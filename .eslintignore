@@ -1,0 +1,9 @@
+node_modules/
+public/
+es/
+lib/
+dist/
+package.json
+src/assets/
+*.cssr.js
+*.cssr.ts
