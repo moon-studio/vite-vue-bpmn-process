@@ -1,6 +1,11 @@
-import { createApp } from "vue";
-import App from "./App.vue";
+import { createApp } from 'vue'
+import App from './App.vue'
 
-import "./assets/styles/designer.scss";
+import './assets/styles/designer.scss'
+import EventEmitter from '@/utils/EventEmitter'
 
-createApp(App).mount("#app");
+const app = createApp(App)
+
+app.mount('#app')
+
+app.config.globalProperties.$emitter = EventEmitter.instance

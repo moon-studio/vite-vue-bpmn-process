@@ -8,6 +8,9 @@ module.exports = {
       jsx: true,
     },
   },
+  globals: {
+    // window: true,
+  },
   extends: [
     "plugin:vue/vue3-recommended",
     "plugin:@typescript-eslint/recommended",
