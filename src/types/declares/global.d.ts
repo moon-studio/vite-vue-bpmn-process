@@ -1,7 +1,7 @@
 declare global {
   interface Window {
     bpmnInstances: {
-      [key: string]: any
+      [key: any]: any
     }
   }
 }
