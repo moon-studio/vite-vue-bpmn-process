@@ -1,16 +1,13 @@
 <template>
   <div class="bpmn-process-container">
     <designer />
+    <penal />
   </div>
 </template>
 
 <script setup lang="ts">
   import Designer from '@/components/Designer/index.vue'
-  import EventEmitter from '@/utils/EventEmitter'
-
-  EventEmitter.instance.on('modeler-init', (modeler) => {
-    console.log('modeler-init', modeler)
-  })
+  import Penal from '@/components/Penal/index.vue'
 </script>
 
 <style>

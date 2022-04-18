@@ -59,9 +59,6 @@
     "jsx": "preserve",
     "resolveJsonModule": true,
   },
-  "globals": {
-    "window": true,
-  },
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",

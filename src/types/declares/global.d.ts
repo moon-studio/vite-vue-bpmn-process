@@ -1,9 +1,11 @@
 declare global {
   interface Window {
-    bpmnInstances: {
-      [key: any]: any
-    }
+    bpmnInstances: any
   }
+}
+
+declare interface Window {
+  bpmnInstances: any
 }
 
 // interface MyWindow extends Window {

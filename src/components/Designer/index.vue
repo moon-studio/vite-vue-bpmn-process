@@ -33,8 +33,8 @@
       const designer = ref<HTMLDivElement | null>(null)
       const { processId, processName, prefix, xml } = toRefs(props)
 
+      // 将字符串转换成图显示出来
       const createNewDiagram = async function (xml) {
-        // 将字符串转换成图显示出来
         let newId = processId.value || `Process_${new Date().getTime()}`
         let newName = processName.value || `业务流程_${new Date().getTime()}`
         let xmlString = xml || emptyXML(newId, newName, prefix.value)
@@ -45,13 +45,13 @@
             warnings.forEach((warn) => console.warn(warn))
           }
         } catch (e) {
-          console.error(`[Process Designer Warn]: ${typeof e === 'string' ? e : e?.message}`)
+          console.error(`[Process Designer Warn]: ${typeof e === 'string' ? e : (e as Error)?.message}`)
         }
       }
 
       onMounted(() => {
-        const modeler = new Modeler({
-          container: designer.value,
+        const modeler: Modeler = new Modeler({
+          container: designer.value as HTMLElement,
           keyboard: {
             bindTo: designer.value
           }
