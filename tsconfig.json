@@ -67,6 +67,7 @@
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "public"
   ]
 }

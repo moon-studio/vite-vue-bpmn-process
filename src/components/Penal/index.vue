@@ -13,6 +13,9 @@
       const penal = ref<HTMLDivElement | null>(null)
 
       const currentElement = ref<BpmnElement | null>(null)
+      const currentElementId = ref<string | null>(null)
+      const currentElementType = ref<string | null>(null)
+      const currentElementBO = ref<string | null>(null)
 
       EventEmitter.instance.on('modeler-init', (modeler) => {
         modeler.on('element.click', (element) => {
@@ -22,7 +25,10 @@
       })
 
       return {
-        penal
+        penal,
+        currentElementId,
+        currentElementType,
+        currentElementBO
       }
     }
   })
