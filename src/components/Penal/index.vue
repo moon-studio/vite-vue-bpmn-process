@@ -5,17 +5,16 @@
 <script lang="ts">
   import { defineComponent, ref } from 'vue'
   import EventEmitter from '@/utils/EventEmitter'
-  import { BpmnElement } from 'bpmn-js'
 
   export default defineComponent({
     name: 'Penal',
     setup() {
       const penal = ref<HTMLDivElement | null>(null)
 
-      const currentElement = ref<BpmnElement | null>(null)
-      const currentElementId = ref<string | null>(null)
-      const currentElementType = ref<string | null>(null)
-      const currentElementBO = ref<string | null>(null)
+      const currentElement = ref<Shape | Base | Connection | Label | null>(null)
+      const currentElementId = ref<string | undefined>(undefined)
+      const currentElementType = ref<string | undefined>(undefined)
+      const currentElementBO = ref<ModdleElement | null>(null)
 
       EventEmitter.instance.on('modeler-init', (modeler) => {
         modeler.on('element.click', (element) => {

@@ -1,58 +1,109 @@
-declare class Diagram {
-  constructor(options: ViewerOptions)
-  attachTo(element: DOMElement): void // 重新挂载
-  clear(): void // 清空
-  destroy(): void // 销毁
-  detach(): void // 卸载
-  getDefinitions(): any // 获取定义json与
-  getModules(): any // 获取模块定义
-  importXML(xml: string): Promise<any> // 导入xml
-  off(event: string, listener: (event: any) => void): void // 移除事件
-  on(event: string, listener: (event: any) => void): void // 添加事件
-  open(xml: string): Promise<any> // 打开xml
-  saveXML(options?: any): Promise<any> // 保存xml
-  saveSVG(options?: any): Promise<any> // 保存svg
+import { Diagram, ViewerOptions, DoneCallbackOpt, EventCallbackParams, ModdleElement } from '@/types/declares/diagram'
+import { ModuleDeclaration } from '@/types/declares/didi.t'
+
+/************************************* 参数类型定义 ******************************************/
+export interface Point {
+  x: number
+  y: number
+  original?: Point
+}
+export interface ModdleBase {
+  get(name: string): any
+  set(name: string, value: any): void
+}
+declare interface ModdleElement extends ModdleBase {
+  readonly $type: string
+  $model: Moddle
+  $descriptor: Descriptor
+  $attrs: any
+  $parent: ModdleElement
+  $instanceOf: ((type: string) => boolean) & ((element: Base, type: string) => boolean)
+  di?: ModdleElement
+  [field: string]: any
+  hasType(element: ModdleElement, type?: string): boolean
+}
+declare interface Base {
+  id: string
+  type: string
+  width?: number
+  height?: number
+  businessObject: ModdleElement
+  label: Label
+  parent: Shape
+  labels: Label[]
+  outgoingRefs: Connection[]
+  incomingRefs: Connection[]
+}
+declare interface Connection extends Base {
+  source: Base
+  target: Base
+  waypoints?: Point[]
+}
+declare interface Shape extends Base {
+  children: Base[]
+  host: Shape
+  attachers: Shape[]
+  collapsed?: boolean
+  hidden?: boolean
+  x?: number
+  y?: number
+}
+declare interface Root extends Shape {}
+declare interface Label extends Shape {
+  labelTarget: Base
 }
 
-export default class Viewer extends Diagram {
+export type BPMNEvent = string
+export type BPMNEventCallback<P extends EventCallbackParams> = (params: P) => void
+export interface WriterOptions {
+  format?: boolean
+  preamble?: boolean
+}
+export interface DoneCallbackOpt {
+  warn: any[]
+  xml: string
+  err?: any
+}
+
+/************************************* 初始构造函数 ******************************************/
+export default class BaseViewer extends Diagram {
   constructor(options?: ViewerOptions)
-
-  get<T extends ServiceName | string>(service: T): Service<T>
-
-  invoke(fn: (...v: any[]) => void | any[]): void
-
   importXML(xml: string): Promise<DoneCallbackOpt>
-
-  open(diagram: BpmnDiDiagram | string): Promise<DoneCallbackOpt>
-
+  open(diagram: BPMNDiagram | string): Promise<DoneCallbackOpt>
   saveXML(options: WriterOptions): Promise<DoneCallbackOpt>
-
   saveSVG(options: WriterOptions): Promise<DoneCallbackOpt>
-
   clear(): void
-
   destroy(): void
-
-  on<T extends Event, P extends EventCallbackParams>(
+  on<T extends BPMNEvent, P extends EventCallbackParams>(
     event: T,
-    priority: number | Callback<P>,
-    callback?: Callback<P>
+    priority: number | BPMNEventCallback<P>,
+    callback?: BPMNEventCallback<P>,
+    target?: this
   ): void
-
-  /**
-   * De-register an event listener.
-   */
-  off(events: Event | Event[], callback?: Callback<Event>): void
-
+  off<T extends BPMNEvent, P extends EventCallbackParams>(events: T | T[], callback?: BPMNEventCallback<P>): void
   attachTo<T extends Element>(parentNode: string | T): void
-
   detach(): void
+  importDefinitions(): ModdleElement
+  getDefinitions(): ModdleElement
+  protected _setDefinitions(definitions: ModdleElement): void
+  protected _modules: ModuleDeclaration[]
 }
 
-declare class Modeler extends Viewer {
-  createDiagram(xml: string): void // 创建流程图
+export class Viewer extends BaseViewer {
+  constructor(options?: ViewerOptions)
 }
+
+declare class BaseModeler extends Viewer {
+  constructor(options?: ViewerOptions)
+}
+
+declare class Modeler extends BaseModeler {
+  invoke(fn: (...v: any[]) => void | any[]): void
+  createDiagram(): void // 创建流程图
+}
+
+/************************************* 基础扩展功能定义 ******************************************/
 
 declare module 'bpmn-js/lib/Modeler' {
-  export = Modeler
+  export default Modeler
 }
