@@ -140,6 +140,7 @@ declare module 'diagram-js/lib/core/EventBus' {
   interface EventMap<E extends Base> {
     [event: string]: SelectionEvent<E> | ElementEvent<E>
   }
+
   export interface SelectionEvent<E extends Base> extends InternalEvent {
     readonly type: string
     newSelection: E[]
@@ -582,7 +583,7 @@ declare module 'diagram-js/lib/features/palette/Palette' {
   export default class Palette {
     constructor(eventBus: EventBus, canvas: Canvas)
     registerProvider(priority: number | PaletteProvider, provider?: PaletteProvider): void
-    getEntries(element: Base): PaletteEntry[]
+    getEntries(element: Base): { [name: string]: PaletteEntry }
     trigger(action: string, event: Event, autoActivate?: boolean): void
     open(): void
     close(): void
@@ -592,7 +593,56 @@ declare module 'diagram-js/lib/features/palette/Palette' {
     updateToolHighlight(name: string): void
   }
 }
+declare module 'diagram-js/lib/features/context-pad/ContextPad' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Overlays from 'diagram-js/lib/features/overlays/Overlays'
+  import { Base } from 'diagram-js/lib/model'
+  import { Overlay } from 'diagram-js/lib/features/overlays/Overlays'
 
+  export type ContextPadEntry = {}
+  export type ContextPadProvider = {
+    getContextPadEntries(element: Base): ContextPadEntry
+  }
+
+  export default class ContextPad {
+    constructor(config: any, eventBus: EventBus, overlays: Overlays)
+    protected _init(): void
+    registerProvider(priority: number | ContextPadProvider, provider?: ContextPadProvider): void
+    getEntries(element: Base): { [name: string]: ContextPadEntry }
+    trigger(action: string, event: Event, autoActivate?: boolean): void
+    open(element: Base, force?: boolean): void
+    close(): void
+    getPad(element: Base): Overlay | null
+  }
+}
+declare module 'diagram-js/lib/features/popup-menu/PopupMenu' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Overlays from 'diagram-js/lib/features/overlays/Overlays'
+  import PopupMenuProvider from 'diagram-js/lib/features/popup-menu/PopupMenuProvider'
+  import { Base } from 'diagram-js/lib/model'
+  import { Position } from 'diagram-js/lib/core/Canvas'
+
+  export default class PopupMenu {
+    constructor(config: any, eventBus: EventBus, overlays: Overlays)
+    registerProvider(id: string, priority: number | PopupMenuProvider, provider?: PopupMenuProvider): void
+    isEmpty(element: Base, providerId: string): boolean
+    open(element: Base, id: string, position: Position): Object
+    close(): void
+    isOpen(): boolean
+    trigger(event: Object): Function | null
+  }
+}
+declare module 'diagram-js/lib/features/popup-menu/PopupMenuProvider' {
+  import PopupMenu from 'diagram-js/lib/features/popup-menu/PopupMenu'
+  import { Base } from 'diagram-js/lib/model'
+
+  export default abstract class PopupMenuProvider {
+    constructor(popupMenu: PopupMenu)
+    abstract getEntries(element: Base): void
+    abstract getHeaderEntries(element: Base): void
+    abstract register(): void
+  }
+}
 // declare module 'diagram-js/lib/features/xxx/xxx' {
 //   export default class xxx {}
 // }
