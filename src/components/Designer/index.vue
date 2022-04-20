@@ -57,7 +57,7 @@
           }
         })
 
-        modeler.console.log('[Process Designer]', modeler, modeler.getDefinitions())
+        console.log('[Process Designer]', modeler, modeler.getDefinitions())
 
         !window.bpmnInstances && (window.bpmnInstances = {})
         window.bpmnInstances.modeler = modeler
