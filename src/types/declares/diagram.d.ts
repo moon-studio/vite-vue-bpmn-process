@@ -410,7 +410,88 @@ declare module 'diagram-js/lib/model' {
     [field: string]: any
   }
 }
+/************************************** Diagram translate 翻译模块 *****************************************/
+declare module 'diagram-js/lib/i18n/translate' {
+  export function translate(template: string, replacements?: Object): string
+}
 /************************************** Diagram feature 扩展功能模块 *****************************************/
+declare module 'diagram-js/lib/features/modeling/Modeling' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import ElementFactory from 'diagram-js/lib/core/ElementFactory'
+  import CommandStack from 'diagram-js/lib/command/CommandStack'
+  import CommandHandler from 'diagram-js/lib/command/CommandHandler'
+  import { Base, Connection, Label, Shape } from 'diagram-js/lib/model'
+  import { Dimensions, Position } from 'diagram-js/lib/core/Canvas'
+
+  export class ModelingHandler extends CommandHandler {
+    constructor(modeling: Modeling)
+    canExecute(context: Object): boolean
+    execute<E extends Base>(context: Object): E[]
+    postExecute(context: Object): void
+    preExecute(context: Object): void
+    revert<E extends Base>(context: Object): E[]
+  }
+
+  export default class Modeling {
+    constructor(eventBus: EventBus, elementFactory: ElementFactory, commandStack: CommandStack)
+    getHandlers<H extends ModelingHandler>(): H[]
+    registerHandlers(commandStack: CommandStack[]): void
+    moveShape(shape: Base, delta: Position, newParent: Base, newParentIndex?: number, hints?: Object): void
+    updateAttachment(shape: Base, newHost?: Base): void
+    moveElements(shapes: Base[], delta: Position, target?: Base, hints?: Object): void
+    moveConnection(connection: Base, delta: Position, newParent: Base, newParentIndex?: number, hints?: Object): void
+    layoutConnection(connection: Base, hints?: Object): void
+    createConnection(
+      source: Base,
+      target: Base,
+      parentIndex: number | Connection | Object,
+      connection: Connection | Object,
+      parent: Base | Object,
+      hints?: Object
+    ): Connection
+    createShape(shape: Shape | Object, position: Position, target: Base, parentIndex?: number, hints?: Object): Shape
+    createElements(elements: Base[], position: Position, target: Base, parentIndex?: number, hints?: Object): Base[]
+    createLabel(labelTarget: Base, position: Position, label: Base, parent?: Base): Label
+    appendShape(source: Base, shape: Base | Object, position: Position, target: Base, hints?: Object): Shape
+    removeElements(elements: Base[]): void
+    distributeElements(groups: Base[], axis: string, dimension: Dimensions): void
+    removeShape(shape: Shape, hints?: Object): void
+    removeConnection(connection: Connection, hints?: Object): void
+    replaceShape(oldShape: Shape, newShape: Shape, hints?: Object): Shape
+    alignElements(elements: Base[], alignment: string): void
+    resizeShape(shape: Shape, newBounds: Dimensions, minBounds?: Dimensions, hints?: Object): void
+    createSpace(movingShapes: Base[], resizingShapes: Base[], delta: Position, direction: string, hints?: Object): void
+    updateWaypoints(connection: Connection, newWaypoints: Position[], hints?: Object): void
+    reconnect(
+      connection: Connection,
+      source: Shape,
+      target: Shape,
+      dockingOrPoints: Position | Position[],
+      hints?: Object
+    ): void
+    reconnectStart(
+      connection: Connection,
+      newSource: Shape,
+      dockingOrPoints: Position | Position[],
+      hints?: Object
+    ): void
+    reconnectEnd(connection: Connection, newTarget: Shape, dockingOrPoints: Position | Position[], hints?: Object): void
+    connect(source: Shape, target: Shape, attrs?: Object, hints?: Object): Connection
+    toggleCollapse(shape: Shape, hints?: Object): void
+  }
+}
+declare module 'diagram-js/lib/features/editor-actions/EditorActions' {
+  import { Injector } from '@/types/declares/didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  export default class EditorActions {
+    constructor(eventBus: EventBus, injector: Injector)
+    protected _actions: { [actionName: string]: Function }
+    trigger(action: string, opts?: Object): unknown
+    unregister(action: string): unknown
+    getActions(): number
+    isRegistered(action: string): boolean
+  }
+}
 declare module 'diagram-js/lib/features/keyboard/Keyboard' {
   import EventBus from 'diagram-js/lib/core/EventBus'
 
@@ -431,3 +512,58 @@ declare module 'diagram-js/lib/features/keyboard/Keyboard' {
     bindTo: T
   }
 }
+declare module 'diagram-js/lib/features/keyboard/KeyboardBindings' {
+  import Keyboard from 'diagram-js/lib/features/keyboard/Keyboard'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import EditorActions from 'diagram-js/lib/features/editor-actions/EditorActions'
+
+  export default class KeyboardBindings<T extends Element> {
+    constructor(eventBus: EventBus, keyboard: Keyboard<T>)
+    registerBindings<T extends Element>(keyboard: Keyboard<T>, editorActions: EditorActions): void
+  }
+}
+declare module 'diagram-js/lib/features/overlays/Overlays' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+  import { Base } from 'diagram-js/lib/model'
+
+  export type Search = {
+    id?: string
+    element?: Base
+    type?: string
+  }
+  export type Overlay = {
+    html: string | HTMLElement
+    show?: {
+      minZoom?: number
+      maxZoom?: number
+    }
+    position?: {
+      left?: number
+      top?: number
+      bottom?: number
+      right?: number
+    }
+    scale?: boolean & {
+      min?: number
+      max?: number
+    }
+  }
+  export default class Overlays {
+    constructor(config: any, eventBus: EventBus, canvas: Canvas, elementRegistry: ElementRegistry)
+    get(search: Search): Overlay | Overlay[] | null
+    add(element: Base, type: string, overlay: Overlay): string
+    remove(filter: string | Object): void
+    show(): void
+    hide(): void
+    clear(): void
+  }
+}
+declare module 'diagram-js/lib/features/xxx/xxx' {
+  export default class xxx {}
+}
+
+// declare module 'diagram-js/lib/features/xxx/xxx' {
+//   export default class xxx {}
+// }
