@@ -560,8 +560,30 @@ declare module 'diagram-js/lib/features/overlays/Overlays' {
     clear(): void
   }
 }
-declare module 'diagram-js/lib/features/xxx/xxx' {
-  export default class xxx {}
+declare module 'diagram-js/lib/features/palette/Palette' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import { Base } from 'diagram-js/lib/model'
+
+  export type PaletteEntry = {
+    group: string
+    className?: string
+    title: string
+    action: string
+    options?: any
+  }
+  export type PaletteProvider = {
+    getPaletteEntries(element: Base): PaletteEntry[]
+  }
+  export type PaletteEntryDescriptor = {
+    [key: string]: PaletteEntry
+  }
+
+  export default class Palette {
+    constructor(eventBus: EventBus, canvas: Canvas)
+    registerProvider(priority: number | PaletteProvider, provider?: PaletteProvider): void
+    getEntries(element: Base): PaletteEntry[]
+  }
 }
 
 // declare module 'diagram-js/lib/features/xxx/xxx' {
