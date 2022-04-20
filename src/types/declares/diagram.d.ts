@@ -583,6 +583,13 @@ declare module 'diagram-js/lib/features/palette/Palette' {
     constructor(eventBus: EventBus, canvas: Canvas)
     registerProvider(priority: number | PaletteProvider, provider?: PaletteProvider): void
     getEntries(element: Base): PaletteEntry[]
+    trigger(action: string, event: Event, autoActivate?: boolean): void
+    open(): void
+    close(): void
+    toggle(): void
+    isOpen(): boolean
+    isActiveTool(tool: string): boolean
+    updateToolHighlight(name: string): void
   }
 }
 
