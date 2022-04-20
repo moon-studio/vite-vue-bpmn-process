@@ -15,26 +15,33 @@ declare module 'diagram-js' {
   }
 }
 /************************************** Diagram 核心模块 声明 *****************************************/
+// canvas 图层渲染显示
 declare module 'diagram-js/lib/core/Canvas' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
-  import { Base } from 'diagram-js/lib/model'
+  import { Base, Point } from 'diagram-js/lib/model'
 
   export type Dimensions = {
     width: number
     height: number
   }
+  export type Position = {
+    x: number
+    y: number
+  }
+  export type Delta = {
+    dx: number
+    dy: number
+  }
+  export type Bounds = Position & Dimensions
   export type Viewbox = {
     x: number
     y: number
     width: number
     height: number
     scale: number
-    inner: Dimensions & {
-      x: number
-      y: number
-    }
+    inner: Dimensions & Position
     outer: Dimensions
   }
 
@@ -61,22 +68,47 @@ declare module 'diagram-js/lib/core/Canvas' {
     removeShape<E extends Base>(shape: E | string): E
     removeConnection<E extends Base>(shape: E | string): E
     getGraphics<E extends Base>(element: E | string, secondary?: boolean): SVGElement
-    viewbox(box: Dimensions & { x: number; y: number }): Object
+    viewbox(box: Dimensions & { x: number; y: number }): Viewbox
+    scroll(delta: Delta): Position
+    scrollToElement<E extends Base>(elements?: Array<E | Object>, padding?: number | Object): Position
+    zoom(newScale: number | string, center: Point | string): number
+    getSize(): Dimensions
+    getAbsoluteBBox<E extends Base>(element: E): Bounds
+    resized(): void
   }
 }
+// 元素模型工厂
 declare module 'diagram-js/lib/core/ElementFactory' {
-  import EventBus from 'diagram-js/lib/core/EventBus'
-  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+  import { Root, Label, Shape, Connection } from 'diagram-js/lib/model'
+
   export default class ElementFactory {
-    constructor(eventBus: EventBus, elementRegistry: ElementRegistry, modeling: any)
+    constructor()
+    create(type: string, attrs: any): Root | Shape | Connection | Label
+    createRoot<E extends Root>(attrs: any): E
+    createLabel<E extends Label>(attrs: any): E
+    createShape<E extends Shape>(attrs: any): E
+    createConnection<E extends Connection>(attrs: any): E
   }
 }
+// 元素注册表
 declare module 'diagram-js/lib/core/ElementRegistry' {
   import EventBus from 'diagram-js/lib/core/EventBus'
+  import { Base } from 'diagram-js/lib/model'
   export default class ElementRegistry {
     constructor(eventBus: EventBus)
+    add<E extends Base>(element: E, gfx: SVGElement, secondaryGfx?: SVGElement): void
+    remove<E extends Base>(element: E): void
+    updateId<E extends Base>(element: E, newId: string): void
+    updateGraphics<E extends Base>(element: E, gfx: SVGElement, secondary?: boolean): void
+    get<E extends Base>(filter: string | SVGElement): E
+    filter<E extends Base>(fn: (element: E) => boolean): E[]
+    find<E extends Base>(fn: (element: E) => boolean): E[]
+    getAll<E extends Base>(): E[]
+    forEach<E extends Base>(fn: (element: E) => void): void
+    getGraphics<E extends Base>(filter: E | string, secondary?: boolean): SVGElement
   }
 }
+// 事件总线
 declare module 'diagram-js/lib/core/EventBus' {
   import { Base } from 'diagram-js/lib/model'
 
@@ -120,14 +152,184 @@ declare module 'diagram-js/lib/core/EventBus' {
     originalEvent: MouseEvent
   }
 }
+// SVG 元素工厂
 declare module 'diagram-js/lib/core/GraphicsFactory' {
+  import { Base, Shape, Connection } from 'diagram-js/lib/model'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+
   export default class GraphicsFactory {
     constructor(eventBus: EventBus, elementRegistry: ElementRegistry)
+    create<E extends Base>(type: string, element: E, parentIndex?: number): SVGElement
+    drawShape<E extends Shape>(gfx: SVGElement | string, element: E): void
+    drawConnection<E extends Connection>(gfx: SVGElement | string, element: E): void
+    getShapePath<E extends Shape>(element: E): string
+    getConnectionPath<E extends Connection>(element: E): string
+    update<E extends Base>(type: string, element: E, gfx: SVGElement): void
+    remove<E extends Base>(element: E): void
   }
 }
+/************************************** Diagram command 命令执行栈 *****************************************/
+declare module 'diagram-js/lib/command/CommandStack' {
+  import { Base } from 'diagram-js/lib/model'
+  import { Injector } from '@/types/declares/didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import CommandHandler from 'diagram-js/lib/command/CommandHandler'
 
+  export type CommandContext = {
+    context: Base
+    oldValues: { [key: string]: any }
+    newValues: { [key: string]: any }
+  }
+  export type Command = string
+
+  export default class CommandStack {
+    constructor(eventBus: EventBus, injector: Injector)
+    execute(command: Command, context: Object): void
+    canExecute(command: Command, context: Object): boolean
+    clear(emit?: boolean): void
+    undo(): void
+    redo(): void
+    register(command: Command, handler: CommandHandler): void
+    registerHandler(command: Command, handler: CommandHandler | Function): void
+    canUndo(): boolean
+    canRedo(): boolean
+  }
+}
+declare module 'diagram-js/lib/command/CommandHandler' {
+  import { Base } from 'diagram-js/lib/model'
+
+  export default abstract class CommandHandler {
+    abstract execute<E extends Base>(context: Object): E[]
+    abstract revert<E extends Base>(context: Object): E[]
+    abstract canExecute(context: Object): boolean
+    abstract preExecute(context: Object): void
+    abstract postExecute(context: Object): void
+  }
+}
+declare module 'diagram-js/lib/command/CommandInterceptor' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+
+  export default class CommandInterceptor {
+    constructor(eventBus: EventBus)
+    on(events?: string | string[], hook?: string, priority?: number, handler?: Function, unwrap?: boolean): void
+    canExecute(
+      events?: string | string[],
+      hook?: string,
+      priority?: number,
+      handler?: Function,
+      unwrap?: boolean,
+      that?: Object
+    ): boolean
+    preExecute(
+      events?: string | string[],
+      hook?: string,
+      priority?: number,
+      handler?: Function,
+      unwrap?: boolean,
+      that?: Object
+    ): void
+    preExecuted(
+      events?: string | string[],
+      hook?: string,
+      priority?: number,
+      handler?: Function,
+      unwrap?: boolean,
+      that?: Object
+    ): void
+    execute(
+      events?: string | string[],
+      hook?: string,
+      priority?: number,
+      handler?: Function,
+      unwrap?: boolean,
+      that?: Object
+    ): void
+    executed(
+      events?: string | string[],
+      hook?: string,
+      priority?: number,
+      handler?: Function,
+      unwrap?: boolean,
+      that?: Object
+    ): void
+    postExecute(
+      events?: string | string[],
+      hook?: string,
+      priority?: number,
+      handler?: Function,
+      unwrap?: boolean,
+      that?: Object
+    ): void
+    postExecuted(
+      events?: string | string[],
+      hook?: string,
+      priority?: number,
+      handler?: Function,
+      unwrap?: boolean,
+      that?: Object
+    ): void
+    revert(
+      events?: string | string[],
+      hook?: string,
+      priority?: number,
+      handler?: Function,
+      unwrap?: boolean,
+      that?: Object
+    ): void
+    reverted(
+      events?: string | string[],
+      hook?: string,
+      priority?: number,
+      handler?: Function,
+      unwrap?: boolean,
+      that?: Object
+    ): void
+  }
+}
+/************************************** Diagram Draw 元素绘制模块 *****************************************/
+declare module 'diagram-js/lib/draw/BaseRenderer' {
+  import { Connection, Shape } from 'diagram-js/lib/model'
+  export default abstract class BaseRenderer {
+    abstract canRender(): boolean
+    abstract drawShape<E extends Shape>(visuals: SVGElement, element: E): SVGRectElement
+    abstract drawConnection<E extends Connection>(visuals: SVGElement, connection: E): SVGPolylineElement
+    abstract getShapePath<E extends Shape>(shape: E): string
+    abstract getConnectionPath<E extends Connection>(connection: E): string
+  }
+}
+declare module 'diagram-js/lib/draw/DefaultRenderer' {
+  import BaseRenderer from 'diagram-js/lib/draw/BaseRenderer'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Styles, { Traits } from 'diagram-js/lib/draw/Styles'
+  import { Connection, Shape } from 'diagram-js/lib/model'
+
+  export default class DefaultRenderer extends BaseRenderer {
+    constructor(eventBus: EventBus, styles: Styles, DEFAULT_RENDER_PRIORITY?: number)
+    CONNECTION_STYLE: Traits
+    SHAPE_STYLE: Traits
+    FRAME_STYLE: Traits
+    canRender(): boolean
+    drawShape<E extends Shape>(visuals: SVGElement, element: E, attrs?: Object): SVGRectElement
+    drawConnection<E extends Connection>(visuals: SVGElement, connection: E, attrs?: Object): SVGPolylineElement
+    getShapePath<E extends Shape>(shape: E): string
+    getConnectionPath<E extends Connection>(connection: E): string
+  }
+}
+declare module 'diagram-js/lib/draw/Styles' {
+  export type Traits = {
+    'no-fill': Traits
+    'no-border': Traits
+    'no-events': Traits
+    [styleName: string]: string | number | Traits
+  }
+  export default class Styles {
+    constructor()
+    cls(className: string, traits?: string[], additionalAttrs?: Object): Traits & { class: string }
+    style(traits?: string[], additionalAttrs?: Object): Traits
+    computeStyle(custom?: Object | null, traits?: string[], defaultStyles?: Object): Traits
+  }
+}
 /************************************** Diagram Model 元素 声明 *****************************************/
 declare module 'diagram-js/lib/model' {
   import { DJSModule } from 'diagram-js'
@@ -208,7 +410,7 @@ declare module 'diagram-js/lib/model' {
     [field: string]: any
   }
 }
-
+/************************************** Diagram feature 扩展功能模块 *****************************************/
 declare module 'diagram-js/lib/features/keyboard/Keyboard' {
   import EventBus from 'diagram-js/lib/core/EventBus'
 

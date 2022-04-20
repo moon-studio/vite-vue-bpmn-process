@@ -59,6 +59,8 @@
 
         console.log('[Process Designer]', modeler, modeler.getDefinitions())
 
+        console.log('[Process Designer]', modeler.get('modeling'))
+
         !window.bpmnInstances && (window.bpmnInstances = {})
         window.bpmnInstances.modeler = modeler
 
