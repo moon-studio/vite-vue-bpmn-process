@@ -8,6 +8,7 @@ The typescript type declaration of Bpmn.js and Diagram.js is implemented, and ty
 
 ## Directory
 
+```
 |-- public
 |-- src
 |   |-- App.vue
@@ -27,6 +28,7 @@ The typescript type declaration of Bpmn.js and Diagram.js is implemented, and ty
 |-- tsconfig.json
 |-- package.json
 |-- vite.config.js
+```
 
 ## Friendship sponsorship
 
