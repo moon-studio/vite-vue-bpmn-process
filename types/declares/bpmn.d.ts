@@ -261,7 +261,7 @@ declare module 'bpmn-js/lib/import/BpmnImporter' {
   import Canvas from 'diagram-js/lib/core/Canvas'
   import ElementFactory from 'diagram-js/lib/core/ElementFactory'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
-  import { translate } from 'diagram-js/lib/i18n/translate'
+  import { Translate } from 'diagram-js/lib/i18n/translate'
   import { Base } from 'diagram-js/lib/model'
   import TextRenderer from 'bpmn-js/lib/draw/TextRenderer'
 
@@ -271,17 +271,17 @@ declare module 'bpmn-js/lib/import/BpmnImporter' {
       canvas: Canvas,
       elementFactory: ElementFactory,
       elementRegistry: ElementRegistry,
-      translate: translate,
+      translate: Translate,
       textRenderer: TextRenderer
     )
     add<E extends Base>(semantic: any, di: any, parentElement?: E): E
   }
 }
 declare module 'bpmn-js/lib/import/BpmnTreeWalker' {
-  import { translate } from 'diagram-js/lib/i18n/translate'
+  import { Translate } from 'diagram-js/lib/i18n/translate'
 
   export default class BpmnTreeWalker {
-    constructor(handler, translate: translate)
+    constructor(handler, translate: Translate)
   }
 }
 /************************************* feature 扩展功能 *************************************/
