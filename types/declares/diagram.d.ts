@@ -174,7 +174,7 @@ declare module 'diagram-js/lib/core/GraphicsFactory' {
 // 提供可撤销/重做的命令执行栈, 通过 CommandHandler 执行具体命令
 declare module 'diagram-js/lib/command/CommandStack' {
   import { Base } from 'diagram-js/lib/model'
-  import { Injector } from '@/types/declares/didi'
+  import { Injector } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import CommandHandler from 'diagram-js/lib/command/CommandHandler'
 
@@ -492,7 +492,7 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
 // 一种接口，通过将请求触发操作的人和触发器本身解耦，提供对建模操作的访问。
 // 可以通过将新操作注册到 'registerAction' 来添加新操作，并同样使用 'unregisterAction' 取消注册现有操作。
 declare module 'diagram-js/lib/features/editor-actions/EditorActions' {
-  import { Injector } from '@/types/declares/didi'
+  import { Injector } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   export default class EditorActions {
     constructor(eventBus: EventBus, injector: Injector)
@@ -716,7 +716,7 @@ declare module 'diagram-js/lib/features/replace/Replace' {
 // 默认实现将挂入命令堆栈执行实际的规则评估。确保提供命令堆栈如果您打算使用此模块，请使用它。
 // 连同此实现，您可以使用 RulesProvider 来实现你自己的规则检查器。
 declare module 'diagram-js/lib/features/rules/Rules' {
-  import { Injector } from '@/types/declares/didi'
+  import { Injector } from 'didi'
   import CommandStack from 'diagram-js/lib/command/CommandStack'
 
   export default class Rules {
