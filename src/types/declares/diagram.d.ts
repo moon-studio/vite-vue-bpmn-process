@@ -171,6 +171,7 @@ declare module 'diagram-js/lib/core/GraphicsFactory' {
   }
 }
 /************************************** Diagram command 命令执行栈 *****************************************/
+// 提供可撤销/重做的命令执行栈, 通过 CommandHandler 执行具体命令
 declare module 'diagram-js/lib/command/CommandStack' {
   import { Base } from 'diagram-js/lib/model'
   import { Injector } from '@/types/declares/didi'
@@ -197,6 +198,7 @@ declare module 'diagram-js/lib/command/CommandStack' {
     canRedo(): boolean
   }
 }
+// 抽象类，继承实现可以在 CommandStack 中注册的命令
 declare module 'diagram-js/lib/command/CommandHandler' {
   import { Base } from 'diagram-js/lib/model'
 
@@ -208,6 +210,7 @@ declare module 'diagram-js/lib/command/CommandHandler' {
     abstract postExecute(context: Object): void
   }
 }
+// CommandHandler 实现类 的一个验证和扩展程序
 declare module 'diagram-js/lib/command/CommandInterceptor' {
   import EventBus from 'diagram-js/lib/core/EventBus'
 
@@ -289,6 +292,7 @@ declare module 'diagram-js/lib/command/CommandInterceptor' {
   }
 }
 /************************************** Diagram Draw 元素绘制模块 *****************************************/
+// 抽象类 基础渲染器
 declare module 'diagram-js/lib/draw/BaseRenderer' {
   import { Connection, Shape } from 'diagram-js/lib/model'
   export default abstract class BaseRenderer {
@@ -299,6 +303,7 @@ declare module 'diagram-js/lib/draw/BaseRenderer' {
     abstract getConnectionPath<E extends Connection>(connection: E): string
   }
 }
+// 继承 BaseRenderer 的默认渲染器
 declare module 'diagram-js/lib/draw/DefaultRenderer' {
   import BaseRenderer from 'diagram-js/lib/draw/BaseRenderer'
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -317,6 +322,7 @@ declare module 'diagram-js/lib/draw/DefaultRenderer' {
     getConnectionPath<E extends Connection>(connection: E): string
   }
 }
+// 默认渲染样式
 declare module 'diagram-js/lib/draw/Styles' {
   export type Traits = {
     'no-fill': Traits
@@ -332,6 +338,7 @@ declare module 'diagram-js/lib/draw/Styles' {
   }
 }
 /************************************** Diagram Model 元素 声明 *****************************************/
+// 元素模型定义
 declare module 'diagram-js/lib/model' {
   import { DJSModule } from 'diagram-js'
   import { KeyboardConfig } from 'diagram-js/lib/features/keyboard/Keyboard'
@@ -416,6 +423,7 @@ declare module 'diagram-js/lib/i18n/translate' {
   export function translate(template: string, replacements?: Object): string
 }
 /************************************** Diagram feature 扩展功能模块 *****************************************/
+// 基本建模器，提供基础操作方法，内部方法都继承 CommandHandler 来实现
 declare module 'diagram-js/lib/features/modeling/Modeling' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import ElementFactory from 'diagram-js/lib/core/ElementFactory'
@@ -481,6 +489,8 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
     toggleCollapse(shape: Shape, hints?: Object): void
   }
 }
+// 一种接口，通过将请求触发操作的人和触发器本身解耦，提供对建模操作的访问。
+// 可以通过将新操作注册到 'registerAction' 来添加新操作，并同样使用 'unregisterAction' 取消注册现有操作。
 declare module 'diagram-js/lib/features/editor-actions/EditorActions' {
   import { Injector } from '@/types/declares/didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -493,6 +503,7 @@ declare module 'diagram-js/lib/features/editor-actions/EditorActions' {
     isRegistered(action: string): boolean
   }
 }
+// 键盘事件绑定和映射
 declare module 'diagram-js/lib/features/keyboard/Keyboard' {
   import EventBus from 'diagram-js/lib/core/EventBus'
 
@@ -513,6 +524,7 @@ declare module 'diagram-js/lib/features/keyboard/Keyboard' {
     bindTo: T
   }
 }
+// 添加默认键盘绑定
 declare module 'diagram-js/lib/features/keyboard/KeyboardBindings' {
   import Keyboard from 'diagram-js/lib/features/keyboard/Keyboard'
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -523,6 +535,7 @@ declare module 'diagram-js/lib/features/keyboard/KeyboardBindings' {
     registerBindings<T extends Element>(keyboard: Keyboard<T>, editorActions: EditorActions): void
   }
 }
+// 将覆盖元素或者dom 附加到对应图元素的服务
 declare module 'diagram-js/lib/features/overlays/Overlays' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
@@ -561,6 +574,7 @@ declare module 'diagram-js/lib/features/overlays/Overlays' {
     clear(): void
   }
 }
+// 左侧基础元素工具栏
 declare module 'diagram-js/lib/features/palette/Palette' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
@@ -593,6 +607,7 @@ declare module 'diagram-js/lib/features/palette/Palette' {
     updateToolHighlight(name: string): void
   }
 }
+// 在图表元素旁边显示特定于元素的上下文操作的操作菜单
 declare module 'diagram-js/lib/features/context-pad/ContextPad' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Overlays from 'diagram-js/lib/features/overlays/Overlays'
@@ -615,6 +630,7 @@ declare module 'diagram-js/lib/features/context-pad/ContextPad' {
     getPad(element: Base): Overlay | null
   }
 }
+// 一个弹出菜单，可用于在画布中的任何位置显示操作列表
 declare module 'diagram-js/lib/features/popup-menu/PopupMenu' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Overlays from 'diagram-js/lib/features/overlays/Overlays'
@@ -632,6 +648,8 @@ declare module 'diagram-js/lib/features/popup-menu/PopupMenu' {
     trigger(event: Object): Function | null
   }
 }
+// 抽象类，可以扩展为弹出菜单提供条目的基本提供程序。
+// 扩展应该实现方法getEntries和register。可选地，可以实现方法getHeaderEntries
 declare module 'diagram-js/lib/features/popup-menu/PopupMenuProvider' {
   import PopupMenu from 'diagram-js/lib/features/popup-menu/PopupMenu'
   import { Base } from 'diagram-js/lib/model'
@@ -643,6 +661,162 @@ declare module 'diagram-js/lib/features/popup-menu/PopupMenuProvider' {
     abstract register(): void
   }
 }
+// 在图表中提供当前选择元素的服务。也提供了控制选择的api
+declare module 'diagram-js/lib/features/selection/Selection' {
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import { Base } from 'diagram-js/lib/model'
+
+  interface SelectedElement extends Base {}
+
+  export default class Selection {
+    constructor(eventBus: EventBus, canvas: Canvas)
+    protected _selectedElements: Array<SelectedElement>
+    select(elements: Array<SelectedElement>, add?: boolean): void
+    deselect(element: SelectedElement): void
+    get(): Array<SelectedElement>
+    isSelected(element: SelectedElement): boolean
+  }
+}
+// 选择事件的不同时期的事件触发程序
+declare module 'diagram-js/lib/features/selection/SelectionBehavior' {
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Selection from 'diagram-js/lib/features/selection/Selection'
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+  import { Base } from 'diagram-js/lib/model'
+
+  export default class SelectionBehavior {
+    constructor(eventBus: EventBus, selection: Selection, canvas: Canvas, elementRegistry: ElementRegistry)
+  }
+}
+// 为选择元素添加/移除选择样式及标记dom
+declare module 'diagram-js/lib/features/selection/SelectionVisuals' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Selection from 'diagram-js/lib/features/selection/Selection'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import Styles from 'diagram-js/lib/draw/Styles'
+
+  export default class SelectionVisuals {
+    constructor(eventBus: EventBus, canvas: Canvas, selection: Selection, styles: Styles)
+    protected _multiSelectionBox: any
+  }
+}
+// 允许替换元素类型的服务
+declare module 'diagram-js/lib/features/replace/Replace' {
+  import Modeling from 'diagram-js/lib/features/modeling/Modeling'
+  import { Base, Shape } from 'diagram-js/lib/model'
+
+  export default class Replace {
+    constructor(modeling: Modeling)
+    replaceElement<E extends Base, S extends Shape>(oldElement: E, newElement: Object | E, options?: Object): S
+  }
+}
+// 为某些图操作提供规则的服务。
+// 默认实现将挂入命令堆栈执行实际的规则评估。确保提供命令堆栈如果您打算使用此模块，请使用它。
+// 连同此实现，您可以使用 RulesProvider 来实现你自己的规则检查器。
+declare module 'diagram-js/lib/features/rules/Rules' {
+  import { Injector } from '@/types/declares/didi'
+  import CommandStack from 'diagram-js/lib/command/CommandStack'
+
+  export default class Rules {
+    constructor(injector: Injector)
+    protected _commandStack: CommandStack
+    allowed(action: string, context?: Object): boolean
+  }
+}
+// 可以扩展以实现建模规则的基本提供程序。
+// 扩展应该实现init方法来实际添加他们的自定义建模检查。可以通过 addRule(action，fn) 方法添加检查。
+declare module 'diagram-js/lib/features/rules/RulesProvider' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor'
+
+  export default class RulesProvider extends CommandInterceptor {
+    constructor(eventBus: EventBus)
+    protected init(): void
+    addRule(actions: string | string[], priority: number | Function, fn?: Function): void
+  }
+}
+// 提供画布上形状大小调整的组件
+declare module 'diagram-js/lib/features/resize/Resize' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Rules from 'diagram-js/lib/features/rules/Rules'
+  import Modeling from 'diagram-js/lib/features/modeling/Modeling'
+  import Dragging from 'diagram-js/lib/features/dragging/Dragging'
+  import { Shape } from 'diagram-js/lib/model'
+  import { Bounds } from 'diagram-js/lib/core/Canvas'
+
+  export default class Resize {
+    constructor(eventBus: EventBus, rules: Rules, modeling: Modeling, dragging: Dragging)
+    canResize(context: Object): boolean
+    activate<E extends Shape>(event: MouseEvent, shape: E, contextOrDirection: Object | string): void
+    computeMinResizeBox(context: Object): Bounds
+  }
+}
+// 该组件负责添加调整大小句柄
+declare module 'diagram-js/lib/features/resize/ResizeHandles' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import Selection from 'diagram-js/lib/features/selection/Selection'
+  import Resize from 'diagram-js/lib/features/resize/Resize'
+  import { Shape } from 'diagram-js/lib/model'
+
+  export default class ResizeHandles {
+    constructor(eventBus: EventBus, canvas: Canvas, selection: Selection, resize: Resize)
+    protected _resize: Resize
+    protected _canvas: Canvas
+    protected _getResizersParent(): SVGElement
+    makeDraggable<E extends Shape>(element: E, gfx: SVGElement, direction: string): void
+    createResizer<E extends Shape>(element: E, direction: string): void
+    addResizer(shape: Shape): void
+    removeResizers(): void
+  }
+}
+// 提供调整大小时调整形状的预览
+declare module 'diagram-js/lib/features/resize/ResizePreview' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import PreviewSupport from 'diagram-js/lib/features/preview-support/PreviewSupport'
+  export default class ResizePreview {
+    constructor(eventBus: EventBus, canvas: Canvas, previewSupport: PreviewSupport)
+  }
+}
+// 触发 canvas 话不内 拖动事件并实现一般 “拖放” 事件的操作。会在不同生命周期中通过 eventBus 触发不同的事件。
+declare module 'diagram-js/lib/features/dragging/Dragging' {
+  import Selection from 'diagram-js/lib/features/selection/Selection'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+
+  export default class Dragging {
+    constructor(eventBus: EventBus, canvas: Canvas, selection: Selection, elementRegistry: ElementRegistry)
+    protected init(): void
+    private move(event: Event, activate?: Object): void
+    private hover(event: Event): void
+    private out(event: Event): void
+    private end(event: Event): void
+    private cancel(restore?: boolean): void
+    private context(): Object | null
+    private setOptions(options: Object): void
+  }
+}
+// 增加对移动 / 调整大小元素预览的支持
+declare module 'diagram-js/lib/features/preview-support/PreviewSupport' {
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import Styles from 'diagram-js/lib/draw/Styles'
+  import { Base } from 'diagram-js/lib/model'
+
+  export default class PreviewSupport {
+    constructor(elementRegistry: ElementRegistry, eventBus: EventBus, canvas: Canvas, styles: Styles)
+    protected _clonedMarkers: Object
+    getGfx<E extends Base>(element: E): SVGElement
+    addDragger<E extends Base>(element: E, group: SVGElement, gfx?: SVGElement): SVGElement
+    addFrame<E extends Base>(element: E, group: SVGElement): SVGElement
+  }
+}
+//
 // declare module 'diagram-js/lib/features/xxx/xxx' {
 //   export default class xxx {}
 // }
