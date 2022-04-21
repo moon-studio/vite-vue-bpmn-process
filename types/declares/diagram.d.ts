@@ -489,6 +489,48 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
     toggleCollapse(shape: Shape, hints?: Object): void
   }
 }
+// 在图表元素旁边显示特定于元素的上下文操作的操作菜单
+declare module 'diagram-js/lib/features/context-pad/ContextPad' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Overlays from 'diagram-js/lib/features/overlays/Overlays'
+  import { Base } from 'diagram-js/lib/model'
+  import { Overlay } from 'diagram-js/lib/features/overlays/Overlays'
+
+  export type ContextPadEntry = {}
+  export type ContextPadProvider = {
+    getContextPadEntries(element: Base): ContextPadEntry
+  }
+
+  export default class ContextPad {
+    constructor(config: any, eventBus: EventBus, overlays: Overlays)
+    protected _init(): void
+    registerProvider(priority: number | ContextPadProvider, provider?: ContextPadProvider): void
+    getEntries(element: Base): { [name: string]: ContextPadEntry }
+    trigger(action: string, event: Event, autoActivate?: boolean): void
+    open(element: Base, force?: boolean): void
+    close(): void
+    getPad(element: Base): Overlay | null
+  }
+}
+// 触发 canvas 话不内 拖动事件并实现一般 “拖放” 事件的操作。会在不同生命周期中通过 eventBus 触发不同的事件。
+declare module 'diagram-js/lib/features/dragging/Dragging' {
+  import Selection from 'diagram-js/lib/features/selection/Selection'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+
+  export default class Dragging {
+    constructor(eventBus: EventBus, canvas: Canvas, selection: Selection, elementRegistry: ElementRegistry)
+    protected init(): void
+    private move(event: Event, activate?: Object): void
+    private hover(event: Event): void
+    private out(event: Event): void
+    private end(event: Event): void
+    private cancel(restore?: boolean): void
+    private context(): Object | null
+    private setOptions(options: Object): void
+  }
+}
 // 一种接口，通过将请求触发操作的人和触发器本身解耦，提供对建模操作的访问。
 // 可以通过将新操作注册到 'registerAction' 来添加新操作，并同样使用 'unregisterAction' 取消注册现有操作。
 declare module 'diagram-js/lib/features/editor-actions/EditorActions' {
@@ -607,29 +649,6 @@ declare module 'diagram-js/lib/features/palette/Palette' {
     updateToolHighlight(name: string): void
   }
 }
-// 在图表元素旁边显示特定于元素的上下文操作的操作菜单
-declare module 'diagram-js/lib/features/context-pad/ContextPad' {
-  import EventBus from 'diagram-js/lib/core/EventBus'
-  import Overlays from 'diagram-js/lib/features/overlays/Overlays'
-  import { Base } from 'diagram-js/lib/model'
-  import { Overlay } from 'diagram-js/lib/features/overlays/Overlays'
-
-  export type ContextPadEntry = {}
-  export type ContextPadProvider = {
-    getContextPadEntries(element: Base): ContextPadEntry
-  }
-
-  export default class ContextPad {
-    constructor(config: any, eventBus: EventBus, overlays: Overlays)
-    protected _init(): void
-    registerProvider(priority: number | ContextPadProvider, provider?: ContextPadProvider): void
-    getEntries(element: Base): { [name: string]: ContextPadEntry }
-    trigger(action: string, event: Event, autoActivate?: boolean): void
-    open(element: Base, force?: boolean): void
-    close(): void
-    getPad(element: Base): Overlay | null
-  }
-}
 // 一个弹出菜单，可用于在画布中的任何位置显示操作列表
 declare module 'diagram-js/lib/features/popup-menu/PopupMenu' {
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -661,45 +680,20 @@ declare module 'diagram-js/lib/features/popup-menu/PopupMenuProvider' {
     abstract register(): void
   }
 }
-// 在图表中提供当前选择元素的服务。也提供了控制选择的api
-declare module 'diagram-js/lib/features/selection/Selection' {
-  import Canvas from 'diagram-js/lib/core/Canvas'
-  import EventBus from 'diagram-js/lib/core/EventBus'
-  import { Base } from 'diagram-js/lib/model'
-
-  interface SelectedElement extends Base {}
-
-  export default class Selection {
-    constructor(eventBus: EventBus, canvas: Canvas)
-    protected _selectedElements: Array<SelectedElement>
-    select(elements: Array<SelectedElement>, add?: boolean): void
-    deselect(element: SelectedElement): void
-    get(): Array<SelectedElement>
-    isSelected(element: SelectedElement): boolean
-  }
-}
-// 选择事件的不同时期的事件触发程序
-declare module 'diagram-js/lib/features/selection/SelectionBehavior' {
-  import Canvas from 'diagram-js/lib/core/Canvas'
-  import EventBus from 'diagram-js/lib/core/EventBus'
-  import Selection from 'diagram-js/lib/features/selection/Selection'
+// 增加对移动 / 调整大小元素预览的支持
+declare module 'diagram-js/lib/features/preview-support/PreviewSupport' {
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
-  import { Base } from 'diagram-js/lib/model'
-
-  export default class SelectionBehavior {
-    constructor(eventBus: EventBus, selection: Selection, canvas: Canvas, elementRegistry: ElementRegistry)
-  }
-}
-// 为选择元素添加/移除选择样式及标记dom
-declare module 'diagram-js/lib/features/selection/SelectionVisuals' {
   import EventBus from 'diagram-js/lib/core/EventBus'
-  import Selection from 'diagram-js/lib/features/selection/Selection'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import Styles from 'diagram-js/lib/draw/Styles'
+  import { Base } from 'diagram-js/lib/model'
 
-  export default class SelectionVisuals {
-    constructor(eventBus: EventBus, canvas: Canvas, selection: Selection, styles: Styles)
-    protected _multiSelectionBox: any
+  export default class PreviewSupport {
+    constructor(elementRegistry: ElementRegistry, eventBus: EventBus, canvas: Canvas, styles: Styles)
+    protected _clonedMarkers: Object
+    getGfx<E extends Base>(element: E): SVGElement
+    addDragger<E extends Base>(element: E, group: SVGElement, gfx?: SVGElement): SVGElement
+    addFrame<E extends Base>(element: E, group: SVGElement): SVGElement
   }
 }
 // 允许替换元素类型的服务
@@ -781,39 +775,45 @@ declare module 'diagram-js/lib/features/resize/ResizePreview' {
     constructor(eventBus: EventBus, canvas: Canvas, previewSupport: PreviewSupport)
   }
 }
-// 触发 canvas 话不内 拖动事件并实现一般 “拖放” 事件的操作。会在不同生命周期中通过 eventBus 触发不同的事件。
-declare module 'diagram-js/lib/features/dragging/Dragging' {
-  import Selection from 'diagram-js/lib/features/selection/Selection'
+// 在图表中提供当前选择元素的服务。也提供了控制选择的api
+declare module 'diagram-js/lib/features/selection/Selection' {
   import Canvas from 'diagram-js/lib/core/Canvas'
   import EventBus from 'diagram-js/lib/core/EventBus'
-  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
-
-  export default class Dragging {
-    constructor(eventBus: EventBus, canvas: Canvas, selection: Selection, elementRegistry: ElementRegistry)
-    protected init(): void
-    private move(event: Event, activate?: Object): void
-    private hover(event: Event): void
-    private out(event: Event): void
-    private end(event: Event): void
-    private cancel(restore?: boolean): void
-    private context(): Object | null
-    private setOptions(options: Object): void
-  }
-}
-// 增加对移动 / 调整大小元素预览的支持
-declare module 'diagram-js/lib/features/preview-support/PreviewSupport' {
-  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
-  import EventBus from 'diagram-js/lib/core/EventBus'
-  import Canvas from 'diagram-js/lib/core/Canvas'
-  import Styles from 'diagram-js/lib/draw/Styles'
   import { Base } from 'diagram-js/lib/model'
 
-  export default class PreviewSupport {
-    constructor(elementRegistry: ElementRegistry, eventBus: EventBus, canvas: Canvas, styles: Styles)
-    protected _clonedMarkers: Object
-    getGfx<E extends Base>(element: E): SVGElement
-    addDragger<E extends Base>(element: E, group: SVGElement, gfx?: SVGElement): SVGElement
-    addFrame<E extends Base>(element: E, group: SVGElement): SVGElement
+  interface SelectedElement extends Base {}
+
+  export default class Selection {
+    constructor(eventBus: EventBus, canvas: Canvas)
+    protected _selectedElements: Array<SelectedElement>
+    select(elements: Array<SelectedElement>, add?: boolean): void
+    deselect(element: SelectedElement): void
+    get(): Array<SelectedElement>
+    isSelected(element: SelectedElement): boolean
+  }
+}
+// 选择事件的不同时期的事件触发程序
+declare module 'diagram-js/lib/features/selection/SelectionBehavior' {
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Selection from 'diagram-js/lib/features/selection/Selection'
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+  import { Base } from 'diagram-js/lib/model'
+
+  export default class SelectionBehavior {
+    constructor(eventBus: EventBus, selection: Selection, canvas: Canvas, elementRegistry: ElementRegistry)
+  }
+}
+// 为选择元素添加/移除选择样式及标记dom
+declare module 'diagram-js/lib/features/selection/SelectionVisuals' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Selection from 'diagram-js/lib/features/selection/Selection'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import Styles from 'diagram-js/lib/draw/Styles'
+
+  export default class SelectionVisuals {
+    constructor(eventBus: EventBus, canvas: Canvas, selection: Selection, styles: Styles)
+    protected _multiSelectionBox: any
   }
 }
 //

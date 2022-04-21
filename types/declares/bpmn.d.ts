@@ -11,6 +11,7 @@ declare module 'bpmn-js/lib/BaseViewer' {
   import Diagram from 'diagram-js'
   import { ViewerOptions, ModdleElement } from 'diagram-js/lib/model'
   import { InternalEvent } from 'diagram-js/lib/core/EventBus'
+  import { ModuleDefinition } from 'didi'
 
   export interface WriterOptions {
     format?: boolean
@@ -44,7 +45,7 @@ declare module 'bpmn-js/lib/BaseViewer' {
     importDefinitions(): ModdleElement
     getDefinitions(): ModdleElement
     protected _setDefinitions(definitions: ModdleElement): void
-    protected _modules: ModdleElement[]
+    protected _modules: ModuleDefinition[]
   }
 }
 declare module 'bpmn-js/lib/NavigatedViewer' {
