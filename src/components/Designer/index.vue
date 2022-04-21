@@ -50,19 +50,12 @@
       }
 
       onMounted(() => {
-        const modeler: Modeler = new Modeler({
+        const modeler = (window.bpmnInstances.modeler = new Modeler({
           container: designer.value as HTMLElement,
           keyboard: {
-            bindTo: designer.value
+            bindTo: designer.value as HTMLElement
           }
-        })
-
-        console.log('[Process Designer]', modeler, modeler.getDefinitions())
-
-        console.log('[Process Designer]', modeler.get('modeling'))
-
-        !window.bpmnInstances && (window.bpmnInstances = {})
-        window.bpmnInstances.modeler = modeler
+        }))
 
         modeler.on('commandStack.changed', async (event) => {
           try {

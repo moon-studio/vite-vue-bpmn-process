@@ -6,8 +6,8 @@ declare module 'diagram-js' {
     __init__?: any[]
     [id: string]: undefined | any[] | DJSModule[] | ['type' | 'factory' | 'value', any]
   }
-  export default class Diagram<E extends Element> {
-    constructor(options?: ViewerOptions<E>, injector?: any)
+  export default class Diagram {
+    constructor(options?: ViewerOptions<Element>, injector?: any)
     get<T>(name: string, strict?: boolean): T
     invoke(fn: (...v: any[]) => void | any[]): void
     destroy(): void
@@ -294,9 +294,10 @@ declare module 'diagram-js/lib/command/CommandInterceptor' {
 /************************************** Diagram Draw 元素绘制模块 *****************************************/
 // 抽象类 基础渲染器
 declare module 'diagram-js/lib/draw/BaseRenderer' {
-  import { Connection, Shape } from 'diagram-js/lib/model'
+  import { Base, Connection, Shape } from 'diagram-js/lib/model'
+
   export default abstract class BaseRenderer {
-    abstract canRender(): boolean
+    abstract canRender<E extends Base>(element: E): boolean
     abstract drawShape<E extends Shape>(visuals: SVGElement, element: E): SVGRectElement
     abstract drawConnection<E extends Connection>(visuals: SVGElement, connection: E): SVGPolylineElement
     abstract getShapePath<E extends Shape>(shape: E): string
@@ -402,7 +403,7 @@ declare module 'diagram-js/lib/model' {
     labelTarget: Base
   }
 
-  export interface ViewerOptions<E extends Element> {
+  export type ViewerOptions<E extends Element> = {
     keyboard?: KeyboardConfig<E>
     container?: string | E
     width?: string | number
@@ -420,7 +421,7 @@ declare module 'diagram-js/lib/model' {
 }
 /************************************** Diagram translate 翻译模块 *****************************************/
 declare module 'diagram-js/lib/i18n/translate' {
-  export function translate(template: string, replacements?: Object): string
+  export type translate = (template: string, replacements?: Object) => string
 }
 /************************************** Diagram feature 扩展功能模块 *****************************************/
 // 基本建模器，提供基础操作方法，内部方法都继承 CommandHandler 来实现

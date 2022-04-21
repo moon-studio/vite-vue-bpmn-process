@@ -3,8 +3,8 @@ declare module 'bpmn-js' {
   import BaseViewer from 'bpmn-js/lib/BaseViewer'
   import { ViewerOptions } from 'diagram-js/lib/model'
 
-  export default class Viewer<E extends Element> extends BaseViewer<E> {
-    constructor(options?: ViewerOptions<E>)
+  export default class Viewer extends BaseViewer {
+    constructor(options?: ViewerOptions<Element>)
   }
 }
 declare module 'bpmn-js/lib/BaseViewer' {
@@ -25,8 +25,8 @@ declare module 'bpmn-js/lib/BaseViewer' {
   export type BPMNEvent = string
   export type BPMNEventCallback<P extends InternalEvent> = (params: P) => void
 
-  export default class BaseViewer<E extends Element> extends Diagram<E> {
-    constructor(options?: ViewerOptions<E>)
+  export default class BaseViewer extends Diagram {
+    constructor(options?: ViewerOptions<Element>)
     importXML(xml: string): Promise<DoneCallbackOpt>
     open(diagram: string): Promise<DoneCallbackOpt>
     saveXML(options: WriterOptions): Promise<DoneCallbackOpt>
@@ -52,24 +52,24 @@ declare module 'bpmn-js/lib/NavigatedViewer' {
   import Viewer from 'bpmn-js'
   import { ViewerOptions } from 'diagram-js/lib/model'
 
-  export default class NavigatedViewer<E extends Element> extends Viewer<E> {
-    constructor(options?: ViewerOptions<E>)
+  export default class NavigatedViewer extends Viewer {
+    constructor(options?: ViewerOptions<Element>)
   }
 }
 declare module 'bpmn-js/lib/BaseModeler' {
   import Viewer from 'bpmn-js'
   import { ViewerOptions } from 'diagram-js/lib/model'
 
-  export default class BaseModeler<E extends Element> extends Viewer<E> {
-    constructor(options?: ViewerOptions<E>)
+  export default class BaseModeler extends Viewer {
+    constructor(options?: ViewerOptions<Element>)
   }
 }
 declare module 'bpmn-js/lib/Modeler' {
   import BaseModeler from 'bpmn-js/lib/BaseModeler'
   import { ViewerOptions } from 'diagram-js/lib/model'
 
-  export default class Modeler<E extends Element> extends BaseModeler<E> {
-    constructor(options?: ViewerOptions<E>)
+  export default class Modeler extends BaseModeler {
+    constructor(options?: ViewerOptions<Element>)
     createDiagram(): void // 创建流程图
   }
 }
@@ -82,7 +82,7 @@ declare module 'bpmn-js/lib/draw/BpmnRenderer' {
   import Styles from 'diagram-js/lib/draw/Styles'
   import PathMap from 'bpmn-js/lib/draw/PathMap'
   import TextRenderer from 'bpmn-js/lib/draw/TextRenderer'
-  import { Base } from 'diagram-js/lib/model'
+  import { Base, Connection, Shape } from 'diagram-js/lib/model'
 
   export type RendererHandler = <E extends Base>(
     parentGfx: SVGElement,
@@ -164,9 +164,10 @@ declare module 'bpmn-js/lib/draw/BpmnRenderer' {
     protected handlers: { [rendererType in RendererType]: RendererHandler }
     protected _drawPath(parentGfx: SVGElement, element: Base, attrs?: Object): SVGElement
     protected _renderer(type: RendererType): RendererHandler
+    getConnectionPath<E extends Base>(connection: E): string
     canRender<E extends Base>(element: E): boolean
-    drawShape<E extends Base>(parentGfx: SVGElement, element: E): SVGElement
-    drawConnection<E extends Base>(parentGfx: SVGElement, element: E): SVGElement
+    drawShape<E extends Shape>(parentGfx: SVGElement, element: E): SVGRectElement
+    drawConnection<E extends Connection>(parentGfx: SVGElement, element: E): SVGPolylineElement
     getShapePath<E extends Base>(element: E): string
   }
 }
