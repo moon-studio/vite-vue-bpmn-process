@@ -8,8 +8,7 @@ The typescript type declaration of Bpmn.js and Diagram.js is implemented, and ty
 
 ## Directory
 
-|-- README.md
-|-- package.json
+|-- public
 |-- src
 |   |-- App.vue
 |   |-- main.ts
@@ -23,6 +22,10 @@ The typescript type declaration of Bpmn.js and Diagram.js is implemented, and ty
 |       |-- didi.d.ts                          [Nikku - didi](https://github.com/nikku/didi/blob/master/lib/index.d.ts)
 |       |-- global.d.ts
 |       |-- moddle.d.ts
+|-- LICENSE
+|-- README.md
+|-- tsconfig.json
+|-- package.json
 |-- vite.config.js
 
 ## Friendship sponsorship
