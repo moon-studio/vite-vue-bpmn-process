@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import './assets/styles/designer.scss'
+import './styles/index.scss'
 import EventEmitter from '@/utils/EventEmitter'
 
 const app = createApp(App)

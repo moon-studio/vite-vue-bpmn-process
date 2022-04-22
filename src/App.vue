@@ -2,12 +2,14 @@
   <div class="bpmn-process-container">
     <designer />
     <penal />
+    <setting />
   </div>
 </template>
 
 <script setup lang="ts">
-  import Designer from '@/components/Designer/index.vue'
+  import Designer from '@/components/Designer'
   import Penal from '@/components/Penal/index.vue'
+  import Setting from '@/components/Setting'
 </script>
 
 <style>
