@@ -1,8 +1,11 @@
-import { defineComponent, onMounted, PropType, ref, toRefs } from 'vue'
+import { computed, defineComponent, onMounted, PropType, ref, toRefs } from 'vue'
 import Modeler from 'bpmn-js/lib/Modeler'
 import EmptyXML from '@/utils/EmptyXML'
 import EventEmitter from '@/utils/EventEmitter'
 import Logger from '@/utils/Logger'
+
+import translate from '@/components/Moddles/Translate'
+import simulationModeler from 'bpmn-js-token-simulation'
 
 const designerProps = {
   xml: {
@@ -33,6 +36,17 @@ const Designer = defineComponent({
     const designer = ref<HTMLDivElement | null>(null)
     const { processId, processName, prefix, xml } = toRefs(props)
 
+    const additionalModules = computed(() => {
+      const modules: any[] = []
+      modules.push(translate)
+      modules.push(simulationModeler)
+      return modules
+    }).value
+
+    const moddleExtensions = computed(() => {
+      return {}
+    }).value
+
     // 将字符串转换成图显示出来
     const createNewDiagram = async function (newXml) {
       try {
@@ -54,7 +68,9 @@ const Designer = defineComponent({
         container: designer.value as HTMLElement,
         keyboard: {
           bindTo: designer.value as HTMLElement
-        }
+        },
+        additionalModules,
+        moddleExtensions
       }))
       EventEmitter.instance.emit('modeler-init', modeler)
       logger.prettyPrimary('[Process Designer Modeler]', modeler)
