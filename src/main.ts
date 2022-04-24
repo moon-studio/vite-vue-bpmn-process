@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+import App from './App.js'
 
 import './styles/index.scss'
 import EventEmitter from '@/utils/EventEmitter'

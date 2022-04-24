@@ -88,7 +88,7 @@ const Designer = defineComponent({
       createNewDiagram(xml.value)
     })
 
-    return () => <div ref={designer} class="process-designer"></div>
+    return () => <div ref={designer} class="designer"></div>
   }
 })
 
