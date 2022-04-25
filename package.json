@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "bpmn-js": "^9.0.3",
+    "bpmn-js-properties-panel": "^1.1.0",
     "bpmn-js-token-simulation": "^0.27.0",
+    "camunda-bpmn-moddle": "^6.1.2",
     "naive-ui": "^2.28.2",
     "vue": "^3.2.25"
   },

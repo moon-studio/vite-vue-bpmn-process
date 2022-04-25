@@ -24,7 +24,7 @@ const App = defineComponent({
     return () => (
       <div class={computedClasses.value}>
         {customPalette.value && <Palette></Palette>}
-        <Designer></Designer>
+        <Designer {...editorSettings.value}></Designer>
         {customPenal.value && <Penal></Penal>}
         <Setting v-model={[editorSettings, 'settings']}></Setting>
       </div>
