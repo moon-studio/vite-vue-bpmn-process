@@ -1,4 +1,4 @@
-import { computed, defineComponent, onMounted, PropType, ref, toRefs } from 'vue'
+import { computed, defineComponent, onMounted, PropType, ref, toRefs, Teleport } from 'vue'
 import Modeler from 'bpmn-js/lib/Modeler'
 import EmptyXML from '@/utils/EmptyXML'
 import EventEmitter from '@/utils/EventEmitter'
@@ -20,7 +20,7 @@ const designerProps = {
     type: String as PropType<string | undefined>,
     default: undefined
   },
-  prefix: {
+  processEngine: {
     type: String as PropType<string | undefined>,
     default: undefined
   }
@@ -34,7 +34,8 @@ const Designer = defineComponent({
   setup(props, { emit }) {
     !window.bpmnInstances && (window.bpmnInstances = {})
     const designer = ref<HTMLDivElement | null>(null)
-    const { processId, processName, prefix, xml } = toRefs(props)
+    const camundaPenal = ref<HTMLDivElement | null>(null)
+    const { processId, processName, processEngine, xml } = toRefs(props)
 
     const additionalModules = computed(() => {
       const modules: any[] = []
@@ -52,7 +53,7 @@ const Designer = defineComponent({
       try {
         const newId: string = processId.value ? processId.value : `Process_${new Date().getTime()}`
         const newName: string = processName.value || `业务流程_${new Date().getTime()}`
-        const xmlString = newXml || xml.value || EmptyXML(newId, newName, prefix.value)
+        const xmlString = newXml || xml.value || EmptyXML(newId, newName, processEngine.value)
         const { modeler } = window.bpmnInstances
         const { warnings } = await modeler.importXML(xmlString)
         if (warnings && warnings.length) {
@@ -88,7 +89,13 @@ const Designer = defineComponent({
       createNewDiagram(xml.value)
     })
 
-    return () => <div ref={designer} class="designer"></div>
+    return () => (
+      <div ref={designer} class="designer">
+        <Teleport to=".designer-container">
+          <div ref={camundaPenal} class="camunda-penal"></div>
+        </Teleport>
+      </div>
+    )
   }
 })
 

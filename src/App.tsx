@@ -10,21 +10,22 @@ const App = defineComponent({
   setup() {
     const editorSettings = ref<EditorSettings>({ ...defaultSettings })
 
-    const computedClasses = computed(() => {
+    const customPalette = computed<boolean>(() => editorSettings.value.paletteMode === 'custom')
+    const customPenal = computed<boolean>(() => editorSettings.value.penalMode === 'custom')
+
+    const computedClasses = computed<Object>(() => {
       const baseClass = ['designer-container']
-      editorSettings.value.paletteMode === 'custom' && baseClass.push('designer-with-palette')
-      editorSettings.value.penalMode === 'custom' && baseClass.push('designer-with-penal')
+      customPalette.value && baseClass.push('designer-with-palette')
+      customPenal.value && baseClass.push('designer-with-penal')
       editorSettings.value.bg === 'image' && baseClass.push('designer-with-bg')
       return baseClass.join(' ')
     })
 
-    const updateSettings = (e) => (editorSettings.value = { ...e })
-
     return () => (
       <div class={computedClasses.value}>
-        <Palette></Palette>
+        {customPalette.value && <Palette></Palette>}
         <Designer></Designer>
-        <Penal></Penal>
+        {customPenal.value && <Penal></Penal>}
         <Setting v-model={[editorSettings, 'settings']}></Setting>
       </div>
     )

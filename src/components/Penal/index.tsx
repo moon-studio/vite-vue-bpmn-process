@@ -1,6 +1,7 @@
 import { defineComponent, ref } from 'vue'
 import EventEmitter from '@/utils/EventEmitter'
 import { Base, Connection, Label, ModdleElement, Shape } from 'diagram-js/lib/model'
+import { NCard } from 'naive-ui'
 
 const props = {}
 
@@ -19,9 +20,16 @@ const Penal = defineComponent({
         currentElement.value = element
       })
     })
+
     return () => (
       <div ref={penal} class="penal">
-        Penal
+        <NCard
+          title="属性配置"
+          segmented={{ content: true, footer: 'soft' }}
+          v-slots={{
+            default: () => <div>卡片内容</div>
+          }}
+        ></NCard>
       </div>
     )
   }

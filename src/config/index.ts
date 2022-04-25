@@ -1,7 +1,10 @@
 import { EditorSettings } from '../../types/editor/settings'
 
 export const defaultSettings: EditorSettings = {
-  paletteMode: 'default',
-  penalMode: 'default',
+  processId: `Process_${new Date().getTime()}`,
+  processName: `业务流程`,
+  processEngine: 'camunda',
+  paletteMode: 'custom',
+  penalMode: 'custom',
   bg: 'image'
 }
