@@ -1,3 +1,5 @@
+// @ts-ignore
+
 declare global {
   interface Window {
     bpmnInstances: any

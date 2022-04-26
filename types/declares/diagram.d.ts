@@ -365,7 +365,7 @@ declare module 'diagram-js/lib/model' {
     $attrs: any
     $parent: ModdleElement
     $instanceOf: ((type: string) => boolean) & ((element: Base, type: string) => boolean)
-    di?: ModdleElement;
+    di?: any;
     [field: string]: any
     static hasType(element: ModdleElement, type?: string): boolean
   }

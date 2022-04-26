@@ -49,7 +49,9 @@ declare module 'bpmn-js-token-simulation' {
     tokenSimulationPalette: ['type', Palette]
   }
 
-  export default SimulationModeler
+  namespace SimulationModule {
+    const SimulationModule: SimulationModeler
+  }
 }
 
 declare module 'bpmn-js-token-simulation/lib/viewer' {
