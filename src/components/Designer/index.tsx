@@ -110,11 +110,6 @@ const Designer = defineComponent({
       () => nextTick().then(() => initModeler(settings.value.penalMode)),
       { immediate: true }
     )
-    // watchEffect(() => {
-    //   nextTick().then(() => initModeler(settings.value.penalMode))
-    // })
-
-    // onMounted(() => initModeler(useCamundaPenal.value))
 
     return () => <div ref={designer} class="designer"></div>
   }

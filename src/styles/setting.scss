@@ -4,7 +4,7 @@
   right: 0;
   top: 0;
   bottom: 0;
-  transition: all cubic-bezier(0.8, 0.2, 0.8, 0.2) 0.36s;
+  transition: all cubic-bezier(0.8, 0.4, 0.8, 0.4) 0.24s;
   transform: translateX(100%);
   z-index: 10;
   box-shadow:  0 0 0 0 rgba(0,0,0,0.2);
@@ -58,6 +58,6 @@
     border-radius: 8px;
     transform: translateX(-100%);
     cursor: pointer;
-    transition: all cubic-bezier(0.8, 0.2, 0.8, 0.2) 0.36s;
+    transition: all cubic-bezier(0.8, 0.4, 0.8, 0.4) 0.24s;
   }
 }
