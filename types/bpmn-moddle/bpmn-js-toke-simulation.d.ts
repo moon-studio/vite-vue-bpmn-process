@@ -48,10 +48,6 @@ declare module 'bpmn-js-token-simulation' {
     tokenSimulationKeyboardBindings: ['type', KeyboardBindings]
     tokenSimulationPalette: ['type', Palette]
   }
-
-  namespace SimulationModule {
-    const SimulationModule: SimulationModeler
-  }
 }
 
 declare module 'bpmn-js-token-simulation/lib/viewer' {
