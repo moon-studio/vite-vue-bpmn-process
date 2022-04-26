@@ -5,8 +5,8 @@ declare module '@/utils/Logger' {
     protected typeColor(type: string): string
     isArray(obj: any): boolean
     getInstance(): Logger
-    print(text: any, type: string, back?: boolean): void
-    printBack(text: any, type: string): void
+    print(type: string, text: any, back?: boolean): void
+    printBack(type: string, text: any): void
     pretty(text: any, title: string, ...type: any[]): void
     prettyPrimary(title: string, ...type: any[]): void
     prettySuccess(title: string, ...type: any[]): void

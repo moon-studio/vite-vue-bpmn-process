@@ -1,3 +1,6 @@
+import { ViewerOptions } from 'diagram-js/lib/model'
+import { ModuleDeclaration } from 'didi'
+
 export interface EditorSettings {
   processName: string
   processId: string
@@ -5,4 +8,9 @@ export interface EditorSettings {
   paletteMode: 'default' | 'custom' | 'rerender'
   penalMode: 'default' | 'custom' | 'rerender'
   bg: string
+}
+
+export type ModelerOptions<E extends Element> = ViewerOptions<E> & {
+  additionalModules: ModuleDeclaration[]
+  moddleExtensions: Object
 }

@@ -1,14 +1,19 @@
-import { defineComponent, computed, ref } from 'vue'
+import { defineComponent, computed, ref, watchEffect } from 'vue'
 import Palette from '@/components/Palette'
 import Designer from '@/components/Designer'
 import Penal from '@/components/Penal'
 import Setting from '@/components/Setting'
 import { EditorSettings } from '../types/editor/settings'
 import { defaultSettings } from '@/config'
+import Logger from '@/utils/Logger'
+
+const logger = new Logger()
 
 const App = defineComponent({
   setup() {
     const editorSettings = ref<EditorSettings>({ ...defaultSettings })
+
+    const processXml = ref<string | undefined>(undefined)
 
     const customPalette = computed<boolean>(() => editorSettings.value.paletteMode === 'custom')
     const customPenal = computed<boolean>(() => editorSettings.value.penalMode === 'custom')
@@ -21,11 +26,18 @@ const App = defineComponent({
       return baseClass.join(' ')
     })
 
+    /* 测试功能部分 */
+    watchEffect(() => {
+      logger.printBack('success', '[Process Designer XML]')
+      logger.printBack('success', processXml.value)
+    })
+
+    /* 组件渲染 */
     return () => (
-      <div class={computedClasses.value}>
+      <div class={computedClasses.value} id="designer-container">
         {customPalette.value && <Palette></Palette>}
-        <Designer {...editorSettings.value}></Designer>
-        {customPenal.value && <Penal></Penal>}
+        <Designer settings={editorSettings.value} v-model={[processXml.value, 'xml']}></Designer>
+        {customPenal.value ? <Penal></Penal> : <div class="camunda-penal" id="camunda-penal"></div>}
         <Setting v-model={[editorSettings, 'settings']}></Setting>
       </div>
     )

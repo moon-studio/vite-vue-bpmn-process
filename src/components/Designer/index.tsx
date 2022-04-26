@@ -1,4 +1,4 @@
-import { computed, defineComponent, onMounted, PropType, ref, toRefs, Teleport, watchEffect } from 'vue'
+import { computed, defineComponent, onMounted, PropType, ref, toRefs, watchEffect, nextTick, watch } from 'vue'
 import Modeler from 'bpmn-js/lib/Modeler'
 import EmptyXML from '@/utils/EmptyXML'
 import EventEmitter from '@/utils/EventEmitter'
@@ -6,7 +6,6 @@ import Logger from '@/utils/Logger'
 
 import translate from '@/components/Moddles/Translate'
 import simulationModeler from 'bpmn-js-token-simulation'
-import { ViewerOptions } from 'diagram-js/lib/model'
 import {
   BpmnPropertiesPanelModule,
   BpmnPropertiesProviderModule,
@@ -14,13 +13,13 @@ import {
 } from 'bpmn-js-properties-panel'
 import CamundaExtensionModule from 'camunda-bpmn-moddle/lib'
 import camundaModdleDescriptors from 'camunda-bpmn-moddle/resources/camunda.json'
-import { EditorSettings } from '../../../types/editor/settings'
 import { defaultSettings } from '@/config'
+
+import { EditorSettings, ModelerOptions } from '../../../types/editor/settings'
 
 const designerProps = {
   xml: {
-    type: String as PropType<string | undefined>,
-    default: EmptyXML('process_1', '流程图1.0')
+    type: String as PropType<string>
   },
   settings: {
     type: Object as PropType<EditorSettings>,
@@ -35,20 +34,20 @@ const Designer = defineComponent({
   emits: ['update:xml', 'command-stack-changed'],
   setup(props, { emit }) {
     !window.bpmnInstances && (window.bpmnInstances = {})
-    const designer = ref<HTMLDivElement | null>(null)
-    const camundaPenal = ref<HTMLDivElement | null>(null)
+
     const { settings, xml } = toRefs(props)
+    const designer = ref<HTMLDivElement | null>(null)
 
     const useCamundaPenal = computed(() => settings.value.penalMode !== 'custom')
 
-    const additionalModules = computed(() => {
+    const additionalModules = computed<any[]>(() => {
       const modules: any[] = []
       modules.push(translate)
       modules.push(simulationModeler)
       return modules
     })
 
-    const moddleExtensions = computed(() => {
+    const moddleExtensions = computed<Object>(() => {
       return {}
     })
 
@@ -69,10 +68,9 @@ const Designer = defineComponent({
       }
     }
     // 初始化建模器
-    const initModeler = (penal) => {
-      console.log(useCamundaPenal.value)
+    const initModeler = (penalMode) => {
       window?.bpmnInstances?.modeler && (window.bpmnInstances = {})
-      const options: ViewerOptions<Element> = {
+      const options: ModelerOptions<Element> = {
         container: designer.value as HTMLElement,
         keyboard: {
           bindTo: designer.value as HTMLElement
@@ -80,16 +78,14 @@ const Designer = defineComponent({
         additionalModules: additionalModules.value || [],
         moddleExtensions: moddleExtensions.value || {}
       }
-      if (penal) {
-        options.propertiesPanel = { parent: '#camundaPenal' }
-        // @ts-ignore 上面已强制赋值为 {}, 可直接赋值
+      if (penalMode !== 'custom') {
+        options.propertiesPanel = { parent: '#camunda-penal' }
         options.additionalModules.push(
           BpmnPropertiesPanelModule,
           BpmnPropertiesProviderModule,
           CamundaPlatformPropertiesProviderModule,
           CamundaExtensionModule
         )
-        // @ts-ignore 上面已强制赋值为 {}, 可直接赋值
         options.moddleExtensions.camunda = camundaModdleDescriptors
       }
       const modeler = (window.bpmnInstances.modeler = new Modeler(options))
@@ -109,24 +105,18 @@ const Designer = defineComponent({
       createNewDiagram(xml.value)
     }
 
-    watchEffect(() => {
-      if (!designer.value) {
-        return undefined
-      }
-      initModeler(camundaPenal.value)
-    })
-
-    onMounted(() => initModeler(camundaPenal.value))
-
-    return () => (
-      <div ref={designer} class="designer">
-        {useCamundaPenal.value && (
-          <Teleport to=".designer-container">
-            <div ref={camundaPenal} class="camunda-penal" id="camundaPenal"></div>
-          </Teleport>
-        )}
-      </div>
+    watch(
+      () => settings.value.penalMode,
+      () => nextTick().then(() => initModeler(settings.value.penalMode)),
+      { immediate: true }
     )
+    // watchEffect(() => {
+    //   nextTick().then(() => initModeler(settings.value.penalMode))
+    // })
+
+    // onMounted(() => initModeler(useCamundaPenal.value))
+
+    return () => <div ref={designer} class="designer"></div>
   }
 })
 

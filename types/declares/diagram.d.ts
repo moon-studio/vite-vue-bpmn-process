@@ -1,7 +1,9 @@
 /************************************** Diagram.js 入口声明 *****************************************/
 declare module 'diagram-js' {
+  import { ModuleDeclaration } from 'didi'
   import { ViewerOptions } from 'diagram-js/lib/model'
-  export interface DJSModule {
+
+  export type DJSModule = ModuleDeclaration & {
     __depends__?: DJSModule[]
     __init__?: any[]
     [id: string]: undefined | any[] | DJSModule[] | ['type' | 'factory' | 'value', any]
