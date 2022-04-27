@@ -23,7 +23,7 @@ declare module 'bpmn-js-token-simulation' {
   import KeyboardBindings from 'bpmn-js-token-simulation/lib/features/keyboard-bindings/KeyboardBindings'
   import EditorActions from 'bpmn-js-token-simulation/lib/features/editor-actions/EditorActions'
 
-  interface SimulationModeler extends DJSModule {
+  const SimulationModeler: DJSModule & {
     animation: ['type', Animation]
     contextPads: ['type', ContextPads]
     disableModeling: ['type', DisableModeling]
@@ -48,6 +48,8 @@ declare module 'bpmn-js-token-simulation' {
     tokenSimulationKeyboardBindings: ['type', KeyboardBindings]
     tokenSimulationPalette: ['type', Palette]
   }
+
+  export default SimulationModeler
 }
 
 declare module 'bpmn-js-token-simulation/lib/viewer' {
@@ -72,7 +74,7 @@ declare module 'bpmn-js-token-simulation/lib/viewer' {
   import TokenCount from 'bpmn-js-token-simulation/lib/features/token-count/TokenCount'
   import TokenSimulationBehavior from 'bpmn-js-token-simulation/lib/features/token-simulation-behavior/TokenSimulationBehavior'
 
-  interface SimulationViewer extends DJSModule {
+  const SimulationViewer: DJSModule & {
     animation: ['type', Animation]
     contextPads: ['type', ContextPads]
     elementNotifications: ['type', ElementNotifications]
