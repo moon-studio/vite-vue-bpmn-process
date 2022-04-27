@@ -38,8 +38,6 @@ const Designer = defineComponent({
     const { settings, xml } = toRefs(props)
     const designer = ref<HTMLDivElement | null>(null)
 
-    const useCamundaPenal = computed(() => settings.value.penalMode !== 'custom')
-
     const additionalModules = computed<any[]>(() => {
       const modules: any[] = []
       modules.push(translate)
