@@ -789,7 +789,7 @@ declare module 'diagram-js/lib/features/selection/Selection' {
   export default class Selection {
     constructor(eventBus: EventBus, canvas: Canvas)
     protected _selectedElements: Array<SelectedElement>
-    select(elements: Array<SelectedElement>, add?: boolean): void
+    select(elements: SelectedElement | Array<SelectedElement>, add?: boolean): void
     deselect(element: SelectedElement): void
     get(): Array<SelectedElement>
     isSelected(element: SelectedElement): boolean

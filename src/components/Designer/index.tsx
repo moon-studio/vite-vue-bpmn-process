@@ -1,4 +1,4 @@
-import { computed, defineComponent, onMounted, PropType, ref, toRefs, watchEffect, nextTick, watch } from 'vue'
+import { computed, defineComponent, PropType, ref, toRefs, nextTick, watch } from 'vue'
 import Modeler from 'bpmn-js/lib/Modeler'
 import EmptyXML from '@/utils/EmptyXML'
 import EventEmitter from '@/utils/EventEmitter'
@@ -16,6 +16,7 @@ import camundaModdleDescriptors from 'camunda-bpmn-moddle/resources/camunda.json
 import { defaultSettings } from '@/config'
 
 import { EditorSettings, ModelerOptions } from '../../../types/editor/settings'
+import RerenderPalette from '@/components/Moddles/RerenderPalette'
 
 const designerProps = {
   xml: {
@@ -40,8 +41,17 @@ const Designer = defineComponent({
 
     const additionalModules = computed<any[]>(() => {
       const modules: any[] = []
+      settings.value.paletteMode === 'rerender' && modules.push(RerenderPalette)
+      settings.value.penalMode !== 'custom' &&
+        modules.push(
+          BpmnPropertiesPanelModule,
+          BpmnPropertiesProviderModule,
+          CamundaPlatformPropertiesProviderModule,
+          CamundaExtensionModule
+        )
       modules.push(translate)
       modules.push(simulationModeler)
+      console.log(settings.value)
       return modules
     })
 
