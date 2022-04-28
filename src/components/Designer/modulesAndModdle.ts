@@ -9,14 +9,14 @@ import {
 import CamundaExtensionModule from 'camunda-bpmn-moddle/lib'
 
 // moddle 定义文件
-import activitiModdleDescriptors from '@/components/Moddles/Extensions/activiti.json'
-import camundaModdleDescriptors from '@/components/Moddles/Extensions/camunda.json'
-import flowableModdleDescriptors from '@/components/Moddles/Extensions/flowable.json'
+import activitiModdleDescriptors from '@/components/ModdleExtensions/activiti.json'
+import camundaModdleDescriptors from '@/components/ModdleExtensions/camunda.json'
+import flowableModdleDescriptors from '@/components/ModdleExtensions/flowable.json'
 
 // 自定义 modules 扩展模块
-import RerenderPalette from '@/components/Moddles/RerenderPalette'
-import translate from '@/components/Moddles/Translate'
-import EnhancementPalette from '@/components/Moddles/EnhancementPalette'
+import RerenderPalette from '@/components/AddiModules/RerenderPalette'
+import translate from '@/components/AddiModules/Translate'
+import EnhancementPalette from '@/components/AddiModules/EnhancementPalette'
 
 import { computed } from 'vue'
 import { ModuleDeclaration } from 'didi'

@@ -4,7 +4,7 @@ import EmptyXML from '@/utils/EmptyXML'
 import EventEmitter from '@/utils/EventEmitter'
 import Logger from '@/utils/Logger'
 
-import translate from '@/components/Moddles/Translate'
+import translate from '@/components/AddiModules/Translate'
 import simulationModeler from 'bpmn-js-token-simulation'
 import {
   BpmnPropertiesPanelModule,
@@ -16,7 +16,7 @@ import camundaModdleDescriptors from 'camunda-bpmn-moddle/resources/camunda.json
 import { defaultSettings } from '@/config'
 
 import { EditorSettings, ModelerOptions } from '../../../types/editor/settings'
-import RerenderPalette from '@/components/Moddles/RerenderPalette'
+import RerenderPalette from '@/components/AddiModules/RerenderPalette'
 import modulesAndModdle from '@/components/Designer/modulesAndModdle'
 import { ModuleDeclaration } from 'didi'
 
