@@ -54,23 +54,18 @@ class EnhancementPaletteProvider extends PaletteProvider {
     }
 
     assign(actions, {
-      'create.exclusive-gateway': createAction(
-        'bpmn:ExclusiveGateway',
-        'gateway',
-        'bpmn-icon-gateway-none',
-        translate('Create Gateway')
-      ),
+      'create.exclusive-gateway': createAction('bpmn:ExclusiveGateway', 'gateway', 'bpmn-icon-gateway-none', '网关'),
       'create.parallel-gateway': createAction(
         'bpmn:ParallelGateway',
         'gateway',
-        'bpmn-icon-parallel-gateway-none',
-        translate('Create Parallel Gateway')
+        'bpmn-icon-gateway-parallel',
+        '并行网关'
       ),
       'create.event-base-gateway': createAction(
         'bpmn:EventBasedGateway',
         'gateway',
-        'bpmn-icon-event-base-gateway-none',
-        translate('Create Event Based Gateway')
+        'bpmn-icon-gateway-eventbased',
+        '事件网关'
       ),
       'gateway-separator': {
         group: 'gateway',
