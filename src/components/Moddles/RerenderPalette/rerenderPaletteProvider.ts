@@ -76,9 +76,6 @@ class RerenderPaletteProvider extends PaletteProvider {
         }
       })
     }
-    function createParticipant(event) {
-      create.start(event, elementFactory.createParticipantShape())
-    }
 
     assign(actions, {
       'hand-tool': {
