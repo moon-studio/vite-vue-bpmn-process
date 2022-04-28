@@ -7,12 +7,12 @@ declare module '@/utils/Logger' {
     getInstance(): Logger
     print(type: string, text: any, back?: boolean): void
     printBack(type: string, text: any): void
-    pretty(text: any, title: string, ...type: any[]): void
-    prettyPrimary(title: string, ...type: any[]): void
-    prettySuccess(title: string, ...type: any[]): void
-    prettyWarn(title: string, ...type: any[]): void
-    prettyError(title: string, ...type: any[]): void
-    prettyInfo(title: string, ...type: any[]): void
+    pretty(type: any, title: string, ...text: any[]): void
+    prettyPrimary(title: string, ...text: any[]): void
+    prettySuccess(title: string, ...text: any[]): void
+    prettyWarn(title: string, ...text: any[]): void
+    prettyError(title: string, ...text: any[]): void
+    prettyInfo(title: string, ...text: any[]): void
   }
   export default Logger
 }

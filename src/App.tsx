@@ -28,8 +28,7 @@ const App = defineComponent({
 
     /* 测试功能部分 */
     watchEffect(() => {
-      logger.printBack('success', '[Process Designer XML]')
-      logger.printBack('success', processXml.value)
+      logger.printBack('success', '[Process Designer XML change]')
     })
 
     /* 组件渲染 */

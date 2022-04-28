@@ -1,4 +1,4 @@
-import { computed, defineComponent, PropType, ref, toRefs, nextTick, watch } from 'vue'
+import { computed, defineComponent, PropType, ref, toRefs, nextTick, watch, ComputedRef, toRaw } from 'vue'
 import Modeler from 'bpmn-js/lib/Modeler'
 import EmptyXML from '@/utils/EmptyXML'
 import EventEmitter from '@/utils/EventEmitter'
@@ -17,6 +17,8 @@ import { defaultSettings } from '@/config'
 
 import { EditorSettings, ModelerOptions } from '../../../types/editor/settings'
 import RerenderPalette from '@/components/Moddles/RerenderPalette'
+import modulesAndModdle from '@/components/Designer/modulesAndModdle'
+import { ModuleDeclaration } from 'didi'
 
 const designerProps = {
   xml: {
@@ -39,25 +41,7 @@ const Designer = defineComponent({
     const { settings, xml } = toRefs(props)
     const designer = ref<HTMLDivElement | null>(null)
 
-    const additionalModules = computed<any[]>(() => {
-      const modules: any[] = []
-      settings.value.paletteMode === 'rerender' && modules.push(RerenderPalette)
-      settings.value.penalMode !== 'custom' &&
-        modules.push(
-          BpmnPropertiesPanelModule,
-          BpmnPropertiesProviderModule,
-          CamundaPlatformPropertiesProviderModule,
-          CamundaExtensionModule
-        )
-      modules.push(translate)
-      modules.push(simulationModeler)
-      console.log(settings.value)
-      return modules
-    })
-
-    const moddleExtensions = computed<Object>(() => {
-      return {}
-    })
+    const modelerModules: ComputedRef<[ModuleDeclaration[], { [key: string]: any }]> = modulesAndModdle(settings)
 
     // 将字符串转换成图显示出来
     const createNewDiagram = async function (newXml) {
@@ -76,25 +60,16 @@ const Designer = defineComponent({
       }
     }
     // 初始化建模器
-    const initModeler = (penalMode) => {
-      window?.bpmnInstances?.modeler && (window.bpmnInstances = {})
+    const initModeler = () => {
+      console.log(toRaw(modelerModules.value))
+      ;(window.bpmnInstances?.modeler && window.bpmnInstances.modeler.destroy()) || (window.bpmnInstances = {})
       const options: ModelerOptions<Element> = {
         container: designer.value as HTMLElement,
         keyboard: {
           bindTo: designer.value as HTMLElement
         },
-        additionalModules: additionalModules.value || [],
-        moddleExtensions: moddleExtensions.value || {}
-      }
-      if (penalMode !== 'custom') {
-        options.propertiesPanel = { parent: '#camunda-penal' }
-        options.additionalModules.push(
-          BpmnPropertiesPanelModule,
-          BpmnPropertiesProviderModule,
-          CamundaPlatformPropertiesProviderModule,
-          CamundaExtensionModule
-        )
-        options.moddleExtensions.camunda = camundaModdleDescriptors
+        additionalModules: modelerModules.value[0] || [],
+        moddleExtensions: modelerModules.value[1] || {}
       }
       const modeler = (window.bpmnInstances.modeler = new Modeler(options))
       EventEmitter.instance.emit('modeler-init', modeler)
@@ -114,8 +89,8 @@ const Designer = defineComponent({
     }
 
     watch(
-      () => settings.value.penalMode,
-      () => nextTick().then(() => initModeler(settings.value.penalMode)),
+      () => modelerModules.value,
+      () => nextTick().then(() => initModeler()),
       { immediate: true }
     )
 

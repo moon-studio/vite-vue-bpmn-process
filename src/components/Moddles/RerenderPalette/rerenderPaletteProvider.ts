@@ -11,8 +11,8 @@ class RerenderPaletteProvider extends PaletteProvider {
   private readonly _handTool: any
   private readonly _globalConnect: any
   private readonly _translate: any
-  constructor(palette, create, elementFactory, spaceTool, lassoTool, handTool, globalConnect, translate) {
-    super(palette, create, elementFactory, spaceTool, lassoTool, handTool, globalConnect, translate, 2000)
+  constructor(palette, create, elementFactory, spaceTool, lassoTool, handTool, globalConnect) {
+    super(palette, create, elementFactory, spaceTool, lassoTool, handTool, globalConnect, 2000)
     this._palette = palette
     this._create = create
     this._elementFactory = elementFactory
@@ -20,7 +20,6 @@ class RerenderPaletteProvider extends PaletteProvider {
     this._lassoTool = lassoTool
     this._handTool = handTool
     this._globalConnect = globalConnect
-    this._translate = translate
   }
   getPaletteEntries() {
     const actions = {},
@@ -56,7 +55,6 @@ class RerenderPaletteProvider extends PaletteProvider {
         }
       }
     }
-
     function createSubprocess(event) {
       const subProcess = elementFactory.createShape({
         type: 'bpmn:SubProcess',
@@ -78,7 +76,6 @@ class RerenderPaletteProvider extends PaletteProvider {
         }
       })
     }
-
     function createParticipant(event) {
       create.start(event, elementFactory.createParticipantShape())
     }
@@ -87,7 +84,7 @@ class RerenderPaletteProvider extends PaletteProvider {
       'hand-tool': {
         group: 'tools',
         className: 'bpmn-icon-hand-tool',
-        title: translate('Activate the hand tool'),
+        title: '手型工具',
         action: {
           click: function (event) {
             handTool.activateHand(event)
@@ -97,27 +94,17 @@ class RerenderPaletteProvider extends PaletteProvider {
       'lasso-tool': {
         group: 'tools',
         className: 'bpmn-icon-lasso-tool',
-        title: translate('Activate the lasso tool'),
+        title: '套索工具',
         action: {
           click: function (event) {
             lassoTool.activateSelection(event)
           }
         }
       },
-      'space-tool': {
-        group: 'tools',
-        className: 'bpmn-icon-space-tool',
-        title: translate('Activate the create/remove space tool'),
-        action: {
-          click: function (event) {
-            spaceTool.activateSelection(event)
-          }
-        }
-      },
       'global-connect-tool': {
         group: 'tools',
         className: 'bpmn-icon-connection-multi',
-        title: translate('Activate the global connect tool'),
+        title: '全局连线',
         action: {
           click: function (event) {
             globalConnect.toggle(event)
@@ -128,67 +115,39 @@ class RerenderPaletteProvider extends PaletteProvider {
         group: 'tools',
         separator: true
       },
-      'create.start-event': createAction(
-        'bpmn:StartEvent',
-        'event',
-        'bpmn-icon-start-event-none',
-        translate('Create StartEvent')
-      ),
-      'create.intermediate-event': createAction(
-        'bpmn:IntermediateThrowEvent',
-        'event',
-        'bpmn-icon-intermediate-event-none',
-        translate('Create Intermediate/Boundary Event')
-      ),
-      'create.end-event': createAction(
-        'bpmn:EndEvent',
-        'event',
-        'bpmn-icon-end-event-none',
-        translate('Create EndEvent')
-      ),
-      'create.exclusive-gateway': createAction(
-        'bpmn:ExclusiveGateway',
+      'create.exclusive-gateway': createAction('bpmn:ExclusiveGateway', 'gateway', 'bpmn-icon-gateway-none', '网关'),
+      'create.parallel-gateway': createAction(
+        'bpmn:ParallelGateway',
         'gateway',
-        'bpmn-icon-gateway-none',
-        translate('Create Gateway')
+        'bpmn-icon-gateway-parallel',
+        '并行网关'
       ),
-      'create.user-task': createAction(
-        'bpmn:UserTask',
-        'activity',
-        'bpmn-icon-user-task',
-        translate('Create User Task')
+      'create.event-base-gateway': createAction(
+        'bpmn:EventBasedGateway',
+        'gateway',
+        'bpmn-icon-gateway-eventbased',
+        '事件网关'
       ),
-      'create.data-object': createAction(
-        'bpmn:DataObjectReference',
-        'data-object',
-        'bpmn-icon-data-object',
-        translate('Create DataObjectReference')
-      ),
-      'create.data-store': createAction(
-        'bpmn:DataStoreReference',
-        'data-store',
-        'bpmn-icon-data-store',
-        translate('Create DataStoreReference')
-      ),
+      'gateway-separator': {
+        group: 'gateway',
+        separator: true
+      },
+      'create.user-task': createAction('bpmn:UserTask', 'activity', 'bpmn-icon-user-task', '用户任务'),
+      'create.script-task': createAction('bpmn:ScriptTask', 'activity', 'bpmn-icon-script-task', '脚本任务'),
+      'create.service-task': createAction('bpmn:ServiceTask', 'activity', 'bpmn-icon-service-task', '服务任务'),
+      'task-separator': {
+        group: 'activity',
+        separator: true
+      },
       'create.subprocess-expanded': {
         group: 'activity',
         className: 'bpmn-icon-subprocess-expanded',
-        title: translate('Create expanded SubProcess'),
+        title: '子流程',
         action: {
           dragstart: createSubprocess,
           click: createSubprocess
         }
-      },
-      'create.participant-expanded': {
-        group: 'collaboration',
-        className: 'bpmn-icon-participant',
-        title: translate('Create Pool/Participant'),
-        action: {
-          dragstart: createParticipant,
-          click: createParticipant
-        }
-      },
-      'create.group': createAction('bpmn:Group', 'artifact', 'bpmn-icon-group', translate('Create Group'))
+      }
     })
 
     return actions

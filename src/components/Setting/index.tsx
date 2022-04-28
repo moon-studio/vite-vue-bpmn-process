@@ -71,6 +71,7 @@ const Setting = defineComponent({
                   <NRadio value="default">默认</NRadio>
                   <NRadio value="custom">自定义</NRadio>
                   <NRadio value="rerender">重写版</NRadio>
+                  <NRadio value="enhancement">扩展版</NRadio>
                 </NRadioGroup>
               </NFormItem>
               <NFormItem label="Penal模式">
