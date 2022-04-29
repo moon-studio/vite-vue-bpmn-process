@@ -8,7 +8,7 @@ const Previews = defineComponent({
         v-slots={{
           trigger: () => <NButton>预览文件</NButton>,
           default: () => (
-            <div>
+            <div class="button-list_column">
               <NButton>预览XML</NButton>
               <NButton>预览JSON</NButton>
             </div>

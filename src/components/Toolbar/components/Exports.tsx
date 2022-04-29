@@ -8,7 +8,7 @@ const Exports = defineComponent({
         v-slots={{
           trigger: () => <NButton>导出为...</NButton>,
           default: () => (
-            <div>
+            <div class="button-list_column">
               <NButton>导出为Bpmn</NButton>
               <NButton>导出为XML</NButton>
               <NButton>导出为SVG</NButton>
