@@ -1,5 +1,5 @@
 import { computed, defineComponent, PropType, ref, watchEffect } from 'vue'
-import { EditorSettings } from '../../../types/editor/settings'
+import { EditorSettings } from 'types/editor/settings'
 import { defaultSettings } from '@/config'
 import { NIcon, NForm, NFormItem, NInput, NRadioGroup, NRadio, NSwitch } from 'naive-ui'
 import SettingsRound from '@vicons/material/SettingsRound'
