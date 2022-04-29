@@ -1,4 +1,4 @@
-import { EditorSettings } from '../../types/editor/settings'
+import { EditorSettings } from 'types/editor/settings'
 
 export const defaultSettings: EditorSettings = {
   processId: `Process_${new Date().getTime()}`,
@@ -6,5 +6,6 @@ export const defaultSettings: EditorSettings = {
   processEngine: 'camunda',
   paletteMode: 'default',
   penalMode: 'default',
-  bg: 'image'
+  bg: 'image',
+  toolbar: true
 }

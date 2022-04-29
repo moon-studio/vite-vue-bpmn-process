@@ -8,6 +8,7 @@ export interface EditorSettings {
   paletteMode: 'default' | 'custom' | 'rerender' | 'enhancement'
   penalMode: 'default' | 'custom' | 'rerender'
   bg: string
+  toolbar: boolean
 }
 
 export type ModelerOptions<E extends Element> = ViewerOptions<E> & {

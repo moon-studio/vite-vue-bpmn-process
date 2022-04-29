@@ -1,9 +1,10 @@
 import { defineComponent, computed, ref, watchEffect } from 'vue'
+import Toolbar from '@/components/Toolbar'
 import Palette from '@/components/Palette'
 import Designer from '@/components/Designer'
 import Penal from '@/components/Penal'
 import Setting from '@/components/Setting'
-import { EditorSettings } from '../types/editor/settings'
+import { EditorSettings } from 'types/editor/settings'
 import { defaultSettings } from '@/config'
 import Logger from '@/utils/Logger'
 
@@ -17,6 +18,7 @@ const App = defineComponent({
 
     const customPalette = computed<boolean>(() => editorSettings.value.paletteMode === 'custom')
     const customPenal = computed<boolean>(() => editorSettings.value.penalMode === 'custom')
+    const showToolbar = computed<boolean>(() => editorSettings.value.toolbar)
 
     const computedClasses = computed<Object>(() => {
       const baseClass = ['designer-container']
@@ -34,6 +36,7 @@ const App = defineComponent({
     /* 组件渲染 */
     return () => (
       <div class={computedClasses.value} id="designer-container">
+        {showToolbar.value && <Toolbar></Toolbar>}
         {customPalette.value && <Palette></Palette>}
         <Designer settings={editorSettings.value} v-model={[processXml.value, 'xml']}></Designer>
         {customPenal.value ? <Penal></Penal> : <div class="camunda-penal" id="camunda-penal"></div>}

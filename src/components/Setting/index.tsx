@@ -1,7 +1,7 @@
 import { computed, defineComponent, PropType, ref, watchEffect } from 'vue'
 import { EditorSettings } from '../../../types/editor/settings'
 import { defaultSettings } from '@/config'
-import { NIcon, NForm, NFormItem, NInput, NRadioGroup, NRadio } from 'naive-ui'
+import { NIcon, NForm, NFormItem, NInput, NRadioGroup, NRadio, NSwitch } from 'naive-ui'
 import SettingsRound from '@vicons/material/SettingsRound'
 import { Icon } from '@vicons/utils'
 
@@ -58,6 +58,9 @@ const Setting = defineComponent({
               </NFormItem>
               <NFormItem label="流程ID">
                 <NInput v-model={[editorSettings.value.processId, 'value']} clearable={true}></NInput>
+              </NFormItem>
+              <NFormItem label="Toolbar">
+                <NSwitch v-model={[editorSettings.value.toolbar, 'value']}></NSwitch>
               </NFormItem>
               <NFormItem label="流程引擎">
                 <NRadioGroup v-model={[editorSettings.value.processEngine, 'value']}>

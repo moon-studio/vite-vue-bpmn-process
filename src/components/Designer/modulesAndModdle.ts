@@ -20,6 +20,7 @@ import EnhancementPalette from '@/components/AddiModules/EnhancementPalette'
 
 import { computed } from 'vue'
 import { ModuleDeclaration } from 'didi'
+import rerenderPaletteProvider from '@/components/AddiModules/RerenderPalette/rerenderPaletteProvider'
 
 export default function (settings) {
   return computed<[ModuleDeclaration[], { [key: string]: any }]>(() => {
@@ -31,9 +32,10 @@ export default function (settings) {
     if (settings.value.processEngine === 'camunda') moddle['camunda'] = camundaModdleDescriptors
     if (settings.value.processEngine === 'flowable') moddle['flowable'] = flowableModdleDescriptors
 
-    // 配置 palette
+    // 配置 palette (可覆盖 paletteProvider 取消原生侧边栏)
     settings.value.paletteMode === 'enhancement' && modules.push(EnhancementPalette)
     settings.value.paletteMode === 'rerender' && modules.push(RerenderPalette)
+    settings.value.paletteMode === 'custom' && modules.push({ paletteProvider: ['type', function () {}] })
 
     // 配置 penal (基于 camunda)
     settings.value.penalMode !== 'custom' &&
