@@ -3,7 +3,11 @@ import { NButton } from 'naive-ui'
 
 const Imports = defineComponent({
   setup() {
-    return () => <NButton>打开文件</NButton>
+    return () => (
+      <NButton type="info" secondary>
+        打开文件
+      </NButton>
+    )
   }
 })
 

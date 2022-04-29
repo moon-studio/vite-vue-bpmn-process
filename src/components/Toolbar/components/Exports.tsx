@@ -6,12 +6,16 @@ const Exports = defineComponent({
     return () => (
       <NPopover
         v-slots={{
-          trigger: () => <NButton>导出为...</NButton>,
+          trigger: () => (
+            <NButton type="info" secondary>
+              导出为...
+            </NButton>
+          ),
           default: () => (
             <div class="button-list_column">
-              <NButton>导出为Bpmn</NButton>
-              <NButton>导出为XML</NButton>
-              <NButton>导出为SVG</NButton>
+              <NButton type="info">导出为Bpmn</NButton>
+              <NButton type="info">导出为XML</NButton>
+              <NButton type="info">导出为SVG</NButton>
             </div>
           )
         }}

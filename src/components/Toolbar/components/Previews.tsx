@@ -6,11 +6,15 @@ const Previews = defineComponent({
     return () => (
       <NPopover
         v-slots={{
-          trigger: () => <NButton>预览文件</NButton>,
+          trigger: () => (
+            <NButton type="info" secondary>
+              预览文件
+            </NButton>
+          ),
           default: () => (
             <div class="button-list_column">
-              <NButton>预览XML</NButton>
-              <NButton>预览JSON</NButton>
+              <NButton type="info">预览XML</NButton>
+              <NButton type="info">预览JSON</NButton>
             </div>
           )
         }}
