@@ -347,6 +347,16 @@ declare module 'diagram-js/lib/model' {
   import { KeyboardConfig } from 'diagram-js/lib/features/keyboard/Keyboard'
   import { Descriptor, Moddle } from 'moddle'
 
+  export interface Hints {
+    connectionStart?: Point
+    connectionEnd?: Point
+    source?: Point
+    target?: Point
+    attach?: boolean
+    connection?: Connection | Object
+    connectionParent?: Base
+  }
+
   export interface Point {
     x: number
     y: number
@@ -432,7 +442,7 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
   import ElementFactory from 'diagram-js/lib/core/ElementFactory'
   import CommandStack from 'diagram-js/lib/command/CommandStack'
   import CommandHandler from 'diagram-js/lib/command/CommandHandler'
-  import { Base, Connection, Label, Shape } from 'diagram-js/lib/model'
+  import { Base, Connection, Label, Shape, Hints } from 'diagram-js/lib/model'
   import { Dimensions, Position } from 'diagram-js/lib/core/Canvas'
 
   export class ModelingHandler extends CommandHandler {
@@ -448,48 +458,48 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
     constructor(eventBus: EventBus, elementFactory: ElementFactory, commandStack: CommandStack)
     getHandlers<H extends ModelingHandler>(): H[]
     registerHandlers(commandStack: CommandStack[]): void
-    moveShape(shape: Base, delta: Position, newParent: Base, newParentIndex?: number, hints?: Object): void
+    moveShape(shape: Base, delta: Position, newParent: Base, newParentIndex?: number, hints?: Hints): void
     updateAttachment(shape: Base, newHost?: Base): void
-    moveElements(shapes: Base[], delta: Position, target?: Base, hints?: Object): void
-    moveConnection(connection: Base, delta: Position, newParent: Base, newParentIndex?: number, hints?: Object): void
-    layoutConnection(connection: Base, hints?: Object): void
+    moveElements(shapes: Base[], delta: Position, target?: Base, hints?: Hints): void
+    moveConnection(connection: Base, delta: Position, newParent: Base, newParentIndex?: number, hints?: Hints): void
+    layoutConnection(connection: Base, hints?: Hints): void
     createConnection(
       source: Base,
       target: Base,
       parentIndex: number | Connection | Object,
       connection: Connection | Object,
       parent: Base | Object,
-      hints?: Object
+      hints?: Hints
     ): Connection
-    createShape(shape: Shape | Object, position: Position, target: Base, parentIndex?: number, hints?: Object): Shape
-    createElements(elements: Base[], position: Position, target: Base, parentIndex?: number, hints?: Object): Base[]
+    createShape(shape: Shape | Object, position: Position, target: Base, parentIndex?: number, hints?: Hints): Shape
+    createElements(elements: Base[], position: Position, target: Base, parentIndex?: number, hints?: Hints): Base[]
     createLabel(labelTarget: Base, position: Position, label: Base, parent?: Base): Label
-    appendShape(source: Base, shape: Base | Object, position: Position, target: Base, hints?: Object): Shape
+    appendShape(source: Base, shape: Base | Object, position: Position, target: Base, hints?: Hints): Shape
     removeElements(elements: Base[]): void
     distributeElements(groups: Base[], axis: string, dimension: Dimensions): void
-    removeShape(shape: Shape, hints?: Object): void
-    removeConnection(connection: Connection, hints?: Object): void
-    replaceShape(oldShape: Shape, newShape: Shape, hints?: Object): Shape
+    removeShape(shape: Shape, hints?: Hints): void
+    removeConnection(connection: Connection, hints?: Hints): void
+    replaceShape(oldShape: Shape, newShape: Shape, hints?: Hints): Shape
     alignElements(elements: Base[], alignment: string): void
-    resizeShape(shape: Shape, newBounds: Dimensions, minBounds?: Dimensions, hints?: Object): void
-    createSpace(movingShapes: Base[], resizingShapes: Base[], delta: Position, direction: string, hints?: Object): void
-    updateWaypoints(connection: Connection, newWaypoints: Position[], hints?: Object): void
+    resizeShape(shape: Shape, newBounds: Dimensions, minBounds?: Dimensions, hints?: Hints): void
+    createSpace(movingShapes: Base[], resizingShapes: Base[], delta: Position, direction: string, hints?: Hints): void
+    updateWaypoints(connection: Connection, newWaypoints: Position[], hints?: Hints): void
     reconnect(
       connection: Connection,
       source: Shape,
       target: Shape,
       dockingOrPoints: Position | Position[],
-      hints?: Object
+      hints?: Hints
     ): void
     reconnectStart(
       connection: Connection,
       newSource: Shape,
       dockingOrPoints: Position | Position[],
-      hints?: Object
+      hints?: Hints
     ): void
-    reconnectEnd(connection: Connection, newTarget: Shape, dockingOrPoints: Position | Position[], hints?: Object): void
-    connect(source: Shape, target: Shape, attrs?: Object, hints?: Object): Connection
-    toggleCollapse(shape: Shape, hints?: Object): void
+    reconnectEnd(connection: Connection, newTarget: Shape, dockingOrPoints: Position | Position[], hints?: Hints): void
+    connect(source: Shape, target: Shape, attrs?: Object, hints?: Hints): Connection
+    toggleCollapse(shape: Shape, hints?: Hints): void
   }
 }
 // 在图表元素旁边显示特定于元素的上下文操作的操作菜单
@@ -823,3 +833,47 @@ declare module 'diagram-js/lib/features/selection/SelectionVisuals' {
 // declare module 'diagram-js/lib/features/xxx/xxx' {
 //   export default class xxx {}
 // }
+/************************************** Diagram layout 布局模块 *****************************************/
+// 基本连接布局实现，通过直接连接 mid (源中间位置) 和 mid (目标中间位置) 来布局连接。
+declare module 'diagram-js/lib/layout/BaseLayouter' {
+  import { Connection, Point, Hints } from 'diagram-js/lib/model'
+  export default class BaseLayouter {
+    constructor()
+    layoutConnection(connection: Connection, hints?: Hints): [Point, Point]
+  }
+}
+// 用于检索航路点信息的连接的布局组件
+declare module 'diagram-js/lib/layout/ConnectionDocking' {
+  import { Base, Connection, Shape, Point, Hints } from 'diagram-js/lib/model'
+
+  export interface DockingPointDescriptor {
+    point: Point
+    actual: Point
+    idx: number
+  }
+
+  export default class ConnectionDocking {
+    constructor()
+    getCroppedWaypoints(connection: Connection, source?: Base, target?: Base): Point[]
+    getDockingPoint(connection: Connection, shape: Shape, dockStart?: boolean): DockingPointDescriptor
+  }
+}
+// 根据 ConnectionDocking 计算出来的连线锚点进行连接
+declare module 'diagram-js/lib/layout/CroppingConnectionDocking' {
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+  import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
+  import { Base, Connection, Shape, Point, Hints } from 'diagram-js/lib/model'
+  import { DockingPointDescriptor } from 'diagram-js/lib/layout/ConnectionDocking'
+
+  export default class CroppingConnectionDocking {
+    constructor(elementRegistry: ElementRegistry, graphicsFactory: GraphicsFactory)
+    private _getIntersection(shape: Shape, connection: Connection, takeFirst: boolean): Point
+    private _getConnectionPath(connection: Connection): string
+    private _getShapePath(shape: Shape): string
+    private _getGfx(element: Base): SVGElement
+    /*获取连接的实际航路点 (可见的连接点)*/
+    getCroppedWaypoints(connection: Connection, source?: Base, target?: Base): Point[]
+    /*返回指定形状上的连接对接点*/
+    getDockingPoint(connection: Connection, shape: Shape, dockStart?: boolean): DockingPointDescriptor
+  }
+}

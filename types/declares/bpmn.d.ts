@@ -75,8 +75,22 @@ declare module 'bpmn-js/lib/Modeler' {
 }
 /************************************* core 核心模块( draw, import) *************************************/
 declare module 'bpmn-js/lib/features/modeling/BpmnFactory.js' {
+  import { Moddle } from 'moddle'
+  import { Base } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'diagram-js/lib/model'
+
   export default class BpmnFactory {
-    constructor()
+    constructor(moddle: Moddle)
+    private _needsId<E extends Base>(element: E): boolean
+    private _ensureId<E extends Base>(element: E): void
+    create<E extends Base>(type: string, attrs?: Object): E & ModdleElement
+    createDiLabel<E extends Base>(): E
+    createDiShape<E extends Base>(): E
+    createDiBounds<E extends Base>(): E
+    createDiWaypoints<E extends Base>(): E
+    createDiWaypoint<E extends Base>(): E
+    createDiEdge<E extends Base>(): E
+    createDiPlane<E extends Base>(): E
   }
 }
 declare module 'bpmn-js/lib/features/modeling/ElementFactory.js' {
@@ -95,6 +109,9 @@ declare module 'bpmn-js/lib/features/modeling/ElementFactory.js' {
     getDefaultSize(element, di): Dimensions
     createParticipantShape(attrs?: Object): Shape & ModdleElement
   }
+}
+declare module 'bpmn-js/lib/features/modeling/Modeling.js' {
+  export default class Modeling {}
 }
 /************************************* draw 图形元素绘制模块 *************************************/
 declare module 'bpmn-js/lib/draw/BpmnRenderer' {
