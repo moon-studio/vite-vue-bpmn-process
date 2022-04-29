@@ -1,10 +1,19 @@
 import { defineComponent } from 'vue'
 import { NCollapse, NCollapseItem } from 'naive-ui'
-
-const props = {}
+import { assign } from 'min-dash'
 
 const Palette = defineComponent({
   setup() {
+    const createElement = (ev: Event, type: string, options?: any) => {
+      const ElementFactory = window.bpmnInstances?.elementFactory || window.bpmnInstances.modeler.get('elementFactory')
+      const create = window.bpmnInstances.modeler.get('create')
+      const shape = ElementFactory.createShape(assign({ type: `bpmn:${type}` }, options))
+      if (options) {
+        shape.businessObject.di.isExpanded = options.isExpanded
+      }
+      create.start(ev, shape)
+    }
+
     return () => (
       <div class="palette">
         <NCollapse>
@@ -12,7 +21,12 @@ const Palette = defineComponent({
             工具部分
           </NCollapseItem>
           <NCollapseItem title="事件" name="events">
-            事件部分
+            <div class="palette-el-list">
+              <div class="palette-el-item start-event" onClick={(e) => createElement(e, 'StartEvent')}>
+                <i class="bpmn-icon-start-event-none"></i>
+                <span>开始</span>
+              </div>
+            </div>
           </NCollapseItem>
           <NCollapseItem title="任务" name="tasks">
             任务部分
