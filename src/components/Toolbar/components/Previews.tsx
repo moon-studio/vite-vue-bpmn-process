@@ -9,8 +9,8 @@ const Previews = defineComponent({
           trigger: () => <NButton>预览文件</NButton>,
           default: () => (
             <div>
-              <NButton>111</NButton>
-              <NButton>111</NButton>
+              <NButton>预览XML</NButton>
+              <NButton>预览JSON</NButton>
             </div>
           )
         }}
