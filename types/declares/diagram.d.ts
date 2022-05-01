@@ -8,6 +8,7 @@ declare module 'diagram-js' {
     __init__?: any[]
     [id: string]: undefined | any[] | DJSModule[] | ['type' | 'factory' | 'value', any]
   }
+
   export default class Diagram {
     constructor(options?: ViewerOptions<Element>, injector?: any)
     get<T>(name: string, strict?: boolean): T
@@ -363,12 +364,12 @@ declare module 'diagram-js/lib/model' {
     original?: Point
   }
 
-  export abstract class ModdleBase {
+  export class ModdleBase {
     get(name: string): any
     set(name: string, value: any): void
   }
 
-  export abstract class ModdleElement extends ModdleBase {
+  export class ModdleElement extends ModdleBase {
     static $model: Moddle
     static $descriptor: Descriptor
     readonly $type: string
