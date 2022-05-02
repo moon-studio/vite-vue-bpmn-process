@@ -29,8 +29,8 @@ declare module 'bpmn-js/lib/BaseViewer' {
     constructor(options?: ViewerOptions<Element>)
     importXML(xml: string): Promise<DoneCallbackOpt>
     open(diagram: string): Promise<DoneCallbackOpt>
-    saveXML(options: WriterOptions): Promise<DoneCallbackOpt>
-    saveSVG(options: WriterOptions): Promise<DoneCallbackOpt>
+    saveXML(options?: WriterOptions): Promise<DoneCallbackOpt>
+    saveSVG(options?: WriterOptions): Promise<DoneCallbackOpt>
     clear(): void
     destroy(): void
     on<T extends BPMNEvent, P extends InternalEvent>(

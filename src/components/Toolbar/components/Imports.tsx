@@ -16,7 +16,6 @@ const Imports = defineComponent({
         reader.readAsText(file)
         reader.onload = function () {
           const xmlStr = this.result
-          console.log(xmlStr)
           window.bpmnInstances.modeler.importXML(xmlStr)
         }
       }
