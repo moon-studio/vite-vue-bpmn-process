@@ -1,6 +1,6 @@
 /************************************** Diagram.js 入口声明 *****************************************/
 declare module 'diagram-js' {
-  import { ModuleDeclaration } from 'didi'
+  import { Injector, ModuleDeclaration } from 'didi'
   import { ViewerOptions } from 'diagram-js/lib/model'
 
   export type DJSModule = ModuleDeclaration & {
@@ -9,8 +9,42 @@ declare module 'diagram-js' {
     [id: string]: undefined | any[] | DJSModule[] | ['type' | 'factory' | 'value', any]
   }
 
+  /**
+   * 初始化 Diagram 实例
+   * @param {ViewerOptions} options 初始化参数
+   * @param {Module} [options.models] - 模型定义
+   * @param {Injector} [injector] - 依赖注入实例
+   * @example
+   * 注册一个新模块
+   * // 一个新模块，依赖 eventBus 事件总线实例
+   * function MyLoggingPlugin(eventBus) {
+   *   eventBus.on('shape.added', function(event) {
+   *     console.log('shape ', event.shape, ' was added to the diagram');
+   *   });
+   * }
+   * // 导出为一个 功能模块
+   * export default {
+   *   __init__: [ 'myLoggingPlugin' ],
+   *     myLoggingPlugin: [ 'type', MyLoggingPlugin ]
+   * };
+   *
+   * // 初始化 Diagram 实例
+   * import MyLoggingModule from 'path-to-my-logging-plugin';
+   *
+   * const diagram = new Diagram({
+   *   modules: [
+   *     MyLoggingModule
+   *   ]
+   * });
+   *
+   * ### 初始化时默认会加载 Canvas, ElementRegistry, ElementFactory, EventBus,
+   * GraphicsFactory 模块，并依赖于 DefaultRenderer 和 Styles 模块进行显示
+   * new 时会触发 `canvas.init` 事件, 并进行后续实例初始化
+   *
+   * @returns {Diagram}
+   */
   export default class Diagram {
-    constructor(options?: ViewerOptions<Element>, injector?: any)
+    constructor(options: ViewerOptions<Element>, injector?: Injector)
     get<T>(name: string, strict?: boolean): T
     invoke(fn: (...v: any[]) => void | any[]): void
     destroy(): void
@@ -48,9 +82,49 @@ declare module 'diagram-js/lib/core/Canvas' {
     outer: Dimensions
   }
 
+  /**
+   * @class
+   * @constructor
+   * 画布构造函数
+   * 初始化时抛出 canvas.init 事件
+   */
   export default class Canvas {
     constructor(config: any, eventBus: EventBus, graphicsFactory: GraphicsFactory, elementRegistry: ElementRegistry)
+    /**
+     * ## 画布初始化方法，创建一个一直被 div#container 元素包裹的 svg 元素，可以通过访问外层 div 元素获取画布大小
+     * <div class="djs-container" style="width: {desired-width}, height: {desired-height}">
+     *   <svg width="100%" height="100%">
+     *    ...
+     *   </svg>
+     * </div>
+     * 同时以下事件监听
+     * 注册 diagram.init 事件监听回调函数，在 diagram 实例化时抛出 canvas.init 事件
+     * 注册 'shape.added', 'connection.added', 'shape.removed', 'connection.removed', 'elements.changed',
+     *     'root.set' 事件监听回调函数，强制重新刷新视图
+     * 注册 diagram.destroy, 同时执行 _destroy 销毁画布
+     * 注册 diagram.clear, 同时执行 _clear 方法
+     */
+    protected _init(config: Object): void
+    /**
+     * 画布销毁
+     * 抛出 canvas.destroy 事件，并从外层元素中移除 div#container
+     */
+    protected _destroy(): void
+    /**
+     * 画布清空
+     * 调用 elementRegistry.getAll() 获取所有元素执行 canvas._removeElement 或者 canvas.removeRootElement
+     */
+    protected _clear(): void
+    /**
+     * ### 返回绘制所有元素的默认图层
+     * 通常为最外层 SVG 元素 下 g.viewport 下的 g.layer-base 元素，而非最外层 SVG
+     * @returns {SVGElement} dom 元素
+     */
     getDefaultLayer(): SVGElement
+    /**
+     * 返回用于在其上绘制元素或注释的图层
+     * @returns {SVGElement} dom 元素
+     */
     getLayer(name: string, index: number): SVGElement
     showLayer(name: string): SVGElement
     hideLayer(name: string): SVGElement
@@ -347,6 +421,7 @@ declare module 'diagram-js/lib/model' {
   import { DJSModule } from 'diagram-js'
   import { KeyboardConfig } from 'diagram-js/lib/features/keyboard/Keyboard'
   import { Descriptor, Moddle } from 'moddle'
+  import { Module } from 'didi'
 
   export interface Hints {
     connectionStart?: Point
@@ -423,7 +498,7 @@ declare module 'diagram-js/lib/model' {
     height?: string | number
     position?: string
     deferUpdate?: boolean
-    modules?: DJSModule[]
+    modules?: Module[]
     additionalModules?: any[]
     moddleExtensions?: { [id: string]: any }
     propertiesPanel?: {

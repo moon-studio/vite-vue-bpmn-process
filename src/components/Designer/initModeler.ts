@@ -2,6 +2,7 @@ import type { ModelerOptions } from 'types/editor/settings'
 import Modeler from 'bpmn-js/lib/Modeler'
 import EventEmitter from '@/utils/EventEmitter'
 import EmptyXML from '@/utils/EmptyXML'
+import Canvas from 'diagram-js/lib/core/Canvas'
 
 const createNewDiagram = async function (newXml, settings) {
   try {
@@ -34,6 +35,8 @@ export default function (designer, modelerModules, settings, xml, emit) {
 
   const modeler = (window.bpmnInstances.modeler = new Modeler(options))
   EventEmitter.instance.emit('modeler-init', modeler)
+
+  console.log(modeler.get<Canvas>('canvas').getDefaultLayer())
 
   modeler.on('commandStack.changed', async (event) => {
     try {
