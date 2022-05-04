@@ -36,7 +36,13 @@ export default function (designer, modelerModules, settings, xml, emit) {
   const modeler = (window.bpmnInstances.modeler = new Modeler(options))
   EventEmitter.instance.emit('modeler-init', modeler)
 
-  console.log(modeler.get<Canvas>('canvas').getDefaultLayer())
+  const canvas: Canvas = modeler.get('canvas')
+
+  console.log(canvas.getDefaultLayer())
+
+  modeler.on('element.click', ({ element }: any) => {
+    console.log(canvas.getAbsoluteBBox(element))
+  })
 
   modeler.on('commandStack.changed', async (event) => {
     try {

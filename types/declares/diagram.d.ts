@@ -148,9 +148,29 @@ declare module 'diagram-js/lib/core/Canvas' {
     viewbox(box: Dimensions & { x: number; y: number }): Viewbox
     scroll(delta: Delta): Position
     scrollToElement<E extends Base>(elements?: Array<E | Object>, padding?: number | Object): Position
+
+    /**
+     * 获取或设置画布的当前缩放，可选地缩放到指定位置, 可使用 canvas.zoom('fit-viewport', 'auto') 使画布自动缩放至
+     * 画布可见范围内并居中
+     * @param {number | string} newScale
+     * @param {Point | string} center
+     * @return {number} zoom 当前缩放层级
+     */
     zoom(newScale: number | string, center: Point | string): number
+
+    /**
+     * 返回画布的尺寸
+     */
     getSize(): Dimensions
+    /**
+     * 返回给定元素的绝对边界坐标与元素高宽
+     * @param {Base} element 元素
+     * @return {Bounds} 坐标与高宽
+     */
     getAbsoluteBBox<E extends Base>(element: E): Bounds
+    /**
+     * 强制刷新视图，并触发 canvas.resized 让其他元素同时调整
+     */
     resized(): void
   }
 }
