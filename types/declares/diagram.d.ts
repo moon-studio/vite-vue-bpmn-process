@@ -590,9 +590,22 @@ declare module 'diagram-js/lib/core/EventBus' {
      * @returns {InternalEvent}
      */
     createEvent(data?: any): InternalEvent
-    fire(name: string | { type: string }, event: any, ...data: any[]): any
+
+    /**
+     * 触发一个命名事件。
+     * @param name {string | { type: string }} 事件名称
+     * @param [data] {*} 事件参数
+     * @returns {boolean}
+     */
+    fire(name: string | { type: string }, data?: any): boolean
+
+    /**
+     * 抛出错误事件，触发 error 事件
+     * @param error
+     */
     handleError(error: any): boolean
 
+    // 清空 _listeners
     protected _destroy(): void
     protected _invokeListeners(event: string, args: any[], listener: any): void
     protected _invokeListener(event: string, args: any[], listener: any): void
