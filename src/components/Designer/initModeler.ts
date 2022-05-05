@@ -6,9 +6,10 @@ import Canvas from 'diagram-js/lib/core/Canvas'
 
 const createNewDiagram = async function (newXml, settings) {
   try {
+    const timestamp = Date.now()
     const { processId, processName, processEngine } = settings.value
-    const newId: string = processId ? processId : `Process_${new Date().getTime()}`
-    const newName: string = processName || `业务流程_${new Date().getTime()}`
+    const newId: string = processId ? processId : `Process_${timestamp}`
+    const newName: string = processName || `业务流程_${timestamp}`
     const xmlString = newXml || EmptyXML(newId, newName, processEngine)
     const { modeler } = window.bpmnInstances
     const { warnings } = await modeler.importXML(xmlString)
@@ -34,15 +35,8 @@ export default function (designer, modelerModules, settings, xml, emit) {
   settings.value?.penalMode !== 'custom' && (options.propertiesPanel = { parent: '#camunda-penal' })
 
   const modeler = (window.bpmnInstances.modeler = new Modeler(options))
+
   EventEmitter.instance.emit('modeler-init', modeler)
-
-  const canvas: Canvas = modeler.get('canvas')
-
-  console.log(canvas.getDefaultLayer())
-
-  modeler.on('element.click', ({ element }: any) => {
-    console.log(canvas.getAbsoluteBBox(element))
-  })
 
   modeler.on('commandStack.changed', async (event) => {
     try {

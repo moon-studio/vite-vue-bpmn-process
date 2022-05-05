@@ -9,6 +9,7 @@ declare module 'bpmn-js' {
 }
 declare module 'bpmn-js/lib/BaseViewer' {
   import Diagram from 'diagram-js'
+  import { EventCallback } from 'diagram-js/lib/core/EventBus'
   import { ViewerOptions, ModdleElement } from 'diagram-js/lib/model'
   import { InternalEvent } from 'diagram-js/lib/core/EventBus'
   import { ModuleDefinition } from 'didi'
@@ -36,7 +37,7 @@ declare module 'bpmn-js/lib/BaseViewer' {
     on<T extends BPMNEvent, P extends InternalEvent>(
       event: T,
       priority: number | BPMNEventCallback<P>,
-      callback?: BPMNEventCallback<P>,
+      callback?: EventCallback<T, any>,
       that?: this
     ): void
     off<T extends BPMNEvent, P extends InternalEvent>(events: T | T[], callback?: BPMNEventCallback<P>): void

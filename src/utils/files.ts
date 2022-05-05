@@ -2,7 +2,7 @@
 export function setEncoded(type: string, filename: string, data: string) {
   const encodedData: string = encodeURIComponent(data)
   return {
-    filename: `${filename}.${type}`,
+    filename: `${filename}.${type.toLowerCase()}`,
     href: `data:application/${type === 'svg' ? 'text/xml' : 'bpmn20-xml'};charset=UTF-8,${encodedData}`,
     data: data
   }

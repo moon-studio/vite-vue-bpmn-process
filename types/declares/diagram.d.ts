@@ -358,11 +358,11 @@ declare module 'diagram-js/lib/core/Canvas' {
     /**
      * 获取或设置画布的当前缩放，可选地缩放到指定位置, 可使用 canvas.zoom('fit-viewport', 'auto') 使画布自动缩放至
      * 画布可见范围内并居中
-     * @param {number | string} newScale
-     * @param {Point | string} center
+     * @param {number | string} [newScale]
+     * @param {Point | string} [center]
      * @return {number} zoom 当前缩放层级
      */
-    zoom(newScale: number | string, center: Point | string): number
+    zoom(newScale?: number | string, center?: Point | string): number
 
     /**
      * 返回画布的尺寸
@@ -513,6 +513,7 @@ declare module 'diagram-js/lib/core/ElementRegistry' {
 // 事件总线
 declare module 'diagram-js/lib/core/EventBus' {
   import { Base } from 'diagram-js/lib/model'
+  import { Viewbox } from 'diagram-js/lib/core/Canvas'
 
   export interface InternalEvent {
     cancelBubble?: boolean
@@ -526,7 +527,7 @@ declare module 'diagram-js/lib/core/EventBus' {
   export type EventCallback<T extends string, E extends Base> = (event: EventType<T, E>, data: any) => any
   export type EventType<T extends string, E extends Base> = EventMap<E> extends Record<T, infer P> ? P : InternalEvent
   interface EventMap<E extends Base> {
-    [event: string]: SelectionEvent<E> | ElementEvent<E>
+    [event: string]: SelectionEvent<E> | ElementEvent<E> | CanvasEvent<E>
   }
 
   export interface SelectionEvent<E extends Base> extends InternalEvent {
@@ -539,6 +540,9 @@ declare module 'diagram-js/lib/core/EventBus' {
     element: E
     gfx: SVGElement
     originalEvent: MouseEvent
+  }
+  export interface CanvasEvent<E extends Base> extends InternalEvent {
+    viewbox: Viewbox
   }
 
   export default class EventBus {

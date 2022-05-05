@@ -7,18 +7,17 @@ import type { PropType, ComputedRef } from 'vue'
 import type { EditorSettings } from 'types/editor/settings'
 import type { ModuleDeclaration } from 'didi'
 
-const designerProps = {
-  xml: {
-    type: String as PropType<string>
-  },
-  settings: {
-    type: Object as PropType<EditorSettings>,
-    default: () => defaultSettings
-  }
-}
-
 const Designer = defineComponent({
-  props: designerProps,
+  props: {
+    xml: {
+      type: String as PropType<string>,
+      default: undefined
+    },
+    settings: {
+      type: Object as PropType<EditorSettings>,
+      default: () => defaultSettings
+    }
+  },
   emits: ['update:xml', 'command-stack-changed'],
   setup(props, { emit }) {
     !window.bpmnInstances && (window.bpmnInstances = {})
