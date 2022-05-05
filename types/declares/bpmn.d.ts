@@ -112,7 +112,18 @@ declare module 'bpmn-js/lib/features/modeling/ElementFactory.js' {
   }
 }
 declare module 'bpmn-js/lib/features/modeling/Modeling.js' {
-  export default class Modeling {}
+  import BaseModeling from 'diagram-js/lib/features/modeling/Modeling'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import ElementFactory from 'diagram-js/lib/core/ElementFactory'
+  import CommandStack from 'diagram-js/lib/command/CommandStack'
+  import { Connection, Hints, Shape } from 'diagram-js/lib/model'
+
+  export default class Modeling extends BaseModeling {
+    constructor(eventBus: EventBus, elementFactory: ElementFactory, commandStack: CommandStack, bpmnRules: any)
+    getHandlers(): any
+    updateLabel(element: any, newLabel: any, newBounds, hints): void
+    connect(source: Shape, target: Shape, attrs?: Object, hints?: Hints): Connection
+  }
 }
 /************************************* draw 图形元素绘制模块 *************************************/
 declare module 'bpmn-js/lib/draw/BpmnRenderer' {

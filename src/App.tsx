@@ -7,7 +7,7 @@ import Setting from '@/components/Setting'
 import { EditorSettings } from 'types/editor/settings'
 import { defaultSettings } from '@/config'
 import Logger from '@/utils/Logger'
-import { NConfigProvider } from 'naive-ui'
+import { NConfigProvider, NMessageProvider } from 'naive-ui'
 
 const logger = new Logger()
 
@@ -38,11 +38,13 @@ const App = defineComponent({
     return () => (
       <div class={computedClasses.value} id="designer-container">
         <NConfigProvider abstract componentOptions={{ DynamicInput: { buttonSize: 'small' } }}>
-          {showToolbar.value && <Toolbar></Toolbar>}
-          {customPalette.value && <Palette></Palette>}
-          <Designer settings={editorSettings.value} v-model={[processXml.value, 'xml']}></Designer>
-          {customPenal.value ? <Penal></Penal> : <div class="camunda-penal" id="camunda-penal"></div>}
-          <Setting v-model={[editorSettings, 'settings']}></Setting>
+          <NMessageProvider>
+            {showToolbar.value && <Toolbar></Toolbar>}
+            {customPalette.value && <Palette></Palette>}
+            <Designer settings={editorSettings.value} v-model={[processXml.value, 'xml']}></Designer>
+            {customPenal.value ? <Penal></Penal> : <div class="camunda-penal" id="camunda-penal"></div>}
+            <Setting v-model={[editorSettings, 'settings']}></Setting>
+          </NMessageProvider>
         </NConfigProvider>
       </div>
     )

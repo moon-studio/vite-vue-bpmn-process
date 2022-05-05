@@ -971,6 +971,23 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
     toggleCollapse(shape: Shape, hints?: Hints): void
   }
 }
+// 元素对其方式
+declare module 'diagram-js/lib/features/align-elements/AlignElements' {
+  import Modeling from 'diagram-js/lib/features/modeling/Modeling'
+  import { Base } from 'diagram-js/lib/model'
+
+  export default class AlignElements {
+    constructor(modeling: Modeling)
+
+    /**
+     * 对选择的元素进行对齐, 内部会调用 modeling.alignElements
+     *
+     * @param  {Array} elements
+     * @param  {string} type 可选值：left|right|center|top|bottom|middle
+     */
+    trigger(elements: Base[], type: string): void
+  }
+}
 // 在图表元素旁边显示特定于元素的上下文操作的操作菜单
 declare module 'diagram-js/lib/features/context-pad/ContextPad' {
   import EventBus from 'diagram-js/lib/core/EventBus'
