@@ -252,7 +252,6 @@ declare module 'diagram-js/lib/core/Canvas' {
     /**
      * 删除指定根元素，依次触发 root.remove, root.removed 事件
      * @param element {Base}
-     * @param override
      */
     protected _removeRoot(element: Base): void
 
@@ -276,7 +275,7 @@ declare module 'diagram-js/lib/core/Canvas' {
 
     /**
      * 添加形状元素, 调用 _addElement('shape', element, parent, parentIndex)
-     * @param element {Base} 元素实例
+     * @param shape
      * @param [parent] {Base} 父元素实例
      * @param [parentIndex] {number} 父元素实例的索引
      * @returns {Base} 新添加的元素实例
@@ -285,7 +284,7 @@ declare module 'diagram-js/lib/core/Canvas' {
 
     /**
      * 添加连线元素, 调用 _addElement('connection', element, parent, parentIndex)
-     * @param element {Base} 元素实例
+     * @param shape
      * @param [parent] {Base} 父元素实例
      * @param [parentIndex] {number} 父元素实例的索引
      * @returns {Base} 新添加的元素实例
@@ -435,7 +434,7 @@ declare module 'diagram-js/lib/core/ElementRegistry' {
     /**
      * 注册一对 元素实例 与 SVG 元素 的关联关系
      *
-     * @param {djs.model.Base} element
+     * @param {Base} element
      * @param {SVGElement} gfx
      * @param {SVGElement} [secondaryGfx] 选择其他要注册的元素
      */
@@ -560,7 +559,7 @@ declare module 'diagram-js/lib/core/EventBus' {
      * @param {Object} [that] Pass context (`this`) to the callback
      */
     on<T extends string, E extends Base>(
-      event: T,
+      events: T,
       priority: number | EventCallback<T, E>,
       callback?: EventCallback<T, E>,
       that?: any
@@ -573,7 +572,12 @@ declare module 'diagram-js/lib/core/EventBus' {
      * @param {Function} callback the callback to execute
      * @param {Object} [that] Pass context (`this`) to the callback
      */
-    once<T extends string, E extends Base>(event: T, priority: number, callback: EventCallback<T, E>): void
+    once<T extends string, E extends Base>(
+      event: T,
+      priority: number,
+      callback: EventCallback<T, E>,
+      that?: Object
+    ): void
 
     /**
      * 通过事件和回调删除事件侦听器。

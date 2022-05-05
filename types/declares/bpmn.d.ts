@@ -37,7 +37,7 @@ declare module 'bpmn-js/lib/BaseViewer' {
       event: T,
       priority: number | BPMNEventCallback<P>,
       callback?: BPMNEventCallback<P>,
-      target?: this
+      that?: this
     ): void
     off<T extends BPMNEvent, P extends InternalEvent>(events: T | T[], callback?: BPMNEventCallback<P>): void
     attachTo<T extends Element>(parentNode: string | T): void
