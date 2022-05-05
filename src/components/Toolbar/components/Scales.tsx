@@ -1,5 +1,5 @@
 import { defineComponent, ref } from 'vue'
-import { NButton, NButtonGroup, NIcon } from 'naive-ui'
+import { NButton, NButtonGroup, NIcon, NPopover } from 'naive-ui'
 import ZoomOutRound from '@vicons/material/ZoomOutRound'
 import ZoomInRound from '@vicons/material/ZoomInRound'
 import EventEmitter from '@/utils/EventEmitter'
@@ -36,15 +36,36 @@ const Scales = defineComponent({
 
     return () => (
       <NButtonGroup>
-        <NButton onClick={() => zoomOut()}>
-          <NIcon component={ZoomOutRound}></NIcon>
-        </NButton>
-        <NButton onClick={() => zoomReset('fit-viewport')}>
-          <span style="text-align: center; display: inline-block; width: 40px">{currentScale.value}</span>
-        </NButton>
-        <NButton onClick={() => zoomIn()}>
-          <NIcon component={ZoomInRound}></NIcon>
-        </NButton>
+        <NPopover
+          v-slots={{
+            default: () => '缩小视图',
+            trigger: () => (
+              <NButton onClick={() => zoomOut()}>
+                <NIcon component={ZoomOutRound}></NIcon>
+              </NButton>
+            )
+          }}
+        ></NPopover>
+        <NPopover
+          v-slots={{
+            default: () => '重置缩放',
+            trigger: () => (
+              <NButton onClick={() => zoomReset('fit-viewport')}>
+                <span style="text-align: center; display: inline-block; width: 40px">{currentScale.value}</span>
+              </NButton>
+            )
+          }}
+        ></NPopover>
+        <NPopover
+          v-slots={{
+            default: () => '放大视图',
+            trigger: () => (
+              <NButton onClick={() => zoomIn()}>
+                <NIcon component={ZoomInRound}></NIcon>
+              </NButton>
+            )
+          }}
+        ></NPopover>
       </NButtonGroup>
     )
   }
