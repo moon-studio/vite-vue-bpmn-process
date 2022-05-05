@@ -72,6 +72,10 @@ declare module 'diagram-js/lib/core/Canvas' {
     dy: number
   }
   export type Bounds = Position & Dimensions
+  export type Layer = {
+    index: number
+    group: SVGElement
+  }
   export type Viewbox = {
     x: number
     y: number
@@ -90,6 +94,8 @@ declare module 'diagram-js/lib/core/Canvas' {
    */
   export default class Canvas {
     constructor(config: any, eventBus: EventBus, graphicsFactory: GraphicsFactory, elementRegistry: ElementRegistry)
+    // 内部属性，保存图层实例
+    protected _layers: { [name: string]: any }
     /**
      * ## 画布初始化方法，创建一个一直被 div#container 元素包裹的 svg 元素，可以通过访问外层 div 元素获取画布大小
      * <div class="djs-container" style="width: {desired-width}, height: {desired-height}">
@@ -126,27 +132,228 @@ declare module 'diagram-js/lib/core/Canvas' {
      * @returns {SVGElement} dom 元素
      */
     getLayer(name: string, index: number): SVGElement
+
+    /**
+     * 对于给定的索引，返回具有较高索引且可见的层数。
+     * @param index
+     * @protected
+     */
+    protected _getChildIndex(index: number): number
+
+    /**
+     * 创建一个给定的层并返回
+     * @param name 图层名称
+     * @param index 图层层级索引
+     * @returns {Layer} layer 对象
+     */
+    protected _createLayer(name: string, index: number): Layer
+
+    /**
+     * 根据传入名称显示图层，该图层必须存在于 canvas._layers 中
+     * @param name {string} 图层名称
+     * @returns {SVGElement} dom 元素
+     */
     showLayer(name: string): SVGElement
+    /**
+     * 根据传入名称隐藏图层，该图层必须存在于 canvas._layers 中
+     * @param name {string} 图层名称
+     * @returns {SVGElement} dom 元素
+     */
     hideLayer(name: string): SVGElement
+
+    /**
+     * 返回当前主要活动的图层，没有则返回 null
+     * @returns {SVGElement|null} dom 元素
+     */
     getActiveLayer(): SVGElement | null
+
+    /**
+     * 查找对应元素的跟元素实例
+     * @param element {string | Base} 元素实例或元素名称
+     * @returns {Base} 根元素实例
+     */
     findRoot<E extends Base>(element: string | E): E
+
+    /**
+     * 查找所有根元素实例
+     * @returns {Base[]} 根元素实例数组
+     */
     getRootElements<E extends Base>(): E[]
+
+    /**
+     * 返回画布父元素
+     * @returns {Element} dom div 元素
+     */
     getContainer<E extends Element>(): E
+
+    /**
+     * 更新元素标记，通常是 class 类名, 触发 element.marker.update 事件
+     * @param element { Base } 元素实例
+     * @param marker { string } 标记名称
+     * @param add { boolean } 是否添加标记
+     * @protected
+     */
+    protected _updateMarker(element: Base, marker: string, add: boolean): void
+
+    /**
+     * 将标记添加到元素 (基本上是css类), 调用 _updateMarker(element, marker, true)
+     * @param element { Base | string } 元素实例
+     * @param marker { string } 标记名称
+     */
     addMarker<E extends Base>(element: E | string, marker: string): void
+
+    /**
+     * 从元素中删除标记。调用 _updateMarker(element, marker, false)
+     * @param element { Base | string } 元素实例
+     * @param marker { string } 标记名称
+     */
     removeMarker<E extends Base>(element: E | string, marker: string): void
+
+    /**
+     * 检查元素上是否存在标记。
+     * @param element { Base | string } 元素实例
+     * @param marker { string } 标记名称
+     * @returns {boolean} 是否存在标记
+     */
     hasMarker<E extends Base>(element: E | string, marker: string): boolean
+
+    /**
+     * 切换元素上的标记显示状态，根据 hasMarker 结果判断调用 addMarker 或者 removeMarker
+     * @param element
+     * @param marker
+     */
     toggleMarker<E extends Base>(element: E | string, marker: string): void
+
+    /**
+     * 返回当前根元素。支持处理根元素的两种不同模式:
+     *
+     * 1. 如果之前没有添加根元素，则将添加一个隐式根并返回。这在不需要显式根元素的应用程序中使用。
+     *
+     * 2. 在调用之前添加了根元素时地托元素,根元素可以为null。这用于希望自己管理根元素的应用程序。
+     *
+     * @returns {Object|Root|null} rootElement.
+     */
     getRootElement<E extends Base>(): E | Object | null
+
+    /**
+     * 添加给定的根元素并返回
+     * @param element { Base | Object } 根元素
+     * @returns {Base | Object} 根元素
+     */
     addRootElement<E extends Base>(element: E | Object): E | Object
+
+    /**
+     * 删除给定的rootElement并返回
+     * @param rootElement { Base | Object } 根元素
+     * @returns {Base | Object} 根元素
+     */
     removeRootElement<E extends Base>(rootElement: E | string): E | Object
+
+    /**
+     * 删除指定根元素，依次触发 root.remove, root.removed 事件
+     * @param element {Base}
+     * @param override
+     */
+    protected _removeRoot(element: Base): void
+
+    /**
+     * 将给定元素设置为画布的新根元素，并返回新的根元素。
+     * @param rootElement {Base | Object}
+     * @param [override] {boolean}
+     * @returns {Base | Object}
+     */
     setRootElement<E extends Base>(rootElement: E | Object, override?: boolean): E | Object
+
+    /**
+     * 将元素添加到画布中。根据所传入的 type 类型会触发对应的 [type].add, [type].added 事件
+     * @param type {string} 元素类型
+     * @param element {Base} 元素实例
+     * @param [parent] {Base} 父元素实例
+     * @param [parentIndex] {number} 父元素实例的索引
+     * @returns {Base} 新添加的元素实例
+     */
+    protected _addElement(type: string, element: Base, parent?: Base, parentIndex?: number): void
+
+    /**
+     * 添加形状元素, 调用 _addElement('shape', element, parent, parentIndex)
+     * @param element {Base} 元素实例
+     * @param [parent] {Base} 父元素实例
+     * @param [parentIndex] {number} 父元素实例的索引
+     * @returns {Base} 新添加的元素实例
+     */
     addShape<E extends Base>(shape: E | Object, parent?: E, parentIndex?: number): E
+
+    /**
+     * 添加连线元素, 调用 _addElement('connection', element, parent, parentIndex)
+     * @param element {Base} 元素实例
+     * @param [parent] {Base} 父元素实例
+     * @param [parentIndex] {number} 父元素实例的索引
+     * @returns {Base} 新添加的元素实例
+     */
     addConnection<E extends Base>(shape: E | Object, parent?: E, parentIndex?: number): E
+
+    /**
+     * 从画布中移除对应的元素。根据所传入的 type 类型会触发对应的 [type].remove, [type].removed 事件
+     * @param element {Base} 元素实例
+     * @param type {string} 元素类型
+     * @returns {Base} 被移除的元素实例
+     */
+    protected _removeElement(element: Base, type: string): void
+
+    /**
+     * 从画布中删除形状元素, 调用 _removeElement(element, 'shape')
+     * @param shape {Base}
+     * @returns {Base} 被移除的元素实例
+     */
     removeShape<E extends Base>(shape: E | string): E
-    removeConnection<E extends Base>(shape: E | string): E
+
+    /**
+     * 从画布中删除形状连线, 调用 _removeElement(element, 'connection')
+     * @param connection {Base}
+     * @returns {Base} 被移除的元素实例
+     */
+    removeConnection<E extends Base>(connection: E | string): E
+
+    /**
+     * 返回在某个图元素下面的SVG图形对象
+     * @param element {Base | string}
+     * @param [secondary] {boolean} 是否返回二级连接元素
+     * @return {SVGElement}
+     */
     getGraphics<E extends Base>(element: E | string, secondary?: boolean): SVGElement
-    viewbox(box: Dimensions & { x: number; y: number }): Viewbox
+
+    /**
+     * 通过给定的更改函数执行viewbox更新, 触发 canvas.viewbox.changing 事件
+     * @param changeFn {Function}
+     * @protected
+     */
+    protected _changeViewbox(changeFn: () => void): void
+
+    /**
+     * 触发 canvas.viewbox.changed 事件
+     * @protected
+     */
+    protected _viewboxChanged(): void
+
+    /**
+     * 获取或重新设置画布的视图框，即当前显示的区域。
+     * @param box { Dimensions & Position }
+     * @returns {Viewbox}
+     */
+    viewbox(box: Dimensions & Position): Viewbox
+
+    /**
+     * 获取画布偏移（滚动）量，或者重新设置画布偏移（滚动）量。
+     * @param [delta] {Delta}
+     * @returns {Position}
+     */
     scroll(delta: Delta): Position
+
+    /**
+     * 滚动viewbox以包含给定的元素。(可选) 指定要应用于边缘的填充
+     * @param [elements] {Base[] | string[]}
+     * @param [padding] {number | Object}
+     */
     scrollToElement<E extends Base>(elements?: Array<E | Object>, padding?: number | Object): Position
 
     /**
@@ -180,10 +387,41 @@ declare module 'diagram-js/lib/core/ElementFactory' {
 
   export default class ElementFactory {
     constructor()
+    /**
+     * 创建具有给定类型和许多预设属性的模型元素
+     *
+     * @param  {string} type
+     * @param  {Object} attrs
+     * @return {Base} the newly created model instance
+     */
     create(type: string, attrs: any): Root | Shape | Connection | Label
+
+    /**
+     * 创建一个根元素, 调用 create('root', attrs)
+     * @param {Object} attrs
+     * @return {Base} the newly created model instance
+     */
     createRoot<E extends Root>(attrs: any): E
+
+    /**
+     * 创建一个label标签元素, 调用 create('label', attrs)
+     * @param {Object} attrs
+     * @return {Base} the newly created model instance
+     */
     createLabel<E extends Label>(attrs: any): E
+
+    /**
+     * 创建一个形状元素, 调用 create('shape', attrs)
+     * @param {Object} attrs
+     * @return {Base} the newly created model instance
+     */
     createShape<E extends Shape>(attrs: any): E
+
+    /**
+     * 创建一个连线元素, 调用 create('connection', attrs)
+     * @param {Object} attrs
+     * @return {Base} the newly created model instance
+     */
     createConnection<E extends Connection>(attrs: any): E
   }
 }
@@ -192,36 +430,90 @@ declare module 'diagram-js/lib/core/ElementRegistry' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import { Base } from 'diagram-js/lib/model'
   export default class ElementRegistry {
+    private _elements: { [key: string]: Base }
     constructor(eventBus: EventBus)
+    /**
+     * 注册一对 元素实例 与 SVG 元素 的关联关系
+     *
+     * @param {djs.model.Base} element
+     * @param {SVGElement} gfx
+     * @param {SVGElement} [secondaryGfx] 选择其他要注册的元素
+     */
     add<E extends Base>(element: E, gfx: SVGElement, secondaryGfx?: SVGElement): void
+
+    /**
+     * 从注册表中删除一个元素
+     * @param element
+     */
     remove<E extends Base>(element: E): void
+
+    /**
+     * 更新元素的id
+     * @param element
+     * @param newId {string} 新id
+     */
     updateId<E extends Base>(element: E, newId: string): void
+
+    /**
+     * 更新元素的图形元素
+     * @param element {Base}
+     * @param gfx {SVGElement}
+     * @param [secondary] {boolean}
+     */
     updateGraphics<E extends Base>(element: E, gfx: SVGElement, secondary?: boolean): void
+
+    /**
+     * 返回给定id或图形对应的元素实例
+     * @param filter {string | SVGElement}
+     * @return {Base}
+     */
     get<E extends Base>(filter: string | SVGElement): E
+
+    /**
+     * 根据传入的回调函数，返回所有符合条件的元素，类似数组的filter方法
+     * @param fn {Function}
+     * @return {Array<Base>}
+     */
     filter<E extends Base>(fn: (element: E) => boolean): E[]
+
+    /**
+     * 根据传入的回调函数，返回第一个符合条件的元素，find
+     * @param fn {Function}
+     * @return {Base}
+     */
     find<E extends Base>(fn: (element: E) => boolean): E[]
+
+    /**
+     * 获取所有注册的元素实例
+     * @return {Array<Base>}
+     */
     getAll<E extends Base>(): E[]
+
+    /**
+     * 根据传入的回调函数，类似数组的forEach方法
+     * @param fn {Function}
+     */
     forEach<E extends Base>(fn: (element: E) => void): void
+
+    /**
+     * 返回元素或其id的图形表示
+     * @param filter {string | Base}
+     * @param [secondary] {boolean}
+     */
     getGraphics<E extends Base>(filter: E | string, secondary?: boolean): SVGElement
+
+    /**
+     * 验证id合法性
+     * @param {string} id
+     *
+     * @throws {Error} if id is empty or already assigned
+     */
+    protected _validateId(id: string): void
   }
 }
 // 事件总线
 declare module 'diagram-js/lib/core/EventBus' {
   import { Base } from 'diagram-js/lib/model'
-
-  export default class EventBus {
-    on<T extends string, E extends Base>(
-      event: T,
-      priority: number | EventCallback<T, E>,
-      callback?: EventCallback<T, E>,
-      that?: any
-    ): void
-    once<T extends string, E extends Base>(event: T, priority: number, callback: EventCallback<T, E>): void
-    off<T extends string, E extends Base>(events: string | string[], callback?: EventCallback<T, E>): void
-    createEvent(data?: any): InternalEvent
-    fire(name: string | { type: string }, event: any, ...data: any[]): any
-    handleError(error: any): boolean
-  }
 
   export interface InternalEvent {
     cancelBubble?: boolean
@@ -248,6 +540,66 @@ declare module 'diagram-js/lib/core/EventBus' {
     element: E
     gfx: SVGElement
     originalEvent: MouseEvent
+  }
+
+  export default class EventBus {
+    private _listeners: { [key: string]: EventCallback<string, Base>[] }
+
+    /**
+     * 注册一个事件监听器
+     *
+     * 在回调函数中 返回 false 可以阻止事件的后续传播
+     *
+     * 设置 priority 优先级，数值越大，优先级越高，优先级相同的事件会按照注册顺序依次执行，优先级越高越先执行
+     *
+     * 可以通过设置高 priority 来阻止该同名事件的其他事件回调的执行
+     *
+     * @param {string|Array<string>} events
+     * @param {number} [priority=1000] the priority in which this listener is called, larger is higher
+     * @param {Function} callback
+     * @param {Object} [that] Pass context (`this`) to the callback
+     */
+    on<T extends string, E extends Base>(
+      event: T,
+      priority: number | EventCallback<T, E>,
+      callback?: EventCallback<T, E>,
+      that?: any
+    ): void
+
+    /**
+     * 注册一个只执行一次的事件监听器
+     * @param {string} event
+     * @param {number} [priority=1000] the priority in which this listener is called, larger is higher
+     * @param {Function} callback the callback to execute
+     * @param {Object} [that] Pass context (`this`) to the callback
+     */
+    once<T extends string, E extends Base>(event: T, priority: number, callback: EventCallback<T, E>): void
+
+    /**
+     * 通过事件和回调删除事件侦听器。
+     *
+     * 如果未给出回调函数，则将删除给定事件名称的所有侦听器。
+     * @param {string|Array<string>} events
+     * @param {Function} [callback]
+     */
+    off<T extends string, E extends Base>(events: string | string[], callback?: EventCallback<T, E>): void
+
+    /**
+     * 创建EventBus事件
+     * @param data
+     * @returns {InternalEvent}
+     */
+    createEvent(data?: any): InternalEvent
+    fire(name: string | { type: string }, event: any, ...data: any[]): any
+    handleError(error: any): boolean
+
+    protected _destroy(): void
+    protected _invokeListeners(event: string, args: any[], listener: any): void
+    protected _invokeListener(event: string, args: any[], listener: any): void
+    protected _addListener(event: string, newListener: any): void
+    protected _getListeners(name: string): void
+    protected _setListeners(name: string): void
+    protected _removeListener(event: string, callback: () => void): void
   }
 }
 // SVG 元素工厂
