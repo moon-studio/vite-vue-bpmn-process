@@ -10,9 +10,11 @@ import { CanvasEvent } from 'diagram-js/lib/core/EventBus'
 const Scales = defineComponent({
   setup() {
     const currentScale = ref(1)
+    let canvas: Canvas | null = null
 
     EventEmitter.instance.on('modeler-init', (modeler: Modeler) => {
-      currentScale.value = modeler.get<Canvas>('canvas').zoom()
+      canvas = modeler.get<Canvas>('canvas')
+      currentScale.value = canvas.zoom()
       modeler.on('canvas.viewbox.changed', ({ viewbox }: CanvasEvent<any>) => {
         currentScale.value = viewbox.scale
       })
@@ -28,12 +30,8 @@ const Scales = defineComponent({
       zoomReset(currentScale.value)
     }
 
-    const zoomReset = (newScale: number | string, center?: string) => {
-      if (!window.bpmnInstances?.modeler) {
-        return false
-      }
-      const canvas: Canvas = window.bpmnInstances.modeler.get('canvas')
-      canvas.zoom(newScale, center || { x: 0, y: 0 })
+    const zoomReset = (newScale: number | string) => {
+      canvas && canvas.zoom(newScale, newScale === 'fit-viewport' ? undefined : { x: 0, y: 0 })
     }
 
     return () => (
@@ -41,7 +39,7 @@ const Scales = defineComponent({
         <NButton onClick={() => zoomOut()}>
           <NIcon component={ZoomOutRound}></NIcon>
         </NButton>
-        <NButton onClick={() => zoomReset('fit-viewport', 'auto')}>
+        <NButton onClick={() => zoomReset('fit-viewport')}>
           <span style="text-align: center; display: inline-block; width: 40px">{currentScale.value}</span>
         </NButton>
         <NButton onClick={() => zoomIn()}>
