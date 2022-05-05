@@ -1,25 +1,7 @@
 import type { ModelerOptions } from 'types/editor/settings'
 import Modeler from 'bpmn-js/lib/Modeler'
 import EventEmitter from '@/utils/EventEmitter'
-import EmptyXML from '@/utils/EmptyXML'
-import Canvas from 'diagram-js/lib/core/Canvas'
-
-const createNewDiagram = async function (newXml, settings) {
-  try {
-    const timestamp = Date.now()
-    const { processId, processName, processEngine } = settings.value
-    const newId: string = processId ? processId : `Process_${timestamp}`
-    const newName: string = processName || `业务流程_${timestamp}`
-    const xmlString = newXml || EmptyXML(newId, newName, processEngine)
-    const { modeler } = window.bpmnInstances
-    const { warnings } = await modeler.importXML(xmlString)
-    if (warnings && warnings.length) {
-      warnings.forEach((warn) => console.warn(warn))
-    }
-  } catch (e) {
-    console.error(`[Process Designer Warn]: ${typeof e === 'string' ? e : (e as Error)?.message}`)
-  }
-}
+import { createNewDiagram } from '@/utils'
 
 export default function (designer, modelerModules, settings, xml, emit) {
   ;(window.bpmnInstances?.modeler && window.bpmnInstances.modeler.destroy()) || (window.bpmnInstances = {})
@@ -48,5 +30,5 @@ export default function (designer, modelerModules, settings, xml, emit) {
     }
   })
 
-  createNewDiagram(xml.value, settings)
+  createNewDiagram(xml.value, settings.value)
 }
