@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@bpmn-io/properties-panel": "^0.13.2",
     "bpmn-js": "^9.0.3",
     "bpmn-js-properties-panel": "^1.1.0",
     "bpmn-js-token-simulation": "^0.27.0",
