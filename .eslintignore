@@ -3,6 +3,7 @@ public/
 es/
 lib/
 dist/
+docs/
 package.json
 src/assets/
 *.cssr.js
