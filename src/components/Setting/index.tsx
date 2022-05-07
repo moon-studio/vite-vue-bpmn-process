@@ -62,6 +62,13 @@ const Setting = defineComponent({
               <NFormItem label="Toolbar">
                 <NSwitch v-model={[editorSettings.value.toolbar, 'value']}></NSwitch>
               </NFormItem>
+              <NFormItem label="Background">
+                <NRadioGroup v-model={[editorSettings.value.bg, 'value']}>
+                  <NRadio value="grid-image">网格</NRadio>
+                  <NRadio value="image">图片</NRadio>
+                  <NRadio value="none">空</NRadio>
+                </NRadioGroup>
+              </NFormItem>
               <NFormItem label="流程引擎">
                 <NRadioGroup v-model={[editorSettings.value.processEngine, 'value']}>
                   <NRadio value="camunda">Camunda</NRadio>

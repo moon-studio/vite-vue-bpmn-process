@@ -25,7 +25,7 @@ const App = defineComponent({
       const baseClass = ['designer-container']
       customPalette.value && baseClass.push('designer-with-palette')
       customPenal.value && baseClass.push('designer-with-penal')
-      editorSettings.value.bg === 'image' && baseClass.push('designer-with-bg')
+      editorSettings.value.bg === 'grid-image' && baseClass.push('designer-with-bg')
       return baseClass.join(' ')
     })
 

@@ -6,6 +6,6 @@ export const defaultSettings: EditorSettings = {
   processEngine: 'camunda',
   paletteMode: 'default',
   penalMode: 'default',
-  bg: 'image',
+  bg: 'grid-image',
   toolbar: true
 }
