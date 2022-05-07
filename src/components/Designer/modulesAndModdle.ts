@@ -1,13 +1,7 @@
 // 官方流程模拟 module
 import simulationModeler from 'bpmn-js-token-simulation'
 // camunda 官方侧边栏扩展
-// import {
-//   BpmnPropertiesPanelModule,
-//   BpmnPropertiesProviderModule,
-//   CamundaPlatformPropertiesProviderModule
-// } from 'bpmn-js-properties-panel'
-// import CamundaExtensionModule from 'camunda-bpmn-moddle/lib'
-
+import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel'
 // moddle 定义文件
 import activitiModdleDescriptors from '@/components/ModdleExtensions/activiti.json'
 import camundaModdleDescriptors from '@/components/ModdleExtensions/camunda.json'
@@ -37,14 +31,7 @@ export default function (settings) {
     settings.value.paletteMode === 'custom' && modules.push({ paletteProvider: ['type', function () {}] })
 
     // 配置 penal (基于 camunda)
-    // settings.value.penalMode !== 'custom' &&
-    //   modules.push(
-    //     BpmnPropertiesPanelModule,
-    //     BpmnPropertiesProviderModule,
-    //     CamundaPlatformPropertiesProviderModule,
-    //     CamundaExtensionModule
-    //   ) &&
-    //   (moddle = { camunda: camundaModdleDescriptors })
+    settings.value.penalMode !== 'custom' && modules.push(BpmnPropertiesPanelModule, BpmnPropertiesProviderModule)
 
     // 配置 翻译 与 流程模拟
     modules.push(translate)
