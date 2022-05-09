@@ -45,7 +45,8 @@ export default function (settings) {
         CamundaPlatformPropertiesProviderModule,
         CamundaExtensionModule
       ) &&
-      (moddle = { camunda: camundaModdleDescriptors })
+      (moddle = { camunda: camundaModdleDescriptors }) &&
+      (settings.value.processEngine = 'camunda')
 
     // 配置 翻译 与 流程模拟
     modules.push(translate)

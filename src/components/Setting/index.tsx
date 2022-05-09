@@ -92,6 +92,7 @@ const Setting = defineComponent({
                 </NRadioGroup>
               </NFormItem>
             </NForm>
+            <div class="tips-message">仅自定义模式可使用 activiti 或者 flowable 引擎</div>
           </div>
           <div class="setting-footer"></div>
         </div>

@@ -23,6 +23,8 @@ export default function (designer, modelerModules, settings, xml, emit) {
   modeler.on('commandStack.changed', async (event) => {
     try {
       const { xml } = await modeler.saveXML({ format: true })
+
+      console.log('saveXML', xml)
       emit('update:xml', xml)
       emit('command-stack-changed', event)
     } catch (error) {
