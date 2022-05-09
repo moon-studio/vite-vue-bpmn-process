@@ -1,5 +1,9 @@
-// // 官方流程模拟 module
-// import simulationModeler from 'bpmn-js-token-simulation'
+import { computed } from 'vue'
+import { ModuleDeclaration } from 'didi'
+
+// ** 官方流程模拟 module
+// ** import simulationModeler from 'bpmn-js-token-simulation'
+
 // camunda 官方侧边栏扩展
 import {
   BpmnPropertiesPanelModule,
@@ -17,10 +21,6 @@ import flowableModdleDescriptors from '@/components/ModdleExtensions/flowable.js
 import RerenderPalette from '@/components/AddiModules/RerenderPalette'
 import translate from '@/components/AddiModules/Translate'
 import EnhancementPalette from '@/components/AddiModules/EnhancementPalette'
-
-import { computed } from 'vue'
-import { ModuleDeclaration } from 'didi'
-import rerenderPaletteProvider from '@/components/AddiModules/RerenderPalette/rerenderPaletteProvider'
 
 export default function (settings) {
   return computed<[ModuleDeclaration[], { [key: string]: any }]>(() => {
