@@ -1,7 +1,13 @@
-// 官方流程模拟 module
-import simulationModeler from 'bpmn-js-token-simulation'
+// // 官方流程模拟 module
+// import simulationModeler from 'bpmn-js-token-simulation'
 // camunda 官方侧边栏扩展
-import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel'
+import {
+  BpmnPropertiesPanelModule,
+  BpmnPropertiesProviderModule,
+  CamundaPlatformPropertiesProviderModule
+} from 'bpmn-js-properties-panel'
+import CamundaExtensionModule from 'camunda-bpmn-moddle/lib'
+
 // moddle 定义文件
 import activitiModdleDescriptors from '@/components/ModdleExtensions/activiti.json'
 import camundaModdleDescriptors from '@/components/ModdleExtensions/camunda.json'
@@ -14,11 +20,12 @@ import EnhancementPalette from '@/components/AddiModules/EnhancementPalette'
 
 import { computed } from 'vue'
 import { ModuleDeclaration } from 'didi'
+import rerenderPaletteProvider from '@/components/AddiModules/RerenderPalette/rerenderPaletteProvider'
 
 export default function (settings) {
   return computed<[ModuleDeclaration[], { [key: string]: any }]>(() => {
     const modules: ModuleDeclaration[] = [] // modules 扩展模块数组
-    const moddle: { [key: string]: any } = {} // moddle 声明文件对象`
+    let moddle: { [key: string]: any } = {} // moddle 声明文件对象
 
     // 设置对应的 moddle 解析配置文件
     if (settings.value.processEngine === 'activiti') moddle['activiti'] = activitiModdleDescriptors
@@ -31,7 +38,14 @@ export default function (settings) {
     settings.value.paletteMode === 'custom' && modules.push({ paletteProvider: ['type', function () {}] })
 
     // 配置 penal (基于 camunda)
-    settings.value.penalMode !== 'custom' && modules.push(BpmnPropertiesPanelModule, BpmnPropertiesProviderModule)
+    settings.value.penalMode !== 'custom' &&
+      modules.push(
+        BpmnPropertiesPanelModule,
+        BpmnPropertiesProviderModule,
+        CamundaPlatformPropertiesProviderModule,
+        CamundaExtensionModule
+      ) &&
+      (moddle = { camunda: camundaModdleDescriptors })
 
     // 配置 翻译 与 流程模拟
     modules.push(translate)
