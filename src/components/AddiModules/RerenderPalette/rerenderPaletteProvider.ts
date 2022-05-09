@@ -132,10 +132,6 @@ class RerenderPaletteProvider extends PaletteProvider {
       'create.user-task': createAction('bpmn:UserTask', 'activity', 'bpmn-icon-user-task', '用户任务'),
       'create.script-task': createAction('bpmn:ScriptTask', 'activity', 'bpmn-icon-script-task', '脚本任务'),
       'create.service-task': createAction('bpmn:ServiceTask', 'activity', 'bpmn-icon-service-task', '服务任务'),
-      'task-separator': {
-        group: 'activity',
-        separator: true
-      },
       'create.subprocess-expanded': {
         group: 'activity',
         className: 'bpmn-icon-subprocess-expanded',
