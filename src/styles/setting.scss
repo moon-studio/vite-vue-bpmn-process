@@ -60,4 +60,18 @@
     cursor: pointer;
     transition: all cubic-bezier(0.8, 0.4, 0.8, 0.4) 0.24s;
   }
+
+  .sponsorship-image {
+    width: 240px;
+    height: 240px;
+    background-size: cover;
+    display: inline-block;
+    &.wechat {
+      background-image: url("/wechat.jpg");
+    }
+    &.alipay {
+      margin-left: 8px;
+      background-image: url("/alipay.png");
+    }
+  }
 }

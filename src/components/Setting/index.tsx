@@ -95,8 +95,8 @@ const Setting = defineComponent({
             <div class="tips-message">
               <p>注：仅自定义模式可使用 activiti 或者 flowable 引擎</p>
               <p style="font-weight: bold">友情赞助</p>
-              <img alt="微信" src="/wechat.jpg" width="200"></img>
-              <img alt="支付宝" src="/alipay.png" height="200"></img>
+              <div class="sponsorship-image wechat"></div>
+              <div class="sponsorship-image alipay"></div>
             </div>
           </div>
           <div class="setting-footer"></div>
