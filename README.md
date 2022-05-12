@@ -28,7 +28,7 @@ Life is not easy, secretly throw an appreciation code. Please give me a meal. Th
 |   |-- declares
 |       |-- bpmn.d.ts
 |       |-- diagram.d.ts
-|       |-- didi.d.ts                          [Nikku - didi](https://github.com/nikku/didi/blob/master/lib/index.d.ts)
+|       |-- didi.d.ts         [Nikku - didi](https://github.com/nikku/didi/blob/master/lib/index.d.ts)
 |       |-- global.d.ts
 |       |-- moddle.d.ts
 |-- LICENSE
