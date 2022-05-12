@@ -37,3 +37,7 @@ Life is not easy, secretly throw an appreciation code. Please give me a meal. Th
 |-- package.json
 |-- vite.config.js
 ```
+
+
+> 
+> Activiti moddle json: https://github.com/Activiti/activiti-modeling-app/blob/master/projects/process-editor/src/services/activiti.json

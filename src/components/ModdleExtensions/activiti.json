@@ -8,20 +8,6 @@
   "associations": [],
   "types": [
     {
-      "name": "Definitions",
-      "isAbstract": true,
-      "extends": [
-        "bpmn:Definitions"
-      ],
-      "properties": [
-        {
-          "name": "diagramRelationId",
-          "isAttr": true,
-          "type": "String"
-        }
-      ]
-    },
-    {
       "name": "InOutBinding",
       "superClass": [
         "Element"
@@ -168,20 +154,6 @@
       ]
     },
     {
-      "name": "Error",
-      "isAbstract": true,
-      "extends": [
-        "bpmn:Error"
-      ],
-      "properties": [
-        {
-          "name": "activiti:errorMessage",
-          "isAttr": true,
-          "type": "String"
-        }
-      ]
-    },
-    {
       "name": "PotentialStarter",
       "superClass": [
         "Element"
@@ -214,24 +186,11 @@
       ]
     },
     {
-      "name": "TemplateSupported",
-      "isAbstract": true,
-      "extends": [
-        "bpmn:Process",
-        "bpmn:FlowElement"
-      ],
-      "properties": [
-        {
-          "name": "modelerTemplate",
-          "isAttr": true,
-          "type": "String"
-        }
-      ]
-    },
-    {
       "name": "Initiator",
       "isAbstract": true,
-      "extends": [ "bpmn:StartEvent" ],
+      "extends": [
+        "bpmn:StartEvent"
+      ],
       "properties": [
         {
           "name": "initiator",
@@ -280,22 +239,6 @@
           "name": "versionTag",
           "isAttr": true,
           "type": "String"
-        },
-        {
-          "name": "historyTimeToLive",
-          "isAttr": true,
-          "type": "String"
-        },
-        {
-          "name": "isStartableInTasklist",
-          "isAttr": true,
-          "type": "Boolean",
-          "default": true
-        },
-        {
-          "name":"executionListener",
-          "isAbstract": true,
-          "type":"Expression"
         }
       ]
     },
@@ -328,20 +271,10 @@
       ]
     },
     {
-      "name": "multiinstance_type",
-      "superClass":[
-        "Element"
-      ]
-    },
-    {
-      "name": "multiinstance_condition",
-      "superClass":[
-        "Element"
-      ]
-    },
-    {
       "name": "Assignable",
-      "extends": [ "bpmn:UserTask" ],
+      "extends": [
+        "bpmn:UserTask"
+      ],
       "properties": [
         {
           "name": "assignee",
@@ -372,17 +305,14 @@
           "name": "priority",
           "isAttr": true,
           "type": "String"
-        },
-        {
-          "name": "multiinstance_condition",
-          "isAttr": true,
-          "type": "String"
         }
       ]
     },
     {
       "name": "CallActivity",
-      "extends": [ "bpmn:CallActivity" ],
+      "extends": [
+        "bpmn:CallActivity"
+      ],
       "properties": [
         {
           "name": "calledElementBinding",
@@ -392,11 +322,6 @@
         },
         {
           "name": "calledElementVersion",
-          "isAttr": true,
-          "type": "String"
-        },
-        {
-          "name": "calledElementVersionTag",
           "isAttr": true,
           "type": "String"
         },
@@ -435,6 +360,12 @@
           "name": "variableMappingDelegateExpression",
           "isAttr": true,
           "type": "String"
+        },
+        {
+          "name": "inheritBusinessKey",
+          "isAttr": true,
+          "type": "Boolean",
+          "default": true
         }
       ]
     },
@@ -443,6 +374,7 @@
       "extends": [
         "bpmn:ServiceTask",
         "bpmn:BusinessRuleTask",
+        "bpmn:ScriptTask",
         "bpmn:SendTask",
         "bpmn:MessageEventDefinition"
       ],
@@ -464,6 +396,37 @@
         },
         {
           "name": "resultVariable",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "MessagePayload",
+      "extends": [
+        "bpmn:MessageEventDefinition"
+      ],
+      "properties": [
+        {
+          "name": "correlationKey",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "messageExpression",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "SignalScope",
+      "extends": [
+        "bpmn:Signal"
+      ],
+      "properties": [
+        {
+          "name": "scope",
           "isAttr": true,
           "type": "String"
         }
@@ -542,7 +505,9 @@
         "Element"
       ],
       "meta": {
-        "allowedIn": [ "*" ]
+        "allowedIn": [
+          "*"
+        ]
       },
       "properties": [
         {
@@ -582,7 +547,10 @@
       ],
       "meta": {
         "allowedIn": [
-          "activiti:ServiceTaskLike"
+          "bpmn:ServiceTask",
+          "bpmn:BusinessRuleTask",
+          "bpmn:ScriptTask",
+          "bpmn:SendTask"
         ]
       },
       "properties": [
@@ -603,8 +571,28 @@
       ],
       "meta": {
         "allowedIn": [
-          "bpmn:FlowNode",
-          "activiti:Connector"
+          "bpmn:Task",
+          "bpmn:UserTask",
+          "bpmn:ServiceTask",
+          "bpmn:SendTask",
+          "bpmn:BusinessRuleTask",
+          "bpmn:ReceiveTask",
+          "bpmn:ScriptTask",
+          "bpmn:ManualTask",
+          "bpmn:GlobalUserTask",
+          "bpmn:GlobalScriptTask",
+          "bpmn:GlobalBusinessRuleTask",
+          "bpmn:GlobalTask",
+          "bpmn:GlobalManualTask",
+          "bpmn:SubProcess",
+          "bpmn:Transaction",
+          "bpmn:IntermediateCatchEvent",
+          "bpmn:IntermediateThrowEvent",
+          "bpmn:EndEvent",
+          "bpmn:ThrowEvent",
+          "bpmn:CatchEvent",
+          "bpmn:ImplicitThrowEvent",
+          "bpmn:CallActivity"
         ]
       },
       "properties": [
@@ -653,7 +641,9 @@
     },
     {
       "name": "List",
-      "superClass": [ "InputOutputParameterDefinition" ],
+      "superClass": [
+        "InputOutputParameterDefinition"
+      ],
       "properties": [
         {
           "name": "items",
@@ -664,7 +654,9 @@
     },
     {
       "name": "Map",
-      "superClass": [ "InputOutputParameterDefinition" ],
+      "superClass": [
+        "InputOutputParameterDefinition"
+      ],
       "properties": [
         {
           "name": "entries",
@@ -717,7 +709,9 @@
     },
     {
       "name": "Script",
-      "superClass": [ "InputOutputParameterDefinition" ],
+      "superClass": [
+        "InputOutputParameterDefinition"
+      ],
       "properties": [
         {
           "name": "scriptFormat",
@@ -738,12 +732,15 @@
     },
     {
       "name": "Field",
-      "superClass": [ "Element" ],
+      "superClass": [
+        "Element"
+      ],
       "meta": {
         "allowedIn": [
-          "activiti:ServiceTaskLike",
-          "activiti:ExecutionListener",
-          "activiti:TaskListener"
+          "bpmn:ServiceTask",
+          "bpmn:BusinessRuleTask",
+          "bpmn:ScriptTask",
+          "bpmn:SendTask"
         ]
       },
       "properties": [
@@ -769,17 +766,25 @@
     },
     {
       "name": "InputParameter",
-      "superClass": [ "InputOutputParameter" ]
+      "superClass": [
+        "InputOutputParameter"
+      ]
     },
     {
       "name": "OutputParameter",
-      "superClass": [ "InputOutputParameter" ]
+      "superClass": [
+        "InputOutputParameter"
+      ]
     },
     {
       "name": "Collectable",
       "isAbstract": true,
-      "extends": [ "bpmn:MultiInstanceLoopCharacteristics" ],
-      "superClass": [ "activiti:AsyncCapable" ],
+      "extends": [
+        "bpmn:MultiInstanceLoopCharacteristics"
+      ],
+      "superClass": [
+        "activiti:AsyncCapable"
+      ],
       "properties": [
         {
           "name": "collection",
@@ -795,10 +800,21 @@
     },
     {
       "name": "FailedJobRetryTimeCycle",
-      "superClass": [ "Element" ],
+      "superClass": [
+        "Element"
+      ],
       "meta": {
         "allowedIn": [
-          "activiti:AsyncCapable",
+          "bpmn:Task",
+          "bpmn:ServiceTask",
+          "bpmn:SendTask",
+          "bpmn:UserTask",
+          "bpmn:BusinessRuleTask",
+          "bpmn:ScriptTask",
+          "bpmn:ReceiveTask",
+          "bpmn:CallActivity",
+          "bpmn:TimerEventDefinition",
+          "bpmn:SignalEventDefinition",
           "bpmn:MultiInstanceLoopCharacteristics"
         ]
       },
@@ -812,7 +828,9 @@
     },
     {
       "name": "ExecutionListener",
-      "superClass": [ "Element" ],
+      "superClass": [
+        "Element"
+      ],
       "meta": {
         "allowedIn": [
           "bpmn:Task",
@@ -826,15 +844,13 @@
           "bpmn:SequenceFlow",
           "bpmn:ParallelGateway",
           "bpmn:InclusiveGateway",
-          "bpmn:EventBasedGateway",
           "bpmn:StartEvent",
           "bpmn:IntermediateCatchEvent",
           "bpmn:IntermediateThrowEvent",
           "bpmn:EndEvent",
           "bpmn:BoundaryEvent",
           "bpmn:CallActivity",
-          "bpmn:SubProcess",
-          "bpmn:Process"
+          "bpmn:SubProcess"
         ]
       },
       "properties": [
@@ -871,7 +887,9 @@
     },
     {
       "name": "TaskListener",
-      "superClass": [ "Element" ],
+      "superClass": [
+        "Element"
+      ],
       "meta": {
         "allowedIn": [
           "bpmn:UserTask"
@@ -911,7 +929,9 @@
     },
     {
       "name": "FormProperty",
-      "superClass": [ "Element" ],
+      "superClass": [
+        "Element"
+      ],
       "meta": {
         "allowedIn": [
           "bpmn:StartEvent",
@@ -977,8 +997,34 @@
       ]
     },
     {
-      "name": "FormProperty",
-      "superClass": [ "Element" ],
+      "name": "FormData",
+      "superClass": [
+        "Element"
+      ],
+      "meta": {
+        "allowedIn": [
+          "bpmn:StartEvent",
+          "bpmn:UserTask"
+        ]
+      },
+      "properties": [
+        {
+          "name": "fields",
+          "type": "FormField",
+          "isMany": true
+        },
+        {
+          "name": "businessKey",
+          "type": "String",
+          "isAttr": true
+        }
+      ]
+    },
+    {
+      "name": "FormField",
+      "superClass": [
+        "Element"
+      ],
       "properties": [
         {
           "name": "id",
@@ -1022,7 +1068,9 @@
     },
     {
       "name": "Validation",
-      "superClass": [ "Element" ],
+      "superClass": [
+        "Element"
+      ],
       "properties": [
         {
           "name": "constraints",
@@ -1033,7 +1081,9 @@
     },
     {
       "name": "Constraint",
-      "superClass": [ "Element" ],
+      "superClass": [
+        "Element"
+      ],
       "properties": [
         {
           "name": "name",
@@ -1067,5 +1117,5 @@
       ]
     }
   ],
-  "emumerations": [ ]
+  "enumerations": []
 }
