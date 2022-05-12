@@ -1,5 +1,7 @@
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { ModuleDeclaration } from 'didi'
+
+import EventEmitter from '@/utils/EventEmitter'
 
 // ** 官方流程模拟 module
 // ** import simulationModeler from 'bpmn-js-token-simulation'
@@ -46,7 +48,9 @@ export default function (settings) {
         CamundaExtensionModule
       ) &&
       (moddle = { camunda: camundaModdleDescriptors }) &&
-      (settings.value.processEngine = 'camunda')
+      EventEmitter.instance.emit('settings', 'processEngine', 'camunda')
+
+    console.log(settings.value)
 
     // 配置 翻译 与 流程模拟
     modules.push(translate)

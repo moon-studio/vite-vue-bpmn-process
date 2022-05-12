@@ -4,6 +4,7 @@ import { defaultSettings } from '@/config'
 import { NIcon, NForm, NFormItem, NInput, NRadioGroup, NRadio, NSwitch } from 'naive-ui'
 import SettingsRound from '@vicons/material/SettingsRound'
 import { Icon } from '@vicons/utils'
+import EventEmitter from '@/utils/EventEmitter'
 
 const props = {
   settings: {
@@ -29,6 +30,10 @@ const Setting = defineComponent({
       const baseClasses = ['setting']
       modelVisible.value && baseClasses.push('setting_open')
       return baseClasses.join(' ')
+    })
+
+    EventEmitter.instance.on('settings', (key: string, value: string) => {
+      editorSettings.value[key] = value
     })
 
     watchEffect(() => {
@@ -69,26 +74,26 @@ const Setting = defineComponent({
                   <NRadio value="none">空</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="流程引擎">
-                <NRadioGroup v-model={[editorSettings.value.processEngine, 'value']}>
-                  <NRadio value="camunda">Camunda</NRadio>
-                  <NRadio value="activiti">Activiti</NRadio>
-                  <NRadio value="flowable">Flowable</NRadio>
+              <NFormItem label="Penal模式">
+                <NRadioGroup v-model={[editorSettings.value.penalMode, 'value']}>
+                  <NRadio value="default">默认</NRadio>
+                  <NRadio value="rerender">重写版</NRadio>
+                  <NRadio value="custom">自定义</NRadio>
                 </NRadioGroup>
               </NFormItem>
               <NFormItem label="Palette模式">
                 <NRadioGroup v-model={[editorSettings.value.paletteMode, 'value']}>
                   <NRadio value="default">默认</NRadio>
-                  <NRadio value="custom">自定义</NRadio>
                   <NRadio value="rerender">重写版</NRadio>
                   <NRadio value="enhancement">扩展版</NRadio>
+                  <NRadio value="custom">自定义</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="Penal模式">
-                <NRadioGroup v-model={[editorSettings.value.penalMode, 'value']}>
-                  <NRadio value="default">默认</NRadio>
-                  <NRadio value="custom">自定义</NRadio>
-                  <NRadio value="rerender">重写版</NRadio>
+              <NFormItem label="流程引擎">
+                <NRadioGroup v-model={[editorSettings.value.processEngine, 'value']}>
+                  <NRadio value="camunda">Camunda</NRadio>
+                  <NRadio value="activiti">Activiti</NRadio>
+                  <NRadio value="flowable">Flowable</NRadio>
                 </NRadioGroup>
               </NFormItem>
             </NForm>
