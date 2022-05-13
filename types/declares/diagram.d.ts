@@ -832,12 +832,12 @@ declare module 'diagram-js/lib/model' {
     original?: Point
   }
 
-  export class ModdleBase {
+  export abstract class ModdleBase {
     get(name: string): any
     set(name: string, value: any): void
   }
 
-  export class ModdleElement extends ModdleBase {
+  export abstract class ModdleElement extends ModdleBase {
     static $model: Moddle
     static $descriptor: Descriptor
     readonly $type: string
