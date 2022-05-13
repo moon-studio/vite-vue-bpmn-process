@@ -12,5 +12,8 @@ export default defineConfig({
       types: path.resolve(__dirname, 'types/')
     }
   },
+  server: {
+    port: 80
+  },
   plugins: [vue(), vueJsx({})]
 })

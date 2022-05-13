@@ -900,6 +900,50 @@ declare module 'diagram-js/lib/model' {
     [field: string]: any
   }
 }
+/************************************** Diagram layout 布局模块 *****************************************/
+// 基本连接布局实现，通过直接连接 mid (源中间位置) 和 mid (目标中间位置) 来布局连接。
+declare module 'diagram-js/lib/layout/BaseLayouter' {
+  import { Connection, Point, Hints } from 'diagram-js/lib/model'
+  export default class BaseLayouter {
+    constructor()
+    layoutConnection(connection: Connection, hints?: Hints): [Point, Point]
+  }
+}
+// 用于检索航路点信息的连接的布局组件
+declare module 'diagram-js/lib/layout/ConnectionDocking' {
+  import { Base, Connection, Shape, Point, Hints } from 'diagram-js/lib/model'
+
+  export interface DockingPointDescriptor {
+    point: Point
+    actual: Point
+    idx: number
+  }
+
+  export default class ConnectionDocking {
+    constructor()
+    getCroppedWaypoints(connection: Connection, source?: Base, target?: Base): Point[]
+    getDockingPoint(connection: Connection, shape: Shape, dockStart?: boolean): DockingPointDescriptor
+  }
+}
+// 根据 ConnectionDocking 计算出来的连线锚点进行连接
+declare module 'diagram-js/lib/layout/CroppingConnectionDocking' {
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+  import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
+  import { Base, Connection, Shape, Point, Hints } from 'diagram-js/lib/model'
+  import { DockingPointDescriptor } from 'diagram-js/lib/layout/ConnectionDocking'
+
+  export default class CroppingConnectionDocking {
+    constructor(elementRegistry: ElementRegistry, graphicsFactory: GraphicsFactory)
+    private _getIntersection(shape: Shape, connection: Connection, takeFirst: boolean): Point
+    private _getConnectionPath(connection: Connection): string
+    private _getShapePath(shape: Shape): string
+    private _getGfx(element: Base): SVGElement
+    /*获取连接的实际航路点 (可见的连接点)*/
+    getCroppedWaypoints(connection: Connection, source?: Base, target?: Base): Point[]
+    /*返回指定形状上的连接对接点*/
+    getDockingPoint(connection: Connection, shape: Shape, dockStart?: boolean): DockingPointDescriptor
+  }
+}
 /************************************** Diagram translate 翻译模块 *****************************************/
 declare module 'diagram-js/lib/i18n/translate' {
   export type Translate = (template: string, replacements: Object) => string
@@ -988,6 +1032,70 @@ declare module 'diagram-js/lib/features/align-elements/AlignElements' {
     trigger(elements: Base[], type: string): void
   }
 }
+//
+declare module 'diagram-js/lib/features/attach-support/AttachSupport' {
+  export default class AttachSupport {}
+}
+//
+declare module 'diagram-js/lib/features/auto-place/AutoPlace' {
+  export default class AutoPlace {}
+}
+//
+declare module 'diagram-js/lib/features/auto-resize/AutoResize' {
+  export default class AutoResize {}
+}
+//
+declare module 'diagram-js/lib/features/auto-resize/AutoResizeProvider' {
+  export default class AutoResizeProvider {}
+}
+//
+declare module 'diagram-js/lib/features/auto-scroll/AutoScroll' {
+  export default class AutoScroll {}
+}
+//
+declare module 'diagram-js/lib/features/bendpoints/BendpointsMove' {
+  export default class BendpointsMove {}
+}
+//
+declare module 'diagram-js/lib/features/bendpoints/BendpointsMovePreview' {
+  export default class BendpointsMovePreview {}
+}
+//
+declare module 'diagram-js/lib/features/bendpoints/Bendpoints' {
+  export default class Bendpoints {}
+}
+//
+declare module 'diagram-js/lib/features/bendpoints/BendpointSnapping' {
+  export default class BendpointSnapping {}
+}
+//
+declare module 'diagram-js/lib/features/bendpoints/ConnectionSegmentMove' {
+  export default class ConnectionSegmentMove {}
+}
+//
+declare module 'diagram-js/lib/features/change-support/ChangeSupport' {
+  export default class ChangeSupport {}
+}
+//
+declare module 'diagram-js/lib/features/clipboard/Clipboard' {
+  export default class Clipboard {}
+}
+//
+declare module 'diagram-js/lib/features/connect/Connect' {
+  export default class Connect {}
+}
+//
+declare module 'diagram-js/lib/features/connect/ConnectPreview' {
+  export default class ConnectPreview {}
+}
+//
+declare module 'diagram-js/lib/features/connection-preview/ConnectionPreview' {
+  export default class ConnectionPreview {}
+}
+//
+declare module 'diagram-js/lib/features/copy-paste/CopyPaste' {
+  export default class CopyPaste {}
+}
 // 在图表元素旁边显示特定于元素的上下文操作的操作菜单
 declare module 'diagram-js/lib/features/context-pad/ContextPad' {
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -1010,6 +1118,18 @@ declare module 'diagram-js/lib/features/context-pad/ContextPad' {
     close(): void
     getPad(element: Base): Overlay | null
   }
+}
+//
+declare module 'diagram-js/lib/features/create/Create' {
+  export default class Create {}
+}
+//
+declare module 'diagram-js/lib/features/create/CreateConnectPreview' {
+  export default class CreateConnectPreview {}
+}
+//
+declare module 'diagram-js/lib/features/create/CreatePreview' {
+  export default class CreatePreview {}
 }
 // 触发 canvas 话不内 拖动事件并实现一般 “拖放” 事件的操作。会在不同生命周期中通过 eventBus 触发不同的事件。
 declare module 'diagram-js/lib/features/dragging/Dragging' {
@@ -1319,47 +1439,3 @@ declare module 'diagram-js/lib/features/selection/SelectionVisuals' {
 // declare module 'diagram-js/lib/features/xxx/xxx' {
 //   export default class xxx {}
 // }
-/************************************** Diagram layout 布局模块 *****************************************/
-// 基本连接布局实现，通过直接连接 mid (源中间位置) 和 mid (目标中间位置) 来布局连接。
-declare module 'diagram-js/lib/layout/BaseLayouter' {
-  import { Connection, Point, Hints } from 'diagram-js/lib/model'
-  export default class BaseLayouter {
-    constructor()
-    layoutConnection(connection: Connection, hints?: Hints): [Point, Point]
-  }
-}
-// 用于检索航路点信息的连接的布局组件
-declare module 'diagram-js/lib/layout/ConnectionDocking' {
-  import { Base, Connection, Shape, Point, Hints } from 'diagram-js/lib/model'
-
-  export interface DockingPointDescriptor {
-    point: Point
-    actual: Point
-    idx: number
-  }
-
-  export default class ConnectionDocking {
-    constructor()
-    getCroppedWaypoints(connection: Connection, source?: Base, target?: Base): Point[]
-    getDockingPoint(connection: Connection, shape: Shape, dockStart?: boolean): DockingPointDescriptor
-  }
-}
-// 根据 ConnectionDocking 计算出来的连线锚点进行连接
-declare module 'diagram-js/lib/layout/CroppingConnectionDocking' {
-  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
-  import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
-  import { Base, Connection, Shape, Point, Hints } from 'diagram-js/lib/model'
-  import { DockingPointDescriptor } from 'diagram-js/lib/layout/ConnectionDocking'
-
-  export default class CroppingConnectionDocking {
-    constructor(elementRegistry: ElementRegistry, graphicsFactory: GraphicsFactory)
-    private _getIntersection(shape: Shape, connection: Connection, takeFirst: boolean): Point
-    private _getConnectionPath(connection: Connection): string
-    private _getShapePath(shape: Shape): string
-    private _getGfx(element: Base): SVGElement
-    /*获取连接的实际航路点 (可见的连接点)*/
-    getCroppedWaypoints(connection: Connection, source?: Base, target?: Base): Point[]
-    /*返回指定形状上的连接对接点*/
-    getDockingPoint(connection: Connection, shape: Shape, dockStart?: boolean): DockingPointDescriptor
-  }
-}
