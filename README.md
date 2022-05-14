@@ -1,7 +1,7 @@
 <div align="center">
     <h1>Vite Vue Bpmn Process Editor</h1>
     <br />
-    <a href="https://github.com/moon-studio/vite-vue-bpmn-process/blob/main/README.zh-CN.md">中文</a> | English
+    English | <a href="https://github.com/moon-studio/vite-vue-bpmn-process/blob/main/README.zh-CN.md">中文</a>
     <br />
 </div>
 
