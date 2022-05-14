@@ -1,19 +1,19 @@
 <div align="center">
     <h1>Vite Vue Bpmn Process Editor</h1>
     <br />
-    <a href="https://github.com/moon-studio/vite-vue-bpmn-process/blob/main/README.zh-CN.md">English</a> | 中文
+    <a href="https://github.com/moon-studio/vite-vue-bpmn-process/blob/main/README.md">English</a> | 中文
     <br />
 </div>
 
 ## Description
 
-A Vite Vue Bpmn Process Editor based on [Bpmn.js](https://github.com/bpmn-io/bpmn-js), [Vite](https://vitejs.dev), [Vue.js 3.x](https://vuejs.org/).
+Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-js)， [Vite](https://vitejs.dev)， [Vue.js 3.x](https://vuejs.org/)。
 
-The typescript type declaration of Bpmn.js and Diagram.js is implemented, and typescript can be used to write code in the editor.
+实现了Bpmn.js和Diagram.js的typescript类型声明，typescript可以用来在编辑器中编写代码。
 
 ## Friendship sponsorship
 
-Life is not easy, secretly throw an appreciation code. Please give me a meal. Thanks~~~~
+生活不易，偷偷丢个码。请我吃顿饭，感谢万分~ ~ ~ ~
 
 <img alt="微信" src="/public/wechat.jpg" width="240" style="display: inline-block"/>
 <img alt="支付宝" src="/public/alipay.png" width="240" style="display: inline-block"/>
