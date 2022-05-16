@@ -437,7 +437,26 @@ declare module 'bpmn-js/lib/features/ordering/BpmnOrderingProvider' {
 }
 //
 declare module 'bpmn-js/lib/features/palette/PaletteProvider' {
-  export default class PaletteProvider {}
+  import ElementFactory from 'bpmn-js/lib/features/modeling/ElementFactory'
+  import Create from 'diagram-js/lib/features/create/Create'
+  import SpaceTool from 'diagram-js/lib/features/space-tool/SpaceTool'
+  import LassoTool from 'diagram-js/lib/features/lasso-tool/LassoTool'
+  import HandTool from 'diagram-js/lib/features/hand-tool/HandTool'
+  import GlobalConnect from 'diagram-js/lib/features/global-connect/GlobalConnect'
+  import Palette from 'diagram-js/lib/features/palette/Palette'
+  export default class PaletteProvider {
+    constructor(
+      palette: Palette,
+      create: Create,
+      elementFactory: ElementFactory,
+      spaceTool: SpaceTool,
+      lassoTool: LassoTool,
+      handTool: HandTool,
+      globalConnect: GlobalConnect,
+      translate?: any,
+      priority?: number
+    )
+  }
 }
 //
 declare module 'bpmn-js/lib/features/popup-menu/ReplaceMenuProvider' {

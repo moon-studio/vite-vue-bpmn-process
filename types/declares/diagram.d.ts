@@ -1121,7 +1121,11 @@ declare module 'diagram-js/lib/features/context-pad/ContextPad' {
 }
 //
 declare module 'diagram-js/lib/features/create/Create' {
-  export default class Create {}
+  import { Base } from 'diagram-js/lib/model'
+
+  export default class Create {
+    start<T extends Base>(event: string | Event, elements: T | T[], context?: any): void
+  }
 }
 //
 declare module 'diagram-js/lib/features/create/CreateConnectPreview' {

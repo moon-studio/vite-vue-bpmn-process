@@ -1,15 +1,21 @@
-import PaletteProvider from 'bpmn-js/lib/features/palette/PaletteProvider'
-import ElementFactory from 'bpmn-js/lib/features/modeling/ElementFactory.js'
 import { assign } from 'min-dash'
+import PaletteProvider from 'bpmn-js/lib/features/palette/PaletteProvider'
+import ElementFactory from 'bpmn-js/lib/features/modeling/ElementFactory'
+import Create from 'diagram-js/lib/features/create/Create'
+import SpaceTool from 'diagram-js/lib/features/space-tool/SpaceTool'
+import LassoTool from 'diagram-js/lib/features/lasso-tool/LassoTool'
+import HandTool from 'diagram-js/lib/features/hand-tool/HandTool'
+import GlobalConnect from 'diagram-js/lib/features/global-connect/GlobalConnect'
+import Palette from 'diagram-js/lib/features/palette/Palette'
 
 class EnhancementPaletteProvider extends PaletteProvider {
-  private readonly _palette: PaletteProvider
-  private readonly _create: any
+  private readonly _palette: Palette
+  private readonly _create: Create
   private readonly _elementFactory: ElementFactory
-  private readonly _spaceTool: any
-  private readonly _lassoTool: any
-  private readonly _handTool: any
-  private readonly _globalConnect: any
+  private readonly _spaceTool: SpaceTool
+  private readonly _lassoTool: LassoTool
+  private readonly _handTool: HandTool
+  private readonly _globalConnect: GlobalConnect
   private readonly _translate: any
   constructor(palette, create, elementFactory, spaceTool, lassoTool, handTool, globalConnect, translate) {
     super(palette, create, elementFactory, spaceTool, lassoTool, handTool, globalConnect, translate, 2000)
