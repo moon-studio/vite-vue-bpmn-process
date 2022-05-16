@@ -1131,6 +1131,10 @@ declare module 'diagram-js/lib/features/create/CreateConnectPreview' {
 declare module 'diagram-js/lib/features/create/CreatePreview' {
   export default class CreatePreview {}
 }
+//
+declare module 'diagram-js/lib/features/distribute-elements/DistributeElements' {
+  export default class DistributeElements {}
+}
 // 触发 canvas 话不内 拖动事件并实现一般 “拖放” 事件的操作。会在不同生命周期中通过 eventBus 触发不同的事件。
 declare module 'diagram-js/lib/features/dragging/Dragging' {
   import Selection from 'diagram-js/lib/features/selection/Selection'
@@ -1164,6 +1168,38 @@ declare module 'diagram-js/lib/features/editor-actions/EditorActions' {
     isRegistered(action: string): boolean
   }
 }
+//
+declare module 'diagram-js/lib/features/global-connect/GlobalConnect' {
+  export default class GlobalConnect {}
+}
+//
+declare module 'diagram-js/lib/features/grid-snapping/GridSnapping' {
+  export default class GridSnapping {}
+}
+//
+declare module 'diagram-js/lib/features/grid-snapping/visuals/Grid' {
+  export default class Grid {}
+}
+//
+declare module 'diagram-js/lib/features/grid-snapping/behavior/ResizeBehavior' {
+  export default class ResizeBehavior {}
+}
+//
+declare module 'diagram-js/lib/features/grid-snapping/behavior/SpaceToolBehavior' {
+  export default class SpaceToolBehavior {}
+}
+//
+declare module 'diagram-js/lib/features/hand-tool/HandTool' {
+  export default class HandTool {}
+}
+//
+declare module 'diagram-js/lib/features/hover-fix/HoverFix' {
+  export default class HoverFix {}
+}
+//
+declare module 'diagram-js/lib/features/interaction-events/InteractionEvents' {
+  export default class InteractionEvents {}
+}
 // 键盘事件绑定和映射
 declare module 'diagram-js/lib/features/keyboard/Keyboard' {
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -1195,6 +1231,38 @@ declare module 'diagram-js/lib/features/keyboard/KeyboardBindings' {
     constructor(eventBus: EventBus, keyboard: Keyboard<T>)
     registerBindings<T extends Element>(keyboard: Keyboard<T>, editorActions: EditorActions): void
   }
+}
+//
+declare module 'diagram-js/lib/features/keyboard-move-selection/KeyboardMoveSelection' {
+  export default class KeyboardMoveSelection {}
+}
+//
+declare module 'diagram-js/lib/features/label-support/LabelSupport' {
+  export default class LabelSupport {}
+}
+//
+declare module 'diagram-js/lib/features/lasso-tool/LassoTool' {
+  export default class LassoTool {}
+}
+//
+declare module 'diagram-js/lib/features/mouse/Mouse' {
+  export default class Mouse {}
+}
+//
+declare module 'diagram-js/lib/features/move/Move' {
+  export default class Move {}
+}
+//
+declare module 'diagram-js/lib/features/move/MovePreview' {
+  export default class MovePreview {}
+}
+//
+declare module 'diagram-js/lib/features/ordering/OrderingProvider' {
+  export default class OrderingProvider {}
+}
+//
+declare module 'diagram-js/lib/features/outline/Outline' {
+  export default class Outline {}
 }
 // 将覆盖元素或者dom 附加到对应图元素的服务
 declare module 'diagram-js/lib/features/overlays/Overlays' {
@@ -1325,31 +1393,6 @@ declare module 'diagram-js/lib/features/replace/Replace' {
     replaceElement<E extends Base, S extends Shape>(oldElement: E, newElement: Object | E, options?: Object): S
   }
 }
-// 为某些图操作提供规则的服务。
-// 默认实现将挂入命令堆栈执行实际的规则评估。确保提供命令堆栈如果您打算使用此模块，请使用它。
-// 连同此实现，您可以使用 RulesProvider 来实现你自己的规则检查器。
-declare module 'diagram-js/lib/features/rules/Rules' {
-  import { Injector } from 'didi'
-  import CommandStack from 'diagram-js/lib/command/CommandStack'
-
-  export default class Rules {
-    constructor(injector: Injector)
-    protected _commandStack: CommandStack
-    allowed(action: string, context?: Object): boolean
-  }
-}
-// 可以扩展以实现建模规则的基本提供程序。
-// 扩展应该实现init方法来实际添加他们的自定义建模检查。可以通过 addRule(action，fn) 方法添加检查。
-declare module 'diagram-js/lib/features/rules/RulesProvider' {
-  import EventBus from 'diagram-js/lib/core/EventBus'
-  import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor'
-
-  export default class RulesProvider extends CommandInterceptor {
-    constructor(eventBus: EventBus)
-    protected init(): void
-    addRule(actions: string | string[], priority: number | Function, fn?: Function): void
-  }
-}
 // 提供画布上形状大小调整的组件
 declare module 'diagram-js/lib/features/resize/Resize' {
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -1394,6 +1437,39 @@ declare module 'diagram-js/lib/features/resize/ResizePreview' {
     constructor(eventBus: EventBus, canvas: Canvas, previewSupport: PreviewSupport)
   }
 }
+//
+declare module 'diagram-js/lib/features/root-elements/RootElementsBehavior' {
+  export default class RootElementsBehavior {}
+}
+// 为某些图操作提供规则的服务。
+// 默认实现将挂入命令堆栈执行实际的规则评估。确保提供命令堆栈如果您打算使用此模块，请使用它。
+// 连同此实现，您可以使用 RulesProvider 来实现你自己的规则检查器。
+declare module 'diagram-js/lib/features/rules/Rules' {
+  import { Injector } from 'didi'
+  import CommandStack from 'diagram-js/lib/command/CommandStack'
+
+  export default class Rules {
+    constructor(injector: Injector)
+    protected _commandStack: CommandStack
+    allowed(action: string, context?: Object): boolean
+  }
+}
+// 可以扩展以实现建模规则的基本提供程序。
+// 扩展应该实现init方法来实际添加他们的自定义建模检查。可以通过 addRule(action，fn) 方法添加检查。
+declare module 'diagram-js/lib/features/rules/RulesProvider' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor'
+
+  export default class RulesProvider extends CommandInterceptor {
+    constructor(eventBus: EventBus)
+    protected init(): void
+    addRule(actions: string | string[], priority: number | Function, fn?: Function): void
+  }
+}
+//
+declare module 'diagram-js/lib/features/search-pad/SearchPad' {
+  export default class SearchPad {}
+}
 // 在图表中提供当前选择元素的服务。也提供了控制选择的api
 declare module 'diagram-js/lib/features/selection/Selection' {
   import Canvas from 'diagram-js/lib/core/Canvas'
@@ -1436,6 +1512,56 @@ declare module 'diagram-js/lib/features/selection/SelectionVisuals' {
   }
 }
 //
-// declare module 'diagram-js/lib/features/xxx/xxx' {
-//   export default class xxx {}
-// }
+declare module 'diagram-js/lib/features/snapping/Snapping' {
+  export default class Snapping {}
+}
+//
+declare module 'diagram-js/lib/features/snapping/SnapContext' {
+  export default class SnapContext {}
+}
+//
+declare module 'diagram-js/lib/features/snapping/ResizeSnapping' {
+  export default class ResizeSnapping {}
+}
+//
+declare module 'diagram-js/lib/features/snapping/CreateMoveSnapping' {
+  export default class CreateMoveSnapping {}
+}
+//
+declare module 'diagram-js/lib/features/space-tool/SpaceTool' {
+  export default class SpaceTool {}
+}
+//
+declare module 'diagram-js/lib/features/space-tool/SpaceToolPreview' {
+  export default class SpaceToolPreview {}
+}
+//
+declare module 'diagram-js/lib/features/tool-manager/ToolManager' {
+  export default class ToolManager {}
+}
+//
+declare module 'diagram-js/lib/features/tooltips/Tooltips' {
+  export default class Tooltips {}
+}
+//
+declare module 'diagram-js/lib/features/touch/TouchFix' {
+  export default class TouchFix {}
+}
+//
+declare module 'diagram-js/lib/features/touch/TouchInteractionEvents' {
+  export default class TouchInteractionEvents {}
+}
+
+/*************************************** 123123 ****************************************/
+//
+declare module 'diagram-js/lib/navigation/keyboard-move/KeyboardMove' {
+  export default class KeyboardMove {}
+}
+//
+declare module 'diagram-js/lib/navigation/movecanvas/MoveCanvas' {
+  export default class MoveCanvas {}
+}
+//
+declare module 'diagram-js/lib/navigation/zoomscroll/ZoomScroll' {
+  export default class ZoomScroll {}
+}
