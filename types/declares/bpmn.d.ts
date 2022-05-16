@@ -75,57 +75,10 @@ declare module 'bpmn-js/lib/Modeler' {
   }
 }
 /************************************* core 核心模块( draw, import) *************************************/
-declare module 'bpmn-js/lib/features/modeling/BpmnFactory.js' {
-  import { Moddle } from 'moddle'
-  import { Base } from 'diagram-js/lib/model'
-  import { ModdleElement } from 'diagram-js/lib/model'
-
-  export default class BpmnFactory {
-    constructor(moddle: Moddle)
-    private _needsId<E extends Base>(element: E): boolean
-    private _ensureId<E extends Base>(element: E): void
-    create<E extends Base>(type: string, attrs?: Object): E & ModdleElement
-    createDiLabel<E extends Base>(): E
-    createDiShape<E extends Base>(): E
-    createDiBounds<E extends Base>(): E
-    createDiWaypoints<E extends Base>(): E
-    createDiWaypoint<E extends Base>(): E
-    createDiEdge<E extends Base>(): E
-    createDiPlane<E extends Base>(): E
-  }
-}
-declare module 'bpmn-js/lib/features/modeling/ElementFactory.js' {
-  import DiagramElementFactory from 'diagram-js/lib/core/ElementFactory'
-  import { Moddle } from 'moddle'
-  import { Translate } from 'diagram-js/lib/i18n/translate'
-  import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory.js'
-  import { Base, Connection, Label, ModdleElement, Root, Shape } from 'diagram-js/lib/model'
-  import { Dimensions } from 'diagram-js/lib/core/Canvas'
-
-  export default class ElementFactory extends DiagramElementFactory {
-    constructor(bpmnFactory: BpmnFactory, moddle: Moddle, translate: Translate)
-    baseCreate(type: string, attrs: any): Root | Shape | Connection | Label
-    create<E extends Base>(elementType: string, attrs?: Object): E & ModdleElement
-    createBpmnElement<E extends Base>(elementType: string, attrs?: Object): E & ModdleElement
-    getDefaultSize(element, di): Dimensions
-    createParticipantShape(attrs?: Object): Shape & ModdleElement
-  }
-}
-declare module 'bpmn-js/lib/features/modeling/Modeling.js' {
-  import BaseModeling from 'diagram-js/lib/features/modeling/Modeling'
-  import EventBus from 'diagram-js/lib/core/EventBus'
-  import ElementFactory from 'diagram-js/lib/core/ElementFactory'
-  import CommandStack from 'diagram-js/lib/command/CommandStack'
-  import { Connection, Hints, Shape } from 'diagram-js/lib/model'
-
-  export default class Modeling extends BaseModeling {
-    constructor(eventBus: EventBus, elementFactory: ElementFactory, commandStack: CommandStack, bpmnRules: any)
-    getHandlers(): any
-    updateLabel(element: any, newLabel: any, newBounds, hints): void
-    connect(source: Shape, target: Shape, attrs?: Object, hints?: Hints): Connection
-  }
-}
+//
+declare module 'bpmn-js/lib/core' {}
 /************************************* draw 图形元素绘制模块 *************************************/
+//
 declare module 'bpmn-js/lib/draw/BpmnRenderer' {
   import Canvas, { Position } from 'diagram-js/lib/core/Canvas'
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -222,6 +175,7 @@ declare module 'bpmn-js/lib/draw/BpmnRenderer' {
     getShapePath<E extends Base>(element: E): string
   }
 }
+//
 declare module 'bpmn-js/lib/draw/PathMap' {
   export type Path = {
     d: string
@@ -276,6 +230,7 @@ declare module 'bpmn-js/lib/draw/PathMap' {
     private getScaledPath(pathId: string, param: Object): Object
   }
 }
+//
 declare module 'bpmn-js/lib/draw/TextRenderer' {
   import { Bounds } from 'diagram-js/lib/core/Canvas'
 
@@ -296,6 +251,7 @@ declare module 'bpmn-js/lib/draw/TextRenderer' {
   }
 }
 /************************************* import 文件导入 *************************************/
+//
 declare module 'bpmn-js/lib/import/Importer' {
   import Diagram from 'diagram-js'
   import { ModdleElement } from 'diagram-js/lib/model'
@@ -307,6 +263,7 @@ declare module 'bpmn-js/lib/import/Importer' {
     bpmnDiagram: ModdleElement
   ): Promise<DoneCallbackOpt>
 }
+//
 declare module 'bpmn-js/lib/import/BpmnImporter' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
@@ -328,6 +285,7 @@ declare module 'bpmn-js/lib/import/BpmnImporter' {
     add<E extends Base>(semantic: any, di: any, parentElement?: E): E
   }
 }
+//
 declare module 'bpmn-js/lib/import/BpmnTreeWalker' {
   import { Translate } from 'diagram-js/lib/i18n/translate'
 
@@ -336,3 +294,180 @@ declare module 'bpmn-js/lib/import/BpmnTreeWalker' {
   }
 }
 /************************************* feature 扩展功能 *************************************/
+declare module 'bpmn-js/lib/features/modeling/Modeling.js' {
+  import BaseModeling from 'diagram-js/lib/features/modeling/Modeling'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import ElementFactory from 'diagram-js/lib/core/ElementFactory'
+  import CommandStack from 'diagram-js/lib/command/CommandStack'
+  import { Connection, Hints, Shape } from 'diagram-js/lib/model'
+
+  export default class Modeling extends BaseModeling {
+    constructor(eventBus: EventBus, elementFactory: ElementFactory, commandStack: CommandStack, bpmnRules: any)
+    getHandlers(): any
+    updateLabel(element: any, newLabel: any, newBounds, hints): void
+    connect(source: Shape, target: Shape, attrs?: Object, hints?: Hints): Connection
+  }
+}
+//
+declare module 'bpmn-js/lib/features/modeling/BpmnFactory' {
+  import { Moddle } from 'moddle'
+  import { Base } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'diagram-js/lib/model'
+
+  export default class BpmnFactory {
+    constructor(moddle: Moddle)
+    private _needsId<E extends Base>(element: E): boolean
+    private _ensureId<E extends Base>(element: E): void
+    create<E extends Base>(type: string, attrs?: Object): E & ModdleElement
+    createDiLabel<E extends Base>(): E
+    createDiShape<E extends Base>(): E
+    createDiBounds<E extends Base>(): E
+    createDiWaypoints<E extends Base>(): E
+    createDiWaypoint<E extends Base>(): E
+    createDiEdge<E extends Base>(): E
+    createDiPlane<E extends Base>(): E
+  }
+}
+//
+declare module 'bpmn-js/lib/features/modeling/ElementFactory' {
+  import DiagramElementFactory from 'diagram-js/lib/core/ElementFactory'
+  import { Moddle } from 'moddle'
+  import { Translate } from 'diagram-js/lib/i18n/translate'
+  import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory.js'
+  import { Base, Connection, Label, ModdleElement, Root, Shape } from 'diagram-js/lib/model'
+  import { Dimensions } from 'diagram-js/lib/core/Canvas'
+
+  export default class ElementFactory extends DiagramElementFactory {
+    constructor(bpmnFactory: BpmnFactory, moddle: Moddle, translate: Translate)
+    baseCreate(type: string, attrs: any): Root | Shape | Connection | Label
+    create<E extends Base>(elementType: string, attrs?: Object): E & ModdleElement
+    createBpmnElement<E extends Base>(elementType: string, attrs?: Object): E & ModdleElement
+    getDefaultSize(element, di): Dimensions
+    createParticipantShape(attrs?: Object): Shape & ModdleElement
+  }
+}
+
+//
+declare module 'bpmn-js/lib/features/auto-place/BpmnAutoPlace' {
+  export default class BpmnAutoPlace {}
+}
+//
+declare module 'bpmn-js/lib/features/auto-resize/BpmnAutoResize' {
+  export default class BpmnAutoResize {}
+}
+//
+declare module 'bpmn-js/lib/features/auto-resize/BpmnAutoResizeProvider' {
+  export default class BpmnAutoResizeProvider {}
+}
+//
+declare module 'bpmn-js/lib/features/context-pad/ContextPadProvider' {
+  export default class ContextPadProvider {}
+}
+//
+declare module 'bpmn-js/lib/features/copy-paste/BpmnCopyPaste' {
+  export default class BpmnCopyPaste {}
+}
+//
+declare module 'bpmn-js/lib/features/di-ordering/BpmnDiOrdering' {
+  export default class BpmnDiOrdering {}
+}
+//
+declare module 'bpmn-js/lib/features/distribute-elements/BpmnDistributeElements' {
+  export default class BpmnDistributeElements {}
+}
+//
+declare module 'bpmn-js/lib/features/drilldown/DrilldownBreadcrumbs' {
+  export default class DrilldownBreadcrumbs {}
+}
+//
+declare module 'bpmn-js/lib/features/drilldown/DrilldownCentering' {
+  export default class DrilldownCentering {}
+}
+//
+declare module 'bpmn-js/lib/features/drilldown/DrilldownOverlayBehavior' {
+  export default class DrilldownOverlayBehavior {}
+}
+//
+declare module 'bpmn-js/lib/features/drilldown/SubprocessCompatibility' {
+  export default class SubprocessCompatibility {}
+}
+//
+declare module 'bpmn-js/lib/features/editor-actions/BpmnEditorActions' {
+  export default class BpmnEditorActions {}
+}
+//
+declare module 'bpmn-js/lib/features/grid-snapping/BpmnGridSnapping' {
+  export default class BpmnGridSnapping {}
+}
+//
+declare module 'bpmn-js/lib/features/grid-snapping/behavior/AutoPlaceBehavior' {
+  export default class AutoPlaceBehavior {}
+}
+//
+declare module 'bpmn-js/lib/features/grid-snapping/behavior/CreateParticipantBehavior' {
+  export default class CreateParticipantBehavior {}
+}
+//
+declare module 'bpmn-js/lib/features/grid-snapping/behavior/LayoutConnectionBehavior' {
+  export default class LayoutConnectionBehavior {}
+}
+//
+declare module 'bpmn-js/lib/features/interaction-events/BpmnInteractionEvents' {
+  export default class BpmnInteractionEvents {}
+}
+//
+declare module 'bpmn-js/lib/features/keyboard/BpmnKeyboardBindings' {
+  export default class BpmnKeyboardBindings {}
+}
+//
+declare module 'bpmn-js/lib/features/label-editing/LabelEditingPreview' {
+  export default class LabelEditingPreview {}
+}
+//
+declare module 'bpmn-js/lib/features/label-editing/LabelEditingProvider' {
+  export default class LabelEditingProvider {}
+}
+//
+declare module 'bpmn-js/lib/features/label-editing/cmd/UpdateLabelHandler' {
+  export default class UpdateLabelHandler {}
+}
+//
+declare module 'bpmn-js/lib/features/ordering/BpmnOrderingProvider' {
+  export default class BpmnOrderingProvider {}
+}
+//
+declare module 'bpmn-js/lib/features/palette/PaletteProvider' {
+  export default class PaletteProvider {}
+}
+//
+declare module 'bpmn-js/lib/features/popup-menu/ReplaceMenuProvider' {
+  export default class ReplaceMenuProvider {}
+}
+//
+declare module 'bpmn-js/lib/features/replace/BpmnReplace' {
+  export default class BpmnReplace {}
+}
+//
+declare module 'bpmn-js/lib/features/replace/ReplaceOptions' {
+  export default class ReplaceOptions {}
+}
+//
+declare module 'bpmn-js/lib/features/replace-preview/BpmnReplacePreview' {
+  export default class BpmnReplacePreview {}
+}
+//
+declare module 'bpmn-js/lib/features/rules/BpmnRules' {
+  export default class BpmnRules {}
+}
+//
+declare module 'bpmn-js/lib/features/search/BpmnSearchProvider' {
+  export default class BpmnSearchProvider {}
+}
+//
+declare module 'bpmn-js/lib/features/snapping/BpmnConnectSnapping' {
+  export default class BpmnConnectSnapping {}
+}
+//
+declare module 'bpmn-js/lib/features/snapping/BpmnCreateMoveSnapping' {
+  export default class BpmnCreateMoveSnapping {}
+}
