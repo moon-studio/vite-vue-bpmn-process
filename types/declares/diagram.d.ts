@@ -684,8 +684,8 @@ declare module 'diagram-js/lib/command/CommandHandler' {
 declare module 'diagram-js/lib/command/CommandInterceptor' {
   import EventBus from 'diagram-js/lib/core/EventBus'
 
-  export default class CommandInterceptor {
-    constructor(eventBus: EventBus)
+  export default abstract class CommandInterceptor {
+    protected constructor(eventBus: EventBus)
     on(events?: string | string[], hook?: string, priority?: number, handler?: Function, unwrap?: boolean): void
     canExecute(
       events?: string | string[],
@@ -824,6 +824,10 @@ declare module 'diagram-js/lib/model' {
     attach?: boolean
     connection?: Connection | Object
     connectionParent?: Base
+    waypoints?: Point[]
+    noLayout?: boolean
+    noCropping?: boolean
+    noNoop?: boolean
   }
 
   export interface Point {
@@ -1015,7 +1019,7 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
     toggleCollapse(shape: Shape, hints?: Hints): void
   }
 }
-// 元素对其方式
+// 元素对其
 declare module 'diagram-js/lib/features/align-elements/AlignElements' {
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import { Base } from 'diagram-js/lib/model'
@@ -1032,69 +1036,365 @@ declare module 'diagram-js/lib/features/align-elements/AlignElements' {
     trigger(elements: Base[], type: string): void
   }
 }
-//
+// 元素拖动时的标记支持, 内部依赖 movePreview 实现 svg 可见元素的添加
 declare module 'diagram-js/lib/features/attach-support/AttachSupport' {
-  export default class AttachSupport {}
+  import { Injector } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import Rules from 'diagram-js/lib/features/rules/Rules'
+  import Modeling from 'diagram-js/lib/features/modeling/Modeling'
+  import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor'
+
+  export default class AttachSupport extends CommandInterceptor {
+    constructor(injector: Injector, eventBus: EventBus, canvas: Canvas, rules: Rules, modeling: Modeling)
+  }
 }
-//
+// 元素自动分布
 declare module 'diagram-js/lib/features/auto-place/AutoPlace' {
-  export default class AutoPlace {}
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Modeling from 'diagram-js/lib/features/modeling/Modeling'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import { Hints, Shape } from 'diagram-js/lib/model'
+
+  export default class AutoPlace {
+    constructor(eventBus: EventBus, modeling: Modeling, canvas: Canvas)
+    /**
+     * 将元素添加到 source 元素中的合适位置
+     * @param {Shape} source
+     * @param {Shape} shape
+     * @param {Hints} hints
+     * @return {Shape} appended shape
+     */
+    private append(source: Shape, shape: Shape, hints?: Hints): Shape
+  }
 }
-//
+// 添加 autoPlace.end 事件监听，触发时默认选择元素
+declare module 'diagram-js/lib/features/auto-place/AutoPlaceSelectionBehavior' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Selection from 'diagram-js/lib/features/selection/Selection'
+
+  export default class AutoPlaceSelectionBehavior {
+    constructor(eventBus: EventBus, selection: Selection)
+  }
+}
+// 自动调整元素大小组件，用于在创建子元素或将子元素移近父边时扩展父元素。
 declare module 'diagram-js/lib/features/auto-resize/AutoResize' {
-  export default class AutoResize {}
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+  import Modeling from 'diagram-js/lib/features/modeling/Modeling'
+  import Rules from 'diagram-js/lib/features/rules/Rules'
+  import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor'
+  import { Shape } from 'diagram-js/lib/model'
+  import { Bounds } from 'diagram-js/lib/core/Canvas'
+
+  export type TRBL = {
+    top: number
+    right: number
+    bottom: number
+    left: number
+  }
+
+  export default class AutoResize extends CommandInterceptor {
+    constructor(eventBus: EventBus, elementRegistry: ElementRegistry, modeling: Modeling, rules: Rules)
+    /**
+     * 给定已将许多元素移动或添加到父项中，计算目标形状的新边界。
+     * 此方法考虑当前大小，添加的元素以及为新边界提供的填充
+     *
+     * @param {Array<Shape>} elements
+     * @param {Shape} target
+     * @returns {Bounds} new bounds of the target shape
+     */
+    private _getOptimalBounds(elements: Shape[], target: Shape): Bounds
+    /**
+     * 展开符合规则、偏移和边界设定的元素
+     *
+     * @param {Array<Shape>} elements
+     * @param {Shape|string} target
+     */
+    private _expand(elements: Shape[], target: Shape | string): void
+    /**
+     * 获取在每个方向上扩展给定形状的量, 在该实例的方法默认返回 { top: 60, bottom: 60, left: 100, right: 100 };
+     * @param {Shape} shape
+     * @return {TRBL}
+     */
+    getOffset(shape: Shape): TRBL
+    /**
+     * 获取在每个方向上扩展给定形状的量, 在该实例的方法默认返回 { top: 2, bottom: 2, left: 15, right: 15 };
+     * @param {Shape} shape
+     * @return {TRBL}
+     */
+    getPadding(shape: Shape): TRBL
+    /**
+     * 执行 resize 方法, 调用 modeling.resizeShape(shape, newBounds, null, hints) 方法执行对应逻辑
+     * @param {Shape} shape
+     * @param {Bounds} newBounds
+     * @param {Object} [hints]
+     * @param {string} [hints.autoResize]
+     */
+    resize(shape: Shape, newBounds: Bounds, hints?: Object): void
+  }
 }
-//
+// 元素自动调整大小的构造规则，可继承该类实现自定义resize规则
 declare module 'diagram-js/lib/features/auto-resize/AutoResizeProvider' {
-  export default class AutoResizeProvider {}
+  import RuleProvider from 'diagram-js/lib/features/rules/RuleProvider'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+
+  export default class AutoResizeProvider extends RuleProvider {
+    constructor(eventBus: EventBus)
+    /**
+     * 需要由具体子类实现的方法，返回是否可以调整形状大小, 当前直接返回 false
+     * @param  {Array<Shape>} elements
+     * @param  {Shape} target
+     *
+     * @return {boolean}
+     */
+    canResize(elements, target): boolean
+  }
 }
-//
+/**
+ * 画布自动滚动。如果当前光标点接近边框，则启动画布滚动。当当前点移回滚动边框内或手动取消时取消
+ * Default options :
+ *   scrollThresholdIn: [ 20, 20, 20, 20 ], // 当前点距离边框的距离，小于该距离则开始滚动
+ *   scrollThresholdOut: [ 0, 0, 0, 0 ], // 当前点离边框的距离
+ *   scrollRepeatTimeout: 15, // 画布滚动的时间间隔
+ *   scrollStep: 10 // 画布滚动步长
+ *
+ * Threshold order 阈值设置顺序:
+ *   [ left, top, right, bottom ]
+ */
 declare module 'diagram-js/lib/features/auto-scroll/AutoScroll' {
-  export default class AutoScroll {}
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import { Point } from 'diagram-js/lib/model'
+
+  export default class AutoScroll {
+    constructor(config: any, eventBus: EventBus, canvas: Canvas)
+    /**
+     * 启动画布滚动, 创建一个定时器，每隔一定时间执行一次滚动
+     */
+    startScroll(point: Point): void
+    // 停止画布滚动，清除定时器
+    stopScroll(): void
+    // 重设滚动默认设置
+    setOptions(options: any): void
+    // 将一个事件位置转换为画布坐标
+    private _toBorderPoint(event: Event): Point
+  }
 }
-//
-declare module 'diagram-js/lib/features/bendpoints/BendpointsMove' {
-  export default class BendpointsMove {}
-}
-//
-declare module 'diagram-js/lib/features/bendpoints/BendpointsMovePreview' {
-  export default class BendpointsMovePreview {}
-}
-//
+/**
+ * 向节点之间的连接线添加可编辑的拐点锚点的服务
+ * 在实例化时会注册一系列监听事件，包括：
+ * connection.changed, connection.remove, element.marker.update, element.mousemove
+ * element.mousedown, selection.changed, element.hover, element.out, element.updateId
+ */
 declare module 'diagram-js/lib/features/bendpoints/Bendpoints' {
-  export default class Bendpoints {}
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import InteractionEvents from 'diagram-js/lib/features/interaction-events/InteractionEvents'
+  import BendpointsMove from 'diagram-js/lib/features/bendpoints/BendpointsMove'
+  import ConnectionSegmentMove from 'diagram-js/lib/features/bendpoints/ConnectionSegmentMove'
+  import { Connection } from 'diagram-js/lib/model'
+
+  export default class Bendpoints {
+    constructor(
+      eventBus: EventBus,
+      canvas: Canvas,
+      interactionEvents: InteractionEvents,
+      bendpointMove: BendpointsMove,
+      connectionSegmentMove: ConnectionSegmentMove
+    )
+
+    addHandles(connection: Connection): SVGElement
+    updateHandles(connection: Connection): void
+    getBendpointsContainer(element: Connection, create?: boolean): SVGElement
+    getSegmentDragger(idx: string, parentGfx: SVGElement): SVGElement
+  }
+}
+// 通过拖放移动弯曲点以添加/删除弯曲点或重新连接连接
+declare module 'diagram-js/lib/features/bendpoints/BendpointsMove' {
+  import { Injector } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import Dragging from 'diagram-js/lib/features/dragging/Dragging'
+  import Rules from 'diagram-js/lib/features/rules/Rules'
+  import Modeling from 'diagram-js/lib/features/modeling/Modeling'
+  import { Connection, Point } from 'diagram-js/lib/model'
+
+  export default class BendpointsMove {
+    constructor(
+      injector: Injector,
+      eventBus: EventBus,
+      canvas: Canvas,
+      dragging: Dragging,
+      rules: Rules,
+      modeling: Modeling
+    )
+
+    start(event: Event, connection: Connection, bendpointIndex: number, insert?: boolean): void
+    cropWaypoints(connection: Connection, newWaypoints: Point[]): Point[]
+  }
+}
+// 拖动连线拐点时的预览实现
+declare module 'diagram-js/lib/features/bendpoints/BendpointsMovePreview' {
+  import BendpointsMove from 'diagram-js/lib/features/bendpoints/BendpointsMove'
+  import { Injector } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+
+  export default class BendpointsMovePreview {
+    constructor(bendpointMove: BendpointsMove, injector: Injector, eventBus: EventBus, canvas: Canvas)
+  }
 }
 //
 declare module 'diagram-js/lib/features/bendpoints/BendpointSnapping' {
-  export default class BendpointSnapping {}
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  export default class BendpointSnapping {
+    constructor(eventBus: EventBus)
+  }
 }
-//
+// 拐点移动时的预览实现
 declare module 'diagram-js/lib/features/bendpoints/ConnectionSegmentMove' {
-  export default class ConnectionSegmentMove {}
+  import { Injector } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import Dragging from 'diagram-js/lib/features/dragging/Dragging'
+  import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
+  import Modeling from 'diagram-js/lib/features/modeling/Modeling'
+  export default class ConnectionSegmentMove {
+    constructor(
+      injector: Injector,
+      eventBus: EventBus,
+      canvas: Canvas,
+      dragging: Dragging,
+      graphicsFactory: GraphicsFactory,
+      modeling: Modeling
+    )
+  }
 }
-//
+// 图标更改支持
 declare module 'diagram-js/lib/features/change-support/ChangeSupport' {
-  export default class ChangeSupport {}
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+  import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
+  /**
+   * 向图表添加更改支持，包括
+   * 更改时重新绘制形状和连接线
+   * @param {EventBus} eventBus
+   * @param {Canvas} canvas
+   * @param {ElementRegistry} elementRegistry
+   * @param {GraphicsFactory} graphicsFactory
+   */
+  export default class ChangeSupport {
+    constructor(eventBus: EventBus, canvas: Canvas, elementRegistry: ElementRegistry, graphicsFactory: GraphicsFactory)
+  }
 }
-//
+// 剪切板数据缓存
 declare module 'diagram-js/lib/features/clipboard/Clipboard' {
-  export default class Clipboard {}
+  export default class Clipboard {
+    private _data: any
+    get(): any
+    set(data: any): void
+    clear(): any
+    isEmpty(): boolean
+  }
 }
-//
+// 连接工具
 declare module 'diagram-js/lib/features/connect/Connect' {
-  export default class Connect {}
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Dragging from 'diagram-js/lib/features/dragging/Dragging'
+  import Modeling from 'diagram-js/lib/features/modeling/Modeling'
+  import Rules from 'diagram-js/lib/features/rules/Rules'
+  import { Base, Point } from 'diagram-js/lib/model'
+  export default class Connect {
+    constructor(eventBus: EventBus, dragging: Dragging, modeling: Modeling, rules: Rules)
+    /**
+     * 开始连接操作
+     * @param {Event} event
+     * @param {Base} start
+     * @param {Point} [connectionStart]
+     * @param {boolean} [autoActivate=false]
+     */
+    start(event: Event, start: Base, connectionStart?: Point, autoActivate?: boolean): void
+  }
 }
-//
+// 在连接期间显示连接预览
 declare module 'diagram-js/lib/features/connect/ConnectPreview' {
-  export default class ConnectPreview {}
+  import { Injector } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  // 内部依赖 connectionPreview 模块
+  export default class ConnectPreview {
+    constructor(injector: Injector, eventBus: EventBus, canvas: Canvas)
+  }
 }
-//
+// 绘制连接预览。
 declare module 'diagram-js/lib/features/connection-preview/ConnectionPreview' {
-  export default class ConnectionPreview {}
-}
-//
-declare module 'diagram-js/lib/features/copy-paste/CopyPaste' {
-  export default class CopyPaste {}
+  import { Injector } from 'didi'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
+  import ElementFactory from 'diagram-js/lib/core/ElementFactory'
+  import { Connection, Hints, Point, Shape } from 'diagram-js/lib/model'
+  /**
+   * 绘制连接预览。这可以使用布局和连接对接来绘制外观更好的预览(可选)
+   */
+  export default class ConnectionPreview {
+    constructor(injector: Injector, canvas: Canvas, graphicsFactory: GraphicsFactory, elementFactory: ElementFactory)
+    /**
+     * 绘制连线预览.
+     * 需要至少一个 source 和 target 元素分别作为连线起点和终点，
+     * 可以通过 `connectionPreview.cleanUp()` 来清除预览
+     * @param {Object} context
+     * @param {Object|boolean} canConnect
+     * @param {Object} hints
+     * @param {Shape} [hints.source] source element
+     * @param {Shape} [hints.target] target element
+     * @param {Point} [hints.connectionStart] connection preview start
+     * @param {Point} [hints.connectionEnd] connection preview end
+     * @param {Array<Point>} [hints.waypoints] provided waypoints for preview
+     * @param {boolean} [hints.noLayout] true if preview should not be laid out
+     * @param {boolean} [hints.noCropping] true if preview should not be cropped
+     * @param {boolean} [hints.noNoop] true if simple connection should not be drawn
+     */
+    drawPreview(context: Object, canConnect: Object | boolean, hints?: Hints): void
+    /**
+     * 在源与目标元素 或者 提供的两个点之间 绘制简单的连接线
+     * @param {SVGElement} connectionPreviewGfx container for the connection
+     * @param {Object} hints
+     * @param {Shape} [hints.source] source element
+     * @param {Shape} [hints.target] target element
+     * @param {Point} [hints.connectionStart] connection preview start
+     * @param {Point} [hints.connectionEnd] connection preview end
+     */
+    drawNoopPreview(connectionPreviewGfx: SVGElement, hints?: Hints): void
+    /**
+     * 返回连线起点和终点
+     * @param {Point} start
+     * @param {Point} end
+     * @param {Shape} source
+     * @param {Shape} target
+     *
+     * @returns {Point[]}
+     */
+    cropWaypoints(start: Point, end: Point, source: Shape, target: Shape): [Point, Point]
+    // 删除连接预览
+    cleanUp(context?: { connectionPreviewGfx?: SVGElement }): void
+    /**
+     * 获取两个元素之间的连接线
+     * @param {Object|boolean} canConnect
+     * @returns {connection}
+     */
+    getConnection(canConnect: Object | boolean): Connection
+    // 创建连接预览元素
+    createConnectionPreviewGfx(): SVGElement
+    /**
+     * 创建并返回简单连接线
+     * @param {Point} start
+     * @param {Point} end
+     * @returns {SVGElement}
+     */
+    createNoopConnection(start: Point, end: Point): SVGElement
+  }
 }
 // 在图表元素旁边显示特定于元素的上下文操作的操作菜单
 declare module 'diagram-js/lib/features/context-pad/ContextPad' {
@@ -1110,14 +1410,30 @@ declare module 'diagram-js/lib/features/context-pad/ContextPad' {
 
   export default class ContextPad {
     constructor(config: any, eventBus: EventBus, overlays: Overlays)
+    //注册与其他组件交互所需的事件, 包括 selection.changed, element.changed, element.delete
     protected _init(): void
+    /**
+     * 注册一个上下文菜单提供者, 注册事件 contextPad.getProviders 的一个监听事件，在默认 providers 中添加一个新的 provider
+     * @param  {number | ContextPadProvider} [priority=1000]
+     * @param  {ContextPadProvider} provider
+     */
     registerProvider(priority: number | ContextPadProvider, provider?: ContextPadProvider): void
+    /**
+     * 返回对应元素可用的上下文菜单项
+     * @param {Base} element
+     * @return {Array<{ [name: string]: ContextPadEntry }>} list of entries
+     */
     getEntries(element: Base): { [name: string]: ContextPadEntry }
+    // 切换菜单显示状态
     trigger(action: string, event: Event, autoActivate?: boolean): void
     open(element: Base, force?: boolean): void
     close(): void
     getPad(element: Base): Overlay | null
   }
+}
+//
+declare module 'diagram-js/lib/features/copy-paste/CopyPaste' {
+  export default class CopyPaste {}
 }
 //
 declare module 'diagram-js/lib/features/create/Create' {
@@ -1460,11 +1776,11 @@ declare module 'diagram-js/lib/features/rules/Rules' {
 }
 // 可以扩展以实现建模规则的基本提供程序。
 // 扩展应该实现init方法来实际添加他们的自定义建模检查。可以通过 addRule(action，fn) 方法添加检查。
-declare module 'diagram-js/lib/features/rules/RulesProvider' {
+declare module 'diagram-js/lib/features/rules/RuleProvider' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor'
 
-  export default class RulesProvider extends CommandInterceptor {
+  export default class RuleProvider extends CommandInterceptor {
     constructor(eventBus: EventBus)
     protected init(): void
     addRule(actions: string | string[], priority: number | Function, fn?: Function): void
