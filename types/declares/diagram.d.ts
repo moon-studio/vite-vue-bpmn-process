@@ -1431,29 +1431,194 @@ declare module 'diagram-js/lib/features/context-pad/ContextPad' {
     getPad(element: Base): Overlay | null
   }
 }
-//
+// 元素复制粘贴功能实现
 declare module 'diagram-js/lib/features/copy-paste/CopyPaste' {
-  export default class CopyPaste {}
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import Create from 'diagram-js/lib/features/create/Create'
+  import Clipboard from 'diagram-js/lib/features/clipboard/Clipboard'
+  import ElementFactory from 'diagram-js/lib/core/ElementFactory'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Modeling from 'diagram-js/lib/features/modeling/Modeling'
+  import Mouse from 'diagram-js/lib/features/mouse/Mouse'
+  import Rules from 'diagram-js/lib/features/rules/Rules'
+  import { Base, Connection, Shape, Label, Point, Hints } from 'diagram-js/lib/model'
+
+  export type CopyPasteTree = {
+    [key: number]: {
+      id: string
+      priority: number
+      [attr: string]: string | number
+    }[]
+  }
+
+  export default class CopyPaste {
+    constructor(
+      canvas: Canvas,
+      create: Create,
+      clipboard: Clipboard,
+      elementFactory: ElementFactory,
+      eventBus: EventBus,
+      modeling: Modeling,
+      mouse: Mouse,
+      rules: Rules
+    )
+
+    /**
+     * 复制元素
+     * 触发 copyPaste.canCopyElements 获取返回值判断是否可以复制
+     * 触发 copyPaste.elementsCopied 表示元素已经复制
+     * @param {Array<Base>} elements
+     * @returns {Object}
+     */
+    copy(elements): Object
+    /**
+     * 粘贴元素
+     * 触发 copyPaste.pasteElements
+     * @param {Object} [context]
+     * @param {Base} [context.element] - Parent.
+     * @param {Point} [context.point] - Position.
+     * @param {Object} [context.hints] - Hints.
+     */
+    paste(context?: { element?: Base; point?: Point; hints?: Object }): void
+    /**
+     * 直接粘贴元素到某个位置
+     * @param {Array<Base>} elements
+     * @param {Base} target
+     * @param {Point} position
+     * @param {Object} [hints]
+     */
+    private _paste(elements: Base[], target: Base, position: Point, hints?: Hints)
+    /**
+     * 根据已复制的元素树型数组 遍历创建新元素, 返回创建好的元素数组
+     * 会频繁触发 copyPaste.pasteElement
+     * @param {Array} tree
+     * @returns {Array<Base>}
+     */
+    private _createElements(tree: CopyPasteTree[]): Base[]
+    // 创建一个新的连线元素
+    createConnection(attrs?: Object): Connection
+    // 创建一个新的形状元素
+    createShape(attrs?: Object): Shape
+    // 创建一个新的Label元素
+    createLabel(attrs?: Object): Label
+    /**
+     * 检查元素是否与其他元素 (例如附件，标签和连接) 有关系
+     * @param  {Object} element
+     * @param  {Array<Base>} elements
+     * @returns {boolean}
+     */
+    hasRelations(element: Object, elements: Base[]): boolean
+    /**
+     * 根据元素创建树状结构
+     * @param {Array<Base>} elements
+     * @returns {Object}
+     */
+    createTree(elements: Base[]): CopyPasteTree
+  }
 }
-//
+// 通过拖放创建新元素
 declare module 'diagram-js/lib/features/create/Create' {
   import { Base } from 'diagram-js/lib/model'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import Dragging from 'diagram-js/lib/features/dragging/Dragging'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Modeling from 'diagram-js/lib/features/modeling/Modeling'
+  import Rules from 'diagram-js/lib/features/rules/Rules'
 
   export default class Create {
+    constructor(canvas: Canvas, dragging: Dragging, eventBus: EventBus, modeling: Modeling, rules: Rules)
     start<T extends Base>(event: string | Event, elements: T | T[], context?: any): void
   }
 }
-//
+// 元素创建过程中的连线预览
 declare module 'diagram-js/lib/features/create/CreateConnectPreview' {
-  export default class CreateConnectPreview {}
+  import { Injector } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+
+  // 内部依赖 connectionPreview 实例，监听 create.move 事件 通过 connectionPreview.drawPreview 创建连线预览
+  export default class CreateConnectPreview {
+    constructor(injector: Injector, eventBus: EventBus)
+  }
 }
-//
+// 元素创建预览
 declare module 'diagram-js/lib/features/create/CreatePreview' {
-  export default class CreatePreview {}
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
+  import PreviewSupport from 'diagram-js/lib/features/preview-support/PreviewSupport'
+  import Styles from 'diagram-js/lib/draw/Styles'
+  // 监听 create.move 事件
+  export default class CreatePreview {
+    constructor(
+      canvas: Canvas,
+      eventBus: EventBus,
+      graphicsFactory: GraphicsFactory,
+      previewSupport: PreviewSupport,
+      styles: Styles
+    )
+  }
 }
-//
+// 分组和过滤元素，然后触发均匀分布。
 declare module 'diagram-js/lib/features/distribute-elements/DistributeElements' {
-  export default class DistributeElements {}
+  import Modeling from 'diagram-js/lib/features/modeling/Modeling'
+  import { Base } from 'diagram-js/lib/model'
+
+  export type ElementRange = {
+    min: number
+    max: number
+  }
+  export type RangeGroup = {
+    range: ElementRange
+    elements: Base[]
+  }
+  export type RangeGroups = RangeGroup[]
+  export type Orientation = 'horizontal' | 'vertical'
+
+  export default class DistributeElements {
+    constructor(modeling: Modeling)
+    private _filters: Function[]
+    /**
+     * 寄存器过滤功能，允许外部各方过滤掉某些元素, 会将该方法添加到 _filters 属性中
+     * @param  {Function} filterFn
+     */
+    registerFilter(filterFn: Function): void
+    /**
+     * 以给定的方向均匀分布元素
+     * @param  {Array<Base>} elements
+     * @param  {string} orientation
+     */
+    trigger(elements: Base[], orientation: Orientation): undefined | RangeGroups
+    /**
+     * 使用外部方提供的过滤器过滤元素
+     * @param  {Base[]} elements
+     * @return {Base[]}
+     */
+    _filterElements(elements: Base[]): Base[]
+    /**
+     * 创建范围 (最小，最大) 组。还尝试将共享相同范围的元素组合在一起
+     * @param  {Base[]} elements
+     * @return {RangeGroups}
+     */
+    _createGroups(elements: Base[]): RangeGroups
+    /**
+     * 将方向映射到相应的轴和尺寸
+     * @param  {Orientation} direction
+     */
+    _setOrientation(direction: Orientation): void
+    /**
+     * 检查两个元素范围是否有交叉
+     * @param  {ElementRange} rangeA {min, max}
+     * @param  {ElementRange} rangeB {min, max}
+     * @return {boolean}
+     */
+    _hasIntersection(rangeA: ElementRange, rangeB: ElementRange): boolean
+    /**
+     * 返回元素所占位置的最小值和最大值
+     * @param  {Base} element
+     * @return {{ min: number, max: number }}
+     */
+    _findRange(element: Base): ElementRange
+  }
 }
 // 触发 canvas 话不内 拖动事件并实现一般 “拖放” 事件的操作。会在不同生命周期中通过 eventBus 触发不同的事件。
 declare module 'diagram-js/lib/features/dragging/Dragging' {
@@ -1481,16 +1646,72 @@ declare module 'diagram-js/lib/features/editor-actions/EditorActions' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   export default class EditorActions {
     constructor(eventBus: EventBus, injector: Injector)
+    // 初始化可用操作对象Map
     protected _actions: { [actionName: string]: Function }
+
+    /**
+     * 注册所有默认的操作事件
+     * 通过 injector 实例获取相关实例, 默认依赖 commandStack, modeling, selection, zoomScroll,
+     * copyPaste, canvas, rules, keyboardMove, keyboardMoveSelection
+     * 默认注册的操作:
+     * undo, redo, copy, paste, stepZoom, zoom, removeSelection, moveCanvas, moveSelection,
+     * @param injector
+     */
+    _registerDefaultActions(injector: Injector): void
+    /**
+     * Registers a collections of actions.
+     * The key of the object will be the name of the action.
+     *
+     * @example
+     * ´´´
+     * var actions = {
+     *   spaceTool: function() {
+     *     spaceTool.activateSelection();
+     *   },
+     *   lassoTool: function() {
+     *     lassoTool.activateSelection();
+     *   }
+     * ];
+     *
+     * editorActions.register(actions);
+     *
+     * editorActions.isRegistered('spaceTool'); // true
+     * ´´´
+     *
+     * @param  {{ [action: string]: Function } | string} actions
+     * @param  {Function} [listener]
+     */
+    register(actions: string | { [action: string]: Function }, listener?: Function): void
+    // 触发操作
     trigger(action: string, opts?: Object): unknown
+    // 取消注册的某个操作事件
     unregister(action: string): unknown
+    // 返回当前已注册的操作数量
     getActions(): number
+    // 检查是否注册了给定的操作
     isRegistered(action: string): boolean
   }
 }
-//
+// 全局任意创建连线的工具
 declare module 'diagram-js/lib/features/global-connect/GlobalConnect' {
-  export default class GlobalConnect {}
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Dragging from 'diagram-js/lib/features/dragging/Dragging'
+  import Connect from 'diagram-js/lib/features/connect/Connect'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import ToolManager from 'diagram-js/lib/features/tool-manager/ToolManager'
+  import Rules from 'diagram-js/lib/features/rules/Rules'
+  import Mouse from 'diagram-js/lib/features/mouse/Mouse'
+  export default class GlobalConnect {
+    constructor(
+      eventBus: EventBus,
+      dragging: Dragging,
+      connect: Connect,
+      canvas: Canvas,
+      toolManager: ToolManager,
+      rules: Rules,
+      mouse: Mouse
+    )
+  }
 }
 //
 declare module 'diagram-js/lib/features/grid-snapping/GridSnapping' {
