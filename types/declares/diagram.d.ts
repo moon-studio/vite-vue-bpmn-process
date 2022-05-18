@@ -1245,7 +1245,7 @@ declare module 'diagram-js/lib/features/bendpoints/BendpointsMovePreview' {
     constructor(bendpointMove: BendpointsMove, injector: Injector, eventBus: EventBus, canvas: Canvas)
   }
 }
-//
+// 注册拐点移动监听事件
 declare module 'diagram-js/lib/features/bendpoints/BendpointSnapping' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   export default class BendpointSnapping {
@@ -1713,13 +1713,71 @@ declare module 'diagram-js/lib/features/global-connect/GlobalConnect' {
     )
   }
 }
-//
+// 基本的格式调整事件监听注册，包括连接，创建，移动，调整形状，移动弯曲点和连接等
 declare module 'diagram-js/lib/features/grid-snapping/GridSnapping' {
-  export default class GridSnapping {}
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  /**
+   * 基本的格式调整事件监听注册，包括连接，创建，移动，调整形状，移动弯曲点和连接等
+   * 可以通过设置 config 参数 {gridSnapping: { active: false }} 来禁用格式调整
+   * 默认监听以下事件：
+   * 'create.move',
+   * 'create.end',
+   * 'bendpoint.move.move',
+   * 'bendpoint.move.end',
+   * 'connect.move',
+   * 'connect.end',
+   * 'connectionSegment.move.move',
+   * 'connectionSegment.move.end',
+   * 'resize.move',
+   * 'resize.end',
+   * 'shape.move.move',
+   * 'shape.move.end'
+   */
+  export default class GridSnapping {
+    constructor(elementRegistry: ElementRegistry, eventBus: EventBus, config: any)
+    /**
+     * 捕捉事件x或y。可选设置 最小值、最大值和偏移量
+     * @param {Object} event
+     * @param {string} axis
+     * @param options
+     * @param {number} [options.min]
+     * @param {number} [options.max]
+     * @param {number} [options.offset]
+     */
+    snapEvent(event: Object, axis: string, options?: { min?: number; max?: number; offset?: number }): void
+    /**
+     * 为第三方扩展模块 公开网格间距
+     * @return {number} spacing of grid dots
+     */
+    getGridSpacing(): number
+    /**
+     * 具有可选的最小值、最大值和偏移量的捕捉值
+     * @param {number} value
+     * @param {Object} options
+     * @param {number} [options.min]
+     * @param {number} [options.max]
+     * @param {number} [options.offset]
+     */
+    snapValue(value: number, options?: { min?: number; max?: number; offset?: number }): number
+    isActive(): boolean
+    setActive(active: boolean): void
+    toggleActive(): void
+  }
 }
-//
+// 背景网格生成器
 declare module 'diagram-js/lib/features/grid-snapping/visuals/Grid' {
-  export default class Grid {}
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  /**
+   * 背景网格工具
+   * 在 diagram 初始化时初始化一个背景网格（画布容器大小）
+   * 默认网格尺寸 100000 * 100000
+   *
+   */
+  export default class Grid {
+    constructor(canvas: Canvas, eventBus: EventBus)
+  }
 }
 //
 declare module 'diagram-js/lib/features/grid-snapping/behavior/ResizeBehavior' {
