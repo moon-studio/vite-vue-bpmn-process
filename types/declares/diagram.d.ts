@@ -95,7 +95,7 @@ declare module 'diagram-js/lib/core/Canvas' {
   export default class Canvas {
     constructor(config: any, eventBus: EventBus, graphicsFactory: GraphicsFactory, elementRegistry: ElementRegistry)
     // 内部属性，保存图层实例
-    protected _layers: { [name: string]: any }
+    protected _layers: Record<string, any>
     /**
      * ## 画布初始化方法，创建一个一直被 div#container 元素包裹的 svg 元素，可以通过访问外层 div 元素获取画布大小
      * <div class="djs-container" style="width: {desired-width}, height: {desired-height}">
@@ -429,7 +429,7 @@ declare module 'diagram-js/lib/core/ElementRegistry' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import { Base } from 'diagram-js/lib/model'
   export default class ElementRegistry {
-    private _elements: { [key: string]: Base }
+    private _elements: Record<string, Base>
     constructor(eventBus: EventBus)
     /**
      * 注册一对 元素实例 与 SVG 元素 的关联关系
@@ -526,9 +526,11 @@ declare module 'diagram-js/lib/core/EventBus' {
 
   export type EventCallback<T extends string, E extends Base> = (event: EventType<T, E>, data: any) => any
   export type EventType<T extends string, E extends Base> = EventMap<E> extends Record<T, infer P> ? P : InternalEvent
-  interface EventMap<E extends Base> {
-    [event: string]: SelectionEvent<E> | ElementEvent<E> | CanvasEvent<E>
-  }
+
+  type EventMap<E extends Base> = Record<string, SelectionEvent<E> | ElementEvent<E> | CanvasEvent<E>>
+  // interface EventMap<E extends Base> {
+  //   [event: string]: SelectionEvent<E> | ElementEvent<E> | CanvasEvent<E>
+  // }
 
   export interface SelectionEvent<E extends Base> extends InternalEvent {
     readonly type: string
@@ -546,7 +548,7 @@ declare module 'diagram-js/lib/core/EventBus' {
   }
 
   export default class EventBus {
-    private _listeners: { [key: string]: EventCallback<string, Base>[] }
+    private _listeners: Record<string, EventCallback<string, Base>[]>
 
     /**
      * 注册一个事件监听器
@@ -650,8 +652,8 @@ declare module 'diagram-js/lib/command/CommandStack' {
 
   export type CommandContext = {
     context: Base
-    oldValues: { [key: string]: any }
-    newValues: { [key: string]: any }
+    oldValues: Record<string, any>
+    newValues: Record<string, any>
   }
   export type Command = string
 
@@ -897,7 +899,7 @@ declare module 'diagram-js/lib/model' {
     deferUpdate?: boolean
     modules?: Module[]
     additionalModules?: any[]
-    moddleExtensions?: { [id: string]: any }
+    moddleExtensions?: Record<string, any>
     propertiesPanel?: {
       parent: string | E
     }
@@ -1421,9 +1423,9 @@ declare module 'diagram-js/lib/features/context-pad/ContextPad' {
     /**
      * 返回对应元素可用的上下文菜单项
      * @param {Base} element
-     * @return {Array<{ [name: string]: ContextPadEntry }>} list of entries
+     * @return {Array<Record<string, ContextPadEntry>> }>} list of entries
      */
-    getEntries(element: Base): { [name: string]: ContextPadEntry }
+    getEntries(element: Base): Record<string, ContextPadEntry>[]
     // 切换菜单显示状态
     trigger(action: string, event: Event, autoActivate?: boolean): void
     open(element: Base, force?: boolean): void
@@ -1647,7 +1649,7 @@ declare module 'diagram-js/lib/features/editor-actions/EditorActions' {
   export default class EditorActions {
     constructor(eventBus: EventBus, injector: Injector)
     // 初始化可用操作对象Map
-    protected _actions: { [actionName: string]: Function }
+    protected _actions: Record<string, Function>
 
     /**
      * 注册所有默认的操作事件
@@ -1678,10 +1680,10 @@ declare module 'diagram-js/lib/features/editor-actions/EditorActions' {
      * editorActions.isRegistered('spaceTool'); // true
      * ´´´
      *
-     * @param  {{ [action: string]: Function } | string} actions
+     * @param  { Record<string, Function> | string} actions
      * @param  {Function} [listener]
      */
-    register(actions: string | { [action: string]: Function }, listener?: Function): void
+    register(actions: string | Record<string, Function>, listener?: Function): void
     // 触发操作
     trigger(action: string, opts?: Object): unknown
     // 取消注册的某个操作事件
@@ -1765,7 +1767,7 @@ declare module 'diagram-js/lib/features/grid-snapping/GridSnapping' {
     toggleActive(): void
   }
 }
-// 背景网格生成器
+// 网格化生成器
 declare module 'diagram-js/lib/features/grid-snapping/visuals/Grid' {
   import Canvas from 'diagram-js/lib/core/Canvas'
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -1918,14 +1920,12 @@ declare module 'diagram-js/lib/features/palette/Palette' {
   export type PaletteProvider = {
     getPaletteEntries(element: Base): PaletteEntry[]
   }
-  export type PaletteEntryDescriptor = {
-    [key: string]: PaletteEntry
-  }
+  export type PaletteEntryDescriptor = Record<string, PaletteEntry>
 
   export default class Palette {
     constructor(eventBus: EventBus, canvas: Canvas)
     registerProvider(priority: number | PaletteProvider, provider?: PaletteProvider): void
-    getEntries(element: Base): { [name: string]: PaletteEntry }
+    getEntries(element: Base): PaletteEntryDescriptor
     trigger(action: string, event: Event, autoActivate?: boolean): void
     open(): void
     close(): void
