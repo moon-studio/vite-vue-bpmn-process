@@ -9,8 +9,6 @@ import { defaultSettings } from '@/config'
 import Logger from '@/utils/Logger'
 import { NConfigProvider, NMessageProvider } from 'naive-ui'
 
-const logger = new Logger()
-
 const App = defineComponent({
   setup() {
     const editorSettings = ref<EditorSettings>({ ...defaultSettings })
@@ -36,7 +34,7 @@ const App = defineComponent({
 
     /* 测试功能部分 */
     watchEffect(() => {
-      logger.printBack('success', '[Process Designer XML change]')
+      Logger.printBack('success', '[Process Designer XML change]')
     })
 
     /* 组件渲染 */

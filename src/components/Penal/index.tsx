@@ -4,8 +4,6 @@ import EventEmitter from '@/utils/EventEmitter'
 import { Base, Connection, Label, ModdleElement, Shape } from 'diagram-js/lib/model'
 import Logger from '@/utils/Logger'
 
-const logger = new Logger()
-
 const Penal = defineComponent({
   setup() {
     const penal = ref<HTMLDivElement | null>(null)
@@ -47,15 +45,15 @@ const Penal = defineComponent({
           window.bpmnInstances.elementRegistry.find((el) => el.type === 'bpmn:Process') ??
           window.bpmnInstances.elementRegistry.find((el) => el.type === 'bpmn:Collaboration')
         if (!activatedElement) {
-          return logger.prettyError('No Element found!')
+          return Logger.prettyError('No Element found!')
         }
       }
       window.bpmnInstances.currentElement = activatedElement
       currentElementId.value = activatedElement.id
       currentElementType.value = activatedElement.type
       currentElementBO.value = activatedElement.businessObject
-      logger.printBack('primary', `select element changed: id: ${activatedElement.id} , type: ${activatedElement.type}`)
-      logger.prettyInfo('businessObject', activatedElement.businessObject)
+      Logger.printBack('primary', `select element changed: id: ${activatedElement.id} , type: ${activatedElement.type}`)
+      Logger.prettyInfo('businessObject', activatedElement.businessObject)
     }
 
     return () => (

@@ -1,18 +1,14 @@
 declare module '@/utils/Logger' {
   export class Logger {
     constructor()
-    protected type: string[]
-    protected typeColor(type: string): string
-    isArray(obj: any): boolean
-    getInstance(): Logger
-    print(type: string, text: any, back?: boolean): void
-    printBack(type: string, text: any): void
-    pretty(type: any, title: string, ...text: any[]): void
-    prettyPrimary(title: string, ...text: any[]): void
-    prettySuccess(title: string, ...text: any[]): void
-    prettyWarn(title: string, ...text: any[]): void
-    prettyError(title: string, ...text: any[]): void
-    prettyInfo(title: string, ...text: any[]): void
+    static print(type: string, text: any, back?: boolean): void
+    static printBack(type: string, text: any): void
+    static pretty(type: any, title: string, ...text: any[]): void
+    static prettyPrimary(title: string, ...text: any[]): void
+    static prettySuccess(title: string, ...text: any[]): void
+    static prettyWarn(title: string, ...text: any[]): void
+    static prettyError(title: string, ...text: any[]): void
+    static prettyInfo(title: string, ...text: any[]): void
   }
   export default Logger
 }
