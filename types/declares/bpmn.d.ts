@@ -368,6 +368,10 @@ declare module 'bpmn-js/lib/features/copy-paste/BpmnCopyPaste' {
   export default class BpmnCopyPaste {}
 }
 //
+declare module 'bpmn-js/lib/features/copy-paste/ModdleCopy' {
+  export default class ModdleCopy {}
+}
+//
 declare module 'bpmn-js/lib/features/di-ordering/BpmnDiOrdering' {
   export default class BpmnDiOrdering {}
 }
