@@ -7,9 +7,9 @@ export default function (designer, modelerModules, settings, xml, emit) {
   ;(window.bpmnInstances?.modeler && window.bpmnInstances.modeler.destroy()) || (window.bpmnInstances = {})
 
   const options: ModelerOptions<Element> = {
-    container: designer.value as HTMLElement,
+    container: designer!.value,
     keyboard: {
-      bindTo: designer.value as HTMLElement
+      bindTo: designer!.value
     },
     additionalModules: modelerModules.value[0] || [],
     moddleExtensions: modelerModules.value[1] || {}
