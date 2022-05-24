@@ -10,6 +10,7 @@ import PopupMenu from 'diagram-js/lib/features/popup-menu/PopupMenu'
 import Canvas from 'diagram-js/lib/core/Canvas'
 import Rules from 'diagram-js/lib/features/rules/Rules'
 import { Translate } from 'diagram-js/lib/i18n/translate'
+import { Base } from 'diagram-js/lib/model'
 
 class RewriteContextPadProvider extends ContextPadProvider {
   constructor(
@@ -41,6 +42,36 @@ class RewriteContextPadProvider extends ContextPadProvider {
       translate,
       2000
     )
+  }
+
+  getContextPadEntries(element: Base) {
+    const actions: Record<string, any> = {}
+
+    // 添加一个与edit一组的按钮
+    actions['enhancement-op-1'] = {
+      group: 'edit',
+      className: 'enhancement-op',
+      title: '扩展操作1',
+      action: {
+        click: function (e: Event) {
+          alert('点击 扩展操作1')
+        }
+      }
+    }
+
+    // 添加一个新分组的自定义按钮
+    actions['enhancement-op'] = {
+      group: 'enhancement',
+      className: 'enhancement-op',
+      title: '扩展操作2',
+      action: {
+        click: function (e: Event) {
+          alert('点击 扩展操作2')
+        }
+      }
+    }
+
+    return actions
   }
 }
 

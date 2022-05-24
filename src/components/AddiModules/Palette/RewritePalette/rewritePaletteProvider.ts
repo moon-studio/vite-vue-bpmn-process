@@ -2,7 +2,7 @@ import PaletteProvider from 'bpmn-js/lib/features/palette/PaletteProvider'
 import ElementFactory from 'bpmn-js/lib/features/modeling/ElementFactory.js'
 import { assign } from 'min-dash'
 
-class RerenderPaletteProvider extends PaletteProvider {
+class RewritePaletteProvider extends PaletteProvider {
   private readonly _palette: PaletteProvider
   private readonly _create: any
   private readonly _elementFactory: ElementFactory
@@ -147,4 +147,4 @@ class RerenderPaletteProvider extends PaletteProvider {
   }
 }
 
-export default RerenderPaletteProvider
+export default RewritePaletteProvider

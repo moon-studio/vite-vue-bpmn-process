@@ -2,8 +2,8 @@ import { ModuleDeclaration } from 'didi'
 import enhancementPaletteProvider from './enhancementPaletteProvider'
 
 const EnhancementPalette: ModuleDeclaration = {
-  __init__: ['enhancementPalette'],
-  enhancementPalette: ['type', enhancementPaletteProvider]
+  __init__: ['enhancementPaletteProvider'],
+  enhancementPaletteProvider: ['type', enhancementPaletteProvider]
 }
 
 export default EnhancementPalette

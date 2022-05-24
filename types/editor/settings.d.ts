@@ -5,8 +5,8 @@ export interface EditorSettings {
   processName: string
   processId: string
   processEngine: 'flowable' | 'activiti' | 'camunda'
-  paletteMode: 'default' | 'custom' | 'rerender' | 'enhancement'
-  penalMode: 'default' | 'custom' | 'rerender'
+  paletteMode: 'default' | 'custom' | 'rewrite' | 'enhancement'
+  penalMode: 'default' | 'custom' | 'rewrite'
   bg: string
   toolbar: boolean
 }

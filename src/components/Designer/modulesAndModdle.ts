@@ -20,10 +20,11 @@ import camundaModdleDescriptors from '@/components/ModdleExtensions/camunda.json
 import flowableModdleDescriptors from '@/components/ModdleExtensions/flowable.json'
 
 // 自定义 modules 扩展模块
-import RerenderPalette from '@/components/AddiModules/Palette/RewritePalette'
+import RewritePalette from '@/components/AddiModules/Palette/RewritePalette'
 import translate from '@/components/AddiModules/Translate'
 import EnhancementPalette from '@/components/AddiModules/Palette/EnhancementPalette'
 import EnhancementContextPad from '@/components/AddiModules/ContextPad/EnhancementContextPad'
+import RewriteContextPad from '@/components/AddiModules/ContextPad/RewriteContextPad'
 
 export default function (settings) {
   return computed<[ModuleDeclaration[], { [key: string]: any }]>(() => {
@@ -37,7 +38,7 @@ export default function (settings) {
 
     // 配置 palette (可覆盖 paletteProvider 取消原生侧边栏)
     settings.value.paletteMode === 'enhancement' && modules.push(EnhancementPalette)
-    settings.value.paletteMode === 'rerender' && modules.push(RerenderPalette)
+    settings.value.paletteMode === 'rewrite' && modules.push(RewritePalette)
     settings.value.paletteMode === 'custom' && modules.push({ paletteProvider: ['type', function () {}] })
 
     // 配置 penal (基于 camunda)
@@ -55,7 +56,7 @@ export default function (settings) {
 
     // 配置 翻译 与 流程模拟
     modules.push(translate)
-    modules.push(EnhancementContextPad)
+    modules.push(RewriteContextPad)
     // modules.push(simulationModeler)
 
     return [modules, moddle]

@@ -77,14 +77,14 @@ const Setting = defineComponent({
               <NFormItem label="Penal模式">
                 <NRadioGroup v-model={[editorSettings.value.penalMode, 'value']}>
                   <NRadio value="default">默认</NRadio>
-                  <NRadio value="rerender">重写版</NRadio>
+                  <NRadio value="rewrite">重写版</NRadio>
                   <NRadio value="custom">自定义</NRadio>
                 </NRadioGroup>
               </NFormItem>
               <NFormItem label="Palette模式">
                 <NRadioGroup v-model={[editorSettings.value.paletteMode, 'value']}>
                   <NRadio value="default">默认</NRadio>
-                  <NRadio value="rerender">重写版</NRadio>
+                  <NRadio value="rewrite">重写版</NRadio>
                   <NRadio value="enhancement">扩展版</NRadio>
                   <NRadio value="custom">自定义</NRadio>
                 </NRadioGroup>
