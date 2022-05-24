@@ -14,7 +14,7 @@ export default function (designer, modelerModules, settings, xml, emit) {
     additionalModules: modelerModules.value[0] || [],
     moddleExtensions: modelerModules.value[1] || {}
   }
-  settings.value?.penalMode !== 'custom' && (options.propertiesPanel = { parent: '#camunda-penal' })
+  settings.value.penalMode !== 'custom' && (options.propertiesPanel = { parent: '#camunda-penal' })
 
   const modeler = (window.bpmnInstances.modeler = new Modeler(options))
 

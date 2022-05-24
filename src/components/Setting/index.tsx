@@ -89,6 +89,13 @@ const Setting = defineComponent({
                   <NRadio value="custom">自定义</NRadio>
                 </NRadioGroup>
               </NFormItem>
+              <NFormItem label="ContextPadMode模式">
+                <NRadioGroup v-model={[editorSettings.value.contextPadMode, 'value']}>
+                  <NRadio value="default">默认</NRadio>
+                  <NRadio value="rewrite">重写版</NRadio>
+                  <NRadio value="enhancement">扩展版</NRadio>
+                </NRadioGroup>
+              </NFormItem>
               <NFormItem label="流程引擎">
                 <NRadioGroup v-model={[editorSettings.value.processEngine, 'value']}>
                   <NRadio value="camunda">Camunda</NRadio>

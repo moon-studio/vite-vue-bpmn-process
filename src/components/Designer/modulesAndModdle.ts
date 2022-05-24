@@ -41,6 +41,10 @@ export default function (settings) {
     settings.value.paletteMode === 'rewrite' && modules.push(RewritePalette)
     settings.value.paletteMode === 'custom' && modules.push({ paletteProvider: ['type', function () {}] })
 
+    // 配置 contextPad (可覆盖 contextPadProvider 取消原生上下文菜单)
+    settings.value.contextPadMode === 'enhancement' && modules.push(EnhancementContextPad)
+    settings.value.contextPadMode === 'rewrite' && modules.push(RewriteContextPad)
+
     // 配置 penal (基于 camunda)
     settings.value.penalMode !== 'custom' &&
       modules.push(
@@ -56,7 +60,6 @@ export default function (settings) {
 
     // 配置 翻译 与 流程模拟
     modules.push(translate)
-    modules.push(RewriteContextPad)
     // modules.push(simulationModeler)
 
     return [modules, moddle]
