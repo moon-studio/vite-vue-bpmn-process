@@ -12,9 +12,3 @@ declare global {
 declare interface Window {
   bpmnInstances: any
 }
-
-// interface MyWindow extends Window {
-//   bpmnInstances: any;
-// }
-//
-// declare const window: MyWindow;
