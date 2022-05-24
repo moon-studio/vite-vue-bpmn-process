@@ -20,9 +20,10 @@ import camundaModdleDescriptors from '@/components/ModdleExtensions/camunda.json
 import flowableModdleDescriptors from '@/components/ModdleExtensions/flowable.json'
 
 // 自定义 modules 扩展模块
-import RerenderPalette from '@/components/AddiModules/RerenderPalette'
+import RerenderPalette from '@/components/AddiModules/Palette/RewritePalette'
 import translate from '@/components/AddiModules/Translate'
-import EnhancementPalette from '@/components/AddiModules/EnhancementPalette'
+import EnhancementPalette from '@/components/AddiModules/Palette/EnhancementPalette'
+import EnhancementContextPad from '@/components/AddiModules/ContextPad/EnhancementContextPad'
 
 export default function (settings) {
   return computed<[ModuleDeclaration[], { [key: string]: any }]>(() => {
@@ -54,6 +55,7 @@ export default function (settings) {
 
     // 配置 翻译 与 流程模拟
     modules.push(translate)
+    modules.push(EnhancementContextPad)
     // modules.push(simulationModeler)
 
     return [modules, moddle]

@@ -1415,7 +1415,7 @@ declare module 'diagram-js/lib/features/context-pad/ContextPad' {
     //注册与其他组件交互所需的事件, 包括 selection.changed, element.changed, element.delete
     protected _init(): void
     /**
-     * 注册一个上下文菜单提供者, 注册事件 contextPad.getProviders 的一个监听事件，在默认 providers 中添加一个新的 provider
+     * 注册一个上下文菜单提供者, 注册事件 ContextPad.getProviders 的一个监听事件，在默认 providers 中添加一个新的 provider
      * @param  {number | ContextPadProvider} [priority=1000]
      * @param  {ContextPadProvider} provider
      */

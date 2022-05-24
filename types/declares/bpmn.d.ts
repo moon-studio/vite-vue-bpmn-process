@@ -361,7 +361,35 @@ declare module 'bpmn-js/lib/features/auto-resize/BpmnAutoResizeProvider' {
 }
 //
 declare module 'bpmn-js/lib/features/context-pad/ContextPadProvider' {
-  export default class ContextPadProvider {}
+  import { Injector } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import ContextPad from 'diagram-js/lib/features/context-pad/ContextPad'
+  import Modeling from 'bpmn-js/lib/features/modeling/Modeling.js'
+  import ElementFactory from 'bpmn-js/lib/features/modeling/ElementFactory'
+  import Connect from 'diagram-js/lib/features/connect/Connect'
+  import Create from 'diagram-js/lib/features/create/Create'
+  import PopupMenu from 'diagram-js/lib/features/popup-menu/PopupMenu'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import Rules from 'diagram-js/lib/features/rules/Rules'
+  import { Translate } from 'diagram-js/lib/i18n/translate'
+
+  export default class ContextPadProvider {
+    constructor(
+      config: any,
+      injector: Injector,
+      eventBus: EventBus,
+      contextPad: ContextPad,
+      modeling: Modeling,
+      elementFactory: ElementFactory,
+      connect: Connect,
+      create: Create,
+      popupMenu: PopupMenu,
+      canvas: Canvas,
+      rules: Rules,
+      translate?: Translate,
+      priority?: number
+    )
+  }
 }
 //
 declare module 'bpmn-js/lib/features/copy-paste/BpmnCopyPaste' {
