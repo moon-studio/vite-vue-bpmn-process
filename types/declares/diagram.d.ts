@@ -1067,7 +1067,7 @@ declare module 'diagram-js/lib/features/auto-place/AutoPlace' {
      * @param {Hints} hints
      * @return {Shape} appended shape
      */
-    private append(source: Shape, shape: Shape, hints?: Hints): Shape
+    append(source: Shape, shape: Shape, hints?: Hints): Shape
   }
 }
 // 添加 autoPlace.end 事件监听，触发时默认选择元素

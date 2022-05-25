@@ -372,6 +372,7 @@ declare module 'bpmn-js/lib/features/context-pad/ContextPadProvider' {
   import Canvas from 'diagram-js/lib/core/Canvas'
   import Rules from 'diagram-js/lib/features/rules/Rules'
   import { Translate } from 'diagram-js/lib/i18n/translate'
+  import AutoPlace from 'diagram-js/lib/features/auto-place/AutoPlace'
 
   export default class ContextPadProvider {
     constructor(
@@ -389,6 +390,17 @@ declare module 'bpmn-js/lib/features/context-pad/ContextPadProvider' {
       translate?: Translate,
       priority?: number
     )
+
+    _contextPad: ContextPad
+    _modeling: Modeling
+    _elementFactory: ElementFactory
+    _connect: Connect
+    _create: Create
+    _popupMenu: PopupMenu
+    _canvas: Canvas
+    _rules: Rules
+    _translate: Translate
+    _autoPlace: AutoPlace
   }
 }
 //

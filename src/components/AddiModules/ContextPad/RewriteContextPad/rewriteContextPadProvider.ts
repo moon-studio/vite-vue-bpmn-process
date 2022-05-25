@@ -42,6 +42,18 @@ class RewriteContextPadProvider extends ContextPadProvider {
       translate,
       2000
     )
+
+    this._contextPad = contextPad
+    this._modeling = modeling
+    this._elementFactory = elementFactory
+    this._connect = connect
+    this._create = create
+    this._popupMenu = popupMenu
+    this._canvas = canvas
+    this._rules = rules
+    this._translate = translate
+
+    this._autoPlace = injector.get('autoPlace', false)
   }
 
   getContextPadEntries(element: Base) {

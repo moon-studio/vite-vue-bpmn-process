@@ -105,7 +105,9 @@ const Setting = defineComponent({
               </NFormItem>
             </NForm>
             <div class="tips-message">
-              <p>注：仅自定义模式可使用 activiti 或者 flowable 引擎</p>
+              <p>注：</p>
+              <p>1. 仅自定义模式可使用 activiti 或者 flowable 引擎</p>
+              <p>2. 扩展模式下只能扩展工具按钮，不能删除原有工具</p>
               <p style="font-weight: bold">友情赞助</p>
               <div class="sponsorship-image wechat"></div>
               <div class="sponsorship-image alipay"></div>
