@@ -20,11 +20,12 @@ import camundaModdleDescriptors from '@/components/ModdleExtensions/camunda.json
 import flowableModdleDescriptors from '@/components/ModdleExtensions/flowable.json'
 
 // 自定义 modules 扩展模块
-import RewritePalette from '@/components/AddiModules/Palette/RewritePalette'
 import translate from '@/components/AddiModules/Translate'
 import EnhancementPalette from '@/components/AddiModules/Palette/EnhancementPalette'
+import RewritePalette from '@/components/AddiModules/Palette/RewritePalette'
 import EnhancementContextPad from '@/components/AddiModules/ContextPad/EnhancementContextPad'
 import RewriteContextPad from '@/components/AddiModules/ContextPad/RewriteContextPad'
+import renderer from '@/components/AddiModules/Renderer'
 
 export default function (settings) {
   return computed<[ModuleDeclaration[], { [key: string]: any }]>(() => {
@@ -60,6 +61,9 @@ export default function (settings) {
 
     // 配置 翻译 与 流程模拟
     modules.push(translate)
+
+    modules.push(renderer)
+
     // modules.push(simulationModeler)
 
     return [modules, moddle]

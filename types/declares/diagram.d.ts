@@ -798,16 +798,13 @@ declare module 'diagram-js/lib/draw/DefaultRenderer' {
 // 默认渲染样式
 declare module 'diagram-js/lib/draw/Styles' {
   export type Traits = {
-    'no-fill': Traits
-    'no-border': Traits
-    'no-events': Traits
     [styleName: string]: string | number | Traits
   }
   export default class Styles {
-    constructor()
+    constructor(priority?: number)
     cls(className: string, traits?: string[], additionalAttrs?: Object): Traits & { class: string }
     style(traits?: string[], additionalAttrs?: Object): Traits
-    computeStyle(custom?: Object | null, traits?: string[], defaultStyles?: Object): Traits
+    computeStyle(custom?: Object | null, traits?: string[] | Traits, defaultStyles?: Object): Traits
   }
 }
 /************************************** Diagram Model 元素 声明 *****************************************/
