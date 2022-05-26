@@ -78,7 +78,7 @@ declare module 'bpmn-js/lib/Modeler' {
 //
 declare module 'bpmn-js/lib/core' {}
 /************************************* draw 图形元素绘制模块 *************************************/
-//
+// bpmn 元素核心绘制模块
 declare module 'bpmn-js/lib/draw/BpmnRenderer' {
   import Canvas, { Position } from 'diagram-js/lib/core/Canvas'
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -175,7 +175,7 @@ declare module 'bpmn-js/lib/draw/BpmnRenderer' {
     getShapePath<E extends Base>(element: E): string
   }
 }
-//
+// bpmn 元素图形路径字典
 declare module 'bpmn-js/lib/draw/PathMap' {
   export type Path = {
     d: string
@@ -230,7 +230,7 @@ declare module 'bpmn-js/lib/draw/PathMap' {
     private getScaledPath(pathId: string, param: Object): Object
   }
 }
-//
+// bpmn 文本渲染
 declare module 'bpmn-js/lib/draw/TextRenderer' {
   import { Bounds } from 'diagram-js/lib/core/Canvas'
 
@@ -251,7 +251,7 @@ declare module 'bpmn-js/lib/draw/TextRenderer' {
   }
 }
 /************************************* import 文件导入 *************************************/
-//
+// 导入
 declare module 'bpmn-js/lib/import/Importer' {
   import Diagram from 'diagram-js'
   import { ModdleElement } from 'diagram-js/lib/model'
@@ -285,7 +285,7 @@ declare module 'bpmn-js/lib/import/BpmnImporter' {
     add<E extends Base>(semantic: any, di: any, parentElement?: E): E
   }
 }
-//
+// xml 树形结构遍历
 declare module 'bpmn-js/lib/import/BpmnTreeWalker' {
   import { Translate } from 'diagram-js/lib/i18n/translate'
 
@@ -293,7 +293,7 @@ declare module 'bpmn-js/lib/import/BpmnTreeWalker' {
     constructor(handler, translate: Translate)
   }
 }
-/************************************* feature 扩展功能 *************************************/
+/************************************* feature modeling 核心扩展功能 *************************************/
 declare module 'bpmn-js/lib/features/modeling/Modeling.js' {
   import BaseModeling from 'diagram-js/lib/features/modeling/Modeling'
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -308,7 +308,7 @@ declare module 'bpmn-js/lib/features/modeling/Modeling.js' {
     connect(source: Shape, target: Shape, attrs?: Object, hints?: Hints): Connection
   }
 }
-//
+// bpmn DI 元素工厂
 declare module 'bpmn-js/lib/features/modeling/BpmnFactory' {
   import { Moddle } from 'moddle'
   import { Base } from 'diagram-js/lib/model'
@@ -316,8 +316,8 @@ declare module 'bpmn-js/lib/features/modeling/BpmnFactory' {
 
   export default class BpmnFactory {
     constructor(moddle: Moddle)
-    private _needsId<E extends Base>(element: E): boolean
-    private _ensureId<E extends Base>(element: E): void
+    protected _needsId<E extends Base>(element: E): boolean
+    protected _ensureId<E extends Base>(element: E): void
     create<E extends Base>(type: string, attrs?: Object): E & ModdleElement
     createDiLabel<E extends Base>(): E
     createDiShape<E extends Base>(): E
@@ -328,7 +328,7 @@ declare module 'bpmn-js/lib/features/modeling/BpmnFactory' {
     createDiPlane<E extends Base>(): E
   }
 }
-//
+// bpmn 元素实例工厂
 declare module 'bpmn-js/lib/features/modeling/ElementFactory' {
   import DiagramElementFactory from 'diagram-js/lib/core/ElementFactory'
   import { Moddle } from 'moddle'
@@ -339,6 +339,10 @@ declare module 'bpmn-js/lib/features/modeling/ElementFactory' {
 
   export default class ElementFactory extends DiagramElementFactory {
     constructor(bpmnFactory: BpmnFactory, moddle: Moddle, translate: Translate)
+    _bpmnFactory: BpmnFactory
+    _moddle: Moddle
+    _translate: Translate
+
     baseCreate(type: string, attrs: any): Root | Shape | Connection | Label
     create<E extends Base>(elementType: string, attrs?: Object): E & ModdleElement
     createBpmnElement<E extends Base>(elementType: string, attrs?: Object): E & ModdleElement
@@ -346,20 +350,55 @@ declare module 'bpmn-js/lib/features/modeling/ElementFactory' {
     createParticipantShape(attrs?: Object): Shape & ModdleElement
   }
 }
-
-//
+/************************************* feature modules 扩展功能 *************************************/
+// 定位
 declare module 'bpmn-js/lib/features/auto-place/BpmnAutoPlace' {
-  export default class BpmnAutoPlace {}
+  import EventBus from 'diagram-js/lib/core/EventBus'
+
+  // 在实例化时注册一个 autoPlace 事件监听，触发时返回 要连接到源的目标元素的新位置。
+  export default class BpmnAutoPlace {
+    constructor(eventBus: EventBus)
+  }
 }
-//
+// 实现BPMN特定调整大小功能的AutoResize模块的子类。
 declare module 'bpmn-js/lib/features/auto-resize/BpmnAutoResize' {
-  export default class BpmnAutoResize {}
+  import { Injector } from 'didi'
+  import AutoResize from 'diagram-js/lib/features/auto-resize/AutoResize'
+  import { Hints, Shape } from 'diagram-js/lib/model'
+  import { Bounds } from 'diagram-js/lib/core/Canvas'
+
+  export default class BpmnAutoResize extends AutoResize {
+    constructor(injector: Injector)
+    /**
+     * 调整形状和泳道的大小
+     * 根据 target 是否是 Participant 元素
+     * 来确定调用 modeling.resizeLane(target, newBounds, null, hints)
+     * 或者 modeling.resizeShape(target, newBounds, null, hints)
+     * @param {Shape} target
+     * @param {Bounds} newBounds
+     * @param {Object} hints
+     */
+    resize(target: Shape, newBounds: Bounds, hints?: Hints): void
+  }
 }
-//
+// 模块是自动调整父BPMN元素大小的具体实现类
 declare module 'bpmn-js/lib/features/auto-resize/BpmnAutoResizeProvider' {
-  export default class BpmnAutoResizeProvider {}
+  import AutoResizeProvider from 'diagram-js/lib/features/auto-resize/AutoResizeProvider'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Modeling from 'bpmn-js/lib/features/modeling/Modeling.js'
+  import { Base, Shape } from 'diagram-js/lib/model'
+  export default class BpmnAutoResizeProvider extends AutoResizeProvider {
+    constructor(eventBus: EventBus, modeling: Modeling)
+    /**
+     * 检查给定的目标是否可以扩展, elements 中任意一个不能扩展则返回 false
+     * @param  {Shape[]} elements
+     * @param  {Shape} target
+     * @return {boolean}
+     */
+    canResize(elements: Base[], target: Shape): boolean
+  }
 }
-//
+// 元素上下文菜单
 declare module 'bpmn-js/lib/features/context-pad/ContextPadProvider' {
   import { Injector } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -373,7 +412,20 @@ declare module 'bpmn-js/lib/features/context-pad/ContextPadProvider' {
   import Rules from 'diagram-js/lib/features/rules/Rules'
   import { Translate } from 'diagram-js/lib/i18n/translate'
   import AutoPlace from 'diagram-js/lib/features/auto-place/AutoPlace'
+  import { Base } from 'diagram-js/lib/model'
 
+  type ContextPadAction = {
+    group: string
+    className: string
+    title: string
+    action: Record<string, (event: Event, element: Base) => unknown>
+  }
+
+  /**
+   * 元素对应的上下文菜单
+   * 实例化时添加对 autoPlace 实例的依赖
+   * 注册 create.end 事件监听函数，手动触发 replace 下面的点击事件
+   */
   export default class ContextPadProvider {
     constructor(
       config: any,
@@ -401,27 +453,119 @@ declare module 'bpmn-js/lib/features/context-pad/ContextPadProvider' {
     _rules: Rules
     _translate: Translate
     _autoPlace: AutoPlace
+
+    /**
+     * 根据当前节点提供可见上下文菜单入口
+     * 可以通过继承或者重写来增加上下文菜单可用功能
+     * @param element { Base }
+     * @returns {Record<string, ContextPadAction>} entries
+     */
+    getContextPadEntries(element: Base): Record<string, ContextPadAction>
+  }
+}
+// bpmn 元素实例的复制粘贴
+declare module 'bpmn-js/lib/features/copy-paste/BpmnCopyPaste' {
+  import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import ModdleCopy from 'bpmn-js/lib/features/copy-paste/ModdleCopy'
+
+  /**
+   * bpmn 元素实例的复制粘贴, 优先级指数 750
+   * 初始化时注册 copyPaste.copyElement, moddleCopy.canCopyProperty,
+   * copyPaste.pasteElements, copyPaste.pasteElement 事件的监听函数
+   *
+   */
+  export default class BpmnCopyPaste {
+    constructor(bpmnFactory: BpmnFactory, eventBus: EventBus, moddleCopy: ModdleCopy)
   }
 }
 //
-declare module 'bpmn-js/lib/features/copy-paste/BpmnCopyPaste' {
-  export default class BpmnCopyPaste {}
-}
-//
 declare module 'bpmn-js/lib/features/copy-paste/ModdleCopy' {
-  export default class ModdleCopy {}
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
+  import { Moddle } from 'moddle'
+  import { Base, ModdleElement } from 'diagram-js/lib/model'
+
+  /**
+   * 用于将模型属性从源元素复制到目标元素。
+   * 初始化时注册 moddleCopy.canCopyProperties, moddleCopy.canCopyProperty,
+   * moddleCopy.canSetCopiedProperty 事件的监听函数， 对元素实例与元素属性的可复制性进行校验
+   */
+  export default class ModdleCopy {
+    constructor(eventBus: EventBus, bpmnFactory: BpmnFactory, moddle: Moddle)
+    protected _bpmnFactory: BpmnFactory
+    protected _eventBus: EventBus
+    protected _moddle: Moddle
+
+    /**
+     * 将源元素的模型属性复制到目标元素。
+     * @param {ModdleElement} sourceElement
+     * @param {ModdleElement} targetElement
+     * @param {Array<string>} [propertyNames]
+     * @returns {ModdleElement}
+     */
+    copyElement<T extends ModdleElement>(sourceElement: T, targetElement: T, propertyNames?: string[]): T
+
+    /**
+     * Copy model property.
+     *
+     * @param {*} property
+     * @param {ModdleElement} parent
+     * @param {string} propertyName
+     *
+     * @returns {*}
+     */
+    copyProperty<T extends ModdleElement, U>(property: U, parent: T, propertyName: string): U
+
+    // 返回copy元素对应的新id，不需要id的返回undefined
+    _copyId(id: string, element: Base): string | undefined
+  }
 }
 //
 declare module 'bpmn-js/lib/features/di-ordering/BpmnDiOrdering' {
   export default class BpmnDiOrdering {}
 }
-//
+// 排除bpmn定义的不可均分元素
 declare module 'bpmn-js/lib/features/distribute-elements/BpmnDistributeElements' {
-  export default class BpmnDistributeElements {}
+  import DistributeElements from 'diagram-js/lib/features/distribute-elements/DistributeElements'
+  /**
+   * 初始化时注册一个过滤器，默认排除以下元素：
+   * 'bpmn:Association',
+   * 'bpmn:BoundaryEvent',
+   * 'bpmn:DataInputAssociation',
+   * 'bpmn:DataOutputAssociation',
+   * 'bpmn:Lane',
+   * 'bpmn:MessageFlow',
+   * 'bpmn:Participant',
+   * 'bpmn:SequenceFlow',
+   * 'bpmn:TextAnnotation'
+   */
+  export default class BpmnDistributeElements {
+    constructor(distributeElements: DistributeElements)
+  }
 }
-//
+// 添加允许在折叠的子进程上切换平面的叠加层。
 declare module 'bpmn-js/lib/features/drilldown/DrilldownBreadcrumbs' {
-  export default class DrilldownBreadcrumbs {}
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+  import Overlays from 'diagram-js/lib/features/overlays/Overlays'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import { Base } from 'diagram-js/lib/model'
+  /**
+   * 添加允许在折叠的子进程上切换平面的叠加层。
+   * 初始化时会在画布中添加一个 `<ul class="bjs-breadcrumbs"></ul>` 标签
+   * 在 element.changed, root.set 事件触发时会更新 Breadcrumbs
+   */
+  export default class DrilldownBreadcrumbs {
+    constructor(eventBus: EventBus, elementRegistry: ElementRegistry, overlays: Overlays, canvas: Canvas)
+
+    /**
+     * 更新显示的面包屑。如果未提供元素，则仅更新标签
+     * @param element
+     * @private
+     */
+    private updateBreadcrumbs(element: Base): void
+  }
 }
 //
 declare module 'bpmn-js/lib/features/drilldown/DrilldownCentering' {
