@@ -59,10 +59,16 @@ const Setting = defineComponent({
           <div class="setting-content">
             <NForm labelWidth={120} labelAlign="left">
               <NFormItem label="流程名称">
-                <NInput v-model={[editorSettings.value.processName, 'value']} clearable={true}></NInput>
+                <NInput
+                  v-model={[editorSettings.value.processName, 'value']}
+                  clearable={true}
+                ></NInput>
               </NFormItem>
               <NFormItem label="流程ID">
-                <NInput v-model={[editorSettings.value.processId, 'value']} clearable={true}></NInput>
+                <NInput
+                  v-model={[editorSettings.value.processId, 'value']}
+                  clearable={true}
+                ></NInput>
               </NFormItem>
               <NFormItem label="Toolbar">
                 <NSwitch v-model={[editorSettings.value.toolbar, 'value']}></NSwitch>

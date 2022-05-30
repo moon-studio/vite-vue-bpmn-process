@@ -7,10 +7,10 @@
   transition: all cubic-bezier(0.8, 0.4, 0.8, 0.4) 0.24s;
   transform: translateX(100%);
   z-index: 101;
-  box-shadow:  0 0 0 0 rgba(0,0,0,0.2);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
   &.setting_open {
     transform: translateX(0);
-    box-shadow:  0 0 10px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.2);
     .toggle-button {
       transform: translateX(0);
       z-index: -1;
@@ -67,11 +67,11 @@
     background-size: cover;
     display: inline-block;
     &.wechat {
-      background-image: url("/wechat.jpg");
+      background-image: url('/wechat.jpg');
     }
     &.alipay {
       margin-left: 8px;
-      background-image: url("/alipay.png");
+      background-image: url('/alipay.png');
     }
   }
 }

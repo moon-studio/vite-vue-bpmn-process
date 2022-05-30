@@ -39,7 +39,10 @@ Logger.print = function (type = 'default', text: any, back = false) {
   }
   if (back) {
     // 如果是打印帶背景圖的
-    console.log(`%c ${text} `, `background:${Logger.typeColor(type)}; padding: 2px; border-radius: 4px; color: #fff;`)
+    console.log(
+      `%c ${text} `,
+      `background:${Logger.typeColor(type)}; padding: 2px; border-radius: 4px; color: #fff;`
+    )
   } else {
     console.log(
       `%c ${text} `,

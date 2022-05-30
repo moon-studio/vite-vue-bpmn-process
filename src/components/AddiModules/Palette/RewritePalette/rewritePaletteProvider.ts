@@ -31,7 +31,13 @@ class RewritePaletteProvider extends PaletteProvider {
       globalConnect = this._globalConnect,
       translate = this._translate
 
-    function createAction(type: string, group: string, className: string, title: string, options?: Object) {
+    function createAction(
+      type: string,
+      group: string,
+      className: string,
+      title: string,
+      options?: Object
+    ) {
       function createListener(event) {
         const shape = elementFactory.createShape(assign({ type: type }, options))
 
@@ -112,7 +118,12 @@ class RewritePaletteProvider extends PaletteProvider {
         group: 'tools',
         separator: true
       },
-      'create.exclusive-gateway': createAction('bpmn:ExclusiveGateway', 'gateway', 'bpmn-icon-gateway-none', '网关'),
+      'create.exclusive-gateway': createAction(
+        'bpmn:ExclusiveGateway',
+        'gateway',
+        'bpmn-icon-gateway-none',
+        '网关'
+      ),
       'create.parallel-gateway': createAction(
         'bpmn:ParallelGateway',
         'gateway',
@@ -129,9 +140,24 @@ class RewritePaletteProvider extends PaletteProvider {
         group: 'gateway',
         separator: true
       },
-      'create.user-task': createAction('bpmn:UserTask', 'activity', 'bpmn-icon-user-task', '用户任务'),
-      'create.script-task': createAction('bpmn:ScriptTask', 'activity', 'bpmn-icon-script-task', '脚本任务'),
-      'create.service-task': createAction('bpmn:ServiceTask', 'activity', 'bpmn-icon-service-task', '服务任务'),
+      'create.user-task': createAction(
+        'bpmn:UserTask',
+        'activity',
+        'bpmn-icon-user-task',
+        '用户任务'
+      ),
+      'create.script-task': createAction(
+        'bpmn:ScriptTask',
+        'activity',
+        'bpmn-icon-script-task',
+        '脚本任务'
+      ),
+      'create.service-task': createAction(
+        'bpmn:ServiceTask',
+        'activity',
+        'bpmn-icon-service-task',
+        '服务任务'
+      ),
       'create.subprocess-expanded': {
         group: 'activity',
         className: 'bpmn-icon-subprocess-expanded',

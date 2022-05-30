@@ -40,7 +40,8 @@ export default function (settings) {
     // 配置 palette (可覆盖 paletteProvider 取消原生侧边栏)
     settings.value.paletteMode === 'enhancement' && modules.push(EnhancementPalette)
     settings.value.paletteMode === 'rewrite' && modules.push(RewritePalette)
-    settings.value.paletteMode === 'custom' && modules.push({ paletteProvider: ['type', function () {}] })
+    settings.value.paletteMode === 'custom' &&
+      modules.push({ paletteProvider: ['type', function () {}] })
 
     // 配置 contextPad (可覆盖 contextPadProvider 取消原生上下文菜单)
     settings.value.contextPadMode === 'enhancement' && modules.push(EnhancementContextPad)

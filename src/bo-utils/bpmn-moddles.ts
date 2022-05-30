@@ -7,5 +7,9 @@ import { FormalExpression } from 'bpmn-moddle'
  */
 export function createFormalExpression(options: FormalExpression) {
   const { resource, language, evaluatesToTypeRef } = options || {}
-  return window.bpmnInstances.moddle.create('bpmn:FormalExpression', { resource, language, evaluatesToTypeRef })
+  return window.bpmnInstances.moddle.create('bpmn:FormalExpression', {
+    resource,
+    language,
+    evaluatesToTypeRef
+  })
 }

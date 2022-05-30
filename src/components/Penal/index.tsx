@@ -52,7 +52,10 @@ const Penal = defineComponent({
       currentElementId.value = activatedElement.id
       currentElementType.value = activatedElement.type
       currentElementBO.value = activatedElement.businessObject
-      Logger.printBack('primary', `select element changed: id: ${activatedElement.id} , type: ${activatedElement.type}`)
+      Logger.printBack(
+        'primary',
+        `select element changed: id: ${activatedElement.id} , type: ${activatedElement.type}`
+      )
       Logger.prettyInfo('businessObject', activatedElement.businessObject)
     }
 

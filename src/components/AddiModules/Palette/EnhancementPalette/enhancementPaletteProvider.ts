@@ -17,8 +17,27 @@ class EnhancementPaletteProvider extends PaletteProvider {
   private readonly _handTool: HandTool
   private readonly _globalConnect: GlobalConnect
   private readonly _translate: any
-  constructor(palette, create, elementFactory, spaceTool, lassoTool, handTool, globalConnect, translate) {
-    super(palette, create, elementFactory, spaceTool, lassoTool, handTool, globalConnect, translate, 2000)
+  constructor(
+    palette,
+    create,
+    elementFactory,
+    spaceTool,
+    lassoTool,
+    handTool,
+    globalConnect,
+    translate
+  ) {
+    super(
+      palette,
+      create,
+      elementFactory,
+      spaceTool,
+      lassoTool,
+      handTool,
+      globalConnect,
+      translate,
+      2000
+    )
     this._palette = palette
     this._create = create
     this._elementFactory = elementFactory
@@ -34,7 +53,13 @@ class EnhancementPaletteProvider extends PaletteProvider {
       elementFactory = this._elementFactory,
       translate = this._translate
 
-    function createAction(type: string, group: string, className: string, title: string, options?: Object) {
+    function createAction(
+      type: string,
+      group: string,
+      className: string,
+      title: string,
+      options?: Object
+    ) {
       function createListener(event) {
         const shape = elementFactory.createShape(assign({ type: type }, options))
 
@@ -60,7 +85,12 @@ class EnhancementPaletteProvider extends PaletteProvider {
     }
 
     assign(actions, {
-      'create.exclusive-gateway': createAction('bpmn:ExclusiveGateway', 'gateway', 'bpmn-icon-gateway-none', '网关'),
+      'create.exclusive-gateway': createAction(
+        'bpmn:ExclusiveGateway',
+        'gateway',
+        'bpmn-icon-gateway-none',
+        '网关'
+      ),
       'create.parallel-gateway': createAction(
         'bpmn:ParallelGateway',
         'gateway',

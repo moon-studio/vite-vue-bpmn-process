@@ -25,7 +25,8 @@ const Designer = defineComponent({
     const { settings, xml } = toRefs(props)
     const designer = ref<HTMLDivElement | null>(null)
 
-    const modelerModules: ComputedRef<[ModuleDeclaration[], { [key: string]: any }]> = modulesAndModdle(settings)
+    const modelerModules: ComputedRef<[ModuleDeclaration[], { [key: string]: any }]> =
+      modulesAndModdle(settings)
 
     watch(
       () => modelerModules.value,

@@ -4,7 +4,8 @@ import EventEmitter from '@/utils/EventEmitter'
 import { createNewDiagram } from '@/utils'
 
 export default function (designer, modelerModules, settings, xml, emit) {
-  ;(window.bpmnInstances?.modeler && window.bpmnInstances.modeler.destroy()) || (window.bpmnInstances = {})
+  ;(window.bpmnInstances?.modeler && window.bpmnInstances.modeler.destroy()) ||
+    (window.bpmnInstances = {})
 
   const options: ModelerOptions<Element> = {
     container: designer!.value,

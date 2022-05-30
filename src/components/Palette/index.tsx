@@ -5,7 +5,8 @@ import { assign } from 'min-dash'
 const Palette = defineComponent({
   setup() {
     const createElement = (ev: Event, type: string, options?: any) => {
-      const ElementFactory = window.bpmnInstances?.elementFactory || window.bpmnInstances.modeler.get('elementFactory')
+      const ElementFactory =
+        window.bpmnInstances?.elementFactory || window.bpmnInstances.modeler.get('elementFactory')
       const create = window.bpmnInstances.modeler.get('create')
       const shape = ElementFactory.createShape(assign({ type: `bpmn:${type}` }, options))
       if (options) {
@@ -22,7 +23,10 @@ const Palette = defineComponent({
           </NCollapseItem>
           <NCollapseItem title="事件" name="events">
             <div class="palette-el-list">
-              <div class="palette-el-item start-event" onClick={(e) => createElement(e, 'StartEvent')}>
+              <div
+                class="palette-el-item start-event"
+                onClick={(e) => createElement(e, 'StartEvent')}
+              >
                 <i class="bpmn-icon-start-event-none"></i>
                 <span>开始</span>
               </div>

@@ -5,7 +5,12 @@ import PathMap from 'bpmn-js/lib/draw/PathMap'
 import Canvas from 'diagram-js/lib/core/Canvas'
 import TextRenderer from 'bpmn-js/lib/draw/TextRenderer'
 import { isObject } from 'min-dash'
-import { append as svgAppend, attr as svgAttr, create as svgCreate, classes as svgClasses } from 'tiny-svg'
+import {
+  append as svgAppend,
+  attr as svgAttr,
+  create as svgCreate,
+  classes as svgClasses
+} from 'tiny-svg'
 
 export default class CustomRendererProvider extends BpmnRenderer {
   _styles: Styles

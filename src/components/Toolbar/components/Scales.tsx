@@ -51,7 +51,9 @@ const Scales = defineComponent({
             default: () => '重置缩放',
             trigger: () => (
               <NButton onClick={() => zoomReset('fit-viewport')}>
-                <span style="text-align: center; display: inline-block; width: 40px">{currentScale.value}</span>
+                <span style="text-align: center; display: inline-block; width: 40px">
+                  {currentScale.value}
+                </span>
               </NButton>
             )
           }}

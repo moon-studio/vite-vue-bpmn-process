@@ -567,21 +567,100 @@ declare module 'bpmn-js/lib/features/drilldown/DrilldownBreadcrumbs' {
     private updateBreadcrumbs(element: Base): void
   }
 }
-//
+// 向下钻取时，将折叠的子流程移动到视图中。
 declare module 'bpmn-js/lib/features/drilldown/DrilldownCentering' {
-  export default class DrilldownCentering {}
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  // 向下钻取时，将折叠的子流程移动到视图中。
+  // 缩放和滚动保存在会话中。
+  export default class DrilldownCentering {
+    constructor(eventBus: EventBus, canvas: Canvas)
+  }
 }
 //
 declare module 'bpmn-js/lib/features/drilldown/DrilldownOverlayBehavior' {
-  export default class DrilldownOverlayBehavior {}
+  import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+  import Overlays from 'diagram-js/lib/features/overlays/Overlays'
+  import { Base } from 'diagram-js/lib/model'
+
+  export default class DrilldownOverlayBehavior extends CommandInterceptor {
+    constructor(canvas: Canvas, eventBus: EventBus, elementRegistry: ElementRegistry, overlays: Overlays)
+
+    canDrillDown(element: Base): boolean
+
+    /**
+     * 更新向下钻入覆盖的可见性。如果平面没有元素，则仅在选择元素时才显示向下钻取。
+     * @param element { Base }
+     */
+    updateOverlayVisibility(element: Base): void
+
+    /**
+     * 将一个向下钻入按钮附加到给定的元素上。我们假设平面与元素具有相同的id。
+     * @param element { Base }
+     */
+    addOverlay(element: Base): void
+
+    /**
+     * 移除元素对应的 overlays 覆盖物, 调用 overlays.remove
+     * @param element { Base }
+     */
+    removeOverlay(element: Base): void
+  }
 }
-//
+// 在生命周期钩子 `import.render.start` 触发时为具有折叠的子进程和所有dis在同一平面上的图创建新平面
 declare module 'bpmn-js/lib/features/drilldown/SubprocessCompatibility' {
-  export default class SubprocessCompatibility {}
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import { Moddle } from 'moddle'
+  import { Definitions } from 'bpmn-moddle'
+
+  export default class SubprocessCompatibility {
+    constructor(eventBus: EventBus, moddle: Moddle)
+
+    protected _definitions: Definitions | undefined
+    protected _processToDiagramMap: Record<string, any> | undefined
+
+    handleImport(definitions: Definitions): void
+
+    /**
+     * 将所有DI元素从折叠的子进程移动到新平面.
+     * @param {Object} plane
+     * @return {Array} new diagrams created for the collapsed subprocesses
+     */
+    createNewDiagrams(plane: Object): any[]
+
+    // 移动后重新定位
+    movePlaneElementsToOrigin(plane: Object): void
+
+    moveToDiPlane(diElement: Object, newPlane: Object): void
+
+    createDiagram(bo: Object): void
+  }
 }
 //
 declare module 'bpmn-js/lib/features/editor-actions/BpmnEditorActions' {
-  export default class BpmnEditorActions {}
+  import { Injector } from 'didi'
+  import EditorActions from 'diagram-js/lib/features/editor-actions/EditorActions'
+
+  export default class BpmnEditorActions extends EditorActions {
+    constructor(injector: Injector)
+
+    /**
+     * 注册 bpmn 相关的操作事件
+     * 1. selectElements 对应的元素选中事件，默认排除根元素
+     * 2. spaceTool 对应的 toggle 事件
+     * 3. lassoTool 对应的 toggle 事件
+     * 4. handTool 对应的 toggle 事件
+     * 5. globalConnectTool 对应的 toggle 事件
+     * 6. distributeElements 触发时执行 distributeElements.trigger
+     * 7. alignElements 事件触发时对齐当前选中元素，执行 alignElements.trigger
+     * 等等
+     * @param injector
+     */
+    _registerDefaultActions(injector: Injector): void
+  }
 }
 //
 declare module 'bpmn-js/lib/features/grid-snapping/BpmnGridSnapping' {

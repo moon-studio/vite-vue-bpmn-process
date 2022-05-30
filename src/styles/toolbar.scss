@@ -5,7 +5,7 @@
   padding: 8px 16px;
   display: flex;
   align-items: center;
-  > div[class^=n-button] + div[class^=n-button] {
+  > div[class^='n-button'] + div[class^='n-button'] {
     margin-left: 16px;
   }
 }

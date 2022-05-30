@@ -45,8 +45,15 @@ const App = defineComponent({
             {showToolbar.value && <Toolbar></Toolbar>}
             <div class="main-content">
               {customPalette.value && <Palette></Palette>}
-              <Designer settings={editorSettings.value} v-model={[processXml.value, 'xml']}></Designer>
-              {customPenal.value ? <Penal></Penal> : <div class="camunda-penal" id="camunda-penal"></div>}
+              <Designer
+                settings={editorSettings.value}
+                v-model={[processXml.value, 'xml']}
+              ></Designer>
+              {customPenal.value ? (
+                <Penal></Penal>
+              ) : (
+                <div class="camunda-penal" id="camunda-penal"></div>
+              )}
             </div>
             <Setting v-model={[editorSettings, 'settings']}></Setting>
           </NMessageProvider>
