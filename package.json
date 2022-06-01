@@ -12,6 +12,7 @@
     "bpmn-js": "^9.0.3",
     "bpmn-js-properties-panel": "^1.1.0",
     "camunda-bpmn-moddle": "^6.1.2",
+    "highlight.js": "^11.5.1",
     "naive-ui": "^2.28.2",
     "vue": "^3.2.25"
   },

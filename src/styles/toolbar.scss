@@ -16,3 +16,18 @@
   grid-row-gap: 8px;
   padding: 8px 0;
 }
+
+.preview-model {
+  width: 64vw;
+  height: 64vh;
+  overflow-y: auto;
+  .preview-model-content {
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+}
+
+/* 修改弹窗宽度 */
+.n-dialog.n-modal {
+  width: auto;
+}

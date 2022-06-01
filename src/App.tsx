@@ -7,7 +7,12 @@ import Setting from '@/components/Setting'
 import { EditorSettings } from 'types/editor/settings'
 import { defaultSettings } from '@/config'
 import Logger from '@/utils/Logger'
-import { NConfigProvider, NMessageProvider } from 'naive-ui'
+import { NConfigProvider, NMessageProvider, NDialogProvider } from 'naive-ui'
+
+import hljs from 'highlight.js/lib/core'
+import xml from 'highlight.js/lib/languages/xml'
+
+hljs.registerLanguage('xml', xml)
 
 const App = defineComponent({
   setup() {
@@ -39,26 +44,32 @@ const App = defineComponent({
 
     /* 组件渲染 */
     return () => (
-      <div class={computedClasses.value} id="designer-container">
-        <NConfigProvider abstract componentOptions={{ DynamicInput: { buttonSize: 'small' } }}>
-          <NMessageProvider>
-            {showToolbar.value && <Toolbar></Toolbar>}
-            <div class="main-content">
-              {customPalette.value && <Palette></Palette>}
-              <Designer
-                settings={editorSettings.value}
-                v-model={[processXml.value, 'xml']}
-              ></Designer>
-              {customPenal.value ? (
-                <Penal></Penal>
-              ) : (
-                <div class="camunda-penal" id="camunda-penal"></div>
-              )}
-            </div>
-            <Setting v-model={[editorSettings, 'settings']}></Setting>
-          </NMessageProvider>
-        </NConfigProvider>
-      </div>
+      <NConfigProvider
+        abstract
+        componentOptions={{ DynamicInput: { buttonSize: 'small' } }}
+        hljs={hljs}
+      >
+        <NDialogProvider>
+          <div class={computedClasses.value} id="designer-container">
+            <NMessageProvider>
+              {showToolbar.value && <Toolbar></Toolbar>}
+              <div class="main-content">
+                {customPalette.value && <Palette></Palette>}
+                <Designer
+                  settings={editorSettings.value}
+                  v-model={[processXml.value, 'xml']}
+                ></Designer>
+                {customPenal.value ? (
+                  <Penal></Penal>
+                ) : (
+                  <div class="camunda-penal" id="camunda-penal"></div>
+                )}
+              </div>
+              <Setting v-model={[editorSettings, 'settings']}></Setting>
+            </NMessageProvider>
+          </div>
+        </NDialogProvider>
+      </NConfigProvider>
     )
   }
 })
