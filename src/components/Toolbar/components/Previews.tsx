@@ -10,23 +10,27 @@ const Previews = defineComponent({
     const message = useMessage()
 
     const openPreviewModel = async () => {
-      const modeler: Modeler | null = window.bpmnInstances.modeler
+      try {
+        const modeler: Modeler | null = window.bpmnInstances.modeler
 
-      if (!modeler) {
-        return message.warning('模型加载失败，请刷新重试')
+        if (!modeler) {
+          return message.warning('模型加载失败，请刷新重试')
+        }
+
+        const result = await modeler.saveXML({ format: true })
+
+        previewModel.create({
+          title: '流程预览',
+          showIcon: false,
+          content: () => (
+            <div class="preview-model">
+              <NCode code={result.xml} language="xml" wordWrap={true}></NCode>
+            </div>
+          )
+        })
+      } catch (e) {
+        message.error((e as Error).message || (e as string))
       }
-
-      const result = await modeler.saveXML({ format: true })
-
-      previewModel.create({
-        title: '流程预览',
-        showIcon: false,
-        content: () => (
-          <div class="preview-model">
-            <NCode code={result.xml} language="xml" wordWrap={true}></NCode>
-          </div>
-        )
-      })
     }
 
     return () => (
