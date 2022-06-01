@@ -24,17 +24,7 @@ export type FactoryFunction<T> = {
   (...args: any[]): T
 } & Annotated
 
-export type ArrayArgs<T> =
-  | [T]
-  | [string, T]
-  | [string, string, T]
-  | [string, string, string, T]
-  | [string, string, string, string, T]
-  | [string, string, string, string, string, T]
-  | [string, string, string, string, string, string, T]
-  | [string, string, string, string, string, string, string, T]
-  | [string, string, string, string, string, string, string, string, T]
-  | [string, string, string, string, string, string, string, string, string, T]
+export type ArrayArgs<T> = [...string[], T]
 
 export type ServiceProvider<T> = {
   (name: string): T

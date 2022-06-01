@@ -845,7 +845,7 @@ declare module 'diagram-js/lib/model' {
   import { DJSModule } from 'diagram-js'
   import { KeyboardConfig } from 'diagram-js/lib/features/keyboard/Keyboard'
   import { Descriptor, Moddle } from 'moddle'
-  import { Module } from 'didi'
+  import { ModuleDeclaration } from 'types/declares/didi'
 
   export interface Hints {
     connectionStart?: Point
@@ -926,7 +926,7 @@ declare module 'diagram-js/lib/model' {
     height?: string | number
     position?: string
     deferUpdate?: boolean
-    modules?: Module[]
+    modules?: ModuleDeclaration[]
     additionalModules?: any[]
     moddleExtensions?: Record<string, any>
     propertiesPanel?: {
