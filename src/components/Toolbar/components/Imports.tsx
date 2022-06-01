@@ -2,6 +2,7 @@ import { defineComponent, ref } from 'vue'
 import { NButton } from 'naive-ui'
 
 const Imports = defineComponent({
+  name: 'Imports',
   setup() {
     const importRef = ref<HTMLInputElement | null>(null)
 

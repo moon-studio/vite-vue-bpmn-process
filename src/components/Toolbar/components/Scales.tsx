@@ -8,6 +8,7 @@ import type Canvas from 'diagram-js/lib/core/Canvas'
 import { CanvasEvent } from 'diagram-js/lib/core/EventBus'
 
 const Scales = defineComponent({
+  name: 'Scales',
   setup() {
     const currentScale = ref(1)
     let canvas: Canvas | null = null

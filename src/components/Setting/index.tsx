@@ -14,6 +14,7 @@ const props = {
 }
 
 const Setting = defineComponent({
+  name: 'Setting',
   props: props,
   emits: ['update:settings'],
   setup(props) {

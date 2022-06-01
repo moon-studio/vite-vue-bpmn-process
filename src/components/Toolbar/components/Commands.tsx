@@ -10,6 +10,7 @@ import { createNewDiagram } from '@/utils'
 import ZoomOutRound from '@vicons/material/ZoomOutRound'
 
 const Commands = defineComponent({
+  name: 'Commands',
   setup() {
     let command: CommandStack | null = null
 

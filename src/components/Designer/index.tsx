@@ -8,6 +8,7 @@ import type { EditorSettings } from 'types/editor/settings'
 import type { ModuleDeclaration } from 'didi'
 
 const Designer = defineComponent({
+  name: 'Designer',
   props: {
     xml: {
       type: String as PropType<string>,

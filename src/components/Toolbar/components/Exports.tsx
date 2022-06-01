@@ -3,6 +3,7 @@ import { NButton, NPopover } from 'naive-ui'
 import { downloadFile, setEncoded } from '@/utils/files'
 
 const Exports = defineComponent({
+  name: 'Exports',
   setup() {
     // 下载流程图到本地
     /**

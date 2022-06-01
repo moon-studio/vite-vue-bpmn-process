@@ -5,6 +5,7 @@ import { Base, Connection, Label, ModdleElement, Shape } from 'diagram-js/lib/mo
 import Logger from '@/utils/Logger'
 
 const Penal = defineComponent({
+  name: 'Penal',
   setup() {
     const penal = ref<HTMLDivElement | null>(null)
 

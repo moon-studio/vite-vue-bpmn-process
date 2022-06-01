@@ -8,6 +8,7 @@ import Commands from '@/components/Toolbar/components/Commands'
 import { NButtonGroup } from 'naive-ui'
 
 const Toolbar = defineComponent({
+  name: 'ToolBar',
   setup() {
     return () => (
       <div class="toolbar">

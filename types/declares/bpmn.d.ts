@@ -40,7 +40,10 @@ declare module 'bpmn-js/lib/BaseViewer' {
       callback?: EventCallback<T, any>,
       that?: this
     ): void
-    off<T extends BPMNEvent, P extends InternalEvent>(events: T | T[], callback?: BPMNEventCallback<P>): void
+    off<T extends BPMNEvent, P extends InternalEvent>(
+      events: T | T[],
+      callback?: BPMNEventCallback<P>
+    ): void
     attachTo<T extends Element>(parentNode: string | T): void
     detach(): void
     importDefinitions(): ModdleElement
@@ -302,7 +305,12 @@ declare module 'bpmn-js/lib/features/modeling/Modeling.js' {
   import { Connection, Hints, Shape } from 'diagram-js/lib/model'
 
   export default class Modeling extends BaseModeling {
-    constructor(eventBus: EventBus, elementFactory: ElementFactory, commandStack: CommandStack, bpmnRules: any)
+    constructor(
+      eventBus: EventBus,
+      elementFactory: ElementFactory,
+      commandStack: CommandStack,
+      bpmnRules: any
+    )
     getHandlers(): any
     updateLabel(element: any, newLabel: any, newBounds, hints): void
     connect(source: Shape, target: Shape, attrs?: Object, hints?: Hints): Connection
@@ -504,7 +512,11 @@ declare module 'bpmn-js/lib/features/copy-paste/ModdleCopy' {
      * @param {Array<string>} [propertyNames]
      * @returns {ModdleElement}
      */
-    copyElement<T extends ModdleElement>(sourceElement: T, targetElement: T, propertyNames?: string[]): T
+    copyElement<T extends ModdleElement>(
+      sourceElement: T,
+      targetElement: T,
+      propertyNames?: string[]
+    ): T
 
     /**
      * Copy model property.
@@ -557,7 +569,12 @@ declare module 'bpmn-js/lib/features/drilldown/DrilldownBreadcrumbs' {
    * 在 element.changed, root.set 事件触发时会更新 Breadcrumbs
    */
   export default class DrilldownBreadcrumbs {
-    constructor(eventBus: EventBus, elementRegistry: ElementRegistry, overlays: Overlays, canvas: Canvas)
+    constructor(
+      eventBus: EventBus,
+      elementRegistry: ElementRegistry,
+      overlays: Overlays,
+      canvas: Canvas
+    )
 
     /**
      * 更新显示的面包屑。如果未提供元素，则仅更新标签
@@ -587,7 +604,12 @@ declare module 'bpmn-js/lib/features/drilldown/DrilldownOverlayBehavior' {
   import { Base } from 'diagram-js/lib/model'
 
   export default class DrilldownOverlayBehavior extends CommandInterceptor {
-    constructor(canvas: Canvas, eventBus: EventBus, elementRegistry: ElementRegistry, overlays: Overlays)
+    constructor(
+      canvas: Canvas,
+      eventBus: EventBus,
+      elementRegistry: ElementRegistry,
+      overlays: Overlays
+    )
 
     canDrillDown(element: Base): boolean
 

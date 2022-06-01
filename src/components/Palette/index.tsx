@@ -3,6 +3,7 @@ import { NCollapse, NCollapseItem } from 'naive-ui'
 import { assign } from 'min-dash'
 
 const Palette = defineComponent({
+  name: 'Palette',
   setup() {
     const createElement = (ev: Event, type: string, options?: any) => {
       const ElementFactory =

@@ -12,6 +12,7 @@ import Modeling from 'bpmn-js/lib/features/modeling/Modeling.js'
 import EventEmitter from '@/utils/EventEmitter'
 
 const Aligns = defineComponent({
+  name: 'Aligns',
   setup() {
     const buttons: { name: string; key: string; icon: Component }[] = [
       { name: '左对齐', key: 'left', icon: AlignHorizontalLeftRound },

@@ -2,6 +2,7 @@ import { defineComponent } from 'vue'
 import { NButton, NPopover } from 'naive-ui'
 
 const Previews = defineComponent({
+  name: 'Previews',
   setup() {
     return () => (
       <NPopover
