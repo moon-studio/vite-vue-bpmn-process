@@ -60,18 +60,34 @@
     cursor: pointer;
     transition: all cubic-bezier(0.8, 0.4, 0.8, 0.4) 0.24s;
   }
+}
 
-  .sponsorship-image {
-    width: 240px;
-    height: 240px;
-    background-size: cover;
-    display: inline-block;
-    &.wechat {
-      background-image: url('/wechat.jpg');
+.tips-message {
+  width: 100%;
+  text-align: left;
+  .grip-tips {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    p:first-child {
+      grid-row-start: 1;
+      grid-row-end: 3;
     }
-    &.alipay {
-      margin-left: 8px;
-      background-image: url('/alipay.png');
-    }
+  }
+
+  p {
+    margin: 0 0 4px 0;
+  }
+}
+.sponsorship-image {
+  width: 180px;
+  height: 180px;
+  background-size: 100% 100%  ;
+  display: inline-block;
+  &.wechat {
+    background-image: url('/wechat.jpg');
+  }
+  &.alipay {
+    margin-left: 8px;
+    background-image: url('/alipay.png');
   }
 }

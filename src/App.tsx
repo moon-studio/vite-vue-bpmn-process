@@ -65,7 +65,7 @@ const App = defineComponent({
                   <div class="camunda-penal" id="camunda-penal"></div>
                 )}
               </div>
-              <Setting v-model={[editorSettings, 'settings']}></Setting>
+              <Setting v-model={[editorSettings.value, 'settings']}></Setting>
             </NMessageProvider>
           </div>
         </NDialogProvider>

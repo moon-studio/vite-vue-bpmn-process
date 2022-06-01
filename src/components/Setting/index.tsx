@@ -1,7 +1,17 @@
 import { computed, defineComponent, PropType, ref, watchEffect } from 'vue'
 import { EditorSettings } from 'types/editor/settings'
 import { defaultSettings } from '@/config'
-import { NIcon, NForm, NFormItem, NInput, NRadioGroup, NRadio, NSwitch } from 'naive-ui'
+import {
+  NIcon,
+  NForm,
+  NFormItem,
+  NInput,
+  NRadioGroup,
+  NRadio,
+  NSwitch,
+  NDrawer,
+  NDrawerContent
+} from 'naive-ui'
 import SettingsRound from '@vicons/material/SettingsRound'
 import { Icon } from '@vicons/utils'
 import EventEmitter from '@/utils/EventEmitter'
@@ -27,26 +37,20 @@ const Setting = defineComponent({
       modelVisible.value = !modelVisible.value
     }
 
-    const settingClasses = computed(() => {
-      const baseClasses = ['setting']
-      modelVisible.value && baseClasses.push('setting_open')
-      return baseClasses.join(' ')
-    })
-
     EventEmitter.instance.on('settings', (key: string, value: string) => {
       editorSettings.value[key] = value
     })
 
-    watchEffect(() => {
-      if (modelVisible.value) {
-        document.body.addEventListener('click', changeModelVisible)
-      } else {
-        document.body.removeEventListener('click', changeModelVisible)
-      }
-    })
+    // watchEffect(() => {
+    //   if (modelVisible.value) {
+    //     document.body.addEventListener('click', changeModelVisible)
+    //   } else {
+    //     document.body.removeEventListener('click', changeModelVisible)
+    //   }
+    // })
 
     return () => (
-      <div class={settingClasses.value} onClick={(e) => e.stopPropagation()}>
+      <div class="setting" onClick={(e) => e.stopPropagation()}>
         <div class="toggle-button" onClick={changeModelVisible}>
           <NIcon size={40} color="#ffffff">
             <Icon>
@@ -55,10 +59,26 @@ const Setting = defineComponent({
           </NIcon>
         </div>
 
-        <div class="setting-container">
-          <div class="setting-header">偏好设置</div>
-          <div class="setting-content">
-            <NForm labelWidth={120} labelAlign="left">
+        <NDrawer v-model={[modelVisible.value, 'show']} width={560}>
+          <NDrawerContent
+            title="偏好设置"
+            closable={true}
+            v-slots={{
+              footer: () => (
+                <div class="tips-message">
+                  <div class="grip-tips">
+                    <p>注：</p>
+                    <p>1. 仅自定义模式可使用 activiti 或者 flowable 引擎</p>
+                    <p>2. 扩展模式下只能扩展工具按钮，不能删除原有工具</p>
+                  </div>
+                  <p style="font-weight: bold">友情赞助</p>
+                  <div class="sponsorship-image wechat"></div>
+                  <div class="sponsorship-image alipay"></div>
+                </div>
+              )
+            }}
+          >
+            <NForm labelWidth={120} labelAlign="left" size="small">
               <NFormItem label="流程名称">
                 <NInput
                   v-model={[editorSettings.value.processName, 'value']}
@@ -111,17 +131,8 @@ const Setting = defineComponent({
                 </NRadioGroup>
               </NFormItem>
             </NForm>
-            <div class="tips-message">
-              <p>注：</p>
-              <p>1. 仅自定义模式可使用 activiti 或者 flowable 引擎</p>
-              <p>2. 扩展模式下只能扩展工具按钮，不能删除原有工具</p>
-              <p style="font-weight: bold">友情赞助</p>
-              <div class="sponsorship-image wechat"></div>
-              <div class="sponsorship-image alipay"></div>
-            </div>
-          </div>
-          <div class="setting-footer"></div>
-        </div>
+          </NDrawerContent>
+        </NDrawer>
       </div>
     )
   }
