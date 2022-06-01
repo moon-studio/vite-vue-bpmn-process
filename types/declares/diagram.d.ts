@@ -3,16 +3,10 @@ declare module 'diagram-js' {
   import { Injector, ModuleDeclaration } from 'didi'
   import { ViewerOptions } from 'diagram-js/lib/model'
 
-  export type DJSModule = ModuleDeclaration & {
-    __depends__?: DJSModule[]
-    __init__?: any[]
-    [id: string]: undefined | any[] | DJSModule[] | ['type' | 'factory' | 'value', any]
-  }
-
   /**
    * 初始化 Diagram 实例
    * @param {ViewerOptions} options 初始化参数
-   * @param {Module} [options.models] - 模型定义
+   * @param {ModuleDeclaration} [options.models] - 模型定义
    * @param {Injector} [injector] - 依赖注入实例
    * @example
    * 注册一个新模块
@@ -842,7 +836,6 @@ declare module 'diagram-js/lib/draw/Styles' {
 /************************************** Diagram Model 元素 声明 *****************************************/
 // 元素模型定义
 declare module 'diagram-js/lib/model' {
-  import { DJSModule } from 'diagram-js'
   import { KeyboardConfig } from 'diagram-js/lib/features/keyboard/Keyboard'
   import { Descriptor, Moddle } from 'moddle'
   import { ModuleDeclaration } from 'types/declares/didi'

@@ -1,5 +1,4 @@
 declare module 'bpmn-js-token-simulation' {
-  import { DJSModule } from 'diagram-js'
   import ContextPads from 'bpmn-js-token-simulation/lib/features/context-pads/ContextPads'
   import ElementNotifications from 'bpmn-js-token-simulation/lib/features/element-notifications/ElementNotifications'
   import ElementSupport from 'bpmn-js-token-simulation/lib/features/element-support/ElementSupport'
@@ -22,8 +21,9 @@ declare module 'bpmn-js-token-simulation' {
   import DisableModeling from 'bpmn-js-token-simulation/lib/features/disable-modeling/DisableModeling'
   import KeyboardBindings from 'bpmn-js-token-simulation/lib/features/keyboard-bindings/KeyboardBindings'
   import EditorActions from 'bpmn-js-token-simulation/lib/features/editor-actions/EditorActions'
+  import { ModuleDefinition } from 'types/declares/didi'
 
-  const SimulationModeler: DJSModule & {
+  const SimulationModeler: ModuleDefinition & {
     animation: ['type', Animation]
     contextPads: ['type', ContextPads]
     disableModeling: ['type', DisableModeling]
@@ -53,7 +53,7 @@ declare module 'bpmn-js-token-simulation' {
 }
 
 declare module 'bpmn-js-token-simulation/lib/viewer' {
-  import { DJSModule } from 'diagram-js'
+  import { ModuleDefinition } from 'types/declares/didi'
   import ContextPads from 'bpmn-js-token-simulation/lib/features/context-pads/ContextPads'
   import ElementNotifications from 'bpmn-js-token-simulation/lib/features/element-notifications/ElementNotifications'
   import ElementSupport from 'bpmn-js-token-simulation/lib/features/element-support/ElementSupport'
@@ -74,7 +74,7 @@ declare module 'bpmn-js-token-simulation/lib/viewer' {
   import TokenCount from 'bpmn-js-token-simulation/lib/features/token-count/TokenCount'
   import TokenSimulationBehavior from 'bpmn-js-token-simulation/lib/features/token-simulation-behavior/TokenSimulationBehavior'
 
-  const SimulationViewer: DJSModule & {
+  const SimulationViewer: ModuleDefinition & {
     animation: ['type', Animation]
     contextPads: ['type', ContextPads]
     elementNotifications: ['type', ElementNotifications]

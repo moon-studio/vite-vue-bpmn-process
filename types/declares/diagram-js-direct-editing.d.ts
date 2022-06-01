@@ -1,7 +1,7 @@
 //
 declare module 'diagram-js-direct-editing' {
-  import { DJSModule } from 'diagram-js'
-  const directEditingModule: DJSModule
+  import { ModuleDefinition } from 'types/declares/didi'
+  const directEditingModule: ModuleDefinition
   export default directEditingModule
 }
 //
@@ -97,7 +97,12 @@ declare module 'diagram-js-direct-editing/lib/TextBox' {
      * @param [value] {string | Object}
      * @param [options] {Object}
      */
-    create(bounds: TextBoxBounds, style: Style | string, value?: string | Object, options?: Object): HTMLElement
+    create(
+      bounds: TextBoxBounds,
+      style: Style | string,
+      value?: string | Object,
+      options?: Object
+    ): HTMLElement
 
     handlePaste(e: Event): void
 
