@@ -1,112 +1,104 @@
-// https://github.com/nikku/didi/blob/master/lib/index.d.ts
-declare module 'didi' {
-  export type ValueType = 'value'
-  export type FactoryType = 'factory'
-  export type TypeType = 'type'
+export type ValueType = 'value'
+export type FactoryType = 'factory'
+export type TypeType = 'type'
 
-  export type ProviderType = ValueType | FactoryType | TypeType
+export type ProviderType = ValueType | FactoryType | TypeType
 
-  export type InjectAnnotated = {
-    $inject?: string[]
-  }
-
-  export type ScopeAnnotated = {
-    $scope?: string[]
-  }
-
-  export type Annotated = InjectAnnotated & ScopeAnnotated
-
-  export type Constructor<T> = { new (...args: any[]): T } | { (...args: any[]): T }
-
-  export type InitializerFunction = {
-    (...args: any[]): unknown
-  } & Annotated
-
-  export type FactoryFunction<T> = {
-    (...args: any[]): T
-  } & Annotated
-
-  export type ArrayArgs<T> =
-    | [T]
-    | [string, T]
-    | [string, string, T]
-    | [string, string, string, T]
-    | [string, string, string, string, T]
-    | [string, string, string, string, string, T]
-    | [string, string, string, string, string, string, T]
-    | [string, string, string, string, string, string, string, T]
-    | [string, string, string, string, string, string, string, string, T]
-    | [string, string, string, string, string, string, string, string, string, T]
-
-  export type ServiceProvider<T> = {
-    (name: string): T
-  }
-
-  export type Initializer = InitializerFunction | ArrayArgs<InitializerFunction>
-
-  export type FactoryDefinition<T> = FactoryFunction<T> | ArrayArgs<FactoryFunction<T>>
-
-  export type TypeDefinition<T> = Constructor<T> | ArrayArgs<Constructor<T>>
-
-  export type ValueDefinition<T> = T
-
-  export type ServiceDefinition<T> = FactoryDefinition<T> | TypeDefinition<T> | ValueDefinition<T>
-
-  type TypedDeclaration<T, D> = [T, D] | [T, D, 'private']
-
-  export type ServiceDeclaration<T> =
-    | TypedDeclaration<ValueType, ValueDefinition<T>>
-    | TypedDeclaration<TypeType, TypeDefinition<T>>
-    | TypedDeclaration<FactoryType, FactoryDefinition<T>>
-
-  export type ModuleDeclaration = {
-    [name: string]: ServiceDeclaration<unknown> | unknown
-    __init__?: Array<string | InitializerFunction>
-    __depends__?: Array<ModuleDeclaration>
-    __exports__?: Array<string>
-    __modules__?: Array<ModuleDeclaration>
-  }
-
-  // injector.js
-
-  export type InjectionContext = unknown
-  export type LocalsMap = {
-    [name: string]: unknown
-  }
-
-  export type ModuleDefinition = ModuleDeclaration
-
-  export type InjectorContext = {
-    get<T>(name: string, strict?: boolean): T
-    /**
-     * @internal
-     */
-    _providers?: object
-  }
-
-  export class Module {
-    factory(name: string, factory: any): Module
-    value(name: string, value: any): Module
-    type(name: string, type: any): Module
-    forEach(fn: () => void): void
-  }
-
-  export class Injector {
-    constructor(modules: Module[], parent?: Injector)
-    protected _instances: {
-      config: any
-      injector: Injector
-      [name: string]: any
-    }
-    protected _providers: {
-      [name: string]: [Function, Function, ProviderType]
-    }
-    init(): void
-    get<T>(name: string, strict?: boolean): T
-    invoke<T>(func: (...args: unknown[]) => T, context: InjectionContext, locals: LocalsMap): T
-    instantiate<T>(Type: T): T
-    createChild(modules: ModuleDefinition[], forceNewInstances?: string[]): Injector
-    __depends__: Array<ModuleDeclaration>
-    __init__: [null | undefined | ModuleDeclaration, null | undefined | ModuleDeclaration, ...string[]]
-  }
+export type InjectAnnotated = {
+  $inject?: string[]
 }
+
+export type ScopeAnnotated = {
+  $scope?: string[]
+}
+
+export type Annotated = InjectAnnotated & ScopeAnnotated
+
+export type Constructor<T> = { new (...args: any[]): T } | { (...args: any[]): T }
+
+export type InitializerFunction = {
+  (...args: any[]): unknown
+} & Annotated
+
+export type FactoryFunction<T> = {
+  (...args: any[]): T
+} & Annotated
+
+export type ArrayArgs<T> =
+  | [T]
+  | [string, T]
+  | [string, string, T]
+  | [string, string, string, T]
+  | [string, string, string, string, T]
+  | [string, string, string, string, string, T]
+  | [string, string, string, string, string, string, T]
+  | [string, string, string, string, string, string, string, T]
+  | [string, string, string, string, string, string, string, string, T]
+  | [string, string, string, string, string, string, string, string, string, T]
+
+export type ServiceProvider<T> = {
+  (name: string): T
+}
+
+export type Initializer = InitializerFunction | ArrayArgs<InitializerFunction>
+
+export type FactoryDefinition<T> = FactoryFunction<T> | ArrayArgs<FactoryFunction<T>>
+
+export type TypeDefinition<T> = Constructor<T> | ArrayArgs<Constructor<T>>
+
+export type ValueDefinition<T> = T
+
+export type ServiceDefinition<T> = FactoryDefinition<T> | TypeDefinition<T> | ValueDefinition<T>
+
+type TypedDeclaration<T, D> = [T, D] | [T, D, 'private']
+
+export type ServiceDeclaration<T> =
+  | TypedDeclaration<ValueType, ValueDefinition<T>>
+  | TypedDeclaration<TypeType, TypeDefinition<T>>
+  | TypedDeclaration<FactoryType, FactoryDefinition<T>>
+
+export type ModuleDeclaration = {
+  [name: string]: ServiceDeclaration<unknown> | unknown
+  __init__?: Array<string | InitializerFunction>
+  __depends__?: Array<ModuleDeclaration>
+  __exports__?: Array<string>
+  __modules__?: Array<ModuleDeclaration>
+}
+
+// injector.js
+
+export type InjectionContext = unknown
+export type LocalsMap = {
+  [name: string]: unknown
+}
+
+export type ModuleDefinition = ModuleDeclaration
+
+export class Injector {
+  constructor(modules: ModuleDefinition[], parent?: InjectorContext)
+  get<T>(name: string, strict?: boolean): T
+  invoke<T>(func: (...args: unknown[]) => T, context: InjectionContext, locals: LocalsMap): T
+  instantiate<T>(Type: T): T
+  createChild(modules: ModuleDefinition[], forceNewInstances?: string[]): Injector
+  init(): void
+
+  /**
+   * @internal
+   */
+  _providers: object
+}
+
+export type InjectorContext = {
+  get<T>(name: string, strict?: boolean): T
+
+  /**
+   * @internal
+   */
+  _providers?: object
+}
+
+// annotation.js
+
+export function annotate<T>(...args: unknown[]): T & InjectAnnotated
+
+export function parseAnnotations(fn: unknown): string[]
