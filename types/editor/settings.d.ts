@@ -16,3 +16,11 @@ export type ModelerOptions<E extends Element> = ViewerOptions<E> & {
   additionalModules: ModuleDeclaration[]
   moddleExtensions: Object
 }
+
+
+// bpmn.js 事件参数
+// 1. canvas 事件
+type CanvasEventParams = {
+  svg: SVGElement
+  viewport: SVGElement
+}

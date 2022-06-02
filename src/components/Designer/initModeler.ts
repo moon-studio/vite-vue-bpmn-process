@@ -40,5 +40,9 @@ export default function (
     }
   })
 
+  modeler.on('element.click', e => {
+    console.log(e)
+  })
+
   createNewDiagram(xml.value, settings.value)
 }

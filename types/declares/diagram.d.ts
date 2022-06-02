@@ -51,7 +51,7 @@ declare module 'diagram-js/lib/core/Canvas' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
-  import { Base, Point } from 'diagram-js/lib/model'
+  import { Root, Base, Point } from 'diagram-js/lib/model'
 
   export type Dimensions = {
     width: number
@@ -69,6 +69,7 @@ declare module 'diagram-js/lib/core/Canvas' {
   export type Layer = {
     index: number
     group: SVGElement
+    visible: boolean
   }
   export type Viewbox = {
     x: number
@@ -93,8 +94,15 @@ declare module 'diagram-js/lib/core/Canvas' {
       graphicsFactory: GraphicsFactory,
       elementRegistry: ElementRegistry
     )
+    protected _eventBus: EventBus
+    protected _elementRegistry: ElementRegistry
+    protected _graphicsFactory: GraphicsFactory
     // 内部属性，保存图层实例
-    protected _layers: Record<string, any>
+    protected _layers: Record<string, Layer>
+    protected _planes: {rootElement: Root; layer: Layer}[]
+    protected _rootElement: Root | null
+    protected _cachedViewbox: Viewbox | null
+
     /**
      * ## 画布初始化方法，创建一个一直被 div#container 元素包裹的 svg 元素，可以通过访问外层 div 元素获取画布大小
      * <div class="djs-container" style="width: {desired-width}, height: {desired-height}">
@@ -388,6 +396,7 @@ declare module 'diagram-js/lib/core/ElementFactory' {
 
   export default class ElementFactory {
     constructor()
+    protected _uid: number
     /**
      * 创建具有给定类型和许多预设属性的模型元素
      *
@@ -882,34 +891,34 @@ declare module 'diagram-js/lib/model' {
     type: string
     width?: number
     height?: number
-    businessObject: ModdleElement
+    parent: Base
     label: Label
-    parent: Shape
     labels: Label[]
-    outgoingRefs: Connection[]
-    incomingRefs: Connection[]
-  }
-
-  export interface Connection extends Base {
-    source: Base
-    target: Base
-    waypoints?: Point[]
+    businessObject: ModdleElement
+    outgoing: Connection[]
+    incoming: Connection[]
   }
 
   export interface Shape extends Base {
     children: Base[]
-    host: Shape
     attachers: Shape[]
     collapsed?: boolean
     hidden?: boolean
     x?: number
     y?: number
+    host?: Shape
   }
 
   export interface Root extends Shape {}
 
   export interface Label extends Shape {
     labelTarget: Base
+  }
+
+  export interface Connection extends Base {
+    source: Base
+    target: Base
+    waypoints?: Point[]
   }
 
   export type ViewerOptions<E extends Element> = {
