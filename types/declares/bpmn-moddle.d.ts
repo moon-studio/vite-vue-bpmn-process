@@ -652,7 +652,11 @@ declare module 'bpmn-moddle' {
   // 默认导出
   export default class BpmnModdle extends Moddle {
     constructor(packages?: Package[], options?: Object)
-    fromXML(xmlStr: string, typeName?: string | Object, options?: Object): Promise<ParseResult | ParseError>
+    fromXML(
+      xmlStr: string,
+      typeName?: string | Object,
+      options?: Object
+    ): Promise<ParseResult | ParseError>
     toXML(element: string, options?: Object): Promise<SerializationResult | Error>
   }
 }

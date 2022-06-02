@@ -45,4 +45,15 @@ declare module 'moddle' {
     getPropertyDescriptor(element: ModdleElement, property: any): Descriptor
     getTypeDescriptor(type: string): Descriptor
   }
+
+  /**
+   * Parses a namespaced attribute name of the form (ns:)localName to an object,
+   * given a default prefix to assume in case no explicit namespace is given.
+   *
+   * @param {String} name
+   * @param {String} [defaultPrefix] the default prefix to take, if none is present.
+   *
+   * @return {Object} the parsed name
+   */
+  export type ParseNameNS = (name: string, defaultPrefix?: string) => object
 }

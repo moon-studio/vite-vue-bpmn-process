@@ -1,16 +1,24 @@
-import type { ModelerOptions } from 'types/editor/settings'
+import type { EditorSettings, ModelerOptions } from 'types/editor/settings'
+import type { Ref, ComputedRef } from 'vue'
+import type { ModuleDeclaration } from 'didi'
 import Modeler from 'bpmn-js/lib/Modeler'
 import EventEmitter from '@/utils/EventEmitter'
 import { createNewDiagram } from '@/utils'
 
-export default function (designer, modelerModules, settings, xml, emit) {
+export default function (
+  designer: Ref<HTMLElement | null>,
+  modelerModules: ComputedRef<[ModuleDeclaration[], { [key: string]: Object }]>,
+  settings: Ref<EditorSettings>,
+  xml: Ref<string | undefined>,
+  emit
+) {
   ;(window.bpmnInstances?.modeler && window.bpmnInstances.modeler.destroy()) ||
     (window.bpmnInstances = {})
 
   const options: ModelerOptions<Element> = {
-    container: designer!.value,
+    container: designer!.value as HTMLElement,
     keyboard: {
-      bindTo: designer!.value
+      bindTo: designer!.value as HTMLElement
     },
     additionalModules: modelerModules.value[0] || [],
     moddleExtensions: modelerModules.value[1] || {}
