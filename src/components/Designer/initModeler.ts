@@ -1,31 +1,35 @@
-import type { EditorSettings, ModelerOptions } from 'types/editor/settings'
-import type { Ref, ComputedRef } from 'vue'
-import type { ModuleDeclaration } from 'didi'
+import { EditorSettings } from 'types/editor/settings'
+import { Ref, ComputedRef } from 'vue'
+import { ViewerOptions } from 'diagram-js/lib/model'
 import Modeler from 'bpmn-js/lib/Modeler'
 import EventEmitter from '@/utils/EventEmitter'
 import { createNewDiagram } from '@/utils'
 
 export default function (
   designer: Ref<HTMLElement | null>,
-  modelerModules: ComputedRef<[ModuleDeclaration[], { [key: string]: Object }]>,
+  modelerModules: ViewerOptions<Element>,
   settings: Ref<EditorSettings>,
   xml: Ref<string | undefined>,
   emit
 ) {
-  ;(window.bpmnInstances?.modeler && window.bpmnInstances.modeler.destroy()) ||
-    (window.bpmnInstances = {})
+  if (window.bpmnInstances?.modeler) {
+    window.bpmnInstances.modeler.destroy()
+  }
+  window.bpmnInstances = {}
 
-  const options: ModelerOptions<Element> = {
+  const options: ViewerOptions<Element> = {
     container: designer!.value as HTMLElement,
     keyboard: {
       bindTo: designer!.value as HTMLElement
     },
-    additionalModules: modelerModules.value[0] || [],
-    moddleExtensions: modelerModules.value[1] || {}
+    additionalModules: modelerModules[0] || [],
+    moddleExtensions: modelerModules[1] || {},
+    ...modelerModules[2]
   }
-  settings.value.penalMode !== 'custom' && (options.propertiesPanel = { parent: '#camunda-penal' })
 
   const modeler = (window.bpmnInstances.modeler = new Modeler(options))
+
+  console.log(modeler)
 
   EventEmitter.instance.emit('modeler-init', modeler)
 
@@ -38,10 +42,6 @@ export default function (
     } catch (error) {
       console.error(error)
     }
-  })
-
-  modeler.on('element.click', e => {
-    console.log(e)
   })
 
   createNewDiagram(xml.value, settings.value)

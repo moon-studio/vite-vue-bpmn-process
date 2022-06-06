@@ -765,7 +765,8 @@ declare module 'bpmn-js/lib/features/replace-preview/BpmnReplacePreview' {
 }
 //
 declare module 'bpmn-js/lib/features/rules/BpmnRules' {
-  export default class BpmnRules {}
+  import RuleProvider from 'diagram-js/lib/features/rules/RuleProvider'
+  export default class BpmnRules extends RuleProvider {}
 }
 //
 declare module 'bpmn-js/lib/features/search/BpmnSearchProvider' {

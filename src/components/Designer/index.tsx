@@ -26,12 +26,11 @@ const Designer = defineComponent({
     const { settings, xml } = toRefs(props)
     const designer = ref<HTMLDivElement | null>(null)
 
-    const modelerModules: ComputedRef<[ModuleDeclaration[], { [key: string]: Object }]> =
-      modulesAndModdle(settings)
+    const modelerModules = modulesAndModdle(settings)
 
     watch(
       () => modelerModules.value,
-      () => nextTick().then(() => initModeler(designer, modelerModules, settings, xml, emit)),
+      () => nextTick().then(() => initModeler(designer, modelerModules.value, settings, xml, emit)),
       { immediate: true }
     )
 

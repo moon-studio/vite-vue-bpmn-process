@@ -1,4 +1,4 @@
-import { computed, toRef } from 'vue'
+import { computed } from 'vue'
 import { ModuleDeclaration } from 'didi'
 
 import EventEmitter from '@/utils/EventEmitter'
@@ -27,10 +27,15 @@ import EnhancementContextPad from '@/components/AddiModules/ContextPad/Enhanceme
 import RewriteContextPad from '@/components/AddiModules/ContextPad/RewriteContextPad'
 import renderer from '@/components/AddiModules/Renderer'
 
+import lintModule from 'bpmn-js-bpmnlint'
+import bpmnlint from '@/components/AddiModules/Lint/bpmnlint'
+import { ViewerOptions } from 'diagram-js/lib/model'
+
 export default function (settings) {
-  return computed<[ModuleDeclaration[], { [key: string]: any }]>(() => {
+  return computed<ViewerOptions<Element>>(() => {
     const modules: ModuleDeclaration[] = [] // modules 扩展模块数组
     let moddle: { [key: string]: any } = {} // moddle 声明文件对象
+    const options: { [key: string]: any } = {} // modeler 其他配置
 
     // 设置对应的 moddle 解析配置文件
     if (settings.value.processEngine === 'activiti') moddle['activiti'] = activitiModdleDescriptors
@@ -48,25 +53,31 @@ export default function (settings) {
     settings.value.contextPadMode === 'rewrite' && modules.push(RewriteContextPad)
 
     // 配置 penal (基于 camunda)
-    settings.value.penalMode !== 'custom' &&
+    if (settings.value.penalMode !== 'custom') {
       modules.push(
         BpmnPropertiesPanelModule,
         BpmnPropertiesProviderModule,
         CamundaPlatformPropertiesProviderModule,
         CamundaExtensionModule
-      ) &&
-      (moddle = { camunda: camundaModdleDescriptors }) &&
+      )
+      moddle = { camunda: camundaModdleDescriptors }
+      options['propertiesPanel'] = { parent: '#camunda-penal' }
       EventEmitter.instance.emit('settings', 'processEngine', 'camunda')
-
-    console.log(settings.value)
+    }
 
     // 配置 翻译 与 流程模拟
     modules.push(translate)
 
+    // 测试自定义渲染
     modules.push(renderer)
 
-    // modules.push(simulationModeler)
+    // 设置 lint 校验
+    modules.push(lintModule)
+    options['linting'] = {
+      active: true,
+      bpmnlint: bpmnlint
+    }
 
-    return [modules, moddle]
+    return [modules, moddle, options]
   })
 }
