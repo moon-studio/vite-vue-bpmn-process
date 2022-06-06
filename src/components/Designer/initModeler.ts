@@ -1,9 +1,10 @@
 import { EditorSettings } from 'types/editor/settings'
-import { Ref, ComputedRef } from 'vue'
+import { markRaw, Ref } from 'vue'
 import { ViewerOptions } from 'diagram-js/lib/model'
 import Modeler from 'bpmn-js/lib/Modeler'
-import EventEmitter from '@/utils/EventEmitter'
 import { createNewDiagram } from '@/utils'
+import EventEmitter from '@/utils/EventEmitter'
+import modelerStore from '@/store/modeler'
 
 export default function (
   designer: Ref<HTMLElement | null>,
@@ -17,6 +18,8 @@ export default function (
   }
   window.bpmnInstances = {}
 
+  const store = modelerStore()
+
   const options: ViewerOptions<Element> = {
     container: designer!.value as HTMLElement,
     keyboard: {
@@ -27,9 +30,13 @@ export default function (
     ...modelerModules[2]
   }
 
-  const modeler = (window.bpmnInstances.modeler = new Modeler(options))
+  const modeler: Modeler = (window.bpmnInstances.modeler = new Modeler(options))
 
-  console.log(modeler)
+  store.setModeler(markRaw(modeler))
+  store.setModules('moddle', markRaw(modeler.get('moddle')))
+  store.setModules('modeling', markRaw(modeler.get('modeling')))
+  store.setModules('canvas', markRaw(modeler.get('canvas')))
+  store.setModules('elementRegistry', markRaw(modeler.get('elementRegistry')))
 
   EventEmitter.instance.emit('modeler-init', modeler)
 

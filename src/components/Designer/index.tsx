@@ -3,9 +3,8 @@ import { defaultSettings } from '@/config'
 import modulesAndModdle from '@/components/Designer/modulesAndModdle'
 import initModeler from '@/components/Designer/initModeler'
 
-import type { PropType, ComputedRef } from 'vue'
+import type { PropType } from 'vue'
 import type { EditorSettings } from 'types/editor/settings'
-import type { ModuleDeclaration } from 'didi'
 
 const Designer = defineComponent({
   name: 'Designer',
@@ -21,8 +20,6 @@ const Designer = defineComponent({
   },
   emits: ['update:xml', 'command-stack-changed'],
   setup(props, { emit }) {
-    !window.bpmnInstances && (window.bpmnInstances = {})
-
     const { settings, xml } = toRefs(props)
     const designer = ref<HTMLDivElement | null>(null)
 

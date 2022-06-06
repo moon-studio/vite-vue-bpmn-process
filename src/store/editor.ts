@@ -5,7 +5,7 @@ const state = {
   editorSettings: defaultSettings
 }
 
-export default defineStore('main', {
+export default defineStore('editor', {
   state: () => state,
   getters: {
     processDef: (state) => ({
