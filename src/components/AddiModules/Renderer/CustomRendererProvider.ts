@@ -26,13 +26,24 @@ export default class CustomRendererProvider extends BpmnRenderer {
 
     this._styles = styles
 
-    this.handlers['bpmn:StartEvent'] = (parentGfx, element, attrs) => {
+    // 重点！！！在这里执行重绘
+    this.handlers['bpmn:Event'] = (parentGfx, element, attrs) => {
       if (!attrs || !attrs['fillOpacity']) {
         !attrs && (attrs = {})
-
         attrs['fillOpacity'] = 1
+        attrs['fill'] = '#1bbc9d'
+        attrs['strokeWidth'] = 0
       }
-
+      return this.drawCircle(parentGfx, element.width, element.height, attrs)
+    }
+    this.handlers['bpmn:EndEvent'] = (parentGfx, element, attrs) => {
+      if (!attrs || !attrs['fillOpacity']) {
+        !attrs && (attrs = {})
+        attrs['fillOpacity'] = 1
+        attrs['fill'] = '#e98885'
+        attrs['stroke'] = '#000000'
+        attrs['strokeWidth'] = 2
+      }
       return this.drawCircle(parentGfx, element.width, element.height, attrs)
     }
   }
@@ -42,22 +53,13 @@ export default class CustomRendererProvider extends BpmnRenderer {
       attrs = offset
       offset = 0
     }
-
     offset = offset || 0
-
-    attrs = this._styles.computeStyle(attrs, {
-      stroke: '#1d286f',
-      strokeWidth: 2,
-      fill: '#2bcd64'
-    })
-
+    attrs = this._styles.computeStyle(attrs)
     if (attrs.fill === 'none') {
       delete attrs.fillOpacity
     }
-
     const cx = width / 2,
       cy = height / 2
-
     const circle = svgCreate('circle')
     svgAttr(circle, {
       cx: cx,
@@ -65,9 +67,7 @@ export default class CustomRendererProvider extends BpmnRenderer {
       r: Math.round((width + height) / 4 - offset)
     })
     svgAttr(circle, attrs)
-
     svgAppend(parentGfx, circle)
-
     return circle
   }
 }

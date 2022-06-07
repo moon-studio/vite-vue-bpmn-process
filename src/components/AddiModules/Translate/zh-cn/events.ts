@@ -1,6 +1,8 @@
 export default {
   StartEvent: '开始事件',
   EndEvent: '结束事件',
+  IntermediateThrowEvent: '中间抛出事件',
+  IntermediateCatchEvent: '中间捕获事件',
   'Message Start Event': '消息开始事件',
   'Timer Start Event': '定时开始事件',
   'Conditional Start Event': '条件开始事件',
