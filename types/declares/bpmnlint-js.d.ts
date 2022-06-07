@@ -27,7 +27,12 @@ declare module 'bpmn-js-bpmnlint' {
 
   type Issue = {
     id: string
+    category: string
+    message: string
+    rule: string
   }
+
+  type Issues = Record<string, Issue[]>[]
 
   class Linting {
     constructor(
@@ -53,10 +58,10 @@ declare module 'bpmn-js-bpmnlint' {
     protected _overlayIds: Record<string, string>
 
     _init(): void
-    _fireComplete(issues: any[]): void
-    _createIssues(issues: any[]): void
-    _createElementIssues(elementId: string, elementIssues: any[]): void
-    _formatIssues(issues: any[]): any[]
+    _fireComplete(issues: Issues[]): void
+    _createIssues(issues: Issues[]): void
+    _createElementIssues(elementId: string, elementIssues: Issues[]): void
+    _formatIssues(issues: Record<string, Issue>): Issues[]
     _setActive(active: boolean): void
     _addErrors($ul: Element, errors: Entry[]): void
     _addWarnings($ul: Element, warnings: Entry[]): void
