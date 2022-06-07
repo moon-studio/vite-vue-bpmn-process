@@ -26,7 +26,7 @@ const App = defineComponent({
     const customPenal = computed<boolean>(() => editorSettings.value.penalMode === 'custom')
     const showToolbar = computed<boolean>(() => editorSettings.value.toolbar)
 
-    const computedClasses = computed<Object>(() => {
+    const computedClasses = computed<string>(() => {
       const baseClass = ['designer-container']
 
       customPalette.value && baseClass.push('designer-with-palette')
