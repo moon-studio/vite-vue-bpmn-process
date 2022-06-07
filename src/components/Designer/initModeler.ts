@@ -5,6 +5,10 @@ import Modeler from 'bpmn-js/lib/Modeler'
 import { createNewDiagram } from '@/utils'
 import EventEmitter from '@/utils/EventEmitter'
 import modelerStore from '@/store/modeler'
+import { Moddle } from 'moddle'
+import Modeling from 'bpmn-js/lib/features/modeling/Modeling.js'
+import Canvas from 'diagram-js/lib/core/Canvas'
+import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
 
 export default function (
   designer: Ref<HTMLElement | null>,
@@ -33,10 +37,10 @@ export default function (
   const modeler: Modeler = (window.bpmnInstances.modeler = new Modeler(options))
 
   store.setModeler(markRaw(modeler))
-  store.setModules('moddle', markRaw(modeler.get('moddle')))
-  store.setModules('modeling', markRaw(modeler.get('modeling')))
-  store.setModules('canvas', markRaw(modeler.get('canvas')))
-  store.setModules('elementRegistry', markRaw(modeler.get('elementRegistry')))
+  store.setModules('moddle', markRaw(modeler.get<Moddle>('moddle')))
+  store.setModules('modeling', markRaw(modeler.get<Modeling>('modeling')))
+  store.setModules('canvas', markRaw(modeler.get<Canvas>('canvas')))
+  store.setModules('elementRegistry', markRaw(modeler.get<ElementRegistry>('elementRegistry')))
 
   EventEmitter.instance.emit('modeler-init', modeler)
 

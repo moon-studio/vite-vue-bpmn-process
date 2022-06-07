@@ -1,18 +1,14 @@
 import { Translate } from 'diagram-js/lib/i18n/translate'
-import zhCN from './zh-cn.json'
+import zhCN from './zh-cn'
 
-const customTranslate: Translate = (template, replacements) => {
-  replacements = replacements || {}
+const customTranslate: Translate = (template, replacements?: Record<string, string>) => {
+  const rm = replacements || {}
   // Translate
   template = zhCN[template] || template
 
   // Replace
   return template.replace(/{([^}]+)}/g, function (_, key) {
-    let str = replacements[key]
-    if (zhCN[replacements[key]] !== null && zhCN[replacements[key]] !== undefined) {
-      str = zhCN[replacements[key]]
-    }
-    return str || '{' + key + '}'
+    return rm[key] || '{' + key + '}'
   })
 }
 

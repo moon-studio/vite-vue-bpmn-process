@@ -1,20 +1,24 @@
-import { defineComponent, ref } from 'vue'
+import { defineComponent, markRaw, ref } from 'vue'
 import { NCard } from 'naive-ui'
+import { Base, Connection, Label, Shape } from 'diagram-js/lib/model'
+import { Translate } from 'diagram-js/lib/i18n/translate'
+
 import EventEmitter from '@/utils/EventEmitter'
-import { Base, Connection, Label, ModdleElement, Shape } from 'diagram-js/lib/model'
 import Logger from '@/utils/Logger'
+import modelerStore from '@/store/modeler'
 
 const Penal = defineComponent({
   name: 'Penal',
   setup() {
+    const store = modelerStore()
     const penal = ref<HTMLDivElement | null>(null)
-
     const currentElementId = ref<string | undefined>(undefined)
     const currentElementType = ref<string | undefined>(undefined)
-    const currentElementBO = ref<ModdleElement | null>(null)
+
+    const penalTitle = ref<string | undefined>('属性配置')
 
     EventEmitter.instance.on('modeler-init', (modeler) => {
-      initBpmnModules(modeler)
+      // 导入完成后默认选中 process 节点
       modeler.on('import.done', (e) => {
         setCurrentElement(null)
       })
@@ -23,47 +27,40 @@ const Penal = defineComponent({
         setCurrentElement(newSelection[0] || null)
       })
       modeler.on('element.changed', ({ element }) => {
-        // 保证 修改 "默认流转路径" 类似需要修改多个元素的事件发生的时候，更新表单的元素与原选中元素不一致。
+        // 保证 修改 "默认流转路径" 等类似需要修改多个元素的事件发生的时候，更新表单的元素与原选中元素不一致。
         if (element && element.id === currentElementId.value) {
           setCurrentElement(element)
         }
       })
     })
 
-    const initBpmnModules = (modeler) => {
-      window.bpmnInstances.elementRegistry = modeler.get('elementRegistry')
-      window.bpmnInstances.eventBus = modeler.get('eventBus')
-      window.bpmnInstances.modeling = modeler.get('modeling')
-      window.bpmnInstances.moddle = modeler.get('moddle')
-      window.bpmnInstances.replace = modeler.get('replace')
-      window.bpmnInstances.selection = modeler.get('selection')
-    }
-
+    // 设置选中元素，更新 store
     const setCurrentElement = (element: Shape | Base | Connection | Label | null) => {
-      let activatedElement: Shape | Base | Connection | Label | null = element
+      let activatedElement: BpmnElement | null | undefined = element
       if (!activatedElement) {
         activatedElement =
-          window.bpmnInstances.elementRegistry.find((el) => el.type === 'bpmn:Process') ??
-          window.bpmnInstances.elementRegistry.find((el) => el.type === 'bpmn:Collaboration')
+          store.getElRegistry?.find((el) => el.type === 'bpmn:Process') ||
+          store.getElRegistry?.find((el) => el.type === 'bpmn:Collaboration')
+
         if (!activatedElement) {
           return Logger.prettyError('No Element found!')
         }
       }
-      window.bpmnInstances.currentElement = activatedElement
+      store.setElement(markRaw(activatedElement))
       currentElementId.value = activatedElement.id
-      currentElementType.value = activatedElement.type
-      currentElementBO.value = activatedElement.businessObject
-      Logger.printBack(
-        'primary',
-        `select element changed: id: ${activatedElement.id} , type: ${activatedElement.type}`
+      currentElementType.value = activatedElement.type.split(':')[1]
+      penalTitle.value = store.getModeler?.get<Translate>('translate')(currentElementType.value)
+      Logger.prettyPrimary(
+        'Selected element changed',
+        `ID: ${activatedElement.id} , type: ${activatedElement.type}`
       )
-      Logger.prettyInfo('businessObject', activatedElement.businessObject)
+      Logger.prettyInfo('Selected element businessObject', activatedElement.businessObject)
     }
 
     return () => (
       <div ref={penal} class="penal">
         <NCard
-          title="属性配置"
+          title={penalTitle.value}
           segmented={{ content: true, footer: 'soft' }}
           v-slots={{
             default: () => <div>卡片内容</div>

@@ -491,7 +491,7 @@ declare module 'diagram-js/lib/core/ElementRegistry' {
      * @param fn {Function}
      * @return {Base}
      */
-    find<E extends Base>(fn: (element: E) => boolean): E[]
+    find<E extends Base>(fn: (element: E) => boolean): E
 
     /**
      * 获取所有注册的元素实例
@@ -991,7 +991,7 @@ declare module 'diagram-js/lib/layout/CroppingConnectionDocking' {
 }
 /************************************** Diagram translate 翻译模块 *****************************************/
 declare module 'diagram-js/lib/i18n/translate' {
-  export type Translate = (template: string, replacements: Object) => string
+  export type Translate = (template: string, replacements?: Record<string, string>) => string
 }
 /************************************** Diagram feature 扩展功能模块 *****************************************/
 // 基本建模器，提供基础操作方法，内部方法都继承 CommandHandler 来实现

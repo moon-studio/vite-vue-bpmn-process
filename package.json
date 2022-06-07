@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --open -l info --force true",
+    "dev": "vite --force --open",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
