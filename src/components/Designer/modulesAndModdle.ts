@@ -1,5 +1,6 @@
 import { computed } from 'vue'
 import { ModuleDeclaration } from 'didi'
+import { ViewerOptions } from 'diagram-js/lib/model'
 
 import EventEmitter from '@/utils/EventEmitter'
 
@@ -29,7 +30,7 @@ import renderer from '@/components/AddiModules/Renderer'
 
 import lintModule from 'bpmn-js-bpmnlint'
 import bpmnlint from '@/components/AddiModules/Lint/bpmnlint'
-import { ViewerOptions } from 'diagram-js/lib/model'
+import Rules from '@/components/AddiModules/Rules'
 
 export default function (settings) {
   return computed<ViewerOptions<Element>>(() => {
@@ -77,6 +78,9 @@ export default function (settings) {
       active: true,
       bpmnlint: bpmnlint
     }
+
+    console.log(Rules)
+    modules.push(Rules)
 
     return [modules, moddle, options]
   })

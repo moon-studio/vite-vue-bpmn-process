@@ -99,7 +99,7 @@ declare module 'diagram-js/lib/core/Canvas' {
     protected _graphicsFactory: GraphicsFactory
     // 内部属性，保存图层实例
     protected _layers: Record<string, Layer>
-    protected _planes: {rootElement: Root; layer: Layer}[]
+    protected _planes: { rootElement: Root; layer: Layer }[]
     protected _rootElement: Root | null
     protected _cachedViewbox: Viewbox | null
 
@@ -711,80 +711,80 @@ declare module 'diagram-js/lib/command/CommandInterceptor' {
   export default abstract class CommandInterceptor {
     protected constructor(eventBus: EventBus)
     on(
-      events?: string | string[],
-      hook?: string,
-      priority?: number,
-      handler?: Function,
-      unwrap?: boolean
+      events: Function | number | string | string[],
+      hook: string | number | Function,
+      priority: number | Function,
+      handler: Function,
+      unwrap: boolean
     ): void
     canExecute(
-      events?: string | string[],
-      hook?: string,
-      priority?: number,
+      events: Function | number | string | string[],
+      hook: string | number | Function,
+      priority?: number | Function,
       handler?: Function,
       unwrap?: boolean,
       that?: Object
     ): boolean
     preExecute(
-      events?: string | string[],
-      hook?: string,
-      priority?: number,
+      events: Function | number | string | string[],
+      hook: string | number | Function,
+      priority?: number | Function,
       handler?: Function,
       unwrap?: boolean,
       that?: Object
     ): void
     preExecuted(
-      events?: string | string[],
-      hook?: string,
-      priority?: number,
+      events: Function | number | string | string[],
+      hook: string | number | Function,
+      priority?: number | Function,
       handler?: Function,
       unwrap?: boolean,
       that?: Object
     ): void
     execute(
-      events?: string | string[],
-      hook?: string,
-      priority?: number,
+      events: Function | number | string | string[],
+      hook: string | number | Function,
+      priority?: number | Function,
       handler?: Function,
       unwrap?: boolean,
       that?: Object
     ): void
     executed(
-      events?: string | string[],
-      hook?: string,
-      priority?: number,
+      events: Function | number | string | string[],
+      hook: string | number | Function,
+      priority?: number | Function,
       handler?: Function,
       unwrap?: boolean,
       that?: Object
     ): void
     postExecute(
-      events?: string | string[],
-      hook?: string,
-      priority?: number,
+      events: Function | number | string | string[],
+      hook: string | number | Function,
+      priority?: number | Function,
       handler?: Function,
       unwrap?: boolean,
       that?: Object
     ): void
     postExecuted(
-      events?: string | string[],
-      hook?: string,
-      priority?: number,
+      events: Function | number | string | string[],
+      hook: string | number | Function,
+      priority?: number | Function,
       handler?: Function,
       unwrap?: boolean,
       that?: Object
     ): void
     revert(
-      events?: string | string[],
-      hook?: string,
-      priority?: number,
+      events: Function | number | string | string[],
+      hook: string | number | Function,
+      priority?: number | Function,
       handler?: Function,
       unwrap?: boolean,
       that?: Object
     ): void
     reverted(
-      events?: string | string[],
-      hook?: string,
-      priority?: number,
+      events: Function | number | string | string[],
+      hook: string | number | Function,
+      priority?: number | Function,
       handler?: Function,
       unwrap?: boolean,
       that?: Object
