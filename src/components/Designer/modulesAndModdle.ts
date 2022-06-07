@@ -79,7 +79,7 @@ export default function (settings) {
       bpmnlint: bpmnlint
     }
 
-    console.log(Rules)
+    // 设置 自定义规则
     modules.push(Rules)
 
     return [modules, moddle, options]
