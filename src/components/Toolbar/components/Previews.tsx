@@ -20,7 +20,7 @@ const Previews = defineComponent({
           return message.warning('模型加载失败，请刷新重试')
         }
 
-        const result = await modeler.saveXML({ format: true })
+        const result = await modeler.saveXML({ format: true, preamble: true })
 
         previewModel.create({
           title: '流程预览',

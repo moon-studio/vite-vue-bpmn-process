@@ -31,7 +31,7 @@ export default class CustomRendererProvider extends BpmnRenderer {
       }
       return drawCircle(this, parentGfx, element.width, element.height, attrs)
     }
-    this.handlers['bpmn:EndEvent'] = (parentGfx, element, attrs) => {
+    this.handlers['bpmn:EndEvent'] = (parentGfx, element) => {
       const circle = this.handlers['bpmn:Event'](parentGfx, element, {
         fillOpacity: 1,
         strokeWidth: 2,
