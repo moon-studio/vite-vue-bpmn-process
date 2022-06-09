@@ -1,11 +1,13 @@
 import { defineComponent, markRaw, ref } from 'vue'
-import { NCard } from 'naive-ui'
+import { NCollapse } from 'naive-ui'
 import { Base, Connection, Label, Shape } from 'diagram-js/lib/model'
 import { Translate } from 'diagram-js/lib/i18n/translate'
 
 import EventEmitter from '@/utils/EventEmitter'
-import Logger from '@/utils/Logger'
 import modelerStore from '@/store/modeler'
+import Logger from '@/utils/Logger'
+
+import BaseInfo from './components/BaseInfo.vue'
 
 const Penal = defineComponent({
   name: 'Penal',
@@ -46,7 +48,7 @@ const Penal = defineComponent({
           return Logger.prettyError('No Element found!')
         }
       }
-      store.setElement(markRaw(activatedElement))
+      store.setElement(markRaw(activatedElement), activatedElement.id)
       currentElementId.value = activatedElement.id
       currentElementType.value = activatedElement.type.split(':')[1]
       penalTitle.value = store.getModeler?.get<Translate>('translate')(currentElementType.value)
@@ -59,13 +61,9 @@ const Penal = defineComponent({
 
     return () => (
       <div ref={penal} class="penal">
-        <NCard
-          title={penalTitle.value}
-          segmented={{ content: true, footer: 'soft' }}
-          v-slots={{
-            default: () => <div>卡片内容</div>
-          }}
-        ></NCard>
+        <NCollapse>
+          <BaseInfo></BaseInfo>
+        </NCollapse>
       </div>
     )
   }

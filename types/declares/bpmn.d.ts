@@ -302,7 +302,12 @@ declare module 'bpmn-js/lib/features/modeling/Modeling.js' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import ElementFactory from 'diagram-js/lib/core/ElementFactory'
   import CommandStack from 'diagram-js/lib/command/CommandStack'
-  import { Connection, Hints, Shape } from 'diagram-js/lib/model'
+  import { Base, Connection, Hints, Label, ModdleElement, Root, Shape } from 'diagram-js/lib/model'
+  import { Lane } from 'bpmn-moddle'
+  import { ModelingHandler } from 'diagram-js/lib/features/modeling/Modeling'
+  import { Bounds } from 'diagram-js/lib/core/Canvas'
+
+  type Properties = Record<string, string | number | boolean | ModdleElement | null | undefined>
 
   export default class Modeling extends BaseModeling {
     constructor(
@@ -311,9 +316,24 @@ declare module 'bpmn-js/lib/features/modeling/Modeling.js' {
       commandStack: CommandStack,
       bpmnRules: any
     )
-    getHandlers(): any
-    updateLabel(element: any, newLabel: any, newBounds, hints): void
+    getHandlers<H extends ModelingHandler>(): Record<string, H>
+    updateLabel(element: Base, newLabel: Label | string, newBounds?: Bounds, hints?: Hints): void
     connect(source: Shape, target: Shape, attrs?: Object, hints?: Hints): Connection
+    updateModdleProperties(
+      element: Base,
+      moddleElement: ModdleElement,
+      properties: Properties
+    ): void
+    updateProperties(element: Base, properties: Properties): void
+    resizeLane(laneShape: Shape, newBounds: Bounds, balanced?: boolean): void
+    addLane(targetLaneShape: Shape, location: Location): Lane
+    splitLane(targetLane: Lane, count: number): void
+    makeCollaboration(): Root
+    updateLaneRefs(flowNodeShapes: Shape, laneShapes: Shape): void
+    makeProcess(): Root
+    claimId(id: string, moddleElement: ModdleElement): void
+    unclaimId(id: string, moddleElement: ModdleElement): void
+    setColor(elements: Base | Base[], colors): void
   }
 }
 // bpmn DI 元素工厂
@@ -779,4 +799,26 @@ declare module 'bpmn-js/lib/features/snapping/BpmnConnectSnapping' {
 //
 declare module 'bpmn-js/lib/features/snapping/BpmnCreateMoveSnapping' {
   export default class BpmnCreateMoveSnapping {}
+}
+
+/*************************************** utils 相关函数 ****************************************/
+declare module 'bpmn-js/lib/util/ModelUtil' {
+  import { Base, ModdleElement } from 'diagram-js/lib/model'
+
+  export function is(element: Base | ModdleElement, type: string): boolean
+
+  export function isAny(element: Base, types: string[]): boolean
+
+  export function getBusinessObject(element: Base | ModdleElement): ModdleElement
+
+  export function getDi(element: Base): ModdleElement
+}
+
+declare module 'bpmn-js/lib/features/modeling/util/ModelingUtil' {
+  import { Base } from 'diagram-js/lib/model'
+  import { isAny, is } from 'bpmn-js/lib/util/ModelUtil'
+
+  export function getParent(element: Base, anyType: string | string[]): Base
+
+  export { isAny, is }
 }

@@ -7,7 +7,8 @@ import Canvas from 'diagram-js/lib/core/Canvas'
 import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
 
 type ModelerStore = {
-  activeElement: Base | null
+  activeElement: Base | undefined
+  activeElementId: string | undefined
   modeler: Modeler | null
   moddle: Moddle | null
   modeling: Modeling | null
@@ -16,7 +17,8 @@ type ModelerStore = {
 }
 
 const defaultState: ModelerStore = {
-  activeElement: null,
+  activeElement: undefined,
+  activeElementId: undefined,
   modeler: null,
   moddle: null,
   modeling: null,
@@ -28,6 +30,7 @@ export default defineStore('modeler', {
   state: () => defaultState,
   getters: {
     getActive: (state) => state.activeElement,
+    getActiveId: (state) => state.activeElementId,
     getModeler: (state) => state.modeler,
     getModdle: (state) => state.moddle,
     getModeling: (state) => state.modeling,
@@ -38,11 +41,12 @@ export default defineStore('modeler', {
     setModeler(modeler) {
       this.modeler = modeler
     },
-    setModules(key, module) {
+    setModules<K extends keyof ModelerStore>(key: K, module) {
       this[key] = module
     },
-    setElement(element) {
+    setElement(element: Base, id: string) {
       this.activeElement = element
+      this.activeElementId = id
     }
   }
 })
