@@ -1014,7 +1014,7 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
 
   export default class Modeling {
     constructor(eventBus: EventBus, elementFactory: ElementFactory, commandStack: CommandStack)
-    getHandlers<H extends ModelingHandler>(): H[]
+    getHandlers<H extends ModelingHandler>(): Record<string, H>
     registerHandlers(commandStack: CommandStack[]): void
     moveShape(
       shape: Base,
