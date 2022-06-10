@@ -26,9 +26,6 @@ export default function (
 
   const options: ViewerOptions<Element> = {
     container: designer!.value as HTMLElement,
-    keyboard: {
-      bindTo: designer!.value as HTMLElement
-    },
     additionalModules: modelerModules[0] || [],
     moddleExtensions: modelerModules[1] || {},
     ...modelerModules[2]

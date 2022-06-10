@@ -79,6 +79,11 @@ export default function (settings) {
       bpmnlint: bpmnlint
     }
 
+    // 设置键盘事件绑定
+    options['keyboard'] = {
+      bindTo: document
+    }
+
     // 设置 自定义规则
     modules.push(Rules)
 
