@@ -1,6 +1,7 @@
 import PaletteProvider from 'bpmn-js/lib/features/palette/PaletteProvider'
 import ElementFactory from 'bpmn-js/lib/features/modeling/ElementFactory.js'
 import { assign } from 'min-dash'
+import { createAction } from '../utils'
 
 class RewritePaletteProvider extends PaletteProvider {
   private readonly _palette: PaletteProvider
@@ -11,6 +12,7 @@ class RewritePaletteProvider extends PaletteProvider {
   private readonly _handTool: any
   private readonly _globalConnect: any
   private readonly _translate: any
+  private readonly _moddle: any
   constructor(palette, create, elementFactory, spaceTool, lassoTool, handTool, globalConnect) {
     super(palette, create, elementFactory, spaceTool, lassoTool, handTool, globalConnect, 2000)
     this._palette = palette
@@ -25,42 +27,16 @@ class RewritePaletteProvider extends PaletteProvider {
     const actions = {},
       create = this._create,
       elementFactory = this._elementFactory,
-      spaceTool = this._spaceTool,
       lassoTool = this._lassoTool,
       handTool = this._handTool,
-      globalConnect = this._globalConnect,
-      translate = this._translate
+      globalConnect = this._globalConnect
 
-    function createAction(
-      type: string,
-      group: string,
-      className: string,
-      title: string,
-      options?: Object
-    ) {
-      function createListener(event) {
-        const shape = elementFactory.createShape(assign({ type: type }, options))
+    function createSqlTask(event) {
+      const sqlTask = elementFactory.createShape({ type: 'miyue:SqlTask' })
 
-        if (options) {
-          !shape.businessObject.di && (shape.businessObject.di = {})
-          shape.businessObject.di.isExpanded = (options as { [key: string]: any }).isExpanded
-        }
-
-        create.start(event, shape)
-      }
-
-      const shortType = type.replace(/^bpmn:/, '')
-
-      return {
-        group: group,
-        className: className,
-        title: title || translate('Create {type}', { type: shortType }),
-        action: {
-          dragstart: createListener,
-          click: createListener
-        }
-      }
+      create.start(event, sqlTask)
     }
+
     function createSubprocess(event) {
       const subProcess = elementFactory.createShape({
         type: 'bpmn:SubProcess',
@@ -119,18 +95,24 @@ class RewritePaletteProvider extends PaletteProvider {
         separator: true
       },
       'create.exclusive-gateway': createAction(
+        elementFactory,
+        create,
         'bpmn:ExclusiveGateway',
         'gateway',
         'bpmn-icon-gateway-none',
         '网关'
       ),
       'create.parallel-gateway': createAction(
+        elementFactory,
+        create,
         'bpmn:ParallelGateway',
         'gateway',
         'bpmn-icon-gateway-parallel',
         '并行网关'
       ),
       'create.event-base-gateway': createAction(
+        elementFactory,
+        create,
         'bpmn:EventBasedGateway',
         'gateway',
         'bpmn-icon-gateway-eventbased',
@@ -141,23 +123,38 @@ class RewritePaletteProvider extends PaletteProvider {
         separator: true
       },
       'create.user-task': createAction(
+        elementFactory,
+        create,
         'bpmn:UserTask',
         'activity',
         'bpmn-icon-user-task',
         '用户任务'
       ),
       'create.script-task': createAction(
+        elementFactory,
+        create,
         'bpmn:ScriptTask',
         'activity',
         'bpmn-icon-script-task',
         '脚本任务'
       ),
       'create.service-task': createAction(
+        elementFactory,
+        create,
         'bpmn:ServiceTask',
         'activity',
         'bpmn-icon-service-task',
         '服务任务'
       ),
+      'create.sql-task': {
+        group: 'activity',
+        className: 'miyue-sql-task',
+        title: '数据库任务',
+        action: {
+          click: createSqlTask,
+          dragstart: createSqlTask
+        }
+      },
       'create.subprocess-expanded': {
         group: 'activity',
         className: 'bpmn-icon-subprocess-expanded',
@@ -172,5 +169,15 @@ class RewritePaletteProvider extends PaletteProvider {
     return actions
   }
 }
+
+RewritePaletteProvider.$inject = [
+  'palette',
+  'create',
+  'elementFactory',
+  'spaceTool',
+  'lassoTool',
+  'handTool',
+  'globalConnect'
+]
 
 export default RewritePaletteProvider

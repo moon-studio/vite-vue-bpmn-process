@@ -123,4 +123,15 @@ class EnhancementPaletteProvider extends PaletteProvider {
   }
 }
 
+EnhancementPaletteProvider.$inject = [
+  'palette',
+  'create',
+  'elementFactory',
+  'spaceTool',
+  'lassoTool',
+  'handTool',
+  'globalConnect',
+  'translate'
+]
+
 export default EnhancementPaletteProvider

@@ -19,6 +19,7 @@ import CamundaExtensionModule from 'camunda-bpmn-moddle/lib'
 import activitiModdleDescriptors from '@/components/ModdleExtensions/activiti.json'
 import camundaModdleDescriptors from '@/components/ModdleExtensions/camunda.json'
 import flowableModdleDescriptors from '@/components/ModdleExtensions/flowable.json'
+import MiyueModdleDescriptors from '@/components/ModdleExtensions/miyue.json'
 
 // 自定义 modules 扩展模块
 import translate from '@/components/AddiModules/Translate'
@@ -86,6 +87,9 @@ export default function (settings) {
 
     // 设置 自定义规则
     modules.push(Rules)
+
+    // 设置自定义属性
+    moddle['miyue'] = MiyueModdleDescriptors
 
     return [modules, moddle, options]
   })
