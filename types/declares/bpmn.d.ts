@@ -754,6 +754,7 @@ declare module 'bpmn-js/lib/features/palette/PaletteProvider' {
   import GlobalConnect from 'diagram-js/lib/features/global-connect/GlobalConnect'
   import Palette from 'diagram-js/lib/features/palette/Palette'
   export default class PaletteProvider {
+    static $inject?: string[]
     constructor(
       palette: Palette,
       create: Create,
