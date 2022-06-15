@@ -6,10 +6,10 @@
 </template>
 
 <script lang="ts">
-  import { mapState } from 'pinia'
-  import modelerStore from '@/store/modeler'
   import { defineComponent } from 'vue'
   import { NCollapseItem } from 'naive-ui'
+  import { mapState } from 'pinia'
+  import modelerStore from '@/store/modeler'
 
   export default defineComponent({
     name: 'BaseInfo',
