@@ -21,7 +21,7 @@ declare module 'bpmn-js-token-simulation' {
   import DisableModeling from 'bpmn-js-token-simulation/lib/features/disable-modeling/DisableModeling'
   import KeyboardBindings from 'bpmn-js-token-simulation/lib/features/keyboard-bindings/KeyboardBindings'
   import EditorActions from 'bpmn-js-token-simulation/lib/features/editor-actions/EditorActions'
-  import { ModuleDefinition } from 'types/declares/didi'
+  import { ModuleDefinition } from 'didi'
 
   const SimulationModeler: ModuleDefinition & {
     animation: ['type', Animation]
@@ -53,7 +53,7 @@ declare module 'bpmn-js-token-simulation' {
 }
 
 declare module 'bpmn-js-token-simulation/lib/viewer' {
-  import { ModuleDefinition } from 'types/declares/didi'
+  import { ModuleDefinition } from 'didi'
   import ContextPads from 'bpmn-js-token-simulation/lib/features/context-pads/ContextPads'
   import ElementNotifications from 'bpmn-js-token-simulation/lib/features/element-notifications/ElementNotifications'
   import ElementSupport from 'bpmn-js-token-simulation/lib/features/element-support/ElementSupport'
