@@ -1,5 +1,5 @@
 declare module 'bpmn-js-bpmnlint' {
-  import { Injector, ModuleDefinition } from 'types/declares/didi'
+  import { Injector, ModuleDefinition } from 'didi'
   import Modeler from 'bpmn-js/lib/Modeler'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'

@@ -64,6 +64,11 @@ declare module 'camunda-bpmn-moddle/lib/RemoveVariableEventBehaviour' {
   import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
   import ModdleCopy from 'bpmn-js/lib/features/copy-paste/ModdleCopy'
   export default class RemoveVariableEventBehaviour {
-    constructor(modeling: Modeling, injector: Injector, bpmnFactory: BpmnFactory, moddleCopy: ModdleCopy)
+    constructor(
+      modeling: Modeling,
+      injector: Injector,
+      bpmnFactory: BpmnFactory,
+      moddleCopy: ModdleCopy
+    )
   }
 }

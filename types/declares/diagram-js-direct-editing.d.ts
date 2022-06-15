@@ -1,6 +1,6 @@
 //
 declare module 'diagram-js-direct-editing' {
-  import { ModuleDefinition } from 'types/declares/didi'
+  import { ModuleDefinition } from 'didi'
   const directEditingModule: ModuleDefinition
   export default directEditingModule
 }
