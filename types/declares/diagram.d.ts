@@ -60,6 +60,11 @@ declare module 'diagram-js/lib/core/Canvas' {
   export type Position = {
     x: number
     y: number
+    parallel?: number
+    seq?: number
+    compensation?: number
+    loop?: number
+    adhoc?: number
   }
   export type Delta = {
     dx: number
@@ -100,8 +105,9 @@ declare module 'diagram-js/lib/core/Canvas' {
     // 内部属性，保存图层实例
     protected _layers: Record<string, Layer>
     protected _planes: { rootElement: Root; layer: Layer }[]
-    protected _rootElement: Root | null
-    protected _cachedViewbox: Viewbox | null
+    protected _rootElement: Root | undefined
+    protected _cachedViewbox: Viewbox | undefined
+    _svg: HTMLElement
 
     /**
      * ## 画布初始化方法，创建一个一直被 div#container 元素包裹的 svg 元素，可以通过访问外层 div 元素获取画布大小
@@ -668,7 +674,7 @@ declare module 'diagram-js/lib/core/GraphicsFactory' {
 // 提供可撤销/重做的命令执行栈, 通过 CommandHandler 执行具体命令
 declare module 'diagram-js/lib/command/CommandStack' {
   import { Base } from 'diagram-js/lib/model'
-  import { Injector } from 'didi'
+  import { Injector, ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import CommandHandler from 'diagram-js/lib/command/CommandHandler'
 
@@ -679,7 +685,7 @@ declare module 'diagram-js/lib/command/CommandStack' {
   }
   export type Command = string
 
-  export default class CommandStack {
+  export default class CommandStack extends ModuleConstructor {
     constructor(eventBus: EventBus, injector: Injector)
     execute(command: Command, context: Object): void
     canExecute(command: Command, context: Object): boolean
@@ -692,6 +698,7 @@ declare module 'diagram-js/lib/command/CommandStack' {
     canRedo(): boolean
   }
 }
+
 // 抽象类，继承实现可以在 CommandStack 中注册的命令
 declare module 'diagram-js/lib/command/CommandHandler' {
   import { Base } from 'diagram-js/lib/model'
@@ -707,8 +714,9 @@ declare module 'diagram-js/lib/command/CommandHandler' {
 // CommandHandler 实现类 的一个验证和扩展程序
 declare module 'diagram-js/lib/command/CommandInterceptor' {
   import EventBus from 'diagram-js/lib/core/EventBus'
+  import { ModuleConstructor } from 'didi'
 
-  export default abstract class CommandInterceptor {
+  export default abstract class CommandInterceptor extends ModuleConstructor {
     protected constructor(eventBus: EventBus)
     on(
       events: Function | number | string | string[],
@@ -795,8 +803,11 @@ declare module 'diagram-js/lib/command/CommandInterceptor' {
 // 抽象类 基础渲染器
 declare module 'diagram-js/lib/draw/BaseRenderer' {
   import { Base, Connection, Shape } from 'diagram-js/lib/model'
+  import { ModuleConstructor } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
 
-  export default abstract class BaseRenderer {
+  export default abstract class BaseRenderer extends ModuleConstructor {
+    constructor(eventBus: EventBus, renderPriority?: number)
     abstract canRender<E extends Base>(element: E): boolean
     abstract drawShape<E extends Shape>(visuals: SVGElement, element: E): SVGRectElement
     abstract drawConnection<E extends Connection>(
@@ -813,8 +824,9 @@ declare module 'diagram-js/lib/draw/DefaultRenderer' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Styles, { Traits } from 'diagram-js/lib/draw/Styles'
   import { Connection, Shape } from 'diagram-js/lib/model'
+  import { ModuleConstructor } from 'didi'
 
-  export default class DefaultRenderer extends BaseRenderer {
+  export default class DefaultRenderer extends ModuleConstructor implements BaseRenderer {
     constructor(eventBus: EventBus, styles: Styles, DEFAULT_RENDER_PRIORITY?: number)
     CONNECTION_STYLE: Traits
     SHAPE_STYLE: Traits
@@ -847,7 +859,7 @@ declare module 'diagram-js/lib/draw/Styles' {
 declare module 'diagram-js/lib/model' {
   import { KeyboardConfig } from 'diagram-js/lib/features/keyboard/Keyboard'
   import { Descriptor, Moddle } from 'moddle'
-  import { ModuleDeclaration } from 'types/declares/didi'
+  import { ModuleDeclaration } from 'didi'
 
   export interface Hints {
     connectionStart?: Point
@@ -972,8 +984,9 @@ declare module 'diagram-js/lib/layout/CroppingConnectionDocking' {
   import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
   import { Base, Connection, Shape, Point, Hints } from 'diagram-js/lib/model'
   import { DockingPointDescriptor } from 'diagram-js/lib/layout/ConnectionDocking'
+  import { ModuleConstructor } from 'didi'
 
-  export default class CroppingConnectionDocking {
+  export default class CroppingConnectionDocking extends ModuleConstructor {
     constructor(elementRegistry: ElementRegistry, graphicsFactory: GraphicsFactory)
     private _getIntersection(shape: Shape, connection: Connection, takeFirst: boolean): Point
     private _getConnectionPath(connection: Connection): string
@@ -1002,8 +1015,9 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
   import CommandHandler from 'diagram-js/lib/command/CommandHandler'
   import { Base, Connection, Label, Shape, Hints } from 'diagram-js/lib/model'
   import { Dimensions, Position } from 'diagram-js/lib/core/Canvas'
+  import { ModuleConstructor } from 'didi'
 
-  export class ModelingHandler extends CommandHandler {
+  export class ModelingHandler extends ModuleConstructor implements CommandHandler {
     constructor(modeling: Modeling)
     canExecute(context: Object): boolean
     execute<E extends Base>(context: Object): E[]
@@ -1105,8 +1119,9 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
 declare module 'diagram-js/lib/features/align-elements/AlignElements' {
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import { Base } from 'diagram-js/lib/model'
+  import { ModuleConstructor } from 'didi'
 
-  export default class AlignElements {
+  export default class AlignElements extends ModuleConstructor {
     constructor(modeling: Modeling)
 
     /**
@@ -1143,8 +1158,9 @@ declare module 'diagram-js/lib/features/auto-place/AutoPlace' {
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import { Hints, Shape } from 'diagram-js/lib/model'
+  import { ModuleConstructor } from 'didi'
 
-  export default class AutoPlace {
+  export default class AutoPlace extends ModuleConstructor {
     constructor(eventBus: EventBus, modeling: Modeling, canvas: Canvas)
     /**
      * 将元素添加到 source 元素中的合适位置
@@ -1160,8 +1176,9 @@ declare module 'diagram-js/lib/features/auto-place/AutoPlace' {
 declare module 'diagram-js/lib/features/auto-place/AutoPlaceSelectionBehavior' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Selection from 'diagram-js/lib/features/selection/Selection'
+  import { ModuleConstructor } from 'didi'
 
-  export default class AutoPlaceSelectionBehavior {
+  export default class AutoPlaceSelectionBehavior extends ModuleConstructor {
     constructor(eventBus: EventBus, selection: Selection)
   }
 }
@@ -1259,8 +1276,9 @@ declare module 'diagram-js/lib/features/auto-scroll/AutoScroll' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import { Point } from 'diagram-js/lib/model'
+  import { ModuleConstructor } from 'didi'
 
-  export default class AutoScroll {
+  export default class AutoScroll extends ModuleConstructor {
     constructor(config: any, eventBus: EventBus, canvas: Canvas)
     /**
      * 启动画布滚动, 创建一个定时器，每隔一定时间执行一次滚动
@@ -1284,16 +1302,17 @@ declare module 'diagram-js/lib/features/bendpoints/Bendpoints' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import InteractionEvents from 'diagram-js/lib/features/interaction-events/InteractionEvents'
-  import BendpointsMove from 'diagram-js/lib/features/bendpoints/BendpointsMove'
+  import BendpointMove from 'diagram-js/lib/features/bendpoints/BendpointMove'
   import ConnectionSegmentMove from 'diagram-js/lib/features/bendpoints/ConnectionSegmentMove'
   import { Connection } from 'diagram-js/lib/model'
+  import { ModuleConstructor } from 'didi'
 
-  export default class Bendpoints {
+  export default class Bendpoints extends ModuleConstructor {
     constructor(
       eventBus: EventBus,
       canvas: Canvas,
       interactionEvents: InteractionEvents,
-      bendpointMove: BendpointsMove,
+      bendpointMove: BendpointMove,
       connectionSegmentMove: ConnectionSegmentMove
     )
 
@@ -1304,8 +1323,8 @@ declare module 'diagram-js/lib/features/bendpoints/Bendpoints' {
   }
 }
 // 通过拖放移动弯曲点以添加/删除弯曲点或重新连接连接
-declare module 'diagram-js/lib/features/bendpoints/BendpointsMove' {
-  import { Injector } from 'didi'
+declare module 'diagram-js/lib/features/bendpoints/BendpointMove' {
+  import { Injector, ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import Dragging from 'diagram-js/lib/features/dragging/Dragging'
@@ -1313,7 +1332,7 @@ declare module 'diagram-js/lib/features/bendpoints/BendpointsMove' {
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import { Connection, Point } from 'diagram-js/lib/model'
 
-  export default class BendpointsMove {
+  export default class BendpointMove extends ModuleConstructor {
     constructor(
       injector: Injector,
       eventBus: EventBus,
@@ -1328,15 +1347,15 @@ declare module 'diagram-js/lib/features/bendpoints/BendpointsMove' {
   }
 }
 // 拖动连线拐点时的预览实现
-declare module 'diagram-js/lib/features/bendpoints/BendpointsMovePreview' {
-  import BendpointsMove from 'diagram-js/lib/features/bendpoints/BendpointsMove'
-  import { Injector } from 'didi'
+declare module 'diagram-js/lib/features/bendpoints/BendpointMovePreview' {
+  import BendpointMove from 'diagram-js/lib/features/bendpoints/BendpointMove'
+  import { Injector, ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
 
-  export default class BendpointsMovePreview {
+  export default class BendpointMovePreview extends ModuleConstructor {
     constructor(
-      bendpointMove: BendpointsMove,
+      bendpointMove: BendpointMove,
       injector: Injector,
       eventBus: EventBus,
       canvas: Canvas
@@ -1346,19 +1365,20 @@ declare module 'diagram-js/lib/features/bendpoints/BendpointsMovePreview' {
 // 注册拐点移动监听事件
 declare module 'diagram-js/lib/features/bendpoints/BendpointSnapping' {
   import EventBus from 'diagram-js/lib/core/EventBus'
-  export default class BendpointSnapping {
+  import { ModuleConstructor } from 'didi'
+  export default class BendpointSnapping extends ModuleConstructor {
     constructor(eventBus: EventBus)
   }
 }
 // 拐点移动时的预览实现
 declare module 'diagram-js/lib/features/bendpoints/ConnectionSegmentMove' {
-  import { Injector } from 'didi'
+  import { Injector, ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import Dragging from 'diagram-js/lib/features/dragging/Dragging'
   import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
-  export default class ConnectionSegmentMove {
+  export default class ConnectionSegmentMove extends ModuleConstructor {
     constructor(
       injector: Injector,
       eventBus: EventBus,

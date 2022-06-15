@@ -4,7 +4,7 @@ import Styles from 'diagram-js/lib/draw/Styles'
 import PathMap from 'bpmn-js/lib/draw/PathMap'
 import Canvas from 'diagram-js/lib/core/Canvas'
 import TextRenderer from 'bpmn-js/lib/draw/TextRenderer'
-import renderEventContent from '@/components/AddiModules/Renderer/renderEventContent'
+import renderEventContent from '@/components/AddiModules/Renderer/CustomRenderer/renderEventContent'
 import { append as svgAppend, attr as svgAttr, create as svgCreate } from 'tiny-svg'
 import { drawCircle } from '@/components/AddiModules/Renderer/utils'
 

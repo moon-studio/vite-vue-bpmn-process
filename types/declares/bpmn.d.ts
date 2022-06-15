@@ -91,7 +91,7 @@ declare module 'bpmn-js/lib/draw/BpmnRenderer' {
   import TextRenderer from 'bpmn-js/lib/draw/TextRenderer'
   import { Base, Connection, Shape } from 'diagram-js/lib/model'
 
-  export type RendererHandler = <E extends Base>(
+  export type RendererHandler = <E extends Base, T extends SVGElement>(
     parentGfx: SVGElement,
     element: E,
     options?: Position | Object
@@ -229,8 +229,8 @@ declare module 'bpmn-js/lib/draw/PathMap' {
     | 'MESSAGE_FLOW_MARKER'
   export default class PathMap {
     protected pathMap: { [pathId in PathId]: Path }
-    private getRawPath(pathId: string): string
-    private getScaledPath(pathId: string, param: Object): Object
+    getRawPath(pathId: string): string
+    getScaledPath(pathId: string, param: Object): Object
   }
 }
 // bpmn 文本渲染
@@ -247,10 +247,10 @@ declare module 'bpmn-js/lib/draw/TextRenderer' {
   export default class TextRenderer {
     constructor(config: any)
     private getExternalLabelBounds(bounds: Bounds, text: string): Bounds
-    private getTextAnnotationBounds(bounds: Bounds, text: string): Bounds
-    private createText(text: string, options?: Object): SVGElement
-    private getDefaultStyle(): TextStyle
-    private getExternalStyle(): TextStyle
+    getTextAnnotationBounds(bounds: Bounds, text: string): Bounds
+    createText(text: string, options?: Object): SVGTextElement
+    getDefaultStyle(): TextStyle
+    getExternalStyle(): TextStyle
   }
 }
 /************************************* import 文件导入 *************************************/
@@ -599,9 +599,8 @@ declare module 'bpmn-js/lib/features/drilldown/DrilldownBreadcrumbs' {
     /**
      * 更新显示的面包屑。如果未提供元素，则仅更新标签
      * @param element
-     * @private
      */
-    private updateBreadcrumbs(element: Base): void
+    updateBreadcrumbs(element: Base): void
   }
 }
 // 向下钻取时，将折叠的子流程移动到视图中。
@@ -803,6 +802,34 @@ declare module 'bpmn-js/lib/features/snapping/BpmnCreateMoveSnapping' {
 }
 
 /*************************************** utils 相关函数 ****************************************/
+declare module 'bpmn-js/lib/draw/bpmnRenderUtil' {
+  import { Base, ModdleElement, Shape } from 'diagram-js/lib/model'
+
+  import { getDi } from 'bpmn-js/lib/util/ModelUtil'
+  export { getDi }
+
+  export function isTypedEvent(
+    event,
+    eventDefinitionType: string,
+    filter: Object | unknown[]
+  ): boolean
+  export function isThrowEvent(event): boolean
+  export function isCollection(element: Base): boolean
+  export function getSemantic(element: Base): ModdleElement
+
+  export function getFillColor(element: Base, defaultColor: string): string
+  export function getStrokeColor(element: Base, defaultColor: string): string
+  export function getLabelColor(
+    element: Base,
+    defaultColor: string,
+    defaultStrokeColor: string
+  ): string
+
+  export function getCirclePath(shape: Shape): string
+  export function getRoundRectPath(shape: Shape, borderRadius: number): string
+  export function getDiamondPath(shape: Shape): string
+  export function getRectPath(shape: Shape): string
+}
 declare module 'bpmn-js/lib/util/ModelUtil' {
   import { Base, ModdleElement } from 'diagram-js/lib/model'
 
@@ -814,7 +841,6 @@ declare module 'bpmn-js/lib/util/ModelUtil' {
 
   export function getDi(element: Base): ModdleElement
 }
-
 declare module 'bpmn-js/lib/features/modeling/util/ModelingUtil' {
   import { Base } from 'diagram-js/lib/model'
   import { isAny, is } from 'bpmn-js/lib/util/ModelUtil'

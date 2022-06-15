@@ -27,7 +27,7 @@ import EnhancementPalette from '@/components/AddiModules/Palette/EnhancementPale
 import RewritePalette from '@/components/AddiModules/Palette/RewritePalette'
 import EnhancementContextPad from '@/components/AddiModules/ContextPad/EnhancementContextPad'
 import RewriteContextPad from '@/components/AddiModules/ContextPad/RewriteContextPad'
-import renderer from '@/components/AddiModules/Renderer'
+import renderer from '@/components/AddiModules/Renderer/RewriteRenderer'
 
 import lintModule from 'bpmn-js-bpmnlint'
 import bpmnlint from '@/components/AddiModules/Lint/bpmnlint'
