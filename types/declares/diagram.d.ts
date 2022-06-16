@@ -2736,6 +2736,25 @@ declare module 'diagram-js/lib/navigation/zoomscroll/ZoomScroll' {
 }
 
 /*************************************** utils 工具函数 ****************************************/
+declare module 'diagram-js/lib/features/auto-place/AutoPlaceUtil' {}
+declare module 'diagram-js/lib/features/bendpoints/BendpointUtil' {}
+declare module 'diagram-js/lib/features/bendpoints/GeometricUtil' {}
+declare module 'diagram-js/lib/features/grid-snapping/GridUtil' {}
+declare module 'diagram-js/lib/features/keyboard/KeyboardUtil' {
+  export function hasModifier(event: KeyboardEvent): string | undefined
+  export function isCmd(event: KeyboardEvent): boolean | string | undefined
+  export function isKey(keys: string | string[], event: KeyboardEvent): boolean
+  export function isShift(event: KeyboardEvent): boolean
+}
+declare module 'diagram-js/lib/features/resize/ResizeUtil' {}
+declare module 'diagram-js/lib/features/snapping/SnapUtil' {}
+declare module 'diagram-js/lib/features/space-tool/SpaceUtil' {}
+declare module 'diagram-js/lib/layout/LayoutUtil' {}
+declare module 'diagram-js/lib/navigation/zoomscroll/ZoomUtil' {}
+declare module 'diagram-js/lib/util/AttachUtil' {}
+declare module 'diagram-js/lib/util/ClickTrap' {}
+declare module 'diagram-js/lib/util/Collections' {}
+declare module 'diagram-js/lib/util/Cursor' {}
 declare module 'diagram-js/lib/util/Elements' {
   import { Base, Shape } from 'diagram-js/lib/model'
   import { Bounds } from 'diagram-js/lib/core/Canvas'
@@ -2756,6 +2775,10 @@ declare module 'diagram-js/lib/util/Elements' {
   export function getType(element): string
   export function isFrameElement(element): boolean
 }
+declare module 'diagram-js/lib/util/EscapeUtil' {}
+declare module 'diagram-js/lib/util/Event' {}
+declare module 'diagram-js/lib/util/Geometry' {}
+declare module 'diagram-js/lib/util/GraphicsUtil' {}
 declare module 'diagram-js/lib/util/IdGenerator' {
   export default class IdGenerator {
     constructor(prefix: string)
@@ -2765,6 +2788,12 @@ declare module 'diagram-js/lib/util/IdGenerator' {
     next(): string
   }
 }
+declare module 'diagram-js/lib/util/LineIntersection' {}
+declare module 'diagram-js/lib/util/Math' {}
+declare module 'diagram-js/lib/util/Mouse' {}
+declare module 'diagram-js/lib/util/Platform' {}
+declare module 'diagram-js/lib/util/PositionUtil' {}
+declare module 'diagram-js/lib/util/Removal' {}
 declare module 'diagram-js/lib/util/RenderUtil' {
   import { Point } from 'diagram-js/lib/model'
 
@@ -2785,10 +2814,4 @@ declare module 'diagram-js/lib/util/SvgTransformUtil' {
   export function rotate(gfx: SVGElement, angle: number): void
   export function scale(gfx: SVGElement, amount: number): void
 }
-declare module 'diagram-js/lib/features/keyboard/KeyboardUtil' {
-  export function hasModifier(event: KeyboardEvent): string | undefined
-  export function isCmd(event: KeyboardEvent): boolean | string | undefined
-  export function isKey(keys: string | string[], event: KeyboardEvent): boolean
-  export function isShift(event: KeyboardEvent): boolean
-}
-declare module 'diagram-js/lib/features/resize/ResizeUtil' {}
+declare module 'diagram-js/lib/util/Text' {}
