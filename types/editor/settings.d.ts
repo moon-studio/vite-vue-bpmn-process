@@ -8,6 +8,7 @@ export interface EditorSettings {
   paletteMode: 'default' | 'custom' | 'rewrite' | 'enhancement'
   penalMode: 'default' | 'custom' | 'rewrite'
   contextPadMode: 'default' | 'rewrite' | 'enhancement'
+  rendererMode: 'default' | 'rewrite' | 'enhancement'
   bg: string
   toolbar: boolean
 }
@@ -16,7 +17,6 @@ export type ModelerOptions<E extends Element> = ViewerOptions<E> & {
   additionalModules: ModuleDeclaration[]
   moddleExtensions: Object
 }
-
 
 // bpmn.js 事件参数
 // 1. canvas 事件

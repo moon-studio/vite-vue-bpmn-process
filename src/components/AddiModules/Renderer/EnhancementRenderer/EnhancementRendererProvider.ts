@@ -4,11 +4,11 @@ import Styles from 'diagram-js/lib/draw/Styles'
 import PathMap from 'bpmn-js/lib/draw/PathMap'
 import Canvas from 'diagram-js/lib/core/Canvas'
 import TextRenderer from 'bpmn-js/lib/draw/TextRenderer'
-import renderEventContent from '@/components/AddiModules/Renderer/CustomRenderer/renderEventContent'
+import renderEventContent from '@/components/AddiModules/Renderer/EnhancementRenderer/renderEventContent'
 import { append as svgAppend, attr as svgAttr, create as svgCreate } from 'tiny-svg'
 import { drawCircle } from '@/components/AddiModules/Renderer/utils'
 
-export default class CustomRendererProvider extends BpmnRenderer {
+class EnhancementRendererProvider extends BpmnRenderer {
   _styles: Styles
   constructor(
     config: any,
@@ -56,3 +56,14 @@ export default class CustomRendererProvider extends BpmnRenderer {
     }
   }
 }
+
+EnhancementRendererProvider.$inject = [
+  'config.bpmnRenderer',
+  'eventBus',
+  'styles',
+  'pathMap',
+  'canvas',
+  'textRenderer'
+]
+
+export default EnhancementRendererProvider

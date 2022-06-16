@@ -1,6 +1,4 @@
 import { computed, defineComponent, PropType, ref, watchEffect } from 'vue'
-import { EditorSettings } from 'types/editor/settings'
-import { defaultSettings } from '@/config'
 import {
   NIcon,
   NForm,
@@ -14,6 +12,8 @@ import {
 } from 'naive-ui'
 import SettingsRound from '@vicons/material/SettingsRound'
 import { Icon } from '@vicons/utils'
+import { EditorSettings } from 'types/editor/settings'
+import { defaultSettings } from '@/config'
 import EventEmitter from '@/utils/EventEmitter'
 import editor from '@/store/editor'
 
@@ -116,6 +116,13 @@ const Setting = defineComponent({
               </NFormItem>
               <NFormItem label="ContextPadMode模式">
                 <NRadioGroup v-model={[editorSettings.value.contextPadMode, 'value']}>
+                  <NRadio value="default">默认</NRadio>
+                  <NRadio value="rewrite">重写版</NRadio>
+                  <NRadio value="enhancement">扩展版</NRadio>
+                </NRadioGroup>
+              </NFormItem>
+              <NFormItem label="renderer模式">
+                <NRadioGroup v-model={[editorSettings.value.rendererMode, 'value']}>
                   <NRadio value="default">默认</NRadio>
                   <NRadio value="rewrite">重写版</NRadio>
                   <NRadio value="enhancement">扩展版</NRadio>

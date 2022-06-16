@@ -27,7 +27,8 @@ import EnhancementPalette from '@/components/AddiModules/Palette/EnhancementPale
 import RewritePalette from '@/components/AddiModules/Palette/RewritePalette'
 import EnhancementContextPad from '@/components/AddiModules/ContextPad/EnhancementContextPad'
 import RewriteContextPad from '@/components/AddiModules/ContextPad/RewriteContextPad'
-import renderer from '@/components/AddiModules/Renderer/RewriteRenderer'
+import EnhancementRenderer from '@/components/AddiModules/Renderer/EnhancementRenderer'
+import RewriteRenderer from '@/components/AddiModules/Renderer/RewriteRenderer'
 
 import lintModule from 'bpmn-js-bpmnlint'
 import bpmnlint from '@/components/AddiModules/Lint/bpmnlint'
@@ -54,6 +55,10 @@ export default function (settings) {
     settings.value.contextPadMode === 'enhancement' && modules.push(EnhancementContextPad)
     settings.value.contextPadMode === 'rewrite' && modules.push(RewriteContextPad)
 
+    // 配置 自定义渲染
+    settings.value.rendererMode === 'enhancement' && modules.push(EnhancementRenderer)
+    settings.value.rendererMode === 'rewrite' && modules.push(RewriteRenderer)
+
     // 配置 penal (基于 camunda)
     if (settings.value.penalMode !== 'custom') {
       modules.push(
@@ -69,9 +74,6 @@ export default function (settings) {
 
     // 配置 翻译 与 流程模拟
     modules.push(translate)
-
-    // 测试自定义渲染
-    modules.push(renderer)
 
     // 设置 lint 校验
     modules.push(lintModule)

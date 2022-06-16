@@ -7,6 +7,7 @@ export const defaultSettings: EditorSettings = {
   paletteMode: 'default',
   penalMode: 'default',
   contextPadMode: 'default',
+  rendererMode: 'default',
   bg: 'grid-image',
   toolbar: true
 }
