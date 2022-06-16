@@ -63,23 +63,31 @@ class RewriteRendererProvider extends BaseRenderer {
       defaultFillColor: '#ffffff',
       defaultStartEventColor: '#61c071',
       defaultEndEventColor: '#d45651',
+      defaultIntermediateEventColor: '#e9a28d',
+      defaultIntermediateThrowEventColor: '#e9a28d',
+      defaultIntermediateCatchEventColor: '#e9a28d',
       defaultTaskColor: '#9cafcf',
       defaultLabelColor: '#000000',
       defaultGatewayColor: '#fb863c',
       defaultSequenceColor: '#9cafcf'
     }
     const presetOpacity = {
-      defaultStartEventOpacity: 0.5,
-      defaultEndEventOpacity: 0.5,
+      defaultStartEventOpacity: 0,
+      defaultEndEventOpacity: 0,
+      defaultIntermediateThrowEventOpacity: 0,
+      defaultIntermediateCatchEventOpacity: 1,
       defaultTaskOpacity: 0,
       defaultLabelOpacity: 1,
-      defaultGatewayOpacity: 0.5,
+      defaultGatewayOpacity: 0.2,
       defaultSequenceOpacity: 1
     }
     const {
       defaultFillColor,
       defaultStartEventColor,
       defaultEndEventColor,
+      defaultIntermediateEventColor,
+      defaultIntermediateThrowEventColor,
+      defaultIntermediateCatchEventColor,
       defaultTaskColor,
       defaultLabelColor,
       defaultGatewayColor,
@@ -88,6 +96,8 @@ class RewriteRendererProvider extends BaseRenderer {
     const {
       defaultStartEventOpacity,
       defaultEndEventOpacity,
+      defaultIntermediateThrowEventOpacity,
+      defaultIntermediateCatchEventOpacity,
       defaultTaskOpacity,
       defaultLabelOpacity,
       defaultGatewayOpacity,
@@ -377,53 +387,102 @@ class RewriteRendererProvider extends BaseRenderer {
     function renderEventContent(element, parentGfx) {
       const event = getSemantic(element)
       const isThrowing = isThrowEvent(event)
+      type ColorOptions = Record<string, { color: string; opacity: number }>
+      const colorOptions: ColorOptions = {
+        'bpmn:StartEvent': { color: defaultStartEventColor, opacity: defaultStartEventOpacity },
+        'bpmn:EndEvent': { color: defaultEndEventColor, opacity: defaultEndEventOpacity },
+        'bpmn:IntermediateThrowEvent': {
+          color: defaultIntermediateThrowEventColor,
+          opacity: defaultIntermediateThrowEventOpacity
+        },
+        'bpmn:IntermediateCatchEvent': {
+          color: defaultIntermediateCatchEventColor,
+          opacity: defaultIntermediateCatchEventOpacity
+        }
+      }
+      const type: keyof ColorOptions = element.type
 
       if (event.eventDefinitions && event.eventDefinitions.length > 1) {
         if (event.parallelMultiple) {
-          return renderer('bpmn:ParallelMultipleEventDefinition')(parentGfx, element, isThrowing)
+          return renderer('bpmn:ParallelMultipleEventDefinition')(parentGfx, element, {
+            isThrowing,
+            attrs: colorOptions[type]
+          })
         } else {
-          return renderer('bpmn:MultipleEventDefinition')(parentGfx, element, isThrowing)
+          return renderer('bpmn:MultipleEventDefinition')(parentGfx, element, {
+            isThrowing,
+            attrs: colorOptions[type]
+          })
         }
       }
 
       if (isTypedEvent(event, 'bpmn:MessageEventDefinition')) {
-        return renderer('bpmn:MessageEventDefinition')(parentGfx, element, isThrowing)
+        return renderer('bpmn:MessageEventDefinition')(parentGfx, element, {
+          isThrowing,
+          attrs: colorOptions[type]
+        })
       }
 
       if (isTypedEvent(event, 'bpmn:TimerEventDefinition')) {
-        return renderer('bpmn:TimerEventDefinition')(parentGfx, element, isThrowing)
+        return renderer('bpmn:TimerEventDefinition')(parentGfx, element, {
+          isThrowing,
+          attrs: colorOptions[type]
+        })
       }
 
       if (isTypedEvent(event, 'bpmn:ConditionalEventDefinition')) {
-        return renderer('bpmn:ConditionalEventDefinition')(parentGfx, element)
+        return renderer('bpmn:ConditionalEventDefinition')(parentGfx, element, {
+          attrs: colorOptions[type]
+        })
       }
 
       if (isTypedEvent(event, 'bpmn:SignalEventDefinition')) {
-        return renderer('bpmn:SignalEventDefinition')(parentGfx, element, isThrowing)
+        return renderer('bpmn:SignalEventDefinition')(parentGfx, element, {
+          isThrowing,
+          attrs: colorOptions[type]
+        })
       }
 
       if (isTypedEvent(event, 'bpmn:EscalationEventDefinition')) {
-        return renderer('bpmn:EscalationEventDefinition')(parentGfx, element, isThrowing)
+        return renderer('bpmn:EscalationEventDefinition')(parentGfx, element, {
+          isThrowing,
+          attrs: colorOptions[type]
+        })
       }
 
       if (isTypedEvent(event, 'bpmn:LinkEventDefinition')) {
-        return renderer('bpmn:LinkEventDefinition')(parentGfx, element, isThrowing)
+        return renderer('bpmn:LinkEventDefinition')(parentGfx, element, {
+          isThrowing,
+          attrs: colorOptions[type]
+        })
       }
 
       if (isTypedEvent(event, 'bpmn:ErrorEventDefinition')) {
-        return renderer('bpmn:ErrorEventDefinition')(parentGfx, element, isThrowing)
+        return renderer('bpmn:ErrorEventDefinition')(parentGfx, element, {
+          isThrowing,
+          attrs: colorOptions[type]
+        })
       }
 
       if (isTypedEvent(event, 'bpmn:CancelEventDefinition')) {
-        return renderer('bpmn:CancelEventDefinition')(parentGfx, element, isThrowing)
+        return renderer('bpmn:CancelEventDefinition')(parentGfx, element, {
+          isThrowing,
+          attrs: colorOptions[type]
+        })
       }
 
       if (isTypedEvent(event, 'bpmn:CompensateEventDefinition')) {
-        return renderer('bpmn:CompensateEventDefinition')(parentGfx, element, isThrowing)
+        return renderer('bpmn:CompensateEventDefinition')(parentGfx, element, {
+          isThrowing,
+          attrs: colorOptions[type]
+        })
       }
 
       if (isTypedEvent(event, 'bpmn:TerminateEventDefinition')) {
-        return renderer('bpmn:TerminateEventDefinition')(parentGfx, element, isThrowing)
+        return renderer('bpmn:TerminateEventDefinition')(parentGfx, element, {
+          isThrowing,
+          attrs: colorOptions[type]
+        })
       }
 
       return null
@@ -620,7 +679,7 @@ class RewriteRendererProvider extends BaseRenderer {
         renderEventContent(element, parentGfx)
         return circle
       },
-      'bpmn:MessageEventDefinition': function (parentGfx, element, isThrowing) {
+      'bpmn:MessageEventDefinition': function (parentGfx, element, options) {
         const pathData = pathMap.getScaledPath('EVENT_MESSAGE', {
           xScaleFactor: 0.9,
           yScaleFactor: 0.9,
@@ -631,21 +690,17 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.315
           }
         })
-
-        const fill = isThrowing
-          ? getStrokeColor(element, defaultStartEventColor)
-          : getFillColor(element, defaultFillColor)
-        const stroke = isThrowing
-          ? getFillColor(element, defaultFillColor)
-          : getStrokeColor(element, defaultStartEventColor)
-
+        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
-          fill: fill,
-          stroke: stroke
+          fill,
+          stroke
         })
       },
-      'bpmn:TimerEventDefinition': function (parentGfx, element) {
+      'bpmn:TimerEventDefinition': function (parentGfx, element, options) {
+        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
         const circle = drawCircle(
           parentGfx,
           element.width,
@@ -653,8 +708,8 @@ class RewriteRendererProvider extends BaseRenderer {
           (element.height as number) * 0.2,
           {
             strokeWidth: 2,
-            fill: getFillColor(element, defaultFillColor),
-            stroke: getStrokeColor(element, defaultStartEventColor)
+            fill,
+            stroke
           }
         )
         const pathData = pathMap.getScaledPath('EVENT_TIMER_WH', {
@@ -670,7 +725,7 @@ class RewriteRendererProvider extends BaseRenderer {
         drawPath(parentGfx, pathData, {
           strokeWidth: 2,
           strokeLinecap: 'square',
-          stroke: getStrokeColor(element, defaultStartEventColor)
+          stroke
         })
         for (let i = 0; i < 12; i++) {
           const linePathData = pathMap.getScaledPath('EVENT_TIMER_LINE', {
@@ -691,12 +746,12 @@ class RewriteRendererProvider extends BaseRenderer {
             strokeWidth: 1,
             strokeLinecap: 'square',
             transform: 'rotate(' + i * 30 + ',' + height + ',' + width + ')',
-            stroke: getStrokeColor(element, defaultStartEventColor)
+            stroke
           })
         }
         return circle
       },
-      'bpmn:EscalationEventDefinition': function (parentGfx, event, isThrowing) {
+      'bpmn:EscalationEventDefinition': function (parentGfx, event, options) {
         const pathData = pathMap.getScaledPath('EVENT_ESCALATION', {
           xScaleFactor: 1,
           yScaleFactor: 1,
@@ -707,16 +762,15 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.2
           }
         })
-
-        const fill = isThrowing ? getStrokeColor(event, defaultStartEventColor) : 'none'
-
+        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
-          fill: fill,
-          stroke: getStrokeColor(event, defaultStartEventColor)
+          fill,
+          stroke
         })
       },
-      'bpmn:ConditionalEventDefinition': function (parentGfx, event) {
+      'bpmn:ConditionalEventDefinition': function (parentGfx, event, options) {
         const pathData = pathMap.getScaledPath('EVENT_CONDITIONAL', {
           xScaleFactor: 1,
           yScaleFactor: 1,
@@ -730,10 +784,10 @@ class RewriteRendererProvider extends BaseRenderer {
 
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
-          stroke: getStrokeColor(event, defaultTaskColor)
+          stroke: options.attrs.color
         })
       },
-      'bpmn:LinkEventDefinition': function (parentGfx, event, isThrowing) {
+      'bpmn:LinkEventDefinition': function (parentGfx, event, options) {
         const pathData = pathMap.getScaledPath('EVENT_LINK', {
           xScaleFactor: 1,
           yScaleFactor: 1,
@@ -744,16 +798,15 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.263
           }
         })
-
-        const fill = isThrowing ? getStrokeColor(event, defaultTaskColor) : 'none'
-
+        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
-          fill: fill,
-          stroke: getStrokeColor(event, defaultTaskColor)
+          fill,
+          stroke
         })
       },
-      'bpmn:ErrorEventDefinition': function (parentGfx, event, isThrowing) {
+      'bpmn:ErrorEventDefinition': function (parentGfx, event, options) {
         const pathData = pathMap.getScaledPath('EVENT_ERROR', {
           xScaleFactor: 1.1,
           yScaleFactor: 1.1,
@@ -764,16 +817,15 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.722
           }
         })
-
-        const fill = isThrowing ? getStrokeColor(event, defaultTaskColor) : 'none'
-
+        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
-          fill: fill,
-          stroke: getStrokeColor(event, defaultTaskColor)
+          fill,
+          stroke
         })
       },
-      'bpmn:CancelEventDefinition': function (parentGfx, event, isThrowing) {
+      'bpmn:CancelEventDefinition': function (parentGfx, event, options) {
         const pathData = pathMap.getScaledPath('EVENT_CANCEL_45', {
           xScaleFactor: 1.0,
           yScaleFactor: 1.0,
@@ -784,20 +836,19 @@ class RewriteRendererProvider extends BaseRenderer {
             my: -0.055
           }
         })
-
-        const fill = isThrowing ? getStrokeColor(event, defaultTaskColor) : 'none'
-
+        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
         const path = drawPath(parentGfx, pathData, {
           strokeWidth: 1,
-          fill: fill,
-          stroke: getStrokeColor(event, defaultTaskColor)
+          fill,
+          stroke
         })
 
         rotate(path, 45)
 
         return path
       },
-      'bpmn:CompensateEventDefinition': function (parentGfx, event, isThrowing) {
+      'bpmn:CompensateEventDefinition': function (parentGfx, event, options) {
         const pathData = pathMap.getScaledPath('EVENT_COMPENSATION', {
           xScaleFactor: 1,
           yScaleFactor: 1,
@@ -808,16 +859,15 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.5
           }
         })
-
-        const fill = isThrowing ? getStrokeColor(event, defaultTaskColor) : 'none'
-
+        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
-          fill: fill,
-          stroke: getStrokeColor(event, defaultTaskColor)
+          fill,
+          stroke
         })
       },
-      'bpmn:SignalEventDefinition': function (parentGfx, event, isThrowing) {
+      'bpmn:SignalEventDefinition': function (parentGfx, event, options) {
         const pathData = pathMap.getScaledPath('EVENT_SIGNAL', {
           xScaleFactor: 0.9,
           yScaleFactor: 0.9,
@@ -828,16 +878,15 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.2
           }
         })
-
-        const fill = isThrowing ? getStrokeColor(event, defaultTaskColor) : 'none'
-
+        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
-          fill: fill,
-          stroke: getStrokeColor(event, defaultTaskColor)
+          fill,
+          stroke
         })
       },
-      'bpmn:MultipleEventDefinition': function (parentGfx, event, isThrowing) {
+      'bpmn:MultipleEventDefinition': function (parentGfx, event, options) {
         const pathData = pathMap.getScaledPath('EVENT_MULTIPLE', {
           xScaleFactor: 1.1,
           yScaleFactor: 1.1,
@@ -848,15 +897,15 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.36
           }
         })
-
-        const fill = isThrowing ? getStrokeColor(event, defaultTaskColor) : 'none'
-
+        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
-          fill: fill
+          fill,
+          stroke
         })
       },
-      'bpmn:ParallelMultipleEventDefinition': function (parentGfx, event) {
+      'bpmn:ParallelMultipleEventDefinition': function (parentGfx, event, options) {
         const pathData = pathMap.getScaledPath('EVENT_PARALLEL_MULTIPLE', {
           xScaleFactor: 1.2,
           yScaleFactor: 1.2,
@@ -867,11 +916,12 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.194
           }
         })
-
+        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
-          fill: getStrokeColor(event, defaultTaskColor),
-          stroke: getStrokeColor(event, defaultTaskColor)
+          fill,
+          stroke
         })
       },
       'bpmn:EndEvent': function (parentGfx, element) {
@@ -887,7 +937,6 @@ class RewriteRendererProvider extends BaseRenderer {
       'bpmn:TerminateEventDefinition': function (parentGfx, element) {
         return drawCircle(parentGfx, element.width, element.height, 8, {
           strokeWidth: 4,
-          fillOpacity: defaultEndEventOpacity,
           fill: getStrokeColor(element, defaultEndEventColor),
           stroke: getStrokeColor(element, defaultEndEventColor)
         })
@@ -895,15 +944,11 @@ class RewriteRendererProvider extends BaseRenderer {
       'bpmn:IntermediateEvent': function (parentGfx, element) {
         const outer = renderer('bpmn:Event')(parentGfx, element, {
           strokeWidth: 1,
-          fillOpacity: defaultEndEventOpacity,
-          fill: getStrokeColor(element, defaultEndEventColor),
-          stroke: getStrokeColor(element, defaultEndEventColor)
+          stroke: getStrokeColor(element, defaultIntermediateEventColor)
         })
         drawCircle(parentGfx, element.width, element.height, INNER_OUTER_DIST, {
           strokeWidth: 1,
-          fillOpacity: defaultEndEventOpacity,
-          fill: getStrokeColor(element, defaultEndEventColor),
-          stroke: getStrokeColor(element, defaultEndEventColor)
+          stroke: getStrokeColor(element, defaultIntermediateEventColor)
         })
         renderEventContent(element, parentGfx)
         return outer
@@ -1277,8 +1322,8 @@ class RewriteRendererProvider extends BaseRenderer {
         /* circle path */
         drawCircle(parentGfx, element.width, element.height, (element.height as number) * 0.24, {
           strokeWidth: 2.5,
-          fill: getFillColor(element, defaultFillColor),
-          stroke: getStrokeColor(element, defaultTaskColor)
+          fill: getStrokeColor(element, defaultGatewayColor),
+          stroke: getStrokeColor(element, defaultGatewayColor)
         })
 
         return diamond
@@ -1300,8 +1345,8 @@ class RewriteRendererProvider extends BaseRenderer {
         if (getDi(element).isMarkerVisible) {
           drawPath(parentGfx, pathData, {
             strokeWidth: 1,
-            fill: getStrokeColor(element, defaultTaskColor),
-            stroke: getStrokeColor(element, defaultTaskColor)
+            fill: getStrokeColor(element, defaultGatewayColor),
+            stroke: getStrokeColor(element, defaultGatewayColor)
           })
         }
 
@@ -1323,8 +1368,8 @@ class RewriteRendererProvider extends BaseRenderer {
 
         /* complex path */ drawPath(parentGfx, pathData, {
           strokeWidth: 1,
-          fill: getStrokeColor(element, defaultTaskColor),
-          stroke: getStrokeColor(element, defaultTaskColor)
+          fill: getStrokeColor(element, defaultGatewayColor),
+          stroke: getStrokeColor(element, defaultGatewayColor)
         })
 
         return diamond
@@ -1345,8 +1390,8 @@ class RewriteRendererProvider extends BaseRenderer {
 
         /* parallel path */ drawPath(parentGfx, pathData, {
           strokeWidth: 1,
-          fill: getStrokeColor(element, defaultTaskColor),
-          stroke: getStrokeColor(element, defaultTaskColor)
+          fill: getStrokeColor(element, defaultGatewayColor),
+          stroke: getStrokeColor(element, defaultGatewayColor)
         })
 
         return diamond
@@ -1356,17 +1401,12 @@ class RewriteRendererProvider extends BaseRenderer {
 
         const diamond = renderer('bpmn:Gateway')(parentGfx, element)
 
-        /* outer circle path */ drawCircle(
-          parentGfx,
-          element.width,
-          element.height,
-          (element.height as number) * 0.2,
-          {
-            strokeWidth: 1,
-            fill: 'none',
-            stroke: getStrokeColor(element, defaultTaskColor)
-          }
-        )
+        /* outer circle path */
+        drawCircle(parentGfx, element.width, element.height, (element.height as number) * 0.2, {
+          strokeWidth: 1,
+          fill: 'none',
+          stroke: getStrokeColor(element, defaultGatewayColor)
+        })
 
         const type = semantic.eventGatewayType
         const instantiate = !!semantic.instantiate
@@ -1386,10 +1426,9 @@ class RewriteRendererProvider extends BaseRenderer {
           const attrs = {
             strokeWidth: 2,
             fill: getFillColor(element, 'none'),
-            stroke: getStrokeColor(element, defaultTaskColor)
+            stroke: getStrokeColor(element, defaultGatewayColor)
           }
-
-          /* event path */ drawPath(parentGfx, pathData, attrs)
+          drawPath(parentGfx, pathData, attrs)
         }
 
         if (type === 'Parallel') {
@@ -1420,7 +1459,7 @@ class RewriteRendererProvider extends BaseRenderer {
             svgAttr(innerCircle, {
               strokeWidth: 1,
               fill: 'none',
-              stroke: getStrokeColor(element, defaultTaskColor)
+              stroke: getStrokeColor(element, defaultGatewayColor)
             })
           }
 
@@ -1431,9 +1470,9 @@ class RewriteRendererProvider extends BaseRenderer {
       },
       'bpmn:Gateway': function (parentGfx, element) {
         const attrs = {
-          fill: getFillColor(element, defaultFillColor),
-          fillOpacity: DEFAULT_FILL_OPACITY,
-          stroke: getStrokeColor(element, defaultTaskColor)
+          fill: getFillColor(element, defaultGatewayColor),
+          fillOpacity: defaultGatewayOpacity,
+          stroke: getStrokeColor(element, defaultGatewayColor)
         }
 
         return drawDiamond(parentGfx, element.width, element.height, attrs)
@@ -1637,14 +1676,12 @@ class RewriteRendererProvider extends BaseRenderer {
           }
         })
 
-        const elementStore = drawPath(parentGfx, DATA_STORE_PATH, {
+        return drawPath(parentGfx, DATA_STORE_PATH, {
           strokeWidth: 2,
           fill: getFillColor(element, defaultFillColor),
           fillOpacity: DEFAULT_FILL_OPACITY,
           stroke: getStrokeColor(element, defaultTaskColor)
         })
-
-        return elementStore
       },
       'bpmn:BoundaryEvent': function (parentGfx, element) {
         const semantic = getSemantic(element),
@@ -1686,15 +1723,13 @@ class RewriteRendererProvider extends BaseRenderer {
         return outer
       },
       'bpmn:Group': function (parentGfx, element) {
-        const group = drawRect(parentGfx, element.width, element.height, TASK_BORDER_RADIUS, {
+        return drawRect(parentGfx, element.width, element.height, TASK_BORDER_RADIUS, {
           stroke: getStrokeColor(element, defaultTaskColor),
           strokeWidth: 1,
           strokeDasharray: '8,3,1,3',
           fill: 'none',
           pointerEvents: 'none'
         })
-
-        return group
       },
       label: function (parentGfx, element) {
         return renderExternalLabel(parentGfx, element)

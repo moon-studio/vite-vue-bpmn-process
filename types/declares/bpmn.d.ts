@@ -94,7 +94,7 @@ declare module 'bpmn-js/lib/draw/BpmnRenderer' {
   export type RendererHandler = <E extends Base, T extends SVGElement>(
     parentGfx: SVGElement,
     element: E,
-    options?: Position | Object
+    options?: any
   ) => SVGElement
   export type RendererType =
     | 'bpmn:Event'
@@ -841,6 +841,17 @@ declare module 'bpmn-js/lib/util/ModelUtil' {
 
   export function getDi(element: Base): ModdleElement
 }
+declare module 'bpmn-js/lib/util/DiUtil' {
+  import { Base, ModdleElement } from 'diagram-js/lib/model'
+
+  export function isExpanded<T extends Base>(element: T, di?: ModdleElement): boolean
+  export function isInterrupting<T extends Base>(element: T): boolean
+  export function isEventSubProcess<T extends Base>(element: T): boolean
+  export function hasEventDefinition<T extends Base>(element: T, eventType: string): boolean
+  export function hasErrorEventDefinition<T extends Base>(element: T): boolean
+  export function hasEscalationEventDefinition<T extends Base>(element: T): boolean
+  export function hasCompensateEventDefinition<T extends Base>(element: T): boolean
+}
 declare module 'bpmn-js/lib/features/modeling/util/ModelingUtil' {
   import { Base } from 'diagram-js/lib/model'
   import { isAny, is } from 'bpmn-js/lib/util/ModelUtil'
@@ -848,4 +859,10 @@ declare module 'bpmn-js/lib/features/modeling/util/ModelingUtil' {
   export function getParent(element: Base, anyType: string | string[]): Base
 
   export { isAny, is }
+}
+declare module 'bpmn-js/lib/features/label-editing/LabelUtil' {
+  import { Base } from 'diagram-js/lib/model'
+
+  export function getLabel(element: Base): string
+  export function setLabel(element: Base, text: string, isExternal?: boolean): Base
 }

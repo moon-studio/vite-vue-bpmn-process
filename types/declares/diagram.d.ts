@@ -2314,7 +2314,7 @@ declare module 'diagram-js/lib/features/touch/TouchInteractionEvents' {
   export default class TouchInteractionEvents {}
 }
 
-/*************************************** 123123 ****************************************/
+/*************************************** 其他 ****************************************/
 //
 declare module 'diagram-js/lib/navigation/keyboard-move/KeyboardMove' {
   export default class KeyboardMove {}
@@ -2326,4 +2326,26 @@ declare module 'diagram-js/lib/navigation/movecanvas/MoveCanvas' {
 //
 declare module 'diagram-js/lib/navigation/zoomscroll/ZoomScroll' {
   export default class ZoomScroll {}
+}
+
+/*************************************** utils 工具函数 ****************************************/
+declare module 'diagram-js/lib/util/RenderUtil' {
+  import { Point } from 'diagram-js/lib/model'
+
+  export function componentsToPath(elements: [string, ...number[]][]): string
+  export function points(points: Point[]): string
+  export function createLine(points: Point[], attrs: Object): SVGPolylineElement
+  export function updateLine(gfx: SVGPolylineElement, points: Point[]): SVGPolylineElement
+}
+declare module 'diagram-js/lib/util/SvgTransformUtil' {
+  export function transform(
+    gfx: SVGElement,
+    x: number,
+    y: number,
+    angle?: number,
+    amount?: number
+  ): void
+  export function translate(gfx: SVGElement, x: number, y: number): void
+  export function rotate(gfx: SVGElement, angle: number): void
+  export function scale(gfx: SVGElement, amount: number): void
 }
