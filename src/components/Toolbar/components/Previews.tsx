@@ -22,14 +22,14 @@ const Previews = defineComponent({
           return message.warning('模型加载失败，请刷新重试')
         }
 
-        const result = await modeler.saveXML({ format: true, preamble: true })
+        const { xml } = await modeler.saveXML({ format: true, preamble: true })
 
         previewModel.create({
           title: '流程预览',
           showIcon: false,
           content: () => (
             <div class="preview-model">
-              <NCode code={result.xml} language="xml" wordWrap={true}></NCode>
+              <NCode code={xml!} language="xml" wordWrap={true}></NCode>
             </div>
           )
         })
@@ -45,9 +45,9 @@ const Previews = defineComponent({
         return message.warning('模型加载失败，请刷新重试')
       }
 
-      const result = await modeler.saveXML({ format: true })
+      const { xml } = await modeler.saveXML({ format: true })
 
-      const jsonStr = await moddle.fromXML(result.xml)
+      const jsonStr = await moddle.fromXML(xml!)
 
       previewModel.create({
         title: '流程预览',
