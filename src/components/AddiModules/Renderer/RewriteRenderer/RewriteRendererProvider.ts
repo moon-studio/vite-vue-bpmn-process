@@ -391,6 +391,7 @@ class RewriteRendererProvider extends BaseRenderer {
       const colorOptions: ColorOptions = {
         'bpmn:StartEvent': { color: defaultStartEventColor, opacity: defaultStartEventOpacity },
         'bpmn:EndEvent': { color: defaultEndEventColor, opacity: defaultEndEventOpacity },
+        'bpmn:BoundaryEvent': { color: defaultTaskColor, opacity: defaultTaskOpacity },
         'bpmn:IntermediateThrowEvent': {
           color: defaultIntermediateThrowEventColor,
           opacity: defaultIntermediateThrowEventOpacity
@@ -690,8 +691,10 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.315
           }
         })
-        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
-        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
+        const fill = options.isThrowing ? getFillColor(element, options?.attrs?.color) : '#ffffff'
+        const stroke = options.isThrowing
+          ? '#ffffff'
+          : getStrokeColor(element, options?.attrs?.color)
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
           fill,
@@ -699,8 +702,10 @@ class RewriteRendererProvider extends BaseRenderer {
         })
       },
       'bpmn:TimerEventDefinition': function (parentGfx, element, options) {
-        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
-        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
+        const fill = options.isThrowing ? getFillColor(element, options?.attrs?.color) : '#ffffff'
+        const stroke = options.isThrowing
+          ? '#ffffff'
+          : getStrokeColor(element, options?.attrs?.color)
         const circle = drawCircle(
           parentGfx,
           element.width,
@@ -762,8 +767,8 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.2
           }
         })
-        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
-        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
+        const fill = options.isThrowing ? getFillColor(event, options?.attrs?.color) : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : getStrokeColor(event, options?.attrs?.color)
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
           fill,
@@ -781,10 +786,11 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.222
           }
         })
+        const stroke = options.isThrowing ? '#ffffff' : getStrokeColor(event, options?.attrs?.color)
 
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
-          stroke: options.attrs.color
+          stroke
         })
       },
       'bpmn:LinkEventDefinition': function (parentGfx, event, options) {
@@ -798,8 +804,8 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.263
           }
         })
-        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
-        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
+        const fill = options.isThrowing ? getFillColor(event, options?.attrs?.color) : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : getStrokeColor(event, options?.attrs?.color)
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
           fill,
@@ -817,8 +823,8 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.722
           }
         })
-        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
-        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
+        const fill = options.isThrowing ? getFillColor(event, options?.attrs?.color) : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : getStrokeColor(event, options?.attrs?.color)
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
           fill,
@@ -836,8 +842,8 @@ class RewriteRendererProvider extends BaseRenderer {
             my: -0.055
           }
         })
-        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
-        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
+        const fill = options.isThrowing ? getFillColor(event, options?.attrs?.color) : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : getStrokeColor(event, options?.attrs?.color)
         const path = drawPath(parentGfx, pathData, {
           strokeWidth: 1,
           fill,
@@ -859,8 +865,8 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.5
           }
         })
-        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
-        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
+        const fill = options.isThrowing ? getFillColor(event, options?.attrs?.color) : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : getStrokeColor(event, options?.attrs?.color)
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
           fill,
@@ -878,8 +884,8 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.2
           }
         })
-        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
-        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
+        const fill = options.isThrowing ? getFillColor(event, options?.attrs?.color) : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : getStrokeColor(event, options?.attrs?.color)
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
           fill,
@@ -897,8 +903,8 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.36
           }
         })
-        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
-        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
+        const fill = options.isThrowing ? getFillColor(event, options?.attrs?.color) : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : getStrokeColor(event, options?.attrs?.color)
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
           fill,
@@ -916,8 +922,8 @@ class RewriteRendererProvider extends BaseRenderer {
             my: 0.194
           }
         })
-        const fill = options.isThrowing ? options.attrs.color : '#ffffff'
-        const stroke = options.isThrowing ? '#ffffff' : options.attrs.color
+        const fill = options.isThrowing ? getFillColor(event, options?.attrs?.color) : '#ffffff'
+        const stroke = options.isThrowing ? '#ffffff' : getStrokeColor(event, options?.attrs?.color)
         return drawPath(parentGfx, pathData, {
           strokeWidth: 1,
           fill,
