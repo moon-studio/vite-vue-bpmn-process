@@ -814,8 +814,8 @@ declare module 'diagram-js/lib/draw/BaseRenderer' {
       visuals: SVGElement,
       connection: E
     ): SVGPolylineElement
-    abstract getShapePath<E extends Shape>(shape: E): string
-    abstract getConnectionPath<E extends Connection>(connection: E): string
+    abstract getShapePath<E extends Shape>(shape: E): string | undefined
+    abstract getConnectionPath<E extends Connection>(connection: E): string | undefined
   }
 }
 // 继承 BaseRenderer 的默认渲染器

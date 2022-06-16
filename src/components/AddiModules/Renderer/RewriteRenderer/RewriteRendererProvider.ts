@@ -147,7 +147,7 @@ class RewriteRendererProvider extends BaseRenderer {
     }
 
     function createMarker(id, type, fill, stroke) {
-      if (type === 'sequenceFlow-end') {
+      if (type === 'sequenceflow-end') {
         const sequenceFlowEnd = svgCreate('path')
         svgAttr(sequenceFlowEnd, { d: 'M 1 5 L 11 10 L 1 15 Z' })
         addMarker(id, {
@@ -1444,15 +1444,15 @@ class RewriteRendererProvider extends BaseRenderer {
           stroke = getStrokeColor(element, defaultSequenceColor)
         const attrs = {
           strokeLinejoin: 'round',
-          markerEnd: marker('sequenceFlow-end', fill, stroke),
+          markerEnd: marker('sequenceflow-end', fill, stroke),
           stroke: getStrokeColor(element, defaultSequenceColor)
         }
         const path = drawPath(parentGfx, pathData, attrs)
-        const sequenceFlow = getSemantic(element)
+        const sequenceflow = getSemantic(element)
         let source
         if ((element as Base as Connection).source) {
           source = (element as Base as Connection).source.businessObject
-          if (sequenceFlow.conditionExpression && source.$instanceOf('bpmn:Activity')) {
+          if (sequenceflow.conditionExpression && source.$instanceOf('bpmn:Activity')) {
             svgAttr(path, {
               markerStart: marker('conditional-flow-marker', fill, stroke)
             })
@@ -1460,7 +1460,7 @@ class RewriteRendererProvider extends BaseRenderer {
           if (
             source.default &&
             (source.$instanceOf('bpmn:Gateway') || source.$instanceOf('bpmn:Activity')) &&
-            source.default === sequenceFlow
+            source.default === sequenceflow
           ) {
             svgAttr(path, {
               markerStart: marker('conditional-default-flow-marker', fill, stroke)
@@ -1885,18 +1885,18 @@ class RewriteRendererProvider extends BaseRenderer {
   public canRender<E extends Base>(element: E): boolean {
     return is(element, 'bpmn:BaseElement')
   }
-  public drawConnection(visuals: SVGElement, connection: Connection): SVGPolylineElement {
+  public drawConnection(parentGfx: SVGElement, connection: Connection): SVGPolylineElement {
     const type = connection.type
     const h = this._renderer(type)
-    return <SVGPolylineElement>h(visuals, connection)
+    return <SVGPolylineElement>h(parentGfx, connection)
   }
-  public drawShape(visuals: SVGElement, element: Shape): SVGRectElement {
+  public drawShape(parentGfx: SVGElement, element: Shape): SVGRectElement {
     const type = element.type
     const h = this._renderer(type)
-    return <SVGRectElement>h(visuals, element)
+    return <SVGRectElement>h(parentGfx, element)
   }
-  public getConnectionPath(connection: Connection): string {
-    return ''
+  public getConnectionPath(connection: Connection): undefined {
+    return undefined
   }
   public getShapePath(shape: Shape): string {
     if (is(shape, 'bpmn:Event')) {
