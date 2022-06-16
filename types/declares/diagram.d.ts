@@ -2363,6 +2363,14 @@ declare module 'diagram-js/lib/features/popup-menu/PopupMenu' {
   import { Position } from 'diagram-js/lib/core/Canvas'
   import { ModuleConstructor } from 'didi'
 
+  type Entry = {
+    id: string
+    className: string
+    title: string
+    active: boolean
+    action: Function
+  }
+
   export default class PopupMenu extends ModuleConstructor {
     constructor(config: Object, eventBus: EventBus, overlays: Overlays)
     _config: Object
@@ -2379,11 +2387,21 @@ declare module 'diagram-js/lib/features/popup-menu/PopupMenu' {
     open(element: Base, id: string, position: Position): Object
     close(): void
     isOpen(): boolean
-    trigger(event: Object): Function | null
+    trigger(event: Event): Function | undefined
 
     _getProviders(id: string): PopupMenuProvider[]
     _getEntries(element: Base, providers: PopupMenuProvider[]): void
     _getHeaderEntries(element: Base, providers: PopupMenuProvider[]): void
+    _getEntry(entryId: string): void
+    _emit(eventName: string): void
+    _createContainer(): Element
+    _attachContainer(container: EventTarget, parent: Element, cursor?: boolean): void
+    _updateScale(container: EventTarget): void
+    _assureIsInbounds(container: EventTarget, cursor: Position): void
+    _createEntries(entries: Entry[], className: string): Element
+    _createEntries(entry: Entry, id: string): Element
+    _bindAutoClose(): void
+    _unbindAutoClose(): void
   }
 }
 // 抽象类，可以扩展为弹出菜单提供条目的基本提供程序。
@@ -2394,6 +2412,7 @@ declare module 'diagram-js/lib/features/popup-menu/PopupMenuProvider' {
 
   export default abstract class PopupMenuProvider {
     constructor(popupMenu: PopupMenu)
+    _popupMenu: PopupMenu
     abstract getEntries(element: Base): void
     abstract getHeaderEntries(element: Base): void
     abstract register(): void
@@ -2406,26 +2425,34 @@ declare module 'diagram-js/lib/features/preview-support/PreviewSupport' {
   import Canvas from 'diagram-js/lib/core/Canvas'
   import Styles from 'diagram-js/lib/draw/Styles'
   import { Base } from 'diagram-js/lib/model'
+  import { ModuleConstructor } from 'didi'
 
-  export default class PreviewSupport {
+  export default class PreviewSupport extends ModuleConstructor {
     constructor(
       elementRegistry: ElementRegistry,
       eventBus: EventBus,
       canvas: Canvas,
       styles: Styles
     )
-    protected _clonedMarkers: Object
+    protected _elementRegistry: Object
+    protected _canvas: Canvas
+    protected _styles: Styles
+    protected _clonedMarkers: Record<string, SVGElement>
+
     getGfx<E extends Base>(element: E): SVGElement
     addDragger<E extends Base>(element: E, group: SVGElement, gfx?: SVGElement): SVGElement
     addFrame<E extends Base>(element: E, group: SVGElement): SVGElement
+    _cloneMarkers(gfx: SVGElement): void
+    _cloneMarker(gfx: SVGElement, marker: SVGElement, markerType: string): void
   }
 }
 // 允许替换元素类型的服务
 declare module 'diagram-js/lib/features/replace/Replace' {
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import { Base, Shape } from 'diagram-js/lib/model'
+  import { ModuleConstructor } from 'didi'
 
-  export default class Replace {
+  export default class Replace extends ModuleConstructor {
     constructor(modeling: Modeling)
     replaceElement<E extends Base, S extends Shape>(
       oldElement: E,
@@ -2442,8 +2469,9 @@ declare module 'diagram-js/lib/features/resize/Resize' {
   import Dragging from 'diagram-js/lib/features/dragging/Dragging'
   import { Shape } from 'diagram-js/lib/model'
   import { Bounds } from 'diagram-js/lib/core/Canvas'
+  import { ModuleConstructor } from 'didi'
 
-  export default class Resize {
+  export default class Resize extends ModuleConstructor {
     constructor(eventBus: EventBus, rules: Rules, modeling: Modeling, dragging: Dragging)
     canResize(context: Object): boolean
     activate<E extends Shape>(
@@ -2461,8 +2489,9 @@ declare module 'diagram-js/lib/features/resize/ResizeHandles' {
   import Selection from 'diagram-js/lib/features/selection/Selection'
   import Resize from 'diagram-js/lib/features/resize/Resize'
   import { Shape } from 'diagram-js/lib/model'
+  import { ModuleConstructor } from 'didi'
 
-  export default class ResizeHandles {
+  export default class ResizeHandles extends ModuleConstructor {
     constructor(eventBus: EventBus, canvas: Canvas, selection: Selection, resize: Resize)
     protected _resize: Resize
     protected _canvas: Canvas
@@ -2478,22 +2507,28 @@ declare module 'diagram-js/lib/features/resize/ResizePreview' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import PreviewSupport from 'diagram-js/lib/features/preview-support/PreviewSupport'
-  export default class ResizePreview {
+  import { ModuleConstructor } from 'didi'
+  export default class ResizePreview extends ModuleConstructor {
     constructor(eventBus: EventBus, canvas: Canvas, previewSupport: PreviewSupport)
   }
 }
 //
 declare module 'diagram-js/lib/features/root-elements/RootElementsBehavior' {
-  export default class RootElementsBehavior {}
+  import { Injector } from 'didi'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor'
+  export default class RootElementsBehavior extends CommandInterceptor {
+    constructor(canvas: Canvas, injector: Injector)
+  }
 }
 // 为某些图操作提供规则的服务。
 // 默认实现将挂入命令堆栈执行实际的规则评估。确保提供命令堆栈如果您打算使用此模块，请使用它。
 // 连同此实现，您可以使用 RulesProvider 来实现你自己的规则检查器。
 declare module 'diagram-js/lib/features/rules/Rules' {
-  import { Injector } from 'didi'
+  import { Injector, ModuleConstructor } from 'didi'
   import CommandStack from 'diagram-js/lib/command/CommandStack'
 
-  export default class Rules {
+  export default class Rules extends ModuleConstructor {
     constructor(injector: Injector)
     protected _commandStack: CommandStack
     allowed(action: string, context?: Object): boolean
@@ -2511,20 +2546,99 @@ declare module 'diagram-js/lib/features/rules/RuleProvider' {
     addRule(actions: string | string[], priority: number | Function, fn?: Function): void
   }
 }
-//
+// 查询组件
 declare module 'diagram-js/lib/features/search-pad/SearchPad' {
-  export default class SearchPad {}
+  import { ModuleConstructor } from 'didi'
+  import Selection from 'diagram-js/lib/features/selection/Selection'
+  import Overlays from 'diagram-js/lib/features/overlays/Overlays'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import { Base } from 'diagram-js/lib/model'
+
+  export type SearchPadEventMap = {
+    el: Element
+    type: string
+    listener: Function
+  }
+  export type SearchPadResult = {
+    element: Base
+    node: Element
+  }
+  export type SearchProvider = {
+    find: Function
+  }
+
+  export default class SearchPad extends ModuleConstructor {
+    static CONTAINER_SELECTOR: string
+    static INPUT_SELECTOR: string
+    static RESULTS_CONTAINER_SELECTOR: string
+    static RESULT_SELECTOR: string
+    static RESULT_SELECTED_CLASS: string
+    static RESULT_SELECTED_SELECTOR: string
+    static RESULT_ID_ATTRIBUTE: string
+    static RESULT_HIGHLIGHT_CLASS: string
+    static OVERLAY_CLASS: string
+    static BOX_HTML: string
+    static RESULT_HTML: string
+    static RESULT_PRIMARY_HTML: string
+    static RESULT_SECONDARY_HTML: string
+
+    constructor(canvas, eventBus, overlays, selection)
+    protected _open: boolean
+    protected _results: SearchPadResult[]
+    protected _eventMaps: SearchPadEventMap[]
+    protected _canvas: Canvas
+    protected _eventBus: EventBus
+    protected _overlays: Overlays
+    protected _selection: Selection
+    protected _container: Element
+    protected _searchInput: HTMLInputElement
+    protected _resultsContainer: Element
+    protected _searchProvider: SearchProvider
+
+    // 注册默认快捷键及输入事件
+    protected _bindEvents(): void
+    protected _unbindEvents(): void
+    // 清除结果并重新搜索
+    protected _search(pattern: string): void
+    // 导航到上一个/下一个结果。默认为下一个结果。
+    protected _scrollToDirection(previous?: boolean): void
+    // 如果节点不可见，请滚动到节点。
+    protected _scrollToNode(node: Element): void
+    // 清空搜索结果
+    protected _clearResults(): void
+    // 获取当前选中结果
+    protected _getCurrentResult(): Element
+    // 在结果容器中创建与搜索结果相对应的结果DOM元素。
+    protected _createResultNode(result: SearchPadResult, id: string): Element
+    // 预选结果条目
+    protected _preselect(node: Element): void
+    // 选择结果节点
+    protected _select(node: Element): void
+    // 重置结果dom
+    protected _resetOverlay(element: Element): void
+
+    // 注册自定义搜索
+    registerProvider(): void
+    open(): void
+    close(): void
+    toggle(): void
+    isOpen(): boolean
+  }
 }
 // 在图表中提供当前选择元素的服务。也提供了控制选择的api
 declare module 'diagram-js/lib/features/selection/Selection' {
   import Canvas from 'diagram-js/lib/core/Canvas'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import { Base } from 'diagram-js/lib/model'
+  import { ModuleConstructor } from 'didi'
 
   interface SelectedElement extends Base {}
 
-  export default class Selection {
+  export default class Selection extends ModuleConstructor {
     constructor(eventBus: EventBus, canvas: Canvas)
+    protected _eventBus: EventBus
+    protected _canvas: Canvas
     protected _selectedElements: Array<SelectedElement>
     select(elements: SelectedElement | Array<SelectedElement>, add?: boolean): void
     deselect(element: SelectedElement): void
@@ -2538,9 +2652,9 @@ declare module 'diagram-js/lib/features/selection/SelectionBehavior' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Selection from 'diagram-js/lib/features/selection/Selection'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
-  import { Base } from 'diagram-js/lib/model'
+  import { ModuleConstructor } from 'didi'
 
-  export default class SelectionBehavior {
+  export default class SelectionBehavior extends ModuleConstructor {
     constructor(
       eventBus: EventBus,
       selection: Selection,
@@ -2555,10 +2669,15 @@ declare module 'diagram-js/lib/features/selection/SelectionVisuals' {
   import Selection from 'diagram-js/lib/features/selection/Selection'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import Styles from 'diagram-js/lib/draw/Styles'
+  import { ModuleConstructor } from 'didi'
+  import { Shape } from 'diagram-js/lib/model'
 
-  export default class SelectionVisuals {
+  export default class SelectionVisuals extends ModuleConstructor {
     constructor(eventBus: EventBus, canvas: Canvas, selection: Selection, styles: Styles)
+    protected _canvas: Canvas
     protected _multiSelectionBox: any
+
+    protected _updateSelectionOutline(selection: Shape | Shape[]): void
   }
 }
 //
@@ -2672,3 +2791,4 @@ declare module 'diagram-js/lib/features/keyboard/KeyboardUtil' {
   export function isKey(keys: string | string[], event: KeyboardEvent): boolean
   export function isShift(event: KeyboardEvent): boolean
 }
+declare module 'diagram-js/lib/features/resize/ResizeUtil' {}
