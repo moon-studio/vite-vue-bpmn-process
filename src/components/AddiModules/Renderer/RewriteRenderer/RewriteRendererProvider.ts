@@ -1957,6 +1957,27 @@ class RewriteRendererProvider extends BaseRenderer {
           fill: getStrokeColor(element, defaultTaskColor),
           stroke: getStrokeColor(element, defaultTaskColor)
         })
+      },
+
+      // 自定义节点的绘制
+      'miyue:SqlTask': function (parentGfx, element, attr) {
+        // 渲染外层边框
+        const attrs = {
+          fill: getFillColor(element, defaultFillColor),
+          fillOpacity: defaultTaskOpacity,
+          stroke: getStrokeColor(element, defaultTaskColor)
+        }
+        renderer('bpmn:Activity')(parentGfx, element, attrs)
+        // 自定义节点
+        const customIcon = svgCreate('image')
+        svgAttr(customIcon, {
+          ...(attr || {}),
+          width: element.width,
+          height: element.height,
+          href: './icons/mysql.png'
+        })
+        svgAppend(parentGfx, customIcon)
+        return customIcon
       }
     })
   }

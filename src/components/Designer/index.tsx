@@ -31,11 +31,9 @@ const Designer = defineComponent({
 
     watch(
       () => modelerModules.value,
-      () => {
-        console.log(modelerModules.value)
-        nextTick().then(() =>
-          initModeler(designer, modelerModules.value, editorSettings, xml, emit)
-        )
+      async () => {
+        await nextTick()
+        initModeler(designer, modelerModules.value, editorSettings, xml, emit)
       },
       { immediate: true }
     )
