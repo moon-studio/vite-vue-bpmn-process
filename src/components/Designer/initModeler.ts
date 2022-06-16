@@ -17,11 +17,6 @@ export default function (
   xml: Ref<string | undefined>,
   emit
 ) {
-  if (window.bpmnInstances?.modeler) {
-    window.bpmnInstances.modeler.destroy()
-  }
-  window.bpmnInstances = {}
-
   const store = modelerStore()
 
   const options: ViewerOptions<Element> = {
@@ -30,8 +25,11 @@ export default function (
     moddleExtensions: modelerModules[1] || {},
     ...modelerModules[2]
   }
+  // 清除旧 modeler
+  store.getModeler && store.getModeler.destroy()
+  store.setModeler(null)
 
-  const modeler: Modeler = (window.bpmnInstances.modeler = new Modeler(options))
+  const modeler: Modeler = new Modeler(options)
 
   store.setModeler(markRaw(modeler))
   store.setModules('moddle', markRaw(modeler.get<Moddle>('moddle')))

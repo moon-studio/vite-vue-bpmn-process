@@ -20,7 +20,8 @@ declare module 'bpmn-js/lib/BaseViewer' {
   }
   export interface DoneCallbackOpt {
     warnings: any[]
-    xml: string
+    xml?: string
+    svg?: string
     err?: any
   }
   export type BPMNEvent = string

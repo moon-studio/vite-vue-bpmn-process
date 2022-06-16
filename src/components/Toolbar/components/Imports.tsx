@@ -1,9 +1,11 @@
 import { defineComponent, ref } from 'vue'
 import { NButton } from 'naive-ui'
+import modeler from '@/store/modeler'
 
 const Imports = defineComponent({
   name: 'Imports',
   setup() {
+    const modelerStore = modeler()
     const importRef = ref<HTMLInputElement | null>(null)
 
     const openImportWindow = () => {
@@ -17,7 +19,7 @@ const Imports = defineComponent({
         reader.readAsText(file)
         reader.onload = function () {
           const xmlStr = this.result
-          window.bpmnInstances.modeler.importXML(xmlStr)
+          modelerStore.getModeler!.importXML(xmlStr as string)
         }
       }
     }

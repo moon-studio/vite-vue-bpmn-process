@@ -5,8 +5,8 @@
  * @returns {Script}
  */
 export function createScriptObject(options, prefix) {
-  const { scriptType, scriptFormat, value, resource } = options || {}
-  const scriptConfig =
-    scriptType === 'inlineScript' ? { scriptFormat, value } : { scriptFormat, resource }
-  return window.bpmnInstances.moddle.create(`${prefix}:Script`, scriptConfig)
+  // const { scriptType, scriptFormat, value, resource } = options || {}
+  // const scriptConfig =
+  //   scriptType === 'inlineScript' ? { scriptFormat, value } : { scriptFormat, resource }
+  // return window.bpmnInstances.moddle.create(`${prefix}:Script`, scriptConfig)
 }

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { defaultSettings } from '@/config'
+import { EditorSettings } from 'types/editor/settings'
 
 const state = {
   editorSettings: defaultSettings
@@ -16,5 +17,10 @@ export default defineStore('editor', {
     editorConfig: (state) => ({
       bg: state.editorSettings.bg
     })
+  },
+  actions: {
+    updateConfiguration(conf: Partial<EditorSettings>) {
+      this.$state.editorSettings = { ...this.$state.editorSettings, ...conf }
+    }
   }
 })

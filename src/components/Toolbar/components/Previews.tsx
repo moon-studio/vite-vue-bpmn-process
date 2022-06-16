@@ -3,18 +3,20 @@ import { NButton, NCode, NPopover, useDialog, useMessage } from 'naive-ui'
 
 import Modeler from 'bpmn-js/lib/Modeler'
 import BpmnModdle from 'bpmn-moddle'
+import modeler from '@/store/modeler'
 
 const Previews = defineComponent({
   name: 'Previews',
   setup() {
     const previewModel = useDialog()
     const message = useMessage()
+    const modelerStore = modeler()
 
     const moddle = new BpmnModdle()
 
     const openXMLPreviewModel = async () => {
       try {
-        const modeler: Modeler | null = window.bpmnInstances.modeler
+        const modeler = modelerStore.getModeler!
 
         if (!modeler) {
           return message.warning('模型加载失败，请刷新重试')
@@ -37,7 +39,7 @@ const Previews = defineComponent({
     }
 
     const openJsonPreviewModel = async () => {
-      const modeler: Modeler | null = window.bpmnInstances.modeler
+      const modeler = modelerStore.getModeler!
 
       if (!modeler) {
         return message.warning('模型加载失败，请刷新重试')
@@ -46,8 +48,6 @@ const Previews = defineComponent({
       const result = await modeler.saveXML({ format: true })
 
       const jsonStr = await moddle.fromXML(result.xml)
-
-      console.log(jsonStr)
 
       previewModel.create({
         title: '流程预览',

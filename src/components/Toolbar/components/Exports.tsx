@@ -1,10 +1,12 @@
 import { defineComponent } from 'vue'
 import { NButton, NPopover } from 'naive-ui'
 import { downloadFile, setEncoded } from '@/utils/files'
+import modeler from '@/store/modeler'
 
 const Exports = defineComponent({
   name: 'Exports',
   setup() {
+    const moderlerStore = modeler()
     // 下载流程图到本地
     /**
      * @param {string} type
@@ -12,23 +14,23 @@ const Exports = defineComponent({
      */
     const downloadProcess = async (type: string, name = 'diagram') => {
       try {
-        const modeler = window.bpmnInstances.modeler
+        const modeler = moderlerStore.getModeler
         // 按需要类型创建文件并下载
         if (type === 'xml' || type === 'bpmn') {
-          const { err, xml } = await modeler.saveXML()
+          const { err, xml } = await modeler!.saveXML()
           // 读取异常时抛出异常
           if (err) {
             console.error(`[Process Designer Warn ]: ${err.message || err}`)
           }
-          const { href, filename } = setEncoded(type.toUpperCase(), name, xml)
+          const { href, filename } = setEncoded(type.toUpperCase(), name, xml!)
           downloadFile(href, filename)
         } else {
-          const { err, svg } = await modeler.saveSVG()
+          const { err, svg } = await modeler!.saveSVG()
           // 读取异常时抛出异常
           if (err) {
             return console.error(err)
           }
-          const { href, filename } = setEncoded('SVG', name, svg)
+          const { href, filename } = setEncoded('SVG', name, svg!)
           downloadFile(href, filename)
         }
       } catch (e: any) {

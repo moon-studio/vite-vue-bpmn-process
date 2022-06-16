@@ -15,6 +15,7 @@ import {
 import SettingsRound from '@vicons/material/SettingsRound'
 import { Icon } from '@vicons/utils'
 import EventEmitter from '@/utils/EventEmitter'
+import editor from '@/store/editor'
 
 const props = {
   settings: {
@@ -29,6 +30,7 @@ const Setting = defineComponent({
   emits: ['update:settings'],
   setup(props) {
     const modelVisible = ref(false)
+    const editorStore = editor()
 
     const editorSettings = ref(props.settings)
 
@@ -41,13 +43,9 @@ const Setting = defineComponent({
       editorSettings.value[key] = value
     })
 
-    // watchEffect(() => {
-    //   if (modelVisible.value) {
-    //     document.body.addEventListener('click', changeModelVisible)
-    //   } else {
-    //     document.body.removeEventListener('click', changeModelVisible)
-    //   }
-    // })
+    watchEffect(() => {
+      editorSettings.value && editorStore.updateConfiguration(editorSettings.value)
+    })
 
     return () => (
       <div class="setting" onClick={(e) => e.stopPropagation()}>
