@@ -238,7 +238,6 @@ declare module 'bpmn-js/lib/draw/PathMap' {
 declare module 'bpmn-js/lib/draw/TextRenderer' {
   import { Bounds } from 'diagram-js/lib/core/Canvas'
   import { ModuleConstructor } from 'didi'
-  import { LayoutText } from 'diagram-js/lib/util/Text'
 
   export type TextStyle = {
     fontFamily: string
@@ -249,11 +248,11 @@ declare module 'bpmn-js/lib/draw/TextRenderer' {
 
   export default class TextRenderer extends ModuleConstructor {
     constructor(config: any)
-    protected getExternalLabelBounds(bounds: Bounds, text: string): Bounds
-    protected getTextAnnotationBounds(bounds: Bounds, text: string): Bounds
-    protected createText(text: string, options?: Object): LayoutText
-    protected getDefaultStyle(): TextStyle
-    protected getExternalStyle(): TextStyle
+    getExternalLabelBounds(bounds: Bounds, text: string): Bounds
+    getTextAnnotationBounds(bounds: Bounds, text: string): Bounds
+    createText(text: string, options?: Object): SVGElement
+    getDefaultStyle(): TextStyle
+    getExternalStyle(): TextStyle
   }
 }
 /************************************* import 文件导入 *************************************/
