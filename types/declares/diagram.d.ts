@@ -3347,7 +3347,7 @@ declare module 'diagram-js/lib/util/Text' {
     style: Record<string, any>
     align: string
   }
-  type LayoutText = {
+  export type LayoutText = {
     element: Element
     dimensions: Dimensions
   }

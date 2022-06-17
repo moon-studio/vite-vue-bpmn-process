@@ -230,13 +230,15 @@ declare module 'bpmn-js/lib/draw/PathMap' {
     | 'MESSAGE_FLOW_MARKER'
   export default class PathMap {
     protected pathMap: { [pathId in PathId]: Path }
-    getRawPath(pathId: string): string
+    getRawPath(pathId: PathId): string
     getScaledPath(pathId: string, param: Object): Object
   }
 }
 // bpmn 文本渲染
 declare module 'bpmn-js/lib/draw/TextRenderer' {
   import { Bounds } from 'diagram-js/lib/core/Canvas'
+  import { ModuleConstructor } from 'didi'
+  import { LayoutText } from 'diagram-js/lib/util/Text'
 
   export type TextStyle = {
     fontFamily: string
@@ -245,13 +247,13 @@ declare module 'bpmn-js/lib/draw/TextRenderer' {
     lineHeight: number
   }
 
-  export default class TextRenderer {
+  export default class TextRenderer extends ModuleConstructor {
     constructor(config: any)
-    private getExternalLabelBounds(bounds: Bounds, text: string): Bounds
-    getTextAnnotationBounds(bounds: Bounds, text: string): Bounds
-    createText(text: string, options?: Object): SVGTextElement
-    getDefaultStyle(): TextStyle
-    getExternalStyle(): TextStyle
+    protected getExternalLabelBounds(bounds: Bounds, text: string): Bounds
+    protected getTextAnnotationBounds(bounds: Bounds, text: string): Bounds
+    protected createText(text: string, options?: Object): LayoutText
+    protected getDefaultStyle(): TextStyle
+    protected getExternalStyle(): TextStyle
   }
 }
 /************************************* import 文件导入 *************************************/
@@ -274,10 +276,11 @@ declare module 'bpmn-js/lib/import/BpmnImporter' {
   import ElementFactory from 'diagram-js/lib/core/ElementFactory'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
   import { Translate } from 'diagram-js/lib/i18n/translate'
-  import { Base } from 'diagram-js/lib/model'
+  import { Base, ModdleElement } from 'diagram-js/lib/model'
   import TextRenderer from 'bpmn-js/lib/draw/TextRenderer'
+  import { ModuleConstructor } from 'didi'
 
-  export default class BpmnImporter {
+  export default class BpmnImporter extends ModuleConstructor {
     constructor(
       eventBus: EventBus,
       canvas: Canvas,
@@ -286,19 +289,39 @@ declare module 'bpmn-js/lib/import/BpmnImporter' {
       translate: Translate,
       textRenderer: TextRenderer
     )
-    add<E extends Base>(semantic: any, di: any, parentElement?: E): E
+    protected _eventBus: EventBus
+    protected _canvas: Canvas
+    protected _elementFactory: ElementFactory
+    protected _elementRegistry: ElementRegistry
+    protected _translate: Translate
+    protected _textRenderer: TextRenderer
+
+    add<E extends Base>(semantic: ModdleElement, di: ModdleElement, parentElement?: E): E
+    addLabel(semantic: ModdleElement, di: ModdleElement, element: Base): Base
+
+    //将边界元素附加到给定的主机
+    protected _attachBoundary(boundarySemantic: ModdleElement, boundaryElement: Base): void
+    protected _getEnd(semantic: ModdleElement, side: string): Base
+    protected _getSource(semantic: ModdleElement): Base
+    protected _getTarget(semantic: ModdleElement): Base
+    protected _getElement(semantic: ModdleElement): Base
   }
 }
 // xml 树形结构遍历
 declare module 'bpmn-js/lib/import/BpmnTreeWalker' {
   import { Translate } from 'diagram-js/lib/i18n/translate'
+  import { ModdleElement } from 'diagram-js/lib/model'
 
   export default class BpmnTreeWalker {
     constructor(handler, translate: Translate)
+    handleDeferred(): void
+    handleDefinitions(definitions: ModdleElement, diagram?: ModdleElement): void
+    handleSubProcess(subProcess: ModdleElement, context: Object): void
+    registerDi(di: ModdleElement): void
   }
 }
 /************************************* feature modeling 核心扩展功能 *************************************/
-declare module 'bpmn-js/lib/features/modeling/Modeling.js' {
+declare module 'bpmn-js/lib/features/modeling/Modeling' {
   import BaseModeling from 'diagram-js/lib/features/modeling/Modeling'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import ElementFactory from 'diagram-js/lib/core/ElementFactory'
@@ -307,6 +330,7 @@ declare module 'bpmn-js/lib/features/modeling/Modeling.js' {
   import { Lane } from 'bpmn-moddle'
   import { ModelingHandler } from 'diagram-js/lib/features/modeling/Modeling'
   import { Bounds } from 'diagram-js/lib/core/Canvas'
+  import Rules from 'diagram-js/lib/features/rules/Rules'
 
   type Properties = Record<string, string | number | boolean | ModdleElement | null | undefined>
 
@@ -315,8 +339,9 @@ declare module 'bpmn-js/lib/features/modeling/Modeling.js' {
       eventBus: EventBus,
       elementFactory: ElementFactory,
       commandStack: CommandStack,
-      bpmnRules: any
+      bpmnRules: Rules
     )
+    protected _bpmnRules: Rules
     getHandlers<H extends ModelingHandler>(): Record<string, H>
     updateLabel(element: Base, newLabel: Label | string, newBounds?: Bounds, hints?: Hints): void
     connect(source: Shape, target: Shape, attrs?: Object, hints?: Hints): Connection
@@ -831,17 +856,33 @@ declare module 'bpmn-js/lib/draw/bpmnRenderUtil' {
   export function getDiamondPath(shape: Shape): string
   export function getRectPath(shape: Shape): string
 }
-declare module 'bpmn-js/lib/util/ModelUtil' {
-  import { Base, ModdleElement } from 'diagram-js/lib/model'
 
-  export function is(element: Base | ModdleElement, type: string): boolean
+declare module 'bpmn-js/lib/features/auto-place/BpmnAutoPlaceUtil' {}
 
-  export function isAny(element: Base, types: string[]): boolean
+declare module 'bpmn-js/lib/features/label-editing/LabelUtil' {
+  import { Base } from 'diagram-js/lib/model'
 
-  export function getBusinessObject(element: Base | ModdleElement): ModdleElement
-
-  export function getDi(element: Base): ModdleElement
+  export function getLabel(element: Base): string
+  export function setLabel(element: Base, text: string, isExternal?: boolean): Base
 }
+
+declare module 'bpmn-js/lib/features/modeling/util/LaneUtil' {}
+
+declare module 'bpmn-js/lib/features/modeling/util/ModelingUtil' {
+  import { Base } from 'diagram-js/lib/model'
+  import { isAny, is } from 'bpmn-js/lib/util/ModelUtil'
+
+  export function getParent(element: Base, anyType: string | string[]): Base
+
+  export { isAny, is }
+}
+
+declare module 'bpmn-js/lib/features/popup-menu/util/TypeUtil' {}
+
+declare module 'bpmn-js/lib/import/Util' {}
+
+declare module 'bpmn-js/lib/util/CompatibilityUtil' {}
+
 declare module 'bpmn-js/lib/util/DiUtil' {
   import { Base, ModdleElement } from 'diagram-js/lib/model'
 
@@ -853,17 +894,21 @@ declare module 'bpmn-js/lib/util/DiUtil' {
   export function hasEscalationEventDefinition<T extends Base>(element: T): boolean
   export function hasCompensateEventDefinition<T extends Base>(element: T): boolean
 }
-declare module 'bpmn-js/lib/features/modeling/util/ModelingUtil' {
-  import { Base } from 'diagram-js/lib/model'
-  import { isAny, is } from 'bpmn-js/lib/util/ModelUtil'
 
-  export function getParent(element: Base, anyType: string | string[]): Base
+declare module 'bpmn-js/lib/util/DrilldownUtil' {}
 
-  export { isAny, is }
+declare module 'bpmn-js/lib/util/LabelUtil' {}
+
+declare module 'bpmn-js/lib/util/ModelUtil' {
+  import { Base, ModdleElement } from 'diagram-js/lib/model'
+
+  export function is(element: Base | ModdleElement, type: string): boolean
+
+  export function isAny(element: Base, types: string[]): boolean
+
+  export function getBusinessObject(element: Base | ModdleElement): ModdleElement
+
+  export function getDi(element: Base): ModdleElement
 }
-declare module 'bpmn-js/lib/features/label-editing/LabelUtil' {
-  import { Base } from 'diagram-js/lib/model'
 
-  export function getLabel(element: Base): string
-  export function setLabel(element: Base, text: string, isExternal?: boolean): Base
-}
+declare module 'bpmn-js/lib/util/PoweredByUtil' {}
