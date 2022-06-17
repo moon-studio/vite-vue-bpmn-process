@@ -9,6 +9,7 @@ import { Moddle } from 'moddle'
 import Modeling from 'bpmn-js/lib/features/modeling/Modeling.js'
 import Canvas from 'diagram-js/lib/core/Canvas'
 import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+import Logger from '@/utils/Logger'
 
 export default function (
   designer: Ref<HTMLElement | null>,
@@ -38,6 +39,10 @@ export default function (
   store.setModules('elementRegistry', markRaw(modeler.get<ElementRegistry>('elementRegistry')))
 
   EventEmitter.instance.emit('modeler-init', modeler)
+
+  modeler.on('element.click', (event) => {
+    Logger.prettyInfo('Element Click', event)
+  })
 
   modeler.on('commandStack.changed', async (event) => {
     try {
