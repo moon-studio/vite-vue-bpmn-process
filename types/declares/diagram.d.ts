@@ -3194,7 +3194,7 @@ declare module 'diagram-js/lib/util/Collections' {
   import { Connection } from 'diagram-js/lib/model'
 
   export function remove(collection?: Connection[], element?: Object): number
-  export function add(collection: Connection[], element: Object, idx: number): void
+  export function add(collection: Connection[], element: Object, idx?: number): void
   export function indexOf(collection: Connection[], element: Object): number
 }
 
