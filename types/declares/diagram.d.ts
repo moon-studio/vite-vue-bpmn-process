@@ -881,6 +881,13 @@ declare module 'diagram-js/lib/model' {
     original?: Point
   }
 
+  export interface Rect {
+    x: number
+    y: number
+    width: number
+    height: number
+  }
+
   export abstract class ModdleBase {
     get(name: string): any
     set(name: string, value: any): void
@@ -1026,8 +1033,11 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
     revert<E extends Base>(context: Object): E[]
   }
 
-  export default class Modeling {
+  export default class Modeling extends ModuleConstructor {
     constructor(eventBus: EventBus, elementFactory: ElementFactory, commandStack: CommandStack)
+
+    protected _create(type: string, attrs: Object): Base
+
     getHandlers<H extends ModelingHandler>(): Record<string, H>
     registerHandlers(commandStack: CommandStack[]): void
     moveShape(
@@ -1077,10 +1087,10 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
       target: Base,
       hints?: Hints
     ): Shape
-    removeElements(elements: Base[]): void
+    removeElements(elements: Base[]): Base
     distributeElements(groups: Base[], axis: string, dimension: Dimensions): void
-    removeShape(shape: Shape, hints?: Hints): void
-    removeConnection(connection: Connection, hints?: Hints): void
+    removeShape(shape: Shape, hints?: Hints): Shape
+    removeConnection(connection: Connection, hints?: Hints): Connection
     replaceShape(oldShape: Shape, newShape: Shape, hints?: Hints): Shape
     alignElements(elements: Base[], alignment: string): void
     resizeShape(shape: Shape, newBounds: Dimensions, minBounds?: Dimensions, hints?: Hints): void
@@ -2680,81 +2690,520 @@ declare module 'diagram-js/lib/features/selection/SelectionVisuals' {
     protected _updateSelectionOutline(selection: Shape | Shape[]): void
   }
 }
-//
+// 对齐标识线
 declare module 'diagram-js/lib/features/snapping/Snapping' {
-  export default class Snapping {}
+  import { ModuleConstructor } from 'didi'
+  import { debounce } from 'min-dash'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  import { SnapPoints } from 'diagram-js/lib/features/snapping/SnapContext'
+
+  type SnapLine = {
+    update(position?: number): unknown
+  }
+  type SnapLines = {
+    horizontal: SnapLine
+    vertical: SnapLine
+  }
+  type Orientation = 'horizontal' | 'vertical'
+
+  export default class Snapping extends ModuleConstructor {
+    constructor(canvas: Canvas)
+    protected _canvas: Canvas
+    protected _asyncHide: typeof debounce
+    protected _snapLines: undefined | SnapLines
+
+    protected _createLine(orientation: Orientation): SnapLine
+    protected _createSnapLines(): SnapLines
+
+    snap(event: Event, snapPoints: SnapPoints): void
+    showSnapLine(orientation: Orientation, position?: number): void
+    getSnapLine(orientation: Orientation): SnapLine
+    hide(): void
+  }
 }
 //
 declare module 'diagram-js/lib/features/snapping/SnapContext' {
-  export default class SnapContext {}
+  import { Point } from 'diagram-js/lib/model'
+
+  type Direction = 'x' | 'y'
+  type SnapValue = Record<Direction, number[]>
+
+  export class SnapPoints {
+    constructor(defaultSnaps?: Record<string, Point[]>)
+    protected _snapValues: Record<string, SnapValue>
+
+    add(snapLocation: string, point: Point)
+    snap(point: Point, snapLocation: string, axis: string, tolerance?: number): number | undefined
+    initDefaults(defaultSnaps: Record<string, Point[]>)
+  }
+
+  export default class SnapContext {
+    constructor()
+    protected _targets: Record<string, SnapPoints>
+    protected _snapOrigins: Record<string, Point>
+    protected _snapLocations: string[]
+    protected _defaultSnaps: Record<string, Point[]>
+
+    getSnapOrigin(snapLocation: string): Point
+    setSnapOrigin(snapLocation: string, initialValue: Point): void
+    addDefaultSnap(type: string, point: Point): void
+    getSnapLocations(): string[]
+    setSnapLocations(snapLocations: string[]): void
+    pointsForTarget(target: Element | string): SnapPoints
+  }
 }
 //
 declare module 'diagram-js/lib/features/snapping/ResizeSnapping' {
-  export default class ResizeSnapping {}
+  import { ModuleConstructor } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Snapping from 'diagram-js/lib/features/snapping/Snapping'
+  import SnapContext, { SnapPoints } from 'diagram-js/lib/features/snapping/SnapContext'
+  import { Connection, Shape } from 'diagram-js/lib/model'
+
+  export default class ResizeSnapping extends ModuleConstructor {
+    constructor(eventBus: EventBus, snapping: Snapping)
+
+    initSnap(event: Event): SnapContext
+    addSnapTargetPoints(
+      snapPoints: SnapPoints,
+      shape: Shape | Connection,
+      target: Shape | Connection,
+      direction: string
+    ): SnapPoints
+    getSnapTargets(shape: Shape | Connection, target: Shape | Connection): Array<Shape | Connection>
+  }
 }
 //
 declare module 'diagram-js/lib/features/snapping/CreateMoveSnapping' {
-  export default class CreateMoveSnapping {}
+  import { ModuleConstructor } from 'didi'
+  import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Snapping from 'diagram-js/lib/features/snapping/Snapping'
+  import SnapContext, { SnapPoints } from 'diagram-js/lib/features/snapping/SnapContext'
+  import { Connection, Shape } from 'diagram-js/lib/model'
+
+  export default class CreateMoveSnapping extends ModuleConstructor {
+    constructor(elementRegistry: ElementRegistry, eventBus: EventBus, snapping: Snapping)
+    protected _elementRegistry: ElementRegistry
+
+    initSnap(event: Event): SnapContext
+    addSnapTargetPoints(
+      snapPoints: SnapPoints,
+      shape: Shape | Connection,
+      target: Shape | Connection,
+      direction: string
+    ): SnapPoints
+    getSnapTargets(shape: Shape | Connection, target: Shape | Connection): Array<Shape | Connection>
+  }
 }
-//
+// 对齐工具
 declare module 'diagram-js/lib/features/space-tool/SpaceTool' {
-  export default class SpaceTool {}
+  import { ModuleConstructor } from 'didi'
+  import Canvas, { Position } from 'diagram-js/lib/core/Canvas'
+  import Dragging from 'diagram-js/lib/features/dragging/Dragging'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import ToolManager from 'diagram-js/lib/features/tool-manager/ToolManager'
+  import Modeling from 'diagram-js/lib/features/modeling/Modeling'
+  import Rules from 'diagram-js/lib/features/rules/Rules'
+  import Mouse from 'diagram-js/lib/features/mouse/Mouse'
+  import { Shape } from 'diagram-js/lib/model'
+
+  type Adjustment = {
+    movingShapes: Shape[]
+    resizingShapes: Shape[]
+  }
+
+  export default class SpaceTool extends ModuleConstructor {
+    constructor(
+      canvas: Canvas,
+      dragging: Dragging,
+      eventBus: EventBus,
+      modeling: Modeling,
+      rules: Rules,
+      toolManager: ToolManager,
+      mouse: Mouse
+    )
+    protected _canvas: Canvas
+    protected _dragging: Dragging
+    protected _eventBus: EventBus
+    protected _modeling: Modeling
+    protected _rules: Rules
+    protected _toolManager: ToolManager
+    protected _mouse: Mouse
+
+    activateSelection(event: Event, autoActivate: boolean, reactivate?: boolean): void
+    activateMakeSpace(event: MouseEvent): void
+    makeSpace(
+      movingShapes: Shape[],
+      resizingShapes: Shape[],
+      delta: Position,
+      direction: string,
+      start: number
+    ): Shape
+    init(event: Event, context: Object): boolean
+    calculateAdjustments(elements: Shape[], axis: string, delta: number, start: number): Adjustment
+    toggle(): void
+    isActive(): boolean
+  }
 }
-//
+// 供创建/移除空间时选择/移动/调整形状的预览。
 declare module 'diagram-js/lib/features/space-tool/SpaceToolPreview' {
-  export default class SpaceToolPreview {}
+  import { ModuleConstructor } from 'didi'
+  export default class SpaceToolPreview extends ModuleConstructor {
+    constructor(eventBus, elementRegistry, canvas, styles, previewSupport)
+  }
 }
-//
+// 工具管理器充当可用工具和 palette 之间的中间人，它需要确保设置了正确的活动状态。
 declare module 'diagram-js/lib/features/tool-manager/ToolManager' {
-  export default class ToolManager {}
+  import { ModuleConstructor } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Dragging from 'diagram-js/lib/features/dragging/Dragging'
+
+  export default class ToolManager extends ModuleConstructor {
+    constructor(eventBus: EventBus, dragging: Dragging)
+    protected _eventBus: EventBus
+    protected _dragging: Dragging
+    protected _tools: string[]
+    protected _active: EventBus
+
+    registerTool(name: string, events)
+    isActive(tool): boolean
+    length(): number
+    setActive(tool): void
+    bindEvents(name: string, events): void
+  }
 }
-//
+//允许用户在图上呈现工具提示的服务。工具提示服务将负责在导航缩放期间更新工具提示定位。
 declare module 'diagram-js/lib/features/tooltips/Tooltips' {
-  export default class Tooltips {}
+  import { ModuleConstructor } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas, { Viewbox } from 'diagram-js/lib/core/Canvas'
+  import IdGenerator from 'diagram-js/lib/util/IdGenerator'
+
+  export type Tooltip = {
+    html: string | Element
+    show?: {
+      minZoon?: number
+      maxZoom?: number
+    }
+    position?: {
+      top?: number
+      right?: number
+      bottom?: number
+      left?: number
+    }
+    timeout?: number
+    removeTimer?: typeof setTimeout
+  }
+
+  export default class Tooltips extends ModuleConstructor {
+    constructor(eventBus: EventBus, canvas: Canvas)
+    protected _eventBus: EventBus
+    protected _canvas: Canvas
+    protected _ids: IdGenerator
+    protected _tooltipDefaults: Tooltip
+    protected _tooltips: Record<string, Tooltip>
+    protected _tooltipRoot: Element
+
+    protected _init(): void
+    protected _updateRoot(viewbox: Viewbox): void
+    protected _addTooltip(tooltip: Tooltip): void
+    protected _updateTooltip(tooltip: Tooltip): void
+    protected _updateTooltipVisibilty(viewbox: Viewbox): void
+
+    add(tooltip: Tooltip): string
+    trigger(action: string, event: Event): void
+    get(id: string): Tooltip
+    clearTimeout(tooltip: Tooltip): void
+    setTimeout(tooltip: Tooltip): void
+    remove(id: string): void
+    show(): void
+    hide(): void
+  }
 }
-//
+// 移动端事件修正
 declare module 'diagram-js/lib/features/touch/TouchFix' {
-  export default class TouchFix {}
+  import { ModuleConstructor } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  export default class TouchFix extends ModuleConstructor {
+    constructor(canvas: Canvas, eventBus: EventBus)
+
+    /**
+     * 如果0,0和视口元素origin之间没有形状，则Safari mobile (iOS 7) 不会在 <SVG> 元素中触发touchstart事件。
+     * 因此，只有在 <g class = "viewport"> 元素被击中时，才会触发touchstart事件。在 “viewport” 上下放置一个元素可以修复该行为
+     * @param svg
+     */
+    addBBoxMarker(svg: SVGElement): void
+  }
 }
-//
+// 为元素提供触摸事件的插件。
 declare module 'diagram-js/lib/features/touch/TouchInteractionEvents' {
-  export default class TouchInteractionEvents {}
+  import { ModuleConstructor } from 'didi'
+  // 内部依赖 dragging， move， contextPad， palette
+  export default class TouchInteractionEvents extends ModuleConstructor {
+    constructor(injector, canvas, eventBus, elementRegistry, interactionEvents)
+  }
 }
 
 /*************************************** 其他 ****************************************/
 //
 declare module 'diagram-js/lib/navigation/keyboard-move/KeyboardMove' {
-  export default class KeyboardMove {}
+  import { ModuleConstructor } from 'didi'
+  import Keyboard from 'diagram-js/lib/features/keyboard/Keyboard'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+
+  type KeyboardMoveConfig = {
+    moveSpeed: number
+    moveSpeedAccelerated: number
+  }
+  //允许用户使用键盘移动画布的功能。
+  export default class KeyboardMove extends ModuleConstructor {
+    constructor(config: Object, keyboard: Keyboard<Element>, canvas: Canvas)
+    protected _config: KeyboardMoveConfig
+
+    protected moveCanvas(option: { speed: number; direction: string }): void
+  }
 }
-//
+// 通过鼠标移动画布。
 declare module 'diagram-js/lib/navigation/movecanvas/MoveCanvas' {
-  export default class MoveCanvas {}
+  import { ModuleConstructor } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas from 'diagram-js/lib/core/Canvas'
+  export default class MoveCanvas extends ModuleConstructor {
+    constructor(eventBus: EventBus, canvas: Canvas)
+
+    protected isActive(): boolean
+  }
 }
-//
+// 过鼠标滚轮缩放画布
 declare module 'diagram-js/lib/navigation/zoomscroll/ZoomScroll' {
-  export default class ZoomScroll {}
+  import { ModuleConstructor } from 'didi'
+  import EventBus from 'diagram-js/lib/core/EventBus'
+  import Canvas, { Position } from 'diagram-js/lib/core/Canvas'
+  /**
+   * An implementation of zooming and scrolling within the
+   * {@link Canvas} via the mouse wheel.
+   *
+   * Mouse wheel zooming / scrolling may be disabled using
+   * the {@link toggle(enabled)} method.
+   *
+   * @param {Object} [config]
+   * @param {boolean} [config.enabled=true] default enabled state
+   * @param {number} [config.scale=.75] scroll sensivity
+   * @param {EventBus} eventBus
+   * @param {Canvas} canvas
+   */
+  export default class ZoomScroll extends ModuleConstructor {
+    constructor(config: Object, eventBus: EventBus, canvas: Canvas)
+    protected _enabled: boolean
+    protected _canvas: Canvas
+    protected _container: Element
+    protected _handleWheel(event: Event): unknown
+    protected _totalDelta: number
+    protected _scale: number
+
+    protected _init(newEnabled: boolean): void
+    protected _zoom(delta: number, position: Position, stepSize: number): void
+
+    scroll(delta: number): void
+    reset(): void
+    zoom(delta: number, position: Position): void
+    stepZoom(delta: number, position: Position): void
+    toggle(newEnabled: boolean): boolean
+  }
 }
 
 /*************************************** utils 工具函数 ****************************************/
-declare module 'diagram-js/lib/features/auto-place/AutoPlaceUtil' {}
-declare module 'diagram-js/lib/features/bendpoints/BendpointUtil' {}
-declare module 'diagram-js/lib/features/bendpoints/GeometricUtil' {}
-declare module 'diagram-js/lib/features/grid-snapping/GridUtil' {}
+declare module 'diagram-js/lib/features/auto-place/AutoPlaceUtil' {
+  import { Point, Shape } from 'diagram-js/lib/model'
+
+  export const DEFAULT_DISTANCE = 50
+
+  function GetNextPosition(
+    element: Shape,
+    previousPosition: Point,
+    connectedAtPosition: Point
+  ): Point
+
+  export function findFreePosition(
+    source: Shape,
+    element: Shape,
+    position: Point,
+    getNextPosition: typeof GetNextPosition
+  ): Point
+  export function generateGetNextPosition(nextPositionDirection: Point): typeof GetNextPosition
+  export function getConnectedAtPosition(source: Shape, position: Point, element: Element): void
+  export function getConnectedDistance(source: Shape, hints?: Object): void
+}
+
+declare module 'diagram-js/lib/features/bendpoints/BendpointUtil' {
+  import Canvas, { Position } from 'diagram-js/lib/core/Canvas'
+  import { Connection, Point } from 'diagram-js/lib/model'
+
+  export const BENDPOINT_CLS = 'djs-bendpoint'
+  export const SEGMENT_DRAGGER_CLS = 'djs-segment-dragger'
+  export function toCanvasCoordinates(canvas: Canvas, event: Event): Point
+  export function getConnectionIntersection(canvas: Canvas, waypoints: Point[], event: Event): void
+  export function addBendpoint(parentGfx: SVGElement, className: string): void
+  export function addSegmentDragger(
+    parentGfx: SVGElement,
+    segmentStart: Point,
+    segmentEnd: Point
+  ): void
+  export function calculateSegmentMoveRegion(segmentLength: number): number
+  export function getClosestPointOnConnection(position: Position, connection: Connection): Point
+}
+
+declare module 'diagram-js/lib/features/bendpoints/GeometricUtil' {
+  import { Point } from 'diagram-js/lib/model'
+
+  export function vectorLength(v: Point): number
+  export function getAngle(line: [Point, Point]): number
+  export function rotateVector(vector: Point, angle?: number): Point
+  export function perpendicularFoot(point: Point, line: [Point, Point]): Point
+  export function getDistancePointLine(point: Point, line: [Point, Point]): number
+  export function getDistancePointPoint(point1: Point, point2: Point): number
+}
+
+declare module 'diagram-js/lib/features/grid-snapping/GridUtil' {
+  export const SPACING = 10
+
+  export function quantize(value: number, quantum: number, fn?: string): number
+}
+
 declare module 'diagram-js/lib/features/keyboard/KeyboardUtil' {
   export function hasModifier(event: KeyboardEvent): string | undefined
   export function isCmd(event: KeyboardEvent): boolean | string | undefined
   export function isKey(keys: string | string[], event: KeyboardEvent): boolean
   export function isShift(event: KeyboardEvent): boolean
 }
-declare module 'diagram-js/lib/features/resize/ResizeUtil' {}
-declare module 'diagram-js/lib/features/snapping/SnapUtil' {}
-declare module 'diagram-js/lib/features/space-tool/SpaceUtil' {}
-declare module 'diagram-js/lib/layout/LayoutUtil' {}
-declare module 'diagram-js/lib/navigation/zoomscroll/ZoomUtil' {}
-declare module 'diagram-js/lib/util/AttachUtil' {}
-declare module 'diagram-js/lib/util/ClickTrap' {}
-declare module 'diagram-js/lib/util/Collections' {}
-declare module 'diagram-js/lib/util/Cursor' {}
+
+declare module 'diagram-js/lib/features/resize/ResizeUtil' {
+  import { Bounds, Dimensions } from 'diagram-js/lib/core/Canvas'
+  import { Point, Shape } from 'diagram-js/lib/model'
+
+  export type TRBL = {
+    top: number
+    right: number
+    bottom: number
+    left: number
+  }
+  type ResizeConstraints = {
+    min: Partial<TRBL>
+    max: Partial<TRBL>
+  }
+  type Direction = 'nw' | 'ne' | 'se' | 'sw'
+
+  export function substractTRBL(trblA: TRBL, trblB: TRBL): TRBL
+  export function resizeBounds(bounds: Bounds, direction: Direction, delta: Point): Bounds
+  export function resizeTRBL(bounds: Bounds, resize: TRBL): Bounds
+  export function reattachPoint(bounds: Bounds, newBounds: Bounds, point: Point): Point
+  export function ensureConstraints(
+    currentBounds: Bounds,
+    resizeConstraints: ResizeConstraints
+  ): Bounds
+  export function getMinResizeBounds(
+    direction: Direction,
+    currentBounds: Bounds,
+    minDimensions: Dimensions,
+    childrenBounds: Bounds
+  ): Bounds
+  export function addPadding(bbox: Bounds, padding: TRBL | number): Bounds
+  export function computeChildrenBBox(
+    shapeOrChildren: Shape | Shape[],
+    padding: TRBL | number
+  ): number | undefined
+}
+
+declare module 'diagram-js/lib/features/snapping/SnapUtil' {
+  import { Bounds } from 'diagram-js/lib/core/Canvas'
+  import { Connection, Point, Shape } from 'diagram-js/lib/model'
+
+  export function snapTo(value: number, values: number[], tolerance?: number): number
+  export function topLeft(bounds: Bounds): Point
+  export function topRight(bounds: Bounds): Point
+  export function bottomLeft(bounds: Bounds): Point
+  export function bottomRight(bounds: Bounds): Point
+  export function mid(bounds: Bounds, defaultValue: Point): Point
+  export function isSnapped(event: Event, axis: string): boolean
+  export function setSnapped(event: Event, axis: string, value: number | boolean): number
+  export function getChildren(parent: Shape): Array<Shape | Connection>
+}
+
+declare module 'diagram-js/lib/features/space-tool/SpaceUtil' {
+  import { Connection, Point, Shape } from 'diagram-js/lib/model'
+  import { Bounds } from 'diagram-js/lib/core/Canvas'
+
+  export function getDirection(axis: string, delta: number): string
+  export function getWaypointsUpdatingConnections(
+    movingShapes: Shape[],
+    resizingShapes: Shape[]
+  ): Connection[]
+  export function resizeBounds(bounds: Bounds, direction: string, delta: Point): Bounds
+}
+
+declare module 'diagram-js/lib/layout/LayoutUtil' {
+  import { TRBL } from 'diagram-js/lib/features/resize/ResizeUtil'
+  import { Bounds } from 'diagram-js/lib/core/Canvas'
+  import { Connection, Point } from 'diagram-js/lib/model'
+
+  type PathComponent = string | any[][]
+
+  export function roundBounds(bounds: Bounds): Bounds
+  export function roundPoint(point: Point): Point
+  export function asTRBL(bounds: Bounds): TRBL
+  export function asBounds(trbl: TRBL): Bounds
+  export function getBoundsMid(bounds: Bounds | Point): Point
+  export function getConnectionMid(connection: Connection): Point
+  export function getMid(element: Connection): Point
+  export function getOrientation(rect: Bounds, reference: Bounds, padding: Point | number): string
+  export function getElementLineIntersection(
+    elementPath: PathComponent,
+    linePath: PathComponent,
+    cropStart: boolean
+  ): Point
+  export function getIntersections(a: PathComponent, b: PathComponent): Intersection[] | number
+  export function filterRedundantWaypoints(waypoints: Point[]): Point[]
+}
+
+declare module 'diagram-js/lib/navigation/zoomscroll/ZoomUtil' {
+  type Range = {
+    min: number
+    max: number
+  }
+  export function getStepSize(range: Range, steps: number): number
+  export function cap(range: Range, scale: number): number
+}
+
+declare module 'diagram-js/lib/util/AttachUtil' {
+  import { Point, Shape } from 'diagram-js/lib/model'
+  import { Bounds } from 'diagram-js/lib/core/Canvas'
+
+  export function getNewAttachPoint(point: Point, oldBounds: Bounds, newBounds: Bounds): Point
+  export function getNewAttachShapeDelta(shape: Shape, oldBounds: Bounds, newBounds: Bounds): Point
+}
+
+declare module 'diagram-js/lib/util/ClickTrap' {
+  import EventBus from 'diagram-js/lib/core/EventBus'
+
+  export function install(eventBus: EventBus, eventName?: string): Function
+}
+
+declare module 'diagram-js/lib/util/Collections' {
+  import { Connection } from 'diagram-js/lib/model'
+
+  export function remove(collection?: Connection[], element?: Object): number
+  export function add(collection: Connection[], element: Object, idx: number): void
+  export function indexOf(collection: Connection[], element: Object): number
+}
+
+declare module 'diagram-js/lib/util/Cursor' {
+  export function set(mode: string | null): void
+  export function unset(): void
+  export function has(mode: string): void
+}
+
 declare module 'diagram-js/lib/util/Elements' {
   import { Base, Shape } from 'diagram-js/lib/model'
   import { Bounds } from 'diagram-js/lib/core/Canvas'
@@ -2775,10 +3224,44 @@ declare module 'diagram-js/lib/util/Elements' {
   export function getType(element): string
   export function isFrameElement(element): boolean
 }
-declare module 'diagram-js/lib/util/EscapeUtil' {}
-declare module 'diagram-js/lib/util/Event' {}
-declare module 'diagram-js/lib/util/Geometry' {}
-declare module 'diagram-js/lib/util/GraphicsUtil' {}
+
+declare module 'diagram-js/lib/util/EscapeUtil' {
+  // const HTML_ESCAPE_MAP = {
+  //   '&': '&amp;',
+  //   '<': '&lt;',
+  //   '>': '&gt;',
+  //   '"': '&quot;',
+  //   "'": '&#39;'
+  // }
+
+  export function escapeHTML(str: string): string
+}
+
+declare module 'diagram-js/lib/util/Event' {
+  import { Point } from 'diagram-js/lib/model'
+
+  export function getOriginal(event: Event): unknown
+  export function stopPropagation(event: Event, immediate: boolean): void
+  export function toPoint(event: Event): Point | null
+}
+
+declare module 'diagram-js/lib/util/Geometry' {
+  import { Point, Rect } from 'diagram-js/lib/model'
+
+  export function pointDistance(a: Point, b: Point): number
+  export function pointsOnLine(p: Point, q: Point, r: Point, accuracy?: number): boolean
+  export function pointsAligned(a: Point | Point[], b: Point): string | boolean
+  export function pointsAlignedHorizontally(a: Point | Point[], b: Point): boolean
+  export function pointsAlignedVertically(a: Point | Point[], b: Point): boolean
+  export function pointInRect(p: Point, rect: Rect, tolerance: number): boolean
+  export function getMidPoint(p: Point, q: Point): Point
+}
+
+declare module 'diagram-js/lib/util/GraphicsUtil' {
+  export function getVisual(gfx: SVGElement): SVGElement
+  export function getChildren(gfx: SVGElement): SVGElement
+}
+
 declare module 'diagram-js/lib/util/IdGenerator' {
   export default class IdGenerator {
     constructor(prefix: string)
@@ -2788,12 +3271,49 @@ declare module 'diagram-js/lib/util/IdGenerator' {
     next(): string
   }
 }
-declare module 'diagram-js/lib/util/LineIntersection' {}
-declare module 'diagram-js/lib/util/Math' {}
-declare module 'diagram-js/lib/util/Mouse' {}
-declare module 'diagram-js/lib/util/Platform' {}
-declare module 'diagram-js/lib/util/PositionUtil' {}
-declare module 'diagram-js/lib/util/Removal' {}
+
+declare module 'diagram-js/lib/util/LineIntersection' {
+  import { Point } from 'diagram-js/lib/model'
+
+  type ApproxIntersection = {
+    index: number
+    point: Point
+    bendpoint?: boolean
+  }
+  export function getApproxIntersection(waypoints: Point[], reference: Point): ApproxIntersection
+}
+
+declare module 'diagram-js/lib/util/Math' {
+  import { delta } from 'diagram-js/lib/util/PositionUtil'
+  // 得到x以10为底的对数
+  export function log10(x: number): number
+  export { delta as substract }
+}
+
+declare module 'diagram-js/lib/util/Mouse' {
+  export { isMac } from 'diagram-js/lib/util/Platform'
+  export function isButton(event: Object, button): boolean
+  export function isPrimaryButton(event: Object): boolean
+  export function isAuxiliaryButton(event: Object): boolean
+  export function isSecondaryButton(event: Object): boolean
+  export function hasPrimaryModifier(event: Object): boolean
+  export function hasSecondaryModifier(event: Object): boolean
+}
+
+declare module 'diagram-js/lib/util/Platform' {
+  export function isMac(): boolean
+}
+
+declare module 'diagram-js/lib/util/PositionUtil' {
+  import { Point } from 'diagram-js/lib/model'
+
+  export function delta(a: Point, b: Point): Point
+}
+
+declare module 'diagram-js/lib/util/Removal' {
+  export function saveClear(collection: Object[] | Function, removeFn?: Function): Object[] | null
+}
+
 declare module 'diagram-js/lib/util/RenderUtil' {
   import { Point } from 'diagram-js/lib/model'
 
@@ -2802,6 +3322,7 @@ declare module 'diagram-js/lib/util/RenderUtil' {
   export function createLine(points: Point[], attrs: Object): SVGPolylineElement
   export function updateLine(gfx: SVGPolylineElement, points: Point[]): SVGPolylineElement
 }
+
 declare module 'diagram-js/lib/util/SvgTransformUtil' {
   export function transform(
     gfx: SVGElement,
@@ -2814,4 +3335,76 @@ declare module 'diagram-js/lib/util/SvgTransformUtil' {
   export function rotate(gfx: SVGElement, angle: number): void
   export function scale(gfx: SVGElement, amount: number): void
 }
-declare module 'diagram-js/lib/util/Text' {}
+
+declare module 'diagram-js/lib/util/Text' {
+  import { Dimensions } from 'diagram-js/lib/core/Canvas'
+  type TextConfig = {
+    size: {
+      width: number
+      height: number
+    }
+    padding: number
+    style: Record<string, any>
+    align: string
+  }
+  type LayoutText = {
+    element: Element
+    dimensions: Dimensions
+  }
+  type TextOptions = {
+    align: string
+    style: string
+    fitBox: boolean
+  }
+
+  export default class Text {
+    constructor(config: TextConfig)
+    protected _config: TextConfig
+
+    createText(text: string, options: TextOptions): LayoutText
+    getDimensions(text: string, options: TextOptions): Dimensions
+    layoutText(text: string, options: TextOptions): LayoutText
+  }
+}
+
+declare interface Intersection {
+  /**
+   * Segment of first path.
+   */
+  segment1: number
+
+  /**
+   * Segment of first path.
+   */
+  segment2: number
+
+  /**
+   * The x coordinate.
+   */
+  x: number
+
+  /**
+   * The y coordinate.
+   */
+  y: number
+
+  /**
+   * Bezier curve for matching path segment 1.
+   */
+  bez1: number[]
+
+  /**
+   * Bezier curve for matching path segment 2.
+   */
+  bez2: number[]
+
+  /**
+   * Relative position of intersection on path segment1 (0.5 => in middle, 0.0 => at start, 1.0 => at end).
+   */
+  t1: number
+
+  /**
+   * Relative position of intersection on path segment2 (0.5 => in middle, 0.0 => at start, 1.0 => at end).
+   */
+  t2: number
+}
