@@ -856,7 +856,18 @@ declare module 'bpmn-js/lib/draw/bpmnRenderUtil' {
   export function getRectPath(shape: Shape): string
 }
 
-declare module 'bpmn-js/lib/features/auto-place/BpmnAutoPlaceUtil' {}
+declare module 'bpmn-js/lib/features/auto-place/BpmnAutoPlaceUtil' {
+  import { Point, Shape } from 'diagram-js/lib/model'
+
+  //找到要连接到源的目标元素的新位置。
+  export function getNewShapePosition(source: Shape, element: Shape): Point
+  //始终尝试将元素置于源的右边; 计算与流中先前节点的实际距离。
+  export function getFlowNodePosition(source: Shape, element: Shape): Point
+  //始终尝试在源代码的右上方放置文本注释。
+  export function getTextAnnotationPosition(source: Shape, element: Shape): Point
+  //始终将元素放在source的右下方。
+  export function getDataElementPosition(source: Shape, element: Shape): Point
+}
 
 declare module 'bpmn-js/lib/features/label-editing/LabelUtil' {
   import { Base } from 'diagram-js/lib/model'
@@ -865,7 +876,20 @@ declare module 'bpmn-js/lib/features/label-editing/LabelUtil' {
   export function setLabel(element: Base, text: string, isExternal?: boolean): Base
 }
 
-declare module 'bpmn-js/lib/features/modeling/util/LaneUtil' {}
+declare module 'bpmn-js/lib/features/modeling/util/LaneUtil' {
+  import { Base, Shape } from 'diagram-js/lib/model'
+  import { Bounds } from 'diagram-js/lib/core/Canvas'
+
+  export const LANE_INDENTATION: 30
+  //收集给定参数中的所有 lane 元素
+  export function collectLanes(shape: Shape, collectedShapes?: Shape[]): Base[]
+  // 返回给定元素的 lane 子项。
+  export function getChildLanes(shape: Shape): Shape[]
+  //返回包含给定 lane 的根元素
+  export function getLanesRoot(shape: Shape): Shape
+  //假设将其大小调整到给定的新边界，计算与给定形状相邻的通道所需的调整大小操作。
+  export function computeLanesResize(shape: Shape, newBounds: Bounds): Object[]
+}
 
 declare module 'bpmn-js/lib/features/modeling/util/ModelingUtil' {
   import { Base } from 'diagram-js/lib/model'
@@ -876,11 +900,26 @@ declare module 'bpmn-js/lib/features/modeling/util/ModelingUtil' {
   export { isAny, is }
 }
 
-declare module 'bpmn-js/lib/features/popup-menu/util/TypeUtil' {}
+declare module 'bpmn-js/lib/features/popup-menu/util/TypeUtil' {
+  import { Base } from 'diagram-js/lib/model'
 
-declare module 'bpmn-js/lib/import/Util' {}
+  // 如果元素来自与目标定义不同的类型，则返回true。考虑类型、事件定义类型和 triggeredByEvent 属性
+  export function isDifferentType(element: Base): boolean
+}
 
-declare module 'bpmn-js/lib/util/CompatibilityUtil' {}
+declare module 'bpmn-js/lib/import/Util' {
+  import { ModdleElement } from 'diagram-js/lib/model'
+
+  // 根据元素返回标签，无参数时返回 <null>，否则返回 `<${e.$type} ${e.id ? e.id : ''} />`
+  export function elementToString(e?: ModdleElement): string
+}
+
+declare module 'bpmn-js/lib/util/CompatibilityUtil' {
+  import { ModdleElement } from 'diagram-js/lib/model'
+
+  export function wrapForCompatibility(api: Function): Function
+  export function ensureCompatDiRef(businessObject: ModdleElement): void
+}
 
 declare module 'bpmn-js/lib/util/DiUtil' {
   import { Base, ModdleElement } from 'diagram-js/lib/model'
@@ -894,9 +933,43 @@ declare module 'bpmn-js/lib/util/DiUtil' {
   export function hasCompensateEventDefinition<T extends Base>(element: T): boolean
 }
 
-declare module 'bpmn-js/lib/util/DrilldownUtil' {}
+declare module 'bpmn-js/lib/util/DrilldownUtil' {
+  import { Base, ModdleElement } from 'diagram-js/lib/model'
 
-declare module 'bpmn-js/lib/util/LabelUtil' {}
+  export const planeSuffix: '_plane'
+  //获取 plane 的主要形状ID
+  export function getShapeIdFromPlane(element: Base | ModdleElement): string
+  //获取主形状的平面ID。
+  export function getPlaneIdFromShape(element: Base | ModdleElement): string
+  //获取主形状ID的平面ID
+  export function toPlaneId(id: string): string
+  //检查元素是否为 Plane。
+  export function isPlane(element: Base | ModdleElement): boolean
+}
+
+declare module 'bpmn-js/lib/util/LabelUtil' {
+  import { Base, ModdleElement, Point, Shape } from 'diagram-js/lib/model'
+  import { Bounds } from 'diagram-js/lib/core/Canvas'
+  export type DefaultLabelSize = {
+    width: 90
+    height: 20
+  }
+  export const DEFAULT_LABEL_SIZE: DefaultLabelSize
+  // 如果给定的语义具有 label 标签，则返回true
+  export function isLabelExternal(semantic: Base): boolean
+  // 如果给定元素具有外部标签，则返回true
+  export function hasExternalLabel(element: Shape): boolean
+  // 获取 连线的 标签的位置
+  export function getFlowLabelPosition(waypoints: Point[]): Point
+  // 获取多个航点的中间位置
+  export function getWaypointsMid(waypoints: Point[]): Point
+  // 获取 label 元素的中间点
+  export function getExternalLabelMid(element: Base): Point
+  // 返回从元素DI解析或从其边界生成的元素标签的边界。
+  export function getExternalLabelBounds(di: ModdleElement, element: Base): Bounds
+  // 判断当前元素是否是 label 元素
+  export function isLabel(element: Base): boolean
+}
 
 declare module 'bpmn-js/lib/util/ModelUtil' {
   import { Base, ModdleElement } from 'diagram-js/lib/model'
@@ -910,4 +983,14 @@ declare module 'bpmn-js/lib/util/ModelUtil' {
   export function getDi(element: Base): ModdleElement
 }
 
-declare module 'bpmn-js/lib/util/PoweredByUtil' {}
+declare module 'bpmn-js/lib/util/PoweredByUtil' {
+  export const BPMNIO_IMG: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.02 5.57" width="53" height="21"><path fill="currentColor" d="M1.88.92v.14c0 .41-.13.68-.4.8.33.14.46.44.46.86v.33c0 .61-.33.95-.95.95H0V0h.95c.65 0 .93.3.93.92zM.63.57v1.06h.24c.24 0 .38-.1.38-.43V.98c0-.28-.1-.4-.32-.4zm0 1.63v1.22h.36c.2 0 .32-.1.32-.39v-.35c0-.37-.12-.48-.4-.48H.63zM4.18.99v.52c0 .64-.31.98-.94.98h-.3V4h-.62V0h.92c.63 0 .94.35.94.99zM2.94.57v1.35h.3c.2 0 .3-.09.3-.37v-.6c0-.29-.1-.38-.3-.38h-.3zm2.89 2.27L6.25 0h.88v4h-.6V1.12L6.1 3.99h-.6l-.46-2.82v2.82h-.55V0h.87zM8.14 1.1V4h-.56V0h.79L9 2.4V0h.56v4h-.64zm2.49 2.29v.6h-.6v-.6zM12.12 1c0-.63.33-1 .95-1 .61 0 .95.37.95 1v2.04c0 .64-.34 1-.95 1-.62 0-.95-.37-.95-1zm.62 2.08c0 .28.13.39.33.39s.32-.1.32-.4V.98c0-.29-.12-.4-.32-.4s-.33.11-.33.4z"/><path fill="currentColor" d="M0 4.53h14.02v1.04H0zM11.08 0h.63v.62h-.63zm.63 4V1h-.63v2.98z"/></svg>'
+  export const LOGO_STYLES: {
+    verticalAlign: 'middle'
+  }
+  export const LINK_STYLES: {
+    color: '#404040'
+  }
+
+  export function open(): void
+}
