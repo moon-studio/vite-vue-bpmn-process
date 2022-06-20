@@ -11,6 +11,8 @@ import EventEmitter from '@/utils/EventEmitter'
 import {
   BpmnPropertiesPanelModule,
   BpmnPropertiesProviderModule,
+  ZeebePropertiesProviderModule,
+  CloudElementTemplatesPropertiesProviderModule,
   CamundaPlatformPropertiesProviderModule
 } from 'bpmn-js-properties-panel'
 import CamundaExtensionModule from 'camunda-bpmn-moddle/lib'
@@ -33,6 +35,10 @@ import RewriteRenderer from '@/components/AddiModules/Renderer/RewriteRenderer'
 import lintModule from 'bpmn-js-bpmnlint'
 import bpmnlint from '@/components/AddiModules/Lint/bpmnlint'
 import Rules from '@/components/AddiModules/Rules'
+
+import ElementTemplateChooserModule from '@bpmn-io/element-template-chooser'
+import AddExporterModule from '@bpmn-io/add-exporter'
+import ConnectorsExtensionModule from 'bpmn-js-connectors-extension'
 
 export default function (settings) {
   return computed<ViewerOptions<Element>>(() => {
@@ -89,6 +95,22 @@ export default function (settings) {
 
     // 设置 自定义规则
     modules.push(Rules)
+
+    // // feature
+    modules.push(
+      ZeebePropertiesProviderModule,
+      CloudElementTemplatesPropertiesProviderModule,
+      AddExporterModule,
+      ElementTemplateChooserModule,
+      ConnectorsExtensionModule
+    )
+    options['exporter'] = {
+      name: 'element-template-chooser-demo',
+      version: '0.0.0'
+    }
+    options['connectorsExtension'] = {
+      appendAnything: true
+    }
 
     // 设置自定义属性
     moddle['miyue'] = MiyueModdleDescriptors
