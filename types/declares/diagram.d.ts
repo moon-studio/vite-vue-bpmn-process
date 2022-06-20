@@ -2231,10 +2231,10 @@ declare module 'diagram-js/lib/features/move/MovePreview' {
 declare module 'diagram-js/lib/features/ordering/OrderingProvider' {
   import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor'
   import { Base, Shape } from 'diagram-js/lib/model'
-  export default class OrderingProvider extends CommandInterceptor {
-    constructor(eventBus)
+  export default abstract class OrderingProvider extends CommandInterceptor {
+    protected constructor(eventBus)
 
-    getOrdering(element: Base, newParent: Shape): Object | null
+    getOrdering(element: Base, newParent: Shape): any
   }
 }
 // 一个插件，可以通过CSS类激活和样式的形状和连接添加轮廓
@@ -2373,7 +2373,7 @@ declare module 'diagram-js/lib/features/popup-menu/PopupMenu' {
   import { Position } from 'diagram-js/lib/core/Canvas'
   import { ModuleConstructor } from 'didi'
 
-  type Entry = {
+  export type PopupMenuEntry = {
     id: string
     className: string
     title: string
@@ -2408,8 +2408,8 @@ declare module 'diagram-js/lib/features/popup-menu/PopupMenu' {
     _attachContainer(container: EventTarget, parent: Element, cursor?: boolean): void
     _updateScale(container: EventTarget): void
     _assureIsInbounds(container: EventTarget, cursor: Position): void
-    _createEntries(entries: Entry[], className: string): Element
-    _createEntries(entry: Entry, id: string): Element
+    _createEntries(entries: PopupMenuEntry[], className: string): Element
+    _createEntries(entry: PopupMenuEntry, id: string): Element
     _bindAutoClose(): void
     _unbindAutoClose(): void
   }
