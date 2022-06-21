@@ -30,7 +30,7 @@
       labelStyle() {
         return {
           width: `${this.labelWidth}px`,
-          textAlign: this.textAlign
+          textAlign: this.textAlign || 'right'
         }
       }
     }
