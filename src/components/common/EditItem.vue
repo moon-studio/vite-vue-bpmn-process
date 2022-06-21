@@ -10,8 +10,6 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
 
-  type TextAlign = 'left' | 'center' | 'right'
-
   export default defineComponent({
     name: 'EditItem',
     props: {

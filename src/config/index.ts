@@ -4,10 +4,10 @@ export const defaultSettings: EditorSettings = {
   processId: `Process_${new Date().getTime()}`,
   processName: `业务流程`,
   processEngine: 'camunda',
-  paletteMode: 'default',
-  penalMode: 'default',
+  paletteMode: 'rewrite',
+  penalMode: 'custom',
   contextPadMode: 'default',
-  rendererMode: 'default',
+  rendererMode: 'rewrite',
   bg: 'grid-image',
   toolbar: true,
   customTheme: {}

@@ -1,6 +1,5 @@
-import { computed, toRaw } from 'vue'
+import { toRaw } from 'vue'
 import { ModuleDeclaration } from 'didi'
-import { ViewerOptions } from 'diagram-js/lib/model'
 
 // ** 官方流程模拟 module
 // ** import simulationModeler from 'bpmn-js-token-simulation'
@@ -67,12 +66,7 @@ export default function (settings) {
 
   // 配置 penal (基于 camunda)
   if (settings.value.penalMode !== 'custom') {
-    modules.push(
-      BpmnPropertiesPanelModule,
-      BpmnPropertiesProviderModule,
-      CamundaPlatformPropertiesProviderModule,
-      CamundaExtensionModule
-    )
+    modules.push(BpmnPropertiesProviderModule)
     moddle = { camunda: camundaModdleDescriptors }
     options['propertiesPanel'] = { parent: '#camunda-penal' }
   }
@@ -96,20 +90,23 @@ export default function (settings) {
   modules.push(Rules)
 
   // // feature
-  // modules.push(
-  //   ZeebePropertiesProviderModule,
-  //   CloudElementTemplatesPropertiesProviderModule,
-  //   AddExporterModule,
-  //   ElementTemplateChooserModule,
-  //   ConnectorsExtensionModule
-  // )
-  // options['exporter'] = {
-  //   name: 'element-template-chooser-demo',
-  //   version: '0.0.0'
-  // }
-  // options['connectorsExtension'] = {
-  //   appendAnything: true
-  // }
+  modules.push(
+    BpmnPropertiesPanelModule,
+    CamundaPlatformPropertiesProviderModule,
+    CamundaExtensionModule,
+    ZeebePropertiesProviderModule,
+    CloudElementTemplatesPropertiesProviderModule,
+    AddExporterModule,
+    ElementTemplateChooserModule,
+    ConnectorsExtensionModule
+  )
+  options['exporter'] = {
+    name: 'element-template-chooser-demo',
+    version: '0.0.0'
+  }
+  options['connectorsExtension'] = {
+    appendAnything: true
+  }
 
   // 设置自定义属性
   moddle['miyue'] = MiyueModdleDescriptors
