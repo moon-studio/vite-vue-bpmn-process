@@ -48,10 +48,7 @@ const App = defineComponent({
               {showToolbar.value && <Toolbar></Toolbar>}
               <div class="main-content">
                 {customPalette.value && <Palette></Palette>}
-                <Designer
-                  settings={editorSettings.value}
-                  v-model={[processXml.value, 'xml']}
-                ></Designer>
+                <Designer v-model={[processXml.value, 'xml']}></Designer>
                 {customPenal.value ? (
                   <Penal></Penal>
                 ) : (

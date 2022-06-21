@@ -83,7 +83,7 @@ export default function (settings) {
   // 设置 lint 校验
   modules.push(lintModule)
   options['linting'] = {
-    active: true,
+    active: false,
     bpmnlint: bpmnlint
   }
 
