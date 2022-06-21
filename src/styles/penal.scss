@@ -1,3 +1,8 @@
 .penal {
   width: 480px;
+  box-sizing: border-box;
+  padding: 0 8px;
+  border-left: 1px solid #eee;
+  box-shadow: 0 0 8px #ccc;
+  max-height: 100%;
 }

@@ -61,7 +61,7 @@ const Penal = defineComponent({
 
     return () => (
       <div ref={penal} class="penal">
-        <NCollapse>
+        <NCollapse arrow-placement="right">
           <BaseInfo></BaseInfo>
         </NCollapse>
       </div>

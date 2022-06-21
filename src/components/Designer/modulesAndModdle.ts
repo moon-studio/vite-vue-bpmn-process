@@ -16,23 +16,23 @@ import {
 import CamundaExtensionModule from 'camunda-bpmn-moddle/lib'
 
 // moddle 定义文件
-import activitiModdleDescriptors from '@/components/ModdleExtensions/activiti.json'
-import camundaModdleDescriptors from '@/components/ModdleExtensions/camunda.json'
-import flowableModdleDescriptors from '@/components/ModdleExtensions/flowable.json'
-import MiyueModdleDescriptors from '@/components/ModdleExtensions/miyue.json'
+import activitiModdleDescriptors from '@/moddle-extensions/activiti.json'
+import camundaModdleDescriptors from '@/moddle-extensions/camunda.json'
+import flowableModdleDescriptors from '@/moddle-extensions/flowable.json'
+import MiyueModdleDescriptors from '@/moddle-extensions/miyue.json'
 
 // 自定义 modules 扩展模块
-import translate from '@/components/AddiModules/Translate'
-import EnhancementPalette from '@/components/AddiModules/Palette/EnhancementPalette'
-import RewritePalette from '@/components/AddiModules/Palette/RewritePalette'
-import EnhancementContextPad from '@/components/AddiModules/ContextPad/EnhancementContextPad'
-import RewriteContextPad from '@/components/AddiModules/ContextPad/RewriteContextPad'
-import EnhancementRenderer from '@/components/AddiModules/Renderer/EnhancementRenderer'
-import RewriteRenderer from '@/components/AddiModules/Renderer/RewriteRenderer'
+import translate from '@/additional-modules/Translate'
+import EnhancementPalette from '@/additional-modules/Palette/EnhancementPalette'
+import RewritePalette from '@/additional-modules/Palette/RewritePalette'
+import EnhancementContextPad from '@/additional-modules/ContextPad/EnhancementContextPad'
+import RewriteContextPad from '@/additional-modules/ContextPad/RewriteContextPad'
+import EnhancementRenderer from '@/additional-modules/Renderer/EnhancementRenderer'
+import RewriteRenderer from '@/additional-modules/Renderer/RewriteRenderer'
 
 import lintModule from 'bpmn-js-bpmnlint'
-import bpmnlint from '@/components/AddiModules/Lint/bpmnlint'
-import Rules from '@/components/AddiModules/Rules'
+import bpmnlint from '@/additional-modules/Lint/bpmnlint'
+import Rules from '@/additional-modules/Rules'
 
 import ElementTemplateChooserModule from '@bpmn-io/element-template-chooser'
 import AddExporterModule from '@bpmn-io/add-exporter'

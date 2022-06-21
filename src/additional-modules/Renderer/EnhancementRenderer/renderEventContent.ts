@@ -1,5 +1,5 @@
 // 绘制事件节点中的元素
-import { getSemantic, isThrowEvent, isTypedEvent } from '@/components/AddiModules/Renderer/utils'
+import { getSemantic, isThrowEvent, isTypedEvent } from '@/additional-modules/Renderer/utils'
 
 export default function renderEventContent(handlers, element, parentGfx) {
   const event = getSemantic(element)

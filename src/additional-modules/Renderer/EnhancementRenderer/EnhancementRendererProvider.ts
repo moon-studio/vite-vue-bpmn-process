@@ -4,9 +4,9 @@ import Styles from 'diagram-js/lib/draw/Styles'
 import PathMap from 'bpmn-js/lib/draw/PathMap'
 import Canvas from 'diagram-js/lib/core/Canvas'
 import TextRenderer from 'bpmn-js/lib/draw/TextRenderer'
-import renderEventContent from '@/components/AddiModules/Renderer/EnhancementRenderer/renderEventContent'
+import renderEventContent from '@/additional-modules/Renderer/EnhancementRenderer/renderEventContent'
 import { append as svgAppend, attr as svgAttr, create as svgCreate } from 'tiny-svg'
-import { drawCircle } from '@/components/AddiModules/Renderer/utils'
+import { drawCircle } from '@/additional-modules/Renderer/utils'
 
 class EnhancementRendererProvider extends BpmnRenderer {
   _styles: Styles
