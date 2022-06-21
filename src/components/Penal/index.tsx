@@ -19,7 +19,7 @@ const Penal = defineComponent({
 
     const penalTitle = ref<string | undefined>('属性配置')
 
-    EventEmitter.instance.on('modeler-init', (modeler) => {
+    EventEmitter.on('modeler-init', (modeler) => {
       // 导入完成后默认选中 process 节点
       modeler.on('import.done', (e) => {
         setCurrentElement(null)

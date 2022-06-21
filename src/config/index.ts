@@ -9,5 +9,6 @@ export const defaultSettings: EditorSettings = {
   contextPadMode: 'default',
   rendererMode: 'default',
   bg: 'grid-image',
-  toolbar: true
+  toolbar: true,
+  customTheme: {}
 }

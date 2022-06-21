@@ -91,3 +91,28 @@
     background-image: url('/alipay.png');
   }
 }
+
+.n-form-item.theme-list .n-form-item-blank {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  .theme-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .theme-item_label {
+    width: 280px;
+    text-align: right;
+  }
+  .n-color-picker,
+  .n-input-number {
+    width: auto;
+    flex: 1;
+  }
+}
+.theme-item + .theme-item {
+  margin-top: 8px;
+}

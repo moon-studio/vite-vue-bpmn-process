@@ -11,6 +11,7 @@ export interface EditorSettings {
   rendererMode: 'default' | 'rewrite' | 'enhancement'
   bg: string
   toolbar: boolean
+  customTheme: Record<string, string | number>
 }
 
 export type ModelerOptions<E extends Element> = ViewerOptions<E> & {

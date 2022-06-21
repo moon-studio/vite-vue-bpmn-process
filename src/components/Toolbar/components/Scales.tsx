@@ -13,7 +13,7 @@ const Scales = defineComponent({
     const currentScale = ref(1)
     let canvas: Canvas | null = null
 
-    EventEmitter.instance.on('modeler-init', (modeler: Modeler) => {
+    EventEmitter.on('modeler-init', (modeler: Modeler) => {
       canvas = modeler.get<Canvas>('canvas')
       currentScale.value = canvas.zoom()
       modeler.on('canvas.viewbox.changed', ({ viewbox }: CanvasEvent<any>) => {

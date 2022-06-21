@@ -1,4 +1,4 @@
-import { computed, defineComponent, PropType, ref, watchEffect } from 'vue'
+import { computed, defineComponent, PropType, ref, toRaw, watch, watchEffect } from 'vue'
 import {
   NIcon,
   NForm,
@@ -8,13 +8,14 @@ import {
   NRadio,
   NSwitch,
   NDrawer,
-  NDrawerContent
+  NDrawerContent,
+  NColorPicker,
+  NInputNumber
 } from 'naive-ui'
 import SettingsRound from '@vicons/material/SettingsRound'
 import { Icon } from '@vicons/utils'
 import { EditorSettings } from 'types/editor/settings'
 import { defaultSettings } from '@/config'
-import EventEmitter from '@/utils/EventEmitter'
 import editor from '@/store/editor'
 
 const props = {
@@ -32,20 +33,44 @@ const Setting = defineComponent({
     const modelVisible = ref(false)
     const editorStore = editor()
 
+    const themeColorKeys = [
+      'defaultFillColor',
+      'defaultStartEventColor',
+      'defaultEndEventColor',
+      'defaultIntermediateEventColor',
+      'defaultIntermediateThrowEventColor',
+      'defaultIntermediateCatchEventColor',
+      'defaultTaskColor',
+      'defaultLabelColor',
+      'defaultGatewayColor',
+      'defaultSequenceColor'
+    ]
+    const themeOpacityKeys = [
+      'defaultStartEventOpacity',
+      'defaultEndEventOpacity',
+      'defaultIntermediateThrowEventOpacity',
+      'defaultIntermediateCatchEventOpacity',
+      'defaultTaskOpacity',
+      'defaultLabelOpacity',
+      'defaultGatewayOpacity',
+      'defaultSequenceOpacity'
+    ]
     const editorSettings = ref(props.settings)
-
     const changeModelVisible = (event) => {
       event.stopPropagation()
       modelVisible.value = !modelVisible.value
     }
 
-    EventEmitter.instance.on('settings', (key: string, value: string) => {
-      editorSettings.value[key] = value
-    })
-
-    watchEffect(() => {
-      editorSettings.value && editorStore.updateConfiguration(editorSettings.value)
-    })
+    watch(
+      () => editorSettings.value,
+      () => {
+        if (editorSettings.value.penalMode !== 'custom') {
+          editorSettings.value.processEngine = 'camunda'
+        }
+        editorSettings.value && editorStore.updateConfiguration(toRaw(editorSettings.value))
+      },
+      { deep: true }
+    )
 
     return () => (
       <div class="setting" onClick={(e) => e.stopPropagation()}>
@@ -90,6 +115,13 @@ const Setting = defineComponent({
                   clearable={true}
                 ></NInput>
               </NFormItem>
+              <NFormItem label="流程引擎">
+                <NRadioGroup v-model={[editorSettings.value.processEngine, 'value']}>
+                  <NRadio value="camunda">Camunda</NRadio>
+                  <NRadio value="activiti">Activiti</NRadio>
+                  <NRadio value="flowable">Flowable</NRadio>
+                </NRadioGroup>
+              </NFormItem>
               <NFormItem label="Toolbar">
                 <NSwitch v-model={[editorSettings.value.toolbar, 'value']}></NSwitch>
               </NFormItem>
@@ -122,20 +154,39 @@ const Setting = defineComponent({
                   <NRadio value="enhancement">扩展版</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="renderer模式">
+              <NFormItem label="Renderer模式">
                 <NRadioGroup v-model={[editorSettings.value.rendererMode, 'value']}>
                   <NRadio value="default">默认</NRadio>
                   <NRadio value="rewrite">重写版</NRadio>
                   <NRadio value="enhancement">扩展版</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="流程引擎">
-                <NRadioGroup v-model={[editorSettings.value.processEngine, 'value']}>
-                  <NRadio value="camunda">Camunda</NRadio>
-                  <NRadio value="activiti">Activiti</NRadio>
-                  <NRadio value="flowable">Flowable</NRadio>
-                </NRadioGroup>
-              </NFormItem>
+              {editorSettings.value.rendererMode === 'rewrite' && (
+                <NFormItem label="自定义主题" class="theme-list">
+                  {themeColorKeys.map((key) => {
+                    return (
+                      <div class="theme-item">
+                        <div class="theme-item_label">{key}：</div>
+                        <NColorPicker
+                          modes={['hex']}
+                          showAlpha={false}
+                          v-model={[editorSettings.value.customTheme[key], 'value']}
+                        ></NColorPicker>
+                      </div>
+                    )
+                  })}
+                  {themeOpacityKeys.map((key) => {
+                    return (
+                      <div class="theme-item">
+                        <div class="theme-item_label">{key}：</div>
+                        <NInputNumber
+                          v-model={[editorSettings.value.customTheme[key], 'value']}
+                        ></NInputNumber>
+                      </div>
+                    )
+                  })}
+                </NFormItem>
+              )}
             </NForm>
           </NDrawerContent>
         </NDrawer>

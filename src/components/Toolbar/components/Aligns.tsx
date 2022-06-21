@@ -29,7 +29,7 @@ const Aligns = defineComponent({
     let selection: Selection | null = null
     let align: any = null
 
-    EventEmitter.instance.on('modeler-init', (modeler: Modeler) => {
+    EventEmitter.on('modeler-init', (modeler: Modeler) => {
       modeling = modeler.get('modeling')
       selection = modeler.get('selection')
       align = modeler.get('alignElements')

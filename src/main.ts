@@ -12,4 +12,4 @@ app.use(pinia)
 
 app.mount('#app')
 
-app.config.globalProperties.$emitter = EventEmitter.instance
+app.config.globalProperties.$emitter = EventEmitter

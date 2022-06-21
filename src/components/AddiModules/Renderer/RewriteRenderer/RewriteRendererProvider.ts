@@ -92,7 +92,7 @@ class RewriteRendererProvider extends BaseRenderer {
       defaultLabelColor,
       defaultGatewayColor,
       defaultSequenceColor
-    } = assign(presetColor, config || {})
+    } = { ...presetColor, ...config }
     const {
       defaultStartEventOpacity,
       defaultEndEventOpacity,
@@ -102,7 +102,7 @@ class RewriteRendererProvider extends BaseRenderer {
       defaultLabelOpacity,
       defaultGatewayOpacity,
       defaultSequenceOpacity
-    } = assign(presetOpacity, config || {})
+    } = { ...presetOpacity, ...config }
 
     const computeStyle = styles.computeStyle
     const rendererId: string = RENDERER_IDS.next()

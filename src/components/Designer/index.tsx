@@ -1,12 +1,10 @@
 import { defineComponent, ref, toRefs, nextTick, watch } from 'vue'
+import type { PropType } from 'vue'
+import { storeToRefs } from 'pinia'
+
 import editor from '@/store/editor'
-import { defaultSettings } from '@/config'
 import modulesAndModdle from '@/components/Designer/modulesAndModdle'
 import initModeler from '@/components/Designer/initModeler'
-
-import type { PropType } from 'vue'
-import type { EditorSettings } from 'types/editor/settings'
-import { storeToRefs } from 'pinia'
 
 const Designer = defineComponent({
   name: 'Designer',
@@ -14,10 +12,6 @@ const Designer = defineComponent({
     xml: {
       type: String as PropType<string>,
       default: undefined
-    },
-    settings: {
-      type: Object as PropType<EditorSettings>,
-      default: () => defaultSettings
     }
   },
   emits: ['update:xml', 'command-stack-changed'],
@@ -27,15 +21,14 @@ const Designer = defineComponent({
     const { xml } = toRefs(props)
     const designer = ref<HTMLDivElement | null>(null)
 
-    const modelerModules = modulesAndModdle(editorSettings)
-
     watch(
-      () => modelerModules.value,
+      () => [editorSettings.value],
       async () => {
+        const modelerModules = modulesAndModdle(editorSettings)
         await nextTick()
-        initModeler(designer, modelerModules.value, editorSettings, xml, emit)
+        initModeler(designer, modelerModules, editorSettings, xml, emit)
       },
-      { immediate: true }
+      { deep: true, immediate: true }
     )
 
     return () => <div ref={designer} class="designer"></div>

@@ -38,7 +38,7 @@ export default function (
   store.setModules('canvas', markRaw(modeler.get<Canvas>('canvas')))
   store.setModules('elementRegistry', markRaw(modeler.get<ElementRegistry>('elementRegistry')))
 
-  EventEmitter.instance.emit('modeler-init', modeler)
+  EventEmitter.emit('modeler-init', modeler)
 
   modeler.on('element.click', (event) => {
     Logger.prettyInfo('Element Click', event)

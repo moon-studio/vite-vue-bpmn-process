@@ -13,7 +13,7 @@ const Commands = defineComponent({
   setup() {
     let command: CommandStack | null = null
 
-    EventEmitter.instance.on('modeler-init', (modeler: Modeler) => {
+    EventEmitter.on('modeler-init', (modeler: Modeler) => {
       command = modeler.get<CommandStack>('commandStack')
     })
 

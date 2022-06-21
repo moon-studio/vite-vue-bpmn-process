@@ -1,4 +1,4 @@
-import { defineComponent, computed, ref, watchEffect } from 'vue'
+import { defineComponent, computed, ref } from 'vue'
 import Toolbar from '@/components/Toolbar'
 import Palette from '@/components/Palette'
 import Designer from '@/components/Designer'
@@ -6,7 +6,6 @@ import Penal from '@/components/Penal'
 import Setting from '@/components/Setting'
 import { EditorSettings } from 'types/editor/settings'
 import { defaultSettings } from '@/config'
-import Logger from '@/utils/Logger'
 import { NConfigProvider, NMessageProvider, NDialogProvider } from 'naive-ui'
 
 import hljs from 'highlight.js/lib/core'
@@ -28,20 +27,12 @@ const App = defineComponent({
 
     const computedClasses = computed<string>(() => {
       const baseClass = ['designer-container']
-
       customPalette.value && baseClass.push('designer-with-palette')
-
       customPenal.value && baseClass.push('designer-with-penal')
-
       editorSettings.value.bg === 'grid-image' && baseClass.push('designer-with-bg')
       editorSettings.value.bg === 'image' && baseClass.push('designer-with-image')
 
       return baseClass.join(' ')
-    })
-
-    /* 测试功能部分 */
-    watchEffect(() => {
-      Logger.printBack('success', '[Process Designer XML change]')
     })
 
     /* 组件渲染 */
