@@ -1,6 +1,7 @@
 const SPACE_REGEX = /\s/
 
 // for QName validation as per http://www.w3.org/TR/REC-xml/#NT-NameChar
+// | "-" | "." | [0-9] | #xB7 | [#x0300-#x036F] | [#x203F-#x2040]
 const QNAME_REGEX = /^([a-z][\w-.]*:)?[a-z_][\w-.]*$/i
 
 // for ID validation as per BPMN Schema (QName - Namespace)
@@ -24,25 +25,25 @@ export function isIdValid(element, idValue) {
   const idAlreadyExists = assigned && assigned !== element
 
   if (!idValue) {
-    return 'ID must not be empty.'
+    return 'ID 不能为空.'
   }
 
   if (idAlreadyExists) {
-    return 'ID must be unique.'
+    return 'ID 必须是唯一的'
   }
 
   return validateId(idValue)
 }
 export function validateId(idValue) {
   if (containsSpace(idValue)) {
-    return 'ID must not contain spaces.'
+    return 'ID 不能包含空格'
   }
 
   if (!ID_REGEX.test(idValue)) {
     if (QNAME_REGEX.test(idValue)) {
-      return 'ID must not contain prefix.'
+      return 'ID 不能包含前缀'
     }
 
-    return 'ID must be a valid QName.'
+    return 'ID 必须符合 BPMN 规范'
   }
 }
