@@ -3,16 +3,6 @@ import modelerStore from '@/store/modeler'
 import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
 import { without } from 'min-dash'
 
-//////////// helpers
-
-const DOCUMENTATION_TEXT_FORMAT = 'text/plain'
-
-function findDocumentation(docs) {
-  return docs.find(function (d) {
-    return (d.textFormat || DOCUMENTATION_TEXT_FORMAT) === DOCUMENTATION_TEXT_FORMAT
-  })
-}
-
 export function getDocumentValue(element: Base): string {
   const businessObject = element.businessObject
   const documentation = findDocumentation(businessObject && businessObject.get('documentation'))
@@ -46,4 +36,14 @@ export function setDocumentValue(element: Base, value: string | undefined) {
       documentation: [...businessObject.get('documentation'), newDocumentation]
     })
   }
+}
+
+//////////// helpers
+
+const DOCUMENTATION_TEXT_FORMAT = 'text/plain'
+
+function findDocumentation(docs) {
+  return docs.find(function (d) {
+    return (d.textFormat || DOCUMENTATION_TEXT_FORMAT) === DOCUMENTATION_TEXT_FORMAT
+  })
 }
