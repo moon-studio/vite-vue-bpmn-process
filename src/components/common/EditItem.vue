@@ -10,6 +10,8 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
 
+  type TextAlign = 'left' | 'center' | 'right'
+
   export default defineComponent({
     name: 'EditItem',
     props: {
@@ -19,7 +21,8 @@
       },
       textAlign: {
         type: String,
-        default: 'right'
+        default: 'right',
+        validator: (val: string) => ['left', 'center', 'right'].includes(val)
       },
       labelWidth: {
         type: Number,
@@ -30,7 +33,7 @@
       labelStyle() {
         return {
           width: `${this.labelWidth}px`,
-          textAlign: this.textAlign || 'right'
+          textAlign: this.textAlign as 'center'
         }
       }
     }
