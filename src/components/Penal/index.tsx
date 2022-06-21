@@ -7,7 +7,8 @@ import EventEmitter from '@/utils/EventEmitter'
 import modelerStore from '@/store/modeler'
 import Logger from '@/utils/Logger'
 
-import BaseInfo from './components/BaseInfo.vue'
+import ElementGenerations from './components/ElementGenerations.vue'
+import ElementDocumentations from './components/ElementDocumentations.vue'
 
 const Penal = defineComponent({
   name: 'Penal',
@@ -62,7 +63,8 @@ const Penal = defineComponent({
     return () => (
       <div ref={penal} class="penal">
         <NCollapse arrow-placement="right">
-          <BaseInfo></BaseInfo>
+          <ElementGenerations></ElementGenerations>
+          <ElementDocumentations></ElementDocumentations>
         </NCollapse>
       </div>
     )

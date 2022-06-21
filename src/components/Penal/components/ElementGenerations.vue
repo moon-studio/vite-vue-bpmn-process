@@ -20,7 +20,7 @@
   import { defineComponent } from 'vue'
   import { mapState } from 'pinia'
   import { NCollapseItem, NIcon, NInput } from 'naive-ui'
-  import { InfoOutlined } from '@vicons/material'
+  import InfoOutlined from '@vicons/material/InfoOutlined'
   import modelerStore from '@/store/modeler'
   import CollapseTitle from '@/components/common/CollapseTitle.vue'
   import EditItem from '@/components/common/EditItem.vue'
@@ -29,7 +29,7 @@
   import { setIdValue } from '@/bo-utils/idProps'
 
   export default defineComponent({
-    name: 'BaseInfo',
+    name: 'ElementGenerations',
     components: { EditItem, CollapseTitle, NCollapseItem, NIcon, NInput },
     setup() {
       return { InfoOutlined }

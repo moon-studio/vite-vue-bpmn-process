@@ -4,8 +4,8 @@ import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
 import { without } from 'min-dash'
 
 export function getDocumentValue(element: Base): string {
-  const businessObject = element.businessObject
-  const documentation = findDocumentation(businessObject && businessObject.get('documentation'))
+  const businessObject = element?.businessObject
+  const documentation = businessObject && findDocumentation(businessObject.get('documentation'))
   return documentation && documentation.text
 }
 

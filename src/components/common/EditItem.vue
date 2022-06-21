@@ -42,9 +42,8 @@
   .edit-item {
     width: 100%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    line-height: 32px;
+    line-height: 34px;
     .edit-item_content {
       flex: 1;
     }
