@@ -6,7 +6,6 @@ const customTranslate: Translate = (template, replacements?: Record<string, stri
 
   // Replace
   return template.replace(/{([^}]+)}/g, function (_, key) {
-    console.log('key', key, 'rm[key]', rm[key])
     return rm[key] || '{' + key + '}'
   })
 }
