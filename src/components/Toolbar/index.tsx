@@ -5,7 +5,6 @@ import Previews from '@/components/Toolbar/components/Previews'
 import Aligns from '@/components/Toolbar/components/Aligns'
 import Scales from '@/components/Toolbar/components/Scales'
 import Commands from '@/components/Toolbar/components/Commands'
-import { NButtonGroup } from 'naive-ui'
 
 const Toolbar = defineComponent({
   name: 'ToolBar',

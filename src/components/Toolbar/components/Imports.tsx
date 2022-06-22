@@ -1,5 +1,4 @@
 import { defineComponent, ref } from 'vue'
-import { NButton } from 'naive-ui'
 import modeler from '@/store/modeler'
 
 const Imports = defineComponent({

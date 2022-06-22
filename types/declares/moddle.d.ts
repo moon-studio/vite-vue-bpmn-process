@@ -36,7 +36,7 @@ declare module 'moddle' {
     registry: Registry
     typeCache: { [name: string]: any }
 
-    create(type: Descriptor, attrs: any): void
+    create(type: Descriptor | string, attrs: any): ModdleElement
     getType(type: Descriptor): any
     createAny(name: string, nsUri: string, properties?: Properties): void
     getPackage(uriOrPrefix: { uri?: string; prefix?: string }): Package

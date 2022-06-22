@@ -9,12 +9,12 @@ const state = {
 export default defineStore('editor', {
   state: () => state,
   getters: {
-    processDef: (state) => ({
+    getProcessDef: (state) => ({
       processName: state.editorSettings.processName,
       processId: state.editorSettings.processId
     }),
-    processEngine: (state) => state.editorSettings.processEngine,
-    editorConfig: (state) => ({
+    getProcessEngine: (state) => state.editorSettings.processEngine,
+    getEditorConfig: (state) => ({
       bg: state.editorSettings.bg
     })
   },

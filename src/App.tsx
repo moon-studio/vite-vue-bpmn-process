@@ -6,7 +6,6 @@ import Penal from '@/components/Penal'
 import Setting from '@/components/Setting'
 import { EditorSettings } from 'types/editor/settings'
 import { defaultSettings } from '@/config'
-import { NConfigProvider, NMessageProvider, NDialogProvider } from 'naive-ui'
 
 import hljs from 'highlight.js/lib/core'
 import xml from 'highlight.js/lib/languages/xml'

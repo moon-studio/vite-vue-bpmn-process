@@ -1,16 +1,4 @@
 import { defineComponent, PropType, ref, toRaw, watch } from 'vue'
-import {
-  NForm,
-  NFormItem,
-  NInput,
-  NRadioGroup,
-  NRadio,
-  NSwitch,
-  NDrawer,
-  NDrawerContent,
-  NColorPicker,
-  NInputNumber
-} from 'naive-ui'
 import { EditorSettings } from 'types/editor/settings'
 import { defaultSettings } from '@/config'
 import editor from '@/store/editor'

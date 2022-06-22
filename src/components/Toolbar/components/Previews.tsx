@@ -1,9 +1,8 @@
 import { defineComponent } from 'vue'
-import { NButton, NCode, NPopover, useDialog, useMessage } from 'naive-ui'
 
-import Modeler from 'bpmn-js/lib/Modeler'
 import BpmnModdle from 'bpmn-moddle'
 import modeler from '@/store/modeler'
+import { useMessage, useDialog } from 'naive-ui'
 
 const Previews = defineComponent({
   name: 'Previews',

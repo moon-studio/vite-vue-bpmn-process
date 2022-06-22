@@ -1,5 +1,4 @@
 import { defineComponent } from 'vue'
-import { NButton, NPopover } from 'naive-ui'
 import { downloadFile, setEncoded } from '@/utils/files'
 import modeler from '@/store/modeler'
 

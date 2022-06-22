@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import { NButton, NButtonGroup, NIcon, NPopover, useMessage } from 'naive-ui'
+import { useMessage } from 'naive-ui'
 import Modeler from 'bpmn-js/lib/Modeler'
 import Selection from 'diagram-js/lib/features/selection/Selection'
 import Modeling from 'bpmn-js/lib/features/modeling/Modeling.js'

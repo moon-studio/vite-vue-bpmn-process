@@ -19,7 +19,6 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { mapState } from 'pinia'
-  import { NCollapseItem, NInput } from 'naive-ui'
   import modelerStore from '@/store/modeler'
   import CollapseTitle from '@/components/common/CollapseTitle.vue'
   import EditItem from '@/components/common/EditItem.vue'
@@ -30,7 +29,7 @@
 
   export default defineComponent({
     name: 'ElementGenerations',
-    components: { LucideIcon, EditItem, CollapseTitle, NCollapseItem, NInput },
+    components: { LucideIcon, EditItem, CollapseTitle },
     data() {
       return {
         elementId: '',

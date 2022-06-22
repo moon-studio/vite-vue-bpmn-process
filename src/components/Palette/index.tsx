@@ -1,5 +1,4 @@
 import { defineComponent } from 'vue'
-import { NCollapse, NCollapseItem } from 'naive-ui'
 import { assign } from 'min-dash'
 import modelerStore from '@/store/modeler'
 import ElementFactory from 'bpmn-js/lib/features/modeling/ElementFactory'

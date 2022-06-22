@@ -1,5 +1,4 @@
 import { defineComponent, markRaw, ref } from 'vue'
-import { NCollapse } from 'naive-ui'
 import { Base, Connection, Label, Shape } from 'diagram-js/lib/model'
 import { Translate } from 'diagram-js/lib/i18n/translate'
 
@@ -9,6 +8,7 @@ import Logger from '@/utils/Logger'
 
 import ElementGenerations from './components/ElementGenerations.vue'
 import ElementDocumentations from './components/ElementDocumentations.vue'
+import ElementExtensionProperties from './components/ElementExtensionProperties.vue'
 
 const Penal = defineComponent({
   name: 'Penal',
@@ -22,7 +22,7 @@ const Penal = defineComponent({
 
     EventEmitter.on('modeler-init', (modeler) => {
       // 导入完成后默认选中 process 节点
-      modeler.on('import.done', (e) => {
+      modeler.on('import.done', () => {
         setCurrentElement(null)
       })
       // 监听选择事件，修改当前激活的元素以及表单
@@ -65,6 +65,7 @@ const Penal = defineComponent({
         <NCollapse arrow-placement="right" accordion={true}>
           <ElementGenerations></ElementGenerations>
           <ElementDocumentations></ElementDocumentations>
+          <ElementExtensionProperties></ElementExtensionProperties>
         </NCollapse>
       </div>
     )
