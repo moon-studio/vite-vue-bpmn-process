@@ -5,4 +5,20 @@
   border-left: 1px solid #eee;
   box-shadow: 0 0 8px #ccc;
   max-height: 100%;
+  .n-collapse .n-collapse-item {
+    border-top: none;
+    margin: 0;
+    border-bottom: 1px solid var(--n-divider-color);
+    &:first-child {
+      border-top: 1px solid var(--n-divider-color);
+    }
+
+    .n-collapse-item__header {
+      padding: 16px 0;
+    }
+
+    .n-collapse-item__content-wrapper .n-collapse-item__content-inner {
+      padding:  0 0 16px 0;
+    }
+  }
 }
