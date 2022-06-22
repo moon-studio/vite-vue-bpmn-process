@@ -1,6 +1,5 @@
-import { computed, defineComponent, PropType, ref, toRaw, watch, watchEffect } from 'vue'
+import { defineComponent, PropType, ref, toRaw, watch } from 'vue'
 import {
-  NIcon,
   NForm,
   NFormItem,
   NInput,
@@ -12,11 +11,10 @@ import {
   NColorPicker,
   NInputNumber
 } from 'naive-ui'
-import SettingsRound from '@vicons/material/SettingsRound'
-import { Icon } from '@vicons/utils'
 import { EditorSettings } from 'types/editor/settings'
 import { defaultSettings } from '@/config'
 import editor from '@/store/editor'
+import LucideIcon from '@/components/common/LucideIcon.vue'
 
 const props = {
   settings: {
@@ -75,11 +73,7 @@ const Setting = defineComponent({
     return () => (
       <div class="setting" onClick={(e) => e.stopPropagation()}>
         <div class="toggle-button" onClick={changeModelVisible}>
-          <NIcon size={40} color="#ffffff">
-            <Icon>
-              <SettingsRound></SettingsRound>
-            </Icon>
-          </NIcon>
+          <LucideIcon name="Settings" size={40} color="#ffffff"></LucideIcon>
         </div>
 
         <NDrawer v-model={[modelVisible.value, 'show']} width={560}>

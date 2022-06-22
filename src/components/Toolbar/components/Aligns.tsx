@@ -1,26 +1,21 @@
-import { Component, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { NButton, NButtonGroup, NIcon, NPopover, useMessage } from 'naive-ui'
-import AlignHorizontalLeftRound from '@vicons/material/AlignHorizontalLeftRound'
-import AlignHorizontalCenterRound from '@vicons/material/AlignHorizontalCenterRound'
-import AlignHorizontalRightRound from '@vicons/material/AlignHorizontalRightRound'
-import AlignVerticalTopRound from '@vicons/material/AlignVerticalTopRound'
-import AlignVerticalCenterRound from '@vicons/material/AlignVerticalCenterRound'
-import AlignVerticalBottomRound from '@vicons/material/AlignVerticalBottomRound'
 import Modeler from 'bpmn-js/lib/Modeler'
 import Selection from 'diagram-js/lib/features/selection/Selection'
 import Modeling from 'bpmn-js/lib/features/modeling/Modeling.js'
 import EventEmitter from '@/utils/EventEmitter'
+import LucideIcon from '@/components/common/LucideIcon.vue'
 
 const Aligns = defineComponent({
   name: 'Aligns',
   setup() {
-    const buttons: { name: string; key: string; icon: Component }[] = [
-      { name: '左对齐', key: 'left', icon: AlignHorizontalLeftRound },
-      { name: '水平居中', key: 'center', icon: AlignHorizontalCenterRound },
-      { name: '右对齐', key: 'right', icon: AlignHorizontalRightRound },
-      { name: '上对齐', key: 'top', icon: AlignVerticalTopRound },
-      { name: '垂直居中', key: 'middle', icon: AlignVerticalCenterRound },
-      { name: '下对齐', key: 'bottom', icon: AlignVerticalBottomRound }
+    const buttons: { name: string; key: string; icon: string }[] = [
+      { name: '左对齐', key: 'left', icon: 'AlignStartVertical' },
+      { name: '水平居中', key: 'center', icon: 'AlignCenterVertical' },
+      { name: '右对齐', key: 'right', icon: 'AlignEndVertical' },
+      { name: '上对齐', key: 'top', icon: 'AlignStartHorizontal' },
+      { name: '垂直居中', key: 'middle', icon: 'AlignCenterHorizontal' },
+      { name: '下对齐', key: 'bottom', icon: 'AlignEndHorizontal' }
     ]
 
     const message = useMessage()
@@ -54,7 +49,7 @@ const Aligns = defineComponent({
                 default: () => item.name,
                 trigger: () => (
                   <NButton onClick={() => alignElements(item.key)}>
-                    <NIcon component={item.icon}></NIcon>
+                    <LucideIcon name={item.icon} size={16}></LucideIcon>
                   </NButton>
                 )
               }}

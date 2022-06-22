@@ -2,7 +2,7 @@
   <n-collapse-item name="element-documentations">
     <template #header>
       <collapse-title title="附加文档">
-        <n-icon :component="DocumentScannerOutlined" />
+        <lucide-icon name="FileText" />
       </collapse-title>
     </template>
     <edit-item label="Documentation" :label-width="120">
@@ -15,19 +15,16 @@
   import { defineComponent } from 'vue'
   import { mapState } from 'pinia'
   import modelerStore from '@/store/modeler'
-  import { NCollapseItem, NIcon, NInput } from 'naive-ui'
-  import DocumentScannerOutlined from '@vicons/material/DocumentScannerOutlined'
+  import { NCollapseItem, NInput } from 'naive-ui'
   import CollapseTitle from '@/components/common/CollapseTitle.vue'
   import EditItem from '@/components/common/EditItem.vue'
   import { Base } from 'diagram-js/lib/model'
   import { getDocumentValue, setDocumentValue } from '@/bo-utils/documentationProps'
+  import LucideIcon from '@/components/common/LucideIcon.vue'
 
   export default defineComponent({
     name: 'ElementDocumentations',
-    components: { EditItem, CollapseTitle, NCollapseItem, NIcon, NInput },
-    setup() {
-      return { DocumentScannerOutlined }
-    },
+    components: { LucideIcon, EditItem, CollapseTitle, NCollapseItem, NInput },
     data() {
       return {
         elementDoc: ''

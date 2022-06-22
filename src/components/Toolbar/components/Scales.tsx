@@ -1,7 +1,6 @@
 import { defineComponent, ref } from 'vue'
-import { NButton, NButtonGroup, NIcon, NPopover } from 'naive-ui'
-import ZoomOutRound from '@vicons/material/ZoomOutRound'
-import ZoomInRound from '@vicons/material/ZoomInRound'
+import { NButton, NButtonGroup, NPopover } from 'naive-ui'
+import LucideIcon from '@/components/common/LucideIcon.vue'
 import EventEmitter from '@/utils/EventEmitter'
 import type Modeler from 'bpmn-js/lib/Modeler'
 import type Canvas from 'diagram-js/lib/core/Canvas'
@@ -42,7 +41,7 @@ const Scales = defineComponent({
             default: () => '缩小视图',
             trigger: () => (
               <NButton onClick={() => zoomOut()}>
-                <NIcon component={ZoomOutRound}></NIcon>
+                <LucideIcon name="ZoomOut" size={16}></LucideIcon>
               </NButton>
             )
           }}
@@ -53,7 +52,7 @@ const Scales = defineComponent({
             trigger: () => (
               <NButton onClick={() => zoomReset('fit-viewport')}>
                 <span style="text-align: center; display: inline-block; width: 40px">
-                  {currentScale.value}
+                  {Math.floor(currentScale.value * 10) * 10 + '%'}
                 </span>
               </NButton>
             )
@@ -64,7 +63,7 @@ const Scales = defineComponent({
             default: () => '放大视图',
             trigger: () => (
               <NButton onClick={() => zoomIn()}>
-                <NIcon component={ZoomInRound}></NIcon>
+                <LucideIcon name="ZoomIn" size={16}></LucideIcon>
               </NButton>
             )
           }}

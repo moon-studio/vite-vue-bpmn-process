@@ -2,7 +2,7 @@
   <n-collapse-item name="base-info">
     <template #header>
       <collapse-title title="常规信息">
-        <n-icon :component="InfoOutlined" />
+        <lucide-icon name="Info" />
       </collapse-title>
     </template>
 
@@ -19,21 +19,18 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { mapState } from 'pinia'
-  import { NCollapseItem, NIcon, NInput } from 'naive-ui'
-  import InfoOutlined from '@vicons/material/InfoOutlined'
+  import { NCollapseItem, NInput } from 'naive-ui'
   import modelerStore from '@/store/modeler'
   import CollapseTitle from '@/components/common/CollapseTitle.vue'
   import EditItem from '@/components/common/EditItem.vue'
   import { Base } from 'diagram-js/lib/model'
   import { getNameValue, setNameValue } from '@/bo-utils/nameProps'
   import { setIdValue } from '@/bo-utils/idProps'
+  import LucideIcon from '@/components/common/LucideIcon.vue'
 
   export default defineComponent({
     name: 'ElementGenerations',
-    components: { EditItem, CollapseTitle, NCollapseItem, NIcon, NInput },
-    setup() {
-      return { InfoOutlined }
-    },
+    components: { LucideIcon, EditItem, CollapseTitle, NCollapseItem, NInput },
     data() {
       return {
         elementId: '',

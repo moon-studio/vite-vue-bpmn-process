@@ -1,12 +1,10 @@
 import { defineComponent } from 'vue'
 import { NButton, NButtonGroup, NIcon, NPopover } from 'naive-ui'
-import RedoRound from '@vicons/material/RedoRound'
-import UndoRound from '@vicons/material/UndoRound'
-import RestartAltRound from '@vicons/material/RestartAltRound'
 import EventEmitter from '@/utils/EventEmitter'
 import type Modeler from 'bpmn-js/lib/Modeler'
 import type CommandStack from 'diagram-js/lib/command/CommandStack'
 import { createNewDiagram } from '@/utils'
+import LucideIcon from '@/components/common/LucideIcon.vue'
 
 const Commands = defineComponent({
   name: 'Commands',
@@ -37,7 +35,7 @@ const Commands = defineComponent({
             default: () => '撤销',
             trigger: () => (
               <NButton onClick={undo}>
-                <NIcon component={UndoRound}></NIcon>
+                <LucideIcon name="Undo2" size={16}></LucideIcon>
               </NButton>
             )
           }}
@@ -47,17 +45,17 @@ const Commands = defineComponent({
             default: () => '恢复',
             trigger: () => (
               <NButton onClick={redo}>
-                <NIcon component={RedoRound}></NIcon>
+                <LucideIcon name="Redo2" size={16}></LucideIcon>
               </NButton>
             )
           }}
         ></NPopover>
         <NPopover
           v-slots={{
-            default: () => '重做',
+            default: () => '擦除重做',
             trigger: () => (
               <NButton onClick={restart}>
-                <NIcon component={RestartAltRound}></NIcon>
+                <LucideIcon name="Eraser" size={16}></LucideIcon>
               </NButton>
             )
           }}
