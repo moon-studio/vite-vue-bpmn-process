@@ -94,6 +94,26 @@ class RewritePaletteProvider extends PaletteProvider {
         group: 'tools',
         separator: true
       },
+      'create.start-event': createAction(
+        elementFactory,
+        create,
+        'bpmn:StartEvent',
+        'events',
+        'bpmn-icon-start-event-none',
+        '开始事件'
+      ),
+      'create.end-event': createAction(
+        elementFactory,
+        create,
+        'bpmn:EndEvent',
+        'events',
+        'bpmn-icon-end-event-none',
+        '结束事件'
+      ),
+      'events-separator': {
+        group: 'events',
+        separator: true
+      },
       'create.exclusive-gateway': createAction(
         elementFactory,
         create,
