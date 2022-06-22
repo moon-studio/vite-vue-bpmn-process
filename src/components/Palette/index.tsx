@@ -3,6 +3,7 @@ import { assign } from 'min-dash'
 import modelerStore from '@/store/modeler'
 import ElementFactory from 'bpmn-js/lib/features/modeling/ElementFactory'
 import Create from 'diagram-js/lib/features/create/Create'
+import { NCollapse, NCollapseItem } from 'naive-ui'
 
 const Palette = defineComponent({
   name: 'Palette',

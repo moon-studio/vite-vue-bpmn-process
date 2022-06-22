@@ -5,3 +5,8 @@
 .designer {
   flex: 1;
 }
+
+// 修复选中时填充色
+.layer-selectionOutline {
+  fill: none;
+}

@@ -97,7 +97,7 @@
           }
         ],
         extensions: [],
-        newProperty: {},
+        newProperty: { name: '', value: '' },
         rules: {
           name: { required: true, message: 'Name 不能为空', trigger: ['blur', 'change'] },
           value: { required: true, message: 'Value 不能为空', trigger: ['blur', 'change'] }
@@ -120,7 +120,7 @@
       async reloadExtensionProperties() {
         this.modelVisible = false
         await this.$nextTick()
-        this.newProperty = {}
+        this.newProperty = { name: '', value: '' }
         this.extensions = JSON.parse(JSON.stringify(getExtensionProperties(this.getActive as Base)))
       },
       removeProperty(propIndex: number) {

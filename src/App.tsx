@@ -10,6 +10,7 @@ import { defaultSettings } from '@/config'
 import hljs from 'highlight.js/lib/core'
 import xml from 'highlight.js/lib/languages/xml'
 import json from 'highlight.js/lib/languages/json'
+import { NConfigProvider, NDialogProvider, NMessageProvider } from 'naive-ui'
 
 hljs.registerLanguage('xml', xml)
 hljs.registerLanguage('json', json)

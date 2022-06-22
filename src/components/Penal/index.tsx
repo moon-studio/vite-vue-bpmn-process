@@ -1,4 +1,5 @@
 import { defineComponent, markRaw, ref } from 'vue'
+import { NCollapse } from 'naive-ui'
 import { Base, Connection, Label, Shape } from 'diagram-js/lib/model'
 import { Translate } from 'diagram-js/lib/i18n/translate'
 

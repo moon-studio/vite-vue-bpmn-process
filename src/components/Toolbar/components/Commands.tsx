@@ -1,4 +1,5 @@
 import { defineComponent } from 'vue'
+import { NButton, NButtonGroup, NPopover } from 'naive-ui'
 import EventEmitter from '@/utils/EventEmitter'
 import type Modeler from 'bpmn-js/lib/Modeler'
 import type CommandStack from 'diagram-js/lib/command/CommandStack'

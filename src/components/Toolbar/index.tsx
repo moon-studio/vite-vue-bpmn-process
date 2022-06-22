@@ -1,4 +1,5 @@
 import { defineComponent } from 'vue'
+import { NButtonGroup } from 'naive-ui'
 import Imports from '@/components/Toolbar/components/Imports'
 import Exports from '@/components/Toolbar/components/Exports'
 import Previews from '@/components/Toolbar/components/Previews'
