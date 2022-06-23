@@ -28,6 +28,8 @@ import {
   NInputNumber,
   NRadio,
   NRadioGroup,
+  NCheckbox,
+  NCheckboxGroup,
   NSwitch
 } from 'naive-ui'
 
@@ -54,6 +56,8 @@ const naive = create({
     NInputNumber,
     NRadio,
     NRadioGroup,
+    NCheckbox,
+    NCheckboxGroup,
     NSwitch
   ]
 })

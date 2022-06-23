@@ -13,6 +13,16 @@
     <edit-item label="Name">
       <n-input v-model:value="elementName" maxlength="20" @change="updateElementName" />
     </edit-item>
+
+    <template v-if="isProcess">
+      <edit-item key="version" label="Version">
+        <n-input v-model:value="elementVersion" maxlength="20" @change="updateElementVersion" />
+      </edit-item>
+
+      <edit-item key="executable" label="Executable">
+        <n-switch v-model:value="elementExecutable" @update:value="updateElementExecutable" />
+      </edit-item>
+    </template>
   </n-collapse-item>
 </template>
 
@@ -22,10 +32,16 @@
   import modelerStore from '@/store/modeler'
   import CollapseTitle from '@/components/common/CollapseTitle.vue'
   import EditItem from '@/components/common/EditItem.vue'
+  import LucideIcon from '@/components/common/LucideIcon.vue'
   import { Base } from 'diagram-js/lib/model'
   import { getNameValue, setNameValue } from '@/bo-utils/nameProps'
   import { setIdValue } from '@/bo-utils/idProps'
-  import LucideIcon from '@/components/common/LucideIcon.vue'
+  import {
+    getProcessExecutable,
+    getProcessVersionTag,
+    setProcessExecutable,
+    setProcessVersionTag
+  } from '@/bo-utils/processProps'
 
   export default defineComponent({
     name: 'ElementGenerations',
@@ -33,7 +49,10 @@
     data() {
       return {
         elementId: '',
-        elementName: ''
+        elementName: '',
+        elementVersion: '',
+        elementExecutable: true,
+        isProcess: false
       }
     },
     computed: {
@@ -43,8 +62,13 @@
       getActiveId: {
         immediate: true,
         handler() {
+          this.isProcess = !!this.getActive && this.getActive.type === 'bpmn:Process'
           this.elementId = this.getActiveId as string
           this.elementName = getNameValue(this.getActive as Base) || ''
+          if (this.isProcess) {
+            this.elementExecutable = getProcessExecutable(this.getActive as Base)
+            this.elementVersion = getProcessVersionTag(this.getActive as Base) || ''
+          }
         }
       }
     },
@@ -55,6 +79,17 @@
       },
       updateElementId(value: string) {
         setIdValue(this.getActive as Base, value)
+      },
+      updateElementVersion(value: string) {
+        const reg = /((\d|([1-9](\d*))).){2}(\d|([1-9](\d*)))/
+        if (reg.test(value)) {
+          setProcessVersionTag(this.getActive as Base, value)
+        } else {
+          window.__messageBox.error('版本号必须符合语义化版本2.0.0 要点')
+        }
+      },
+      updateElementExecutable(value: boolean) {
+        setProcessExecutable(this.getActive as Base, value)
       }
     }
   })
