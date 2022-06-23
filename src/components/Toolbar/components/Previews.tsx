@@ -2,13 +2,12 @@ import { defineComponent } from 'vue'
 
 import BpmnModdle from 'bpmn-moddle'
 import modeler from '@/store/modeler'
-import { NButton, NPopover, NCode, useMessage, useDialog } from 'naive-ui'
+import { NButton, NPopover, NCode, useDialog } from 'naive-ui'
 
 const Previews = defineComponent({
   name: 'Previews',
   setup() {
     const previewModel = useDialog()
-    const message = useMessage()
     const modelerStore = modeler()
 
     const moddle = new BpmnModdle()
@@ -18,7 +17,7 @@ const Previews = defineComponent({
         const modeler = modelerStore.getModeler!
 
         if (!modeler) {
-          return message.warning('模型加载失败，请刷新重试')
+          return window.__messageBox.warning('模型加载失败，请刷新重试')
         }
 
         const { xml } = await modeler.saveXML({ format: true, preamble: true })
@@ -33,7 +32,7 @@ const Previews = defineComponent({
           )
         })
       } catch (e) {
-        message.error((e as Error).message || (e as string))
+        window.__messageBox.error((e as Error).message || (e as string))
       }
     }
 
@@ -41,7 +40,7 @@ const Previews = defineComponent({
       const modeler = modelerStore.getModeler!
 
       if (!modeler) {
-        return message.warning('模型加载失败，请刷新重试')
+        return window.__messageBox.warning('模型加载失败，请刷新重试')
       }
 
       const { xml } = await modeler.saveXML({ format: true })

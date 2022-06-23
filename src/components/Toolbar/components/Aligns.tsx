@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import { NButton, NButtonGroup, NIcon, NPopover, useMessage } from 'naive-ui'
+import { NButton, NButtonGroup, NPopover } from 'naive-ui'
 import Modeler from 'bpmn-js/lib/Modeler'
 import Selection from 'diagram-js/lib/features/selection/Selection'
 import Modeling from 'bpmn-js/lib/features/modeling/Modeling.js'
@@ -18,8 +18,6 @@ const Aligns = defineComponent({
       { name: '下对齐', key: 'bottom', icon: 'AlignEndHorizontal' }
     ]
 
-    const message = useMessage()
-
     let modeling: Modeling | null = null
     let selection: Selection | null = null
     let align: any = null
@@ -34,7 +32,7 @@ const Aligns = defineComponent({
       if (modeling && selection) {
         const SelectedElements = selection.get()
         if (!SelectedElements || SelectedElements.length <= 1) {
-          return message.warning('请按住 Ctrl 键选择多个元素对齐')
+          return window.__messageBox.warning('请按住 Ctrl 键选择多个元素对齐')
         }
         align.trigger(SelectedElements, tag)
       }
