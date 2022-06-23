@@ -7,14 +7,17 @@ import EventEmitter from '@/utils/EventEmitter'
 import modelerStore from '@/store/modeler'
 import Logger from '@/utils/Logger'
 
+import { isAsynchronous } from '@/bo-utils/asynchronousContinuationsUtil'
+
 import ElementGenerations from './components/ElementGenerations.vue'
 import ElementDocumentations from './components/ElementDocumentations.vue'
 import ElementExtensionProperties from './components/ElementExtensionProperties.vue'
+import ElementAsyncContinuations from './components/ElementAsyncContinuations.vue'
 
 const Penal = defineComponent({
   name: 'Penal',
   setup() {
-    const store = modelerStore()
+    const modeler = modelerStore()
     const penal = ref<HTMLDivElement | null>(null)
     const currentElementId = ref<string | undefined>(undefined)
     const currentElementType = ref<string | undefined>(undefined)
@@ -43,17 +46,17 @@ const Penal = defineComponent({
       let activatedElement: BpmnElement | null | undefined = element
       if (!activatedElement) {
         activatedElement =
-          store.getElRegistry?.find((el) => el.type === 'bpmn:Process') ||
-          store.getElRegistry?.find((el) => el.type === 'bpmn:Collaboration')
+          modeler.getElRegistry?.find((el) => el.type === 'bpmn:Process') ||
+          modeler.getElRegistry?.find((el) => el.type === 'bpmn:Collaboration')
 
         if (!activatedElement) {
           return Logger.prettyError('No Element found!')
         }
       }
-      store.setElement(markRaw(activatedElement), activatedElement.id)
+      modeler.setElement(markRaw(activatedElement), activatedElement.id)
       currentElementId.value = activatedElement.id
       currentElementType.value = activatedElement.type.split(':')[1]
-      penalTitle.value = store.getModeler?.get<Translate>('translate')(currentElementType.value)
+      penalTitle.value = modeler.getModeler?.get<Translate>('translate')(currentElementType.value)
       Logger.prettyPrimary(
         'Selected element changed',
         `ID: ${activatedElement.id} , type: ${activatedElement.type}`
@@ -67,6 +70,9 @@ const Penal = defineComponent({
           <ElementGenerations></ElementGenerations>
           <ElementDocumentations></ElementDocumentations>
           <ElementExtensionProperties></ElementExtensionProperties>
+          {isAsynchronous(modeler.getActive as Base) && (
+            <ElementAsyncContinuations></ElementAsyncContinuations>
+          )}
         </NCollapse>
       </div>
     )

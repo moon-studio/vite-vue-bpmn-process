@@ -1,6 +1,6 @@
 import { Base, ModdleElement } from 'diagram-js/lib/model'
 import { getBusinessObject, is } from 'bpmn-js/lib/util/ModelUtil'
-import { getExtensionElementsList } from '@/utils/BpmnExtensionElementsUtil'
+import { createExtensionElement, getExtensionElementsList } from '@/utils/BpmnExtensionElementsUtil'
 import modelerStore from '@/store/modeler'
 import editorStore from '@/store/editor'
 import { without } from 'min-dash'
@@ -27,22 +27,23 @@ export function addExtensionProperty(element: Base, property) {
     // 判断 extensionElements
     let extensionElements = businessObject.get('extensionElements')
     if (!extensionElements) {
-      extensionElements = moddle!.create('bpmn:ExtensionElements', { values: [] })
-      extensionElements.$parent = element.businessObject
+      extensionElements = createExtensionElement(
+        'bpmn:ExtensionElements',
+        { values: [] },
+        businessObject
+      )
       modeling.updateModdleProperties(element, businessObject, { extensionElements })
     }
     // 判断 extensionElements 是否有 properties
     let properties = getProperties(businessObject)
     if (!properties) {
-      properties = moddle!.create(`${prefix}:Properties`, { values: [] })
-      properties.$parent = extensionElements
+      properties = createExtensionElement(`${prefix}:Properties`, { values: [] }, extensionElements)
       modeling.updateModdleProperties(element, extensionElements, {
         values: [...extensionElements.get('values'), properties]
       })
     }
     // 创建新属性并添加
-    const newProperty = moddle!.create(`${prefix}:Property`, JSON.parse(JSON.stringify(property)))
-    newProperty.$parent = properties
+    const newProperty = createExtensionElement(`${prefix}:Property`, property, properties)
     modeling.updateModdleProperties(element, properties, {
       values: [...properties?.get('values'), newProperty]
     })

@@ -51,7 +51,7 @@
     addExtensionProperty,
     getExtensionProperties,
     removeExtensionProperty
-  } from '@/bo-utils/extensionElementsProps'
+  } from '@/bo-utils/extensionElementsUtil'
 
   import { FormInst, NButton } from 'naive-ui'
 

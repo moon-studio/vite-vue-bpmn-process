@@ -109,15 +109,15 @@ const Setting = defineComponent({
                   clearable={true}
                 ></NInput>
               </NFormItem>
+              <NFormItem label="Toolbar">
+                <NSwitch v-model={[editorSettings.value.toolbar, 'value']}></NSwitch>
+              </NFormItem>
               <NFormItem label="流程引擎">
                 <NRadioGroup v-model={[editorSettings.value.processEngine, 'value']}>
                   <NRadio value="camunda">Camunda</NRadio>
                   <NRadio value="activiti">Activiti</NRadio>
                   <NRadio value="flowable">Flowable</NRadio>
                 </NRadioGroup>
-              </NFormItem>
-              <NFormItem label="Toolbar">
-                <NSwitch v-model={[editorSettings.value.toolbar, 'value']}></NSwitch>
               </NFormItem>
               <NFormItem label="Background">
                 <NRadioGroup v-model={[editorSettings.value.bg, 'value']}>

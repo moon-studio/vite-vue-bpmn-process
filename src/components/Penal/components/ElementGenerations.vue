@@ -34,14 +34,14 @@
   import EditItem from '@/components/common/EditItem.vue'
   import LucideIcon from '@/components/common/LucideIcon.vue'
   import { Base } from 'diagram-js/lib/model'
-  import { getNameValue, setNameValue } from '@/bo-utils/nameProps'
-  import { setIdValue } from '@/bo-utils/idProps'
+  import { getNameValue, setNameValue } from '@/bo-utils/nameUtil'
+  import { setIdValue } from '@/bo-utils/idUtil'
   import {
     getProcessExecutable,
     getProcessVersionTag,
     setProcessExecutable,
     setProcessVersionTag
-  } from '@/bo-utils/processProps'
+  } from '@/bo-utils/processUtil'
 
   export default defineComponent({
     name: 'ElementGenerations',

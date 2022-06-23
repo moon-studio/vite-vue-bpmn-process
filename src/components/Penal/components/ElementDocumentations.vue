@@ -18,7 +18,7 @@
   import CollapseTitle from '@/components/common/CollapseTitle.vue'
   import EditItem from '@/components/common/EditItem.vue'
   import { Base } from 'diagram-js/lib/model'
-  import { getDocumentValue, setDocumentValue } from '@/bo-utils/documentationProps'
+  import { getDocumentValue, setDocumentValue } from '@/bo-utils/documentationUtil'
   import LucideIcon from '@/components/common/LucideIcon.vue'
 
   export default defineComponent({
