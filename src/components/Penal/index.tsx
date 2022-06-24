@@ -8,9 +8,11 @@ import modelerStore from '@/store/modeler'
 import Logger from '@/utils/Logger'
 
 import { isAsynchronous } from '@/bo-utils/asynchronousContinuationsUtil'
+import { isExecutable } from '@/bo-utils/executionListenersUtil'
 
 import ElementGenerations from './components/ElementGenerations.vue'
 import ElementDocumentations from './components/ElementDocumentations.vue'
+import ElementExecutionListeners from './components/ElementExecutionListeners.vue'
 import ElementExtensionProperties from './components/ElementExtensionProperties.vue'
 import ElementAsyncContinuations from './components/ElementAsyncContinuations.vue'
 
@@ -70,6 +72,9 @@ const Penal = defineComponent({
           <ElementGenerations></ElementGenerations>
           <ElementDocumentations></ElementDocumentations>
           <ElementExtensionProperties></ElementExtensionProperties>
+          {isExecutable(modeler.getActive as Base) && (
+            <ElementExecutionListeners></ElementExecutionListeners>
+          )}
           {isAsynchronous(modeler.getActive as Base) && (
             <ElementAsyncContinuations></ElementAsyncContinuations>
           )}

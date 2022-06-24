@@ -1,4 +1,4 @@
-import { getBusinessObject, is } from 'bpmn-js/lib/util/ModelUtil'
+import { getBusinessObject, is, isAny } from 'bpmn-js/lib/util/ModelUtil'
 import { Base, ModdleElement } from 'diagram-js/lib/model'
 import {
   getExtensionElementsList,
@@ -8,21 +8,21 @@ import {
 import editor from '@/store/editor'
 import modeler from '@/store/modeler'
 
-export const EXTENSION_LISTENER_TYPE = {
+export const EXECUTION_LISTENER_TYPE = {
   class: 'Java class',
   expression: 'Expression',
   delegateExpression: 'Delegate expression',
   script: 'Script'
 }
 
-// extension listener list
-export function getExtensionListeners(element: Base): ModdleElement[] {
+// execution listener list
+export function getExecutionListeners(element: Base): ModdleElement[] {
   const prefix = editor().getProcessEngine
   const businessObject = getListenersContainer(element)
   return getExtensionElementsList(businessObject, `${prefix}:ExecutionListener`)
 }
 
-// create an empty extension listener and update element's businessObject
+// create an empty execution listener and update element's businessObject
 export function addEmptyExtensionListener(element: Base) {
   const prefix = editor().getProcessEngine
   const moddle = modeler().getModdle
@@ -37,19 +37,31 @@ export function addEmptyExtensionListener(element: Base) {
   addExtensionElements(element, businessObject, listener)
 }
 
-// remove an extension listener
-export function removeExtensionListener(element: Base, index: number) {
-  const listeners = getExtensionListeners(element)
-  const listener = listeners[index]
+// remove an execution listener
+export function removeExecutionListener(element: Base, listener: ModdleElement) {
   removeExtensionElements(element, getListenersContainer(element), listener)
 }
 
 ////////////// helpers
+export function isExecutable(element: Base): boolean {
+  return !(is(element, 'bpmn:Participant') && !element?.businessObject.processRef)
+}
+export function getExecutionListenerType(listener: ModdleElement): string {
+  const prefix = editor().getProcessEngine
+  console.log('listener:', listener, listener.get('class'), listener.get(`${prefix}:class`))
+  if (isAny(listener, [`${prefix}:ExecutionListener`])) {
+    if (listener.get(`${prefix}:class`)) return 'class'
+    if (listener.get(`${prefix}:expression`)) return 'expression'
+    if (listener.get(`${prefix}:delegateExpression`)) return 'delegateExpression'
+    if (listener.get('script')) return 'script'
+  }
+  return ''
+}
 
 function getListenersContainer(element: Base): ModdleElement {
   const businessObject = getBusinessObject(element)
 
-  return businessObject.get('processRef') || businessObject
+  return businessObject?.get('processRef') || businessObject
 }
 
 function getDefaultEvent(element: Base) {

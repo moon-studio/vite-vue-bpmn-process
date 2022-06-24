@@ -1433,7 +1433,7 @@ declare module 'bpmn-js/lib/util/ModelUtil' {
 
   export function is(element: Base | ModdleElement, type: string): boolean
 
-  export function isAny(element: Base, types: string[]): boolean
+  export function isAny(element: Base | ModdleElement, types: string[]): boolean
 
   export function getBusinessObject(element: Base | ModdleElement): ModdleElement
 
