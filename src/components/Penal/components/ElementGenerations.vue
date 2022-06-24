@@ -30,9 +30,6 @@
   import { defineComponent } from 'vue'
   import { mapState } from 'pinia'
   import modelerStore from '@/store/modeler'
-  import CollapseTitle from '@/components/common/CollapseTitle.vue'
-  import EditItem from '@/components/common/EditItem.vue'
-  import LucideIcon from '@/components/common/LucideIcon.vue'
   import { Base } from 'diagram-js/lib/model'
   import { getNameValue, setNameValue } from '@/bo-utils/nameUtil'
   import { setIdValue } from '@/bo-utils/idUtil'
@@ -45,7 +42,6 @@
 
   export default defineComponent({
     name: 'ElementGenerations',
-    components: { LucideIcon, EditItem, CollapseTitle },
     data() {
       return {
         elementId: '',

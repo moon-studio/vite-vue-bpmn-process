@@ -42,8 +42,6 @@
 
 <script lang="ts">
   import { h, defineComponent, toRaw } from 'vue'
-  import CollapseTitle from '@/components/common/CollapseTitle.vue'
-  import LucideIcon from '@/components/common/LucideIcon.vue'
   import { mapState } from 'pinia'
   import modelerStore from '@/store/modeler'
   import { Base } from 'diagram-js/lib/model'
@@ -57,7 +55,6 @@
 
   export default defineComponent({
     name: 'ElementExtensionProperties',
-    components: { LucideIcon, CollapseTitle },
     data() {
       return {
         columns: [

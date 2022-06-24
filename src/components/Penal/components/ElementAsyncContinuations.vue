@@ -20,11 +20,8 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { mapState } from 'pinia'
-  import modelerStore from '@/store/modeler'
-  import LucideIcon from '@/components/common/LucideIcon.vue'
-  import EditItem from '@/components/common/EditItem.vue'
-  import CollapseTitle from '@/components/common/CollapseTitle.vue'
   import { Base } from 'diagram-js/lib/model'
+  import modelerStore from '@/store/modeler'
   import {
     getACAfter,
     getACBefore,
@@ -36,7 +33,6 @@
 
   export default defineComponent({
     name: 'ElementAsyncContinuations',
-    components: { LucideIcon, EditItem, CollapseTitle },
     data() {
       return {
         acBefore: false,

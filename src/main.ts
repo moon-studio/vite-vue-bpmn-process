@@ -61,6 +61,7 @@ const naive = create({
     NSwitch
   ]
 })
+
 const { message, notification, dialog, loadingBar } = createDiscreteApi([
   'message',
   'dialog',
@@ -69,10 +70,17 @@ const { message, notification, dialog, loadingBar } = createDiscreteApi([
 ])
 window.__messageBox = message
 
+import LucideIcon from '@/components/common/LucideIcon.vue'
+import EditItem from '@/components/common/EditItem.vue'
+import CollapseTitle from '@/components/common/CollapseTitle.vue'
+
 const app = createApp(App)
 
 const pinia = createPinia()
 app.use(pinia)
 app.use(naive)
+app.component('LucideIcon', LucideIcon)
+app.component('EditItem', EditItem)
+app.component('CollapseTitle', CollapseTitle)
 
 app.mount('#app')
