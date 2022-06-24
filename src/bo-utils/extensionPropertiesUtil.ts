@@ -52,7 +52,7 @@ export function addExtensionProperty(element: Base, property) {
   }
 }
 
-export function removeExtensionProperty(element: Base, index: number) {
+export function removeExtensionProperty(element: Base, property: ModdleElement) {
   const businessObject = getRelevantBusinessObject(element)
   const extensionElements = businessObject.get('extensionElements')
   const properties = getProperties(businessObject)
@@ -61,17 +61,12 @@ export function removeExtensionProperty(element: Base, index: number) {
   const store = modelerStore()
   const modeling = store.getModeling
 
-  const newProperties = properties.get('values')
-  newProperties && newProperties.splice(index, 1)
+  const values = without(properties.get('values'), property as any)
+  modeling.updateModdleProperties(element, properties, { values })
 
-  if (!newProperties || !newProperties.length) {
+  if (!values || !values.length) {
     modeling.updateModdleProperties(element, extensionElements, {
-      // @ts-ignore
-      values: without(extensionElements.get('values'), properties)
-    })
-  } else {
-    modeling.updateModdleProperties(element, properties, {
-      values: newProperties
+      values: without(extensionElements.get('values'), properties as any)
     })
   }
 }

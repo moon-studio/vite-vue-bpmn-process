@@ -10,7 +10,7 @@ export function getExtensionElementsList(
   businessObject: ModdleElement,
   type?: string
 ): ModdleElement[] {
-  const extensionElements = businessObject.get('extensionElements')
+  const extensionElements = businessObject?.get('extensionElements')
   if (!extensionElements) return []
 
   const values = extensionElements.get('values')

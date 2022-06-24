@@ -49,7 +49,7 @@
     addExtensionProperty,
     getExtensionProperties,
     removeExtensionProperty
-  } from '@/bo-utils/extensionElementsUtil'
+  } from '@/bo-utils/extensionPropertiesUtil'
 
   import { FormInst, NButton } from 'naive-ui'
 
@@ -94,6 +94,7 @@
           }
         ],
         extensions: [],
+        extensionsRaw: [],
         newProperty: { name: '', value: '' },
         rules: {
           name: { required: true, message: 'Name 不能为空', trigger: ['blur', 'change'] },
@@ -118,10 +119,11 @@
         this.modelVisible = false
         await this.$nextTick()
         this.newProperty = { name: '', value: '' }
-        this.extensions = JSON.parse(JSON.stringify(getExtensionProperties(this.getActive as Base)))
+        ;(this.extensionsRaw as any[]) = getExtensionProperties(this.getActive as Base)
+        this.extensions = JSON.parse(JSON.stringify(this.extensionsRaw))
       },
       removeProperty(propIndex: number) {
-        removeExtensionProperty(this.getActive as Base, propIndex)
+        removeExtensionProperty(this.getActive as Base, this.extensionsRaw[propIndex])
         this.reloadExtensionProperties()
       },
       async addProperty() {
