@@ -63,7 +63,7 @@
         >
           <n-input v-model:value="newListener.delegateExpression" @keydown.enter.prevent />
         </n-form-item>
-        <template v-if="formItemVisible.listenerType === 'script'">
+        <template v-if="formItemVisible.listenerType === 'script' && newListener.script">
           <n-form-item
             key="scriptFormat"
             path="script.scriptFormat"
