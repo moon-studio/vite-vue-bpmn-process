@@ -1,5 +1,5 @@
 declare interface BpmnScript {
-  scriptFormat: string
+  scriptFormat?: string
   resource?: string
   value?: string
 }
