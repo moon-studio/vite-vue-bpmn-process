@@ -2,6 +2,7 @@ import { defineComponent, markRaw, ref } from 'vue'
 import { NCollapse } from 'naive-ui'
 import { Base, Connection, Label, Shape } from 'diagram-js/lib/model'
 import { Translate } from 'diagram-js/lib/i18n/translate'
+import debounce from 'lodash.debounce'
 
 import EventEmitter from '@/utils/EventEmitter'
 import modelerStore from '@/store/modeler'
@@ -44,7 +45,7 @@ const Penal = defineComponent({
     })
 
     // 设置选中元素，更新 store
-    const setCurrentElement = (element: Shape | Base | Connection | Label | null) => {
+    const setCurrentElement = debounce((element: Shape | Base | Connection | Label | null) => {
       let activatedElement: BpmnElement | null | undefined = element
       if (!activatedElement) {
         activatedElement =
@@ -64,7 +65,7 @@ const Penal = defineComponent({
         `ID: ${activatedElement.id} , type: ${activatedElement.type}`
       )
       Logger.prettyInfo('Selected element businessObject', activatedElement.businessObject)
-    }
+    }, 100)
 
     return () => (
       <div ref={penal} class="penal">
