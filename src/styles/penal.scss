@@ -27,3 +27,9 @@
     width: 100%;
   }
 }
+
+.need-filled {
+  &.n-form {
+    height: 520px;
+  }
+}

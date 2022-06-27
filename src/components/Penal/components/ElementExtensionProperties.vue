@@ -23,13 +23,13 @@
       v-model:show="modelVisible"
       preset="dialog"
       title="添加扩展属性"
-      :style="{ width: '480px' }"
+      :style="{ width: '640px' }"
     >
       <n-form ref="formRef" :model="newProperty" :rules="rules" aria-modal="true">
-        <n-form-item path="name" label="Name">
+        <n-form-item path="name" label="属性名称( Name )">
           <n-input v-model:value="newProperty.name" @keydown.enter.prevent />
         </n-form-item>
-        <n-form-item path="value" label="Value">
+        <n-form-item path="value" label="属性值( Value )">
           <n-input v-model:value="newProperty.value" @keydown.enter.prevent />
         </n-form-item>
       </n-form>
@@ -97,8 +97,8 @@
         extensionsRaw: [],
         newProperty: { name: '', value: '' },
         rules: {
-          name: { required: true, message: 'Name 不能为空', trigger: ['blur', 'change'] },
-          value: { required: true, message: 'Value 不能为空', trigger: ['blur', 'change'] }
+          name: { required: true, message: '属性名称不能为空', trigger: ['blur', 'change'] },
+          value: { required: true, message: '属性值不能为空', trigger: ['blur', 'change'] }
         },
         modelVisible: false
       }
