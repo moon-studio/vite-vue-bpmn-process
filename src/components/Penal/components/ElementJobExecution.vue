@@ -2,7 +2,7 @@
   <n-collapse-item name="element-external-task">
     <template #header>
       <collapse-title title="执行作业">
-        <lucide-icon name="Info" />
+        <lucide-icon name="CalendarClock" />
       </collapse-title>
     </template>
     <div class="element-external-task">

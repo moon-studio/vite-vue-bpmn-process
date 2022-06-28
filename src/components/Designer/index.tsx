@@ -5,7 +5,6 @@ import { storeToRefs } from 'pinia'
 import editor from '@/store/editor'
 import modulesAndModdle from '@/components/Designer/modulesAndModdle'
 import initModeler from '@/components/Designer/initModeler'
-import emptyXML from '@/utils/EmptyXML'
 import { createNewDiagram } from '@/utils'
 
 const Designer = defineComponent({
