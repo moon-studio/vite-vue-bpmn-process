@@ -40,6 +40,9 @@ jobs:
           # 该workflow需要操作repo，因此需要一个密钥，下面会讲到如何获取这个密钥
           ACCESS_TOKEN: ${{ secrets.VITE_BPMN_TOKEN }}
           # 发布到的分支
-          BRANCH: gh-pages
+          BRANCH: master
           # 要发布的文件夹
           FOLDER: dist
+          CLEAN: true
+          REPOSITORY_NAME: miyuesc/miyuesc.github.io
+          TARGET_FOLDER: vite-vue-bpmn-process
