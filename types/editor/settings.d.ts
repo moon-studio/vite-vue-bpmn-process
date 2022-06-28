@@ -11,6 +11,8 @@ export interface EditorSettings {
   rendererMode: 'default' | 'rewrite' | 'enhancement'
   bg: string
   toolbar: boolean
+  templateChooser: boolean
+  useLint: boolean
   customTheme: Record<string, string | number>
 }
 

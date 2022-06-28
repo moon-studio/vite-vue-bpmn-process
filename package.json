@@ -11,7 +11,7 @@
     "@bpmn-io/add-exporter": "^0.2.0",
     "@bpmn-io/element-template-chooser": "^0.0.5",
     "@bpmn-io/properties-panel": "^0.13.2",
-    "bpmn-js": "^9.0.3",
+    "bpmn-js": "^9.2.2",
     "bpmn-js-bpmnlint": "^0.18.0",
     "bpmn-js-connectors-extension": "^0.4.0",
     "bpmn-js-properties-panel": "^1.1.0",

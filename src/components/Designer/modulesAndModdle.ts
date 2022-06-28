@@ -1,8 +1,16 @@
-import { toRaw } from 'vue'
+import { Ref, toRaw } from 'vue'
 import { ModuleDeclaration } from 'didi'
+import { EditorSettings } from 'types/editor/settings'
 
 // ** 官方流程模拟 module
 // ** import simulationModeler from 'bpmn-js-token-simulation'
+
+// moddle 定义文件
+import activitiModdleDescriptors from '@/moddle-extensions/activiti.json'
+import camundaModdleDescriptors from '@/moddle-extensions/camunda.json'
+import flowableModdleDescriptors from '@/moddle-extensions/flowable.json'
+import MiyueModdleDescriptors from '@/moddle-extensions/miyue.json'
+import ZeebeModdleDescriptors from '@/moddle-extensions/zeebe.json'
 
 // camunda 官方侧边栏扩展
 import {
@@ -14,11 +22,10 @@ import {
 } from 'bpmn-js-properties-panel'
 import CamundaExtensionModule from 'camunda-bpmn-moddle/lib'
 
-// moddle 定义文件
-import activitiModdleDescriptors from '@/moddle-extensions/activiti.json'
-import camundaModdleDescriptors from '@/moddle-extensions/camunda.json'
-import flowableModdleDescriptors from '@/moddle-extensions/flowable.json'
-import MiyueModdleDescriptors from '@/moddle-extensions/miyue.json'
+// 官方扩展工具 元素模板选择
+import ElementTemplateChooserModule from '@bpmn-io/element-template-chooser'
+import AddExporterModule from '@bpmn-io/add-exporter'
+import ConnectorsExtensionModule from 'bpmn-js-connectors-extension'
 
 // 自定义 modules 扩展模块
 import translate from '@/additional-modules/Translate'
@@ -28,16 +35,12 @@ import EnhancementContextPad from '@/additional-modules/ContextPad/EnhancementCo
 import RewriteContextPad from '@/additional-modules/ContextPad/RewriteContextPad'
 import EnhancementRenderer from '@/additional-modules/Renderer/EnhancementRenderer'
 import RewriteRenderer from '@/additional-modules/Renderer/RewriteRenderer'
+import Rules from '@/additional-modules/Rules'
 
 import lintModule from 'bpmn-js-bpmnlint'
 import bpmnlint from '@/additional-modules/Lint/bpmnlint'
-import Rules from '@/additional-modules/Rules'
 
-import ElementTemplateChooserModule from '@bpmn-io/element-template-chooser'
-import AddExporterModule from '@bpmn-io/add-exporter'
-import ConnectorsExtensionModule from 'bpmn-js-connectors-extension'
-
-export default function (settings) {
+export default function (settings: Ref<EditorSettings>) {
   const modules: ModuleDeclaration[] = [] // modules 扩展模块数组
   let moddle: { [key: string]: any } = {} // moddle 声明文件对象
   const options: { [key: string]: any } = {} // modeler 其他配置
@@ -64,22 +67,52 @@ export default function (settings) {
     options['bpmnRenderer'] = { ...toRaw(settings.value).customTheme }
   }
 
-  // 配置 penal (基于 camunda)
-  if (settings.value.penalMode !== 'custom') {
-    modules.push(BpmnPropertiesProviderModule)
-    moddle = { camunda: camundaModdleDescriptors }
-    options['propertiesPanel'] = { parent: '#camunda-penal' }
+  // 配置模板选择弹窗（会影响默认 popupmenu）
+  if (
+    (settings.value.templateChooser && settings.value.processEngine === 'camunda') ||
+    settings.value.penalMode !== 'custom'
+  ) {
+    modules.push(
+      BpmnPropertiesPanelModule,
+      BpmnPropertiesProviderModule,
+      CamundaPlatformPropertiesProviderModule,
+      CamundaExtensionModule
+    )
+    moddle = {}
+    if (settings.value.penalMode !== 'custom') {
+      options['propertiesPanel'] = { parent: '#camunda-penal' }
+      moddle['camunda'] = camundaModdleDescriptors
+    }
+    if (settings.value.templateChooser) {
+      modules.push(
+        ZeebePropertiesProviderModule,
+        CloudElementTemplatesPropertiesProviderModule,
+        AddExporterModule,
+        ElementTemplateChooserModule,
+        ConnectorsExtensionModule
+      )
+      options['exporter'] = {
+        name: 'element-template-chooser',
+        version: '0.0.1'
+      }
+      options['connectorsExtension'] = {
+        appendAnything: true
+      }
+      moddle['zeebe'] = ZeebeModdleDescriptors
+    }
+  }
+
+  // 设置 lint 校验
+  if (settings.value.useLint) {
+    modules.push(lintModule)
+    options['linting'] = {
+      active: true,
+      bpmnlint: bpmnlint
+    }
   }
 
   // 配置 翻译 与 流程模拟
   modules.push(translate)
-
-  // 设置 lint 校验
-  modules.push(lintModule)
-  options['linting'] = {
-    active: false,
-    bpmnlint: bpmnlint
-  }
 
   // 设置键盘事件绑定
   options['keyboard'] = {
@@ -88,25 +121,6 @@ export default function (settings) {
 
   // 设置 自定义规则
   modules.push(Rules)
-
-  // // feature
-  modules.push(
-    BpmnPropertiesPanelModule,
-    CamundaPlatformPropertiesProviderModule,
-    CamundaExtensionModule,
-    ZeebePropertiesProviderModule,
-    CloudElementTemplatesPropertiesProviderModule,
-    AddExporterModule,
-    ElementTemplateChooserModule,
-    ConnectorsExtensionModule
-  )
-  options['exporter'] = {
-    name: 'element-template-chooser-demo',
-    version: '0.0.0'
-  }
-  options['connectorsExtension'] = {
-    appendAnything: true
-  }
 
   // 设置自定义属性
   moddle['miyue'] = MiyueModdleDescriptors

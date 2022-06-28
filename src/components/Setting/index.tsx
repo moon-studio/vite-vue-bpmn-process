@@ -96,44 +96,52 @@ const Setting = defineComponent({
               )
             }}
           >
-            <NForm labelWidth={120} labelAlign="left" size="small">
-              <NFormItem label="流程名称">
+            <NForm labelWidth={120} labelAlign="right" size="small" labelPlacement="left">
+              <NFormItem label="流程名称：">
                 <NInput
                   v-model={[editorSettings.value.processName, 'value']}
                   clearable={true}
                 ></NInput>
               </NFormItem>
-              <NFormItem label="流程ID">
+              <NFormItem label="流程ID：">
                 <NInput
                   v-model={[editorSettings.value.processId, 'value']}
                   clearable={true}
                 ></NInput>
               </NFormItem>
-              <NFormItem label="Toolbar">
+              <NFormItem label="工具栏：">
                 <NSwitch v-model={[editorSettings.value.toolbar, 'value']}></NSwitch>
               </NFormItem>
-              <NFormItem label="流程引擎">
+              <NFormItem label="流程校验：">
+                <NSwitch v-model={[editorSettings.value.useLint, 'value']}></NSwitch>
+              </NFormItem>
+              <NFormItem label="模板扩展：" feedback="仅在流程引擎为 camunda 时生效">
+                <NSwitch v-model={[editorSettings.value.templateChooser, 'value']}></NSwitch>
+              </NFormItem>
+              <NFormItem label="流程引擎：">
                 <NRadioGroup v-model={[editorSettings.value.processEngine, 'value']}>
                   <NRadio value="camunda">Camunda</NRadio>
                   <NRadio value="activiti">Activiti</NRadio>
                   <NRadio value="flowable">Flowable</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="Background">
+              <NFormItem label="背景设置：">
                 <NRadioGroup v-model={[editorSettings.value.bg, 'value']}>
                   <NRadio value="grid-image">网格</NRadio>
                   <NRadio value="image">图片</NRadio>
                   <NRadio value="none">空</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="Penal模式">
+              <NFormItem label="Penal模式：">
                 <NRadioGroup v-model={[editorSettings.value.penalMode, 'value']}>
                   <NRadio value="default">默认</NRadio>
-                  <NRadio value="rewrite">重写版</NRadio>
+                  <NRadio value="rewrite" disabled={true}>
+                    重写版
+                  </NRadio>
                   <NRadio value="custom">自定义</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="Palette模式">
+              <NFormItem label="Palette模式：">
                 <NRadioGroup v-model={[editorSettings.value.paletteMode, 'value']}>
                   <NRadio value="default">默认</NRadio>
                   <NRadio value="rewrite">重写版</NRadio>
@@ -141,14 +149,14 @@ const Setting = defineComponent({
                   <NRadio value="custom">自定义</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="ContextPadMode模式">
+              <NFormItem label="ContextPad模式：">
                 <NRadioGroup v-model={[editorSettings.value.contextPadMode, 'value']}>
                   <NRadio value="default">默认</NRadio>
                   <NRadio value="rewrite">重写版</NRadio>
                   <NRadio value="enhancement">扩展版</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="Renderer模式">
+              <NFormItem label="Renderer模式：">
                 <NRadioGroup v-model={[editorSettings.value.rendererMode, 'value']}>
                   <NRadio value="default">默认</NRadio>
                   <NRadio value="rewrite">重写版</NRadio>
@@ -156,7 +164,7 @@ const Setting = defineComponent({
                 </NRadioGroup>
               </NFormItem>
               {editorSettings.value.rendererMode === 'rewrite' && (
-                <NFormItem label="自定义主题" class="theme-list">
+                <NFormItem label="自定义主题：" class="theme-list" labelPlacement="top">
                   {themeColorKeys.map((key) => {
                     return (
                       <div class="theme-item">

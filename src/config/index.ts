@@ -10,5 +10,7 @@ export const defaultSettings: EditorSettings = {
   rendererMode: 'rewrite',
   bg: 'grid-image',
   toolbar: true,
+  templateChooser: false,
+  useLint: false,
   customTheme: {}
 }
