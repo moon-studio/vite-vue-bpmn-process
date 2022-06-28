@@ -10,11 +10,13 @@ import Logger from '@/utils/Logger'
 
 import { isAsynchronous } from '@/bo-utils/asynchronousContinuationsUtil'
 import { isExecutable } from '@/bo-utils/executionListenersUtil'
+import { isExternalTask } from '@/bo-utils/externalTaskUtil'
 
 import ElementGenerations from './components/ElementGenerations.vue'
 import ElementDocumentations from './components/ElementDocumentations.vue'
 import ElementExecutionListeners from './components/ElementExecutionListeners.vue'
 import ElementExtensionProperties from './components/ElementExtensionProperties.vue'
+import ElementExternalTask from './components/ElementExternalTask.vue'
 import ElementAsyncContinuations from './components/ElementAsyncContinuations.vue'
 
 const Penal = defineComponent({
@@ -69,14 +71,15 @@ const Penal = defineComponent({
 
     return () => (
       <div ref={penal} class="penal">
-        <NCollapse arrow-placement="right" accordion={true}>
+        <NCollapse arrow-placement="right">
           <ElementGenerations></ElementGenerations>
           <ElementDocumentations></ElementDocumentations>
+          {isExternalTask(modeler.getActive!) && <ElementExternalTask></ElementExternalTask>}
           <ElementExtensionProperties></ElementExtensionProperties>
-          {isExecutable(modeler.getActive as Base) && (
+          {isExecutable(modeler.getActive!) && (
             <ElementExecutionListeners></ElementExecutionListeners>
           )}
-          {isAsynchronous(modeler.getActive as Base) && (
+          {isAsynchronous(modeler.getActive!) && (
             <ElementAsyncContinuations></ElementAsyncContinuations>
           )}
         </NCollapse>
