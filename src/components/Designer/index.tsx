@@ -5,6 +5,8 @@ import { storeToRefs } from 'pinia'
 import editor from '@/store/editor'
 import modulesAndModdle from '@/components/Designer/modulesAndModdle'
 import initModeler from '@/components/Designer/initModeler'
+import emptyXML from '@/utils/EmptyXML'
+import { createNewDiagram } from '@/utils'
 
 const Designer = defineComponent({
   name: 'Designer',
@@ -22,11 +24,16 @@ const Designer = defineComponent({
     const designer = ref<HTMLDivElement | null>(null)
 
     watch(
-      () => [editorSettings.value],
-      async () => {
+      () => editorSettings.value,
+      async (value, oldValue) => {
         const modelerModules = modulesAndModdle(editorSettings)
         await nextTick()
-        initModeler(designer, modelerModules, editorSettings, xml, emit)
+        initModeler(designer, modelerModules, emit)
+        if (!oldValue || value.processEngine !== oldValue!.processEngine) {
+          await createNewDiagram()
+        } else {
+          await createNewDiagram(xml.value, editorSettings.value)
+        }
       },
       { deep: true, immediate: true }
     )

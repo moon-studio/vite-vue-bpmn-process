@@ -1,21 +1,16 @@
-import { EditorSettings } from 'types/editor/settings'
 import { markRaw, Ref } from 'vue'
 import { ViewerOptions } from 'diagram-js/lib/model'
 import Modeler from 'bpmn-js/lib/Modeler'
-import { createNewDiagram } from '@/utils'
 import EventEmitter from '@/utils/EventEmitter'
 import modelerStore from '@/store/modeler'
 import { Moddle } from 'moddle'
-import Modeling from 'bpmn-js/lib/features/modeling/Modeling.js'
+import Modeling from 'bpmn-js/lib/features/modeling/Modeling'
 import Canvas from 'diagram-js/lib/core/Canvas'
 import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
-import Logger from '@/utils/Logger'
 
 export default function (
   designer: Ref<HTMLElement | null>,
   modelerModules: ViewerOptions<Element>,
-  settings: Ref<EditorSettings>,
-  xml: Ref<string | undefined>,
   emit
 ) {
   const store = modelerStore()
@@ -50,6 +45,4 @@ export default function (
       console.error(error)
     }
   })
-
-  createNewDiagram(xml.value, settings.value)
 }
