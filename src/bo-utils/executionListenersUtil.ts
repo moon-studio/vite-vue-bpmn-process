@@ -64,6 +64,7 @@ export function removeExecutionListener(element: Base, listener: ModdleElement) 
 export function isExecutable(element: Base): boolean {
   return !(is(element, 'bpmn:Participant') && !element?.businessObject.processRef)
 }
+
 export function getExecutionListenerType(listener: ModdleElement): string {
   const prefix = editor().getProcessEngine
   if (isAny(listener, [`${prefix}:ExecutionListener`])) {
