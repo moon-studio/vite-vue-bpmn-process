@@ -164,7 +164,12 @@ const Setting = defineComponent({
                 </NRadioGroup>
               </NFormItem>
               {editorSettings.value.rendererMode === 'rewrite' && (
-                <NFormItem label="自定义主题：" class="theme-list" labelPlacement="top">
+                <NFormItem
+                  label="自定义主题："
+                  class="theme-list"
+                  labelAlign="left"
+                  labelPlacement="top"
+                >
                   {themeColorKeys.map((key) => {
                     return (
                       <div class="theme-item">
