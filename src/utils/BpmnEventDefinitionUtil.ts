@@ -49,7 +49,7 @@ export function getTimerDefinitionType(timer: ModdleElement): string | undefined
   }
 }
 
-export function getTimerEventDefinition(element: Base) {
+export function getTimerEventDefinition(element: Base): ModdleElement | undefined {
   return getEventDefinition(element, 'bpmn:TimerEventDefinition')
 }
 

@@ -10,14 +10,14 @@ import Logger from '@/utils/Logger'
 
 import { isAsynchronous } from '@/bo-utils/asynchronousContinuationsUtil'
 import { isExecutable } from '@/bo-utils/executionListenersUtil'
-import { isExternalTask } from '@/bo-utils/externalTaskUtil'
+import { jobExecutionVisible } from '@/bo-utils/jobExecutionUtil'
 
 import ElementGenerations from './components/ElementGenerations.vue'
 import ElementDocumentations from './components/ElementDocumentations.vue'
 import ElementExecutionListeners from './components/ElementExecutionListeners.vue'
 import ElementExtensionProperties from './components/ElementExtensionProperties.vue'
-import ElementExternalTask from './components/ElementExternalTask.vue'
 import ElementAsyncContinuations from './components/ElementAsyncContinuations.vue'
+import ElementJobExecution from './components/ElementJobExecution.vue'
 
 const Penal = defineComponent({
   name: 'Penal',
@@ -43,6 +43,10 @@ const Penal = defineComponent({
         if (element && element.id === currentElementId.value) {
           setCurrentElement(element)
         }
+      })
+
+      modeler.on('element.click', (event) => {
+        Logger.prettyInfo('Element Click', event)
       })
     })
 
@@ -74,7 +78,7 @@ const Penal = defineComponent({
         <NCollapse arrow-placement="right">
           <ElementGenerations></ElementGenerations>
           <ElementDocumentations></ElementDocumentations>
-          {isExternalTask(modeler.getActive!) && <ElementExternalTask></ElementExternalTask>}
+          {jobExecutionVisible(modeler.getActive!) && <ElementJobExecution></ElementJobExecution>}
           <ElementExtensionProperties></ElementExtensionProperties>
           {isExecutable(modeler.getActive!) && (
             <ElementExecutionListeners></ElementExecutionListeners>

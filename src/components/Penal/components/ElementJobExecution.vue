@@ -1,0 +1,78 @@
+<template>
+  <n-collapse-item name="element-external-task">
+    <template #header>
+      <collapse-title title="执行作业">
+        <lucide-icon name="Info" />
+      </collapse-title>
+    </template>
+    <div class="element-external-task">
+      <edit-item v-if="tpVisible" label="任务优先级" :label-width="100">
+        <n-input v-model:value="taskPriority" maxlength="32" @change="setExternalTaskPriority" />
+      </edit-item>
+      <edit-item v-if="rtVisible" label="重试周期" :label-width="100">
+        <n-input v-model:value="retryTimeCycle" maxlength="32" @change="setRetryTimeCycle" />
+      </edit-item>
+    </div>
+  </n-collapse-item>
+</template>
+
+<script lang="ts">
+  import { computed, defineComponent, ref, watch } from 'vue'
+  import modeler from '@/store/modeler'
+  import {
+    getExternalTaskValue,
+    getRetryTimeCycleValue,
+    retryTimeCycleVisible,
+    setExternalTaskValue,
+    setRetryTimeCycleValue,
+    taskPriorityVisible
+  } from '@/bo-utils/jobExecutionUtil'
+  import { Base } from 'diagram-js/lib/model'
+
+  export default defineComponent({
+    name: 'ElementJobExecution',
+    setup() {
+      const modelerStore = modeler()
+      const getActive = computed<Base | null>(() => modelerStore.getActive!)
+      const getActiveId = computed<string>(() => modelerStore.getActiveId!)
+
+      const retryTimeCycle = ref<string | undefined>(undefined)
+      const rtVisible = ref<boolean>(false)
+      const getRetryTimeCycle = () => {
+        rtVisible.value = retryTimeCycleVisible(getActive.value!)
+        retryTimeCycle.value = getRetryTimeCycleValue(getActive.value!) || ''
+      }
+      const setRetryTimeCycle = (value: string | undefined) => {
+        setRetryTimeCycleValue(getActive.value!, value)
+      }
+
+      const taskPriority = ref<string | undefined>(undefined)
+      const tpVisible = ref<boolean>(false)
+      const getExternalTaskPriority = () => {
+        tpVisible.value = taskPriorityVisible(getActive.value!)
+        taskPriority.value = getExternalTaskValue(getActive.value!) || ''
+      }
+      const setExternalTaskPriority = (value: string | undefined) => {
+        setExternalTaskValue(getActive.value!, value)
+      }
+
+      watch(
+        () => getActiveId.value,
+        () => {
+          getRetryTimeCycle()
+          getExternalTaskPriority()
+        },
+        { immediate: true }
+      )
+
+      return {
+        retryTimeCycle,
+        rtVisible,
+        setRetryTimeCycle,
+        taskPriority,
+        tpVisible,
+        setExternalTaskPriority
+      }
+    }
+  })
+</script>

@@ -40,10 +40,6 @@ export default function (
 
   EventEmitter.emit('modeler-init', modeler)
 
-  modeler.on('element.click', (event) => {
-    Logger.prettyInfo('Element Click', event)
-  })
-
   modeler.on('commandStack.changed', async (event) => {
     try {
       const { xml } = await modeler.saveXML({ format: true })
