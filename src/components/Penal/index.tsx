@@ -10,7 +10,8 @@ import Logger from '@/utils/Logger'
 
 import { isAsynchronous } from '@/bo-utils/asynchronousContinuationsUtil'
 import { isExecutable } from '@/bo-utils/executionListenersUtil'
-import { jobExecutionVisible } from '@/bo-utils/jobExecutionUtil'
+import { isJobExecutable } from '@/bo-utils/jobExecutionUtil'
+import { isStartInitializable } from '@/bo-utils/initiatorUtil'
 
 import ElementGenerations from './components/ElementGenerations.vue'
 import ElementDocumentations from './components/ElementDocumentations.vue'
@@ -18,6 +19,7 @@ import ElementExecutionListeners from './components/ElementExecutionListeners.vu
 import ElementExtensionProperties from './components/ElementExtensionProperties.vue'
 import ElementAsyncContinuations from './components/ElementAsyncContinuations.vue'
 import ElementJobExecution from './components/ElementJobExecution.vue'
+import ElementStartInitiator from './components/ElementStartInitiator.vue'
 
 const Penal = defineComponent({
   name: 'Penal',
@@ -78,13 +80,16 @@ const Penal = defineComponent({
         <NCollapse arrow-placement="right">
           <ElementGenerations></ElementGenerations>
           <ElementDocumentations></ElementDocumentations>
-          {jobExecutionVisible(modeler.getActive!) && <ElementJobExecution></ElementJobExecution>}
+          {isJobExecutable(modeler.getActive!) && <ElementJobExecution></ElementJobExecution>}
           <ElementExtensionProperties></ElementExtensionProperties>
           {isExecutable(modeler.getActive!) && (
             <ElementExecutionListeners></ElementExecutionListeners>
           )}
           {isAsynchronous(modeler.getActive!) && (
             <ElementAsyncContinuations></ElementAsyncContinuations>
+          )}
+          {isStartInitializable(modeler.getActive!) && (
+            <ElementStartInitiator></ElementStartInitiator>
           )}
         </NCollapse>
       </div>
