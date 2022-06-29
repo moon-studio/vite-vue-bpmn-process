@@ -34,7 +34,7 @@ export function addExtensionElements(
 
   // (1) create bpmn:ExtensionElements if it doesn't exist
   if (!extensionElements) {
-    extensionElements = createExtensionElement(
+    extensionElements = createModdleElement(
       'bpmn:ExtensionElements',
       { values: [] },
       businessObject
@@ -71,10 +71,10 @@ export function removeExtensionElements(
 }
 
 /////////////
-export function createExtensionElement(
+export function createModdleElement(
   elementType: string,
   properties: Record<string, any>,
-  parent?: ModdleElement
+  parent?: Base | ModdleElement
 ): ModdleElement {
   const moddle = modeler().getModdle!
   const element = moddle.create(elementType, properties)

@@ -905,7 +905,7 @@ declare module 'diagram-js/lib/model' {
     static hasType(element: ModdleElement, type?: string): boolean
   }
 
-  export interface Base {
+  export interface Base extends ModdleElement {
     id: string
     type: string
     width?: number

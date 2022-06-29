@@ -20,7 +20,10 @@ type ImplementationType =
 ///////////////////////////////////////////// bpmn 基础类方法
 
 // 获取节点事件定义
-export function getEventDefinition(element: Base, eventType: string): ModdleElement {
+export function getEventDefinition(
+  element: Base | ModdleElement,
+  eventType: string
+): ModdleElement | undefined {
   const businessObject = getBusinessObject(element)
   const eventDefinitions = businessObject.get('eventDefinitions') || []
   return find(eventDefinitions, function (definition) {
@@ -28,7 +31,7 @@ export function getEventDefinition(element: Base, eventType: string): ModdleElem
   })
 }
 // 获取节点消息事件
-export function getMessageEventDefinition(element: Base): ModdleElement {
+export function getMessageEventDefinition(element: Base): ModdleElement | undefined {
   if (is(element, 'bpmn:ReceiveTask')) {
     return getBusinessObject(element)
   }
@@ -38,17 +41,17 @@ export function getMessageEventDefinition(element: Base): ModdleElement {
 /////////////////////////////////////////// bpmn 根据流程引擎的扩展方法
 
 // Check whether an element is ServiceTaskLike 检查元素是否为 'ServiceTaskLike'
-export function isServiceTaskLike(element: Base): boolean {
+export function isServiceTaskLike(element: Base | ModdleElement): boolean {
   return is(element, `${getProcessPrefix}:ServiceTaskLike`)
 }
 
 // Returns 'true' if the given element is 'DmnCapable'
-export function isDmnCapable(element: Base): boolean {
+export function isDmnCapable(element: Base | ModdleElement): boolean {
   return is(element, `${getProcessPrefix}:DmnCapable`)
 }
 
 // Returns 'true' if the given element is 'ExternalCapable'
-export function isExternalCapable(element: Base): boolean {
+export function isExternalCapable(element: Base | ModdleElement): boolean {
   return is(element, `${getProcessPrefix}:ExternalCapable`)
 }
 
@@ -130,9 +133,11 @@ export function getImplementationType(element: Base): ImplementationType {
   }
 }
 
-function getListenerBusinessObject(businessObject) {
+function getListenerBusinessObject(
+  businessObject: Base | ModdleElement
+): ModdleElement | undefined {
   const prefix = getProcessPrefix()
   if (isAny(businessObject, [`${prefix}:ExecutionListener`, `${prefix}:TaskListener`])) {
-    return businessObject
+    return businessObject as ModdleElement
   }
 }

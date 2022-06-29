@@ -14,12 +14,14 @@ import { isJobExecutable } from '@/bo-utils/jobExecutionUtil'
 import { isStartInitializable } from '@/bo-utils/initiatorUtil'
 
 import ElementGenerations from './components/ElementGenerations.vue'
+import ElementConditional from './components/ElementConditional.vue'
 import ElementDocumentations from './components/ElementDocumentations.vue'
 import ElementExecutionListeners from './components/ElementExecutionListeners.vue'
 import ElementExtensionProperties from './components/ElementExtensionProperties.vue'
 import ElementAsyncContinuations from './components/ElementAsyncContinuations.vue'
 import ElementJobExecution from './components/ElementJobExecution.vue'
 import ElementStartInitiator from './components/ElementStartInitiator.vue'
+import { isCanbeConditional } from '@/bo-utils/conditionUtil'
 
 const Penal = defineComponent({
   name: 'Penal',
@@ -80,6 +82,7 @@ const Penal = defineComponent({
         <NCollapse arrow-placement="right">
           <ElementGenerations></ElementGenerations>
           <ElementDocumentations></ElementDocumentations>
+          {isCanbeConditional(modeler.getActive!) && <ElementConditional></ElementConditional>}
           {isJobExecutable(modeler.getActive!) && <ElementJobExecution></ElementJobExecution>}
           <ElementExtensionProperties></ElementExtensionProperties>
           {isExecutable(modeler.getActive!) && (

@@ -5,7 +5,7 @@ import modeler from '@/store/modeler'
 import { getServiceTaskLikeBusinessObject } from '@/utils/BpmnImplementationType'
 import { getTimerEventDefinition } from '@/utils/BpmnEventDefinitionUtil'
 import { isAsync } from '@/utils/BpmnAsyncElement'
-import { createExtensionElement, getExtensionElementsList } from '@/utils/BpmnExtensionElementsUtil'
+import { createModdleElement, getExtensionElementsList } from '@/utils/BpmnExtensionElementsUtil'
 
 //
 export function retryTimeCycleVisible(element: Base): boolean {
@@ -62,7 +62,7 @@ export function setRetryTimeCycleValue(element: Base, value: string | undefined)
 
   let extensionElements = businessObject.get('extensionElements')
   if (!extensionElements) {
-    extensionElements = createExtensionElement(
+    extensionElements = createModdleElement(
       'bpmn:ExtensionElements',
       { values: [] },
       businessObject
@@ -75,7 +75,7 @@ export function setRetryTimeCycleValue(element: Base, value: string | undefined)
     `${prefix}:FailedJobRetryTimeCycle`
   )[0]
   if (!failedJobRetryTimeCycle) {
-    failedJobRetryTimeCycle = createExtensionElement(
+    failedJobRetryTimeCycle = createModdleElement(
       `${prefix}:FailedJobRetryTimeCycle`,
       {},
       extensionElements
