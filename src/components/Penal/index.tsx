@@ -8,6 +8,10 @@ import EventEmitter from '@/utils/EventEmitter'
 import modelerStore from '@/store/modeler'
 import Logger from '@/utils/Logger'
 
+import getBpmnIconType from '@/bpmn-icons/getIconType'
+import bpmnIcons from '@/bpmn-icons'
+import BpmnIcon from '@/components/common/BpmnIcon.vue'
+
 import { isAsynchronous } from '@/bo-utils/asynchronousContinuationsUtil'
 import { isExecutable } from '@/bo-utils/executionListenersUtil'
 import { isJobExecutable } from '@/bo-utils/jobExecutionUtil'
@@ -22,6 +26,7 @@ import ElementAsyncContinuations from './components/ElementAsyncContinuations.vu
 import ElementJobExecution from './components/ElementJobExecution.vue'
 import ElementStartInitiator from './components/ElementStartInitiator.vue'
 import { isCanbeConditional } from '@/bo-utils/conditionUtil'
+import { customTranslate } from '@/additional-modules/Translate'
 
 const Penal = defineComponent({
   name: 'Penal',
@@ -32,6 +37,8 @@ const Penal = defineComponent({
     const currentElementType = ref<string | undefined>(undefined)
 
     const penalTitle = ref<string | undefined>('属性配置')
+    const bpmnIconName = ref<string>('Process')
+    const bpmnElementName = ref<string>('Process')
 
     EventEmitter.on('modeler-init', (modeler) => {
       // 导入完成后默认选中 process 节点
@@ -57,6 +64,8 @@ const Penal = defineComponent({
     // 设置选中元素，更新 store
     const setCurrentElement = debounce((element: Shape | Base | Connection | Label | null) => {
       let activatedElement: BpmnElement | null | undefined = element
+      let activatedElementTypeName = ''
+
       if (!activatedElement) {
         activatedElement =
           modeler.getElRegistry?.find((el) => el.type === 'bpmn:Process') ||
@@ -66,10 +75,16 @@ const Penal = defineComponent({
           return Logger.prettyError('No Element found!')
         }
       }
+      activatedElementTypeName = getBpmnIconType(activatedElement)
+
       modeler.setElement(markRaw(activatedElement), activatedElement.id)
       currentElementId.value = activatedElement.id
       currentElementType.value = activatedElement.type.split(':')[1]
+
       penalTitle.value = modeler.getModeler?.get<Translate>('translate')(currentElementType.value)
+      bpmnIconName.value = bpmnIcons[activatedElementTypeName]
+      bpmnElementName.value = activatedElementTypeName
+
       Logger.prettyPrimary(
         'Selected element changed',
         `ID: ${activatedElement.id} , type: ${activatedElement.type}`
@@ -79,22 +94,29 @@ const Penal = defineComponent({
 
     return () => (
       <div ref={penal} class="penal">
-        <NCollapse arrow-placement="right">
-          <ElementGenerations></ElementGenerations>
-          <ElementDocumentations></ElementDocumentations>
-          {isCanbeConditional(modeler.getActive!) && <ElementConditional></ElementConditional>}
-          {isJobExecutable(modeler.getActive!) && <ElementJobExecution></ElementJobExecution>}
-          <ElementExtensionProperties></ElementExtensionProperties>
-          {isExecutable(modeler.getActive!) && (
-            <ElementExecutionListeners></ElementExecutionListeners>
-          )}
-          {isAsynchronous(modeler.getActive!) && (
-            <ElementAsyncContinuations></ElementAsyncContinuations>
-          )}
-          {isStartInitializable(modeler.getActive!) && (
-            <ElementStartInitiator></ElementStartInitiator>
-          )}
-        </NCollapse>
+        <div class="penal-header">
+          <BpmnIcon name={bpmnIconName.value}></BpmnIcon>
+          <p>{bpmnElementName.value}</p>
+          <p>{customTranslate(currentElementType.value || 'Process')}</p>
+        </div>
+        {currentElementId.value && currentElementId.value.length && (
+          <NCollapse arrow-placement="right">
+            <ElementGenerations></ElementGenerations>
+            <ElementDocumentations></ElementDocumentations>
+            {isCanbeConditional(modeler.getActive!) && <ElementConditional></ElementConditional>}
+            {isJobExecutable(modeler.getActive!) && <ElementJobExecution></ElementJobExecution>}
+            <ElementExtensionProperties></ElementExtensionProperties>
+            {isExecutable(modeler.getActive!) && (
+              <ElementExecutionListeners></ElementExecutionListeners>
+            )}
+            {isAsynchronous(modeler.getActive!) && (
+              <ElementAsyncContinuations></ElementAsyncContinuations>
+            )}
+            {isStartInitializable(modeler.getActive!) && (
+              <ElementStartInitiator></ElementStartInitiator>
+            )}
+          </NCollapse>
+        )}
       </div>
     )
   }

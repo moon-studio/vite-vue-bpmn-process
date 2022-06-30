@@ -110,6 +110,7 @@
       watch(
         () => getActiveId.value,
         () => {
+          console.log('update')
           getElementVariables()
           getElementConditionType()
         },

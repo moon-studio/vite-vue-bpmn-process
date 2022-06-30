@@ -1,6 +1,6 @@
 import zhCN from './zh-cn'
 
-function customTranslate(template: string, replacements?: Record<string, string>) {
+export function customTranslate(template: string, replacements?: Record<string, string>) {
   replacements = replacements || {}
 
   // Translate

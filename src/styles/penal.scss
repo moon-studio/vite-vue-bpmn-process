@@ -29,6 +29,28 @@
   }
 }
 
+.penal-header {
+  display: grid;
+  padding: 8px;
+  grid-template-columns: 40px auto;
+  grid-template-rows: 1fr 1fr;
+  grid-column-gap: 16px;
+  align-items: center;
+  background: #f5f5f7;
+  .bpmn-icon {
+    width: 40px;
+    height: 40px;
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: bolder;
+  }
+}
+
 .need-filled {
   &.n-form {
     height: 520px;

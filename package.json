@@ -39,6 +39,7 @@
     "sass-loader": "^12.6.0",
     "typescript": "^4.5.4",
     "vite": "^2.9.2",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue-tsc": "^0.29.8"
   }
 }

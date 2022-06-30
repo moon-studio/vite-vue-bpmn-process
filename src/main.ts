@@ -76,6 +76,8 @@ import LucideIcon from '@/components/common/LucideIcon.vue'
 import EditItem from '@/components/common/EditItem.vue'
 import CollapseTitle from '@/components/common/CollapseTitle.vue'
 
+import 'virtual:svg-icons-register'
+
 const app = createApp(App)
 
 const pinia = createPinia()
