@@ -1,10 +1,18 @@
 /************************************* 基础扩展功能定义 *************************************/
 declare module 'bpmn-js' {
+  import Viewer from 'bpmn-js/lib/Viewer'
+
+  export default Viewer
+}
+declare module 'bpmn-js/lib/Viewer' {
   import BaseViewer from 'bpmn-js/lib/BaseViewer'
   import { ViewerOptions } from 'diagram-js/lib/model'
+  import { ModuleDefinition } from 'didi'
 
   export default class Viewer extends BaseViewer {
     constructor(options?: ViewerOptions<Element>)
+    _modules: ModuleDefinition[]
+    _moddleExtensions: Object
   }
 }
 declare module 'bpmn-js/lib/BaseViewer' {
@@ -13,6 +21,7 @@ declare module 'bpmn-js/lib/BaseViewer' {
   import { ViewerOptions, ModdleElement } from 'diagram-js/lib/model'
   import { InternalEvent } from 'diagram-js/lib/core/EventBus'
   import { ModuleDefinition } from 'didi'
+  import BpmnModdle from 'bpmn-moddle'
 
   export interface WriterOptions {
     format?: boolean
@@ -29,6 +38,13 @@ declare module 'bpmn-js/lib/BaseViewer' {
 
   export default class BaseViewer extends Diagram {
     constructor(options?: ViewerOptions<Element>)
+    _moddle: BpmnModdle
+    _container: Element
+    _setDefinitions(definitions: ModdleElement): void
+    _modules: ModuleDefinition[]
+
+    _init(container: Element, moddle: Object, options: Object)
+
     importXML(xml: string): Promise<DoneCallbackOpt>
     open(diagram: string): Promise<DoneCallbackOpt>
     saveXML(options?: WriterOptions): Promise<DoneCallbackOpt>
@@ -49,8 +65,6 @@ declare module 'bpmn-js/lib/BaseViewer' {
     detach(): void
     importDefinitions(): ModdleElement
     getDefinitions(): ModdleElement
-    protected _setDefinitions(definitions: ModdleElement): void
-    protected _modules: ModuleDefinition[]
   }
 }
 declare module 'bpmn-js/lib/NavigatedViewer' {
@@ -63,18 +77,30 @@ declare module 'bpmn-js/lib/NavigatedViewer' {
 }
 declare module 'bpmn-js/lib/BaseModeler' {
   import Viewer from 'bpmn-js'
-  import { ViewerOptions } from 'diagram-js/lib/model'
+  import { ModdleElement, ViewerOptions } from 'diagram-js/lib/model'
+  import BpmnModdle from 'bpmn-moddle'
 
   export default class BaseModeler extends Viewer {
     constructor(options?: ViewerOptions<Element>)
+    _createModdle(options: Object): BpmnModdle
+    _collectIds(definitions: ModdleElement, elementsById: Object): void
   }
 }
 declare module 'bpmn-js/lib/Modeler' {
   import BaseModeler from 'bpmn-js/lib/BaseModeler'
+  import Viewer from 'bpmn-js'
+  import NavigatedViewer from 'bpmn-js/lib/NavigatedViewer'
+  import { ModuleDefinition } from 'didi'
   import { ViewerOptions } from 'diagram-js/lib/model'
 
   export default class Modeler extends BaseModeler {
     constructor(options?: ViewerOptions<Element>)
+    Viewer: Viewer
+    NavigatedViewer: NavigatedViewer
+    _interactionModules: ModuleDefinition[]
+    _modelingModules: ModuleDefinition[]
+    _modules: ModuleDefinition[]
+
     createDiagram(): void // 创建流程图
   }
 }
