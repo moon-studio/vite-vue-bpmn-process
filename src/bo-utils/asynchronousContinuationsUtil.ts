@@ -51,7 +51,7 @@ export function isAsynchronous(element: Base): boolean {
 
 // Returns true if the attribute 'asyncBefore' is set to true.
 function isAsyncBefore(bo: ModdleElement, prefix: string): boolean {
-  return !!(bo.get(`${prefix}:asyncBefore`) || bo.get('camunda:async'))
+  return !!(bo.get(`${prefix}:asyncBefore`) || bo.get(`${prefix}:async`))
 }
 
 // Returns true if the attribute 'asyncAfter' is set to true.
