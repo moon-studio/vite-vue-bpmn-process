@@ -2,7 +2,7 @@ import { defineComponent, computed, ref } from 'vue'
 import Toolbar from '@/components/Toolbar'
 import Palette from '@/components/Palette'
 import Designer from '@/components/Designer'
-import Penal from '@/components/Penal'
+import Panel from '@/components/Panel'
 import Setting from '@/components/Setting'
 import { EditorSettings } from 'types/editor/settings'
 import { defaultSettings } from '@/config'
@@ -50,7 +50,7 @@ const App = defineComponent({
                 {customPalette.value && <Palette></Palette>}
                 <Designer v-model={[processXml.value, 'xml']}></Designer>
                 {customPenal.value ? (
-                  <Penal></Penal>
+                  <Panel></Panel>
                 ) : (
                   <div class="camunda-penal" id="camunda-penal"></div>
                 )}

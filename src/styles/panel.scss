@@ -1,4 +1,4 @@
-.penal {
+.panel {
   width: 480px;
   box-sizing: border-box;
   padding: 0 8px;
@@ -29,7 +29,7 @@
   }
 }
 
-.penal-header {
+.panel-header {
   display: grid;
   padding: 8px;
   grid-template-columns: 40px auto;

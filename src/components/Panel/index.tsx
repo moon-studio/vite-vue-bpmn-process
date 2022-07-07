@@ -28,11 +28,11 @@ import ElementStartInitiator from './components/ElementStartInitiator.vue'
 import { isCanbeConditional } from '@/bo-utils/conditionUtil'
 import { customTranslate } from '@/additional-modules/Translate'
 
-const Penal = defineComponent({
-  name: 'Penal',
+const Panel = defineComponent({
+  name: 'Panel',
   setup() {
     const modeler = modelerStore()
-    const penal = ref<HTMLDivElement | null>(null)
+    const panel = ref<HTMLDivElement | null>(null)
     const currentElementId = ref<string | undefined>(undefined)
     const currentElementType = ref<string | undefined>(undefined)
 
@@ -95,11 +95,11 @@ const Penal = defineComponent({
     }, 100)
 
     return () => (
-      <div ref={penal} class="penal">
-        <div class="penal-header">
-          {/*<BpmnIcon name={bpmnIconName.value}></BpmnIcon>*/}
-          {/*<p>{bpmnElementName.value}</p>*/}
-          {/*<p>{customTranslate(currentElementType.value || 'Process')}</p>*/}
+      <div ref={panel} class="panel">
+        <div class="panel-header">
+          <BpmnIcon name={bpmnIconName.value}></BpmnIcon>
+          <p>{bpmnElementName.value}</p>
+          <p>{customTranslate(currentElementType.value || 'Process')}</p>
         </div>
         {currentElementId.value && currentElementId.value.length && (
           <NCollapse arrow-placement="right">
@@ -124,4 +124,4 @@ const Penal = defineComponent({
   }
 })
 
-export default Penal
+export default Panel
