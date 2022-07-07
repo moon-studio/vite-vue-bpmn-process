@@ -875,6 +875,16 @@ declare module 'diagram-js/lib/model' {
     noNoop?: boolean
   }
 
+  export interface PositionDirection {
+    margin?: number
+    minDistance?: number
+  }
+
+  export interface PositionDirections {
+    x?: PositionDirection
+    y?: PositionDirection
+  }
+
   export interface Point {
     x: number
     y: number
@@ -3016,7 +3026,7 @@ declare module 'diagram-js/lib/navigation/zoomscroll/ZoomScroll' {
 
 /*************************************** utils 工具函数 ****************************************/
 declare module 'diagram-js/lib/features/auto-place/AutoPlaceUtil' {
-  import { Point, Shape } from 'diagram-js/lib/model'
+  import { Point, PositionDirections, Shape } from 'diagram-js/lib/model'
 
   export const DEFAULT_DISTANCE = 50
 
@@ -3032,9 +3042,11 @@ declare module 'diagram-js/lib/features/auto-place/AutoPlaceUtil' {
     position: Point,
     getNextPosition: typeof GetNextPosition
   ): Point
-  export function generateGetNextPosition(nextPositionDirection: Point): typeof GetNextPosition
-  export function getConnectedAtPosition(source: Shape, position: Point, element: Element): void
-  export function getConnectedDistance(source: Shape, hints?: Object): void
+  export function generateGetNextPosition(
+    nextPositionDirection: PositionDirections
+  ): typeof GetNextPosition
+  export function getConnectedAtPosition(source: Shape, position: Point, element: Element): Shape
+  export function getConnectedDistance(source: Shape, hints?: Object): number
 }
 
 declare module 'diagram-js/lib/features/bendpoints/BendpointUtil' {
