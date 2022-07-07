@@ -29,14 +29,16 @@ import ConnectorsExtensionModule from 'bpmn-js-connectors-extension'
 
 // 自定义 modules 扩展模块
 import translate from '@/additional-modules/Translate'
+import Rules from '@/additional-modules/Rules'
+import AutoPlace from '@/additional-modules/AutoPlace'
 import EnhancementPalette from '@/additional-modules/Palette/EnhancementPalette'
 import RewritePalette from '@/additional-modules/Palette/RewritePalette'
 import EnhancementContextPad from '@/additional-modules/ContextPad/EnhancementContextPad'
 import RewriteContextPad from '@/additional-modules/ContextPad/RewriteContextPad'
 import EnhancementRenderer from '@/additional-modules/Renderer/EnhancementRenderer'
 import RewriteRenderer from '@/additional-modules/Renderer/RewriteRenderer'
-import Rules from '@/additional-modules/Rules'
 
+// 流程图校验部分
 import lintModule from 'bpmn-js-bpmnlint'
 import bpmnlint from '@/additional-modules/Lint/bpmnlint'
 
@@ -121,6 +123,8 @@ export default function (settings: Ref<EditorSettings>) {
 
   // 设置 自定义规则
   modules.push(Rules)
+
+  modules.push(AutoPlace)
 
   // 设置自定义属性
   moddle['miyue'] = MiyueModdleDescriptors
