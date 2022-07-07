@@ -52,6 +52,7 @@
   } from '@/bo-utils/extensionPropertiesUtil'
 
   import { FormInst, NButton } from 'naive-ui'
+  import EventEmitter from '@/utils/EventEmitter'
 
   export default defineComponent({
     name: 'ElementExtensionProperties',
@@ -113,6 +114,10 @@
           this.reloadExtensionProperties()
         }
       }
+    },
+    mounted() {
+      this.reloadExtensionProperties()
+      EventEmitter.on('element-update', this.reloadExtensionProperties)
     },
     methods: {
       async reloadExtensionProperties() {

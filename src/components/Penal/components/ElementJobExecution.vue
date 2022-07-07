@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref, watch } from 'vue'
+  import { computed, defineComponent, onMounted, ref, watch } from 'vue'
   import modeler from '@/store/modeler'
   import {
     getExternalTaskValue,
@@ -28,6 +28,7 @@
     taskPriorityVisible
   } from '@/bo-utils/jobExecutionUtil'
   import { Base } from 'diagram-js/lib/model'
+  import EventEmitter from '@/utils/EventEmitter'
 
   export default defineComponent({
     name: 'ElementJobExecution',
@@ -64,6 +65,16 @@
         },
         { immediate: true }
       )
+
+      onMounted(() => {
+        getRetryTimeCycle()
+        getExternalTaskPriority()
+
+        EventEmitter.on('element-update', () => {
+          getRetryTimeCycle()
+          getExternalTaskPriority()
+        })
+      })
 
       return {
         retryTimeCycle,

@@ -39,6 +39,7 @@
     setProcessExecutable,
     setProcessVersionTag
   } from '@/bo-utils/processUtil'
+  import EventEmitter from '@/utils/EventEmitter'
 
   export default defineComponent({
     name: 'ElementGenerations',
@@ -54,22 +55,20 @@
     computed: {
       ...mapState(modelerStore, ['getActive', 'getActiveId'])
     },
-    watch: {
-      getActiveId: {
-        immediate: true,
-        handler() {
-          this.isProcess = !!this.getActive && this.getActive.type === 'bpmn:Process'
-          this.elementId = this.getActiveId as string
-          this.elementName = getNameValue(this.getActive as Base) || ''
-          if (this.isProcess) {
-            this.elementExecutable = getProcessExecutable(this.getActive as Base)
-            this.elementVersion = getProcessVersionTag(this.getActive as Base) || ''
-          }
-        }
-      }
+    mounted() {
+      this.reloadGenerationData()
+      EventEmitter.on('element-update', this.reloadGenerationData)
     },
-    mounted() {},
     methods: {
+      reloadGenerationData() {
+        this.isProcess = !!this.getActive && this.getActive.type === 'bpmn:Process'
+        this.elementId = this.getActiveId as string
+        this.elementName = getNameValue(this.getActive as Base) || ''
+        if (this.isProcess) {
+          this.elementExecutable = getProcessExecutable(this.getActive as Base)
+          this.elementVersion = getProcessVersionTag(this.getActive as Base) || ''
+        }
+      },
       updateElementName(value: string) {
         setNameValue(this.getActive as Base, value)
       },

@@ -108,7 +108,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, h, markRaw, ref, computed, watch, nextTick } from 'vue'
+  import { defineComponent, h, markRaw, ref, computed, nextTick, onMounted } from 'vue'
   import { FormInst, FormRules, DataTableColumns, NButton } from 'naive-ui'
   import modeler from '@/store/modeler'
   import { Base, ModdleElement } from 'diagram-js/lib/model'
@@ -122,6 +122,7 @@
     updateExecutionListener
   } from '@/bo-utils/executionListenersUtil'
   import { getScriptType } from '@/bo-utils/scriptUtil'
+  import EventEmitter from '@/utils/EventEmitter'
 
   export default defineComponent({
     name: 'ElementExecutionListeners',
@@ -259,11 +260,10 @@
         formRef.value && formRef.value.restoreValidation()
       }
 
-      watch(
-        () => getActiveId.value,
-        () => reloadExtensionListeners(),
-        { immediate: true }
-      )
+      onMounted(() => {
+        reloadExtensionListeners()
+        EventEmitter.on('element-update', reloadExtensionListeners)
+      })
 
       return {
         modelVisible,

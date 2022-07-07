@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref, watch } from 'vue'
+  import { computed, defineComponent, onMounted, ref } from 'vue'
   import modeler from '@/store/modeler'
   import { Base } from 'diagram-js/lib/model'
   import {
@@ -54,6 +54,7 @@
     setVariableEventsValue,
     setVariableNameValue
   } from '@/bo-utils/conditionUtil'
+  import EventEmitter from '@/utils/EventEmitter'
 
   export default defineComponent({
     name: 'ElementConditional',
@@ -107,15 +108,14 @@
         setConditionExpressionValue(getActive.value!, value)
       }
 
-      watch(
-        () => getActiveId.value,
-        () => {
-          console.log('update')
+      onMounted(() => {
+        getElementVariables()
+        getElementConditionType()
+        EventEmitter.on('element-update', () => {
           getElementVariables()
           getElementConditionType()
-        },
-        { immediate: true }
-      )
+        })
+      })
 
       return {
         varVisible,

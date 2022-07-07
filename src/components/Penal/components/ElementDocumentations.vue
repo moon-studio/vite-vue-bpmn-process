@@ -17,6 +17,7 @@
   import modelerStore from '@/store/modeler'
   import { Base } from 'diagram-js/lib/model'
   import { getDocumentValue, setDocumentValue } from '@/bo-utils/documentationUtil'
+  import EventEmitter from '@/utils/EventEmitter'
 
   export default defineComponent({
     name: 'ElementDocumentations',
@@ -35,6 +36,12 @@
           this.elementDoc = getDocumentValue(this.getActive as Base) || ''
         }
       }
+    },
+    mounted() {
+      this.elementDoc = getDocumentValue(this.getActive as Base) || ''
+      EventEmitter.on('element-update', () => {
+        this.elementDoc = getDocumentValue(this.getActive as Base) || ''
+      })
     },
     methods: {
       updateElementDoc(value) {

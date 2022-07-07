@@ -85,6 +85,8 @@ const Penal = defineComponent({
       bpmnIconName.value = bpmnIcons[activatedElementTypeName]
       bpmnElementName.value = activatedElementTypeName
 
+      EventEmitter.emit('element-update', activatedElement)
+
       Logger.prettyPrimary(
         'Selected element changed',
         `ID: ${activatedElement.id} , type: ${activatedElement.type}`
@@ -95,9 +97,9 @@ const Penal = defineComponent({
     return () => (
       <div ref={penal} class="penal">
         <div class="penal-header">
-          <BpmnIcon name={bpmnIconName.value}></BpmnIcon>
-          <p>{bpmnElementName.value}</p>
-          <p>{customTranslate(currentElementType.value || 'Process')}</p>
+          {/*<BpmnIcon name={bpmnIconName.value}></BpmnIcon>*/}
+          {/*<p>{bpmnElementName.value}</p>*/}
+          {/*<p>{customTranslate(currentElementType.value || 'Process')}</p>*/}
         </div>
         {currentElementId.value && currentElementId.value.length && (
           <NCollapse arrow-placement="right">

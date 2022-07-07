@@ -30,6 +30,7 @@
     setACBefore,
     setACExclusive
   } from '@/bo-utils/asynchronousContinuationsUtil'
+  import EventEmitter from '@/utils/EventEmitter'
 
   export default defineComponent({
     name: 'ElementAsyncContinuations',
@@ -46,13 +47,9 @@
         return this.acBefore || this.acAfter
       }
     },
-    watch: {
-      getActiveId: {
-        immediate: true,
-        handler() {
-          this.reloadACStatus()
-        }
-      }
+    mounted() {
+      this.reloadACStatus()
+      EventEmitter.on('element-update', this.reloadACStatus)
     },
     methods: {
       reloadACStatus() {

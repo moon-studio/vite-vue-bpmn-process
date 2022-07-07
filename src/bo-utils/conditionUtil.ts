@@ -64,8 +64,11 @@ export function setVariableEventsValue(element: Base, value: string | undefined)
 // 元素条件类型
 export function getConditionTypeValue(element: Base): string {
   const conditionExpression = getConditionExpression(element)
-  if (!conditionExpression) return ''
-  return conditionExpression.get('language') === undefined ? 'expression' : 'script'
+  if (conditionExpression) {
+    return conditionExpression.get('language') === undefined ? 'expression' : 'script'
+  }
+  if (element.source?.businessObject?.default === element.businessObject) return 'default'
+  return ''
 }
 export function setConditionTypeValue(element: Base, value: string) {
   if (!value || value === '' || value === 'default') {
