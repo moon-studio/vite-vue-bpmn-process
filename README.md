@@ -35,8 +35,10 @@ The typescript type declaration of Bpmn.js and Diagram.js is implemented, and ty
 
 Life is not easy, pig sighs sighs. If it helps you, you can buy me a cup of coffee. Thanks~~~~
 
+<div align="left">
 <img alt="微信" src="/public/wechat.jpg" width="240" style="display: inline-block"/>
 <img alt="支付宝" src="/public/alipay.png" width="240" style="display: inline-block"/>
+</div>
 
 
 ## Directory

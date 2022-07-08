@@ -35,8 +35,10 @@ Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-j
 
 生活不易，猪猪叹气。如果对您有帮助，您可以请我喝杯咖啡。十分感谢~ ~ ~ ~
 
+<div align="left">
 <img alt="微信" src="/public/wechat.jpg" width="240" style="display: inline-block"/>
 <img alt="支付宝" src="/public/alipay.png" width="240" style="display: inline-block"/>
+</div>
 
 
 ## 结构目录
