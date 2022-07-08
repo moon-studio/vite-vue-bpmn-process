@@ -112,6 +112,9 @@ const Setting = defineComponent({
               <NFormItem label="工具栏：">
                 <NSwitch v-model={[editorSettings.value.toolbar, 'value']}></NSwitch>
               </NFormItem>
+              <NFormItem label="小地图：">
+                <NSwitch v-model={[editorSettings.value.miniMap, 'value']}></NSwitch>
+              </NFormItem>
               <NFormItem label="流程校验：">
                 <NSwitch v-model={[editorSettings.value.useLint, 'value']}></NSwitch>
               </NFormItem>
@@ -162,6 +165,9 @@ const Setting = defineComponent({
                   <NRadio value="rewrite">重写版</NRadio>
                   <NRadio value="enhancement">扩展版</NRadio>
                 </NRadioGroup>
+              </NFormItem>
+              <NFormItem label="其他示例扩展：" feedback="AutoPlace, Rules 等">
+                <NSwitch v-model={[editorSettings.value.otherModule, 'value']}></NSwitch>
               </NFormItem>
               {editorSettings.value.rendererMode === 'rewrite' && (
                 <NFormItem

@@ -2,8 +2,15 @@
 @import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css'; // 节点基础图标
 @import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css'; // 节点完整图标
 
+// 小地图
+@import "diagram-js-minimap/assets/diagram-js-minimap.css";
+
 .designer {
   flex: 1;
+}
+
+.djs-minimap div.toggle {
+  display: none;
 }
 
 // 修复选中时填充色

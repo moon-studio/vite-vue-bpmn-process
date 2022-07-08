@@ -84,6 +84,11 @@ class EnhancementPaletteProvider extends PaletteProvider {
       }
     }
 
+    function createSqlTask(event) {
+      const sqlTask = elementFactory.createShape({ type: 'miyue:SqlTask' })
+      create.start(event, sqlTask)
+    }
+
     assign(actions, {
       'create.exclusive-gateway': createAction(
         'bpmn:ExclusiveGateway',
@@ -113,6 +118,15 @@ class EnhancementPaletteProvider extends PaletteProvider {
         'bpmn-icon-user-task',
         translate('Create User Task')
       ),
+      'create.sql-task': {
+        group: 'activity',
+        className: 'miyue-sql-task',
+        title: '数据库任务',
+        action: {
+          click: createSqlTask,
+          dragstart: createSqlTask
+        }
+      },
       'task-separator': {
         group: 'activity',
         separator: true

@@ -42,6 +42,9 @@ import RewriteRenderer from '@/additional-modules/Renderer/RewriteRenderer'
 import lintModule from 'bpmn-js-bpmnlint'
 import bpmnlint from '@/additional-modules/Lint/bpmnlint'
 
+// 小地图
+import minimapModule from 'diagram-js-minimap'
+
 export default function (settings: Ref<EditorSettings>) {
   const modules: ModuleDeclaration[] = [] // modules 扩展模块数组
   let moddle: { [key: string]: any } = {} // moddle 声明文件对象
@@ -113,6 +116,22 @@ export default function (settings: Ref<EditorSettings>) {
     }
   }
 
+  // 设置 lint 校验
+  if (settings.value.miniMap) {
+    modules.push(minimapModule)
+    options['minimap'] = {
+      open: true
+    }
+  }
+
+  // 设置其他模块的启用
+  if (settings.value.otherModule) {
+    // 设置 自定义规则
+    modules.push(Rules)
+
+    modules.push(AutoPlace)
+  }
+
   // 配置 翻译 与 流程模拟
   modules.push(translate)
 
@@ -120,11 +139,6 @@ export default function (settings: Ref<EditorSettings>) {
   options['keyboard'] = {
     bindTo: document
   }
-
-  // 设置 自定义规则
-  modules.push(Rules)
-
-  modules.push(AutoPlace)
 
   // 设置自定义属性
   moddle['miyue'] = MiyueModdleDescriptors

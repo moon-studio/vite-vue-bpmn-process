@@ -75,7 +75,7 @@ export function getConditionTypeValue(element: Base): string {
     return conditionExpression.get('language') === undefined ? 'expression' : 'script'
   }
   if (element.source?.businessObject?.default === element.businessObject) return 'default'
-  return ''
+  return 'none'
 }
 export function setConditionTypeValue(element: Base, value: string) {
   if (!value || value === 'none' || value === 'default') {

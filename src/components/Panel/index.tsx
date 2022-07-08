@@ -40,7 +40,7 @@ const Panel = defineComponent({
     const bpmnIconName = ref<string>('Process')
     const bpmnElementName = ref<string>('Process')
 
-    const renderComponents = ref<Component[]>([])
+    const renderComponents = markRaw<Component[]>([])
 
     EventEmitter.on('modeler-init', (modeler) => {
       // 导入完成后默认选中 process 节点
@@ -98,15 +98,16 @@ const Panel = defineComponent({
     }, 100)
 
     const setCurrentComponents = (element: Base) => {
-      renderComponents.value = []
-      renderComponents.value.push(ElementGenerations)
-      renderComponents.value.push(ElementDocumentations)
-      isCanbeConditional(element) && renderComponents.value.push(ElementConditional)
-      isJobExecutable(element) && renderComponents.value.push(ElementJobExecution)
-      renderComponents.value.push(ElementExtensionProperties)
-      isExecutable(element) && renderComponents.value.push(ElementExecutionListeners)
-      isAsynchronous(element) && renderComponents.value.push(ElementAsyncContinuations)
-      isStartInitializable(element) && renderComponents.value.push(ElementStartInitiator)
+      // 清空
+      renderComponents.splice(0, renderComponents.length)
+      renderComponents.push(ElementGenerations)
+      renderComponents.push(ElementDocumentations)
+      isCanbeConditional(element) && renderComponents.push(ElementConditional)
+      isJobExecutable(element) && renderComponents.push(ElementJobExecution)
+      renderComponents.push(ElementExtensionProperties)
+      isExecutable(element) && renderComponents.push(ElementExecutionListeners)
+      isAsynchronous(element) && renderComponents.push(ElementAsyncContinuations)
+      isStartInitializable(element) && renderComponents.push(ElementStartInitiator)
     }
 
     onMounted(() => !currentElementId.value && setCurrentElement())
@@ -119,7 +120,7 @@ const Panel = defineComponent({
           <p>{customTranslate(currentElementType.value || 'Process')}</p>
         </div>
         <NCollapse arrow-placement="right">
-          {renderComponents.value.map((component) => (
+          {renderComponents.map((component) => (
             <component is={component}></component>
           ))}
         </NCollapse>
