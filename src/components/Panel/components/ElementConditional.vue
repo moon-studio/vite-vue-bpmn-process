@@ -21,19 +21,47 @@
       </template>
       <edit-item key="condition" label="条件类型" :label-width="120">
         <n-select
-          v-model:value="conditionType"
+          v-model:value="conditionData.conditionType"
           :options="conditionTypeOptions"
           @update:value="setElementConditionType"
         />
       </edit-item>
       <edit-item
-        v-if="conditionType && conditionType === 'expression'"
+        v-if="conditionData.conditionType && conditionData.conditionType === 'expression'"
         key="expression"
         label="Expression"
         :label-width="120"
       >
-        <n-input v-model:value="expression" @change="setConditionExpression" />
+        <n-input v-model:value="conditionData.expression" @change="setConditionExpression" />
       </edit-item>
+      <template v-if="conditionData.conditionType && conditionData.conditionType === 'script'">
+        <edit-item key="scriptType" label="ScriptType" :label-width="120">
+          <n-select
+            v-model:value="conditionData.scriptType"
+            :options="scriptTypeOptions"
+            @update:value="setElementConditionScriptType"
+          />
+        </edit-item>
+        <edit-item key="scriptLanguage" label="Language" :label-width="120">
+          <n-input v-model:value="conditionData.language" @change="setConditionScriptLanguage" />
+        </edit-item>
+        <edit-item
+          v-show="conditionData.scriptType === 'inline'"
+          key="scriptBody"
+          label="Body"
+          :label-width="120"
+        >
+          <n-input v-model:value="conditionData.body" @change="setConditionScriptBody" />
+        </edit-item>
+        <edit-item
+          v-show="conditionData.scriptType === 'external'"
+          key="scriptResource"
+          label="Resource"
+          :label-width="120"
+        >
+          <n-input v-model:value="conditionData.resource" @change="setConditionScriptResource" />
+        </edit-item>
+      </template>
     </div>
   </n-collapse-item>
 </template>
@@ -42,18 +70,8 @@
   import { computed, defineComponent, onMounted, ref } from 'vue'
   import modeler from '@/store/modeler'
   import { Base } from 'diagram-js/lib/model'
-  import {
-    getConditionExpressionValue,
-    getConditionTypeValue,
-    getVariableEventsValue,
-    getVariableNameValue,
-    isConditionEventDefinition,
-    isExtendStartEvent,
-    setConditionExpressionValue,
-    setConditionTypeValue,
-    setVariableEventsValue,
-    setVariableNameValue
-  } from '@/bo-utils/conditionUtil'
+  import { scriptTypeOptions } from '@/config/selectOptions'
+  import * as CU from '@/bo-utils/conditionUtil'
   import EventEmitter from '@/utils/EventEmitter'
 
   export default defineComponent({
@@ -61,7 +79,6 @@
     setup() {
       const modelerStore = modeler()
       const getActive = computed<Base | null>(() => modelerStore.getActive!)
-      const getActiveId = computed<string>(() => modelerStore.getActiveId!)
 
       // 变量配置部分
       const varVisible = ref<boolean>(false)
@@ -69,43 +86,61 @@
       const varEventVisible = ref<boolean>(false)
       const variableEvents = ref<string | undefined>(undefined)
       const getElementVariables = () => {
-        varVisible.value = isConditionEventDefinition(getActive.value!)
-        variableName.value = getVariableNameValue(getActive.value!)
+        varVisible.value = CU.isConditionEventDefinition(getActive.value!)
+        variableName.value = CU.getVariableNameValue(getActive.value!)
         if (varVisible.value) {
-          varEventVisible.value = !isExtendStartEvent(getActive.value!)
-          variableEvents.value = getVariableEventsValue(getActive.value!)
+          varEventVisible.value = !CU.isExtendStartEvent(getActive.value!)
+          variableEvents.value = CU.getVariableEventsValue(getActive.value!)
         }
       }
       const setElementVariableName = (value: string | undefined) => {
-        setVariableNameValue(getActive.value!, value)
+        CU.setVariableNameValue(getActive.value!, value)
       }
       const setElementVariableEvents = (value: string | undefined) => {
-        setVariableEventsValue(getActive.value!, value)
+        CU.setVariableEventsValue(getActive.value!, value)
       }
 
       // 条件类型配置部分
       const conditionTypeOptions = ref<Record<string, string>[]>([
-        { label: 'None', value: '' },
+        { label: 'None', value: 'none' },
         { label: 'Default', value: 'default' },
         { label: 'Expression', value: 'expression' },
         { label: 'Script', value: 'script' }
       ])
-      const conditionType = ref<string>('')
+      const conditionData = ref<ConditionalForm>({})
       const getElementConditionType = () => {
-        conditionType.value = getConditionTypeValue(getActive.value!)
-        conditionType.value === 'expression' && getConditionExpression()
+        conditionData.value.conditionType = CU.getConditionTypeValue(getActive.value!)
+        conditionData.value.conditionType === 'expression' && getConditionExpression()
+        conditionData.value.conditionType === 'script' && getConditionScript()
       }
       const setElementConditionType = (value: string) => {
-        setConditionTypeValue(getActive.value!, value)
+        CU.setConditionTypeValue(getActive.value!, value)
       }
 
-      //
-      const expression = ref<string | undefined>(undefined)
       const getConditionExpression = () => {
-        getConditionExpressionValue(getActive.value!)
+        conditionData.value.expression = CU.getConditionExpressionValue(getActive.value!)
       }
       const setConditionExpression = (value: string | undefined) => {
-        setConditionExpressionValue(getActive.value!, value)
+        CU.setConditionExpressionValue(getActive.value!, value)
+      }
+
+      const getConditionScript = () => {
+        conditionData.value.language = CU.getConditionScriptLanguageValue(getActive.value!)
+        conditionData.value.scriptType = CU.getConditionScriptTypeValue(getActive.value!)
+        conditionData.value.body = CU.getConditionScriptBodyValue(getActive.value!)
+        conditionData.value.resource = CU.getConditionScriptResourceValue(getActive.value!)
+      }
+      const setConditionScriptLanguage = (value: string | undefined) => {
+        CU.setConditionScriptLanguageValue(getActive.value!, value)
+      }
+      const setElementConditionScriptType = (value: string | undefined) => {
+        CU.setConditionScriptTypeValue(getActive.value!, value)
+      }
+      const setConditionScriptBody = (value: string | undefined) => {
+        CU.setConditionScriptBodyValue(getActive.value!, value)
+      }
+      const setConditionScriptResource = (value: string | undefined) => {
+        CU.setConditionScriptResourceValue(getActive.value!, value)
       }
 
       onMounted(() => {
@@ -125,10 +160,14 @@
         setElementVariableName,
         setElementVariableEvents,
         conditionTypeOptions,
-        conditionType,
+        conditionData,
+        scriptTypeOptions,
         setElementConditionType,
-        expression,
-        setConditionExpression
+        setConditionExpression,
+        setConditionScriptLanguage,
+        setElementConditionScriptType,
+        setConditionScriptBody,
+        setConditionScriptResource
       }
     }
   })

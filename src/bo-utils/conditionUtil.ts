@@ -3,6 +3,7 @@ import { getBusinessObject, is, isAny } from 'bpmn-js/lib/util/ModelUtil'
 import { getEventDefinition } from '@/utils/BpmnImplementationType'
 import modeler from '@/store/modeler'
 import { createModdleElement } from '@/utils/BpmnExtensionElementsUtil'
+import editor from '@/store/editor'
 
 ///////////////////////////////// 配置项可见性
 const CONDITIONAL_SOURCES = [
@@ -33,7 +34,7 @@ export function isCanbeConditional(element: Base): boolean {
 }
 
 ///////////////////////////
-//
+// 1. 条件变量部分
 export function getVariableNameValue(element: Base): string | undefined {
   if (getConditionalEventDefinition(element)) {
     return (getConditionalEventDefinition(element) as ModdleElement).get('variableName')
@@ -47,7 +48,7 @@ export function setVariableNameValue(element: Base, value: string | undefined) {
   }
 }
 
-//
+// 2. 条件事件部分
 export function getVariableEventsValue(element: Base): string | undefined {
   if (getConditionalEventDefinition(element)) {
     return (getConditionalEventDefinition(element) as ModdleElement).get('variableEvents')
@@ -61,7 +62,7 @@ export function setVariableEventsValue(element: Base, value: string | undefined)
   }
 }
 
-// 元素条件类型
+// 3. 元素条件类型
 export function getConditionTypeValue(element: Base): string {
   const conditionExpression = getConditionExpression(element)
   if (conditionExpression) {
@@ -71,12 +72,12 @@ export function getConditionTypeValue(element: Base): string {
   return ''
 }
 export function setConditionTypeValue(element: Base, value: string) {
-  if (!value || value === '' || value === 'default') {
+  if (!value || value === 'none' || value === 'default') {
     updateCondition(element)
     return setDefaultCondition(element as Connection, value === 'default')
   }
   const attributes = {
-    body: '',
+    // body: '',
     language: value === 'script' ? '' : undefined
   }
   const parent = is(element, 'bpmn:SequenceFlow')
@@ -86,7 +87,7 @@ export function setConditionTypeValue(element: Base, value: string) {
   updateCondition(element, formalExpressionElement)
 }
 
-//
+// 4. 元素条件表达式
 export function getConditionExpressionValue(element: Base): string | undefined {
   const conditionExpression = getConditionExpression(element)
   if (conditionExpression) {
@@ -99,6 +100,62 @@ export function setConditionExpressionValue(element: Base, body: string | undefi
     : (getConditionalEventDefinition(element) as ModdleElement)
   const formalExpressionElement = createModdleElement('bpmn:FormalExpression', { body }, parent)
   updateCondition(element, formalExpressionElement)
+}
+
+// 5. 元素脚本来源类型
+export function getConditionScriptTypeValue(element: Base): string | undefined {
+  const prefix = editor().getProcessEngine
+  const conditionExpression = getConditionExpression(element)!
+  console.log(conditionExpression)
+  if (conditionExpression.get('body') !== undefined) return 'inline'
+  if (conditionExpression.get(`${prefix}:resource`) !== undefined) return 'external'
+  return 'none'
+}
+export function setConditionScriptTypeValue(element: Base, value: string | undefined) {
+  const prefix = editor().getProcessEngine
+  const modeling = modeler().getModeling
+  let props
+  if (!value || value === 'none') {
+    props = { body: undefined, [`${prefix}:resource`]: undefined }
+  }
+  if (value === 'inline') {
+    props = { body: '', [`${prefix}:resource`]: undefined }
+  }
+  if (value === 'external') {
+    props = { body: undefined, [`${prefix}:resource`]: '' }
+  }
+  modeling.updateModdleProperties(element, getConditionExpression(element)!, props)
+}
+
+// 6. 元素脚本 语言类型
+export function getConditionScriptLanguageValue(element: Base): string | undefined {
+  return getConditionExpression(element)?.get('language')
+}
+export function setConditionScriptLanguageValue(element: Base, value: string | undefined) {
+  const modeling = modeler().getModeling
+  modeling.updateModdleProperties(element, getConditionExpression(element)!, { language: value })
+}
+
+// 7. 元素脚本 body
+export function getConditionScriptBodyValue(element: Base): string | undefined {
+  return getConditionExpression(element)?.get('body')
+}
+export function setConditionScriptBodyValue(element: Base, value: string | undefined) {
+  const modeling = modeler().getModeling
+  modeling.updateModdleProperties(element, getConditionExpression(element)!, { body: value })
+}
+
+// 8. 元素脚本 source
+export function getConditionScriptResourceValue(element: Base): string | undefined {
+  const prefix = editor().getProcessEngine
+  return getConditionExpression(element)?.get(`${prefix}:resource`)
+}
+export function setConditionScriptResourceValue(element: Base, value: string | undefined) {
+  const modeling = modeler().getModeling
+  const prefix = editor().getProcessEngine
+  modeling.updateModdleProperties(element, getConditionExpression(element)!, {
+    [`${prefix}:resource`]: value
+  })
 }
 
 ///////// helpers
