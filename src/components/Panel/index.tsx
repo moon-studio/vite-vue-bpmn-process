@@ -1,4 +1,4 @@
-import { defineComponent, markRaw, ref } from 'vue'
+import { defineComponent, Component, markRaw, onMounted, ref } from 'vue'
 import { NCollapse } from 'naive-ui'
 import { Base, Connection, Label, Shape } from 'diagram-js/lib/model'
 import { Translate } from 'diagram-js/lib/i18n/translate'
@@ -39,6 +39,8 @@ const Panel = defineComponent({
     const penalTitle = ref<string | undefined>('属性配置')
     const bpmnIconName = ref<string>('Process')
     const bpmnElementName = ref<string>('Process')
+
+    const renderComponents = ref<Component[]>([])
 
     EventEmitter.on('modeler-init', (modeler) => {
       // 导入完成后默认选中 process 节点
@@ -85,9 +87,8 @@ const Panel = defineComponent({
       bpmnIconName.value = bpmnIcons[activatedElementTypeName]
       bpmnElementName.value = activatedElementTypeName
 
+      setCurrentComponents(activatedElement)
       EventEmitter.emit('element-update', activatedElement)
-
-      console.log(isExecutable(modeler.getActive!))
 
       Logger.prettyPrimary(
         'Selected element changed',
@@ -96,6 +97,20 @@ const Panel = defineComponent({
       Logger.prettyInfo('Selected element businessObject', activatedElement.businessObject)
     }, 100)
 
+    const setCurrentComponents = (element: Base) => {
+      renderComponents.value = []
+      renderComponents.value.push(ElementGenerations)
+      renderComponents.value.push(ElementDocumentations)
+      isCanbeConditional(element) && renderComponents.value.push(ElementConditional)
+      isJobExecutable(element) && renderComponents.value.push(ElementJobExecution)
+      renderComponents.value.push(ElementExtensionProperties)
+      isExecutable(element) && renderComponents.value.push(ElementExecutionListeners)
+      isAsynchronous(element) && renderComponents.value.push(ElementAsyncContinuations)
+      isStartInitializable(element) && renderComponents.value.push(ElementStartInitiator)
+    }
+
+    onMounted(() => !currentElementId.value && setCurrentElement())
+
     return () => (
       <div ref={panel} class="panel">
         <div class="panel-header">
@@ -103,24 +118,11 @@ const Panel = defineComponent({
           <p>{bpmnElementName.value}</p>
           <p>{customTranslate(currentElementType.value || 'Process')}</p>
         </div>
-        {currentElementId.value && currentElementId.value.length && (
-          <NCollapse arrow-placement="right">
-            <ElementGenerations></ElementGenerations>
-            <ElementDocumentations></ElementDocumentations>
-            {isCanbeConditional(modeler.getActive!) && <ElementConditional></ElementConditional>}
-            {isJobExecutable(modeler.getActive!) && <ElementJobExecution></ElementJobExecution>}
-            <ElementExtensionProperties></ElementExtensionProperties>
-            {isExecutable(modeler.getActive!) && (
-              <ElementExecutionListeners></ElementExecutionListeners>
-            )}
-            {isAsynchronous(modeler.getActive!) && (
-              <ElementAsyncContinuations></ElementAsyncContinuations>
-            )}
-            {isStartInitializable(modeler.getActive!) && (
-              <ElementStartInitiator></ElementStartInitiator>
-            )}
-          </NCollapse>
-        )}
+        <NCollapse arrow-placement="right">
+          {renderComponents.value.map((component) => (
+            <component is={component}></component>
+          ))}
+        </NCollapse>
       </div>
     )
   }
