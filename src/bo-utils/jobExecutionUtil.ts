@@ -22,7 +22,7 @@ export function taskPriorityVisible(element: Base): boolean {
     (is(element, `${prefix}:JobPriorized`) && isAsync(businessObject)) ||
     is(element, 'bpmn:Process') ||
     (is(element, 'bpmn:Participant') && businessObject.get('processRef')) ||
-    isTimerEvent(element)
+    !!isTimerEvent(element)
   )
 }
 export function isJobExecutable(element: Base): boolean {
