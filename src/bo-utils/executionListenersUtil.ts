@@ -8,6 +8,7 @@ import {
 import editor from '@/store/editor'
 import modeler from '@/store/modeler'
 import { createScript } from '@/bo-utils/scriptUtil'
+import { LISTENER_ALLOWED_TYPES } from '@/config/bpmnEnums'
 
 export const EXECUTION_LISTENER_TYPE = {
   class: 'Java class',
@@ -62,7 +63,11 @@ export function removeExecutionListener(element: Base, listener: ModdleElement) 
 
 ////////////// helpers
 export function isExecutable(element: Base): boolean {
-  return !(is(element, 'bpmn:Participant') && !element?.businessObject.processRef)
+  if (isAny(element, LISTENER_ALLOWED_TYPES)) return true
+  if (is(element, 'bpmn:Participant')) {
+    return !!element.businessObject.processRef
+  }
+  return false
 }
 
 export function getExecutionListenerType(listener: ModdleElement): string {

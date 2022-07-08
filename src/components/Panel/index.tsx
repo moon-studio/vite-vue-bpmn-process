@@ -87,6 +87,8 @@ const Panel = defineComponent({
 
       EventEmitter.emit('element-update', activatedElement)
 
+      console.log(isExecutable(modeler.getActive!))
+
       Logger.prettyPrimary(
         'Selected element changed',
         `ID: ${activatedElement.id} , type: ${activatedElement.type}`
