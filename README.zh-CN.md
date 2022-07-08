@@ -1,25 +1,45 @@
+<p align="center">
+  <a href="https://github.com/moon-studio/vite-vue-bpmn-process">
+   <img alt="logo" src="./public/icon-process.png" />
+  </a>
+</p>
+
 <div align="center">
     <h1>Vite Vue Bpmn Process Editor</h1>
     <br />
-    <a href="https://github.com/moon-studio/vite-vue-bpmn-process/blob/main/README.md">English</a> | 中文
+    English | <a href="https://github.com/moon-studio/vite-vue-bpmn-process/blob/main/README.zh-CN.md">中文</a>
     <br />
 </div>
 
-## Description
+<p align="center">
+<img alt="GitHub stars" src="https://img.shields.io/github/stars/moon-studio/vite-vue-bpmn-process?style=flat&logo=github" />
+<img alt="GitHub stars" src="https://img.shields.io/github/forks/moon-studio/vite-vue-bpmn-process?style=flat&logo=github" />
+</p>
+
+<p align="center">
+<img src="https://img.shields.io/badge/Vue-3.X-brightgreen" alt="" />
+<img src="https://img.shields.io/badge/Pinia-2.X-brightgreen" alt="" />
+<img src="https://img.shields.io/badge/TypeScript-4.5.4-brightgreen" alt="" />
+<img src="https://img.shields.io/badge/Vite-2.9-brightgreen" alt="" />
+<img src="https://img.shields.io/badge/NaiveUI-2.28-orange" alt="" />
+<img src="https://img.shields.io/badge/Bpmn.js-9.2.2-orange" alt="" />
+</p>
+
+## 项目简介
 
 Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-js)， [Vite](https://vitejs.dev)， [Vue.js 3.x](https://vuejs.org/)。
 
 实现了Bpmn.js和Diagram.js的typescript类型声明，typescript可以用来在编辑器中编写代码。
 
-## Friendship sponsorship
+## 友情赞助
 
-生活不易，偷偷丢个码。如果对您有帮助，您可以请我喝杯咖啡。十分感谢~ ~ ~ ~
+生活不易，猪猪叹气。如果对您有帮助，您可以请我喝杯咖啡。十分感谢~ ~ ~ ~
 
 <img alt="微信" src="/public/wechat.jpg" width="240" style="display: inline-block"/>
 <img alt="支付宝" src="/public/alipay.png" width="240" style="display: inline-block"/>
 
 
-## Directory
+## 结构目录
 
 ```
 |-- public
@@ -30,7 +50,7 @@ Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-j
 |       |-- Designer                               流程设计器
 |       |-- ModdleExtensions                       bpmn.js 扩展解析文件
 |       |-- Palette                                重写的 bpmn.js 的 Palette 组件
-|       |-- Penal                                  重写的 bpmn.js 的 Penal 组件
+|       |-- Panel                                  重写的 bpmn.js 的 Panel 组件
 |       |-- Setting                                项目配置表单组件
 |       |-- Toolbar                                编辑器工具栏组件
 |   |-- config                                     项目配置文件
@@ -40,7 +60,7 @@ Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-j
 |       |-- designer.scss                          流程设计器样式
 |       |-- index.scss                             项目样式统一入口
 |       |-- palette.scss                           bpmn.js 的 Palette 组件样式（扩展部分）
-|       |-- penal.scss                             bpmn.js 的 Penal 组件样式（重写penal）
+|       |-- panel.scss                             bpmn.js 的 Panel 组件样式（重写panel）
 |       |-- setting.scss                           项目配置表单样式
 |       |-- toolbar.scss                           编辑器工具栏样式
 |   |-- utils
