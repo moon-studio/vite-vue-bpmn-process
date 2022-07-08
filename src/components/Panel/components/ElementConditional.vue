@@ -7,15 +7,10 @@
     </template>
     <div class="element-conditional">
       <template v-if="varVisible">
-        <edit-item key="variableName" label="Variable Name" :label-width="120">
+        <edit-item key="variableName" label="变量名称" :label-width="120">
           <n-input v-model:value="variableName" maxlength="32" @change="setElementVariableName" />
         </edit-item>
-        <edit-item
-          v-if="varEventVisible"
-          key="variableEvent"
-          label="Variable Events"
-          :label-width="120"
-        >
+        <edit-item v-if="varEventVisible" key="variableEvent" label="变量事件" :label-width="120">
           <n-input v-model:value="variableEvents" @change="setElementVariableEvents" />
         </edit-item>
       </template>
@@ -29,34 +24,38 @@
       <edit-item
         v-if="conditionData.conditionType && conditionData.conditionType === 'expression'"
         key="expression"
-        label="Expression"
+        label="条件内容"
         :label-width="120"
       >
         <n-input v-model:value="conditionData.expression" @change="setConditionExpression" />
       </edit-item>
       <template v-if="conditionData.conditionType && conditionData.conditionType === 'script'">
-        <edit-item key="scriptType" label="ScriptType" :label-width="120">
+        <edit-item key="scriptType" label="脚本类型" :label-width="120">
           <n-select
             v-model:value="conditionData.scriptType"
             :options="scriptTypeOptions"
             @update:value="setElementConditionScriptType"
           />
         </edit-item>
-        <edit-item key="scriptLanguage" label="Language" :label-width="120">
+        <edit-item key="scriptLanguage" label="脚本语言" :label-width="120">
           <n-input v-model:value="conditionData.language" @change="setConditionScriptLanguage" />
         </edit-item>
         <edit-item
           v-show="conditionData.scriptType === 'inline'"
           key="scriptBody"
-          label="Body"
+          label="脚本内容"
           :label-width="120"
         >
-          <n-input v-model:value="conditionData.body" @change="setConditionScriptBody" />
+          <n-input
+            v-model:value="conditionData.body"
+            type="textarea"
+            @change="setConditionScriptBody"
+          />
         </edit-item>
         <edit-item
           v-show="conditionData.scriptType === 'external'"
           key="scriptResource"
-          label="Resource"
+          label="资源地址"
           :label-width="120"
         >
           <n-input v-model:value="conditionData.resource" @change="setConditionScriptResource" />
@@ -101,12 +100,7 @@
       }
 
       // 条件类型配置部分
-      const conditionTypeOptions = ref<Record<string, string>[]>([
-        { label: 'None', value: 'none' },
-        { label: 'Default', value: 'default' },
-        { label: 'Expression', value: 'expression' },
-        { label: 'Script', value: 'script' }
-      ])
+      const conditionTypeOptions = ref<Record<string, string>[]>([])
       const conditionData = ref<ConditionalForm>({})
       const getElementConditionType = () => {
         conditionData.value.conditionType = CU.getConditionTypeValue(getActive.value!)
@@ -146,7 +140,9 @@
       onMounted(() => {
         getElementVariables()
         getElementConditionType()
+        conditionTypeOptions.value = CU.getConditionTypeOptions(getActive.value!)
         EventEmitter.on('element-update', () => {
+          conditionTypeOptions.value = CU.getConditionTypeOptions(getActive.value!)
           getElementVariables()
           getElementConditionType()
         })

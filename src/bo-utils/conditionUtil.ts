@@ -12,6 +12,12 @@ const CONDITIONAL_SOURCES = [
   'bpmn:InclusiveGateway',
   'bpmn:ComplexGateway'
 ]
+const defaultConditionTypeOptions: Record<string, string>[] = [
+  { label: '无条件( None )', value: 'none' },
+  { label: '默认路径( Default )', value: 'default' },
+  { label: '条件表达式( Expression )', value: 'expression' },
+  { label: '条件脚本( Script )', value: 'script' }
+]
 // 父节点符合条件的连线
 export function isConditionalSource(element) {
   return isAny(element, CONDITIONAL_SOURCES)
@@ -160,6 +166,12 @@ export function setConditionScriptResourceValue(element: Base, value: string | u
 
 ///////// helpers
 // 获取事件的条件定义
+export function getConditionTypeOptions(element: Base): Record<string, string>[] {
+  if (is(element, 'bpmn:SequenceFlow')) {
+    return defaultConditionTypeOptions
+  }
+  return defaultConditionTypeOptions.filter((condition) => condition.value !== 'default')
+}
 function getConditionalEventDefinition(
   element: Base | ModdleElement
 ): ModdleElement | false | undefined {
