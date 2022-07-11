@@ -10,13 +10,11 @@ import activitiModdleDescriptors from '@/moddle-extensions/activiti.json'
 import camundaModdleDescriptors from '@/moddle-extensions/camunda.json'
 import flowableModdleDescriptors from '@/moddle-extensions/flowable.json'
 import MiyueModdleDescriptors from '@/moddle-extensions/miyue.json'
-import ZeebeModdleDescriptors from '@/moddle-extensions/zeebe.json'
 
 // camunda 官方侧边栏扩展
 import {
   BpmnPropertiesPanelModule,
   BpmnPropertiesProviderModule,
-  ZeebePropertiesProviderModule,
   CloudElementTemplatesPropertiesProviderModule,
   CamundaPlatformPropertiesProviderModule
 } from 'bpmn-js-properties-panel'
@@ -90,7 +88,6 @@ export default function (settings: Ref<EditorSettings>) {
     }
     if (settings.value.templateChooser) {
       modules.push(
-        ZeebePropertiesProviderModule,
         CloudElementTemplatesPropertiesProviderModule,
         AddExporterModule,
         ElementTemplateChooserModule,
@@ -103,7 +100,6 @@ export default function (settings: Ref<EditorSettings>) {
       options['connectorsExtension'] = {
         appendAnything: true
       }
-      moddle['zeebe'] = ZeebeModdleDescriptors
     }
   }
 
@@ -130,15 +126,15 @@ export default function (settings: Ref<EditorSettings>) {
     modules.push(Rules)
 
     modules.push(AutoPlace)
+
+    // 设置键盘事件绑定
+    options['keyboard'] = {
+      bindTo: document
+    }
   }
 
   // 配置 翻译 与 流程模拟
   modules.push(translate)
-
-  // 设置键盘事件绑定
-  options['keyboard'] = {
-    bindTo: document
-  }
 
   // 设置自定义属性
   moddle['miyue'] = MiyueModdleDescriptors

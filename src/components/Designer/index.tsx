@@ -29,12 +29,13 @@ const Designer = defineComponent({
           const modelerModules = modulesAndModdle(editorSettings)
           await nextTick()
           initModeler(designer, modelerModules, emit)
-        } finally {
           if (!oldValue || value.processEngine !== oldValue!.processEngine) {
             await createNewDiagram()
           } else {
             await createNewDiagram(xml.value, editorSettings.value)
           }
+        } catch (e) {
+          console.log(e)
         }
       },
       { deep: true, immediate: true }

@@ -8,7 +8,8 @@ import editor from '@/store/editor'
 
 export default function (modeler: Modeler) {
   const config = editor().getEditorConfig
-  if (config.contextmenu) {
+  const engine = editor().getProcessEngine
+  if (config.contextmenu && engine === 'camunda') {
     modeler.on('element.contextmenu', 2000, (event) => {
       event.preventDefault()
       const { element, originalEvent } = event
@@ -57,7 +58,7 @@ function openEnhancementPopupMenu(modeler: Modeler, element: Base) {
     })
     const canvas = modeler.get<Canvas>('canvas')
     const container = canvas.getContainer()
-    const closePopupMenu = () => replaceMenu.close()
+    const closePopupMenu = () => replaceMenu && replaceMenu.close()
     container.addEventListener('click', closePopupMenu)
   }
 }
