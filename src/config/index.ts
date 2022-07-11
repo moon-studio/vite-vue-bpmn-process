@@ -11,8 +11,9 @@ export const defaultSettings: EditorSettings = {
   bg: 'grid-image',
   toolbar: true,
   miniMap: true,
+  contextmenu: true,
   otherModule: true,
-  templateChooser: false,
+  templateChooser: true,
   useLint: false,
   customTheme: {}
 }

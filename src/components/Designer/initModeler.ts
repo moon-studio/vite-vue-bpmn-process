@@ -7,6 +7,7 @@ import { Moddle } from 'moddle'
 import Modeling from 'bpmn-js/lib/features/modeling/Modeling'
 import Canvas from 'diagram-js/lib/core/Canvas'
 import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+import EnhancementContextmenu from '@/additional-functions/EnhancementContextmenu'
 
 export default function (
   designer: Ref<HTMLElement | null>,
@@ -34,6 +35,8 @@ export default function (
   store.setModules('elementRegistry', markRaw(modeler.get<ElementRegistry>('elementRegistry')))
 
   EventEmitter.emit('modeler-init', modeler)
+
+  EnhancementContextmenu(modeler)
 
   modeler.on('commandStack.changed', async (event) => {
     try {

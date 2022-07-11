@@ -2404,7 +2404,7 @@ declare module 'diagram-js/lib/features/popup-menu/PopupMenu' {
       provider?: PopupMenuProvider
     ): void
     isEmpty(element: Base, providerId: string): boolean
-    open(element: Base, id: string, position: Position): Object
+    open(element: Base, id: string, position: { cursor: Position }): Object
     close(): void
     isOpen(): boolean
     trigger(event: Event): Function | undefined

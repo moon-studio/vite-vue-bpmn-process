@@ -1,4 +1,4 @@
-import { defineComponent, computed, ref } from 'vue'
+import { defineComponent, computed, ref, onMounted } from 'vue'
 import Toolbar from '@/components/Toolbar'
 import Palette from '@/components/Palette'
 import Designer from '@/components/Designer'
@@ -33,6 +33,12 @@ const App = defineComponent({
       editorSettings.value.bg === 'image' && baseClass.push('designer-with-image')
 
       return baseClass.join(' ')
+    })
+
+    onMounted(() => {
+      document.body.addEventListener('contextmenu', function (ev) {
+        ev.preventDefault()
+      })
     })
 
     /* 组件渲染 */
