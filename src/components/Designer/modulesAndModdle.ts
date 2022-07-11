@@ -22,7 +22,6 @@ import CamundaExtensionModule from 'camunda-bpmn-moddle/lib'
 
 // 官方扩展工具 元素模板选择
 import ElementTemplateChooserModule from '@bpmn-io/element-template-chooser'
-import AddExporterModule from '@bpmn-io/add-exporter'
 import ConnectorsExtensionModule from 'bpmn-js-connectors-extension'
 
 // 自定义 modules 扩展模块
@@ -48,11 +47,6 @@ export default function (settings: Ref<EditorSettings>) {
   let moddle: { [key: string]: any } = {} // moddle 声明文件对象
   const options: { [key: string]: any } = {} // modeler 其他配置
 
-  // 设置对应的 moddle 解析配置文件
-  if (settings.value.processEngine === 'activiti') moddle['activiti'] = activitiModdleDescriptors
-  if (settings.value.processEngine === 'camunda') moddle['camunda'] = camundaModdleDescriptors
-  if (settings.value.processEngine === 'flowable') moddle['flowable'] = flowableModdleDescriptors
-
   // 配置 palette (可覆盖 paletteProvider 取消原生侧边栏)
   settings.value.paletteMode === 'enhancement' && modules.push(EnhancementPalette)
   settings.value.paletteMode === 'rewrite' && modules.push(RewritePalette)
@@ -71,10 +65,7 @@ export default function (settings: Ref<EditorSettings>) {
   }
 
   // 配置模板选择弹窗（会影响默认 popupmenu）
-  if (
-    (settings.value.templateChooser && settings.value.processEngine === 'camunda') ||
-    settings.value.penalMode !== 'custom'
-  ) {
+  if (settings.value.templateChooser || settings.value.penalMode !== 'custom') {
     modules.push(
       BpmnPropertiesPanelModule,
       BpmnPropertiesProviderModule,
@@ -89,7 +80,6 @@ export default function (settings: Ref<EditorSettings>) {
     if (settings.value.templateChooser) {
       modules.push(
         CloudElementTemplatesPropertiesProviderModule,
-        AddExporterModule,
         ElementTemplateChooserModule,
         ConnectorsExtensionModule
       )
@@ -135,6 +125,13 @@ export default function (settings: Ref<EditorSettings>) {
 
   // 配置 翻译 与 流程模拟
   modules.push(translate)
+
+  // 设置对应的 moddle 解析配置文件 ( 避免上面已经配置了 camunda )
+  if (!Object.keys(moddle).length) {
+    if (settings.value.processEngine === 'activiti') moddle['activiti'] = activitiModdleDescriptors
+    if (settings.value.processEngine === 'camunda') moddle['camunda'] = camundaModdleDescriptors
+    if (settings.value.processEngine === 'flowable') moddle['flowable'] = flowableModdleDescriptors
+  }
 
   // 设置自定义属性
   moddle['miyue'] = MiyueModdleDescriptors

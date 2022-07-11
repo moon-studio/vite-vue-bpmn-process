@@ -8,8 +8,7 @@ import editor from '@/store/editor'
 
 export default function (modeler: Modeler) {
   const config = editor().getEditorConfig
-  const engine = editor().getProcessEngine
-  if (config.contextmenu && engine === 'camunda') {
+  if (config.contextmenu) {
     modeler.on('element.contextmenu', 2000, (event) => {
       event.preventDefault()
       const { element, originalEvent } = event
@@ -43,7 +42,12 @@ function openPopupMenu(modeler: Modeler, element: Base) {
     // 设置点击事件清除
     const canvas = modeler.get<Canvas>('canvas')
     const container = canvas.getContainer()
-    const closePopupMenu = () => popupMenu && popupMenu.close()
+    const closePopupMenu = () => {
+      if (popupMenu && popupMenu.isOpen()) {
+        popupMenu.close()
+        container.removeEventListener('click', closePopupMenu)
+      }
+    }
     container.addEventListener('click', closePopupMenu)
   }
 }
@@ -51,14 +55,15 @@ function openPopupMenu(modeler: Modeler, element: Base) {
 // templateChooser enhancement replace popupMenu
 function openEnhancementPopupMenu(modeler: Modeler, element: Base) {
   const replaceMenu: any = modeler.get('replaceMenu')
-  if (replaceMenu) {
+  const changeMenu: any = modeler.get('changeMenu')
+  if (replaceMenu && changeMenu) {
     replaceMenu.open(element, {
       x: element.x + element.width,
       y: element.y + element.height
     })
     const canvas = modeler.get<Canvas>('canvas')
     const container = canvas.getContainer()
-    const closePopupMenu = () => replaceMenu && replaceMenu.close()
+    const closePopupMenu = () => changeMenu && changeMenu._refresh()
     container.addEventListener('click', closePopupMenu)
   }
 }
