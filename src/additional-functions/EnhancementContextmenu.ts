@@ -8,25 +8,25 @@ import editor from '@/store/editor'
 
 export default function (modeler: Modeler) {
   const config = editor().getEditorConfig
-  if (config.contextmenu) {
-    modeler.on('element.contextmenu', 2000, (event) => {
-      event.preventDefault()
-      const { element, originalEvent } = event
-      if (isAny(element, ['bpmn:Process', 'bpmn:Collaboration', 'bpmn:Participant'])) {
-        if (config.templateChooser) {
-          const connectorsExtension: any = modeler.get('connectorsExtension')
-          connectorsExtension.createAnything(originalEvent, {
-            x: originalEvent.clientX,
-            y: originalEvent.clientY
-          })
-        }
-      } else {
-        config.templateChooser
-          ? openEnhancementPopupMenu(modeler, element)
-          : openPopupMenu(modeler, element)
+  if (!config.contextmenu) return
+  modeler.on('element.contextmenu', 2000, (event) => {
+    const { element, originalEvent } = event
+    if (
+      isAny(element, ['bpmn:Process', 'bpmn:Collaboration', 'bpmn:Participant', 'bpmn:SubProcess'])
+    ) {
+      if (config.templateChooser) {
+        const connectorsExtension: any = modeler.get('connectorsExtension')
+        connectorsExtension.createAnything(originalEvent, {
+          x: originalEvent.clientX,
+          y: originalEvent.clientY
+        })
       }
-    })
-  }
+    } else {
+      config.templateChooser
+        ? openEnhancementPopupMenu(modeler, element)
+        : openPopupMenu(modeler, element)
+    }
+  })
 }
 
 // default replace popupMenu
