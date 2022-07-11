@@ -15,7 +15,18 @@ export default defineStore('editor', {
     }),
     getProcessEngine: (state) => state.editorSettings.processEngine,
     getEditorConfig: (state) => ({
-      bg: state.editorSettings.bg
+      bg: state.editorSettings.bg,
+      paletteMode: state.editorSettings.paletteMode,
+      penalMode: state.editorSettings.penalMode,
+      contextPadMode: state.editorSettings.contextPadMode,
+      rendererMode: state.editorSettings.rendererMode,
+      toolbar: state.editorSettings.toolbar,
+      miniMap: state.editorSettings.miniMap,
+      contextmenu: state.editorSettings.contextmenu,
+      otherModule: state.editorSettings.otherModule,
+      templateChooser: state.editorSettings.templateChooser,
+      useLint: state.editorSettings.useLint,
+      customTheme: state.editorSettings.customTheme
     })
   },
   actions: {
