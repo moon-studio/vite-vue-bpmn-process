@@ -23,6 +23,7 @@ export default defineStore('editor', {
       toolbar: state.editorSettings.toolbar,
       miniMap: state.editorSettings.miniMap,
       contextmenu: state.editorSettings.contextmenu,
+      customContextmenu: state.editorSettings.customContextmenu,
       otherModule: state.editorSettings.otherModule,
       templateChooser: state.editorSettings.templateChooser,
       useLint: state.editorSettings.useLint,

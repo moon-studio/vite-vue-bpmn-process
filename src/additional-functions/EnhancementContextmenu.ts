@@ -6,26 +6,32 @@ import Canvas, { Position } from 'diagram-js/lib/core/Canvas'
 import { isAny } from 'bpmn-js/lib/util/ModelUtil'
 import editor from '@/store/editor'
 import ContextPad from 'diagram-js/lib/features/context-pad/ContextPad'
+import EventEmitter from '@/utils/EventEmitter'
+import { isAppendAction } from '@/utils/BpmnDesignerUtils'
 
 export default function (modeler: Modeler) {
   const config = editor().getEditorConfig
   if (!config.contextmenu) return
   modeler.on('element.contextmenu', 2000, (event) => {
     const { element, originalEvent } = event
-    console.log('originalEvent', originalEvent)
-    if (
-      isAny(element, ['bpmn:Process', 'bpmn:Collaboration', 'bpmn:Participant', 'bpmn:SubProcess'])
-    ) {
-      if (config.templateChooser) {
-        const connectorsExtension: any = modeler.get('connectorsExtension')
-        connectorsExtension &&
-          connectorsExtension.createAnything(originalEvent, getContextMenuPosition(originalEvent))
-      }
-    } else {
-      config.templateChooser
+
+    // 自定义右键菜单
+    if (config.customContextmenu) {
+      return EventEmitter.emit('show-contextmenu', originalEvent, element)
+    }
+
+    // 原生面板扩展
+    // 1. 更改元素类型
+    if (!isAppendAction(element)) {
+      return config.templateChooser
         ? openEnhancementPopupMenu(modeler, element, originalEvent)
         : openPopupMenu(modeler, element, originalEvent)
     }
+    // 2. 创建新元素 (仅开始模板扩展时可以)
+    if (!config.templateChooser) return
+    const connectorsExtension: any = modeler.get('connectorsExtension')
+    connectorsExtension &&
+      connectorsExtension.createAnything(originalEvent, getContextMenuPosition(originalEvent))
   })
 }
 

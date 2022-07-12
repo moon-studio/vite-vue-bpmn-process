@@ -124,6 +124,9 @@ const Setting = defineComponent({
               <NFormItem label="右键增强：" feedback="在'模板扩展'下有不同状态">
                 <NSwitch v-model={[editorSettings.value.contextmenu, 'value']}></NSwitch>
               </NFormItem>
+              <NFormItem label="自定义右键菜单：">
+                <NSwitch v-model={[editorSettings.value.customContextmenu, 'value']}></NSwitch>
+              </NFormItem>
               <NFormItem label="流程引擎：">
                 <NRadioGroup v-model={[editorSettings.value.processEngine, 'value']}>
                   <NRadio value="camunda">Camunda</NRadio>

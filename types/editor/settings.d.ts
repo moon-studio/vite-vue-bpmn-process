@@ -13,6 +13,7 @@ export interface EditorSettings {
   toolbar: boolean
   miniMap: boolean
   contextmenu: boolean
+  customContextmenu: boolean
   otherModule: boolean
   templateChooser: boolean
   useLint: boolean

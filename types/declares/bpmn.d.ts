@@ -1167,7 +1167,9 @@ declare module 'bpmn-js/lib/features/replace/ReplaceOptions' {
     }
   }
   export type TaskReplaceOption = BaseReplaceOption & {
-    isExpanded?: boolean
+    target: {
+      isExpanded?: boolean
+    }
   }
   export type DataObjectReplaceOption = BaseReplaceOption
   export type DataStoreReplaceOption = BaseReplaceOption
@@ -1386,8 +1388,10 @@ declare module 'bpmn-js/lib/features/modeling/util/ModelingUtil' {
 declare module 'bpmn-js/lib/features/popup-menu/util/TypeUtil' {
   import { Base } from 'diagram-js/lib/model'
 
+  function isDifferent(entry: Object): boolean
+
   // 如果元素来自与目标定义不同的类型，则返回true。考虑类型、事件定义类型和 triggeredByEvent 属性
-  export function isDifferentType(element: Base): boolean
+  export function isDifferentType(element: Base): typeof isDifferent
 }
 
 declare module 'bpmn-js/lib/import/Util' {
@@ -1407,13 +1411,13 @@ declare module 'bpmn-js/lib/util/CompatibilityUtil' {
 declare module 'bpmn-js/lib/util/DiUtil' {
   import { Base, ModdleElement } from 'diagram-js/lib/model'
 
-  export function isExpanded<T extends Base>(element: T, di?: ModdleElement): boolean
-  export function isInterrupting<T extends Base>(element: T): boolean
-  export function isEventSubProcess<T extends Base>(element: T): boolean
-  export function hasEventDefinition<T extends Base>(element: T, eventType: string): boolean
-  export function hasErrorEventDefinition<T extends Base>(element: T): boolean
-  export function hasEscalationEventDefinition<T extends Base>(element: T): boolean
-  export function hasCompensateEventDefinition<T extends Base>(element: T): boolean
+  export function isExpanded(element: Base, di?: ModdleElement): boolean
+  export function isInterrupting(element: Base | ModdleElement): boolean
+  export function isEventSubProcess(element: Base | ModdleElement): boolean
+  export function hasEventDefinition(element: Base | ModdleElement, eventType: string): boolean
+  export function hasErrorEventDefinition(element: Base | ModdleElement): boolean
+  export function hasEscalationEventDefinition(element: Base | ModdleElement): boolean
+  export function hasCompensateEventDefinition(element: Base | ModdleElement): boolean
 }
 
 declare module 'bpmn-js/lib/util/DrilldownUtil' {
