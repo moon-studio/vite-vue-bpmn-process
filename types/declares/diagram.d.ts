@@ -1553,6 +1553,7 @@ declare module 'diagram-js/lib/features/context-pad/ContextPad' {
   import { Base } from 'diagram-js/lib/model'
   import { Overlay } from 'diagram-js/lib/features/overlays/Overlays'
   import { ModuleConstructor } from 'didi'
+  import { Position } from 'diagram-js/lib/core/Canvas'
 
   export type ContextPadEntry = {}
   export type ContextPadProvider = {
@@ -1580,6 +1581,8 @@ declare module 'diagram-js/lib/features/context-pad/ContextPad' {
     open(element: Base, force?: boolean): void
     close(): void
     getPad(element: Base): Overlay | null
+
+    _getPosition(element: Base | Base[]): { position: { left: number; top: number } }
   }
 }
 // 元素复制粘贴功能实现

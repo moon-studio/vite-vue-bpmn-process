@@ -8,9 +8,13 @@
 
 @import 'bpmn-js-properties-panel/dist/assets/element-templates.css';
 @import 'bpmn-js-properties-panel/dist/assets/properties-panel.css';
+
 @import 'bpmn-js-connectors-extension/dist/connectors-extension.css';
 @import '@bpmn-io/element-template-chooser/dist/element-template-chooser.css';
+
 @import "bpmn-js-bpmnlint/dist/assets/css/bpmn-js-bpmnlint.css";
+
+@import "bpmn-js-token-simulation/assets/css/bpmn-js-token-simulation.css";
 
 body,
 html,
@@ -42,4 +46,13 @@ html,
       flex: 1;
     }
   }
+}
+
+.cmd-change-menu {
+  transition: background-color ease 0.2s;
+  background-color: rgba(0, 0, 0, .3);
+  //pointer-events: none !important;
+  //.cmd-change-menu__overlay {
+  //  pointer-events: auto;
+  //}
 }

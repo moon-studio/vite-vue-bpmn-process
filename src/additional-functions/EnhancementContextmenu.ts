@@ -2,44 +2,42 @@
 import Modeler from 'bpmn-js/lib/Modeler'
 import PopupMenu from 'diagram-js/lib/features/popup-menu/PopupMenu'
 import { Base } from 'diagram-js/lib/model'
-import Canvas from 'diagram-js/lib/core/Canvas'
+import Canvas, { Position } from 'diagram-js/lib/core/Canvas'
 import { isAny } from 'bpmn-js/lib/util/ModelUtil'
 import editor from '@/store/editor'
+import ContextPad from 'diagram-js/lib/features/context-pad/ContextPad'
 
 export default function (modeler: Modeler) {
   const config = editor().getEditorConfig
   if (!config.contextmenu) return
   modeler.on('element.contextmenu', 2000, (event) => {
     const { element, originalEvent } = event
+    console.log('originalEvent', originalEvent)
     if (
       isAny(element, ['bpmn:Process', 'bpmn:Collaboration', 'bpmn:Participant', 'bpmn:SubProcess'])
     ) {
       if (config.templateChooser) {
         const connectorsExtension: any = modeler.get('connectorsExtension')
-        connectorsExtension.createAnything(originalEvent, {
-          x: originalEvent.clientX,
-          y: originalEvent.clientY
-        })
+        connectorsExtension &&
+          connectorsExtension.createAnything(originalEvent, getContextMenuPosition(originalEvent))
       }
     } else {
       config.templateChooser
-        ? openEnhancementPopupMenu(modeler, element)
-        : openPopupMenu(modeler, element)
+        ? openEnhancementPopupMenu(modeler, element, originalEvent)
+        : openPopupMenu(modeler, element, originalEvent)
     }
   })
 }
 
 // default replace popupMenu
-function openPopupMenu(modeler: Modeler, element: Base) {
-  const popupMenu: PopupMenu = modeler.get('popupMenu')
+function openPopupMenu(modeler: Modeler, element: Base, event: MouseEvent) {
+  const contextPad = modeler.get<ContextPad>('contextPad')
+  const popupMenu = modeler.get<PopupMenu>('popupMenu')
   if (popupMenu && !popupMenu.isEmpty(element, 'bpmn-replace')) {
-    popupMenu.open(element, 'bpmn-replace', {
-      cursor: {
-        x: getReplaceMenuPosition(element, modeler).x || element.x + element.width,
-        y: getReplaceMenuPosition(element, modeler).y || element.y + element.height
-      }
-    })
-    // 设置点击事件清除
+    popupMenu.isOpen() && popupMenu.close()
+    const { left: x, top: y } = contextPad._getPosition(element).position
+    popupMenu.open(element, 'bpmn-replace', { cursor: { x, y } })
+    // 设置画布点击清除事件
     const canvas = modeler.get<Canvas>('canvas')
     const container = canvas.getContainer()
     const closePopupMenu = () => {
@@ -53,34 +51,17 @@ function openPopupMenu(modeler: Modeler, element: Base) {
 }
 
 // templateChooser enhancement replace popupMenu
-function openEnhancementPopupMenu(modeler: Modeler, element: Base) {
+function openEnhancementPopupMenu(modeler: Modeler, element: Base, event: MouseEvent) {
   const replaceMenu: any = modeler.get('replaceMenu')
-  const changeMenu: any = modeler.get('changeMenu')
-  if (replaceMenu && changeMenu) {
-    replaceMenu.open(element, {
-      x: element.x + element.width,
-      y: element.y + element.height
-    })
-    const canvas = modeler.get<Canvas>('canvas')
-    const container = canvas.getContainer()
-    const closePopupMenu = () => changeMenu && changeMenu._refresh()
-    container.addEventListener('click', closePopupMenu)
+  if (replaceMenu) {
+    replaceMenu.open(element, getContextMenuPosition(event, true))
   }
 }
 
 ///// utils
-function getReplaceMenuPosition(element, modeler) {
-  const canvas = modeler.get('canvas')
-  const Y_OFFSET = 5
-
-  const diagramContainer = canvas.getContainer()
-  const diagramRect = diagramContainer.getBoundingClientRect()
-
-  const top = element.y + element.height + diagramRect.top
-  const left = element.x + element.width - diagramRect.left
-
+function getContextMenuPosition(event: MouseEvent, offset?: boolean): Position {
   return {
-    x: left,
-    y: top + Y_OFFSET
+    x: event.clientX + (offset ? 10 : 0),
+    y: event.clientY + (offset ? 25 : 0)
   }
 }

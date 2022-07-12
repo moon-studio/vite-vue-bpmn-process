@@ -118,7 +118,7 @@ const Setting = defineComponent({
               <NFormItem label="流程校验：">
                 <NSwitch v-model={[editorSettings.value.useLint, 'value']}></NSwitch>
               </NFormItem>
-              <NFormItem label="模板扩展：" feedback="仅在流程引擎为 camunda 时生效">
+              <NFormItem label="模板扩展：">
                 <NSwitch v-model={[editorSettings.value.templateChooser, 'value']}></NSwitch>
               </NFormItem>
               <NFormItem label="右键增强：" feedback="在'模板扩展'下有不同状态">
