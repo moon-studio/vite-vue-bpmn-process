@@ -15,6 +15,7 @@
     "bpmn-js-bpmnlint": "^0.18.0",
     "bpmn-js-connectors-extension": "^0.4.0",
     "bpmn-js-properties-panel": "^1.1.0",
+    "bpmn-js-token-simulation": "^0.27.0",
     "bpmnlint": "^7.8.0",
     "camunda-bpmn-moddle": "^6.1.2",
     "diagram-js-minimap": "^2.1.1",

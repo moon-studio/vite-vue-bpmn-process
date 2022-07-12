@@ -3,7 +3,7 @@ import { ModuleDeclaration } from 'didi'
 import { EditorSettings } from 'types/editor/settings'
 
 // ** 官方流程模拟 module
-// ** import simulationModeler from 'bpmn-js-token-simulation'
+import TokenSimulationModule from 'bpmn-js-token-simulation'
 
 // moddle 定义文件
 import activitiModdleDescriptors from '@/moddle-extensions/activiti.json'
@@ -116,6 +116,8 @@ export default function (settings: Ref<EditorSettings>) {
     modules.push(Rules)
 
     modules.push(AutoPlace)
+
+    modules.push(TokenSimulationModule)
 
     // 设置键盘事件绑定
     options['keyboard'] = {

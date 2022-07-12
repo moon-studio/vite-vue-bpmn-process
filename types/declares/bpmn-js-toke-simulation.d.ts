@@ -188,7 +188,10 @@ declare module 'bpmn-js-token-simulation/lib/features/toggle-mode/viewer/ToggleM
   export default class ToggleMode {}
 }
 declare module 'bpmn-js-token-simulation/lib/features/toggle-mode/modeler/ToggleMode' {
-  export default class ToggleMode {}
+  export default class ToggleMode {
+    constructor()
+    toggleMode(): void
+  }
 }
 declare module 'bpmn-js-token-simulation/lib/features/token-count/TokenCount' {
   export default class TokenCount {}
