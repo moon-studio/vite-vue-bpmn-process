@@ -24,6 +24,8 @@ import CamundaExtensionModule from 'camunda-bpmn-moddle/lib'
 import ElementTemplateChooserModule from '@bpmn-io/element-template-chooser'
 import ConnectorsExtensionModule from 'bpmn-js-connectors-extension'
 
+import Grid from 'diagram-js/lib/features/grid-snapping/visuals'
+
 // 自定义 modules 扩展模块
 import translate from '@/additional-modules/Translate'
 import Rules from '@/additional-modules/Rules'
@@ -108,6 +110,11 @@ export default function (settings: Ref<EditorSettings>) {
     options['minimap'] = {
       open: true
     }
+  }
+
+  // 官方网点背景
+  if (settings.value.bg === 'grid') {
+    modules.push(Grid)
   }
 
   // 设置其他模块的启用

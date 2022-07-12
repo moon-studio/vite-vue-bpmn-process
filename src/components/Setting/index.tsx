@@ -88,6 +88,7 @@ const Setting = defineComponent({
                     <p>1. 仅自定义模式可使用 activiti 或者 flowable 引擎</p>
                     <p>2. 扩展模式下只能扩展工具按钮，不能删除原有工具</p>
                     <p>3. 自定义的MySql节点只能使用非默认渲染方式</p>
+                    <p>4. 🚀🚀🚀付费咨询请添加微信或者关注微信公众号</p>
                   </div>
                   <p style="font-weight: bold">友情赞助</p>
                   <div class="sponsorship-image wechat"></div>
@@ -136,7 +137,8 @@ const Setting = defineComponent({
               </NFormItem>
               <NFormItem label="背景设置：">
                 <NRadioGroup v-model={[editorSettings.value.bg, 'value']}>
-                  <NRadio value="grid-image">网格</NRadio>
+                  <NRadio value="grid-image">自定义网格</NRadio>
+                  <NRadio value="grid">默认网点</NRadio>
                   <NRadio value="image">图片</NRadio>
                   <NRadio value="none">空</NRadio>
                 </NRadioGroup>

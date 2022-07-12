@@ -65,23 +65,25 @@
 .tips-message {
   width: 100%;
   text-align: left;
+  color: #303133;
   .grip-tips {
     display: grid;
     grid-template-columns: auto 1fr;
     p:first-child {
       grid-row-start: 1;
-      grid-row-end: 4;
+      grid-row-end: 5;
     }
   }
-
   p {
     margin: 0 0 4px 0;
+    font-weight: bold;
   }
 }
 .sponsorship-image {
-  width: 180px;
-  height: 180px;
-  background-size: 100% 100%  ;
+  width: 150px;
+  height: 150px;
+  background-size: 140% 140%;
+  background-position: center center;
   display: inline-block;
   &.wechat {
     background-image: url('/wechat.jpg');
