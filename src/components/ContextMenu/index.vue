@@ -12,9 +12,7 @@
       <div class="context-menu_body">
         <div v-for="item in currentReplaceOptions" :key="item.actionName" class="context-menu_item">
           <i :class="`context-menu_item_icon ${item.className}`"></i>
-          <span @click="($event) => triggerAction(item, $event)">{{
-            translateCh(item.label)
-          }}</span>
+          <span @click="triggerAction(item, $event)">{{ translateCh(item.label) }}</span>
         </div>
       </div>
     </div>
@@ -27,8 +25,7 @@
    * @author MiyueFE
    * @date 2022/7/11
    */
-  import { onMounted, ref } from 'vue'
-  import modeler from '@/store/modeler'
+  import { onBeforeUnmount, onMounted, ref } from 'vue'
   import EventEmitter from '@/utils/EventEmitter'
   import { Base } from 'diagram-js/lib/model'
   import { customTranslate } from '@/additional-modules/Translate'
@@ -36,14 +33,13 @@
   import { isAppendAction } from '@/utils/BpmnDesignerUtils'
   import contextMenuActions from '@/components/ContextMenu/contextMenuActions'
 
+  const translateCh = customTranslate
+
   const showPopover = ref(false)
   const x = ref(0)
   const y = ref(0)
 
-  const modelerStore = modeler()
   const currentReplaceOptions = ref<any[]>([])
-
-  const translateCh = customTranslate
 
   let mouseEvent: MouseEvent | null = null
   let currentElement: Base | null = null
@@ -52,7 +48,7 @@
 
   const { appendAction, replaceAction } = contextMenuActions()
 
-  const triggerAction = async (entry, event) => {
+  const triggerAction = (entry, event) => {
     try {
       isAppend.value
         ? appendAction(entry.target, event)
@@ -63,17 +59,26 @@
     }
   }
 
+  const initEventCallback = (event: MouseEvent, element?: Base) => {
+    x.value = event.clientX
+    y.value = event.clientY
+    mouseEvent = event
+    currentElement = element || null
+    isAppend.value = isAppendAction(element)
+    currentReplaceOptions.value = BpmnReplaceOptions(element)
+    contextMenuTitle.value = isAppend.value ? '创建元素' : '更改元素'
+    showPopover.value = true
+  }
+
+  const closePopover = () => (showPopover.value = false)
+
   onMounted(() => {
-    EventEmitter.on('show-contextmenu', (event: MouseEvent, element?: Base) => {
-      x.value = event.clientX
-      y.value = event.clientY
-      mouseEvent = event
-      currentElement = element || null
-      isAppend.value = isAppendAction(element)
-      currentReplaceOptions.value = BpmnReplaceOptions(element)
-      contextMenuTitle.value = isAppend.value ? '创建元素' : '更改元素'
-      showPopover.value = true
-    })
-    document.body.addEventListener('click', () => (showPopover.value = false))
+    EventEmitter.on('show-contextmenu', initEventCallback)
+    document.body.addEventListener('click', closePopover)
+  })
+
+  onBeforeUnmount(() => {
+    EventEmitter.removeListener('show-contextmenu', initEventCallback)
+    document.body.removeEventListener('click', closePopover)
   })
 </script>
