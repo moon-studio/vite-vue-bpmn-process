@@ -3,7 +3,6 @@ import Modeler from 'bpmn-js/lib/Modeler'
 import PopupMenu from 'diagram-js/lib/features/popup-menu/PopupMenu'
 import { Base } from 'diagram-js/lib/model'
 import Canvas, { Position } from 'diagram-js/lib/core/Canvas'
-import { isAny } from 'bpmn-js/lib/util/ModelUtil'
 import editor from '@/store/editor'
 import ContextPad from 'diagram-js/lib/features/context-pad/ContextPad'
 import EventEmitter from '@/utils/EventEmitter'
@@ -40,14 +39,14 @@ function openPopupMenu(modeler: Modeler, element: Base, event: MouseEvent) {
   const contextPad = modeler.get<ContextPad>('contextPad')
   const popupMenu = modeler.get<PopupMenu>('popupMenu')
   if (popupMenu && !popupMenu.isEmpty(element, 'bpmn-replace')) {
-    popupMenu.isOpen() && popupMenu.close()
-    const { left: x, top: y } = contextPad._getPosition(element).position
-    popupMenu.open(element, 'bpmn-replace', { cursor: { x, y } })
+    popupMenu.open(element, 'bpmn-replace', {
+      cursor: { x: event.clientX + 10, y: event.clientY + 10 }
+    })
     // 设置画布点击清除事件
     const canvas = modeler.get<Canvas>('canvas')
     const container = canvas.getContainer()
-    const closePopupMenu = () => {
-      if (popupMenu && popupMenu.isOpen()) {
+    const closePopupMenu = (ev) => {
+      if (popupMenu && popupMenu.isOpen() && ev.delegateTarget.tagName === 'svg') {
         popupMenu.close()
         container.removeEventListener('click', closePopupMenu)
       }
