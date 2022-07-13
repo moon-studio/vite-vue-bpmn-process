@@ -30,6 +30,14 @@
   }
 }
 
+.shortcut-keys-model {
+  width: 460px;
+  display: grid;
+  line-height: 20px;
+  font-size: 14px;
+  grid-template-columns: 160px auto;
+}
+
 /* 修改弹窗宽度 */
 .n-dialog.n-modal {
   width: auto;

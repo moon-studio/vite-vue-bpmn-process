@@ -6,6 +6,7 @@ import Previews from '@/components/Toolbar/components/Previews'
 import Aligns from '@/components/Toolbar/components/Aligns'
 import Scales from '@/components/Toolbar/components/Scales'
 import Commands from '@/components/Toolbar/components/Commands'
+import ExternalTools from '@/components/Toolbar/components/ExternalTools'
 
 const Toolbar = defineComponent({
   name: 'ToolBar',
@@ -20,6 +21,7 @@ const Toolbar = defineComponent({
         <Aligns></Aligns>
         <Scales></Scales>
         <Commands></Commands>
+        <ExternalTools></ExternalTools>
       </div>
     )
   }

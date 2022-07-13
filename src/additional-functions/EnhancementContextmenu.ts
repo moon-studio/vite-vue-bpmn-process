@@ -4,7 +4,6 @@ import PopupMenu from 'diagram-js/lib/features/popup-menu/PopupMenu'
 import { Base } from 'diagram-js/lib/model'
 import Canvas, { Position } from 'diagram-js/lib/core/Canvas'
 import editor from '@/store/editor'
-import ContextPad from 'diagram-js/lib/features/context-pad/ContextPad'
 import EventEmitter from '@/utils/EventEmitter'
 import { isAppendAction } from '@/utils/BpmnDesignerUtils'
 
@@ -36,7 +35,6 @@ export default function (modeler: Modeler) {
 
 // default replace popupMenu
 function openPopupMenu(modeler: Modeler, element: Base, event: MouseEvent) {
-  const contextPad = modeler.get<ContextPad>('contextPad')
   const popupMenu = modeler.get<PopupMenu>('popupMenu')
   if (popupMenu && !popupMenu.isEmpty(element, 'bpmn-replace')) {
     popupMenu.open(element, 'bpmn-replace', {

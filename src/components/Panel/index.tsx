@@ -42,26 +42,18 @@ const Panel = defineComponent({
 
     const renderComponents = markRaw<Component[]>([])
 
-    EventEmitter.on('modeler-init', (modeler) => {
-      // 导入完成后默认选中 process 节点
-      modeler.on('import.done', () => {
-        setCurrentElement(null)
-      })
-      // 监听选择事件，修改当前激活的元素以及表单
-      modeler.on('selection.changed', ({ newSelection }) => {
-        setCurrentElement(newSelection[0] || null)
-      })
-      modeler.on('element.changed', ({ element }) => {
-        // 保证 修改 "默认流转路径" 等类似需要修改多个元素的事件发生的时候，更新表单的元素与原选中元素不一致。
-        if (element && element.id === currentElementId.value) {
-          setCurrentElement(element)
-        }
-      })
-
-      modeler.on('element.click', (event) => {
-        Logger.prettyInfo('Element Click', event)
-      })
-    })
+    const setCurrentComponents = (element: Base) => {
+      // 清空
+      renderComponents.splice(0, renderComponents.length)
+      renderComponents.push(ElementGenerations)
+      renderComponents.push(ElementDocumentations)
+      isCanbeConditional(element) && renderComponents.push(ElementConditional)
+      isJobExecutable(element) && renderComponents.push(ElementJobExecution)
+      renderComponents.push(ElementExtensionProperties)
+      isExecutable(element) && renderComponents.push(ElementExecutionListeners)
+      isAsynchronous(element) && renderComponents.push(ElementAsyncContinuations)
+      isStartInitializable(element) && renderComponents.push(ElementStartInitiator)
+    }
 
     // 设置选中元素，更新 store
     const setCurrentElement = debounce((element: Shape | Base | Connection | Label | null) => {
@@ -97,18 +89,26 @@ const Panel = defineComponent({
       Logger.prettyInfo('Selected element businessObject', activatedElement.businessObject)
     }, 100)
 
-    const setCurrentComponents = (element: Base) => {
-      // 清空
-      renderComponents.splice(0, renderComponents.length)
-      renderComponents.push(ElementGenerations)
-      renderComponents.push(ElementDocumentations)
-      isCanbeConditional(element) && renderComponents.push(ElementConditional)
-      isJobExecutable(element) && renderComponents.push(ElementJobExecution)
-      renderComponents.push(ElementExtensionProperties)
-      isExecutable(element) && renderComponents.push(ElementExecutionListeners)
-      isAsynchronous(element) && renderComponents.push(ElementAsyncContinuations)
-      isStartInitializable(element) && renderComponents.push(ElementStartInitiator)
-    }
+    EventEmitter.on('modeler-init', (modeler) => {
+      // 导入完成后默认选中 process 节点
+      modeler.on('import.done', () => {
+        setCurrentElement(null)
+      })
+      // 监听选择事件，修改当前激活的元素以及表单
+      modeler.on('selection.changed', ({ newSelection }) => {
+        setCurrentElement(newSelection[0] || null)
+      })
+      modeler.on('element.changed', ({ element }) => {
+        // 保证 修改 "默认流转路径" 等类似需要修改多个元素的事件发生的时候，更新表单的元素与原选中元素不一致。
+        if (element && element.id === currentElementId.value) {
+          setCurrentElement(element)
+        }
+      })
+
+      modeler.on('element.click', (event) => {
+        Logger.prettyInfo('Element Click', event)
+      })
+    })
 
     onMounted(() => !currentElementId.value && setCurrentElement())
 
