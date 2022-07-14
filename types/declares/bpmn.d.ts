@@ -18,10 +18,10 @@ declare module 'bpmn-js/lib/Viewer' {
 declare module 'bpmn-js/lib/BaseViewer' {
   import Diagram from 'diagram-js'
   import { EventCallback } from 'diagram-js/lib/core/EventBus'
-  import { ViewerOptions, ModdleElement } from 'diagram-js/lib/model'
+  import { ViewerOptions } from 'diagram-js/lib/model'
   import { InternalEvent } from 'diagram-js/lib/core/EventBus'
   import { ModuleDefinition } from 'didi'
-  import BpmnModdle from 'bpmn-moddle'
+  import BpmnModdle, { ModdleElement } from 'bpmn-moddle'
 
   export interface WriterOptions {
     format?: boolean
@@ -77,8 +77,8 @@ declare module 'bpmn-js/lib/NavigatedViewer' {
 }
 declare module 'bpmn-js/lib/BaseModeler' {
   import Viewer from 'bpmn-js'
-  import { ModdleElement, ViewerOptions } from 'diagram-js/lib/model'
-  import BpmnModdle from 'bpmn-moddle'
+  import { ViewerOptions } from 'diagram-js/lib/model'
+  import BpmnModdle, { ModdleElement } from 'bpmn-moddle'
 
   export default class BaseModeler extends Viewer {
     constructor(options?: ViewerOptions<Element>)
@@ -285,7 +285,7 @@ declare module 'bpmn-js/lib/draw/TextRenderer' {
 // 导入
 declare module 'bpmn-js/lib/import/Importer' {
   import Diagram from 'diagram-js'
-  import { ModdleElement } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'bpmn-moddle'
   import { DoneCallbackOpt } from 'bpmn-js/lib/BaseViewer'
 
   export function importBpmnDiagram(
@@ -296,12 +296,13 @@ declare module 'bpmn-js/lib/import/Importer' {
 }
 //
 declare module 'bpmn-js/lib/import/BpmnImporter' {
+  import { ModdleElement } from 'bpmn-moddle'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import ElementFactory from 'diagram-js/lib/core/ElementFactory'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
   import { Translate } from 'diagram-js/lib/i18n/translate'
-  import { Base, ModdleElement } from 'diagram-js/lib/model'
+  import { Base } from 'diagram-js/lib/model'
   import TextRenderer from 'bpmn-js/lib/draw/TextRenderer'
   import { ModuleConstructor } from 'didi'
 
@@ -335,7 +336,7 @@ declare module 'bpmn-js/lib/import/BpmnImporter' {
 // xml 树形结构遍历
 declare module 'bpmn-js/lib/import/BpmnTreeWalker' {
   import { Translate } from 'diagram-js/lib/i18n/translate'
-  import { ModdleElement } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'bpmn-moddle'
 
   export default class BpmnTreeWalker {
     constructor(handler, translate: Translate)
@@ -351,8 +352,8 @@ declare module 'bpmn-js/lib/features/modeling/Modeling' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import ElementFactory from 'diagram-js/lib/core/ElementFactory'
   import CommandStack from 'diagram-js/lib/command/CommandStack'
-  import { Base, Connection, Hints, Label, ModdleElement, Root, Shape } from 'diagram-js/lib/model'
-  import { Lane } from 'bpmn-moddle'
+  import { Base, Connection, Hints, Label, Root, Shape } from 'diagram-js/lib/model'
+  import { Lane, ModdleElement } from 'bpmn-moddle'
   import { ModelingHandler } from 'diagram-js/lib/features/modeling/Modeling'
   import { Bounds } from 'diagram-js/lib/core/Canvas'
   import Rules from 'diagram-js/lib/features/rules/Rules'
@@ -389,14 +390,14 @@ declare module 'bpmn-js/lib/features/modeling/Modeling' {
 }
 // bpmn DI 元素工厂
 declare module 'bpmn-js/lib/features/modeling/BpmnFactory' {
-  import { Moddle } from 'moddle'
+  import BpmnModdle from 'bpmn-moddle'
   import { Base } from 'diagram-js/lib/model'
-  import { ModdleElement } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'bpmn-moddle'
   import { ModuleConstructor } from 'didi'
 
   export default class BpmnFactory extends ModuleConstructor {
-    constructor(moddle: Moddle)
-    protected _model: Moddle
+    constructor(moddle: BpmnModdle)
+    protected _model: BpmnModdle
     protected _needsId<E extends Base>(element: E): boolean
     protected _ensureId<E extends Base>(element: E): void
     create<E extends Base>(type: string, attrs?: Object): E & ModdleElement
@@ -427,8 +428,8 @@ declare module 'bpmn-js/lib/features/modeling/BpmnUpdater' {
   import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
   import ConnectionDocking from 'diagram-js/lib/layout/ConnectionDocking'
   import { Translate } from 'diagram-js/lib/i18n/translate'
-  import { Base, Connection, Label, ModdleElement, Shape } from 'diagram-js/lib/model'
-  import { Bounds } from 'diagram-js/lib/core/Canvas'
+  import { Base, Connection, Label, Shape } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'moddle'
 
   type Context = {
     shape: Shape
@@ -468,16 +469,16 @@ declare module 'bpmn-js/lib/features/modeling/BpmnUpdater' {
 // bpmn 元素实例工厂
 declare module 'bpmn-js/lib/features/modeling/ElementFactory' {
   import { default as DiagramElementFactory } from 'diagram-js/lib/core/ElementFactory'
-  import { Moddle } from 'moddle'
+  import BpmnModdle, { ModdleElement } from 'bpmn-moddle'
   import { Translate } from 'diagram-js/lib/i18n/translate'
   import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory.js'
-  import { Base, Connection, Label, ModdleElement, Root, Shape } from 'diagram-js/lib/model'
+  import { Base, Shape } from 'diagram-js/lib/model'
   import { Dimensions } from 'diagram-js/lib/core/Canvas'
 
   export default class ElementFactory extends DiagramElementFactory {
-    constructor(bpmnFactory: BpmnFactory, moddle: Moddle, translate: Translate)
+    constructor(bpmnFactory: BpmnFactory, moddle: BpmnModdle, translate: Translate)
     _bpmnFactory: BpmnFactory
-    _moddle: Moddle
+    _moddle: BpmnModdle
     _translate: Translate
 
     baseCreate: typeof DiagramElementFactory.prototype.create
@@ -624,8 +625,8 @@ declare module 'bpmn-js/lib/features/copy-paste/BpmnCopyPaste' {
 declare module 'bpmn-js/lib/features/copy-paste/ModdleCopy' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
-  import { Moddle } from 'moddle'
-  import { Base, ModdleElement } from 'diagram-js/lib/model'
+  import BpmnModdle, { ModdleElement } from 'bpmn-moddle'
+  import { Base } from 'diagram-js/lib/model'
   import { ModuleConstructor } from 'didi'
 
   /**
@@ -634,10 +635,10 @@ declare module 'bpmn-js/lib/features/copy-paste/ModdleCopy' {
    * moddleCopy.canSetCopiedProperty 事件的监听函数， 对元素实例与元素属性的可复制性进行校验
    */
   export default class ModdleCopy extends ModuleConstructor {
-    constructor(eventBus: EventBus, bpmnFactory: BpmnFactory, moddle: Moddle)
+    constructor(eventBus: EventBus, bpmnFactory: BpmnFactory, moddle: BpmnModdle)
     protected _bpmnFactory: BpmnFactory
     protected _eventBus: EventBus
-    protected _moddle: Moddle
+    protected _moddle: BpmnModdle
 
     /**
      * 将源元素的模型属性复制到目标元素。
@@ -788,11 +789,10 @@ declare module 'bpmn-js/lib/features/drilldown/DrilldownOverlayBehavior' {
 // 在生命周期钩子 `import.render.start` 触发时为具有折叠的子进程和所有dis在同一平面上的图创建新平面
 declare module 'bpmn-js/lib/features/drilldown/SubprocessCompatibility' {
   import EventBus from 'diagram-js/lib/core/EventBus'
-  import { Moddle } from 'moddle'
-  import { Definitions } from 'bpmn-moddle'
+  import BpmnModdle, { Definitions } from 'bpmn-moddle'
 
   export default class SubprocessCompatibility {
-    constructor(eventBus: EventBus, moddle: Moddle)
+    constructor(eventBus: EventBus, moddle: BpmnModdle)
 
     protected _definitions: Definitions | undefined
     protected _processToDiagramMap: Record<string, any> | undefined
@@ -1036,19 +1036,19 @@ declare module 'bpmn-js/lib/features/popup-menu/ReplaceMenuProvider' {
   import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
   import PopupMenu, { PopupMenuEntry } from 'diagram-js/lib/features/popup-menu/PopupMenu'
   import Modeling from 'bpmn-js/lib/features/modeling/Modeling'
-  import { Moddle } from 'moddle'
   import BpmnReplace from 'bpmn-js/lib/features/replace/BpmnReplace'
   import Rules from 'diagram-js/lib/features/rules/Rules'
   import { Translate } from 'diagram-js/lib/i18n/translate'
   import { Base } from 'diagram-js/lib/model'
   import { ReplaceOption } from 'bpmn-js/lib/features/replace/ReplaceOptions'
+  import BpmnModdle from 'bpmn-moddle'
 
   export default class ReplaceMenuProvider extends ModuleConstructor {
     constructor(
       bpmnFactory: BpmnFactory,
       popupMenu: PopupMenu,
       modeling: Modeling,
-      moddle: Moddle,
+      moddle: BpmnModdle,
       bpmnReplace: BpmnReplace,
       rules: Rules,
       translate: Translate
@@ -1056,7 +1056,7 @@ declare module 'bpmn-js/lib/features/popup-menu/ReplaceMenuProvider' {
     protected _bpmnFactory: BpmnFactory
     protected _popupMenu: PopupMenu
     protected _modeling: Modeling
-    protected _moddle: Moddle
+    protected _moddle: BpmnModdle
     protected _bpmnReplace: BpmnReplace
     protected _rules: Rules
     protected _translate: Translate
@@ -1313,7 +1313,8 @@ declare module 'bpmn-js/lib/features/snapping/BpmnCreateMoveSnapping' {
 
 /*************************************** utils 相关函数 ****************************************/
 declare module 'bpmn-js/lib/draw/bpmnRenderUtil' {
-  import { Base, ModdleElement, Shape } from 'diagram-js/lib/model'
+  import { Base, Shape } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'moddle'
 
   import { getDi } from 'bpmn-js/lib/util/ModelUtil'
   export { getDi }
@@ -1395,21 +1396,22 @@ declare module 'bpmn-js/lib/features/popup-menu/util/TypeUtil' {
 }
 
 declare module 'bpmn-js/lib/import/Util' {
-  import { ModdleElement } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'bpmn-moddle'
 
   // 根据元素返回标签，无参数时返回 <null>，否则返回 `<${e.$type} ${e.id ? e.id : ''} />`
   export function elementToString(e?: ModdleElement): string
 }
 
 declare module 'bpmn-js/lib/util/CompatibilityUtil' {
-  import { ModdleElement } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'bpmn-moddle'
 
   export function wrapForCompatibility(api: Function): Function
   export function ensureCompatDiRef(businessObject: ModdleElement): void
 }
 
 declare module 'bpmn-js/lib/util/DiUtil' {
-  import { Base, ModdleElement } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'bpmn-moddle'
+  import { Base } from 'diagram-js/lib/model'
 
   export function isExpanded(element: Base, di?: ModdleElement): boolean
   export function isInterrupting(element: Base | ModdleElement): boolean
@@ -1421,7 +1423,8 @@ declare module 'bpmn-js/lib/util/DiUtil' {
 }
 
 declare module 'bpmn-js/lib/util/DrilldownUtil' {
-  import { Base, ModdleElement } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'bpmn-moddle'
+  import { Base } from 'diagram-js/lib/model'
 
   export const planeSuffix: '_plane'
   //获取 plane 的主要形状ID
@@ -1435,7 +1438,8 @@ declare module 'bpmn-js/lib/util/DrilldownUtil' {
 }
 
 declare module 'bpmn-js/lib/util/LabelUtil' {
-  import { Base, ModdleElement, Point, Shape } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'bpmn-moddle'
+  import { Base, Point, Shape } from 'diagram-js/lib/model'
   import { Bounds } from 'diagram-js/lib/core/Canvas'
   export type DefaultLabelSize = {
     width: 90
@@ -1459,7 +1463,8 @@ declare module 'bpmn-js/lib/util/LabelUtil' {
 }
 
 declare module 'bpmn-js/lib/util/ModelUtil' {
-  import { Base, ModdleElement } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'bpmn-moddle'
+  import { Base } from 'diagram-js/lib/model'
 
   export function is(element: Base | ModdleElement, type: string): boolean
 

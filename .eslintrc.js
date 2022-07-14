@@ -22,22 +22,22 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
     'vue/custom-event-name-casing': 'off',
-    // 'no-use-before-define': 'off',
-    'no-use-before-define': [
-      'error',
-      {
-        functions: false,
-        classes: true
-      }
-    ],
-    // '@typescript-eslint/no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': [
-      'error',
-      {
-        functions: false,
-        classes: true
-      }
-    ],
+    'no-use-before-define': 'off',
+    // 'no-use-before-define': [
+    //   'error',
+    //   {
+    //     functions: false,
+    //     classes: true
+    //   }
+    // ],
+    '@typescript-eslint/no-use-before-define': 'off',
+    // '@typescript-eslint/no-use-before-define': [
+    //   'error',
+    //   {
+    //     functions: false,
+    //     classes: true
+    //   }
+    // ],
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',

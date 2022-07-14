@@ -858,7 +858,7 @@ declare module 'diagram-js/lib/draw/Styles' {
 // 元素模型定义
 declare module 'diagram-js/lib/model' {
   import { KeyboardConfig } from 'diagram-js/lib/features/keyboard/Keyboard'
-  import { Descriptor, Moddle } from 'moddle'
+  import { ModdleElement } from 'moddle'
   import { ModuleDeclaration } from 'didi'
 
   export interface Hints {
@@ -896,23 +896,6 @@ declare module 'diagram-js/lib/model' {
     y: number
     width: number
     height: number
-  }
-
-  export abstract class ModdleBase {
-    get(name: string): any
-    set(name: string, value: any): void
-  }
-
-  export abstract class ModdleElement extends ModdleBase {
-    static $model: Moddle
-    static $descriptor: Descriptor
-    readonly $type: string
-    $attrs: any
-    $parent: ModdleElement
-    $instanceOf: ((type: string) => boolean) & ((element: Base, type: string) => boolean)
-    di?: any;
-    [field: string]: any
-    static hasType(element: ModdleElement, type?: string): boolean
   }
 
   export interface Base extends ModdleElement {
@@ -965,6 +948,15 @@ declare module 'diagram-js/lib/model' {
     }
     [field: string]: any
   }
+
+  export type CreateTypes = {
+    connection: Connection
+    shape: Shape
+    label: Label
+    root: Root
+  }
+
+  export type create = <T extends keyof CreateTypes>(type: T, attrs: Object) => CreateTypes[T]
 }
 /************************************** Diagram layout 布局模块 *****************************************/
 // 基本连接布局实现，通过直接连接 mid (源中间位置) 和 mid (目标中间位置) 来布局连接。

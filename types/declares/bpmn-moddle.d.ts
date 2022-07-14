@@ -1,6 +1,7 @@
 declare module 'bpmn-moddle' {
-  import { Moddle, Package } from 'moddle'
-  import { ModdleElement } from 'diagram-js/lib/model'
+  import { Moddle, Package, ModdleElement } from 'moddle'
+
+  export { Moddle, Package, ModdleElement }
 
   type ParseResult = {
     rootElement: ModdleElement
