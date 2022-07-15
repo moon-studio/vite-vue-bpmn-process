@@ -533,11 +533,11 @@ declare module 'diagram-js/lib/core/EventBus' {
   import { Viewbox } from 'diagram-js/lib/core/Canvas'
 
   export interface InternalEvent {
-    cancelBubble?: boolean
-    defaultPrevented?: boolean
     init(data: any): void
     stopPropagation(): void
     preventDefault(): void
+    cancelBubble?: boolean
+    defaultPrevented?: boolean
     [field: string]: any
   }
 
@@ -573,7 +573,7 @@ declare module 'diagram-js/lib/core/EventBus' {
   }
 
   export default class EventBus {
-    private _listeners: Record<string, EventCallback<string, Base>[]>
+    private _listeners: Record<string, EventCallback<string, Base>[] | null>
 
     /**
      * 注册一个事件监听器
@@ -649,7 +649,7 @@ declare module 'diagram-js/lib/core/EventBus' {
     protected _invokeListener(event: string, args: any[], listener: any): void
     protected _addListener(event: string, newListener: any): void
     protected _getListeners(name: string): void
-    protected _setListeners(name: string): void
+    protected _setListeners(name: string, listener: any): void
     protected _removeListener(event: string, callback: () => void): void
   }
 }
@@ -684,9 +684,35 @@ declare module 'diagram-js/lib/command/CommandStack' {
     newValues: Record<string, any>
   }
   export type Command = string
+  export type Action = {
+    id?: number
+    command: Command
+    context: CommandContext
+  }
+
+  export type TriggerType = 'undo' | 'redo' | 'clear' | 'execute' | null
+  export type CurrentExecution = {
+    actions: Required<Action>[]
+    dirty: Base[]
+    trigger: TriggerType
+    atomic: boolean
+  }
+  export type StackItem = any
 
   export default class CommandStack extends ModuleConstructor {
     constructor(eventBus: EventBus, injector: Injector)
+    // 所有已注册的命令处理程序 Map
+    _handlerMap: Record<string, CommandHandler>
+    // 操作记录栈
+    _stack: StackItem[]
+    // 当前步骤下标
+    _stackIdx: number
+    //
+    _currentExecution: CurrentExecution
+    _injector: Injector
+    _eventBus: EventBus
+    _uid: number
+
     execute(command: Command, context: Object): void
     canExecute(command: Command, context: Object): boolean
     clear(emit?: boolean): void
@@ -696,6 +722,30 @@ declare module 'diagram-js/lib/command/CommandStack' {
     registerHandler(command: Command, handler: CommandHandler | Function): void
     canUndo(): boolean
     canRedo(): boolean
+
+    _getRedoAction(): StackItem | undefined
+    _getUndoAction(): StackItem | undefined
+
+    _internalUndo(action): void
+    _fire<O extends Object>(
+      command: Command,
+      qualifier: string | O,
+      event?: O
+    ): ReturnType<typeof EventBus.prototype.fire>
+    _createId(): number
+    // 执行 fn
+    _atomicDo(fn: Function): void | never
+    _internalExecute(action: Action, redo?: boolean): void
+    // 插入操作记录
+    _pushAction(action: Action): void
+    // 撤销操作记录，如果取出后当前 actions 记录数组为空，则触发 elements.changed 与 commandStack.changed 事件
+    _popAction(): void
+    // 插入元素脏值记录
+    _markDirty(elements?: Base[])
+    _executedAction(action: Action, redo?: boolean): void
+    _revertedAction(action?: Action): void
+    _getHandler(command: Command): CommandHandler
+    _setHandler(command: Command, handler: CommandHandler): void
   }
 }
 
@@ -806,16 +856,13 @@ declare module 'diagram-js/lib/draw/BaseRenderer' {
   import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
 
-  export default abstract class BaseRenderer extends ModuleConstructor {
+  export default class BaseRenderer extends ModuleConstructor {
     constructor(eventBus: EventBus, renderPriority?: number)
-    abstract canRender<E extends Base>(element: E): boolean
-    abstract drawShape<E extends Shape>(visuals: SVGElement, element: E): SVGRectElement
-    abstract drawConnection<E extends Connection>(
-      visuals: SVGElement,
-      connection: E
-    ): SVGPolylineElement
-    abstract getShapePath<E extends Shape>(shape: E): string | undefined
-    abstract getConnectionPath<E extends Connection>(connection: E): string | undefined
+    canRender<E extends Base>(element: E): boolean
+    drawShape<E extends Shape>(visuals: SVGElement, element: E): SVGRectElement
+    drawConnection<E extends Connection>(visuals: SVGElement, connection: E): SVGPolylineElement
+    getShapePath<E extends Shape>(shape: E): string | undefined
+    getConnectionPath<E extends Connection>(connection: E): string | undefined
   }
 }
 // 继承 BaseRenderer 的默认渲染器
@@ -826,7 +873,7 @@ declare module 'diagram-js/lib/draw/DefaultRenderer' {
   import { Connection, Shape } from 'diagram-js/lib/model'
   import { ModuleConstructor } from 'didi'
 
-  export default class DefaultRenderer extends ModuleConstructor implements BaseRenderer {
+  export default class DefaultRenderer extends BaseRenderer {
     constructor(eventBus: EventBus, styles: Styles, DEFAULT_RENDER_PRIORITY?: number)
     CONNECTION_STYLE: Traits
     SHAPE_STYLE: Traits

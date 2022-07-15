@@ -4,12 +4,13 @@
   </a>
 </p>
 
-<div align="center">
-    <h1>Vite Vue Bpmn Process Editor</h1>
-    <br />
-    English | <a href="https://github.com/moon-studio/vite-vue-bpmn-process/blob/main/README.zh-CN.md">中文</a>
-    <br />
-</div>
+<h1 align="center">
+    Vite Vue Bpmn Process Editor
+</h1>
+
+<p align="center">
+    <a href="https://github.com/moon-studio/vite-vue-bpmn-process/blob/main/README.md">English</a> | 中文
+</p>
 
 <p align="center">
 <img alt="GitHub stars" src="https://img.shields.io/github/stars/moon-studio/vite-vue-bpmn-process?style=flat&logo=github" />
