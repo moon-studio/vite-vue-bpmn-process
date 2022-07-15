@@ -858,7 +858,7 @@ declare module 'diagram-js/lib/draw/Styles' {
 // 元素模型定义
 declare module 'diagram-js/lib/model' {
   import { KeyboardConfig } from 'diagram-js/lib/features/keyboard/Keyboard'
-  import { ModdleElement } from 'moddle'
+  import { ModdleElement } from 'bpmn-moddle'
   import { ModuleDeclaration } from 'didi'
 
   export interface Hints {
@@ -916,6 +916,7 @@ declare module 'diagram-js/lib/model' {
     attachers: Shape[]
     collapsed?: boolean
     hidden?: boolean
+    isFrame?: boolean
     x?: number
     y?: number
     host?: Shape

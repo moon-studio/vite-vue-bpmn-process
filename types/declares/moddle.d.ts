@@ -6,16 +6,16 @@ declare module 'moddle' {
   }
 
   export class Base {
-    get: typeof Properties.prototype.get
-    set: typeof Properties.prototype.set
+    get(name: string): ReturnType<typeof Properties.prototype.get>
+    set(name: string, value: any): ReturnType<typeof Properties.prototype.set>
     $instanceOf: typeof Moddle.prototype.hasType
   }
 
   export class ModdleElement extends Base {
     constructor(attrs: Object)
     readonly $type: string
-    $attrs: Object
-    $parent: Object;
+    $attrs: Object | {}
+    $parent: any;
     [field: string]: any
 
     static $model: Moddle
@@ -179,7 +179,7 @@ declare module 'moddle' {
     model: Moddle
 
     set(target: ModdleElement, name: string, value: any): void
-    get(target: ModdleElement, name: string): void
+    get(target: ModdleElement, name: string): any
     define(target: ModdleElement, name: string, options: PropertyDescriptor): void
     defineDescriptor(target: Omit<ModdleElement, '$descriptor'>, descriptor: Descriptor): void
     defineModel(target: Omit<ModdleElement, '$model'>, model: ModdleElement): void

@@ -1,4 +1,5 @@
-import { Base, ModdleElement } from 'diagram-js/lib/model'
+import { Base } from 'diagram-js/lib/model'
+import { ModdleElement } from 'bpmn-moddle'
 import { getBusinessObject, is } from 'bpmn-js/lib/util/ModelUtil'
 import editor from '@/store/editor'
 import modeler from '@/store/modeler'

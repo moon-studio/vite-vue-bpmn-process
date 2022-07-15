@@ -1,5 +1,6 @@
 import modelerStore from '@/store/modeler'
-import { Base, ModdleElement } from 'diagram-js/lib/model'
+import { Base } from 'diagram-js/lib/model'
+import { ModdleElement } from 'bpmn-moddle'
 import { getBusinessObject, is } from 'bpmn-js/lib/util/ModelUtil'
 import { isAny } from 'bpmn-js/lib/features/modeling/util/ModelingUtil'
 import { add as collectionAdd } from 'diagram-js/lib/util/Collections'

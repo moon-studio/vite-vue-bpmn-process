@@ -1,4 +1,5 @@
-import { Base, Connection, ModdleElement } from 'diagram-js/lib/model'
+import { Base, Connection } from 'diagram-js/lib/model'
+import { ModdleElement } from 'bpmn-moddle'
 import { getBusinessObject, is, isAny } from 'bpmn-js/lib/util/ModelUtil'
 import { getEventDefinition } from '@/utils/BpmnImplementationType'
 import modeler from '@/store/modeler'

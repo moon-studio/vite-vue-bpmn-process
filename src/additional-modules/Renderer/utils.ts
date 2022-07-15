@@ -1,6 +1,7 @@
 import { every, some, isObject } from 'min-dash'
 import { append as svgAppend, attr as svgAttr, create as svgCreate } from 'tiny-svg'
-import { Base, ModdleElement } from 'diagram-js/lib/model'
+import { Base } from 'diagram-js/lib/model'
+import { ModdleElement } from 'bpmn-moddle'
 
 //////////////////// 校验部分
 export function isTypedEvent(event: ModdleElement, eventDefinitionType: string, filter?): boolean {

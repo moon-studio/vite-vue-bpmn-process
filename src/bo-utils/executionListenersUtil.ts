@@ -1,5 +1,6 @@
 import { getBusinessObject, is, isAny } from 'bpmn-js/lib/util/ModelUtil'
-import { Base, ModdleElement } from 'diagram-js/lib/model'
+import { Base } from 'diagram-js/lib/model'
+import { ModdleElement } from 'bpmn-moddle'
 import {
   getExtensionElementsList,
   addExtensionElements,

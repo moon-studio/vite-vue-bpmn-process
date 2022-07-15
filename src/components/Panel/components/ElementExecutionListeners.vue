@@ -111,7 +111,8 @@
   import { defineComponent, h, markRaw, ref, computed, nextTick, onMounted } from 'vue'
   import { FormInst, FormRules, DataTableColumns, NButton } from 'naive-ui'
   import modeler from '@/store/modeler'
-  import { Base, ModdleElement } from 'diagram-js/lib/model'
+  import { ModdleElement } from 'bpmn-moddle'
+  import { Base } from 'diagram-js/lib/model'
   import {
     addExecutionListener,
     getDefaultEvent,
