@@ -9,7 +9,7 @@
 </h1>
 
 <p align="center">
-    <a href="https://github.com/moon-studio/vite-vue-bpmn-process/blob/main/README.md">English</a> | 中文
+    English | <a href="https://github.com/moon-studio/vite-vue-bpmn-process/blob/main/README.md">中文</a>
 </p>
 
 <p align="center">
@@ -26,15 +26,15 @@
 <img src="https://img.shields.io/badge/Bpmn.js-9.2.2-orange" alt="" />
 </p>
 
-## 项目简介
+## Description
 
-Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-js)， [Vite](https://vitejs.dev)， [Vue.js 3.x](https://vuejs.org/)。
+A Vite Vue Bpmn Process Editor based on [Bpmn.js](https://github.com/bpmn-io/bpmn-js), [Vite](https://vitejs.dev), [Vue.js 3.x](https://vuejs.org/).
 
-实现了Bpmn.js和Diagram.js的typescript类型声明，typescript可以用来在编辑器中编写代码。
+The typescript type declaration of Bpmn.js and Diagram.js is implemented, and typescript can be used to write code in the editor.
 
-## 友情赞助
+## Friendship sponsorship
 
-生活不易，猪猪叹气。如果对您有帮助，您可以请我喝杯咖啡。十分感谢~ ~ ~ ~
+Life is not easy, pig sighs sighs. If it helps you, you can buy me a cup of coffee. Thanks ( After all, this project has been written for several months, and the typescript part is really too difficult to write. )~~~~
 
 <div align="left">
 <img alt="微信" src="/public/wechat.jpg" width="240" style="display: inline-block"/>
@@ -42,7 +42,7 @@ Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-j
 </div>
 
 
-## 结构目录
+## Directory
 
 ```
 |-- public
