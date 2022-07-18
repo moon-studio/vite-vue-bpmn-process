@@ -1,9 +1,10 @@
-import { computed, defineComponent } from 'vue'
-import { NButton, NButtonGroup, NPopover, useDialog } from 'naive-ui'
+import { computed, defineComponent, ref } from 'vue'
+import { NButton, NButtonGroup, NInput, NPopover, useDialog } from 'naive-ui'
 import LucideIcon from '@/components/common/LucideIcon.vue'
 import editor from '@/store/editor'
 import modeler from '@/store/modeler'
 import ToggleMode from 'bpmn-js-token-simulation/lib/features/toggle-mode/modeler/ToggleMode'
+import EventBus from 'diagram-js/lib/core/EventBus'
 
 const ExternalTools = defineComponent({
   name: 'ExternalTools',
@@ -18,7 +19,7 @@ const ExternalTools = defineComponent({
     }
 
     const mockSimulation = () => {
-      modeler().getModeler!.get<ToggleMode>('toggleMode').toggleMode()
+      moduleStore.getModeler!.get<ToggleMode>('toggleMode').toggleMode()
     }
 
     let lintModule: any | null = null
@@ -78,6 +79,40 @@ const ExternalTools = defineComponent({
       })
     }
 
+    const eventsModel = useDialog()
+    const listeners = ref<string[]>([])
+    const listenerFilter = ref<string>('')
+    const visibleListeners = computed(() =>
+      listeners.value.filter((i) => i.includes(listenerFilter.value))
+    )
+    const openEventsModel = () => {
+      const eventBus = moduleStore.getModeler!.get<EventBus>('eventBus')
+      listenerFilter.value = ''
+      listeners.value = Object.keys(eventBus._listeners).sort()
+
+      eventsModel.create({
+        title: '事件列表',
+        showIcon: false,
+        content: () => (
+          <div class="event-listeners-box">
+            <div class="listener-search">
+              <NInput v-model={[listenerFilter.value, 'value']} clearable={true}></NInput>
+            </div>
+            <div class="event-listeners-box">
+              {visibleListeners.value &&
+                visibleListeners.value.map((name, key) => {
+                  return (
+                    <p class="listener-item">
+                      {key + 1}：{name}
+                    </p>
+                  )
+                })}
+            </div>
+          </div>
+        )
+      })
+    }
+
     return () => (
       <NButtonGroup>
         <NPopover
@@ -86,6 +121,16 @@ const ExternalTools = defineComponent({
             trigger: () => (
               <NButton onClick={mockSimulation}>
                 <LucideIcon name="Bot" size={16}></LucideIcon>
+              </NButton>
+            )
+          }}
+        ></NPopover>
+        <NPopover
+          v-slots={{
+            default: () => '查看bpmn事件',
+            trigger: () => (
+              <NButton onClick={openEventsModel}>
+                <LucideIcon name="Podcast" size={16}></LucideIcon>
               </NButton>
             )
           }}

@@ -573,7 +573,7 @@ declare module 'diagram-js/lib/core/EventBus' {
   }
 
   export default class EventBus {
-    private _listeners: Record<string, EventCallback<string, Base>[] | null>
+    _listeners: Record<string, EventCallback<string, Base>[] | null>
 
     /**
      * 注册一个事件监听器
