@@ -47,16 +47,36 @@ Life is not easy, pig sighs sighs. If it helps you, you can buy me a cup of coff
 ```
 |-- public
 |-- src
+|   |-- additional-functions                       扩展的事件函数方法，包括右键事件等
+|   |-- additional-modules                         bpmn.js 自定义模块（扩展与重写）
+|       |-- AutoPlace
+|       |-- ContextPad
+|       |-- Lint
+|       |-- Palette
+|       |-- PopupMenu
+|       |-- Renderer
+|       |-- Rules
+|       |-- Translate
 |   |-- bo-utils                                   businessObject 相关属性处理函数
 |   |-- components                                 组件 与 bpmn.js 自定义模块
-|       |-- AddiModules                            bpmn.js 自定义模块（扩展与重写）
+|       |-- common                                 公共组件
 |       |-- Designer                               流程设计器
-|       |-- ModdleExtensions                       bpmn.js 扩展解析文件
 |       |-- Palette                                重写的 bpmn.js 的 Palette 组件
 |       |-- Panel                                  重写的 bpmn.js 的 Panel 组件
 |       |-- Setting                                项目配置表单组件
 |       |-- Toolbar                                编辑器工具栏组件
+|   |-- bpmn-icons                                 bpmn 对应的图标文件 svg
 |   |-- config                                     项目配置文件
+|   |-- moddle-extensions                          bpmn.js 扩展解析文件
+|       |-- activiti.json                          
+|       |-- bpmn.json                              bpmn 基础元素和属性配置
+|       |-- camunda.json                           
+|       |-- flowable.json                          
+|       |-- miyue.json                             自定义扩展配置
+|       |-- zeebe.json                             zeebe 表单配置
+|   |-- store
+|       |-- editor
+|       |-- modeler
 |   |-- styles
 |       |-- camunda-penal.scss                     camunda 官方侧边栏样式
 |       |-- context-pad.scss                       bpmn.js 上下文菜单样式（扩展部分）
@@ -82,12 +102,15 @@ Life is not easy, pig sighs sighs. If it helps you, you can buy me a cup of coff
 |   |-- bpmn-moddle
 |   |-- declares
 |       |-- bpmn.d.ts                              bpmn.js 的类型声明文件
+|       |-- bpmn-js-bpmnlint.d.ts                  bpmn.js lint 模块
+|       |-- bpmn-js-token-simulation.d.ts          bpmn.js 流转模拟模块
 |       |-- bpmn-moddle.d.ts                       bpmn.js 的 moddle 类型声明文件
 |       |-- camunda-bpmn-moddle.d.ts               camunda 官方 moddle 类型声明文件
 |       |-- diagram.d.ts                           diagram.js 的类型声明文件
 |       |-- diagram-js-direct-editing.d.ts         diagram.js 的双击编辑类型声明文件
 |       |-- didi.d.ts                              [Nikku - didi](https://github.com/nikku/didi/blob/master/lib/index.d.ts)
 |       |-- moddle.d.ts                            moddle 的类型声明文件
+|       |-- object-refs.d.ts                       
 |   |-- editor
 |-- LICENSE
 |-- README.md
