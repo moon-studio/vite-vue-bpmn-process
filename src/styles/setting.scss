@@ -86,11 +86,11 @@
   background-position: center center;
   display: inline-block;
   &.wechat {
-    background-image: url('/wechat.jpg');
+    background-image: url('./wechat.jpg');
   }
   &.alipay {
     margin-left: 8px;
-    background-image: url('/alipay.png');
+    background-image: url('./alipay.png');
   }
 }
 
