@@ -9,7 +9,7 @@
 </h1>
 
 <p align="center">
-    <a href="https://github.com/moon-studio/vite-vue-bpmn-process/blob/main/README.md">English</a> | 中文
+    English | <a href="https://github.com/moon-studio/vite-vue-bpmn-process/blob/main/README.md">中文</a>
 </p>
 
 <p align="center">
@@ -26,15 +26,15 @@
 <img src="https://img.shields.io/badge/Bpmn.js-9.2.2-orange" alt="" />
 </p>
 
-## 项目简介
+## Description
 
-Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-js)， [Vite](https://vitejs.dev)， [Vue.js 3.x](https://vuejs.org/)。
+A Vite Vue Bpmn Process Editor based on [Bpmn.js](https://github.com/bpmn-io/bpmn-js), [Vite](https://vitejs.dev), [Vue.js 3.x](https://vuejs.org/).
 
-实现了Bpmn.js和Diagram.js的typescript类型声明，typescript可以用来在编辑器中编写代码。
+The typescript type declaration of Bpmn.js and Diagram.js is implemented, and typescript can be used to write code in the editor.
 
-## 友情赞助
+## Friendship sponsorship
 
-生活不易，猪猪叹气。如果对您有帮助，您可以请我喝杯咖啡。十分感谢~ ~ ~ ~
+Life is not easy, pig sighs sighs. If it helps you, you can buy me a cup of coffee. Thanks ( After all, this project has been written for several months, and the typescript part is really too difficult to write. )~~~~
 
 <div align="left">
 <img alt="微信" src="/public/wechat.jpg" width="240" style="display: inline-block"/>
@@ -42,21 +42,41 @@ Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-j
 </div>
 
 
-## 结构目录
+## Directory
 
 ```
 |-- public
 |-- src
+|   |-- additional-functions                       扩展的事件函数方法，包括右键事件等
+|   |-- additional-modules                         bpmn.js 自定义模块（扩展与重写）
+|       |-- AutoPlace
+|       |-- ContextPad
+|       |-- Lint
+|       |-- Palette
+|       |-- PopupMenu
+|       |-- Renderer
+|       |-- Rules
+|       |-- Translate
 |   |-- bo-utils                                   businessObject 相关属性处理函数
 |   |-- components                                 组件 与 bpmn.js 自定义模块
-|       |-- AddiModules                            bpmn.js 自定义模块（扩展与重写）
+|       |-- common                                 公共组件
 |       |-- Designer                               流程设计器
-|       |-- ModdleExtensions                       bpmn.js 扩展解析文件
 |       |-- Palette                                重写的 bpmn.js 的 Palette 组件
 |       |-- Panel                                  重写的 bpmn.js 的 Panel 组件
 |       |-- Setting                                项目配置表单组件
 |       |-- Toolbar                                编辑器工具栏组件
+|   |-- bpmn-icons                                 bpmn 对应的图标文件 svg
 |   |-- config                                     项目配置文件
+|   |-- moddle-extensions                          bpmn.js 扩展解析文件
+|       |-- activiti.json                          
+|       |-- bpmn.json                              bpmn 基础元素和属性配置
+|       |-- camunda.json                           
+|       |-- flowable.json                          
+|       |-- miyue.json                             自定义扩展配置
+|       |-- zeebe.json                             zeebe 表单配置
+|   |-- store
+|       |-- editor
+|       |-- modeler
 |   |-- styles
 |       |-- camunda-penal.scss                     camunda 官方侧边栏样式
 |       |-- context-pad.scss                       bpmn.js 上下文菜单样式（扩展部分）
@@ -82,12 +102,15 @@ Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-j
 |   |-- bpmn-moddle
 |   |-- declares
 |       |-- bpmn.d.ts                              bpmn.js 的类型声明文件
+|       |-- bpmn-js-bpmnlint.d.ts                  bpmn.js lint 模块
+|       |-- bpmn-js-token-simulation.d.ts          bpmn.js 流转模拟模块
 |       |-- bpmn-moddle.d.ts                       bpmn.js 的 moddle 类型声明文件
 |       |-- camunda-bpmn-moddle.d.ts               camunda 官方 moddle 类型声明文件
 |       |-- diagram.d.ts                           diagram.js 的类型声明文件
 |       |-- diagram-js-direct-editing.d.ts         diagram.js 的双击编辑类型声明文件
 |       |-- didi.d.ts                              [Nikku - didi](https://github.com/nikku/didi/blob/master/lib/index.d.ts)
 |       |-- moddle.d.ts                            moddle 的类型声明文件
+|       |-- object-refs.d.ts                       
 |   |-- editor
 |-- LICENSE
 |-- README.md

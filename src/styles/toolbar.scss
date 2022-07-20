@@ -38,6 +38,22 @@
   grid-template-columns: 160px auto;
 }
 
+.event-listeners-box {
+  width: 520px;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  .event-listeners-box {
+    margin-top: 16px;
+    flex: 1;
+    width: 520px;
+    overflow-y: auto;
+  }
+  .listener-item {
+    margin: 4px 0;
+  }
+}
+
 /* 修改弹窗宽度 */
 .n-dialog.n-modal {
   width: auto;
