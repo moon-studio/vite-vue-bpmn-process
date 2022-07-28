@@ -122,7 +122,10 @@ Life is not easy, pig sighs sighs. If it helps you, you can buy me a cup of coff
 |-- vite.config.js
 ```
 
-
 > 
 > Activiti moddle json: https://github.com/Activiti/activiti-modeling-app/blob/master/projects/process-editor/src/services/activiti.json
 
+
+## Licence
+
+This project is licensed under the Apache License 2.0 .

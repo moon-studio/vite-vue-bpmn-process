@@ -30,7 +30,7 @@
 
 Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-js)， [Vite](https://vitejs.dev)， [Vue.js 3.x](https://vuejs.org/)。
 
-实现了Bpmn.js和Diagram.js的typescript类型声明，typescript可以用来在编辑器中编写代码。
+实现了 Bpmn.js 和 Diagram.js 的 typescript 类型声明，typescript 可以用来在编辑器中编写代码。
 
 ## 友情赞助
 
@@ -121,8 +121,65 @@ Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-j
 |-- package.json
 |-- vite.config.js
 ```
-
-
-> 
+ 
 > Activiti moddle json: https://github.com/Activiti/activiti-modeling-app/blob/master/projects/process-editor/src/services/activiti.json
 
+## 当前功能
+
+### 1. 工具栏
+
+- [x] 导入文件
+- [x] 导出文件（xml, bpmn, svg）
+- [x] 预览文件字符串（xml, json）
+- [x] 元素对其（垂直上中下、水平左中右）
+- [x] 缩放
+- [x] 撤销恢复与重做
+- [x] 扩展功能（流程模拟，小地图，快捷键提示，bpmn 事件查询）
+
+### 2. 编辑器
+
+- [x] 自定义流程id与名称
+- [x] 可选流程引擎（camunda，activiti，flowable）
+- [x] 动态背景设置
+- [x] 自定义 PaletteProvider
+- [x] 自定义 Renderer
+- [x] 自定义 ContentPadProvider
+- [x] 自定义 Rules
+- [x] 自定义 ElementFactory
+- [x] 扩展右键菜单
+- [ ] 自定义 Overlays
+- [ ] 扩展 Tooltip
+- [ ] 部分元素高亮
+
+### 3. 属性面板
+
+- [x] 基础信息（id, name, version, executable ...）
+- [x] 附件文档（documentation）
+- [x] 执行作业
+- [x] 异步配置
+- [x] 流程启动项
+- [x] 扩展属性
+- [x] 执行监听器
+- [x] 流转条件
+- [ ] 任务监听器
+- [ ] 任务多实例（会签、或签）
+
+## 界面预览
+
+![img.png](docs/img.png)
+
+![img_1.png](docs/img_1.png)
+
+![img_2.png](docs/img_2.png)
+
+![img_3.png](docs/img_3.png)
+
+![img_4.png](docs/img_4.png)
+
+![img_5.png](docs/img_5.png)
+
+![img_6.png](docs/img_6.png)
+
+## Licence
+
+This project is licensed under the Apache License 2.0 .
