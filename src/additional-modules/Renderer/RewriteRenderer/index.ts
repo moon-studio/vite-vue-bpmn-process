@@ -1,9 +1,9 @@
-import RewriteRendererProvider from './RewriteRendererProvider'
+import RewriteRenderer from './RewriteRenderer'
 import { ModuleDeclaration } from 'didi'
 
 const rewriteRenderer: ModuleDeclaration = {
   __init__: ['bpmnRenderer'],
-  bpmnRenderer: ['type', RewriteRendererProvider]
+  bpmnRenderer: ['type', RewriteRenderer]
 }
 
 export default rewriteRenderer

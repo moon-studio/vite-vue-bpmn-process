@@ -12,7 +12,9 @@ import {
   append as svgAppend,
   attr as svgAttr,
   classes as svgClasses,
-  create as svgCreate
+  create as svgCreate,
+  select as svgSelect,
+  on as svgOn
 } from 'tiny-svg'
 import Ids from 'ids'
 import { assign, forEach, isObject } from 'min-dash'
@@ -36,6 +38,8 @@ import {
 } from 'bpmn-js/lib/draw/BpmnRenderUtil.js'
 import { getLabel } from 'bpmn-js/lib/features/label-editing/LabelUtil'
 import { isEventSubProcess, isExpanded } from 'bpmn-js/lib/util/DiUtil'
+import InteractionEvents from 'diagram-js/lib/features/interaction-events/InteractionEvents'
+import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
 
 const RENDERER_IDS = new Ids()
 const TASK_BORDER_RADIUS = 10
@@ -44,10 +48,11 @@ const DEFAULT_FILL_OPACITY = 0.95,
   HIGH_FILL_OPACITY = 0.35
 const ELEMENT_LABEL_DISTANCE = 10
 
-class RewriteRendererProvider extends BaseRenderer {
+class RewriteRenderer extends BaseRenderer {
   public _renderer: (type: string) => RendererHandler
   public _drawPath: (parentGfx: SVGElement, d: string, attrs?: Object) => SVGPathElement
   public handlers: Record<string, RendererHandler>
+  public _elementRegistry: undefined | ElementRegistry
   constructor(
     config: Object | null,
     eventBus: EventBus,
@@ -55,10 +60,13 @@ class RewriteRendererProvider extends BaseRenderer {
     pathMap: PathMap,
     canvas: Canvas,
     textRenderer: TextRenderer,
+    elementRegistry: ElementRegistry,
+    interactionEvents: InteractionEvents,
     priority?: number
   ) {
     super(eventBus, priority)
 
+    this._elementRegistry = elementRegistry
     const presetColor = {
       defaultFillColor: '#ffffff',
       defaultStartEventColor: '#61c071',
@@ -506,6 +514,38 @@ class RewriteRendererProvider extends BaseRenderer {
       svgAppend(parentGfx, text)
 
       return text
+    }
+
+    function renderButton(parentGfx, text, options) {
+      const button = svgCreate('rect')
+      const attrs = computeStyle(options, {
+        stroke: 'black',
+        strokeWidth: 2,
+        fill: 'white'
+      })
+      const offset = 4
+
+      svgAttr(button, {
+        x: 40,
+        y: 8,
+        width: 60 - offset * 2,
+        height: 36 - offset * 2,
+        rx: offset,
+        ry: offset
+      })
+      svgAttr(button, attrs)
+
+      svgAppend(parentGfx, button)
+      svgOn(
+        button,
+        'click',
+        function (event) {
+          event.stopPropagation()
+          alert('task button click')
+        },
+        false
+      )
+      return button
     }
 
     function renderEmbeddedLabel(parentGfx, element, align) {
@@ -1108,6 +1148,8 @@ class RewriteRendererProvider extends BaseRenderer {
           fill: getStrokeColor(element, defaultTaskColor),
           stroke: getStrokeColor(element, defaultTaskColor)
         })
+
+        renderButton(parentGfx, '1111', {})
 
         return task
       },
@@ -2013,15 +2055,25 @@ class RewriteRendererProvider extends BaseRenderer {
 
     return getRectPath(shape)
   }
+
+  public setElementColors(element: Shape | string, colors: object): void {
+    const svg = this._elementRegistry?.getGraphics(element)
+    if (!svg) return
+    const paths = svgSelect(svg, '.djs-visual')
+    // @ts-ignore
+    paths && paths.childNodes.forEach((el) => svgAttr(el, colors))
+  }
 }
 
-RewriteRendererProvider.$inject = [
+RewriteRenderer.$inject = [
   'config.bpmnRenderer',
   'eventBus',
   'styles',
   'pathMap',
   'canvas',
-  'textRenderer'
+  'textRenderer',
+  'elementRegistry',
+  'interactionEvents'
 ]
 
-export default RewriteRendererProvider
+export default RewriteRenderer
