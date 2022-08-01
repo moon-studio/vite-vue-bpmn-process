@@ -584,6 +584,7 @@ declare module 'bpmn-js/lib/features/context-pad/ContextPadProvider' {
       priority?: number
     )
 
+    _config: any
     _contextPad: ContextPad
     _modeling: Modeling
     _elementFactory: ElementFactory
