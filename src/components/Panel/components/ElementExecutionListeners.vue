@@ -22,7 +22,7 @@
     <n-modal
       v-model:show="modelVisible"
       preset="dialog"
-      title="添加扩展属性"
+      title="添加执行监听器"
       :style="{ width: '640px' }"
     >
       <n-form
