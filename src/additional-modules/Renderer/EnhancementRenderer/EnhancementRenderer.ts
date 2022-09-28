@@ -8,7 +8,7 @@ import renderEventContent from '@/additional-modules/Renderer/EnhancementRendere
 import { append as svgAppend, attr as svgAttr, create as svgCreate } from 'tiny-svg'
 import { drawCircle } from '@/additional-modules/Renderer/utils'
 
-class EnhancementRendererProvider extends BpmnRenderer {
+class EnhancementRenderer extends BpmnRenderer {
   _styles: Styles
   constructor(
     config: any,
@@ -57,7 +57,7 @@ class EnhancementRendererProvider extends BpmnRenderer {
   }
 }
 
-EnhancementRendererProvider.$inject = [
+EnhancementRenderer.$inject = [
   'config.bpmnRenderer',
   'eventBus',
   'styles',
@@ -66,4 +66,4 @@ EnhancementRendererProvider.$inject = [
   'textRenderer'
 ]
 
-export default EnhancementRendererProvider
+export default EnhancementRenderer

@@ -471,7 +471,7 @@ declare module 'bpmn-js/lib/features/modeling/ElementFactory' {
   import { default as DiagramElementFactory } from 'diagram-js/lib/core/ElementFactory'
   import BpmnModdle, { ModdleElement } from 'bpmn-moddle'
   import { Translate } from 'diagram-js/lib/i18n/translate'
-  import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory.js'
+  import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
   import { Base, Shape } from 'diagram-js/lib/model'
   import { Dimensions } from 'diagram-js/lib/core/Canvas'
 
@@ -584,6 +584,7 @@ declare module 'bpmn-js/lib/features/context-pad/ContextPadProvider' {
       priority?: number
     )
 
+    _config: any
     _contextPad: ContextPad
     _modeling: Modeling
     _elementFactory: ElementFactory

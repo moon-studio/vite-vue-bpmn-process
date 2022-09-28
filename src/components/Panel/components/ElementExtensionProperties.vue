@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-  import { h, defineComponent, toRaw } from 'vue'
+  import { h, defineComponent, toRaw, markRaw } from 'vue'
   import { mapState } from 'pinia'
   import modelerStore from '@/store/modeler'
   import { Base } from 'diagram-js/lib/model'
@@ -124,10 +124,11 @@
         this.modelVisible = false
         await this.$nextTick()
         this.newProperty = { name: '', value: '' }
-        ;(this.extensionsRaw as any[]) = getExtensionProperties(this.getActive as Base)
+        ;(this.extensionsRaw as any[]) = markRaw(getExtensionProperties(this.getActive as Base))
         this.extensions = JSON.parse(JSON.stringify(this.extensionsRaw))
       },
       removeProperty(propIndex: number) {
+        console.log(this.getActive, propIndex)
         removeExtensionProperty(this.getActive as Base, this.extensionsRaw[propIndex])
         this.reloadExtensionProperties()
       },

@@ -32,7 +32,7 @@ const Aligns = defineComponent({
       if (modeling && selection) {
         const SelectedElements = selection.get()
         if (!SelectedElements || SelectedElements.length <= 1) {
-          return window.__messageBox.warning('请按住 Ctrl 键选择多个元素对齐')
+          return window.__messageBox.warning('请按住 Shift 键选择多个元素对齐')
         }
         align.trigger(SelectedElements, tag)
       }

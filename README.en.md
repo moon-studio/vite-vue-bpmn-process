@@ -32,15 +32,20 @@ A Vite Vue Bpmn Process Editor based on [Bpmn.js](https://github.com/bpmn-io/bpm
 
 The typescript type declaration of Bpmn.js and Diagram.js is implemented, and typescript can be used to write code in the editor.
 
+> Gitee: https://gitee.com/MiyueSC/vite-vue-bpmn-process
+
 ## Friendship sponsorship
 
 Life is not easy, pig sighs sighs. If it helps you, you can buy me a cup of coffee. Thanks ( After all, this project has been written for several months, and the typescript part is really too difficult to write. )~~~~
 
 <div align="left">
-<img alt="微信" src="/public/wechat.jpg" width="240" style="display: inline-block"/>
-<img alt="支付宝" src="/public/alipay.png" width="240" style="display: inline-block"/>
+<img alt="微信" src="public/wechat.jpg" width="240" style="display: inline-block"/>
+<img alt="支付宝" src="public/alipay.png" width="240" style="display: inline-block"/>
 </div>
 
+> 付费咨询联系微信：
+> 
+> <img alt="wechat.png" src="public/wechat.png" width="200"/>
 
 ## Directory
 
@@ -119,7 +124,10 @@ Life is not easy, pig sighs sighs. If it helps you, you can buy me a cup of coff
 |-- vite.config.js
 ```
 
-
 > 
 > Activiti moddle json: https://github.com/Activiti/activiti-modeling-app/blob/master/projects/process-editor/src/services/activiti.json
 
+
+## Licence
+
+This project is licensed under the Apache License 2.0 .

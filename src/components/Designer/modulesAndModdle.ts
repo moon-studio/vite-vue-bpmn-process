@@ -30,6 +30,7 @@ import Grid from 'diagram-js/lib/features/grid-snapping/visuals'
 import translate from '@/additional-modules/Translate'
 import Rules from '@/additional-modules/Rules'
 import AutoPlace from '@/additional-modules/AutoPlace'
+import ElementFactory from '@/additional-modules/ElementFactory'
 import EnhancementPalette from '@/additional-modules/Palette/EnhancementPalette'
 import RewritePalette from '@/additional-modules/Palette/RewritePalette'
 import EnhancementContextPad from '@/additional-modules/ContextPad/EnhancementContextPad'
@@ -129,6 +130,12 @@ export default function (settings: Ref<EditorSettings>) {
     // 设置键盘事件绑定
     options['keyboard'] = {
       bindTo: document
+    }
+
+    modules.push(ElementFactory)
+    options['elementFactory'] = {
+      'bpmn:Task': { width: 120, height: 120 },
+      'bpmn:SequenceFlow': { width: 100, height: 80 }
     }
   }
 

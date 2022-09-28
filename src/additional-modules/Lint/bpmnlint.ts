@@ -94,4 +94,5 @@ cache['bpmnlint/sub-process-blank-start-event'] = rule_15
 cache['bpmnlint/superfluous-gateway'] = rule_16
 
 export default bundle
+
 export { config, resolver }
