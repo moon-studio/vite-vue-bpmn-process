@@ -128,7 +128,6 @@
         this.extensions = JSON.parse(JSON.stringify(this.extensionsRaw))
       },
       removeProperty(propIndex: number) {
-        console.log(this.getActive, propIndex)
         removeExtensionProperty(this.getActive as Base, this.extensionsRaw[propIndex])
         this.reloadExtensionProperties()
       },
