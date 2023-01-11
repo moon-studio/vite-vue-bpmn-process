@@ -27,9 +27,7 @@
     },
     {
       "name": "IoMapping",
-      "superClass": [
-        "Element"
-      ],
+      "superClass": ["Element"],
       "properties": [
         {
           "name": "ioMapping",
@@ -73,9 +71,7 @@
     },
     {
       "name": "Subscription",
-      "superClass": [
-        "Element"
-      ],
+      "superClass": ["Element"],
       "properties": [
         {
           "name": "correlationKey",
@@ -86,22 +82,14 @@
     },
     {
       "name": "Input",
-      "superClass": [
-        "InputOutputParameter"
-      ],
+      "superClass": ["InputOutputParameter"],
       "meta": {
-        "allowedIn": [
-          "bpmn:CallActivity",
-          "zeebe:ZeebeServiceTask",
-          "bpmn:SubProcess"
-        ]
+        "allowedIn": ["bpmn:CallActivity", "zeebe:ZeebeServiceTask", "bpmn:SubProcess"]
       }
     },
     {
       "name": "Output",
-      "superClass": [
-        "InputOutputParameter"
-      ],
+      "superClass": ["InputOutputParameter"],
       "meta": {
         "allowedIn": [
           "bpmn:CallActivity",
@@ -114,13 +102,9 @@
     },
     {
       "name": "TaskHeaders",
-      "superClass": [
-        "Element"
-      ],
+      "superClass": ["Element"],
       "meta": {
-        "allowedIn": [
-          "zeebe:ZeebeServiceTask"
-        ]
+        "allowedIn": ["zeebe:ZeebeServiceTask"]
       },
       "properties": [
         {
@@ -132,9 +116,7 @@
     },
     {
       "name": "Header",
-      "superClass": [
-        "Element"
-      ],
+      "superClass": ["Element"],
       "properties": [
         {
           "name": "id",
@@ -155,13 +137,9 @@
     },
     {
       "name": "TaskDefinition",
-      "superClass": [
-        "Element"
-      ],
+      "superClass": ["Element"],
       "meta": {
-        "allowedIn": [
-          "zeebe:ZeebeServiceTask"
-        ]
+        "allowedIn": ["zeebe:ZeebeServiceTask"]
       },
       "properties": [
         {
@@ -178,15 +156,9 @@
     },
     {
       "name": "LoopCharacteristics",
-      "superClass": [
-        "Element"
-      ],
+      "superClass": ["Element"],
       "meta": {
-        "allowedIn": [
-          "zeebe:ZeebeServiceTask",
-          "bpmn:ReceiveTask",
-          "bpmn:SubProcess"
-        ]
+        "allowedIn": ["zeebe:ZeebeServiceTask", "bpmn:ReceiveTask", "bpmn:SubProcess"]
       },
       "properties": [
         {
@@ -213,13 +185,9 @@
     },
     {
       "name": "CalledElement",
-      "superClass": [
-        "Element"
-      ],
+      "superClass": ["Element"],
       "meta": {
-        "allowedIn": [
-          "bpmn:CallActivity"
-        ]
+        "allowedIn": ["bpmn:CallActivity"]
       },
       "properties": [
         {
@@ -241,13 +209,9 @@
     },
     {
       "name": "UserTaskForm",
-      "superClass": [
-        "Element"
-      ],
+      "superClass": ["Element"],
       "meta": {
-        "allowedIn": [
-          "bpmn:Process"
-        ]
+        "allowedIn": ["bpmn:Process"]
       },
       "properties": [
         {
@@ -264,13 +228,9 @@
     },
     {
       "name": "FormDefinition",
-      "superClass": [
-        "Element"
-      ],
+      "superClass": ["Element"],
       "meta": {
-        "allowedIn": [
-          "bpmn:UserTask"
-        ]
+        "allowedIn": ["bpmn:UserTask"]
       },
       "properties": [
         {
@@ -282,13 +242,9 @@
     },
     {
       "name": "CalledDecision",
-      "superClass": [
-        "Element"
-      ],
+      "superClass": ["Element"],
       "meta": {
-        "allowedIn": [
-          "bpmn:BusinessRuleTask"
-        ]
+        "allowedIn": ["bpmn:BusinessRuleTask"]
       },
       "properties": [
         {
@@ -305,13 +261,9 @@
     },
     {
       "name": "AssignmentDefinition",
-      "superClass": [
-        "Element"
-      ],
+      "superClass": ["Element"],
       "meta": {
-        "allowedIn": [
-          "bpmn:UserTask"
-        ]
+        "allowedIn": ["bpmn:UserTask"]
       },
       "properties": [
         {
@@ -329,11 +281,7 @@
     {
       "name": "TemplateSupported",
       "isAbstract": true,
-      "extends": [
-        "bpmn:Collaboration",
-        "bpmn:Process",
-        "bpmn:FlowElement"
-      ],
+      "extends": ["bpmn:Collaboration", "bpmn:Process", "bpmn:FlowElement"],
       "properties": [
         {
           "name": "modelerTemplate",

@@ -9,7 +9,7 @@
 #### **使用方式**
 
 ```javascript
-const Modeling = this.bpmnModeler.get("modeling");
+const Modeling = this.bpmnModeler.get('modeling')
 ```
 
 `Modeling` 初始化时会向 `CommandStack` 命令堆栈中注册对应的处理程序，以确保操作可恢复和取消。
@@ -19,52 +19,51 @@ const Modeling = this.bpmnModeler.get("modeling");
 ```javascript
 // BaseModeling (diagram.js)
 BaseModeling.prototype.getHandlers = function () {
-    var BaseModelingHandlers = {
-        'shape.append': AppendShapeHandler, // 形状可逆添加到源形状的处理程序
-        'shape.create': CreateShapeHandler, // 形状可逆创建、添加到流程中的处理程序
-        'shape.delete': DeleteShapeHandler, // 形状可逆移除的处理程序
-        'shape.move': MoveShapeHandler, // 形状可逆移动的处理程序
-        'shape.resize': ResizeShapeHandler, // 形状可逆变换大小的处理程序
-        'shape.replace': ReplaceShapeHandler, // 通过添加新形状并删除旧形状来替换形状。 如果可能，将保持传入和传出连接
-        'shape.toggleCollapse': ToggleShapeCollapseHandler, // 切换元素的折叠状态及其所有子元素的可见性
-        'spaceTool': SpaceToolHandler, // 通过移动和调整形状、大小、连线锚点(巡航点)来添加或者删除空间
-        'label.create': CreateLabelHandler, // 创建标签并附加到特定的模型元素上
-        'connection.create': CreateConnectionHandler, // 创建连线，并显示到画布上
-        'connection.delete': DeleteConnectionHandler, // 移除连线
-        'connection.move': MoveConnectionHandler, // 实现连接的可逆移动的处理程序。 该处理程序与布局连接处理程序的不同之处在于它保留了连接布局
-        'connection.layout': LayoutConnectionHandler, // 实现形状的可逆移动的处理程序
-        'connection.updateWaypoints': UpdateWaypointsHandler, // 更新锚点(巡航点)
-        'connection.reconnect': ReconnectConnectionHandler, // 重新建立连接关系
-        'elements.create': CreateElementsHandler, // 元素可逆创建的处理程序
-        'elements.move': MoveElementsHandler, // 元素可逆移动的处理程序
-        'elements.delete': DeleteElementsHandler, // 元素可逆移除的处理程序
-        'elements.distribute': DistributeElementsHandler, // 均匀分配元素布局的处理程序
-        'elements.align': AlignElementsHandler, // 以某种方式对齐元素
-        'element.updateAttachment': UpdateAttachmentHandler // 实现形状的可逆附着/分离的处理程序。
-    }
-    return BaseModelingHandlers;
+  var BaseModelingHandlers = {
+    'shape.append': AppendShapeHandler, // 形状可逆添加到源形状的处理程序
+    'shape.create': CreateShapeHandler, // 形状可逆创建、添加到流程中的处理程序
+    'shape.delete': DeleteShapeHandler, // 形状可逆移除的处理程序
+    'shape.move': MoveShapeHandler, // 形状可逆移动的处理程序
+    'shape.resize': ResizeShapeHandler, // 形状可逆变换大小的处理程序
+    'shape.replace': ReplaceShapeHandler, // 通过添加新形状并删除旧形状来替换形状。 如果可能，将保持传入和传出连接
+    'shape.toggleCollapse': ToggleShapeCollapseHandler, // 切换元素的折叠状态及其所有子元素的可见性
+    spaceTool: SpaceToolHandler, // 通过移动和调整形状、大小、连线锚点(巡航点)来添加或者删除空间
+    'label.create': CreateLabelHandler, // 创建标签并附加到特定的模型元素上
+    'connection.create': CreateConnectionHandler, // 创建连线，并显示到画布上
+    'connection.delete': DeleteConnectionHandler, // 移除连线
+    'connection.move': MoveConnectionHandler, // 实现连接的可逆移动的处理程序。 该处理程序与布局连接处理程序的不同之处在于它保留了连接布局
+    'connection.layout': LayoutConnectionHandler, // 实现形状的可逆移动的处理程序
+    'connection.updateWaypoints': UpdateWaypointsHandler, // 更新锚点(巡航点)
+    'connection.reconnect': ReconnectConnectionHandler, // 重新建立连接关系
+    'elements.create': CreateElementsHandler, // 元素可逆创建的处理程序
+    'elements.move': MoveElementsHandler, // 元素可逆移动的处理程序
+    'elements.delete': DeleteElementsHandler, // 元素可逆移除的处理程序
+    'elements.distribute': DistributeElementsHandler, // 均匀分配元素布局的处理程序
+    'elements.align': AlignElementsHandler, // 以某种方式对齐元素
+    'element.updateAttachment': UpdateAttachmentHandler // 实现形状的可逆附着/分离的处理程序。
+  }
+  return BaseModelingHandlers
 }
 
 // Modeling (bpmn.js)
-var ModelingHandlers = BaseModeling.prototype.getHandlers.call(this);
+var ModelingHandlers = BaseModeling.prototype.getHandlers.call(this)
 
-ModelingHandlers['element.updateModdleProperties'] = UpdateModdlePropertiesHandler; // 实现元素上的扩展属性的可逆修改
-ModelingHandlers['element.updateProperties'] = UpdatePropertiesHandler; // 实现元素上的属性的可逆修改
-ModelingHandlers['canvas.updateRoot'] = UpdateCanvasRootHandler; // 可逆更新画布挂载节点
-ModelingHandlers['lane.add'] = AddLaneHandler; // 可逆通道添加
-ModelingHandlers['lane.resize'] = ResizeLaneHandler; // 通道可逆resize
-ModelingHandlers['lane.split'] = SplitLaneHandler; // 通道可逆分隔
-ModelingHandlers['lane.updateRefs'] = UpdateFlowNodeRefsHandler; // 可逆更新通道引用
-ModelingHandlers['id.updateClaim'] = IdClaimHandler;
-ModelingHandlers['element.setColor'] = SetColorHandler; // 可逆更新元素颜色
-ModelingHandlers['element.updateLabel'] = UpdateLabelHandler; // 可逆更新元素label
+ModelingHandlers['element.updateModdleProperties'] = UpdateModdlePropertiesHandler // 实现元素上的扩展属性的可逆修改
+ModelingHandlers['element.updateProperties'] = UpdatePropertiesHandler // 实现元素上的属性的可逆修改
+ModelingHandlers['canvas.updateRoot'] = UpdateCanvasRootHandler // 可逆更新画布挂载节点
+ModelingHandlers['lane.add'] = AddLaneHandler // 可逆通道添加
+ModelingHandlers['lane.resize'] = ResizeLaneHandler // 通道可逆resize
+ModelingHandlers['lane.split'] = SplitLaneHandler // 通道可逆分隔
+ModelingHandlers['lane.updateRefs'] = UpdateFlowNodeRefsHandler // 可逆更新通道引用
+ModelingHandlers['id.updateClaim'] = IdClaimHandler
+ModelingHandlers['element.setColor'] = SetColorHandler // 可逆更新元素颜色
+ModelingHandlers['element.updateLabel'] = UpdateLabelHandler // 可逆更新元素label
 ```
 
 #### **提供方法**
 
 ```javascript
-const Modeling = this.bpmnModeler.get("modeling");
-
+const Modeling = this.bpmnModeler.get('modeling')
 
 // 获取当前拥有的处理程序
 Modeling.getHandlers()
@@ -76,7 +75,7 @@ Modeling.getHandlers()
  * @param newBounds: {x: number；y: number; width: number; height: number} 位置及大小
  * @param hints?：{} 提示信息
  */
-Modeling.updateLabel(element, newLabel, newBounds, hints);
+Modeling.updateLabel(element, newLabel, newBounds, hints)
 
 /**
  * 创建新的连接线，触发 connection.create 事件
@@ -84,7 +83,7 @@ Modeling.updateLabel(element, newLabel, newBounds, hints);
  * @param source：ModdleElement 源元素
  * @param target：ModdleElement 目标元素
  * @param attrs?: {} 属性，未传时会根据规则替换成对应的对象，主要包含连线类型 type
- * @param hints?: {} 
+ * @param hints?: {}
  * @return Connection 连线实例
  */
 Modeling.connect(source, target, attrs, hints)
@@ -158,7 +157,6 @@ Modeling.moveConnection(connection, delta, newParent, newParentIndex, hints)
 
 // 移动 Connection 元素到新元素下， 触发 connection.move
 Modeling.layoutConnection(connection, hints)
-
 
 /**
  * 创建新的连线实例，触发 connection.create
@@ -287,14 +285,14 @@ Modeling.connect(source, target, attrs, hints)
 
 ```javascript
 // diagram.js/lib/draw/index.js
-import DefaultRenderer from './DefaultRenderer';
-import Styles from './Styles';
+import DefaultRenderer from './DefaultRenderer'
+import Styles from './Styles'
 
 export default {
-  __init__: [ 'defaultRenderer' ],
-  defaultRenderer: [ 'type', DefaultRenderer ],
-  styles: [ 'type', Styles ]
-};
+  __init__: ['defaultRenderer'],
+  defaultRenderer: ['type', DefaultRenderer],
+  styles: ['type', Styles]
+}
 ```
 
 其中 `DefaultRenderer` 为默认元素绘制方法，继承 `BaseRenderer` ，自身包含 `CONNECTION_STYLE --连线默认样式`, `FRAME_TYLE -- 框架默认样式` 和 `SHAPE_STYLE -- 元素默认样式` 三个样式属性。
@@ -309,13 +307,12 @@ export default {
 
 ```javascript
 // diagram.js/lib/draw/Styles.js
-import { isArray, assign, reduce } from 'min-dash';
+import { isArray, assign, reduce } from 'min-dash'
 
 /**
  * A component that manages shape styles
  */
 export default function Styles() {
-
   var defaultTraits = {
     'no-fill': {
       fill: 'none'
@@ -326,8 +323,8 @@ export default function Styles() {
     'no-events': {
       pointerEvents: 'none'
     }
-  };
-  var self = this;
+  }
+  var self = this
 
   /**
    * Builds a style definition from a className, a list of traits and an object of additional attributes.
@@ -338,10 +335,10 @@ export default function Styles() {
    *
    * @return {Object} the style defintion
    */
-  this.cls = function(className, traits, additionalAttrs) {
-    var attrs = this.style(traits, additionalAttrs);
-    return assign(attrs, { 'class': className });
-  };
+  this.cls = function (className, traits, additionalAttrs) {
+    var attrs = this.style(traits, additionalAttrs)
+    return assign(attrs, { class: className })
+  }
 
   /**
    * Builds a style definition from a list of traits and an object of additional attributes.
@@ -351,24 +348,28 @@ export default function Styles() {
    *
    * @return {Object} the style defintion
    */
-  this.style = function(traits, additionalAttrs) {
+  this.style = function (traits, additionalAttrs) {
     if (!isArray(traits) && !additionalAttrs) {
-      additionalAttrs = traits;
-      traits = [];
+      additionalAttrs = traits
+      traits = []
     }
-    var attrs = reduce(traits, function(attrs, t) {
-      return assign(attrs, defaultTraits[t] || {});
-    }, {});
-    return additionalAttrs ? assign(attrs, additionalAttrs) : attrs;
-  };
+    var attrs = reduce(
+      traits,
+      function (attrs, t) {
+        return assign(attrs, defaultTraits[t] || {})
+      },
+      {}
+    )
+    return additionalAttrs ? assign(attrs, additionalAttrs) : attrs
+  }
 
-  this.computeStyle = function(custom, traits, defaultStyles) {
+  this.computeStyle = function (custom, traits, defaultStyles) {
     if (!isArray(traits)) {
-      defaultStyles = traits;
-      traits = [];
+      defaultStyles = traits
+      traits = []
     }
-    return self.style(traits || [], assign({}, defaultStyles, custom || {}));
-  };
+    return self.style(traits || [], assign({}, defaultStyles, custom || {}))
+  }
 }
 ```
 
@@ -381,27 +382,31 @@ export default function Styles() {
 `BaseRenderer` 提供了一个抽象基类，并且提供了 `canRender() , getShapePath(), getConnecttionPath(), drawShape(), DrawConnection()` 五个抽象方法，定义了方法触发时刻。
 
 ```javascript
-eventBus.on([ 'render.shape', 'render.connection' ], renderPriority, function(evt, context) {
-    var type = evt.type,
-        element = context.element,
-        visuals = context.gfx;
-    if (self.canRender(element)) {
-        if (type === 'render.shape') {
-            return self.drawShape(visuals, element);
-        } else {
-            return self.drawConnection(visuals, element);
-        }
+eventBus.on(['render.shape', 'render.connection'], renderPriority, function (evt, context) {
+  var type = evt.type,
+    element = context.element,
+    visuals = context.gfx
+  if (self.canRender(element)) {
+    if (type === 'render.shape') {
+      return self.drawShape(visuals, element)
+    } else {
+      return self.drawConnection(visuals, element)
     }
-});
-eventBus.on([ 'render.getShapePath', 'render.getConnectionPath'], renderPriority, function(evt, element) {
+  }
+})
+eventBus.on(
+  ['render.getShapePath', 'render.getConnectionPath'],
+  renderPriority,
+  function (evt, element) {
     if (self.canRender(element)) {
-        if (evt.type === 'render.getShapePath') {
-            return self.getShapePath(element);
-        } else {
-            return self.getConnectionPath(element);
-        }
+      if (evt.type === 'render.getShapePath') {
+        return self.getShapePath(element)
+      } else {
+        return self.getConnectionPath(element)
+      }
     }
-});
+  }
+)
 ```
 
 `DefaultRenderer` 重写了以上五个方法（`canRender()` 直接返回了 `true`， 表示任何情况都可以绘制和渲染元素），实现默认元素和样式的解析渲染。
@@ -421,33 +426,33 @@ eventBus.on([ 'render.getShapePath', 'render.getConnectionPath'], renderPriority
 `bpmn.js` 为了实现 `bpmn 2.0` 流程图的支持，不仅重新定义了新的渲染方法类 `BpmnRenderer, TextRender, PathMap`，以保证图形元素的正常解析，以及 `label` 的便捷添加修改。
 
 ```javascript
-import BpmnRenderer from './BpmnRenderer';
-import TextRenderer from './TextRenderer';
-import PathMap from './PathMap';
+import BpmnRenderer from './BpmnRenderer'
+import TextRenderer from './TextRenderer'
+import PathMap from './PathMap'
 
 export default {
-  __init__: [ 'bpmnRenderer' ],
-  bpmnRenderer: [ 'type', BpmnRenderer ],
-  textRenderer: [ 'type', TextRenderer ],
-  pathMap: [ 'type', PathMap ]
-};
+  __init__: ['bpmnRenderer'],
+  bpmnRenderer: ['type', BpmnRenderer],
+  textRenderer: ['type', TextRenderer],
+  pathMap: ['type', PathMap]
+}
 ```
 
 #### `BpmnRenderer` 流程元素绘制方法
 
-支持 `bpmn 2.0` 的流程元素的基础绘制方法，继承 `BaseRender`，注入了 `config, eventBus, styles, pathMap, canvas, textRenderer` 模块。源码位于 `bpmn-js/lib/draw/BpmnRenderer.js`，共1900+行（其中1200+行都在定义绘制各种元素的方法）。
+支持 `bpmn 2.0` 的流程元素的基础绘制方法，继承 `BaseRender`，注入了 `config, eventBus, styles, pathMap, canvas, textRenderer` 模块。源码位于 `bpmn-js/lib/draw/BpmnRenderer.js`，共 1900+行（其中 1200+行都在定义绘制各种元素的方法）。
 
-`BpmnRenderer` 只实现了基类的4个抽象方法（`getConnectionPath()` 方法没有使用，由此可见其实 `bpmn-js` 内部的连线元素也是当做了 `shape` 类型来进行处理的，毕竟有个箭头，也可能存在折线的情况），并且没有新增方法。但是在 `canRender()` 方法里判断了需要渲染的元素是否属于 `bpmn:BaseElement` 类型。
+`BpmnRenderer` 只实现了基类的 4 个抽象方法（`getConnectionPath()` 方法没有使用，由此可见其实 `bpmn-js` 内部的连线元素也是当做了 `shape` 类型来进行处理的，毕竟有个箭头，也可能存在折线的情况），并且没有新增方法。但是在 `canRender()` 方法里判断了需要渲染的元素是否属于 `bpmn:BaseElement` 类型。
 
 ```javascript
-BpmnRenderer.prototype.canRender = function(element) {
-      return is(element, 'bpmn:BaseElement'); // 从解析文件 bpmn.json 其实可以发现，所有需要渲染的元素最终都继承了 Bpmn:BaseElement
-};
+BpmnRenderer.prototype.canRender = function (element) {
+  return is(element, 'bpmn:BaseElement') // 从解析文件 bpmn.json 其实可以发现，所有需要渲染的元素最终都继承了 Bpmn:BaseElement
+}
 ```
 
 在 `getShapePath()` 方法中，对属于 `bpmnEvent（事件类节点，例如开始和结束等事件，显示为圆形）`，`bpmn:Activity（任务类节点，包含子流程类型的节点，显示为圆角矩形）`，`bpmn:Gateway（网关类型，显示为菱形）` 三个大类型的节点定义的对应的路径获取方法，其他类型则沿用与 `diagram.js/DefaultRenderer.js` 里面使用的 `getRectPath()` 方法。
 
-`drawShape()` 与 `drawConnection()` 方法则是判断了需要渲染的元素类型，调用对应的 `handler()` 方法也处理（也就是上面说的那1200+行代码），通过 `handlers` 对象（所有 `handler()` 方法的集合，以各类型的类型名作为 `key`），可以发现可显示的元素一共有60种：
+`drawShape()` 与 `drawConnection()` 方法则是判断了需要渲染的元素类型，调用对应的 `handler()` 方法也处理（也就是上面说的那 1200+行代码），通过 `handlers` 对象（所有 `handler()` 方法的集合，以各类型的类型名作为 `key`），可以发现可显示的元素一共有 60 种：
 
 ```
 0: "bpmn:Event"
@@ -520,9 +525,9 @@ BpmnRenderer.prototype.canRender = function(element) {
 
 源码位于 `bpmn-js/lib/draw/TextRenderer.js`，主要实现了文字元素（即 `Label` 标签）的渲染与显示，通过获取绑定节点的位置和大小，在对应的位置生成一个 `text` 标签来显示文本。可通过重写该函数类来实现自定义的文本位置控制。
 
-#### `PathMap` SVG元素路径对象
+#### `PathMap` SVG 元素路径对象
 
-包含 `BpmnRenderer` 所需的SVG路径的函数，内部有一个 `pathMap` 对象，保存了所有的元素的 svg 路径、默认大小。
+包含 `BpmnRenderer` 所需的 SVG 路径的函数，内部有一个 `pathMap` 对象，保存了所有的元素的 svg 路径、默认大小。
 
 ### 9. AlignElements 元素对齐
 
@@ -533,7 +538,7 @@ BpmnRenderer.prototype.canRender = function(element) {
 **使用：**
 
 ```javascript
-const AlignElements = this.bpmnModeler.get("alignElements");
+const AlignElements = this.bpmnModeler.get('alignElements')
 
 /**
  * Executes the alignment of a selection of elements
@@ -542,7 +547,7 @@ const AlignElements = this.bpmnModeler.get("alignElements");
  * @param  {Array} elements 通常为节点元素
  * @param  {string} type 可用：left|right|center|top|bottom|middle
  */
-AlignElements.trigger(Elements, type);
+AlignElements.trigger(Elements, type)
 ```
 
 **改写：**
@@ -573,15 +578,11 @@ CustomElements.prototype.trigger = function(elements, type) {
 }
 ```
 
-
-
 ### 10. AttachSupport 依附支持
 
 `diagram.js` 模块，注入模块 `injector, eventBus, canvas, rules, modeling`，依赖规则模块 `rulesModule`。主要用作元素移动期间的绑定关系和预览。
 
 > 基础逻辑模块，不推荐更改，也不提供直接使用的方法。
-
-
 
 ### 11. AutoPlace 元素自动放置
 
@@ -594,7 +595,7 @@ CustomElements.prototype.trigger = function(elements, type) {
 **使用：**
 
 ```javascript
-const AutoPlace = this.bpmnModeler.get("autoPlace");
+const AutoPlace = this.bpmnModeler.get('autoPlace')
 
 /**
  * Append shape to source at appropriate position.
@@ -606,10 +607,8 @@ const AutoPlace = this.bpmnModeler.get("autoPlace");
  *
  * @return {djs.model.Shape} appended shape
  */
-AutoPlace.append(source, shape, hints);
+AutoPlace.append(source, shape, hints)
 ```
-
-
 
 ### 12. AutoResize 元素大小调整
 
@@ -649,7 +648,7 @@ inherits(AutoResize, CommandInterceptor); // CommandInterceptor 向commandStack�
 
 ### 13. AutoScroll 画布滚动
 
- 画布自动扩展滚动的方法，如果当前光标点靠近边框，则开始画布滚动。 当当前光标点移回到滚动边框内时取消或手动取消。
+画布自动扩展滚动的方法，如果当前光标点靠近边框，则开始画布滚动。 当当前光标点移回到滚动边框内时取消或手动取消。
 
 依赖于 `DraggingModule` ，注入模块 `eventBus, canvas`
 
@@ -658,7 +657,7 @@ inherits(AutoResize, CommandInterceptor); // CommandInterceptor 向commandStack�
 **使用与方法：**
 
 ```javascript
-const AutoScroll = this.modeler.get("autoScroll");
+const AutoScroll = this.modeler.get('autoScroll')
 
 /**
  * Starts scrolling loop.
@@ -667,19 +666,18 @@ const AutoScroll = this.modeler.get("autoScroll");
  *
  * @param  {Object} point { x: X, y: Y }
  */
-AutoScroll.startScroll(point);
+AutoScroll.startScroll(point)
 
 // 停止滚动
-AutoScroll.stopScroll();
+AutoScroll.stopScroll()
 
 /**
  * 覆盖默认配置
- * @param {Object} options 
+ * @param {Object} options
  * options.scrollThresholdIn: [ 20, 20, 20, 20 ],
  * options.scrollThresholdOut: [ 0, 0, 0, 0 ],
  * options.scrollRepeatTimeout: 15,
  * options.scrollStep: 10
  */
-AutoScroll.setOptions(options);
+AutoScroll.setOptions(options)
 ```
-

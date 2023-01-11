@@ -44,7 +44,7 @@ Life is not easy, pig sighs sighs. If it helps you, you can buy me a cup of coff
 </div>
 
 > 付费咨询联系微信：
-> 
+>
 > <img alt="wechat.png" src="public/wechat.png" width="200"/>
 
 ## Directory
@@ -73,10 +73,10 @@ Life is not easy, pig sighs sighs. If it helps you, you can buy me a cup of coff
 |   |-- bpmn-icons                                 bpmn 对应的图标文件 svg
 |   |-- config                                     项目配置文件
 |   |-- moddle-extensions                          bpmn.js 扩展解析文件
-|       |-- activiti.json                          
+|       |-- activiti.json
 |       |-- bpmn.json                              bpmn 基础元素和属性配置
-|       |-- camunda.json                           
-|       |-- flowable.json                          
+|       |-- camunda.json
+|       |-- flowable.json
 |       |-- miyue.json                             自定义扩展配置
 |       |-- zeebe.json                             zeebe 表单配置
 |   |-- store
@@ -115,7 +115,7 @@ Life is not easy, pig sighs sighs. If it helps you, you can buy me a cup of coff
 |       |-- diagram-js-direct-editing.d.ts         diagram.js 的双击编辑类型声明文件
 |       |-- didi.d.ts                              [Nikku - didi](https://github.com/nikku/didi/blob/master/lib/index.d.ts)
 |       |-- moddle.d.ts                            moddle 的类型声明文件
-|       |-- object-refs.d.ts                       
+|       |-- object-refs.d.ts
 |   |-- editor
 |-- LICENSE
 |-- README.md
@@ -124,9 +124,7 @@ Life is not easy, pig sighs sighs. If it helps you, you can buy me a cup of coff
 |-- vite.config.js
 ```
 
-> 
 > Activiti moddle json: https://github.com/Activiti/activiti-modeling-app/blob/master/projects/process-editor/src/services/activiti.json
-
 
 ## Licence
 

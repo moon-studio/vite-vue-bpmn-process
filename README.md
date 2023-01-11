@@ -28,7 +28,7 @@
 
 ## 项目简介
 
-Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-js)， [Vite](https://vitejs.dev)， [Vue.js 3.x](https://vuejs.org/)。
+Vite Vue Bpmn 流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-js)， [Vite](https://vitejs.dev)， [Vue.js 3.x](https://vuejs.org/)。
 
 实现了 Bpmn.js 和 Diagram.js 的 typescript 类型声明，typescript 可以用来在编辑器中编写代码。
 
@@ -44,7 +44,7 @@ Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-j
 </div>
 
 > 付费咨询联系微信：
-> 
+>
 > <img alt="wechat.png" src="public/wechat.png" width="200"/>
 
 ## 结构目录
@@ -73,10 +73,10 @@ Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-j
 |   |-- bpmn-icons                                 bpmn 对应的图标文件 svg
 |   |-- config                                     项目配置文件
 |   |-- moddle-extensions                          bpmn.js 扩展解析文件
-|       |-- activiti.json                          
+|       |-- activiti.json
 |       |-- bpmn.json                              bpmn 基础元素和属性配置
-|       |-- camunda.json                           
-|       |-- flowable.json                          
+|       |-- camunda.json
+|       |-- flowable.json
 |       |-- miyue.json                             自定义扩展配置
 |       |-- zeebe.json                             zeebe 表单配置
 |   |-- store
@@ -115,7 +115,7 @@ Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-j
 |       |-- diagram-js-direct-editing.d.ts         diagram.js 的双击编辑类型声明文件
 |       |-- didi.d.ts                              [Nikku - didi](https://github.com/nikku/didi/blob/master/lib/index.d.ts)
 |       |-- moddle.d.ts                            moddle 的类型声明文件
-|       |-- object-refs.d.ts                       
+|       |-- object-refs.d.ts
 |   |-- editor
 |-- LICENSE
 |-- README.md
@@ -123,7 +123,7 @@ Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-j
 |-- package.json
 |-- vite.config.js
 ```
- 
+
 > Activiti moddle json: https://github.com/Activiti/activiti-modeling-app/blob/master/projects/process-editor/src/services/activiti.json
 
 ## 当前功能
@@ -140,7 +140,7 @@ Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-j
 
 ### 2. 编辑器
 
-- [x] 自定义流程id与名称
+- [x] 自定义流程 id 与名称
 - [x] 可选流程引擎（camunda，activiti，flowable）
 - [x] 动态背景设置
 - [x] 自定义 PaletteProvider

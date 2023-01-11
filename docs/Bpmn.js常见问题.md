@@ -12,9 +12,9 @@
 
 解决：
 
-在 `data () { }` 中使用 _ 或者 $ 符号作为开头，或者不在 data 中进行声明直接对 this 进行赋值，可避免被响应式处理。
+在 `data () { }` 中使用 \_ 或者 $ 符号作为开头，或者不在 data 中进行声明直接对 this 进行赋值，可避免被响应式处理。
 
-## 2. 导入xml或者创建新标签/属性时报错 Uncaught Error: unknown type [xxx:xxx](xxx:xxx)
+## 2. 导入 xml 或者创建新标签/属性时报错 Uncaught Error: unknown type [xxx:xxx](xxx:xxx)
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0525/165606_bb16a8c3_1832158.png)
 
@@ -49,7 +49,7 @@ a.bjs-powered-by {
 }
 ```
 
-> 📌注意：虽然 bpmn.js 为开源项目，但是作者要求不能隐藏该组织 logo，所以请各位在开发时尽量保留该内容。
+> 📌 注意：虽然 bpmn.js 为开源项目，但是作者要求不能隐藏该组织 logo，所以请各位在开发时尽量保留该内容。
 
 ## 5. 阻止 contentPad 删除事件
 
@@ -62,25 +62,20 @@ a.bjs-powered-by {
 ```javascript
 class CustomContextPadProvider {
   constructor(contextPad, rules, modeling, translate) {
-    contextPad.registerProvider(this);
+    contextPad.registerProvider(this)
 
-    this._rules = rules;
-    this._modeling = modeling;
-    this._translate = translate;
+    this._rules = rules
+    this._modeling = modeling
+    this._translate = translate
   }
 }
 
-CustomContextPadProvider.$inject = [
-  "contextPad",
-  "rules",
-  "modeling",
-  "translate"
-];
+CustomContextPadProvider.$inject = ['contextPad', 'rules', 'modeling', 'translate']
 
 export default {
-  __init__: ["customContextPadProvider"],
-  customContextPadProvider: ["type", CustomContextPadProvider]
-};
+  __init__: ['customContextPadProvider'],
+  customContextPadProvider: ['type', CustomContextPadProvider]
+}
 ```
 
 ### 5.2 定义新的删除规则
@@ -91,39 +86,39 @@ export default {
 // 在 CustomContextPadProvider 类中定义 getContextPadEntries 方法
 class CustomContextPadProvider {
   // ...
-  
+
   // 传入参数为当前的选中元素
   getContextPadEntries(element) {
-    const rules = this._rules;
-    const translate = this._translate;
-    const modeling = this._modeling;
-    
+    const rules = this._rules
+    const translate = this._translate
+    const modeling = this._modeling
+
     // entries 为原有的 contentPad 操作列表
     return function (entries) {
       // 1. 编写删除判断逻辑
-      const deleteAllowed = true;
-      
+      const deleteAllowed = true
+
       // 2. 删除原来的 delete 操作
-      delete entries["delete"];
-      
+      delete entries['delete']
+
       // 3. 插入自定义的删除操作按钮
-      entries["delete"] = {
-        group: "edit",
-        className: "bpmn-icon-trash",
-        title: translate("Remove"),
+      entries['delete'] = {
+        group: 'edit',
+        className: 'bpmn-icon-trash',
+        title: translate('Remove'),
         action: {
           click: function (event) {
             if (!deleteAllowed) {
-              alert("This is not allowed!");
+              alert('This is not allowed!')
             } else {
-              modeling.removeElements([element]);
+              modeling.removeElements([element])
             }
           }
         }
       }
-      
+
       // 4. 返回 contentPad 操作按钮
-      return entries;
+      return entries
     }
   }
 }
@@ -132,10 +127,10 @@ class CustomContextPadProvider {
 ### 5.3 在初始化 modeler 时引入自定义的 contentPad
 
 ```javascript
-import Modeler from "bpmn-js/lib/Modeler";
-import customContextPadProviderModule from "./CustomContextPadProvider";
+import Modeler from 'bpmn-js/lib/Modeler'
+import customContextPadProviderModule from './CustomContextPadProvider'
 
-const container = document.getElementById("container");
+const container = document.getElementById('container')
 
 const modeler = new Modeler({
   container,
@@ -143,7 +138,7 @@ const modeler = new Modeler({
   keyboard: {
     bindTo: document
   }
-});
+})
 ```
 
 ## 6. 自定义 Module 时无法渲染
@@ -152,29 +147,58 @@ const modeler = new Modeler({
 
 **主要问题：**
 
-在页面加载时出现无法正常初始化组件的情况，流程编辑器BpmnModeler实例无法正常实例化。
+在页面加载时出现无法正常初始化组件的情况，流程编辑器 BpmnModeler 实例无法正常实例化。
 
-主要问题也能在错误信息中发现，在自定义palette时发生错误，无法正常找到自定义侧边栏 customPalette。
+主要问题也能在错误信息中发现，在自定义 palette 时发生错误，无法正常找到自定义侧边栏 customPalette。
 
 ![image-20210720160511276](https://gitee.com/MiyueSC/image-bed/raw/master/image-20210720160511276.png)
 
 **原因：**
 
-在自定义palette的构造函数的时候，继承了原生的 paletteProvider，但是没有注入依赖实例，导致实例化时无法找到依赖的其他实例对象。
+在自定义 palette 的构造函数的时候，继承了原生的 paletteProvider，但是没有注入依赖实例，导致实例化时无法找到依赖的其他实例对象。
 
 **解决：**
 
 在自定义 paletteProvider 中添加依赖注入
 
 ```javascript
-import PaletteProvider from "bpmn-js/lib/features/palette/PaletteProvider";
+import PaletteProvider from 'bpmn-js/lib/features/palette/PaletteProvider'
 
-export default function CustomPalette(palette, create, elementFactory, spaceTool, lassoTool, handTool, globalConnect, translate) {
-  PaletteProvider.call(this, palette, create, elementFactory, spaceTool, lassoTool, handTool, globalConnect, translate, 2000);
+export default function CustomPalette(
+  palette,
+  create,
+  elementFactory,
+  spaceTool,
+  lassoTool,
+  handTool,
+  globalConnect,
+  translate
+) {
+  PaletteProvider.call(
+    this,
+    palette,
+    create,
+    elementFactory,
+    spaceTool,
+    lassoTool,
+    handTool,
+    globalConnect,
+    translate,
+    2000
+  )
 }
 
 // 注入依赖
-CustomPalette.$inject = ["palette", "create", "elementFactory", "spaceTool", "lassoTool", "handTool", "globalConnect", "translate"];
+CustomPalette.$inject = [
+  'palette',
+  'create',
+  'elementFactory',
+  'spaceTool',
+  'lassoTool',
+  'handTool',
+  'globalConnect',
+  'translate'
+]
 ```
 
 > 🚀 注意：注入的依赖顺序需要和传入构造函数的参数顺序一致。
@@ -184,7 +208,7 @@ CustomPalette.$inject = ["palette", "create", "elementFactory", "spaceTool", "la
 连线默认共三种状态：默认路径、普通路径、条件路径。
 
 1. 普通路径：`businessObject` 对象内 **不包含** `conditionExpression` 属性，来源节点 `default` 属性不指向该路径
-2. 默认路径：`businessObject` 对象内 **不包含** `conditionExpression` 属性，来源节点 `default` 属性不指向该路径实例，体现在 xml 上为来源节点会增加一个 `default` 属性，属性值为路径id
+2. 默认路径：`businessObject` 对象内 **不包含** `conditionExpression` 属性，来源节点 `default` 属性不指向该路径实例，体现在 xml 上为来源节点会增加一个 `default` 属性，属性值为路径 id
 3. 条件路径：`businessObject` 对象内 **包含** `conditionExpression` 属性
 
 ## 8. 使用 Modeler 实现仅查看的功能
@@ -224,37 +248,35 @@ new BpmnModeler({
 
    ![img](https://secure2.wostatic.cn/static/rVaWL6sPA5zkFgSDRa1SMJ/image.png?auth_key=1640139454-i8FK7hnEvtzVattPAtU6pV-0-7d1d20d48deffc890e9f052084a4cd5f&image_process=format,webp)
 
-   > 📌 每个操作对象包含以下几个属性: 
+   > 📌 每个操作对象包含以下几个属性:
    >
    > 1. group：分组
    > 2. className：图标类名
-   > 3. title：元素title
+   > 3. title：元素 title
    > 4. action： 一个对象，包含鼠标事件对应的操作方法组成的对象，键名为事件名；常用有 click，dragstart
-   > 5. separator：boolean 值，表示是否是一个分割线，会根据 group 属性的值插入该分组下方 
+   > 5. separator：boolean 值，表示是否是一个分割线，会根据 group 属性的值插入该分组下方
 
 2. 编写`index.js` 入口文件
 
    ```javascript
    // custom/index.js
-   import CustomPalette from "./CustomPalette";
-   
-   export default {
-     __init__: ["customPalette"],
-     customPalette: ["type", CustomPalette]
-   };
-   ```
+   import CustomPalette from './CustomPalette'
 
-   
+   export default {
+     __init__: ['customPalette'],
+     customPalette: ['type', CustomPalette]
+   }
+   ```
 
 3. 使用
 
    ```javascript
-   import CustomPaletteProvider from "../package/designer/plugins/palette";
-   
+   import CustomPaletteProvider from '../package/designer/plugins/palette'
+
    this.bpmnModeler = new BpmnModeler({
-           container: this.$refs["bpmn-canvas"],
-           additionalModules: [CustomPaletteProvider]
-         });
+     container: this.$refs['bpmn-canvas'],
+     additionalModules: [CustomPaletteProvider]
+   })
    ```
 
 ## 10. 自定义侧边栏
@@ -272,7 +294,7 @@ this.bpmnModeler = new BpmnModeler({
 
 之后，可以仿照原生侧边栏的定义方式，通过自定义鼠标事件的方法来定义自己的侧边栏元素效果。
 
-以下为Vue单文件实现方式：
+以下为 Vue 单文件实现方式：
 
 ```vue
 <template>
@@ -308,20 +330,20 @@ export default {
 };
 ```
 
-## 11. 阻止双击事件编辑label
+## 11. 阻止双击事件编辑 label
 
-> 🚀 这个情况也适用于阻止单击显示contextPad等等情况。
+> 🚀 这个情况也适用于阻止单击显示 contextPad 等等情况。
 
 第一种方式：
 
 自定义事件监听方法，设置更高的权重，并返回 null
 
 ```javascript
-const eventBus = modeler.get("eventBus");
-eventBus.on("element.dblclick", 3000, function(context) {
+const eventBus = modeler.get('eventBus')
+eventBus.on('element.dblclick', 3000, function (context) {
   // 如果不返回null或者undefined，或者别的返回值。如果不设置返回值，可能不会起到阻止该事件继续执行的作用
-  return null;
-});
+  return null
+})
 ```
 
 第二种方式：
@@ -330,25 +352,41 @@ eventBus.on("element.dblclick", 3000, function(context) {
 
 ```javascript
 this.bpmnModeler = new BpmnModeler({
-  container: this.$refs["bpmn-canvas"],
-  additionalModules: [
-    { labelEditingProvider: ["value", ""] }
-  ]
-});
+  container: this.$refs['bpmn-canvas'],
+  additionalModules: [{ labelEditingProvider: ['value', ''] }]
+})
 ```
 
 ## 12. 实例化时报错：Error: No provider for "xxx" (Resolving: xxx)
 
-这种情况一般发生在改写原生的Provider方法，或者自定义新的插件构造方法的时候出现。主要原因是因为没有在构造方法下注入该方法实例与其他插件的依赖关系。
+这种情况一般发生在改写原生的 Provider 方法，或者自定义新的插件构造方法的时候出现。主要原因是因为没有在构造方法下注入该方法实例与其他插件的依赖关系。
 
 处理方法如下：
 
 ```javascript
 // 以自定义构造方法为例
-export default function CustomPalette(palette, create, elementFactory, spaceTool, lassoTool, handTool, globalConnect, translate) {
+export default function CustomPalette(
+  palette,
+  create,
+  elementFactory,
+  spaceTool,
+  lassoTool,
+  handTool,
+  globalConnect,
+  translate
+) {
   // ...
 }
-CustomPalette.$inject = ["palette", "create", "elementFactory", "spaceTool", "lassoTool", "handTool", "globalConnect", "translate"]
+CustomPalette.$inject = [
+  'palette',
+  'create',
+  'elementFactory',
+  'spaceTool',
+  'lassoTool',
+  'handTool',
+  'globalConnect',
+  'translate'
+]
 ```
 
 > 🚩 特别注意：构造函数使用的参数顺序必须与注入的依赖数组顺序一致。
@@ -356,49 +394,45 @@ CustomPalette.$inject = ["palette", "create", "elementFactory", "spaceTool", "la
 ## 13. 直接获取 Process 元素
 
 ```javascript
-const canvas = modeler.get("canvas");
+const canvas = modeler.get('canvas')
 
-const rootElement = canvas.getRootElement();
+const rootElement = canvas.getRootElement()
 
-console.log("Process Id:", rootElement.id);
+console.log('Process Id:', rootElement.id)
 ```
 
-## 14. 节点resize改变大小
+## 14. 节点 resize 改变大小
 
-> 已有仓库实现基础节点的resize功能 [bpmn-js-task-resize](https://github.com/ElCondor1969/bpmn-js-task-resize)
+> 已有仓库实现基础节点的 resize 功能 [bpmn-js-task-resize](https://github.com/ElCondor1969/bpmn-js-task-resize)
 
 使用：
 
 ```javascript
-import BpmnModeler from 'bpmn-js/lib/Modeler';
+import BpmnModeler from 'bpmn-js/lib/Modeler'
 
-import resizeTask from 'bpmn-js-task-resize/lib';
+import resizeTask from 'bpmn-js-task-resize/lib'
 
 var bpmnJS = new BpmnModeler({
-  additionalModules: [
-    resizeTask
-  ],
+  additionalModules: [resizeTask],
   taskResizingEnabled: true, // 允许任务类节点resize
   eventResizingEnabled: true // 允许开始结束等事件类节点resize
-});
+})
 ```
 
 ## 15. 子流程节点的手动展开/收起
 
 ```javascript
-const modeling = modeler.get("modeling");
+const modeling = modeler.get('modeling')
 
 // bpmnElement 为选中的子流程元素
-modeling.toggleCollapse(this.bpmnElement);
+modeling.toggleCollapse(this.bpmnElement)
 ```
 
 ## 16. 无法拖入元素
 
 ![错误图片](https://gitee.com/MiyueSC/image-bed/raw/master/image-20220211164505735.png)
 
-
-
-这个错误通常出现在初始化时没有导入空白流程元素，插入节点元素时需要已存在一个空白 Process，可以在初始化 Modeler 完成后传入一个xml字符串。
+这个错误通常出现在初始化时没有导入空白流程元素，插入节点元素时需要已存在一个空白 Process，可以在初始化 Modeler 完成后传入一个 xml 字符串。
 
 ```javascript
 // defaultEmpty.js
@@ -410,7 +444,7 @@ export default (key, name, type) => {
     flowable: "http://flowable.org/bpmn"
   };
   return `<?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions 
+<bpmn2:definitions
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL"
   xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
@@ -457,4 +491,3 @@ export default {
   }
 }
 ```
-

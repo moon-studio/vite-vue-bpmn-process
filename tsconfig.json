@@ -24,40 +24,18 @@
     // 指定ECMAScript目标版本
     "target": "esnext",
     // 要包含的类型声明文件名列表
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "isolatedModules": false,
     // 模块名到基于 baseUrl的路径映射的列表。
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "types/*": [
-        "types/*"
-      ]
+      "@/*": ["src/*"],
+      "types/*": ["types/*"]
     },
     // 编译过程中需要引入的库文件的列表。
-    "lib": [
-      "ESNext",
-      "DOM",
-      "DOM.Iterable",
-      "ScriptHost"
-    ],
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "ScriptHost"],
     "jsx": "preserve",
-    "resolveJsonModule": true,
+    "resolveJsonModule": true
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "types/**/*.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "public",
-    "docs"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "types/**/*.d.ts"],
+  "exclude": ["node_modules", "dist", "public", "docs"]
 }

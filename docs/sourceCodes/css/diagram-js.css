@@ -9,7 +9,7 @@
   --color-grey-225-10-80: hsl(225, 10%, 80%);
   --color-grey-225-10-85: hsl(225, 10%, 85%);
   --color-grey-225-10-90: hsl(225, 10%, 90%);
-  --color-grey-225-10-95: hsl(225, 10%, 95%); 
+  --color-grey-225-10-95: hsl(225, 10%, 95%);
   --color-grey-225-10-97: hsl(225, 10%, 97%);
 
   --color-blue-205-100-45: hsl(205, 100%, 45%);
@@ -25,8 +25,8 @@
   --color-red-360-100-97: hsl(360, 100%, 97%);
 
   --color-white: hsl(0, 0%, 100%);
-  --color-black: hsl(0, 0%, 0%); 
-  --color-black-opacity-05: hsla(0, 0%, 0%, 5%); 
+  --color-black: hsl(0, 0%, 0%);
+  --color-black-opacity-05: hsla(0, 0%, 0%, 5%);
   --color-black-opacity-10: hsla(0, 0%, 0%, 10%);
 
   --bendpoint-fill-color: var(--color-blue-205-100-45-opacity-30);
@@ -97,7 +97,7 @@
 .djs-element.selected .djs-outline {
   visibility: visible;
   shape-rendering: geometricPrecision;
-  stroke-dasharray: 3,3;
+  stroke-dasharray: 3, 3;
 }
 
 .djs-element.selected .djs-outline {
@@ -347,7 +347,6 @@ marker.djs-dragger tspan {
 .djs-cursor-resize-ew {
   cursor: ew-resize;
 }
-
 
 /**
  * snapping
@@ -692,9 +691,8 @@ marker.djs-dragger tspan {
 .djs-segment-dragger.djs-dragging,
 .djs-bendpoint.djs-dragging {
   display: block;
-  opacity: 1.0;
+  opacity: 1;
 }
-
 
 /**
  * tooltips
@@ -717,7 +715,6 @@ marker.djs-dragger tspan {
   opacity: 1;
 }
 
-
 /**
  * search pad
  */
@@ -739,7 +736,8 @@ marker.djs-dragger tspan {
   background: var(--search-container-background-color);
   border: solid 1px var(--search-container-border-color);
   border-radius: 2px;
-  box-shadow: 0 0 0 2px var(--search-container-box-shadow-color), 0 0 0 1px var(--search-container-box-shadow-inset-color) inset;
+  box-shadow: 0 0 0 2px var(--search-container-box-shadow-color),
+    0 0 0 1px var(--search-container-box-shadow-inset-color) inset;
 }
 
 .djs-search-container:not(.open) {

@@ -100,7 +100,12 @@ export default class ElementTemplatesLoader {
   }
 }
 
-ElementTemplatesLoader.$inject = ['config.elementTemplates', 'eventBus', 'elementTemplates', 'moddle']
+ElementTemplatesLoader.$inject = [
+  'config.elementTemplates',
+  'eventBus',
+  'elementTemplates',
+  'moddle'
+]
 
 ///////////////////////////////////////////////////////////////////////////////////////////// ElementTemplates
 function CreateMenu(elementTemplates, elementFactory, injector, changeMenu) {

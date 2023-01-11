@@ -8,7 +8,10 @@
               if (Array.isArray(e)) return i(e)
             })(e) ||
             (function (e) {
-              if (('undefined' != typeof Symbol && null != e[Symbol.iterator]) || null != e['@@iterator'])
+              if (
+                ('undefined' != typeof Symbol && null != e[Symbol.iterator]) ||
+                null != e['@@iterator']
+              )
                 return Array.from(e)
             })(e) ||
             (function (e, t) {
@@ -69,7 +72,8 @@
           return i
         }),
           (e.exports.vv = function () {
-            for (var e = [], t = arguments.length, n = new Array(t), r = 0; r < t; r++) n[r] = arguments[r]
+            for (var e = [], t = arguments.length, n = new Array(t), r = 0; r < t; r++)
+              n[r] = arguments[r]
             for (var i = 0, o = n; i < o.length; i++) {
               var c = o[i]
               if (a(c) || l(c)) return null
@@ -79,7 +83,10 @@
           }),
           (e.exports.QY = function (e, t) {
             var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : '.'
-            return !(a(e) || l(e) || a(t) || l(t)) && (s(e) || (e = p(e, n)), s(t) || (t = p(t, n)), e === t)
+            return (
+              !(a(e) || l(e) || a(t) || l(t)) &&
+              (s(e) || (e = p(e, n)), s(t) || (t = p(t, n)), e === t)
+            )
           })
       },
       185: (e, t, n) => {
@@ -265,7 +272,11 @@
         }
         function O(e) {
           e = M(e)
-          for (var t = {}, n = arguments.length, r = new Array(n > 1 ? n - 1 : 0), i = 1; i < n; i++)
+          for (
+            var t = {}, n = arguments.length, r = new Array(n > 1 ? n - 1 : 0), i = 1;
+            i < n;
+            i++
+          )
             r[i - 1] = arguments[i]
           b(r, function (n) {
             return S(n, e, t)
@@ -365,7 +376,10 @@
                   return typeof e
                 }
               : function (e) {
-                  return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                  return e &&
+                    'function' == typeof Symbol &&
+                    e.constructor === Symbol &&
+                    e !== Symbol.prototype
                     ? 'symbol'
                     : typeof e
                 })(e)
@@ -382,7 +396,8 @@
             }).apply(this, arguments)
         }
         function q(e) {
-          for (var t = arguments.length, n = new Array(t > 1 ? t - 1 : 0), r = 1; r < t; r++) n[r - 1] = arguments[r]
+          for (var t = arguments.length, n = new Array(t > 1 ? t - 1 : 0), r = 1; r < t; r++)
+            n[r - 1] = arguments[r]
           return V.apply(void 0, [e].concat(n))
         }
         function H(e, t, n) {
@@ -390,12 +405,15 @@
           return (
             b(t, function (e, i) {
               if ('number' != typeof e && 'string' != typeof e)
-                throw new Error('illegal key type: ' + F(e) + '. Key should be of type number or string.')
+                throw new Error(
+                  'illegal key type: ' + F(e) + '. Key should be of type number or string.'
+                )
               if ('constructor' === e) throw new Error('illegal key: constructor')
               if ('__proto__' === e) throw new Error('illegal key: __proto__')
               var o = t[i + 1],
                 c = r[e]
-              s(o) && l(c) && (c = r[e] = isNaN(+o) ? {} : []), a(o) ? (a(n) ? delete r[e] : (r[e] = n)) : (r = c)
+              s(o) && l(c) && (c = r[e] = isNaN(+o) ? {} : []),
+                a(o) ? (a(n) ? delete r[e] : (r[e] = n)) : (r = c)
             }),
             e
           )
@@ -430,7 +448,8 @@
           )
         }
         function G(e) {
-          for (var t = arguments.length, n = new Array(t > 1 ? t - 1 : 0), r = 1; r < t; r++) n[r - 1] = arguments[r]
+          for (var t = arguments.length, n = new Array(t > 1 ? t - 1 : 0), r = 1; r < t; r++)
+            n[r - 1] = arguments[r]
           return n.length
             ? (b(n, function (t) {
                 t &&
@@ -462,7 +481,13 @@
         var r = n(8538),
           i = {}
         function o() {
-          return (0, r.KV)() ? n.g : 'undefined' != typeof window ? window : 'undefined' != typeof self ? self : i
+          return (0, r.KV)()
+            ? n.g
+            : 'undefined' != typeof window
+            ? window
+            : 'undefined' != typeof self
+            ? self
+            : i
         }
         function a() {
           var e = o(),
@@ -493,7 +518,9 @@
           if (e.message) return e.message
           if (e.exception && e.exception.values && e.exception.values[0]) {
             var t = e.exception.values[0]
-            return t.type && t.value ? t.type + ': ' + t.value : t.type || t.value || e.event_id || '<unknown>'
+            return t.type && t.value
+              ? t.type + ': ' + t.value
+              : t.type || t.value || e.event_id || '<unknown>'
           }
           return e.event_id || '<unknown>'
         }
@@ -503,7 +530,9 @@
           var n = t.console,
             r = {}
           ;['debug', 'info', 'warn', 'error', 'log', 'assert'].forEach(function (e) {
-            e in t.console && n[e].__sentry_original__ && ((r[e] = n[e]), (n[e] = n[e].__sentry_original__))
+            e in t.console &&
+              n[e].__sentry_original__ &&
+              ((r[e] = n[e]), (n[e] = n[e].__sentry_original__))
           })
           var i = e()
           return (
@@ -547,7 +576,10 @@
       8538: (e, t, n) => {
         'use strict'
         function r() {
-          return '[object process]' === Object.prototype.toString.call('undefined' != typeof process ? process : 0)
+          return (
+            '[object process]' ===
+            Object.prototype.toString.call('undefined' != typeof process ? process : 0)
+          )
         }
         function i(e, t) {
           return e.require(t)
@@ -640,7 +672,10 @@
                 if (Array.isArray(e)) return e
               })(i) ||
                 (function (e, t) {
-                  var n = null == e ? null : ('undefined' != typeof Symbol && e[Symbol.iterator]) || e['@@iterator']
+                  var n =
+                    null == e
+                      ? null
+                      : ('undefined' != typeof Symbol && e[Symbol.iterator]) || e['@@iterator']
                   if (null != n) {
                     var r,
                       i,
@@ -681,7 +716,10 @@
                 if (Array.isArray(e)) return n(e)
               })((a = e)) ||
               (function (e) {
-                if (('undefined' != typeof Symbol && null != e[Symbol.iterator]) || null != e['@@iterator'])
+                if (
+                  ('undefined' != typeof Symbol && null != e[Symbol.iterator]) ||
+                  null != e['@@iterator']
+                )
                   return Array.from(e)
               })(a) ||
               t(a) ||
@@ -701,7 +739,11 @@
         'use strict'
         function t(e, t) {
           return {
-            args: [e.shape('source'), e.string('type'), e.point('delta', { defaultValue: { x: 200, y: 0 } })],
+            args: [
+              e.shape('source'),
+              e.string('type'),
+              e.point('delta', { defaultValue: { x: 200, y: 0 } })
+            ],
             exec: function (e, n, r) {
               var i = { x: e.x + e.width / 2 + r.x, y: e.y + e.height / 2 + r.y }
               return t.appendShape(e, { type: n }, i).id
@@ -714,7 +756,12 @@
         'use strict'
         function t(e, t) {
           return {
-            args: [e.shape('source'), e.shape('target'), e.string('type'), e.shape('parent', { optional: !0 })],
+            args: [
+              e.shape('source'),
+              e.shape('target'),
+              e.string('type'),
+              e.shape('parent', { optional: !0 })
+            ],
             exec: function (e, n, r, i) {
               return t.createConnection(e, n, { type: r }, i || e.parent).id
             }
@@ -726,7 +773,12 @@
         'use strict'
         function t(e, t) {
           return {
-            args: [e.string('type'), e.point('position'), e.shape('parent'), e.bool('isAttach', { optional: !0 })],
+            args: [
+              e.string('type'),
+              e.point('position'),
+              e.shape('parent'),
+              e.bool('isAttach', { optional: !0 })
+            ],
             exec: function (e, n, r, i) {
               var o
               return i && (o = { attach: !0 }), t.createShape({ type: e }, n, r, o).id
@@ -897,7 +949,10 @@
                   return typeof e
                 }
               : function (e) {
-                  return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                  return e &&
+                    'function' == typeof Symbol &&
+                    e.constructor === Symbol &&
+                    e !== Symbol.prototype
                     ? 'symbol'
                     : typeof e
                 })(e)
@@ -917,7 +972,8 @@
                     s && e.push(s)
                   }
                 } else if ('object' === r)
-                  if (n.toString === Object.prototype.toString) for (var l in n) o.call(n, l) && n[l] && e.push(l)
+                  if (n.toString === Object.prototype.toString)
+                    for (var l in n) o.call(n, l) && n[l] && e.push(l)
                   else e.push(n.toString())
               }
             }
@@ -954,7 +1010,9 @@
                 }
               for (var s = 0; s < e.length; s++) {
                 var l = [].concat(e[s])
-                ;(r && i[l[0]]) || (n && (l[2] ? (l[2] = ''.concat(n, ' and ').concat(l[2])) : (l[2] = n)), t.push(l))
+                ;(r && i[l[0]]) ||
+                  (n && (l[2] ? (l[2] = ''.concat(n, ' and ').concat(l[2])) : (l[2] = n)),
+                  t.push(l))
               }
             }),
             t
@@ -977,7 +1035,8 @@
                 if (Array.isArray(e)) return e
               })((n = e)) ||
                 (function (e, t) {
-                  var n = e && (('undefined' != typeof Symbol && e[Symbol.iterator]) || e['@@iterator'])
+                  var n =
+                    e && (('undefined' != typeof Symbol && e[Symbol.iterator]) || e['@@iterator'])
                   if (null != n) {
                     var r,
                       i,
@@ -1059,7 +1118,10 @@
                   return typeof e
                 }
               : function (e) {
-                  return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                  return e &&
+                    'function' == typeof Symbol &&
+                    e.constructor === Symbol &&
+                    e !== Symbol.prototype
                     ? 'symbol'
                     : typeof e
                 })(e)
@@ -1069,7 +1131,11 @@
             if (e.CSS && e.CSS.escape) return e.CSS.escape
             var t = function (e) {
               if (0 == arguments.length) throw new TypeError('`CSS.escape` requires an argument.')
-              for (var t, n = String(e), r = n.length, i = -1, o = '', a = n.charCodeAt(0); ++i < r; )
+              for (
+                var t, n = String(e), r = n.length, i = -1, o = '', a = n.charCodeAt(0);
+                ++i < r;
+
+              )
                 0 != (t = n.charCodeAt(i))
                   ? (o +=
                       (t >= 1 && t <= 31) ||
@@ -1096,7 +1162,8 @@
           'object' == l(t)
             ? (e.exports = s(a))
             : ((i = []),
-              void 0 === (o = 'function' == typeof (r = s.bind(a, a)) ? r.apply(t, i) : r) || (e.exports = o))
+              void 0 === (o = 'function' == typeof (r = s.bind(a, a)) ? r.apply(t, i) : r) ||
+                (e.exports = o))
       },
       1161: (e) => {
         'function' == typeof Object.create
@@ -1190,9 +1257,13 @@
           for (
             var p = (c = c > 1 ? 1 : c < 0 ? 0 : c) / 2,
               u = [
-                -0.1252, 0.1252, -0.3678, 0.3678, -0.5873, 0.5873, -0.7699, 0.7699, -0.9041, 0.9041, -0.9816, 0.9816
+                -0.1252, 0.1252, -0.3678, 0.3678, -0.5873, 0.5873, -0.7699, 0.7699, -0.9041, 0.9041,
+                -0.9816, 0.9816
               ],
-              d = [0.2491, 0.2491, 0.2335, 0.2335, 0.2032, 0.2032, 0.1601, 0.1601, 0.1069, 0.1069, 0.0472, 0.0472],
+              d = [
+                0.2491, 0.2491, 0.2335, 0.2335, 0.2032, 0.2032, 0.1601, 0.1601, 0.1069, 0.1069,
+                0.0472, 0.0472
+              ],
               m = 0,
               h = 0;
             h < 12;
@@ -1271,7 +1342,8 @@
             var f = b.apply(0, e.concat(h / s))
             p.push({ x: f.x, y: f.y, t: h / s })
           }
-          for (h = 0; h < c + 1; h++) (f = b.apply(0, t.concat(h / c))), u.push({ x: f.x, y: f.y, t: h / c })
+          for (h = 0; h < c + 1; h++)
+            (f = b.apply(0, t.concat(h / c))), u.push({ x: f.x, y: f.y, t: h / c })
           for (h = 0; h < s; h++)
             for (var g = 0; g < c; g++) {
               var y,
@@ -1287,7 +1359,11 @@
                 d[y] = !0
                 var j = x.t + l((B[O] - x[O]) / (C[O] - x[O])) * (C.t - x.t),
                   M = P.t + l((B[T] - P[T]) / (k[T] - P[T])) * (k.t - P.t)
-                j >= 0 && j <= 1 && M >= 0 && M <= 1 && (n ? m++ : m.push({ x: B.x, y: B.y, t1: j, t2: M }))
+                j >= 0 &&
+                  j <= 1 &&
+                  M >= 0 &&
+                  M <= 1 &&
+                  (n ? m++ : m.push({ x: B.x, y: B.y, t1: j, t2: M }))
               }
             }
           return m
@@ -1315,7 +1391,9 @@
                         }),
                           'm' == a &&
                             o.length > 2 &&
-                            (r.push([t].concat(o.splice(0, 2))), (a = 'l'), (t = 'm' == t ? 'l' : 'L'));
+                            (r.push([t].concat(o.splice(0, 2))),
+                            (a = 'l'),
+                            (t = 'm' == t ? 'l' : 'L'));
                         o.length >= n[a] && (r.push([t].concat(o.splice(0, n[a]))), n[a]);
 
                       );
@@ -1406,7 +1484,10 @@
                   i = (e.count = e.count || [])
                 return d(r, n)
                   ? (h(i, n), r[n])
-                  : (i.length >= 1e3 && delete r[i.shift()], i.push(n), (r[n] = v.apply(0, t)), r[n])
+                  : (i.length >= 1e3 && delete r[i.shift()],
+                    i.push(n),
+                    (r[n] = v.apply(0, t)),
+                    r[n])
               })
           if (m) (O = m[0]), (T = m[1]), (k = m[2]), (S = m[3])
           else {
@@ -1417,7 +1498,9 @@
             _ > 1 && ((n *= _ = r.sqrt(_)), (o *= _))
             var w = n * n,
               C = o * o,
-              P = (s == c ? -1 : 1) * r.sqrt(l((w * C - w * x * x - C * E * E) / (w * x * x + C * E * E))),
+              P =
+                (s == c ? -1 : 1) *
+                r.sqrt(l((w * C - w * x * x - C * E * E) / (w * x * x + C * E * E))),
               k = (P * n * x) / o + (e + p) / 2,
               S = (P * -o * E) / n + (t + u) / 2,
               O = r.asin(((t - S) / o).toFixed(9)),
@@ -1433,7 +1516,12 @@
               D = p,
               R = u
             ;(T = O + g * (c && T > O ? 1 : -1)),
-              (b = B((p = k + n * r.cos(T)), (u = S + o * r.sin(T)), n, o, a, 0, c, D, R, [T, M, k, S]))
+              (b = B((p = k + n * r.cos(T)), (u = S + o * r.sin(T)), n, o, a, 0, c, D, R, [
+                T,
+                M,
+                k,
+                S
+              ]))
           }
           j = T - O
           var z = r.cos(O),
@@ -1448,7 +1536,11 @@
             U = [p + V * L, u - q * N],
             W = [p, u]
           if ((($[0] = 2 * H[0] - $[0]), ($[1] = 2 * H[1] - $[1]), m)) return [$, U, W].concat(b)
-          for (var G = [], Q = 0, K = (b = [$, U, W].concat(b).join().split(',')).length; Q < K; Q++)
+          for (
+            var G = [], Q = 0, K = (b = [$, U, W].concat(b).join().split(',')).length;
+            Q < K;
+            Q++
+          )
             G[Q] = Q % 2 ? A(b[Q - 1], b[Q], y).y : A(b[Q], b[Q + 1], y).x
           return G
         }
@@ -1456,8 +1548,12 @@
           for (var d, m, h, f, v, g, y, b, A = [], E = [[], []], x = 0; x < 2; ++x)
             if (
               (0 == x
-                ? ((m = 6 * e - 12 * n + 6 * s), (d = -3 * e + 9 * n - 9 * s + 3 * p), (h = 3 * n - 3 * e))
-                : ((m = 6 * t - 12 * i + 6 * c), (d = -3 * t + 9 * i - 9 * c + 3 * u), (h = 3 * i - 3 * t)),
+                ? ((m = 6 * e - 12 * n + 6 * s),
+                  (d = -3 * e + 9 * n - 9 * s + 3 * p),
+                  (h = 3 * n - 3 * e))
+                : ((m = 6 * t - 12 * i + 6 * c),
+                  (d = -3 * t + 9 * i - 9 * c + 3 * u),
+                  (h = 3 * i - 3 * t)),
               l(d) < 1e-12)
             ) {
               if (l(m) < 1e-12) continue
@@ -1478,7 +1574,12 @@
             (E[0][C + 1] = p),
             (E[1][C + 1] = u),
             (E[0].length = E[1].length = C + 2),
-            { x0: o.apply(0, E[0]), y0: o.apply(0, E[1]), x1: a.apply(0, E[0]), y1: a.apply(0, E[1]) }
+            {
+              x0: o.apply(0, E[0]),
+              y0: o.apply(0, E[1]),
+              x1: a.apply(0, E[0]),
+              y1: a.apply(0, E[1])
+            }
           )
         }
         function M(e) {
@@ -1498,7 +1599,9 @@
                     e = ['C'].concat(B.apply(0, [t.x, t.y].concat(e.slice(1))))
                     break
                   case 'S':
-                    'C' == n || 'S' == n ? ((r = 2 * t.x - t.bx), (i = 2 * t.y - t.by)) : ((r = t.x), (i = t.y)),
+                    'C' == n || 'S' == n
+                      ? ((r = 2 * t.x - t.bx), (i = 2 * t.y - t.by))
+                      : ((r = t.x), (i = t.y)),
                       (e = ['C', r, i].concat(e.slice(1)))
                     break
                   case 'T':
@@ -1508,7 +1611,9 @@
                       (e = ['C'].concat(T(t.x, t.y, t.qx, t.qy, e[1], e[2])))
                     break
                   case 'Q':
-                    ;(t.qx = e[1]), (t.qy = e[2]), (e = ['C'].concat(T(t.x, t.y, e[1], e[2], e[3], e[4])))
+                    ;(t.qx = e[1]),
+                      (t.qy = e[2]),
+                      (e = ['C'].concat(T(t.x, t.y, e[1], e[2], e[3], e[4])))
                     break
                   case 'L':
                     e = ['C'].concat(O(t.x, t.y, e[1], e[2]))
@@ -1527,7 +1632,8 @@
               a = function (e, t) {
                 if (e[t].length > 7) {
                   e[t].shift()
-                  for (var n = e[t]; n.length; ) (s[t] = 'A'), e.splice(t++, 0, ['C'].concat(n.splice(0, 6)))
+                  for (var n = e[t]; n.length; )
+                    (s[t] = 'A'), e.splice(t++, 0, ['C'].concat(n.splice(0, 6)))
                   e.splice(t, 1), (u = r.length)
                 }
               },
@@ -1546,7 +1652,10 @@
               a(r, p)
             var d = r[p],
               m = d.length
-            ;(i.x = d[m - 2]), (i.y = d[m - 1]), (i.bx = n(d[m - 4]) || i.x), (i.by = n(d[m - 3]) || i.y)
+            ;(i.x = d[m - 2]),
+              (i.y = d[m - 1]),
+              (i.bx = n(d[m - 4]) || i.x),
+              (i.by = n(d[m - 3]) || i.y)
           }
           return (t.curve = y(r)), r
         }
@@ -1605,7 +1714,9 @@
                   'true' === String(this) && ((l = (c = [c, l])[0]), (c = c[1])),
                   p &&
                     p.length < 2048 &&
-                    ((h = p.split('/').pop().split('?')[0]), (u.href = p), -1 !== u.href.indexOf(p)))
+                    ((h = p.split('/').pop().split('?')[0]),
+                    (u.href = p),
+                    -1 !== u.href.indexOf(p)))
                 ) {
                   var f = new XMLHttpRequest()
                   return (
@@ -1625,7 +1736,8 @@
                     return navigator.msSaveBlob ? navigator.msSaveBlob(b(c), h) : A(c)
                   l = (c = b(c)).type || s
                 } else if (/([\x80-\xff])/.test(c)) {
-                  for (var v = 0, g = new Uint8Array(c.length), y = g.length; v < y; ++v) g[v] = c.charCodeAt(v)
+                  for (var v = 0, g = new Uint8Array(c.length), y = g.length; v < y; ++v)
+                    g[v] = c.charCodeAt(v)
                   c = new m([g], { type: l })
                 }
                 function b(e) {
@@ -1709,7 +1821,10 @@
                   return typeof e
                 }
               : function (e) {
-                  return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                  return e &&
+                    'function' == typeof Symbol &&
+                    e.constructor === Symbol &&
+                    e !== Symbol.prototype
                     ? 'symbol'
                     : typeof e
                 })(e)
@@ -1753,7 +1868,8 @@
           c =
             'function' != typeof Object.assign
               ? function (e) {
-                  if (e === l || null === e) throw new TypeError('Cannot convert undefined or null to object')
+                  if (e === l || null === e)
+                    throw new TypeError('Cannot convert undefined or null to object')
                   for (var t = Object(e), n = 1; n < arguments.length; n++) {
                     var r = arguments[n]
                     if (r !== l && null !== r) for (var i in r) r.hasOwnProperty(i) && (t[i] = r[i])
@@ -1886,7 +2002,9 @@
                   r = t.pointers,
                   i = r.length
                 n.firstInput || (n.firstInput = U(t)),
-                  i > 1 && !n.firstMultiple ? (n.firstMultiple = U(t)) : 1 === i && (n.firstMultiple = !1)
+                  i > 1 && !n.firstMultiple
+                    ? (n.firstMultiple = U(t))
+                    : 1 === i && (n.firstMultiple = !1)
                 var o = n.firstInput,
                   a = n.firstMultiple,
                   s = a ? a.center : o.center,
@@ -1935,7 +2053,11 @@
                       var c = t.deltaX - a.deltaX,
                         p = t.deltaY - a.deltaY,
                         u = G(s, c, p)
-                      ;(r = u.x), (i = u.y), (n = m(u.x) > m(u.y) ? u.x : u.y), (o = Q(c, p)), (e.lastInterval = t)
+                      ;(r = u.x),
+                        (i = u.y),
+                        (n = m(u.x) > m(u.y) ? u.x : u.y),
+                        (o = Q(c, p)),
+                        (e.lastInterval = t)
                     } else (n = a.velocity), (r = a.velocityX), (i = a.velocityY), (o = a.direction)
                     ;(t.velocity = n), (t.velocityX = r), (t.velocityY = i), (t.direction = o)
                   })(n, t)
@@ -2001,10 +2123,21 @@
                 2 & t && 1 !== e.which && (t = 4),
                 this.pressed &&
                   (4 & t && (this.pressed = !1),
-                  this.callback(this.manager, t, { pointers: [e], changedPointers: [e], pointerType: F, srcEvent: e }))
+                  this.callback(this.manager, t, {
+                    pointers: [e],
+                    changedPointers: [e],
+                    pointerType: F,
+                    srcEvent: e
+                  }))
             }
           })
-          var te = { pointerdown: 1, pointermove: 2, pointerup: 4, pointercancel: 8, pointerout: 8 },
+          var te = {
+              pointerdown: 1,
+              pointermove: 2,
+              pointerup: 4,
+              pointercancel: 8,
+              pointerout: 8
+            },
             ne = { 2: L, 3: 'pen', 4: F, 5: 'kinect' },
             re = 'pointerdown',
             ie = 'pointermove pointerup pointercancel'
@@ -2026,10 +2159,17 @@
                   o = ne[e.pointerType] || e.pointerType,
                   a = o == L,
                   s = T(t, e.pointerId, 'pointerId')
-                1 & i && (0 === e.button || a) ? s < 0 && (t.push(e), (s = t.length - 1)) : 12 & i && (n = !0),
+                1 & i && (0 === e.button || a)
+                  ? s < 0 && (t.push(e), (s = t.length - 1))
+                  : 12 & i && (n = !0),
                   s < 0 ||
                     ((t[s] = e),
-                    this.callback(this.manager, i, { pointers: t, changedPointers: [e], pointerType: o, srcEvent: e }),
+                    this.callback(this.manager, i, {
+                      pointers: t,
+                      changedPointers: [e],
+                      pointerType: o,
+                      srcEvent: e
+                    }),
                     n && t.splice(s, 1))
               }
             })
@@ -2050,7 +2190,12 @@
               if ((1 === t && (this.started = !0), this.started)) {
                 var n = pe.call(this, e, t)
                 12 & t && n[0].length - n[1].length == 0 && (this.started = !1),
-                  this.callback(this.manager, t, { pointers: n[0], changedPointers: n[1], pointerType: L, srcEvent: e })
+                  this.callback(this.manager, t, {
+                    pointers: n[0],
+                    changedPointers: n[1],
+                    pointerType: L,
+                    srcEvent: e
+                  })
               }
             }
           })
@@ -2075,7 +2220,8 @@
               1 === t)
             )
               for (i = 0; i < o.length; ) (r[o[i].identifier] = !0), i++
-            for (i = 0; i < a.length; ) r[a[i].identifier] && s.push(a[i]), 12 & t && delete r[a[i].identifier], i++
+            for (i = 0; i < a.length; )
+              r[a[i].identifier] && s.push(a[i]), 12 & t && delete r[a[i].identifier], i++
             return s.length ? [j(o.concat(s), 'identifier', !0), s] : void 0
           }
           function fe() {
@@ -2104,7 +2250,11 @@
             }
           }
           function ye(e) {
-            for (var t = e.srcEvent.clientX, n = e.srcEvent.clientY, r = 0; r < this.lastTouches.length; r++) {
+            for (
+              var t = e.srcEvent.clientX, n = e.srcEvent.clientY, r = 0;
+              r < this.lastTouches.length;
+              r++
+            ) {
               var i = this.lastTouches[r],
                 o = Math.abs(t - i.x),
                 a = Math.abs(n - i.y)
@@ -2117,7 +2267,12 @@
               var t = ue[e.type],
                 n = he.call(this, e, t)
               n &&
-                this.callback(this.manager, t, { pointers: n[0], changedPointers: n[1], pointerType: L, srcEvent: e })
+                this.callback(this.manager, t, {
+                  pointers: n[0],
+                  changedPointers: n[1],
+                  pointerType: L,
+                  srcEvent: e
+                })
             }
           }),
             E(fe, H, {
@@ -2147,7 +2302,9 @@
               var e = {},
                 t = o.CSS && o.CSS.supports
               return (
-                ['auto', 'manipulation', 'pan-y', 'pan-x', 'pan-x pan-y', 'none'].forEach(function (n) {
+                ['auto', 'manipulation', 'pan-y', 'pan-x', 'pan-x pan-y', 'none'].forEach(function (
+                  n
+                ) {
                   e[n] = !t || o.CSS.supports('touch-action', n)
                 }),
                 e
@@ -2194,7 +2351,8 @@
                     c = e.deltaTime < 250
                   if (s && l && c) return
                 }
-                if (!a || !o) return i || (o && 6 & n) || (a && 24 & n) ? this.preventSrc(t) : void 0
+                if (!a || !o)
+                  return i || (o && 6 & n) || (a && 24 & n) ? this.preventSrc(t) : void 0
               }
             },
             preventSrc: function (e) {
@@ -2258,7 +2416,10 @@
               (this.recognizers = []),
               (this.oldCssProps = {}),
               (this.element = e),
-              (this.input = new (this.options.inputClass || (I ? oe : N ? me : z ? fe : ee))(this, $)),
+              (this.input = new (this.options.inputClass || (I ? oe : N ? me : z ? fe : ee))(
+                this,
+                $
+              )),
               (this.touchAction = new Se(this, this.options.touchAction)),
               He(this, !0),
               g(
@@ -2276,7 +2437,9 @@
             r.style &&
               (g(e.options.cssProps, function (i, o) {
                 ;(n = M(r.style, o)),
-                  t ? ((e.oldCssProps[n] = r.style[n]), (r.style[n] = i)) : (r.style[n] = e.oldCssProps[n] || '')
+                  t
+                    ? ((e.oldCssProps[n] = r.style[n]), (r.style[n] = i))
+                    : (r.style[n] = e.oldCssProps[n] || '')
               }),
               t || (e.oldCssProps = {}))
           }
@@ -2291,7 +2454,11 @@
               return t[(e = Me(e, this)).id] || ((t[e.id] = e), e.recognizeWith(this)), this
             },
             dropRecognizeWith: function (e) {
-              return v(e, 'dropRecognizeWith', this) || ((e = Me(e, this)), delete this.simultaneous[e.id]), this
+              return (
+                v(e, 'dropRecognizeWith', this) ||
+                  ((e = Me(e, this)), delete this.simultaneous[e.id]),
+                this
+              )
             },
             requireFailure: function (e) {
               if (v(e, 'requireFailure', this)) return this
@@ -2335,7 +2502,9 @@
             recognize: function (e) {
               var t = c({}, e)
               if (!_(this.options.enable, [this, t])) return this.reset(), void (this.state = Oe)
-              56 & this.state && (this.state = 1), (this.state = this.process(t)), 30 & this.state && this.tryEmit(t)
+              56 & this.state && (this.state = 1),
+                (this.state = this.process(t)),
+                30 & this.state && this.tryEmit(t)
             },
             process: function (e) {},
             getTouchAction: function () {},
@@ -2352,7 +2521,15 @@
                   n = e.eventType,
                   r = 6 & t,
                   i = this.attrTest(e)
-                return r && (8 & n || !i) ? 16 | t : r || i ? (4 & n ? 8 | t : 2 & t ? 4 | t : 2) : Oe
+                return r && (8 & n || !i)
+                  ? 16 | t
+                  : r || i
+                  ? 4 & n
+                    ? 8 | t
+                    : 2 & t
+                    ? 4 | t
+                    : 2
+                  : Oe
               }
             }),
             E(Re, De, {
@@ -2372,8 +2549,12 @@
                 return (
                   i & t.direction ||
                     (6 & t.direction
-                      ? ((i = 0 === o ? 1 : o < 0 ? 2 : 4), (n = o != this.pX), (r = Math.abs(e.deltaX)))
-                      : ((i = 0 === a ? 1 : a < 0 ? 8 : 16), (n = a != this.pY), (r = Math.abs(e.deltaY)))),
+                      ? ((i = 0 === o ? 1 : o < 0 ? 2 : 4),
+                        (n = o != this.pX),
+                        (r = Math.abs(e.deltaX)))
+                      : ((i = 0 === a ? 1 : a < 0 ? 8 : 16),
+                        (n = a != this.pY),
+                        (r = Math.abs(e.deltaY)))),
                   (e.direction = i),
                   n && r > t.threshold && i & t.direction
                 )
@@ -2439,7 +2620,8 @@
                 8 === this.state &&
                   (e && 4 & e.eventType
                     ? this.manager.emit(this.options.event + 'up', e)
-                    : ((this._input.timeStamp = h()), this.manager.emit(this.options.event, this._input)))
+                    : ((this._input.timeStamp = h()),
+                      this.manager.emit(this.options.event, this._input)))
               }
             }),
             E(Ne, De, {
@@ -2455,7 +2637,13 @@
               }
             }),
             E(Le, De, {
-              defaults: { event: 'swipe', threshold: 10, velocity: 0.3, direction: 30, pointers: 1 },
+              defaults: {
+                event: 'swipe',
+                threshold: 10,
+                velocity: 0.3,
+                direction: 30,
+                pointers: 1
+              },
               getTouchAction: function () {
                 return Re.prototype.getTouchAction.call(this)
               },
@@ -2478,7 +2666,8 @@
               },
               emit: function (e) {
                 var t = je(e.offsetDirection)
-                t && this.manager.emit(this.options.event + t, e), this.manager.emit(this.options.event, e)
+                t && this.manager.emit(this.options.event + t, e),
+                  this.manager.emit(this.options.event, e)
               }
             }),
             E(Fe, Te, {
@@ -2541,7 +2730,8 @@
               },
               emit: function () {
                 8 == this.state &&
-                  ((this._input.tapCount = this.count), this.manager.emit(this.options.event, this._input))
+                  ((this._input.tapCount = this.count),
+                  this.manager.emit(this.options.event, this._input))
               }
             }),
             (Ve.VERSION = '2.0.7'),
@@ -2574,7 +2764,8 @@
                 return (
                   c(this.options, e),
                   e.touchAction && this.touchAction.update(),
-                  e.inputTarget && (this.input.destroy(), (this.input.target = e.inputTarget), this.input.init()),
+                  e.inputTarget &&
+                    (this.input.destroy(), (this.input.target = e.inputTarget), this.input.init()),
                   this
                 )
               },
@@ -2591,20 +2782,29 @@
                   ;(!i || (i && 8 & i.state)) && (i = t.curRecognizer = null)
                   for (var o = 0; o < r.length; )
                     (n = r[o]),
-                      2 === t.stopped || (i && n != i && !n.canRecognizeWith(i)) ? n.reset() : n.recognize(e),
+                      2 === t.stopped || (i && n != i && !n.canRecognizeWith(i))
+                        ? n.reset()
+                        : n.recognize(e),
                       !i && 14 & n.state && (i = t.curRecognizer = n),
                       o++
                 }
               },
               get: function (e) {
                 if (e instanceof Te) return e
-                for (var t = this.recognizers, n = 0; n < t.length; n++) if (t[n].options.event == e) return t[n]
+                for (var t = this.recognizers, n = 0; n < t.length; n++)
+                  if (t[n].options.event == e) return t[n]
                 return null
               },
               add: function (e) {
                 if (v(e, 'add', this)) return this
                 var t = this.get(e.options.event)
-                return t && this.remove(t), this.recognizers.push(e), (e.manager = this), this.touchAction.update(), e
+                return (
+                  t && this.remove(t),
+                  this.recognizers.push(e),
+                  (e.manager = this),
+                  this.touchAction.update(),
+                  e
+                )
               },
               remove: function (e) {
                 if (v(e, 'remove', this)) return this
@@ -2721,7 +2921,10 @@
                   return typeof e
                 }
               : function (e) {
-                  return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                  return e &&
+                    'function' == typeof Symbol &&
+                    e.constructor === Symbol &&
+                    e !== Symbol.prototype
                     ? 'symbol'
                     : typeof e
                 })(e)
@@ -2758,7 +2961,11 @@
               v = f.call(Object),
               g = {},
               y = function (e) {
-                return 'function' == typeof e && 'number' != typeof e.nodeType && 'function' != typeof e.item
+                return (
+                  'function' == typeof e &&
+                  'number' != typeof e.nodeType &&
+                  'function' != typeof e.item
+                )
               },
               b = function (e) {
                 return null != e && e === e.window
@@ -2770,11 +2977,16 @@
                 i,
                 o = (n = n || A).createElement('script')
               if (((o.text = e), t))
-                for (r in E) (i = t[r] || (t.getAttribute && t.getAttribute(r))) && o.setAttribute(r, i)
+                for (r in E)
+                  (i = t[r] || (t.getAttribute && t.getAttribute(r))) && o.setAttribute(r, i)
               n.head.appendChild(o).parentNode.removeChild(o)
             }
             function _(e) {
-              return null == e ? e + '' : 'object' === i(e) || 'function' == typeof e ? d[m.call(e)] || 'object' : i(e)
+              return null == e
+                ? e + ''
+                : 'object' === i(e) || 'function' == typeof e
+                ? d[m.call(e)] || 'object'
+                : i(e)
             }
             var w = '3.6.0',
               C = function e(t, n) {
@@ -2783,7 +2995,11 @@
             function P(e) {
               var t = !!e && 'length' in e && e.length,
                 n = _(e)
-              return !y(e) && !b(e) && ('array' === n || 0 === t || ('number' == typeof t && t > 0 && t - 1 in e))
+              return (
+                !y(e) &&
+                !b(e) &&
+                ('array' === n || 0 === t || ('number' == typeof t && t > 0 && t - 1 in e))
+              )
             }
             ;(C.fn = C.prototype =
               {
@@ -2871,7 +3087,8 @@
                             s !== r &&
                             (p && r && (C.isPlainObject(r) || (o = Array.isArray(r)))
                               ? ((n = s[t]),
-                                (a = o && !Array.isArray(n) ? [] : o || C.isPlainObject(n) ? n : {}),
+                                (a =
+                                  o && !Array.isArray(n) ? [] : o || C.isPlainObject(n) ? n : {}),
                                 (o = !1),
                                 (s[t] = C.extend(p, a, r)))
                               : void 0 !== r && (s[t] = r))
@@ -2890,7 +3107,8 @@
                     !e ||
                     '[object Object]' !== m.call(e) ||
                     ((t = s(e)) &&
-                      ('function' != typeof (n = h.call(t, 'constructor') && t.constructor) || f.call(n) !== v))
+                      ('function' != typeof (n = h.call(t, 'constructor') && t.constructor) ||
+                        f.call(n) !== v))
                   )
                 },
                 isEmptyObject: function (e) {
@@ -2910,7 +3128,11 @@
                 },
                 makeArray: function (e, t) {
                   var n = t || []
-                  return null != e && (P(Object(e)) ? C.merge(n, 'string' == typeof e ? [e] : e) : p.call(n, e)), n
+                  return (
+                    null != e &&
+                      (P(Object(e)) ? C.merge(n, 'string' == typeof e ? [e] : e) : p.call(n, e)),
+                    n
+                  )
                 },
                 inArray: function (e, t, n) {
                   return null == t ? -1 : u.call(t, e, n)
@@ -2920,7 +3142,8 @@
                   return (e.length = i), e
                 },
                 grep: function (e, t, n) {
-                  for (var r = [], i = 0, o = e.length, a = !n; i < o; i++) !t(e[i], i) !== a && r.push(e[i])
+                  for (var r = [], i = 0, o = e.length, a = !n; i < o; i++)
+                    !t(e[i], i) !== a && r.push(e[i])
                   return r
                 },
                 map: function (e, t, n) {
@@ -2986,7 +3209,8 @@
                 z =
                   'checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped',
                 I = '[\\x20\\t\\r\\n\\f]',
-                N = '(?:\\\\[\\da-fA-F]{1,6}[\\x20\\t\\r\\n\\f]?|\\\\[^\\r\\n\\f]|[\\w-]|[^\0-\\x7f])+',
+                N =
+                  '(?:\\\\[\\da-fA-F]{1,6}[\\x20\\t\\r\\n\\f]?|\\\\[^\\r\\n\\f]|[\\w-]|[^\0-\\x7f])+',
                 L =
                   '\\[[\\x20\\t\\r\\n\\f]*(' +
                   N +
@@ -3006,9 +3230,14 @@
                   L +
                   ')*)|.*)\\)|)',
                 V = new RegExp(I + '+', 'g'),
-                q = new RegExp('^[\\x20\\t\\r\\n\\f]+|((?:^|[^\\\\])(?:\\\\.)*)[\\x20\\t\\r\\n\\f]+$', 'g'),
+                q = new RegExp(
+                  '^[\\x20\\t\\r\\n\\f]+|((?:^|[^\\\\])(?:\\\\.)*)[\\x20\\t\\r\\n\\f]+$',
+                  'g'
+                ),
                 H = new RegExp('^[\\x20\\t\\r\\n\\f]*,[\\x20\\t\\r\\n\\f]*'),
-                $ = new RegExp('^[\\x20\\t\\r\\n\\f]*([>+~]|[\\x20\\t\\r\\n\\f])[\\x20\\t\\r\\n\\f]*'),
+                $ = new RegExp(
+                  '^[\\x20\\t\\r\\n\\f]*([>+~]|[\\x20\\t\\r\\n\\f])[\\x20\\t\\r\\n\\f]*'
+                ),
                 U = new RegExp(I + '|>'),
                 W = new RegExp(F),
                 G = new RegExp('^' + N + '$'),
@@ -3085,14 +3314,16 @@
                   g,
                   y = t && t.ownerDocument,
                   E = t ? t.nodeType : 9
-                if (((r = r || []), 'string' != typeof e || !e || (1 !== E && 9 !== E && 11 !== E))) return r
+                if (((r = r || []), 'string' != typeof e || !e || (1 !== E && 9 !== E && 11 !== E)))
+                  return r
                 if (!i && (d(t), (t = t || m), f)) {
                   if (11 !== E && (u = Z.exec(e)))
                     if ((o = u[1])) {
                       if (9 === E) {
                         if (!(c = t.getElementById(o))) return r
                         if (c.id === o) return r.push(c), r
-                      } else if (y && (c = y.getElementById(o)) && b(t, c) && c.id === o) return r.push(c), r
+                      } else if (y && (c = y.getElementById(o)) && b(t, c) && c.id === o)
+                        return r.push(c), r
                     } else {
                       if (u[2]) return M.apply(r, t.getElementsByTagName(e)), r
                       if ((o = u[3]) && n.getElementsByClassName && t.getElementsByClassName)
@@ -3107,7 +3338,9 @@
                     if (((g = e), (y = t), 1 === E && (U.test(e) || $.test(e)))) {
                       for (
                         ((y = (ee.test(e) && ge(t.parentNode)) || t) === t && n.scope) ||
-                          ((p = t.getAttribute('id')) ? (p = p.replace(re, ie)) : t.setAttribute('id', (p = A))),
+                          ((p = t.getAttribute('id'))
+                            ? (p = p.replace(re, ie))
+                            : t.setAttribute('id', (p = A))),
                           s = (h = a(e)).length;
                         s--;
 
@@ -3184,7 +3417,8 @@
                   return (
                     (t = +t),
                     ce(function (n, r) {
-                      for (var i, o = e([], n.length, t), a = o.length; a--; ) n[(i = o[a])] && (n[i] = !(r[i] = n[i]))
+                      for (var i, o = e([], n.length, t), a = o.length; a--; )
+                        n[(i = o[a])] && (n[i] = !(r[i] = n[i]))
                     })
                   )
                 })
@@ -3216,18 +3450,24 @@
                       (n.scope = pe(function (e) {
                         return (
                           h.appendChild(e).appendChild(m.createElement('div')),
-                          void 0 !== e.querySelectorAll && !e.querySelectorAll(':scope fieldset div').length
+                          void 0 !== e.querySelectorAll &&
+                            !e.querySelectorAll(':scope fieldset div').length
                         )
                       })),
                       (n.attributes = pe(function (e) {
                         return (e.className = 'i'), !e.getAttribute('className')
                       })),
                       (n.getElementsByTagName = pe(function (e) {
-                        return e.appendChild(m.createComment('')), !e.getElementsByTagName('*').length
+                        return (
+                          e.appendChild(m.createComment('')), !e.getElementsByTagName('*').length
+                        )
                       })),
                       (n.getElementsByClassName = X.test(m.getElementsByClassName)),
                       (n.getById = pe(function (e) {
-                        return (h.appendChild(e).id = A), !m.getElementsByName || !m.getElementsByName(A).length
+                        return (
+                          (h.appendChild(e).id = A),
+                          !m.getElementsByName || !m.getElementsByName(A).length
+                        )
                       })),
                       n.getById
                         ? ((r.filter.ID = function (e) {
@@ -3285,7 +3525,8 @@
                       (r.find.CLASS =
                         n.getElementsByClassName &&
                         function (e, t) {
-                          if (void 0 !== t.getElementsByClassName && f) return t.getElementsByClassName(e)
+                          if (void 0 !== t.getElementsByClassName && f)
+                            return t.getElementsByClassName(e)
                         }),
                       (g = []),
                       (v = []),
@@ -3306,7 +3547,9 @@
                             (t = m.createElement('input')).setAttribute('name', ''),
                             e.appendChild(t),
                             e.querySelectorAll("[name='']").length ||
-                              v.push('\\[[\\x20\\t\\r\\n\\f]*name[\\x20\\t\\r\\n\\f]*=[\\x20\\t\\r\\n\\f]*(?:\'\'|"")'),
+                              v.push(
+                                '\\[[\\x20\\t\\r\\n\\f]*name[\\x20\\t\\r\\n\\f]*=[\\x20\\t\\r\\n\\f]*(?:\'\'|"")'
+                              ),
                             e.querySelectorAll(':checked').length || v.push(':checked'),
                             e.querySelectorAll('a#' + A + '+*').length || v.push('.#.+[+~]'),
                             e.querySelectorAll('\\\f'),
@@ -3318,10 +3561,13 @@
                           var t = m.createElement('input')
                           t.setAttribute('type', 'hidden'),
                             e.appendChild(t).setAttribute('name', 'D'),
-                            e.querySelectorAll('[name=d]').length && v.push('name[\\x20\\t\\r\\n\\f]*[*^$|!~]?='),
-                            2 !== e.querySelectorAll(':enabled').length && v.push(':enabled', ':disabled'),
+                            e.querySelectorAll('[name=d]').length &&
+                              v.push('name[\\x20\\t\\r\\n\\f]*[*^$|!~]?='),
+                            2 !== e.querySelectorAll(':enabled').length &&
+                              v.push(':enabled', ':disabled'),
                             (h.appendChild(e).disabled = !0),
-                            2 !== e.querySelectorAll(':disabled').length && v.push(':enabled', ':disabled'),
+                            2 !== e.querySelectorAll(':disabled').length &&
+                              v.push(':enabled', ':disabled'),
                             e.querySelectorAll('*,:x'),
                             v.push(',.*:')
                         })),
@@ -3334,7 +3580,9 @@
                           h.msMatchesSelector)
                       )) &&
                         pe(function (e) {
-                          ;(n.disconnectedMatch = y.call(e, '*')), y.call(e, "[s!='']:x"), g.push('!=', F)
+                          ;(n.disconnectedMatch = y.call(e, '*')),
+                            y.call(e, "[s!='']:x"),
+                            g.push('!=', F)
                         }),
                       (v = v.length && new RegExp(v.join('|'))),
                       (g = g.length && new RegExp(g.join('|'))),
@@ -3351,7 +3599,8 @@
                                   1 !== r.nodeType ||
                                   !(n.contains
                                     ? n.contains(r)
-                                    : e.compareDocumentPosition && 16 & e.compareDocumentPosition(r))
+                                    : e.compareDocumentPosition &&
+                                      16 & e.compareDocumentPosition(r))
                                 )
                               )
                             }
@@ -3391,7 +3640,18 @@
                               o = t.parentNode,
                               a = [e],
                               s = [t]
-                            if (!i || !o) return e == m ? -1 : t == m ? 1 : i ? -1 : o ? 1 : p ? R(p, e) - R(p, t) : 0
+                            if (!i || !o)
+                              return e == m
+                                ? -1
+                                : t == m
+                                ? 1
+                                : i
+                                ? -1
+                                : o
+                                ? 1
+                                : p
+                                ? R(p, e) - R(p, t)
+                                : 0
                             if (i === o) return de(e, t)
                             for (n = e; (n = n.parentNode); ) a.unshift(n)
                             for (n = t; (n = n.parentNode); ) s.unshift(n)
@@ -3405,10 +3665,14 @@
                 return se(e, null, null, t)
               }),
               (se.matchesSelector = function (e, t) {
-                if ((d(e), n.matchesSelector && f && !k[t + ' '] && (!g || !g.test(t)) && (!v || !v.test(t))))
+                if (
+                  (d(e),
+                  n.matchesSelector && f && !k[t + ' '] && (!g || !g.test(t)) && (!v || !v.test(t)))
+                )
                   try {
                     var r = y.call(e, t)
-                    if (r || n.disconnectedMatch || (e.document && 11 !== e.document.nodeType)) return r
+                    if (r || n.disconnectedMatch || (e.document && 11 !== e.document.nodeType))
+                      return r
                   } catch (e) {
                     k(t, !0)
                   }
@@ -3487,7 +3751,9 @@
                         (e[1] = e[1].toLowerCase()),
                         'nth' === e[1].slice(0, 3)
                           ? (e[3] || se.error(e[0]),
-                            (e[4] = +(e[4] ? e[5] + (e[6] || 1) : 2 * ('even' === e[3] || 'odd' === e[3]))),
+                            (e[4] = +(e[4]
+                              ? e[5] + (e[6] || 1)
+                              : 2 * ('even' === e[3] || 'odd' === e[3]))),
                             (e[5] = +(e[7] + e[8] || 'odd' === e[3])))
                           : e[3] && se.error(e[0]),
                         e
@@ -3579,7 +3845,8 @@
                               if (o) {
                                 for (; f; ) {
                                   for (d = t; (d = d[f]); )
-                                    if (s ? d.nodeName.toLowerCase() === g : 1 === d.nodeType) return !1
+                                    if (s ? d.nodeName.toLowerCase() === g : 1 === d.nodeType)
+                                      return !1
                                   h = f = 'only' === e && !h && 'nextSibling'
                                 }
                                 return !0
@@ -3589,8 +3856,9 @@
                                   b =
                                     (m =
                                       (c =
-                                        (p = (u = (d = v)[A] || (d[A] = {}))[d.uniqueID] || (u[d.uniqueID] = {}))[e] ||
-                                        [])[0] === x && c[1]) && c[2],
+                                        (p =
+                                          (u = (d = v)[A] || (d[A] = {}))[d.uniqueID] ||
+                                          (u[d.uniqueID] = {}))[e] || [])[0] === x && c[1]) && c[2],
                                     d = m && v.childNodes[m];
                                   (d = (++m && d && d[f]) || (b = m = 0) || h.pop());
 
@@ -3603,8 +3871,9 @@
                                 (y &&
                                   (b = m =
                                     (c =
-                                      (p = (u = (d = t)[A] || (d[A] = {}))[d.uniqueID] || (u[d.uniqueID] = {}))[e] ||
-                                      [])[0] === x && c[1]),
+                                      (p =
+                                        (u = (d = t)[A] || (d[A] = {}))[d.uniqueID] ||
+                                        (u[d.uniqueID] = {}))[e] || [])[0] === x && c[1]),
                                 !1 === b)
                               )
                                 for (
@@ -3613,7 +3882,9 @@
                                   ((s ? d.nodeName.toLowerCase() !== g : 1 !== d.nodeType) ||
                                     !++b ||
                                     (y &&
-                                      ((p = (u = d[A] || (d[A] = {}))[d.uniqueID] || (u[d.uniqueID] = {}))[e] = [x, b]),
+                                      ((p =
+                                        (u = d[A] || (d[A] = {}))[d.uniqueID] ||
+                                        (u[d.uniqueID] = {}))[e] = [x, b]),
                                     d !== t));
 
                                 );
@@ -3623,14 +3894,18 @@
                     },
                     PSEUDO: function (e, t) {
                       var n,
-                        i = r.pseudos[e] || r.setFilters[e.toLowerCase()] || se.error('unsupported pseudo: ' + e)
+                        i =
+                          r.pseudos[e] ||
+                          r.setFilters[e.toLowerCase()] ||
+                          se.error('unsupported pseudo: ' + e)
                       return i[A]
                         ? i(t)
                         : i.length > 1
                         ? ((n = [e, e, '', t]),
                           r.setFilters.hasOwnProperty(e.toLowerCase())
                             ? ce(function (e, n) {
-                                for (var r, o = i(e, t), a = o.length; a--; ) e[(r = R(e, o[a]))] = !(n[r] = o[a])
+                                for (var r, o = i(e, t), a = o.length; a--; )
+                                  e[(r = R(e, o[a]))] = !(n[r] = o[a])
                               })
                             : function (e) {
                                 return i(e, 0, n)
@@ -3645,7 +3920,8 @@
                         r = s(e.replace(q, '$1'))
                       return r[A]
                         ? ce(function (e, t, n, i) {
-                            for (var o, a = r(e, null, i, []), s = e.length; s--; ) (o = a[s]) && (e[s] = !(t[s] = o))
+                            for (var o, a = r(e, null, i, []), s = e.length; s--; )
+                              (o = a[s]) && (e[s] = !(t[s] = o))
                           })
                         : function (e, i, o) {
                             return (t[0] = e), r(t, null, o, n), (t[0] = null), !n.pop()
@@ -3671,7 +3947,11 @@
                         function (t) {
                           var n
                           do {
-                            if ((n = f ? t.lang : t.getAttribute('xml:lang') || t.getAttribute('lang')))
+                            if (
+                              (n = f
+                                ? t.lang
+                                : t.getAttribute('xml:lang') || t.getAttribute('lang'))
+                            )
                               return (n = n.toLowerCase()) === e || 0 === n.indexOf(e + '-')
                           } while ((t = t.parentNode) && 1 === t.nodeType)
                           return !1
@@ -3687,7 +3967,9 @@
                     },
                     focus: function (e) {
                       return (
-                        e === m.activeElement && (!m.hasFocus || m.hasFocus()) && !!(e.type || e.href || ~e.tabIndex)
+                        e === m.activeElement &&
+                        (!m.hasFocus || m.hasFocus()) &&
+                        !!(e.type || e.href || ~e.tabIndex)
                       )
                     },
                     enabled: fe(!1),
@@ -3825,14 +4107,16 @@
                       v = !e || (!o && t) ? f : xe(f, d, e, s, l),
                       g = n ? (i || (o ? e : h || r) ? [] : a) : v
                     if ((n && n(v, g, s, l), r))
-                      for (c = xe(g, m), r(c, [], s, l), p = c.length; p--; ) (u = c[p]) && (g[m[p]] = !(v[m[p]] = u))
+                      for (c = xe(g, m), r(c, [], s, l), p = c.length; p--; )
+                        (u = c[p]) && (g[m[p]] = !(v[m[p]] = u))
                     if (o) {
                       if (i || e) {
                         if (i) {
                           for (c = [], p = g.length; p--; ) (u = g[p]) && c.push((v[p] = u))
                           i(null, (g = []), c, l)
                         }
-                        for (p = g.length; p--; ) (u = g[p]) && (c = i ? R(o, u) : d[p]) > -1 && (o[c] = !(a[c] = u))
+                        for (p = g.length; p--; )
+                          (u = g[p]) && (c = i ? R(o, u) : d[p]) > -1 && (o[c] = !(a[c] = u))
                       }
                     } else (g = xe(g === a ? g.splice(h, g.length) : g)), i ? i(null, a, g, l) : M.apply(a, g)
                   })
@@ -3863,7 +4147,8 @@
                     ),
                     d = [
                       function (e, n, r) {
-                        var i = (!a && (r || n !== c)) || ((t = n).nodeType ? p(e, n, r) : u(e, n, r))
+                        var i =
+                          (!a && (r || n !== c)) || ((t = n).nodeType ? p(e, n, r) : u(e, n, r))
                         return (t = null), i
                       }
                     ];
@@ -3877,7 +4162,9 @@
                       return _e(
                         l > 1 && Ee(d),
                         l > 1 &&
-                          be(e.slice(0, l - 1).concat({ value: ' ' === e[l - 2].type ? '*' : '' })).replace(q, '$1'),
+                          be(
+                            e.slice(0, l - 1).concat({ value: ' ' === e[l - 2].type ? '*' : '' })
+                          ).replace(q, '$1'),
                         n,
                         l < i && we(e.slice(l, i)),
                         i < o && we((e = e.slice(i))),
@@ -3903,14 +4190,19 @@
                       p = C[e + ' ']
                     if (p) return t ? 0 : p.slice(0)
                     for (s = e, l = [], c = r.preFilter; s; ) {
-                      for (a in ((n && !(i = H.exec(s))) || (i && (s = s.slice(i[0].length) || s), l.push((o = []))),
+                      for (a in ((n && !(i = H.exec(s))) ||
+                        (i && (s = s.slice(i[0].length) || s), l.push((o = []))),
                       (n = !1),
                       (i = $.exec(s)) &&
-                        ((n = i.shift()), o.push({ value: n, type: i[0].replace(q, ' ') }), (s = s.slice(n.length))),
+                        ((n = i.shift()),
+                        o.push({ value: n, type: i[0].replace(q, ' ') }),
+                        (s = s.slice(n.length))),
                       r.filter))
                         !(i = Q[a].exec(s)) ||
                           (c[a] && !(i = c[a](i))) ||
-                          ((n = i.shift()), o.push({ value: n, type: a, matches: i }), (s = s.slice(n.length)))
+                          ((n = i.shift()),
+                          o.push({ value: n, type: a, matches: i }),
+                          (s = s.slice(n.length)))
                       if (!n) break
                     }
                     return t ? s.length : s ? se.error(e) : C(e, l).slice(0)
@@ -3922,7 +4214,8 @@
                       o = [],
                       s = P[e + ' ']
                     if (!s) {
-                      for (t || (t = a(e)), n = t.length; n--; ) (s = we(t[n]))[A] ? i.push(s) : o.push(s)
+                      for (t || (t = a(e)), n = t.length; n--; )
+                        (s = we(t[n]))[A] ? i.push(s) : o.push(s)
                       ;(s = P(
                         e,
                         (function (e, t) {
@@ -3940,9 +4233,17 @@
                                 _ = o || (i && r.find.TAG('*', p)),
                                 w = (x += null == E ? 1 : Math.random() || 0.1),
                                 C = _.length
-                              for (p && (c = a == m || a || p); y !== C && null != (u = _[y]); y++) {
+                              for (
+                                p && (c = a == m || a || p);
+                                y !== C && null != (u = _[y]);
+                                y++
+                              ) {
                                 if (i && u) {
-                                  for (h = 0, a || u.ownerDocument == m || (d(u), (s = !f)); (v = e[h++]); )
+                                  for (
+                                    h = 0, a || u.ownerDocument == m || (d(u), (s = !f));
+                                    (v = e[h++]);
+
+                                  )
                                     if (v(u, a || m, s)) {
                                       l.push(u)
                                       break
@@ -3957,7 +4258,8 @@
                                   if (g > 0) for (; y--; ) b[y] || A[y] || (A[y] = B.call(l))
                                   A = xe(A)
                                 }
-                                M.apply(l, A), p && !o && A.length > 0 && g + t.length > 1 && se.uniqueSort(l)
+                                M.apply(l, A),
+                                  p && !o && A.length > 0 && g + t.length > 1 && se.uniqueSort(l)
                               }
                               return p && ((x = w), (c = E)), b
                             }
@@ -3987,16 +4289,25 @@
                         if (!(t = (r.find.ID(c.matches[0].replace(te, ne), t) || [])[0])) return n
                         d && (t = t.parentNode), (e = e.slice(l.shift().value.length))
                       }
-                      for (o = Q.needsContext.test(e) ? 0 : l.length; o-- && ((c = l[o]), !r.relative[(p = c.type)]); )
+                      for (
+                        o = Q.needsContext.test(e) ? 0 : l.length;
+                        o-- && ((c = l[o]), !r.relative[(p = c.type)]);
+
+                      )
                         if (
                           (u = r.find[p]) &&
-                          (i = u(c.matches[0].replace(te, ne), (ee.test(l[0].type) && ge(t.parentNode)) || t))
+                          (i = u(
+                            c.matches[0].replace(te, ne),
+                            (ee.test(l[0].type) && ge(t.parentNode)) || t
+                          ))
                         ) {
                           if ((l.splice(o, 1), !(e = i.length && be(l)))) return M.apply(n, i), n
                           break
                         }
                     }
-                    return (d || s(e, m))(i, t, !f, n, !t || (ee.test(e) && ge(t.parentNode)) || t), n
+                    return (
+                      (d || s(e, m))(i, t, !f, n, !t || (ee.test(e) && ge(t.parentNode)) || t), n
+                    )
                   }),
                 (n.sortStable = A.split('').sort(S).join('') === A),
                 (n.detectDuplicates = !!u),
@@ -4005,7 +4316,9 @@
                   return 1 & e.compareDocumentPosition(m.createElement('fieldset'))
                 })),
                 pe(function (e) {
-                  return (e.innerHTML = "<a href='#'></a>"), '#' === e.firstChild.getAttribute('href')
+                  return (
+                    (e.innerHTML = "<a href='#'></a>"), '#' === e.firstChild.getAttribute('href')
+                  )
                 }) ||
                   ue('type|href|height|width', function (e, t, n) {
                     if (!n) return e.getAttribute(t, 'type' === t.toLowerCase() ? 1 : 2)
@@ -4027,7 +4340,11 @@
                   ue(z, function (e, t, n) {
                     var r
                     if (!n)
-                      return !0 === e[t] ? t.toLowerCase() : (r = e.getAttributeNode(t)) && r.specified ? r.value : null
+                      return !0 === e[t]
+                        ? t.toLowerCase()
+                        : (r = e.getAttributeNode(t)) && r.specified
+                        ? r.value
+                        : null
                   }),
                 se
               )
@@ -4119,14 +4436,20 @@
               if (!e) return this
               if (((n = n || D), 'string' == typeof e)) {
                 if (
-                  !(r = '<' === e[0] && '>' === e[e.length - 1] && e.length >= 3 ? [null, e, null] : R.exec(e)) ||
+                  !(r =
+                    '<' === e[0] && '>' === e[e.length - 1] && e.length >= 3
+                      ? [null, e, null]
+                      : R.exec(e)) ||
                   (!r[1] && t)
                 )
                   return !t || t.jquery ? (t || n).find(e) : this.constructor(t).find(e)
                 if (r[1]) {
                   if (
                     ((t = t instanceof C ? t[0] : t),
-                    C.merge(this, C.parseHTML(r[1], t && t.nodeType ? t.ownerDocument || t : A, !0)),
+                    C.merge(
+                      this,
+                      C.parseHTML(r[1], t && t.nodeType ? t.ownerDocument || t : A, !0)
+                    ),
                     j.test(r[1]) && C.isPlainObject(t))
                   )
                     for (r in t) y(this[r]) ? this[r](t[r]) : this.attr(r, t[r])
@@ -4166,7 +4489,10 @@
                 if (!T.test(e))
                   for (; r < i; r++)
                     for (n = this[r]; n && n !== t; n = n.parentNode)
-                      if (n.nodeType < 11 && (a ? a.index(n) > -1 : 1 === n.nodeType && C.find.matchesSelector(n, e))) {
+                      if (
+                        n.nodeType < 11 &&
+                        (a ? a.index(n) > -1 : 1 === n.nodeType && C.find.matchesSelector(n, e))
+                      ) {
                         o.push(n)
                         break
                       }
@@ -4294,7 +4620,9 @@
                         (n && !t && ((s = o.length - 1), a.push(n)),
                         (function t(n) {
                           C.each(n, function (n, r) {
-                            y(r) ? (e.unique && c.has(r)) || o.push(r) : r && r.length && 'string' !== _(r) && t(r)
+                            y(r)
+                              ? (e.unique && c.has(r)) || o.push(r)
+                              : r && r.length && 'string' !== _(r) && t(r)
                           })
                         })(arguments),
                         n && !t && l()),
@@ -4328,7 +4656,10 @@
                     return !!i
                   },
                   fireWith: function (e, n) {
-                    return i || ((n = [e, (n = n || []).slice ? n.slice() : n]), a.push(n), t || l()), this
+                    return (
+                      i || ((n = [e, (n = n || []).slice ? n.slice() : n]), a.push(n), t || l()),
+                      this
+                    )
                   },
                   fire: function () {
                     return c.fireWith(this, arguments), this
@@ -4343,8 +4674,22 @@
                 Deferred: function (e) {
                   var t = [
                       ['notify', 'progress', C.Callbacks('memory'), C.Callbacks('memory'), 2],
-                      ['resolve', 'done', C.Callbacks('once memory'), C.Callbacks('once memory'), 0, 'resolved'],
-                      ['reject', 'fail', C.Callbacks('once memory'), C.Callbacks('once memory'), 1, 'rejected']
+                      [
+                        'resolve',
+                        'done',
+                        C.Callbacks('once memory'),
+                        C.Callbacks('once memory'),
+                        0,
+                        'resolved'
+                      ],
+                      [
+                        'reject',
+                        'fail',
+                        C.Callbacks('once memory'),
+                        C.Callbacks('once memory'),
+                        1,
+                        'rejected'
+                      ]
                     ],
                     r = 'pending',
                     o = {
@@ -4383,12 +4728,20 @@
                                 if (!(e < a)) {
                                   if ((n = r.apply(l, c)) === t.promise())
                                     throw new TypeError('Thenable self-resolution')
-                                  ;(p = n && ('object' === i(n) || 'function' == typeof n) && n.then),
+                                  ;(p =
+                                    n && ('object' === i(n) || 'function' == typeof n) && n.then),
                                     y(p)
                                       ? o
                                         ? p.call(n, s(a, t, F, o), s(a, t, V, o))
-                                        : (a++, p.call(n, s(a, t, F, o), s(a, t, V, o), s(a, t, F, t.notifyWith)))
-                                      : (r !== F && ((l = void 0), (c = [n])), (o || t.resolveWith)(l, c))
+                                        : (a++,
+                                          p.call(
+                                            n,
+                                            s(a, t, F, o),
+                                            s(a, t, V, o),
+                                            s(a, t, F, t.notifyWith)
+                                          ))
+                                      : (r !== F && ((l = void 0), (c = [n])),
+                                        (o || t.resolveWith)(l, c))
                                 }
                               },
                               u = o
@@ -4397,13 +4750,17 @@
                                     try {
                                       p()
                                     } catch (n) {
-                                      C.Deferred.exceptionHook && C.Deferred.exceptionHook(n, u.stackTrace),
-                                        e + 1 >= a && (r !== V && ((l = void 0), (c = [n])), t.rejectWith(l, c))
+                                      C.Deferred.exceptionHook &&
+                                        C.Deferred.exceptionHook(n, u.stackTrace),
+                                        e + 1 >= a &&
+                                          (r !== V && ((l = void 0), (c = [n])), t.rejectWith(l, c))
                                     }
                                   }
                             e
                               ? u()
-                              : (C.Deferred.getStackHook && (u.stackTrace = C.Deferred.getStackHook()), n.setTimeout(u))
+                              : (C.Deferred.getStackHook &&
+                                  (u.stackTrace = C.Deferred.getStackHook()),
+                                n.setTimeout(u))
                           }
                         }
                         return C.Deferred(function (n) {
@@ -4458,7 +4815,8 @@
                     }
                   if (
                     t <= 1 &&
-                    (q(e, o.done(a(n)).resolve, o.reject, !t), 'pending' === o.state() || y(i[n] && i[n].then))
+                    (q(e, o.done(a(n)).resolve, o.reject, !t),
+                    'pending' === o.state() || y(i[n] && i[n].then))
                   )
                     return o.then()
                   for (; n--; ) q(i[n], a(n), o.reject)
@@ -4480,7 +4838,9 @@
               })
             var $ = C.Deferred()
             function U() {
-              A.removeEventListener('DOMContentLoaded', U), n.removeEventListener('load', U), C.ready()
+              A.removeEventListener('DOMContentLoaded', U),
+                n.removeEventListener('load', U),
+                C.ready()
             }
             ;(C.fn.ready = function (e) {
               return (
@@ -4499,7 +4859,8 @@
                 }
               }),
               (C.ready.then = $.then),
-              'complete' === A.readyState || ('loading' !== A.readyState && !A.documentElement.doScroll)
+              'complete' === A.readyState ||
+              ('loading' !== A.readyState && !A.documentElement.doScroll)
                 ? n.setTimeout(C.ready)
                 : (A.addEventListener('DOMContentLoaded', U), n.addEventListener('load', U))
             var W = function e(t, n, r, i, o, a, s) {
@@ -4547,7 +4908,10 @@
                       J(e) &&
                         (e.nodeType
                           ? (e[this.expando] = t)
-                          : Object.defineProperty(e, this.expando, { value: t, configurable: !0 }))),
+                          : Object.defineProperty(e, this.expando, {
+                              value: t,
+                              configurable: !0
+                            }))),
                     t
                   )
                 },
@@ -4571,7 +4935,11 @@
                     r = e[this.expando]
                   if (void 0 !== r) {
                     if (void 0 !== t) {
-                      n = (t = Array.isArray(t) ? t.map(Y) : (t = Y(t)) in r ? [t] : t.match(L) || []).length
+                      n = (t = Array.isArray(t)
+                        ? t.map(Y)
+                        : (t = Y(t)) in r
+                        ? [t]
+                        : t.match(L) || []).length
                       for (; n--; ) delete r[t[n]]
                     }
                     ;(void 0 === t || C.isEmptyObject(r)) &&
@@ -4590,12 +4958,22 @@
             function re(e, t, n) {
               var r
               if (void 0 === n && 1 === e.nodeType)
-                if (((r = 'data-' + t.replace(ne, '-$&').toLowerCase()), 'string' == typeof (n = e.getAttribute(r)))) {
+                if (
+                  ((r = 'data-' + t.replace(ne, '-$&').toLowerCase()),
+                  'string' == typeof (n = e.getAttribute(r)))
+                ) {
                   try {
                     n = (function (e) {
                       return (
                         'true' === e ||
-                        ('false' !== e && ('null' === e ? null : e === +e + '' ? +e : te.test(e) ? JSON.parse(e) : e))
+                        ('false' !== e &&
+                          ('null' === e
+                            ? null
+                            : e === +e + ''
+                            ? +e
+                            : te.test(e)
+                            ? JSON.parse(e)
+                            : e))
                       )
                     })(n)
                   } catch (e) {}
@@ -4628,9 +5006,14 @@
                     a = this[0],
                     s = a && a.attributes
                   if (void 0 === e) {
-                    if (this.length && ((o = ee.get(a)), 1 === a.nodeType && !Z.get(a, 'hasDataAttrs'))) {
+                    if (
+                      this.length &&
+                      ((o = ee.get(a)), 1 === a.nodeType && !Z.get(a, 'hasDataAttrs'))
+                    ) {
                       for (n = s.length; n--; )
-                        s[n] && 0 === (r = s[n].name).indexOf('data-') && ((r = Y(r.slice(5))), re(a, r, o[r]))
+                        s[n] &&
+                          0 === (r = s[n].name).indexOf('data-') &&
+                          ((r = Y(r.slice(5))), re(a, r, o[r]))
                       Z.set(a, 'hasDataAttrs', !0)
                     }
                     return o
@@ -4644,7 +5027,9 @@
                         function (t) {
                           var n
                           if (a && void 0 === t)
-                            return void 0 !== (n = ee.get(a, e)) || void 0 !== (n = re(a, e)) ? n : void 0
+                            return void 0 !== (n = ee.get(a, e)) || void 0 !== (n = re(a, e))
+                              ? n
+                              : void 0
                           this.each(function () {
                             ee.set(this, e, t)
                           })
@@ -4669,7 +5054,8 @@
                     return (
                       (t = (t || 'fx') + 'queue'),
                       (r = Z.get(e, t)),
-                      n && (!r || Array.isArray(n) ? (r = Z.access(e, t, C.makeArray(n))) : r.push(n)),
+                      n &&
+                        (!r || Array.isArray(n) ? (r = Z.access(e, t, C.makeArray(n))) : r.push(n)),
                       r || []
                     )
                 },
@@ -4714,7 +5100,8 @@
                       ? this
                       : this.each(function () {
                           var n = C.queue(this, e, t)
-                          C._queueHooks(this, e), 'fx' === e && 'inprogress' !== n[0] && C.dequeue(this, e)
+                          C._queueHooks(this, e),
+                            'fx' === e && 'inprogress' !== n[0] && C.dequeue(this, e)
                         })
                   )
                 },
@@ -4774,7 +5161,9 @@
                 p = e.nodeType && (C.cssNumber[t] || ('px' !== c && +l)) && oe.exec(C.css(e, t))
               if (p && p[3] !== c) {
                 for (l /= 2, c = c || p[3], p = +l || 1; a--; )
-                  C.style(e, t, p + c), (1 - o) * (1 - (o = s() / l || 0.5)) <= 0 && (a = 0), (p /= o)
+                  C.style(e, t, p + c),
+                    (1 - o) * (1 - (o = s() / l || 0.5)) <= 0 && (a = 0),
+                    (p /= o)
                 C.style(e, t, (p *= 2) + c), (n = n || [])
               }
               return (
@@ -4806,7 +5195,8 @@
                 (r = e[o]).style &&
                   ((n = r.style.display),
                   t
-                    ? ('none' === n && ((i[o] = Z.get(r, 'display') || null), i[o] || (r.style.display = '')),
+                    ? ('none' === n &&
+                        ((i[o] = Z.get(r, 'display') || null), i[o] || (r.style.display = '')),
                       '' === r.style.display && pe(r) && (i[o] = me(r)))
                     : 'none' !== n && ((i[o] = 'none'), Z.set(r, 'display', n)))
               for (o = 0; o < a; o++) null != i[o] && (e[o].style.display = i[o])
@@ -4864,14 +5254,20 @@
               )
             }
             function xe(e, t) {
-              for (var n = 0, r = e.length; n < r; n++) Z.set(e[n], 'globalEval', !t || Z.get(t[n], 'globalEval'))
+              for (var n = 0, r = e.length; n < r; n++)
+                Z.set(e[n], 'globalEval', !t || Z.get(t[n], 'globalEval'))
             }
             ;(Ae.tbody = Ae.tfoot = Ae.colgroup = Ae.caption = Ae.thead),
               (Ae.th = Ae.td),
-              g.option || (Ae.optgroup = Ae.option = [1, "<select multiple='multiple'>", '</select>'])
+              g.option ||
+                (Ae.optgroup = Ae.option = [1, "<select multiple='multiple'>", '</select>'])
             var _e = /<|&#?\w+;/
             function we(e, t, n, r, i) {
-              for (var o, a, s, l, c, p, u = t.createDocumentFragment(), d = [], m = 0, h = e.length; m < h; m++)
+              for (
+                var o, a, s, l, c, p, u = t.createDocumentFragment(), d = [], m = 0, h = e.length;
+                m < h;
+                m++
+              )
                 if ((o = e[m]) || 0 === o)
                   if ('object' === _(o)) C.merge(d, o.nodeType ? [o] : o)
                   else if (_e.test(o)) {
@@ -4914,13 +5310,17 @@
             function Oe(e, t, n, r, o, a) {
               var s, l
               if ('object' === i(t)) {
-                for (l in ('string' != typeof n && ((r = r || n), (n = void 0)), t)) Oe(e, l, n, r, t[l], a)
+                for (l in ('string' != typeof n && ((r = r || n), (n = void 0)), t))
+                  Oe(e, l, n, r, t[l], a)
                 return e
               }
               if (
                 (null == r && null == o
                   ? ((o = n), (r = n = void 0))
-                  : null == o && ('string' == typeof n ? ((o = r), (r = void 0)) : ((o = r), (r = n), (n = void 0))),
+                  : null == o &&
+                    ('string' == typeof n
+                      ? ((o = r), (r = void 0))
+                      : ((o = r), (r = n), (n = void 0))),
                 !1 === o)
               )
                 o = ke
@@ -4959,7 +5359,11 @@
                       } else
                         o.length &&
                           (Z.set(this, t, {
-                            value: C.event.trigger(C.extend(o[0], C.Event.prototype), o.slice(1), this)
+                            value: C.event.trigger(
+                              C.extend(o[0], C.Event.prototype),
+                              o.slice(1),
+                              this
+                            )
                           }),
                           e.stopImmediatePropagation())
                     }
@@ -4990,7 +5394,9 @@
                       (a = v.handle) ||
                         (a = v.handle =
                           function (t) {
-                            return C.event.triggered !== t.type ? C.event.dispatch.apply(e, arguments) : void 0
+                            return C.event.triggered !== t.type
+                              ? C.event.dispatch.apply(e, arguments)
+                              : void 0
                           }),
                       c = (t = (t || '').match(L) || ['']).length;
                     c--;
@@ -5038,7 +5444,11 @@
                   v = Z.hasData(e) && Z.get(e)
                 if (v && (l = v.events)) {
                   for (c = (t = (t || '').match(L) || ['']).length; c--; )
-                    if (((m = f = (s = Ce.exec(t[c]) || [])[1]), (h = (s[2] || '').split('.').sort()), m)) {
+                    if (
+                      ((m = f = (s = Ce.exec(t[c]) || [])[1]),
+                      (h = (s[2] || '').split('.').sort()),
+                      m)
+                    ) {
                       for (
                         u = C.event.special[m] || {},
                           d = l[(m = (r ? u.delegateType : u.bindType) || m)] || [],
@@ -5052,10 +5462,13 @@
                             (n && n.guid !== p.guid) ||
                             (s && !s.test(p.namespace)) ||
                             (r && r !== p.selector && ('**' !== r || !p.selector)) ||
-                            (d.splice(o, 1), p.selector && d.delegateCount--, u.remove && u.remove.call(e, p))
+                            (d.splice(o, 1),
+                            p.selector && d.delegateCount--,
+                            u.remove && u.remove.call(e, p))
                       a &&
                         !d.length &&
-                        ((u.teardown && !1 !== u.teardown.call(e, h, v.handle)) || C.removeEvent(e, m, v.handle),
+                        ((u.teardown && !1 !== u.teardown.call(e, h, v.handle)) ||
+                          C.removeEvent(e, m, v.handle),
                         delete l[m])
                     } else for (m in l) C.event.remove(e, m + t[c], n, r, !0)
                   C.isEmptyObject(l) && Z.remove(e, 'handle events')
@@ -5073,13 +5486,27 @@
                   c = (Z.get(this, 'events') || Object.create(null))[l.type] || [],
                   p = C.event.special[l.type] || {}
                 for (s[0] = l, t = 1; t < arguments.length; t++) s[t] = arguments[t]
-                if (((l.delegateTarget = this), !p.preDispatch || !1 !== p.preDispatch.call(this, l))) {
-                  for (a = C.event.handlers.call(this, l, c), t = 0; (i = a[t++]) && !l.isPropagationStopped(); )
-                    for (l.currentTarget = i.elem, n = 0; (o = i.handlers[n++]) && !l.isImmediatePropagationStopped(); )
+                if (
+                  ((l.delegateTarget = this), !p.preDispatch || !1 !== p.preDispatch.call(this, l))
+                ) {
+                  for (
+                    a = C.event.handlers.call(this, l, c), t = 0;
+                    (i = a[t++]) && !l.isPropagationStopped();
+
+                  )
+                    for (
+                      l.currentTarget = i.elem, n = 0;
+                      (o = i.handlers[n++]) && !l.isImmediatePropagationStopped();
+
+                    )
                       (l.rnamespace && !1 !== o.namespace && !l.rnamespace.test(o.namespace)) ||
                         ((l.handleObj = o),
                         (l.data = o.data),
-                        void 0 !== (r = ((C.event.special[o.origType] || {}).handle || o.handler).apply(i.elem, s)) &&
+                        void 0 !==
+                          (r = ((C.event.special[o.origType] || {}).handle || o.handler).apply(
+                            i.elem,
+                            s
+                          )) &&
                           !1 === (l.result = r) &&
                           (l.preventDefault(), l.stopPropagation()))
                   return p.postDispatch && p.postDispatch.call(this, l), l.result
@@ -5099,7 +5526,9 @@
                     if (1 === c.nodeType && ('click' !== e.type || !0 !== c.disabled)) {
                       for (o = [], a = {}, n = 0; n < l; n++)
                         void 0 === a[(i = (r = t[n]).selector + ' ')] &&
-                          (a[i] = r.needsContext ? C(i, this).index(c) > -1 : C.find(i, this, null, [c]).length),
+                          (a[i] = r.needsContext
+                            ? C(i, this).index(c) > -1
+                            : C.find(i, this, null, [c]).length),
                           a[i] && o.push(r)
                       o.length && s.push({ elem: c, handlers: o })
                     }
@@ -5117,7 +5546,12 @@
                         if (this.originalEvent) return this.originalEvent[e]
                       },
                   set: function (t) {
-                    Object.defineProperty(this, e, { enumerable: !0, configurable: !0, writable: !0, value: t })
+                    Object.defineProperty(this, e, {
+                      enumerable: !0,
+                      configurable: !0,
+                      writable: !0,
+                      value: t
+                    })
                   }
                 })
               },
@@ -5137,12 +5571,17 @@
                   },
                   _default: function (e) {
                     var t = e.target
-                    return (ge.test(t.type) && t.click && B(t, 'input') && Z.get(t, 'click')) || B(t, 'a')
+                    return (
+                      (ge.test(t.type) && t.click && B(t, 'input') && Z.get(t, 'click')) ||
+                      B(t, 'a')
+                    )
                   }
                 },
                 beforeunload: {
                   postDispatch: function (e) {
-                    void 0 !== e.result && e.originalEvent && (e.originalEvent.returnValue = e.result)
+                    void 0 !== e.result &&
+                      e.originalEvent &&
+                      (e.originalEvent.returnValue = e.result)
                   }
                 }
               }
@@ -5156,8 +5595,11 @@
                   ? ((this.originalEvent = e),
                     (this.type = e.type),
                     (this.isDefaultPrevented =
-                      e.defaultPrevented || (void 0 === e.defaultPrevented && !1 === e.returnValue) ? Pe : ke),
-                    (this.target = e.target && 3 === e.target.nodeType ? e.target.parentNode : e.target),
+                      e.defaultPrevented || (void 0 === e.defaultPrevented && !1 === e.returnValue)
+                        ? Pe
+                        : ke),
+                    (this.target =
+                      e.target && 3 === e.target.nodeType ? e.target.parentNode : e.target),
                     (this.currentTarget = e.currentTarget),
                     (this.relatedTarget = e.relatedTarget))
                   : (this.type = e),
@@ -5253,7 +5695,9 @@
                         o = e.handleObj
                       return (
                         (i && (i === r || C.contains(r, i))) ||
-                          ((e.type = o.origType), (n = o.handler.apply(this, arguments)), (e.type = t)),
+                          ((e.type = o.origType),
+                          (n = o.handler.apply(this, arguments)),
+                          (e.type = t)),
                         n
                       )
                     }
@@ -5296,13 +5740,23 @@
               je = /checked\s*(?:[^=]|=\s*.checked.)/i,
               Me = /^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g
             function De(e, t) {
-              return (B(e, 'table') && B(11 !== t.nodeType ? t : t.firstChild, 'tr') && C(e).children('tbody')[0]) || e
+              return (
+                (B(e, 'table') &&
+                  B(11 !== t.nodeType ? t : t.firstChild, 'tr') &&
+                  C(e).children('tbody')[0]) ||
+                e
+              )
             }
             function Re(e) {
               return (e.type = (null !== e.getAttribute('type')) + '/' + e.type), e
             }
             function ze(e) {
-              return 'true/' === (e.type || '').slice(0, 5) ? (e.type = e.type.slice(5)) : e.removeAttribute('type'), e
+              return (
+                'true/' === (e.type || '').slice(0, 5)
+                  ? (e.type = e.type.slice(5))
+                  : e.removeAttribute('type'),
+                e
+              )
             }
             function Ie(e, t) {
               var n, r, i, o, a, s
@@ -5344,7 +5798,9 @@
                 o || r)
               ) {
                 for (s = (a = C.map(Ee(i, 'script'), Re)).length; u < d; u++)
-                  (l = i), u !== m && ((l = C.clone(l, !0, !0)), s && C.merge(a, Ee(l, 'script'))), n.call(e[u], l, u)
+                  (l = i),
+                    u !== m && ((l = C.clone(l, !0, !0)), s && C.merge(a, Ee(l, 'script'))),
+                    n.call(e[u], l, u)
                 if (s)
                   for (p = a[a.length - 1].ownerDocument, C.map(a, ze), u = 0; u < s; u++)
                     (l = a[u]),
@@ -5379,7 +5835,9 @@
                 if (!(g.noCloneChecked || (1 !== e.nodeType && 11 !== e.nodeType) || C.isXMLDoc(e)))
                   for (a = Ee(s), r = 0, i = (o = Ee(e)).length; r < i; r++) Ne(o[r], a[r])
                 if (t)
-                  if (n) for (o = o || Ee(e), a = a || Ee(s), r = 0, i = o.length; r < i; r++) Ie(o[r], a[r])
+                  if (n)
+                    for (o = o || Ee(e), a = a || Ee(s), r = 0, i = o.length; r < i; r++)
+                      Ie(o[r], a[r])
                   else Ie(e, s)
                 return (a = Ee(s, 'script')).length > 0 && xe(a, !l && Ee(e, 'script')), s
               },
@@ -5387,7 +5845,9 @@
                 for (var t, n, r, i = C.event.special, o = 0; void 0 !== (n = e[o]); o++)
                   if (J(n)) {
                     if ((t = n[Z.expando])) {
-                      if (t.events) for (r in t.events) i[r] ? C.event.remove(n, r) : C.removeEvent(n, r, t.handle)
+                      if (t.events)
+                        for (r in t.events)
+                          i[r] ? C.event.remove(n, r) : C.removeEvent(n, r, t.handle)
                       n[Z.expando] = void 0
                     }
                     n[ee.expando] && (n[ee.expando] = void 0)
@@ -5419,7 +5879,8 @@
                 },
                 append: function () {
                   return Le(this, arguments, function (e) {
-                    ;(1 !== this.nodeType && 11 !== this.nodeType && 9 !== this.nodeType) || De(this, e).appendChild(e)
+                    ;(1 !== this.nodeType && 11 !== this.nodeType && 9 !== this.nodeType) ||
+                      De(this, e).appendChild(e)
                   })
                 },
                 prepend: function () {
@@ -5462,11 +5923,16 @@
                         n = 0,
                         r = this.length
                       if (void 0 === e && 1 === t.nodeType) return t.innerHTML
-                      if ('string' == typeof e && !Be.test(e) && !Ae[(ye.exec(e) || ['', ''])[1].toLowerCase()]) {
+                      if (
+                        'string' == typeof e &&
+                        !Be.test(e) &&
+                        !Ae[(ye.exec(e) || ['', ''])[1].toLowerCase()]
+                      ) {
                         e = C.htmlPrefilter(e)
                         try {
                           for (; n < r; n++)
-                            1 === (t = this[n] || {}).nodeType && (C.cleanData(Ee(t, !1)), (t.innerHTML = e))
+                            1 === (t = this[n] || {}).nodeType &&
+                              (C.cleanData(Ee(t, !1)), (t.innerHTML = e))
                           t = 0
                         } catch (e) {}
                       }
@@ -5484,7 +5950,8 @@
                     arguments,
                     function (t) {
                       var n = this.parentNode
-                      C.inArray(this, e) < 0 && (C.cleanData(Ee(this)), n && n.replaceChild(t, this))
+                      C.inArray(this, e) < 0 &&
+                        (C.cleanData(Ee(this)), n && n.replaceChild(t, this))
                     },
                     e
                   )
@@ -5554,7 +6021,8 @@
             !(function () {
               function e() {
                 if (p) {
-                  ;(c.style.cssText = 'position:absolute;left:-11111px;width:60px;margin-top:1px;padding:0;border:0'),
+                  ;(c.style.cssText =
+                    'position:absolute;left:-11111px;width:60px;margin-top:1px;padding:0;border:0'),
                     (p.style.cssText =
                       'position:relative;display:block;box-sizing:border-box;overflow:scroll;margin:auto;border:1px;padding:1px;width:60%;top:1%'),
                     se.appendChild(c).appendChild(p)
@@ -5608,7 +6076,8 @@
                         ((e = A.createElement('table')),
                         (t = A.createElement('tr')),
                         (r = A.createElement('div')),
-                        (e.style.cssText = 'position:absolute;left:-11111px;border-collapse:separate'),
+                        (e.style.cssText =
+                          'position:absolute;left:-11111px;border-collapse:separate'),
                         (t.style.cssText = 'border:1px solid'),
                         (t.style.height = '1px'),
                         (r.style.height = '9px'),
@@ -5667,7 +6136,11 @@
               return (
                 !r &&
                   o >= 0 &&
-                  (l += Math.max(0, Math.ceil(e['offset' + t[0].toUpperCase() + t.slice(1)] - o - l - s - 0.5)) || 0),
+                  (l +=
+                    Math.max(
+                      0,
+                      Math.ceil(e['offset' + t[0].toUpperCase() + t.slice(1)] - o - l - s - 0.5)
+                    ) || 0),
                 l
               )
             }
@@ -5738,12 +6211,19 @@
                     p = e.style
                   if ((c || (t = Ye(l)), (s = C.cssHooks[t] || C.cssHooks[l]), void 0 === n))
                     return s && 'get' in s && void 0 !== (o = s.get(e, !1, r)) ? o : p[t]
-                  'string' === (a = i(n)) && (o = oe.exec(n)) && o[1] && ((n = ue(e, t, o)), (a = 'number')),
+                  'string' === (a = i(n)) &&
+                    (o = oe.exec(n)) &&
+                    o[1] &&
+                    ((n = ue(e, t, o)), (a = 'number')),
                     null != n &&
                       n == n &&
                       ('number' !== a || c || (n += (o && o[3]) || (C.cssNumber[l] ? '' : 'px')),
-                      g.clearCloneStyle || '' !== n || 0 !== t.indexOf('background') || (p[t] = 'inherit'),
-                      (s && 'set' in s && void 0 === (n = s.set(e, n, r))) || (c ? p.setProperty(t, n) : (p[t] = n)))
+                      g.clearCloneStyle ||
+                        '' !== n ||
+                        0 !== t.indexOf('background') ||
+                        (p[t] = 'inherit'),
+                      (s && 'set' in s && void 0 === (n = s.set(e, n, r))) ||
+                        (c ? p.setProperty(t, n) : (p[t] = n)))
                 }
               },
               css: function (e, t, n, r) {
@@ -5786,7 +6266,10 @@
                             nt(e, t, 'border', !1, o) -
                             0.5
                         )),
-                      l && (i = oe.exec(n)) && 'px' !== (i[3] || 'px') && ((e.style[t] = n), (n = C.css(e, t))),
+                      l &&
+                        (i = oe.exec(n)) &&
+                        'px' !== (i[3] || 'px') &&
+                        ((e.style[t] = n), (n = C.css(e, t))),
                       tt(0, n, l)
                     )
                   }
@@ -5805,7 +6288,11 @@
               C.each({ margin: '', padding: '', border: 'Width' }, function (e, t) {
                 ;(C.cssHooks[e + t] = {
                   expand: function (n) {
-                    for (var r = 0, i = {}, o = 'string' == typeof n ? n.split(' ') : [n]; r < 4; r++)
+                    for (
+                      var r = 0, i = {}, o = 'string' == typeof n ? n.split(' ') : [n];
+                      r < 4;
+                      r++
+                    )
                       i[e + ae[r] + t] = o[r] || o[r - 2] || o[0]
                     return i
                   }
@@ -5855,7 +6342,13 @@
                   return (
                     this.options.duration
                       ? (this.pos = t =
-                          C.easing[this.easing](e, this.options.duration * e, 0, 1, this.options.duration))
+                          C.easing[this.easing](
+                            e,
+                            this.options.duration * e,
+                            0,
+                            1,
+                            this.options.duration
+                          ))
                       : (this.pos = t = e),
                     (this.now = (this.end - this.start) * t + this.start),
                     this.options.step && this.options.step.call(this.elem, this.now, this),
@@ -5869,7 +6362,8 @@
                 _default: {
                   get: function (e) {
                     var t
-                    return 1 !== e.elem.nodeType || (null != e.elem[e.prop] && null == e.elem.style[e.prop])
+                    return 1 !== e.elem.nodeType ||
+                      (null != e.elem[e.prop] && null == e.elem.style[e.prop])
                       ? e.elem[e.prop]
                       : (t = C.css(e.elem, e.prop, '')) && 'auto' !== t
                       ? t
@@ -5878,7 +6372,8 @@
                   set: function (e) {
                     C.fx.step[e.prop]
                       ? C.fx.step[e.prop](e)
-                      : 1 !== e.elem.nodeType || (!C.cssHooks[e.prop] && null == e.elem.style[Ye(e.prop)])
+                      : 1 !== e.elem.nodeType ||
+                        (!C.cssHooks[e.prop] && null == e.elem.style[Ye(e.prop)])
                       ? (e.elem[e.prop] = e.now)
                       : C.style(e.elem, e.prop, e.now + e.unit)
                   }
@@ -5923,11 +6418,16 @@
               var n,
                 r = 0,
                 i = { height: e }
-              for (t = t ? 1 : 0; r < 4; r += 2 - t) i['margin' + (n = ae[r])] = i['padding' + n] = e
+              for (t = t ? 1 : 0; r < 4; r += 2 - t)
+                i['margin' + (n = ae[r])] = i['padding' + n] = e
               return t && (i.opacity = i.width = e), i
             }
             function dt(e, t, n) {
-              for (var r, i = (mt.tweeners[t] || []).concat(mt.tweeners['*']), o = 0, a = i.length; o < a; o++)
+              for (
+                var r, i = (mt.tweeners[t] || []).concat(mt.tweeners['*']), o = 0, a = i.length;
+                o < a;
+                o++
+              )
                 if ((r = i[o].call(n, t, e))) return r
             }
             function mt(e, t, n) {
@@ -5973,7 +6473,12 @@
                       r = t ? c.tweens.length : 0
                     if (i) return this
                     for (i = !0; n < r; n++) c.tweens[n].run(1)
-                    return t ? (s.notifyWith(e, [c, 1, 0]), s.resolveWith(e, [c, t])) : s.rejectWith(e, [c, t]), this
+                    return (
+                      t
+                        ? (s.notifyWith(e, [c, 1, 0]), s.resolveWith(e, [c, t]))
+                        : s.rejectWith(e, [c, t]),
+                      this
+                    )
                   }
                 }),
                 p = c.props
@@ -5988,7 +6493,8 @@
                       n !== r && ((e[r] = o), delete e[n]),
                       (a = C.cssHooks[r]) && ('expand' in a))
                     )
-                      for (n in ((o = a.expand(o)), delete e[r], o)) (n in e) || ((e[n] = o[n]), (t[n] = i))
+                      for (n in ((o = a.expand(o)), delete e[r], o))
+                        (n in e) || ((e[n] = o[n]), (t[n] = i))
                     else t[r] = i
                 })(p, c.opts.specialEasing);
                 o < a;
@@ -5999,7 +6505,11 @@
               return (
                 C.map(p, dt, c),
                 y(c.opts.start) && c.opts.start.call(e, c),
-                c.progress(c.opts.progress).done(c.opts.done, c.opts.complete).fail(c.opts.fail).always(c.opts.always),
+                c
+                  .progress(c.opts.progress)
+                  .done(c.opts.done, c.opts.complete)
+                  .fail(c.opts.fail)
+                  .always(c.opts.always),
                 C.fx.timer(C.extend(l, { elem: e, anim: c, queue: c.opts.queue })),
                 c
               )
@@ -6061,7 +6571,12 @@
                       ((n.overflow = [h.overflow, h.overflowX, h.overflowY]),
                       null == (c = v && v.display) && (c = Z.get(e, 'display')),
                       'none' === (p = C.css(e, 'display')) &&
-                        (c ? (p = c) : (he([e], !0), (c = e.style.display || c), (p = C.css(e, 'display')), he([e]))),
+                        (c
+                          ? (p = c)
+                          : (he([e], !0),
+                            (c = e.style.display || c),
+                            (p = C.css(e, 'display')),
+                            he([e]))),
                       ('inline' === p || ('inline-block' === p && null != c)) &&
                         'none' === C.css(e, 'float') &&
                         (l ||
@@ -6073,12 +6588,16 @@
                     n.overflow &&
                       ((h.overflow = 'hidden'),
                       d.always(function () {
-                        ;(h.overflow = n.overflow[0]), (h.overflowX = n.overflow[1]), (h.overflowY = n.overflow[2])
+                        ;(h.overflow = n.overflow[0]),
+                          (h.overflowX = n.overflow[1]),
+                          (h.overflowY = n.overflow[2])
                       })),
                     (l = !1),
                     m))
                       l ||
-                        (v ? 'hidden' in v && (f = v.hidden) : (v = Z.access(e, 'fxshow', { display: c })),
+                        (v
+                          ? 'hidden' in v && (f = v.hidden)
+                          : (v = Z.access(e, 'fxshow', { display: c })),
                         o && (v.hidden = !f),
                         f && he([e], !0),
                         d.done(function () {
@@ -6096,7 +6615,11 @@
                 var r =
                   e && 'object' === i(e)
                     ? C.extend({}, e)
-                    : { complete: n || (!n && t) || (y(e) && e), duration: e, easing: (n && t) || (t && !y(t) && t) }
+                    : {
+                        complete: n || (!n && t) || (y(e) && e),
+                        duration: e,
+                        easing: (n && t) || (t && !y(t) && t)
+                      }
                 return (
                   C.fx.off
                     ? (r.duration = 0)
@@ -6114,7 +6637,11 @@
               }),
               C.fn.extend({
                 fadeTo: function (e, t, n, r) {
-                  return this.filter(pe).css('opacity', 0).show().end().animate({ opacity: t }, e, n, r)
+                  return this.filter(pe)
+                    .css('opacity', 0)
+                    .show()
+                    .end()
+                    .animate({ opacity: t }, e, n, r)
                 },
                 animate: function (e, t, n, r) {
                   var i = C.isEmptyObject(e),
@@ -6159,11 +6686,16 @@
                         o = C.timers,
                         a = r ? r.length : 0
                       for (
-                        n.finish = !0, C.queue(this, e, []), i && i.stop && i.stop.call(this, !0), t = o.length;
+                        n.finish = !0,
+                          C.queue(this, e, []),
+                          i && i.stop && i.stop.call(this, !0),
+                          t = o.length;
                         t--;
 
                       )
-                        o[t].elem === this && o[t].queue === e && (o[t].anim.stop(!0), o.splice(t, 1))
+                        o[t].elem === this &&
+                          o[t].queue === e &&
+                          (o[t].anim.stop(!0), o.splice(t, 1))
                       for (t = 0; t < a; t++) r[t] && r[t].finish && r[t].finish.call(this)
                       delete n.finish
                     })
@@ -6198,7 +6730,8 @@
                 var e,
                   t = 0,
                   n = C.timers
-                for (ot = Date.now(); t < n.length; t++) (e = n[t])() || n[t] !== e || n.splice(t--, 1)
+                for (ot = Date.now(); t < n.length; t++)
+                  (e = n[t])() || n[t] !== e || n.splice(t--, 1)
                 n.length || C.fx.stop(), (ot = void 0)
               }),
               (C.fx.timer = function (e) {
@@ -6255,7 +6788,9 @@
                     return void 0 === e.getAttribute
                       ? C.prop(e, t, n)
                       : ((1 === o && C.isXMLDoc(e)) ||
-                          (i = C.attrHooks[t.toLowerCase()] || (C.expr.match.bool.test(t) ? ht : void 0)),
+                          (i =
+                            C.attrHooks[t.toLowerCase()] ||
+                            (C.expr.match.bool.test(t) ? ht : void 0)),
                         void 0 !== n
                           ? null === n
                             ? void C.removeAttr(e, t)
@@ -6296,7 +6831,11 @@
                   var i,
                     o,
                     a = t.toLowerCase()
-                  return r || ((o = ft[a]), (ft[a] = i), (i = null != n(e, t, r) ? a : null), (ft[a] = o)), i
+                  return (
+                    r ||
+                      ((o = ft[a]), (ft[a] = i), (i = null != n(e, t, r) ? a : null), (ft[a] = o)),
+                    i
+                  )
                 }
               })
             var vt = /^(?:input|select|textarea|button)$/i,
@@ -6341,7 +6880,11 @@
                   tabIndex: {
                     get: function (e) {
                       var t = C.find.attr(e, 'tabindex')
-                      return t ? parseInt(t, 10) : vt.test(e.nodeName) || (gt.test(e.nodeName) && e.href) ? 0 : -1
+                      return t
+                        ? parseInt(t, 10)
+                        : vt.test(e.nodeName) || (gt.test(e.nodeName) && e.href)
+                        ? 0
+                        : -1
                     }
                   }
                 },
@@ -6440,7 +6983,10 @@
                           (void 0 !== e && 'boolean' !== n) ||
                             ((t = bt(this)) && Z.set(this, '__className__', t),
                             this.setAttribute &&
-                              this.setAttribute('class', t || !1 === e ? '' : Z.get(this, '__className__') || ''))
+                              this.setAttribute(
+                                'class',
+                                t || !1 === e ? '' : Z.get(this, '__className__') || ''
+                              ))
                       })
                 },
                 hasClass: function (e) {
@@ -6521,7 +7067,8 @@
                     },
                     set: function (e, t) {
                       for (var n, r, i = e.options, o = C.makeArray(t), a = i.length; a--; )
-                        ((r = i[a]).selected = C.inArray(C.valHooks.option.get(r), o) > -1) && (n = !0)
+                        ((r = i[a]).selected = C.inArray(C.valHooks.option.get(r), o) > -1) &&
+                          (n = !0)
                       return n || (e.selectedIndex = -1), o
                     }
                   }
@@ -6563,9 +7110,13 @@
                     !xt.test(v + C.event.triggered) &&
                     (v.indexOf('.') > -1 && ((g = v.split('.')), (v = g.shift()), g.sort()),
                     (p = v.indexOf(':') < 0 && 'on' + v),
-                    ((e = e[C.expando] ? e : new C.Event(v, 'object' === i(e) && e)).isTrigger = o ? 2 : 3),
+                    ((e = e[C.expando] ? e : new C.Event(v, 'object' === i(e) && e)).isTrigger = o
+                      ? 2
+                      : 3),
                     (e.namespace = g.join('.')),
-                    (e.rnamespace = e.namespace ? new RegExp('(^|\\.)' + g.join('\\.(?:.*\\.|)') + '(\\.|$)') : null),
+                    (e.rnamespace = e.namespace
+                      ? new RegExp('(^|\\.)' + g.join('\\.(?:.*\\.|)') + '(\\.|$)')
+                      : null),
                     (e.result = void 0),
                     e.target || (e.target = r),
                     (t = null == t ? [e] : C.makeArray(t, [e])),
@@ -6573,14 +7124,20 @@
                     o || !d.trigger || !1 !== d.trigger.apply(r, t)))
                 ) {
                   if (!o && !d.noBubble && !b(r)) {
-                    for (c = d.delegateType || v, xt.test(c + v) || (s = s.parentNode); s; s = s.parentNode)
+                    for (
+                      c = d.delegateType || v, xt.test(c + v) || (s = s.parentNode);
+                      s;
+                      s = s.parentNode
+                    )
                       f.push(s), (l = s)
                     l === (r.ownerDocument || A) && f.push(l.defaultView || l.parentWindow || n)
                   }
                   for (a = 0; (s = f[a++]) && !e.isPropagationStopped(); )
                     (m = s),
                       (e.type = a > 1 ? c : d.bindType || v),
-                      (u = (Z.get(s, 'events') || Object.create(null))[e.type] && Z.get(s, 'handle')) && u.apply(s, t),
+                      (u =
+                        (Z.get(s, 'events') || Object.create(null))[e.type] &&
+                        Z.get(s, 'handle')) && u.apply(s, t),
                       (u = p && s[p]) &&
                         u.apply &&
                         J(s) &&
@@ -6670,7 +7227,9 @@
               var o
               if (Array.isArray(t))
                 C.each(t, function (t, o) {
-                  n || kt.test(e) ? r(e, o) : Bt(e + '[' + ('object' === i(o) && null != o ? t : '') + ']', o, n, r)
+                  n || kt.test(e)
+                    ? r(e, o)
+                    : Bt(e + '[' + ('object' === i(o) && null != o ? t : '') + ']', o, n, r)
                 })
               else if (n || 'object' !== _(t)) r(e, t)
               else for (o in t) Bt(e + '[' + o + ']', t[o], n, r)
@@ -6780,7 +7339,9 @@
                 ajaxSettings: {
                   url: wt.href,
                   type: 'GET',
-                  isLocal: /^(?:about|app|app-storage|.+-extension|file|res|widget):$/.test(wt.protocol),
+                  isLocal: /^(?:about|app|app-storage|.+-extension|file|res|widget):$/.test(
+                    wt.protocol
+                  ),
                   global: !0,
                   processData: !0,
                   async: !0,
@@ -6793,8 +7354,17 @@
                     json: 'application/json, text/javascript'
                   },
                   contents: { xml: /\bxml\b/, html: /\bhtml/, json: /\bjson\b/ },
-                  responseFields: { xml: 'responseXML', text: 'responseText', json: 'responseJSON' },
-                  converters: { '* text': String, 'text html': !0, 'text json': JSON.parse, 'text xml': C.parseXML },
+                  responseFields: {
+                    xml: 'responseXML',
+                    text: 'responseText',
+                    json: 'responseJSON'
+                  },
+                  converters: {
+                    '* text': String,
+                    'text html': !0,
+                    'text json': JSON.parse,
+                    'text xml': C.parseXML
+                  },
                   flatOptions: { url: !0, context: !0 }
                 },
                 ajaxSetup: function (e, t) {
@@ -6830,7 +7400,9 @@
                         if (p) {
                           if (!s)
                             for (s = {}; (t = Rt.exec(a)); )
-                              s[t[1].toLowerCase() + ' '] = (s[t[1].toLowerCase() + ' '] || []).concat(t[2])
+                              s[t[1].toLowerCase() + ' '] = (
+                                s[t[1].toLowerCase() + ' '] || []
+                              ).concat(t[2])
                           t = s[e.toLowerCase() + ' ']
                         }
                         return null == t ? null : t.join(', ')
@@ -6839,7 +7411,11 @@
                         return p ? a : null
                       },
                       setRequestHeader: function (e, t) {
-                        return null == p && ((e = x[e.toLowerCase()] = x[e.toLowerCase()] || e), (E[e] = t)), this
+                        return (
+                          null == p &&
+                            ((e = x[e.toLowerCase()] = x[e.toLowerCase()] || e), (E[e] = t)),
+                          this
+                        )
                       },
                       overrideMimeType: function (e) {
                         return null == p && (h.mimeType = e), this
@@ -6873,12 +7449,17 @@
                     }
                   }
                   if (
-                    (h.data && h.processData && 'string' != typeof h.data && (h.data = C.param(h.data, h.traditional)),
+                    (h.data &&
+                      h.processData &&
+                      'string' != typeof h.data &&
+                      (h.data = C.param(h.data, h.traditional)),
                     Ht(Nt, h, t, w),
                     p)
                   )
                     return w
-                  for (d in ((u = C.event && h.global) && 0 == C.active++ && C.event.trigger('ajaxStart'),
+                  for (d in ((u = C.event && h.global) &&
+                    0 == C.active++ &&
+                    C.event.trigger('ajaxStart'),
                   (h.type = h.type.toUpperCase()),
                   (h.hasContent = !zt.test(h.type)),
                   (o = h.url.replace(Mt, '')),
@@ -6892,23 +7473,32 @@
                         (h.processData || 'string' == typeof h.data) &&
                         ((o += (Pt.test(o) ? '&' : '?') + h.data), delete h.data),
                       !1 === h.cache &&
-                        ((o = o.replace(Dt, '$1')), (m = (Pt.test(o) ? '&' : '?') + '_=' + Ct.guid++ + m)),
+                        ((o = o.replace(Dt, '$1')),
+                        (m = (Pt.test(o) ? '&' : '?') + '_=' + Ct.guid++ + m)),
                       (h.url = o + m)),
                   h.ifModified &&
-                    (C.lastModified[o] && w.setRequestHeader('If-Modified-Since', C.lastModified[o]),
+                    (C.lastModified[o] &&
+                      w.setRequestHeader('If-Modified-Since', C.lastModified[o]),
                     C.etag[o] && w.setRequestHeader('If-None-Match', C.etag[o])),
                   ((h.data && h.hasContent && !1 !== h.contentType) || t.contentType) &&
                     w.setRequestHeader('Content-Type', h.contentType),
                   w.setRequestHeader(
                     'Accept',
                     h.dataTypes[0] && h.accepts[h.dataTypes[0]]
-                      ? h.accepts[h.dataTypes[0]] + ('*' !== h.dataTypes[0] ? ', ' + Ft + '; q=0.01' : '')
+                      ? h.accepts[h.dataTypes[0]] +
+                          ('*' !== h.dataTypes[0] ? ', ' + Ft + '; q=0.01' : '')
                       : h.accepts['*']
                   ),
                   h.headers))
                     w.setRequestHeader(d, h.headers[d])
                   if (h.beforeSend && (!1 === h.beforeSend.call(f, w, h) || p)) return w.abort()
-                  if (((_ = 'abort'), y.add(h.complete), w.done(h.success), w.fail(h.error), (r = Ht(Lt, h, t, w)))) {
+                  if (
+                    ((_ = 'abort'),
+                    y.add(h.complete),
+                    w.done(h.success),
+                    w.fail(h.error),
+                    (r = Ht(Lt, h, t, w)))
+                  ) {
                     if (((w.readyState = 1), u && v.trigger('ajaxSend', [w, h]), p)) return w
                     h.async &&
                       h.timeout > 0 &&
@@ -6939,7 +7529,9 @@
                       i &&
                         (A = (function (e, t, n) {
                           for (var r, i, o, a, s = e.contents, l = e.dataTypes; '*' === l[0]; )
-                            l.shift(), void 0 === r && (r = e.mimeType || t.getResponseHeader('Content-Type'))
+                            l.shift(),
+                              void 0 === r &&
+                                (r = e.mimeType || t.getResponseHeader('Content-Type'))
                           if (r)
                             for (i in s)
                               if (s[i] && s[i].test(r)) {
@@ -6983,8 +7575,13 @@
                             else if ('*' !== l && l !== o) {
                               if (!(a = c[l + ' ' + o] || c['* ' + o]))
                                 for (i in c)
-                                  if ((s = i.split(' '))[1] === o && (a = c[l + ' ' + s[0]] || c['* ' + s[0]])) {
-                                    !0 === a ? (a = c[i]) : !0 !== c[i] && ((o = s[0]), p.unshift(s[1]))
+                                  if (
+                                    (s = i.split(' '))[1] === o &&
+                                    (a = c[l + ' ' + s[0]] || c['* ' + s[0]])
+                                  ) {
+                                    !0 === a
+                                      ? (a = c[i])
+                                      : !0 !== c[i] && ((o = s[0]), p.unshift(s[1]))
                                     break
                                   }
                               if (!0 !== a)
@@ -7018,7 +7615,9 @@
                       (b = void 0),
                       u && v.trigger(c ? 'ajaxSuccess' : 'ajaxError', [w, h, c ? d : m]),
                       y.fireWith(f, [w, x]),
-                      u && (v.trigger('ajaxComplete', [w, h]), --C.active || C.event.trigger('ajaxStop')))
+                      u &&
+                        (v.trigger('ajaxComplete', [w, h]),
+                        --C.active || C.event.trigger('ajaxStop')))
                   }
                   return w
                 },
@@ -7033,13 +7632,19 @@
                 C[t] = function (e, n, r, i) {
                   return (
                     y(n) && ((i = i || r), (r = n), (n = void 0)),
-                    C.ajax(C.extend({ url: e, type: t, dataType: i, data: n, success: r }, C.isPlainObject(e) && e))
+                    C.ajax(
+                      C.extend(
+                        { url: e, type: t, dataType: i, data: n, success: r },
+                        C.isPlainObject(e) && e
+                      )
+                    )
                   )
                 }
               }),
               C.ajaxPrefilter(function (e) {
                 var t
-                for (t in e.headers) 'content-type' === t.toLowerCase() && (e.contentType = e.headers[t] || '')
+                for (t in e.headers)
+                  'content-type' === t.toLowerCase() && (e.contentType = e.headers[t] || '')
               }),
               (C._evalUrl = function (e, t, n) {
                 return C.ajax({
@@ -7125,13 +7730,22 @@
                       if ((s.open(e.type, e.url, e.async, e.username, e.password), e.xhrFields))
                         for (a in e.xhrFields) s[a] = e.xhrFields[a]
                       for (a in (e.mimeType && s.overrideMimeType && s.overrideMimeType(e.mimeType),
-                      e.crossDomain || i['X-Requested-With'] || (i['X-Requested-With'] = 'XMLHttpRequest'),
+                      e.crossDomain ||
+                        i['X-Requested-With'] ||
+                        (i['X-Requested-With'] = 'XMLHttpRequest'),
                       i))
                         s.setRequestHeader(a, i[a])
                       ;(t = function (e) {
                         return function () {
                           t &&
-                            ((t = r = s.onload = s.onerror = s.onabort = s.ontimeout = s.onreadystatechange = null),
+                            ((t =
+                              r =
+                              s.onload =
+                              s.onerror =
+                              s.onabort =
+                              s.ontimeout =
+                              s.onreadystatechange =
+                                null),
                             'abort' === e
                               ? s.abort()
                               : 'error' === e
@@ -7141,7 +7755,8 @@
                               : o(
                                   Ut[s.status] || s.status,
                                   s.statusText,
-                                  'text' !== (s.responseType || 'text') || 'string' != typeof s.responseText
+                                  'text' !== (s.responseType || 'text') ||
+                                    'string' != typeof s.responseText
                                     ? { binary: s.response }
                                     : { text: s.responseText },
                                   s.getAllResponseHeaders()
@@ -7175,7 +7790,8 @@
               }),
               C.ajaxSetup({
                 accepts: {
-                  script: 'text/javascript, application/javascript, application/ecmascript, application/x-ecmascript'
+                  script:
+                    'text/javascript, application/javascript, application/ecmascript, application/x-ecmascript'
                 },
                 contents: { script: /\b(?:java|ecma)script\b/ },
                 converters: {
@@ -7232,10 +7848,12 @@
                         'data')
                 if (s || 'jsonp' === e.dataTypes[0])
                   return (
-                    (i = e.jsonpCallback = y(e.jsonpCallback) ? e.jsonpCallback() : e.jsonpCallback),
+                    (i = e.jsonpCallback =
+                      y(e.jsonpCallback) ? e.jsonpCallback() : e.jsonpCallback),
                     s
                       ? (e[s] = e[s].replace(Kt, '$1' + i))
-                      : !1 !== e.jsonp && (e.url += (Pt.test(e.url) ? '&' : '?') + e.jsonp + '=' + i),
+                      : !1 !== e.jsonp &&
+                        (e.url += (Pt.test(e.url) ? '&' : '?') + e.jsonp + '=' + i),
                     (e.converters['script json'] = function () {
                       return a || C.error(i + ' was not called'), a[0]
                     }),
@@ -7254,7 +7872,8 @@
                   )
               }),
               (g.createHTMLDocument =
-                (((Gt = A.implementation.createHTMLDocument('').body).innerHTML = '<form></form><form></form>'),
+                (((Gt = A.implementation.createHTMLDocument('').body).innerHTML =
+                  '<form></form><form></form>'),
                 2 === Gt.childNodes.length)),
               (C.parseHTML = function (e, t, n) {
                 return 'string' != typeof e
@@ -7262,14 +7881,17 @@
                   : ('boolean' == typeof t && ((n = t), (t = !1)),
                     t ||
                       (g.createHTMLDocument
-                        ? (((r = (t = A.implementation.createHTMLDocument('')).createElement('base')).href =
-                            A.location.href),
+                        ? (((r = (t = A.implementation.createHTMLDocument('')).createElement(
+                            'base'
+                          )).href = A.location.href),
                           t.head.appendChild(r))
                         : (t = A)),
                     (o = !n && []),
                     (i = j.exec(e))
                       ? [t.createElement(i[1])]
-                      : ((i = we([e], t, o)), o && o.length && C(o).remove(), C.merge([], i.childNodes)))
+                      : ((i = we([e], t, o)),
+                        o && o.length && C(o).remove(),
+                        C.merge([], i.childNodes)))
                 var r, i, o
               }),
               (C.fn.load = function (e, t, n) {
@@ -7355,8 +7977,12 @@
                     if ('fixed' === C.css(r, 'position')) t = r.getBoundingClientRect()
                     else {
                       for (
-                        t = this.offset(), n = r.ownerDocument, e = r.offsetParent || n.documentElement;
-                        e && (e === n.body || e === n.documentElement) && 'static' === C.css(e, 'position');
+                        t = this.offset(),
+                          n = r.ownerDocument,
+                          e = r.offsetParent || n.documentElement;
+                        e &&
+                        (e === n.body || e === n.documentElement) &&
+                        'static' === C.css(e, 'position');
 
                       )
                         e = e.parentNode
@@ -7374,7 +8000,8 @@
                 },
                 offsetParent: function () {
                   return this.map(function () {
-                    for (var e = this.offsetParent; e && 'static' === C.css(e, 'position'); ) e = e.offsetParent
+                    for (var e = this.offsetParent; e && 'static' === C.css(e, 'position'); )
+                      e = e.offsetParent
                     return e || se
                   })
                 }
@@ -7565,7 +8192,11 @@
         }
         function o(e, t) {
           if (!(this instanceof o)) return new o(e, t)
-          ;(e.inverse = t), (t.inverse = e), (this.props = {}), (this.props[e.name] = e), (this.props[t.name] = t)
+          ;(e.inverse = t),
+            (t.inverse = e),
+            (this.props = {}),
+            (this.props[e.name] = e),
+            (this.props[t.name] = t)
         }
         ;(o.prototype.bind = function (e, t) {
           if ('string' == typeof t) {
@@ -7603,10 +8234,13 @@
           }),
           (o.prototype.unset = function (e, t, n) {
             e &&
-              (this.ensureBound(e, t), t.collection ? this.ensureRefsCollection(e, t).remove(n) : (e[t.name] = void 0))
+              (this.ensureBound(e, t),
+              t.collection ? this.ensureRefsCollection(e, t).remove(n) : (e[t.name] = void 0))
           }),
           (o.prototype.set = function (e, t, n) {
-            e && (this.ensureBound(e, t), t.collection ? this.ensureRefsCollection(e, t).add(n) : (e[t.name] = n))
+            e &&
+              (this.ensureBound(e, t),
+              t.collection ? this.ensureRefsCollection(e, t).add(n) : (e[t.name] = n))
           }),
           (e.exports = o)
       },
@@ -7636,7 +8270,9 @@
           '',
           {
             version: 3,
-            sources: ['webpack://./node_modules/bpmn-js-connectors-extension/dist/connectors-extension.css'],
+            sources: [
+              'webpack://./node_modules/bpmn-js-connectors-extension/dist/connectors-extension.css'
+            ],
             names: [],
             mappings:
               'AAAA;;EAEE;AACF;EACE,eAAe;EACf,YAAY;EACZ,aAAa;EACb,MAAM;EACN,OAAO;EACP,YAAY;;EAEZ,cAAc;;EAEd,mBAAmB;EACnB,8CAA8C;EAC9C,8CAA8C;EAC9C,0CAA0C;EAC1C,0CAA0C;EAC1C,0CAA0C;EAC1C,4CAA4C;EAC5C,4CAA4C;;EAE5C,iDAAiD;EACjD,4DAA4D;EAC5D,wDAAwD;;EAExD,gDAAgD;EAChD,iCAAiC;EACjC,kDAAkD;EAClD,uEAAuE;EACvE,kEAAkE;EAClE,iEAAiE;EACjE,uDAAuD;EACvD,yDAAyD;;EAEzD,qBAAqB;EACrB,2BAA2B;EAC3B,sBAAsB;EACtB,uBAAuB;EACvB,wBAAwB;;EAExB,qDAAqD;EACrD,wCAAwC;AAC1C;;AAEA;EACE,WAAW;EACX,YAAY;AACd;;AAEA;EACE,kBAAkB;;EAElB,wDAAwD;EACxD,wBAAwB;AAC1B;;AAEA;;EAEE;AACF;EACE,YAAY;EACZ,+CAA+C;EAC/C,gBAAgB;AAClB;;AAEA;EACE,kBAAkB;EAClB,SAAS;EACT,YAAY;AACd;;AAEA;EACE,WAAW;EACX,sBAAsB;EACtB,gCAAgC;EAChC,gBAAgB;EAChB,kBAAkB;EAClB,2CAA2C;EAC3C,oCAAoC;EACpC,wBAAwB;AAC1B;;AAEA;EACE,qDAAqD;EACrD,iDAAiD;EACjD,aAAa;AACf;;AAEA;EACE,+BAA+B;AACjC;;AAEA;EACE,aAAa;EACb,oBAAoB;EACpB,iBAAiB;EACjB,2BAA2B;AAC7B;;AAEA;EACE,gBAAgB;EAChB,kBAAkB;AACpB;;AAEA;EACE,qDAAqD;AACvD;;AAEA;EACE,oDAAoD;AACtD;;AAEA;EACE,iBAAiB;AACnB;;AAEA;EACE,eAAe;EACf,kDAAkD;EAClD,OAAO;EACP,SAAS;AACX;;AAEA;EACE,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;AACV;;AAEA;EACE,kBAAkB;AACpB;;AAEA;EACE,mBAAmB;EACnB,UAAU;EACV,gBAAgB;EAChB,iBAAiB;EACjB,cAAc;EACd,cAAc;AAChB;;AAEA;;;EAGE,gBAAgB;EAChB,eAAe;EACf,kBAAkB;EAClB,iCAAiC;AACnC;;AAEA;EACE,kDAAkD;EAClD,wCAAwC;AAC1C;;AAEA;EACE,WAAW;EACX,oBAAoB;EACpB,sBAAsB;AACxB;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,8BAA8B;AAChC;;AAEA;EACE,+CAA+C;AACjD;;AAEA;EACE,eAAe;AACjB;;AAEA;;EAEE,kBAAkB;AACpB;;AAEA;EACE,mBAAmB;EACnB,8BAA8B;AAChC;;AAEA;EACE,mBAAmB;AACrB;;AAEA;;EAEE,kBAAkB;EAClB,cAAc;EACd,mBAAmB;EACnB,gBAAgB;EAChB,uBAAuB;AACzB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,oBAAoB;AACtB;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,OAAO;EACP,gBAAgB;AAClB;;AAEA;EACE,OAAO;EACP,mBAAmB;EACnB,mBAAmB;EACnB,iBAAiB;EACjB,aAAa;AACf;;AAEA;EACE,aAAa;AACf;;AAEA;EACE,sBAAsB;EACtB,yBAAyB;AAC3B;;AAEA;;EAEE,qBAAqB;EACrB,gBAAgB;EAChB,sBAAsB;EACtB,oBAAoB;AACtB;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE,kBAAkB;EAClB,iCAAiC;AACnC;;AAEA;EACE,gBAAgB;EAChB,wBAAwB;EACxB,SAAS;EACT,YAAY;AACd,CAAC;EACC,8BAA8B;EAC9B,SAAS;EACT,2BAA2B;AAC7B',
@@ -7987,7 +8623,9 @@
         e.exports = function (e, t) {
           ;(t = t || {}).singleton ||
             'boolean' == typeof t.singleton ||
-            (t.singleton = (void 0 === r && (r = Boolean(window && document && document.all && !window.atob)), r))
+            (t.singleton =
+              (void 0 === r && (r = Boolean(window && document && document.all && !window.atob)),
+              r))
           var n = s((e = e || []), t)
           return function (e) {
             if (((e = e || []), '[object Array]' === Object.prototype.toString.call(e))) {
@@ -8018,7 +8656,8 @@
       return n.d(t, { a: t }), t
     }),
     (n.d = (e, t) => {
-      for (var r in t) n.o(t, r) && !n.o(e, r) && Object.defineProperty(e, r, { enumerable: !0, get: t[r] })
+      for (var r in t)
+        n.o(t, r) && !n.o(e, r) && Object.defineProperty(e, r, { enumerable: !0, get: t[r] })
     }),
     (n.g = (function () {
       if ('object' == typeof globalThis) return globalThis
@@ -8034,7 +8673,8 @@
         enumerable: !0,
         set: () => {
           throw new Error(
-            'ES Modules may not assign module.exports or exports.*, Use ESM export syntax, instead: ' + e.id
+            'ES Modules may not assign module.exports or exports.*, Use ESM export syntax, instead: ' +
+              e.id
           )
         }
       }),
@@ -8382,7 +9022,8 @@
           }).apply(this, arguments)
       }
       function K(e) {
-        for (var t = arguments.length, n = new Array(t > 1 ? t - 1 : 0), r = 1; r < t; r++) n[r - 1] = arguments[r]
+        for (var t = arguments.length, n = new Array(t > 1 ? t - 1 : 0), r = 1; r < t; r++)
+          n[r - 1] = arguments[r]
         return Q.apply(void 0, [e].concat(n))
       }
       function Y(e, t) {
@@ -8405,7 +9046,11 @@
         )
       }
       function X(e, t, n) {
-        return 2 == arguments.length ? e.getAttribute(t) : null === n ? e.removeAttribute(t) : (e.setAttribute(t, n), e)
+        return 2 == arguments.length
+          ? e.getAttribute(t)
+          : null === n
+          ? e.removeAttribute(t)
+          : (e.setAttribute(t, n), e)
       }
       var Z = [].indexOf,
         ee = function (e, t) {
@@ -8444,8 +9089,18 @@
         }),
         (ie.prototype.toggle = function (e, t) {
           return this.list
-            ? (void 0 !== t ? t !== this.list.toggle(e, t) && this.list.toggle(e) : this.list.toggle(e), this)
-            : (void 0 !== t ? (t ? this.add(e) : this.remove(e)) : this.has(e) ? this.remove(e) : this.add(e), this)
+            ? (void 0 !== t
+                ? t !== this.list.toggle(e, t) && this.list.toggle(e)
+                : this.list.toggle(e),
+              this)
+            : (void 0 !== t
+                ? t
+                  ? this.add(e)
+                  : this.remove(e)
+                : this.has(e)
+                ? this.remove(e)
+                : this.add(e),
+              this)
         }),
         (ie.prototype.array = function () {
           var e = (this.el.getAttribute('class') || '').replace(/^\s+|\s+$/g, '').split(te)
@@ -8466,13 +9121,16 @@
         le = function (e, t) {
           if (!e || 1 !== e.nodeType) return !1
           if (se) return se.call(e, t)
-          for (var n = e.parentNode.querySelectorAll(t), r = 0; r < n.length; r++) if (n[r] == e) return !0
+          for (var n = e.parentNode.querySelectorAll(t), r = 0; r < n.length; r++)
+            if (n[r] == e) return !0
           return !1
         }
       function ce(e, t, n) {
         for (
           var r = n ? e : e.parentNode;
-          r && r.nodeType !== document.DOCUMENT_NODE && r.nodeType !== document.DOCUMENT_FRAGMENT_NODE;
+          r &&
+          r.nodeType !== document.DOCUMENT_NODE &&
+          r.nodeType !== document.DOCUMENT_FRAGMENT_NODE;
 
         ) {
           if (le(r, t)) return r
@@ -8517,7 +9175,8 @@
           if (!n) return t.createTextNode(e)
           e = e.replace(/^\s+|\s+$/g, '')
           var r = n[1]
-          if ('body' == r) return ((i = t.createElement('html')).innerHTML = e), i.removeChild(i.lastChild)
+          if ('body' == r)
+            return ((i = t.createElement('html')).innerHTML = e), i.removeChild(i.lastChild)
           var i,
             o = Ae[r] || Ae._default,
             a = o[0],
@@ -8525,7 +9184,8 @@
             l = o[2]
           for ((i = t.createElement('div')).innerHTML = s + e + l; a--; ) i = i.lastChild
           if (i.firstChild == i.lastChild) return i.removeChild(i.firstChild)
-          for (var c = t.createDocumentFragment(); i.firstChild; ) c.appendChild(i.removeChild(i.firstChild))
+          for (var c = t.createDocumentFragment(); i.firstChild; )
+            c.appendChild(i.removeChild(i.firstChild))
           return c
         },
         be = !1
@@ -8642,7 +9302,9 @@
       function ke(e, t, n) {
         var r = t.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase(),
           i = Pe[r]
-        i ? (2 === i && 'number' == typeof n && (n = String(n) + 'px'), (e.style[r] = n)) : e.setAttributeNS(null, t, n)
+        i
+          ? (2 === i && 'number' == typeof n && (n = String(n) + 'px'), (e.style[r] = n))
+          : e.setAttributeNS(null, t, n)
       }
       function Se(e, t, n) {
         if ('string' == typeof t) {
@@ -8683,7 +9345,9 @@
         var t = this.array()
         return (
           ~Oe(t, e) || t.push(e),
-          je(this.el.className.baseVal) ? (this.el.className.baseVal = t.join(' ')) : (this.el.className = t.join(' ')),
+          je(this.el.className.baseVal)
+            ? (this.el.className.baseVal = t.join(' '))
+            : (this.el.className = t.join(' ')),
           this
         )
       }),
@@ -8700,8 +9364,16 @@
         }),
         (Me.prototype.toggle = function (e, t) {
           return this.list
-            ? (je(t) ? t !== this.list.toggle(e, t) && this.list.toggle(e) : this.list.toggle(e), this)
-            : (je(t) ? (t ? this.add(e) : this.remove(e)) : this.has(e) ? this.remove(e) : this.add(e), this)
+            ? (je(t) ? t !== this.list.toggle(e, t) && this.list.toggle(e) : this.list.toggle(e),
+              this)
+            : (je(t)
+                ? t
+                  ? this.add(e)
+                  : this.remove(e)
+                : this.has(e)
+                ? this.remove(e)
+                : this.add(e),
+              this)
         }),
         (Me.prototype.array = function () {
           var e = (this.el.getAttribute('class') || '').replace(/^\s+|\s+$/g, '').split(Te)
@@ -8723,7 +9395,8 @@
           return ((t = new DOMParser()).async = !1), t.parseFromString(e, 'text/xml')
         })(e)
         if (!t) return n
-        for (var r = document.createDocumentFragment(), i = n.firstChild; i.firstChild; ) r.appendChild(i.firstChild)
+        for (var r = document.createDocumentFragment(), i = n.firstChild; i.firstChild; )
+          r.appendChild(i.firstChild)
         return r
       }
       function Ne(e, t) {
@@ -8783,7 +9456,11 @@
                 t)
               ) {
                 '#document-fragment' === n.nodeName || (n = n.documentElement)
-                for (var r, i = ((r = n.childNodes), Array.prototype.slice.call(r)), o = 0; o < i.length; o++)
+                for (
+                  var r, i = ((r = n.childNodes), Array.prototype.slice.call(r)), o = 0;
+                  o < i.length;
+                  o++
+                )
                   we(i[o], e)
               }
             })(e, t)
@@ -8804,7 +9481,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -8826,7 +9506,8 @@
         Je = /^(?:async )?(?:function\s*)?[^(]*\(\s*([^)]*)\)/m,
         Xe = /\/\*([^*]*)\*\//m
       function Ze(e) {
-        if ('function' != typeof e) throw new Error('Cannot annotate "' + e + '". Expected a function!')
+        if ('function' != typeof e)
+          throw new Error('Cannot annotate "' + e + '". Expected a function!')
         var t = e.toString().match(
           (function (e) {
             return We.test(e.toString())
@@ -8987,7 +9668,10 @@
                       ;-1 !== n[1].$scope.indexOf(e) && ((l[h] = [n[2], n[1]]), (c[e] = !0))
                     })
               t.forEach(function (e) {
-                if (!c[e]) throw new Error('No provider for "' + e + '". Cannot use provider from the parent!')
+                if (!c[e])
+                  throw new Error(
+                    'No provider for "' + e + '". Cannot use provider from the parent!'
+                  )
               }),
                 e.unshift(l)
             }
@@ -9004,10 +9688,12 @@
               i = t.element,
               o = t.gfx,
               a = t.attrs
-            if (n.canRender(i)) return 'render.shape' === r ? n.drawShape(o, i, a) : n.drawConnection(o, i, a)
+            if (n.canRender(i))
+              return 'render.shape' === r ? n.drawShape(o, i, a) : n.drawConnection(o, i, a)
           }),
           e.on(['render.getShapePath', 'render.getConnectionPath'], t, function (e, t) {
-            if (n.canRender(t)) return 'render.getShapePath' === e.type ? n.getShapePath(t) : n.getConnectionPath(t)
+            if (n.canRender(t))
+              return 'render.getShapePath' === e.type ? n.getShapePath(t) : n.getConnectionPath(t)
           })
       }
       function ot(e, t) {
@@ -9097,7 +9783,9 @@
       function st(e, t, n) {
         var r = t.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase(),
           i = at[r]
-        i ? (2 === i && 'number' == typeof n && (n = String(n) + 'px'), (e.style[r] = n)) : e.setAttributeNS(null, t, n)
+        i
+          ? (2 === i && 'number' == typeof n && (n = String(n) + 'px'), (e.style[r] = n))
+          : e.setAttributeNS(null, t, n)
       }
       function lt(e, t, n) {
         if ('string' == typeof t) {
@@ -9148,7 +9836,9 @@
         var t = this.array()
         return (
           ~ct(t, e) || t.push(e),
-          dt(this.el.className.baseVal) ? (this.el.className.baseVal = t.join(' ')) : (this.el.className = t.join(' ')),
+          dt(this.el.className.baseVal)
+            ? (this.el.className.baseVal = t.join(' '))
+            : (this.el.className = t.join(' ')),
           this
         )
       }),
@@ -9165,8 +9855,16 @@
         }),
         (ht.prototype.toggle = function (e, t) {
           return this.list
-            ? (dt(t) ? t !== this.list.toggle(e, t) && this.list.toggle(e) : this.list.toggle(e), this)
-            : (dt(t) ? (t ? this.add(e) : this.remove(e)) : this.has(e) ? this.remove(e) : this.add(e), this)
+            ? (dt(t) ? t !== this.list.toggle(e, t) && this.list.toggle(e) : this.list.toggle(e),
+              this)
+            : (dt(t)
+                ? t
+                  ? this.add(e)
+                  : this.remove(e)
+                : this.has(e)
+                ? this.remove(e)
+                : this.add(e),
+              this)
         }),
         (ht.prototype.array = function () {
           var e = (this.el.getAttribute('class') || '').replace(/^\s+|\s+$/g, '').split(pt)
@@ -9311,7 +10009,11 @@
         it.call(this, e, 1),
           (this.CONNECTION_STYLE = t.style(['no-fill'], { strokeWidth: 5, stroke: 'fuchsia' })),
           (this.SHAPE_STYLE = t.style({ fill: 'white', stroke: 'fuchsia', strokeWidth: 2 })),
-          (this.FRAME_STYLE = t.style(['no-fill'], { stroke: 'fuchsia', strokeDasharray: 4, strokeWidth: 2 }))
+          (this.FRAME_STYLE = t.style(['no-fill'], {
+            stroke: 'fuchsia',
+            strokeDasharray: 4,
+            strokeWidth: 2
+          }))
       }
       rt()(Nt, it),
         (Nt.prototype.canRender = function () {
@@ -9321,7 +10023,9 @@
           var r = At('rect')
           return (
             lt(r, { x: 0, y: 0, width: t.width || 0, height: t.height || 0 }),
-            zt(t) ? lt(r, K({}, this.FRAME_STYLE, n || {})) : lt(r, K({}, this.SHAPE_STYLE, n || {})),
+            zt(t)
+              ? lt(r, K({}, this.FRAME_STYLE, n || {}))
+              : lt(r, K({}, this.SHAPE_STYLE, n || {})),
             ot(e, r),
             r
           )
@@ -9341,7 +10045,8 @@
             n,
             r = e.waypoints,
             i = []
-          for (t = 0; (n = r[t]); t++) (n = n.original || n), i.push([0 === t ? 'M' : 'L', n.x, n.y])
+          for (t = 0; (n = r[t]); t++)
+            (n = n.original || n), i.push([0 === t ? 'M' : 'L', n.x, n.y])
           return Pt(i)
         }),
         (Nt.$inject = ['eventBus', 'styles'])
@@ -9425,7 +10130,10 @@
             })(n) && 'v'
       }
       function Wt(e, t, n) {
-        return (n = n || 0), e.x > t.x - n && e.y > t.y - n && e.x < t.x + t.width + n && e.y < t.y + t.height + n
+        return (
+          (n = n || 0),
+          e.x > t.x - n && e.y > t.y - n && e.x < t.x + t.width + n && e.y < t.y + t.height + n
+        )
       }
       function Gt(e, t) {
         return { x: Math.round(e.x + (t.x - e.x) / 2), y: Math.round(e.y + (t.y - e.y) / 2) }
@@ -9433,7 +10141,12 @@
       var Qt = n(9699),
         Kt = n.n(Qt)
       function Yt(e) {
-        return { x: Math.round(e.x), y: Math.round(e.y), width: Math.round(e.width), height: Math.round(e.height) }
+        return {
+          x: Math.round(e.x),
+          y: Math.round(e.y),
+          width: Math.round(e.width),
+          height: Math.round(e.height)
+        }
       }
       function Jt(e) {
         return { x: Math.round(e.x), y: Math.round(e.y) }
@@ -9480,7 +10193,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -9520,7 +10236,12 @@
                 n = document.createElement('div')
               return (
                 n.setAttribute('class', 'djs-container'),
-                K(n.style, { position: 'relative', overflow: 'hidden', width: an(e.width), height: an(e.height) }),
+                K(n.style, {
+                  position: 'relative',
+                  overflow: 'hidden',
+                  width: an(e.width),
+                  height: an(e.height)
+                }),
                 t.appendChild(n),
                 n
               )
@@ -9655,7 +10376,12 @@
               (O([r.gfx, r.secondaryGfx], function (e) {
                 e && (n ? mt(e).add(t) : mt(e).remove(t))
               }),
-              this._eventBus.fire('element.marker.update', { element: e, gfx: r.gfx, marker: t, add: !!n }))
+              this._eventBus.fire('element.marker.update', {
+                element: e,
+                gfx: r.gfx,
+                marker: t,
+                add: !!n
+              }))
         }),
         (cn.prototype.addMarker = function (e, t) {
           this._updateMarker(e, t, !0)
@@ -9679,10 +10405,17 @@
           var n = (e.layer = 'root-' + t)
           this._ensureValid('root', e)
           var r = this.getLayer(n, 0)
-          return this.hideLayer(n), this._addRoot(e, r), this._planes.push({ rootElement: e, layer: r }), e
+          return (
+            this.hideLayer(n),
+            this._addRoot(e, r),
+            this._planes.push({ rootElement: e, layer: r }),
+            e
+          )
         }),
         (cn.prototype.removeRootElement = function (e) {
-          if (('string' == typeof e && (e = this._elementRegistry.get(e)), this._findPlaneForRoot(e)))
+          if (
+            ('string' == typeof e && (e = this._elementRegistry.get(e)), this._findPlaneForRoot(e))
+          )
             return (
               this._removeRoot(e),
               this._removeLayer(e.layer),
@@ -9708,7 +10441,9 @@
         (cn.prototype._addRoot = function (e, t) {
           var n = this._elementRegistry,
             r = this._eventBus
-          r.fire('root.add', { element: e }), n.add(e, t), r.fire('root.added', { element: e, gfx: t })
+          r.fire('root.add', { element: e }),
+            n.add(e, t),
+            r.fire('root.added', { element: e, gfx: t })
         }),
         (cn.prototype._setRoot = function (e, t) {
           var n = this._rootElement
@@ -9722,7 +10457,8 @@
         }),
         (cn.prototype._ensureValid = function (e, t) {
           if (!t.id) throw new Error('element must have an id')
-          if (this._elementRegistry.get(t.id)) throw new Error('element <' + t.id + '> already exists')
+          if (this._elementRegistry.get(t.id))
+            throw new Error('element <' + t.id + '> already exists')
           var n = ln[e]
           if (
             !B(n, function (e) {
@@ -9738,9 +10474,16 @@
           n = n || this.getRootElement()
           var i = this._eventBus,
             o = this._graphicsFactory
-          this._ensureValid(e, t), i.fire(e + '.add', { element: t, parent: n }), this._setParent(t, n, r)
+          this._ensureValid(e, t),
+            i.fire(e + '.add', { element: t, parent: n }),
+            this._setParent(t, n, r)
           var a = o.create(e, t, r)
-          return this._elementRegistry.add(t, a), o.update(e, t, a), i.fire(e + '.added', { element: t, gfx: a }), t
+          return (
+            this._elementRegistry.add(t, a),
+            o.update(e, t, a),
+            i.fire(e + '.added', { element: t, gfx: a }),
+            t
+          )
         }),
         (cn.prototype.addShape = function (e, t, n) {
           return this._addElement('shape', e, t, n)
@@ -9873,7 +10616,8 @@
             ? 'fit-viewport' === e
               ? this._fitViewport(t)
               : (this._changeViewbox(function () {
-                  'object' !== rn(t) && ((n = this.viewbox().outer), (t = { x: n.width / 2, y: n.height / 2 })),
+                  'object' !== rn(t) &&
+                    ((n = this.viewbox().outer), (t = { x: n.width / 2, y: n.height / 2 })),
                     (r = this._setZoom(e, t))
                 }),
                 on(r.a, 1e3))
@@ -10023,7 +10767,10 @@
       var mn = n(1285),
         hn = n.n(mn),
         fn = new (hn())({ name: 'children', enumerable: !0, collection: !0 }, { name: 'parent' }),
-        vn = new (hn())({ name: 'labels', enumerable: !0, collection: !0 }, { name: 'labelTarget' }),
+        vn = new (hn())(
+          { name: 'labels', enumerable: !0, collection: !0 },
+          { name: 'labelTarget' }
+        ),
         gn = new (hn())({ name: 'attachers', collection: !0 }, { name: 'host' }),
         yn = new (hn())({ name: 'outgoing', collection: !0 }, { name: 'source' }),
         bn = new (hn())({ name: 'incoming', collection: !0 }, { name: 'target' })
@@ -10068,7 +10815,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -10138,7 +10888,8 @@
       }),
         (On.prototype.once = function (e, t, n, r) {
           var i = this
-          if ((w(t) && ((r = n), (n = t), (t = 1e3)), !_(t))) throw new Error('priority must be a number')
+          if ((w(t) && ((r = n), (n = t), (t = 1e3)), !_(t)))
+            throw new Error('priority must be a number')
           function o() {
             o.__isTomb = !0
             var t = n.apply(r, arguments)
@@ -10193,7 +10944,8 @@
               })(n.callback, t)) && ((e.returnValue = r), e.stopPropagation()),
               !1 === r && e.preventDefault()
           } catch (e) {
-            if (!this.handleError(e)) throw (console.error('unhandled error in event listener', e), e)
+            if (!this.handleError(e))
+              throw (console.error('unhandled error in event listener', e), e)
           }
           return r
         }),
@@ -10202,7 +10954,8 @@
             r = this._getListeners(e)
           if (r) {
             for (; r; ) {
-              if (r.priority < t.priority) return (t.next = r), void (n ? (n.next = t) : this._setListeners(e, t))
+              if (r.priority < t.priority)
+                return (t.next = r), void (n ? (n.next = t) : this._setListeners(e, t))
               ;(n = r), (r = r.next)
             }
             n.next = t
@@ -10222,7 +10975,8 @@
           if (t)
             for (; o; )
               (n = o.next),
-                ((i = o.callback) !== t && i.__fn !== t) || (r ? (r.next = n) : this._setListeners(e, n)),
+                ((i = o.callback) !== t && i.__fn !== t) ||
+                  (r ? (r.next = n) : this._setListeners(e, n)),
                 (r = o),
                 (o = n)
           else this._setListeners(e, null)
@@ -10349,7 +11103,9 @@
                   try {
                     i['string' == typeof e ? 'get' : 'invoke'](e)
                   } catch (e) {
-                    throw (console.error('Failed to instantiate component'), console.error(e.stack), e)
+                    throw (
+                      (console.error('Failed to instantiate component'), console.error(e.stack), e)
+                    )
                   }
                 }),
                 i
@@ -10436,7 +11192,8 @@
           i = e.split(/:/)
         if (1 === i.length) (n = e), (r = t)
         else {
-          if (2 !== i.length) throw new Error('expected <prefix:localName> or <localName>, got ' + e)
+          if (2 !== i.length)
+            throw new Error('expected <prefix:localName> or <localName>, got ' + e)
           ;(n = i[1]), (r = i[0])
         }
         return { name: (e = (r ? r + ':' : '') + n), prefix: r, localName: n }
@@ -10464,7 +11221,12 @@
         this.model = e
       }
       function Jn(e, t, n) {
-        Object.defineProperty(e, t.name, { enumerable: !t.isReference, writable: !0, value: n, configurable: !0 })
+        Object.defineProperty(e, t.name, {
+          enumerable: !t.isReference,
+          writable: !0,
+          value: n,
+          configurable: !0
+        })
       }
       function Xn(e) {
         ;(this.properties = new Yn(this)),
@@ -10479,7 +11241,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -10508,12 +11273,16 @@
             a = e.name !== t.name
           if (e.isId) {
             if (!t.isId)
-              throw new Error('property <' + t.ns.name + '> must be id property to refine <' + e.ns.name + '>')
+              throw new Error(
+                'property <' + t.ns.name + '> must be id property to refine <' + e.ns.name + '>'
+              )
             this.setIdProperty(t, !1)
           }
           if (e.isBody) {
             if (!t.isBody)
-              throw new Error('property <' + t.ns.name + '> must be body property to refine <' + e.ns.name + '>')
+              throw new Error(
+                'property <' + t.ns.name + '> must be body property to refine <' + e.ns.name + '>'
+              )
             this.setBodyProperty(t, !1)
           }
           var s = i.indexOf(e)
@@ -10543,14 +11312,22 @@
         (Gn.prototype.setBodyProperty = function (e, t) {
           if (t && this.bodyProperty)
             throw new Error(
-              'body property defined multiple times (<' + this.bodyProperty.ns.name + '>, <' + e.ns.name + '>)'
+              'body property defined multiple times (<' +
+                this.bodyProperty.ns.name +
+                '>, <' +
+                e.ns.name +
+                '>)'
             )
           this.bodyProperty = e
         }),
         (Gn.prototype.setIdProperty = function (e, t) {
           if (t && this.idProperty)
             throw new Error(
-              'id property defined multiple times (<' + this.idProperty.ns.name + '>, <' + e.ns.name + '>)'
+              'id property defined multiple times (<' +
+                this.idProperty.ns.name +
+                '>, <' +
+                e.ns.name +
+                '>)'
             )
           this.idProperty = e
         }),
@@ -10589,7 +11366,9 @@
                   i = n.redefines
                 r || i
                   ? this.redefineProperty(n, r || i, r)
-                  : (n.isBody && this.setBodyProperty(n), n.isId && this.setIdProperty(n), this.addProperty(n))
+                  : (n.isBody && this.setBodyProperty(n),
+                    n.isId && this.setIdProperty(n),
+                    this.addProperty(n))
               }, this)
             ),
             r.push(e),
@@ -10632,7 +11411,9 @@
             G(function (e) {
               var t = Wn(e.name, n.prefix),
                 r = t.name
-              $n(e.type) || (e.type = Wn(e.type, t.prefix).name), K(e, { ns: t, name: r }), (i[r] = e)
+              $n(e.type) || (e.type = Wn(e.type, t.prefix).name),
+                K(e, { ns: t, name: r }),
+                (i[r] = e)
             }, this)
           ),
             K(e, { ns: n, name: r, propertiesByName: i }),
@@ -10716,7 +11497,12 @@
           var t = this.typeCache,
             n = C(e) ? e : e.ns.name,
             r = t[n]
-          return r || ((e = this.registry.getEffectiveDescriptor(n)), (r = t[n] = this.factory.createType(e))), r
+          return (
+            r ||
+              ((e = this.registry.getEffectiveDescriptor(n)),
+              (r = t[n] = this.factory.createType(e))),
+            r
+          )
         }),
         (Xn.prototype.createAny = function (e, t, n) {
           var r = Wn(e),
@@ -10748,7 +11534,10 @@
           return e.$descriptor
         }),
         (Xn.prototype.hasType = function (e, t) {
-          return void 0 === t && ((t = e), (e = this)), t in e.$model.getElementDescriptor(e).allTypesByName
+          return (
+            void 0 === t && ((t = e), (e = this)),
+            t in e.$model.getElementDescriptor(e).allTypesByName
+          )
         }),
         (Xn.prototype.getPropertyDescriptor = function (e, t) {
           return this.getElementDescriptor(e).propertiesByName[t]
@@ -10944,7 +11733,8 @@
                           y('illegal attribute name char'), (l = !0)
                         }
                       if (
-                        ('xmlns:xmlns' === (s = g.substring(v, u)) && (y('illegal declaration of xmlns'), (l = !0)),
+                        ('xmlns:xmlns' === (s = g.substring(v, u)) &&
+                          (y('illegal declaration of xmlns'), (l = !0)),
                         34 === (p = g.charCodeAt(u + 1)))
                       )
                         -1 === (u = g.indexOf('"', (v = u + 2))) &&
@@ -11003,7 +11793,8 @@
                               ? (n = S[s.substring(0, p)])
                                 ? ((s = d === n ? s.substr(p + 1) : n + s.substr(p)) === ar &&
                                     (-1 !== (p = o.indexOf(':'))
-                                      ? ((n = o.substring(0, p)), (o = (n = S[n] || n) + o.substring(p)))
+                                      ? ((n = o.substring(0, p)),
+                                        (o = (n = S[n] || n) + o.substring(p)))
                                       : (o = d + ':' + o)),
                                   (A[s] = o))
                                 : y(cr(s.substring(0, p)))
@@ -11099,10 +11890,13 @@
                     if (33 !== A) {
                       if (((P = {}), 47 === A)) {
                         if (((B = !1), (j = !0), !O.length)) return g('missing open tag')
-                        if (((u = _ = O.pop()), (b = M + 2 + u.length), e.substring(M + 2, b) !== u))
+                        if (
+                          ((u = _ = O.pop()), (b = M + 2 + u.length), e.substring(M + 2, b) !== u)
+                        )
                           return g('closing tag mismatch')
                         for (; b < D; b++)
-                          if (!(32 === (A = e.charCodeAt(b)) || (A > 8 && A < 14))) return g('close tag')
+                          if (!(32 === (A = e.charCodeAt(b)) || (A > 8 && A < 14)))
+                            return g('close tag')
                       } else {
                         if (
                           (47 === e.charCodeAt(D - 1)
@@ -11135,16 +11929,20 @@
                           ((o = S),
                           B &&
                             (j || k.push(o),
-                            null === P && (m = -1 !== u.indexOf('xmlns', b)) && ((z = b), (R = u), I(), (m = !1))),
+                            null === P &&
+                              (m = -1 !== u.indexOf('xmlns', b)) &&
+                              ((z = b), (R = u), I(), (m = !1))),
                           (w = _),
                           -1 !== (A = _.indexOf(':')))
                         ) {
-                          if (!(x = S[_.substring(0, A)])) return g('missing namespace on <' + w + '>')
+                          if (!(x = S[_.substring(0, A)]))
+                            return g('missing namespace on <' + w + '>')
                           _ = _.substr(A + 1)
                         } else x = S.xmlns
                         x && (_ = x + ':' + _)
                       }
-                      if (B && ((z = b), (R = u), n && (p ? n(C, or, j, d) : n(_, I, or, j, d), v))) return
+                      if (B && ((z = b), (R = u), n && (p ? n(C, or, j, d) : n(_, I, or, j, d), v)))
+                        return
                       if (j) {
                         if (r && (r(p ? C : _, or, B, d), v)) return
                         h && (S = B ? o : k.pop())
@@ -11173,7 +11971,10 @@
       function vr(e) {
         return e.xml && 'lowerCase' === e.xml.tagAlias
       }
-      var gr = { xsi: 'http://www.w3.org/2001/XMLSchema-instance', xml: 'http://www.w3.org/XML/1998/namespace' },
+      var gr = {
+          xsi: 'http://www.w3.org/2001/XMLSchema-instance',
+          xml: 'http://www.w3.org/XML/1998/namespace'
+        },
         yr = 'xsi:type'
       function br(e) {
         return e.xml && e.xml.serialize
@@ -11182,7 +11983,9 @@
         return br(e) === yr
       }
       function Er(e, t) {
-        return vr(t) ? e.prefix + ':' + ((n = e.localName).charAt(0).toUpperCase() + n.slice(1)) : e.name
+        return vr(t)
+          ? e.prefix + ':' + ((n = e.localName).charAt(0).toUpperCase() + n.slice(1))
+          : e.name
         var n
       }
       function xr(e) {
@@ -11205,7 +12008,8 @@
               n = this.elementsById,
               r = _r(e).idProperty
             if (r && (t = e.get(r.name))) {
-              if (!/^([a-z][\w-.]*:)?[a-z_][\w-.]*$/i.test(t)) throw new Error('illegal ID <' + t + '>')
+              if (!/^([a-z][\w-.]*:)?[a-z_][\w-.]*$/i.test(t))
+                throw new Error('illegal ID <' + t + '>')
               if (n[t]) throw xr('duplicate ID <' + t + '>')
               n[t] = e
             }
@@ -11270,7 +12074,10 @@
           var t = this,
             n = this.element
           return (
-            n ? (t = this.handleChild(e)) : ((n = this.element = this.createElement(e)), this.context.addElement(n)), t
+            n
+              ? (t = this.handleChild(e))
+              : ((n = this.element = this.createElement(e)), this.context.addElement(n)),
+            t
           )
         }),
         (Br.prototype = Object.create(Tr.prototype)),
@@ -11309,7 +12116,12 @@
                     : 'xmlns' !== n &&
                       ((t = Wn(n, i.ns.prefix)),
                       s.getPackage(t.prefix) &&
-                        o.addWarning({ message: 'unknown attribute <' + n + '>', element: a, property: n, value: e })),
+                        o.addWarning({
+                          message: 'unknown attribute <' + n + '>',
+                          element: a,
+                          property: n,
+                          value: e
+                        })),
                   a.set(n, e))
             }),
             a
@@ -11365,17 +12177,27 @@
           return new Sr(e, this.context)
         }),
         (Br.prototype.handler = function (e) {
-          return 'Element' === e ? new Mr(this.model, e, this.context) : new Br(this.model, e, this.context)
+          return 'Element' === e
+            ? new Mr(this.model, e, this.context)
+            : new Br(this.model, e, this.context)
         }),
         (Br.prototype.handleChild = function (e) {
           var t, n, r, i
-          if (((t = this.getPropertyForNode(e)), (r = this.element), Un((n = t.effectiveType || t.type))))
+          if (
+            ((t = this.getPropertyForNode(e)),
+            (r = this.element),
+            Un((n = t.effectiveType || t.type)))
+          )
             return this.valueHandler(t, r)
-          var o = (i = t.isReference ? this.referenceHandler(t).handleNode(e) : this.handler(n).handleNode(e)).element
+          var o = (i = t.isReference
+            ? this.referenceHandler(t).handleNode(e)
+            : this.handler(n).handleNode(e)).element
           return (
             void 0 !== o &&
               (t.isMany ? r.get(t.name).push(o) : r.set(t.name, o),
-              t.isReference ? (K(o, { element: r }), this.context.addReference(o)) : (o.$parent = r)),
+              t.isReference
+                ? (K(o, { element: r }), this.context.addReference(o))
+                : (o.$parent = r)),
             i
           )
         }),
@@ -11491,7 +12313,9 @@
                     n = t && t[1]
                   n &&
                     !m.test(n) &&
-                    a.addWarning({ message: 'unsupported document encoding <' + n + '>, falling back to UTF-8' })
+                    a.addWarning({
+                      message: 'unsupported document encoding <' + n + '>, falling back to UTF-8'
+                    })
                 }
               })
               .on('closeTag', function () {
@@ -11542,7 +12366,9 @@
               var l = a.warnings,
                 c = a.references,
                 p = a.elementsById
-              return i ? ((i.warnings = l), n(i)) : t({ rootElement: o, elementsById: p, references: c, warnings: l })
+              return i
+                ? ((i.warnings = l), n(i))
+                : t({ rootElement: o, elementsById: p, references: c, warnings: l })
             })
           )
         }),
@@ -11594,7 +12420,15 @@
       function Lr(e) {
         return C(e) ? e : (e.prefix ? e.prefix + ':' : '') + e.localName
       }
-      var Fr = { '\n': '#10', '\n\r': '#10', '"': '#34', "'": '#39', '<': '#60', '>': '#62', '&': '#38' },
+      var Fr = {
+          '\n': '#10',
+          '\n\r': '#10',
+          '"': '#34',
+          "'": '#39',
+          '<': '#60',
+          '>': '#62',
+          '&': '#38'
+        },
         Vr = { '<': 'lt', '>': 'gt', '&': 'amp' }
       function qr(e, t, n) {
         return (e = C(e) ? e : '' + e).replace(t, function (e) {
@@ -11671,7 +12505,9 @@
             e.append(this.escape ? qr(this.value, zr, Vr) : this.value)
           }),
         ($r.prototype.build = function (e, t) {
-          return (this.value = t), 'String' === e.type && -1 !== t.search(zr) && (this.escape = !0), this
+          return (
+            (this.value = t), 'String' === e.type && -1 !== t.search(zr) && (this.escape = !0), this
+          )
         }),
         Nr(Ur, $r),
         (Ur.prototype.serializeTo = function (e) {
@@ -11721,7 +12557,9 @@
               : K(
                   {
                     localName:
-                      ((n = t.ns.localName), (r = t.$pkg), vr(r) ? (i = n).charAt(0).toLowerCase() + i.slice(1) : n)
+                      ((n = t.ns.localName),
+                      (r = t.$pkg),
+                      vr(r) ? (i = n).charAt(0).toLowerCase() + i.slice(1) : n)
                   },
                   e
                 )
@@ -11757,7 +12595,9 @@
                 ? O(i, function (e) {
                     n.push(new Wr(t).build(e))
                   })
-                : 0 !== o.indexOf('$') && t.parseNsAttribute(e, o, i) && r.push({ name: o, value: i })
+                : 0 !== o.indexOf('$') &&
+                  t.parseNsAttribute(e, o, i) &&
+                  r.push({ name: o, value: i })
             }),
             r
           )
@@ -11833,7 +12673,11 @@
           var t,
             n = this.namespaces,
             r = this.parent
-          return n || ((t = r && r.getNamespaces()), e || !t ? (this.namespaces = n = new Ir(t)) : (n = t)), n
+          return (
+            n ||
+              ((t = r && r.getNamespaces()), e || !t ? (this.namespaces = n = new Ir(t)) : (n = t)),
+            n
+          )
         }),
         (Wr.prototype.logNamespace = function (e, t, n) {
           var r = this.getNamespaces(n),
@@ -11850,7 +12694,9 @@
             s = e.prefix,
             l = e.uri
           if (!s && !l) return { localName: e.localName }
-          if (((i = gr[s] || (o && (o.getPackage(s) || {}).uri)), !(l = l || i || a.uriByPrefix(s))))
+          if (
+            ((i = gr[s] || (o && (o.getPackage(s) || {}).uri)), !(l = l || i || a.uriByPrefix(s)))
+          )
             throw new Error('no namespace uri given for prefix <' + s + '>')
           if (!(e = a.byUri(l))) {
             for (n = s, r = 1; a.uriByPrefix(n); ) n = s + '_' + r++
@@ -11924,7 +12770,13 @@
           this.getNamespaces().logUsed(this.typeNs)
           var i = e.$model.getPackage(r.uri),
             o = (i.xml && i.xml.typePrefix) || ''
-          return this.addAttribute(this.nsAttributeName(yr), (r.prefix ? r.prefix + ':' : '') + o + n.ns.localName), t
+          return (
+            this.addAttribute(
+              this.nsAttributeName(yr),
+              (r.prefix ? r.prefix + ':' : '') + o + n.ns.localName
+            ),
+            t
+          )
         }),
         (Gr.prototype.isLocalNs = function (e) {
           return e.uri === (this.typeNs || this.ns).uri
@@ -11991,7 +12843,12 @@
                 { name: 'auditing', type: 'Auditing' },
                 { name: 'monitoring', type: 'Monitoring' },
                 { name: 'properties', type: 'Property', isMany: !0 },
-                { name: 'laneSets', isMany: !0, replaces: 'FlowElementsContainer#laneSets', type: 'LaneSet' },
+                {
+                  name: 'laneSets',
+                  isMany: !0,
+                  replaces: 'FlowElementsContainer#laneSets',
+                  type: 'LaneSet'
+                },
                 {
                   name: 'flowElements',
                   isMany: !0,
@@ -12002,7 +12859,12 @@
                 { name: 'resources', type: 'ResourceRole', isMany: !0 },
                 { name: 'correlationSubscriptions', type: 'CorrelationSubscription', isMany: !0 },
                 { name: 'supports', type: 'Process', isMany: !0, isReference: !0 },
-                { name: 'definitionalCollaborationRef', type: 'Collaboration', isAttr: !0, isReference: !0 },
+                {
+                  name: 'definitionalCollaborationRef',
+                  type: 'Collaboration',
+                  isAttr: !0,
+                  isReference: !0
+                },
                 { name: 'isExecutable', isAttr: !0, type: 'Boolean' }
               ]
             },
@@ -12050,14 +12912,26 @@
               name: 'Gateway',
               isAbstract: !0,
               superClass: ['FlowNode'],
-              properties: [{ name: 'gatewayDirection', type: 'GatewayDirection', default: 'Unspecified', isAttr: !0 }]
+              properties: [
+                {
+                  name: 'gatewayDirection',
+                  type: 'GatewayDirection',
+                  default: 'Unspecified',
+                  isAttr: !0
+                }
+              ]
             },
             {
               name: 'EventBasedGateway',
               superClass: ['Gateway'],
               properties: [
                 { name: 'instantiate', default: !1, isAttr: !0, type: 'Boolean' },
-                { name: 'eventGatewayType', type: 'EventBasedGatewayType', isAttr: !0, default: 'Exclusive' }
+                {
+                  name: 'eventGatewayType',
+                  type: 'EventBasedGatewayType',
+                  isAttr: !0,
+                  default: 'Exclusive'
+                }
               ]
             },
             {
@@ -12096,7 +12970,12 @@
               properties: [
                 { name: 'id', isAttr: !0, type: 'String', isId: !0 },
                 { name: 'documentation', type: 'Documentation', isMany: !0 },
-                { name: 'extensionDefinitions', type: 'ExtensionDefinition', isMany: !0, isReference: !0 },
+                {
+                  name: 'extensionDefinitions',
+                  type: 'ExtensionDefinition',
+                  isMany: !0,
+                  isReference: !0
+                },
                 { name: 'extensionElements', type: 'ExtensionElements' }
               ]
             },
@@ -12111,7 +12990,11 @@
               name: 'ExtensionDefinition',
               properties: [
                 { name: 'name', isAttr: !0, type: 'String' },
-                { name: 'extensionAttributeDefinitions', type: 'ExtensionAttributeDefinition', isMany: !0 }
+                {
+                  name: 'extensionAttributeDefinitions',
+                  type: 'ExtensionAttributeDefinition',
+                  isMany: !0
+                }
               ]
             },
             {
@@ -12120,7 +13003,12 @@
                 { name: 'name', isAttr: !0, type: 'String' },
                 { name: 'type', isAttr: !0, type: 'String' },
                 { name: 'isReference', default: !1, isAttr: !0, type: 'Boolean' },
-                { name: 'extensionDefinition', type: 'ExtensionDefinition', isAttr: !0, isReference: !0 }
+                {
+                  name: 'extensionDefinition',
+                  type: 'ExtensionDefinition',
+                  isAttr: !0,
+                  isReference: !0
+                }
               ]
             },
             {
@@ -12202,7 +13090,9 @@
             {
               name: 'EscalationEventDefinition',
               superClass: ['EventDefinition'],
-              properties: [{ name: 'escalationRef', type: 'Escalation', isAttr: !0, isReference: !0 }]
+              properties: [
+                { name: 'escalationRef', type: 'Escalation', isAttr: !0, isReference: !0 }
+              ]
             },
             {
               name: 'Escalation',
@@ -12250,7 +13140,9 @@
             {
               name: 'ConditionalEventDefinition',
               superClass: ['EventDefinition'],
-              properties: [{ name: 'condition', type: 'Expression', xml: { serialize: 'xsi:type' } }]
+              properties: [
+                { name: 'condition', type: 'Expression', xml: { serialize: 'xsi:type' } }
+              ]
             },
             {
               name: 'SignalEventDefinition',
@@ -12285,7 +13177,11 @@
               properties: [
                 { name: 'sourceRef', type: 'ItemAwareElement', isMany: !0, isReference: !0 },
                 { name: 'targetRef', type: 'ItemAwareElement', isReference: !0 },
-                { name: 'transformation', type: 'FormalExpression', xml: { serialize: 'property' } },
+                {
+                  name: 'transformation',
+                  type: 'FormalExpression',
+                  xml: { serialize: 'property' }
+                },
                 { name: 'assignment', type: 'Assignment', isMany: !0 }
               ]
             },
@@ -12295,9 +13191,27 @@
               properties: [
                 { name: 'name', isAttr: !0, type: 'String' },
                 { name: 'isCollection', default: !1, isAttr: !0, type: 'Boolean' },
-                { name: 'inputSetRef', type: 'InputSet', isMany: !0, isVirtual: !0, isReference: !0 },
-                { name: 'inputSetWithOptional', type: 'InputSet', isMany: !0, isVirtual: !0, isReference: !0 },
-                { name: 'inputSetWithWhileExecuting', type: 'InputSet', isMany: !0, isVirtual: !0, isReference: !0 }
+                {
+                  name: 'inputSetRef',
+                  type: 'InputSet',
+                  isMany: !0,
+                  isVirtual: !0,
+                  isReference: !0
+                },
+                {
+                  name: 'inputSetWithOptional',
+                  type: 'InputSet',
+                  isMany: !0,
+                  isVirtual: !0,
+                  isReference: !0
+                },
+                {
+                  name: 'inputSetWithWhileExecuting',
+                  type: 'InputSet',
+                  isMany: !0,
+                  isVirtual: !0,
+                  isReference: !0
+                }
               ]
             },
             {
@@ -12306,9 +13220,27 @@
               properties: [
                 { name: 'name', isAttr: !0, type: 'String' },
                 { name: 'isCollection', default: !1, isAttr: !0, type: 'Boolean' },
-                { name: 'outputSetRef', type: 'OutputSet', isMany: !0, isVirtual: !0, isReference: !0 },
-                { name: 'outputSetWithOptional', type: 'OutputSet', isMany: !0, isVirtual: !0, isReference: !0 },
-                { name: 'outputSetWithWhileExecuting', type: 'OutputSet', isMany: !0, isVirtual: !0, isReference: !0 }
+                {
+                  name: 'outputSetRef',
+                  type: 'OutputSet',
+                  isMany: !0,
+                  isVirtual: !0,
+                  isReference: !0
+                },
+                {
+                  name: 'outputSetWithOptional',
+                  type: 'OutputSet',
+                  isMany: !0,
+                  isVirtual: !0,
+                  isReference: !0
+                },
+                {
+                  name: 'outputSetWithWhileExecuting',
+                  type: 'OutputSet',
+                  isMany: !0,
+                  isVirtual: !0,
+                  isReference: !0
+                }
               ]
             },
             {
@@ -12330,7 +13262,12 @@
                 { name: 'name', isAttr: !0, type: 'String' },
                 { name: 'inputSetRefs', type: 'InputSet', isMany: !0, isReference: !0 },
                 { name: 'optionalOutputRefs', type: 'DataOutput', isMany: !0, isReference: !0 },
-                { name: 'whileExecutingOutputRefs', type: 'DataOutput', isMany: !0, isReference: !0 }
+                {
+                  name: 'whileExecutingOutputRefs',
+                  type: 'DataOutput',
+                  isMany: !0,
+                  isReference: !0
+                }
               ]
             },
             {
@@ -12388,7 +13325,9 @@
             {
               name: 'DataObjectReference',
               superClass: ['ItemAwareElement', 'FlowElement'],
-              properties: [{ name: 'dataObjectRef', type: 'DataObject', isAttr: !0, isReference: !0 }]
+              properties: [
+                { name: 'dataObjectRef', type: 'DataObject', isAttr: !0, isReference: !0 }
+              ]
             },
             {
               name: 'ConversationLink',
@@ -12403,15 +13342,30 @@
               name: 'ConversationAssociation',
               superClass: ['BaseElement'],
               properties: [
-                { name: 'innerConversationNodeRef', type: 'ConversationNode', isAttr: !0, isReference: !0 },
-                { name: 'outerConversationNodeRef', type: 'ConversationNode', isAttr: !0, isReference: !0 }
+                {
+                  name: 'innerConversationNodeRef',
+                  type: 'ConversationNode',
+                  isAttr: !0,
+                  isReference: !0
+                },
+                {
+                  name: 'outerConversationNodeRef',
+                  type: 'ConversationNode',
+                  isAttr: !0,
+                  isReference: !0
+                }
               ]
             },
             {
               name: 'CallConversation',
               superClass: ['ConversationNode'],
               properties: [
-                { name: 'calledCollaborationRef', type: 'Collaboration', isAttr: !0, isReference: !0 },
+                {
+                  name: 'calledCollaborationRef',
+                  type: 'Collaboration',
+                  isAttr: !0,
+                  isReference: !0
+                },
                 { name: 'participantAssociations', type: 'ParticipantAssociation', isMany: !0 }
               ]
             },
@@ -12475,7 +13429,12 @@
               name: 'CorrelationKey',
               superClass: ['BaseElement'],
               properties: [
-                { name: 'correlationPropertyRef', type: 'CorrelationProperty', isMany: !0, isReference: !0 },
+                {
+                  name: 'correlationPropertyRef',
+                  type: 'CorrelationProperty',
+                  isMany: !0,
+                  isReference: !0
+                },
                 { name: 'name', isAttr: !0, type: 'String' }
               ]
             },
@@ -12547,9 +13506,18 @@
               superClass: ['RootElement'],
               properties: [
                 { name: 'name', isAttr: !0, type: 'String' },
-                { name: 'ioSpecification', type: 'InputOutputSpecification', xml: { serialize: 'property' } },
+                {
+                  name: 'ioSpecification',
+                  type: 'InputOutputSpecification',
+                  xml: { serialize: 'property' }
+                },
                 { name: 'supportedInterfaceRef', type: 'Interface', isMany: !0, isReference: !0 },
-                { name: 'ioBinding', type: 'InputOutputBinding', isMany: !0, xml: { serialize: 'property' } }
+                {
+                  name: 'ioBinding',
+                  type: 'InputOutputBinding',
+                  isMany: !0,
+                  xml: { serialize: 'property' }
+                }
               ]
             },
             {
@@ -12575,7 +13543,12 @@
               superClass: ['BaseElement'],
               properties: [
                 { name: 'dataPath', type: 'FormalExpression' },
-                { name: 'correlationPropertyRef', type: 'CorrelationProperty', isAttr: !0, isReference: !0 }
+                {
+                  name: 'correlationPropertyRef',
+                  type: 'CorrelationProperty',
+                  isAttr: !0,
+                  isReference: !0
+                }
               ]
             },
             {
@@ -12600,7 +13573,11 @@
               superClass: ['BaseElement'],
               properties: [
                 { name: 'correlationKeyRef', type: 'CorrelationKey', isAttr: !0, isReference: !0 },
-                { name: 'correlationPropertyBinding', type: 'CorrelationPropertyBinding', isMany: !0 }
+                {
+                  name: 'correlationPropertyBinding',
+                  type: 'CorrelationPropertyBinding',
+                  isMany: !0
+                }
               ]
             },
             {
@@ -12692,7 +13669,12 @@
               superClass: ['FlowNode'],
               properties: [
                 { name: 'participantRef', type: 'Participant', isMany: !0, isReference: !0 },
-                { name: 'initiatingParticipantRef', type: 'Participant', isAttr: !0, isReference: !0 },
+                {
+                  name: 'initiatingParticipantRef',
+                  type: 'Participant',
+                  isAttr: !0,
+                  isReference: !0
+                },
                 { name: 'correlationKeys', type: 'CorrelationKey', isMany: !0 },
                 { name: 'loopType', type: 'ChoreographyLoopType', default: 'None', isAttr: !0 }
               ]
@@ -12701,7 +13683,12 @@
               name: 'CallChoreography',
               superClass: ['ChoreographyActivity'],
               properties: [
-                { name: 'calledChoreographyRef', type: 'Choreography', isAttr: !0, isReference: !0 },
+                {
+                  name: 'calledChoreographyRef',
+                  type: 'Choreography',
+                  isAttr: !0,
+                  isReference: !0
+                },
                 { name: 'participantAssociations', type: 'ParticipantAssociation', isMany: !0 }
               ]
             },
@@ -12713,13 +13700,22 @@
             {
               name: 'ChoreographyTask',
               superClass: ['ChoreographyActivity'],
-              properties: [{ name: 'messageFlowRef', type: 'MessageFlow', isMany: !0, isReference: !0 }]
+              properties: [
+                { name: 'messageFlowRef', type: 'MessageFlow', isMany: !0, isReference: !0 }
+              ]
             },
             { name: 'Choreography', superClass: ['Collaboration', 'FlowElementsContainer'] },
             {
               name: 'GlobalChoreographyTask',
               superClass: ['Choreography'],
-              properties: [{ name: 'initiatingParticipantRef', type: 'Participant', isAttr: !0, isReference: !0 }]
+              properties: [
+                {
+                  name: 'initiatingParticipantRef',
+                  type: 'Participant',
+                  isAttr: !0,
+                  isReference: !0
+                }
+              ]
             },
             {
               name: 'TextAnnotation',
@@ -12732,7 +13728,9 @@
             {
               name: 'Group',
               superClass: ['Artifact'],
-              properties: [{ name: 'categoryValueRef', type: 'CategoryValue', isAttr: !0, isReference: !0 }]
+              properties: [
+                { name: 'categoryValueRef', type: 'CategoryValue', isAttr: !0, isReference: !0 }
+              ]
             },
             {
               name: 'Association',
@@ -12756,7 +13754,13 @@
               name: 'CategoryValue',
               superClass: ['BaseElement'],
               properties: [
-                { name: 'categorizedFlowElements', type: 'FlowElement', isMany: !0, isVirtual: !0, isReference: !0 },
+                {
+                  name: 'categorizedFlowElements',
+                  type: 'FlowElement',
+                  isMany: !0,
+                  isVirtual: !0,
+                  isReference: !0
+                },
                 { name: 'value', isAttr: !0, type: 'String' }
               ]
             },
@@ -12767,7 +13771,11 @@
               properties: [
                 { name: 'isForCompensation', default: !1, isAttr: !0, type: 'Boolean' },
                 { name: 'default', type: 'SequenceFlow', isAttr: !0, isReference: !0 },
-                { name: 'ioSpecification', type: 'InputOutputSpecification', xml: { serialize: 'property' } },
+                {
+                  name: 'ioSpecification',
+                  type: 'InputOutputSpecification',
+                  xml: { serialize: 'property' }
+                },
                 { name: 'boundaryEventRefs', type: 'BoundaryEvent', isMany: !0, isReference: !0 },
                 { name: 'properties', type: 'Property', isMany: !0 },
                 { name: 'dataInputAssociations', type: 'DataInputAssociation', isMany: !0 },
@@ -12806,10 +13814,24 @@
                 { name: 'loopDataOutputRef', type: 'ItemAwareElement', isReference: !0 },
                 { name: 'inputDataItem', type: 'DataInput', xml: { serialize: 'property' } },
                 { name: 'outputDataItem', type: 'DataOutput', xml: { serialize: 'property' } },
-                { name: 'complexBehaviorDefinition', type: 'ComplexBehaviorDefinition', isMany: !0 },
+                {
+                  name: 'complexBehaviorDefinition',
+                  type: 'ComplexBehaviorDefinition',
+                  isMany: !0
+                },
                 { name: 'completionCondition', type: 'Expression', xml: { serialize: 'xsi:type' } },
-                { name: 'oneBehaviorEventRef', type: 'EventDefinition', isAttr: !0, isReference: !0 },
-                { name: 'noneBehaviorEventRef', type: 'EventDefinition', isAttr: !0, isReference: !0 }
+                {
+                  name: 'oneBehaviorEventRef',
+                  type: 'EventDefinition',
+                  isAttr: !0,
+                  isReference: !0
+                },
+                {
+                  name: 'noneBehaviorEventRef',
+                  type: 'EventDefinition',
+                  isAttr: !0,
+                  isReference: !0
+                }
               ]
             },
             {
@@ -12917,7 +13939,9 @@
             },
             {
               name: 'ResourceAssignmentExpression',
-              properties: [{ name: 'expression', type: 'Expression', xml: { serialize: 'xsi:type' } }],
+              properties: [
+                { name: 'expression', type: 'Expression', xml: { serialize: 'xsi:type' } }
+              ],
               superClass: ['BaseElement']
             },
             {
@@ -12934,8 +13958,18 @@
               properties: [
                 { name: 'name', isAttr: !0, type: 'String' },
                 { name: 'targetNamespace', isAttr: !0, type: 'String' },
-                { name: 'expressionLanguage', default: 'http://www.w3.org/1999/XPath', isAttr: !0, type: 'String' },
-                { name: 'typeLanguage', default: 'http://www.w3.org/2001/XMLSchema', isAttr: !0, type: 'String' },
+                {
+                  name: 'expressionLanguage',
+                  default: 'http://www.w3.org/1999/XPath',
+                  isAttr: !0,
+                  type: 'String'
+                },
+                {
+                  name: 'typeLanguage',
+                  default: 'http://www.w3.org/2001/XMLSchema',
+                  isAttr: !0,
+                  type: 'String'
+                },
                 { name: 'imports', type: 'Import', isMany: !0 },
                 { name: 'extensions', type: 'Extension', isMany: !0 },
                 { name: 'rootElements', type: 'RootElement', isMany: !0 },
@@ -12947,15 +13981,31 @@
             }
           ],
           enumerations: [
-            { name: 'ProcessType', literalValues: [{ name: 'None' }, { name: 'Public' }, { name: 'Private' }] },
+            {
+              name: 'ProcessType',
+              literalValues: [{ name: 'None' }, { name: 'Public' }, { name: 'Private' }]
+            },
             {
               name: 'GatewayDirection',
-              literalValues: [{ name: 'Unspecified' }, { name: 'Converging' }, { name: 'Diverging' }, { name: 'Mixed' }]
+              literalValues: [
+                { name: 'Unspecified' },
+                { name: 'Converging' },
+                { name: 'Diverging' },
+                { name: 'Mixed' }
+              ]
             },
-            { name: 'EventBasedGatewayType', literalValues: [{ name: 'Parallel' }, { name: 'Exclusive' }] },
+            {
+              name: 'EventBasedGatewayType',
+              literalValues: [{ name: 'Parallel' }, { name: 'Exclusive' }]
+            },
             {
               name: 'RelationshipDirection',
-              literalValues: [{ name: 'None' }, { name: 'Forward' }, { name: 'Backward' }, { name: 'Both' }]
+              literalValues: [
+                { name: 'None' },
+                { name: 'Forward' },
+                { name: 'Backward' },
+                { name: 'Both' }
+              ]
             },
             { name: 'ItemKind', literalValues: [{ name: 'Physical' }, { name: 'Information' }] },
             {
@@ -12967,10 +14017,18 @@
                 { name: 'MultiInstanceParallel' }
               ]
             },
-            { name: 'AssociationDirection', literalValues: [{ name: 'None' }, { name: 'One' }, { name: 'Both' }] },
+            {
+              name: 'AssociationDirection',
+              literalValues: [{ name: 'None' }, { name: 'One' }, { name: 'Both' }]
+            },
             {
               name: 'MultiInstanceBehavior',
-              literalValues: [{ name: 'None' }, { name: 'One' }, { name: 'All' }, { name: 'Complex' }]
+              literalValues: [
+                { name: 'None' },
+                { name: 'One' },
+                { name: 'All' },
+                { name: 'Complex' }
+              ]
             },
             { name: 'AdHocOrdering', literalValues: [{ name: 'Parallel' }, { name: 'Sequential' }] }
           ],
@@ -13018,7 +14076,12 @@
                 { name: 'label', type: 'BPMNLabel' },
                 { name: 'isMessageVisible', isAttr: !0, type: 'Boolean' },
                 { name: 'participantBandKind', type: 'ParticipantBandKind', isAttr: !0 },
-                { name: 'choreographyActivityShape', type: 'BPMNShape', isAttr: !0, isReference: !0 }
+                {
+                  name: 'choreographyActivityShape',
+                  type: 'BPMNShape',
+                  isAttr: !0,
+                  isReference: !0
+                }
               ],
               superClass: ['di:LabeledShape']
             },
@@ -13047,7 +14110,12 @@
                   type: 'di:DiagramElement',
                   redefines: 'di:Edge#target'
                 },
-                { name: 'messageVisibleKind', type: 'MessageVisibleKind', isAttr: !0, default: 'initiating' }
+                {
+                  name: 'messageVisibleKind',
+                  type: 'MessageVisibleKind',
+                  isAttr: !0,
+                  default: 'initiating'
+                }
               ],
               superClass: ['di:LabeledEdge']
             },
@@ -13064,7 +14132,11 @@
               ],
               superClass: ['di:Label']
             },
-            { name: 'BPMNLabelStyle', properties: [{ name: 'font', type: 'dc:Font' }], superClass: ['di:Style'] }
+            {
+              name: 'BPMNLabelStyle',
+              properties: [{ name: 'font', type: 'dc:Font' }],
+              superClass: ['di:Style']
+            }
           ],
           enumerations: [
             {
@@ -13078,7 +14150,10 @@
                 { name: 'bottom_non_initiating' }
               ]
             },
-            { name: 'MessageVisibleKind', literalValues: [{ name: 'initiating' }, { name: 'non_initiating' }] }
+            {
+              name: 'MessageVisibleKind',
+              literalValues: [{ name: 'initiating' }, { name: 'non_initiating' }]
+            }
           ],
           associations: []
         },
@@ -13132,11 +14207,35 @@
               properties: [
                 { name: 'id', isAttr: !0, isId: !0, type: 'String' },
                 { name: 'extension', type: 'Extension' },
-                { name: 'owningDiagram', type: 'Diagram', isReadOnly: !0, isVirtual: !0, isReference: !0 },
-                { name: 'owningElement', type: 'DiagramElement', isReadOnly: !0, isVirtual: !0, isReference: !0 },
-                { name: 'modelElement', isReadOnly: !0, isVirtual: !0, isReference: !0, type: 'Element' },
+                {
+                  name: 'owningDiagram',
+                  type: 'Diagram',
+                  isReadOnly: !0,
+                  isVirtual: !0,
+                  isReference: !0
+                },
+                {
+                  name: 'owningElement',
+                  type: 'DiagramElement',
+                  isReadOnly: !0,
+                  isVirtual: !0,
+                  isReference: !0
+                },
+                {
+                  name: 'modelElement',
+                  isReadOnly: !0,
+                  isVirtual: !0,
+                  isReference: !0,
+                  type: 'Element'
+                },
                 { name: 'style', type: 'Style', isReadOnly: !0, isVirtual: !0, isReference: !0 },
-                { name: 'ownedElement', type: 'DiagramElement', isReadOnly: !0, isMany: !0, isVirtual: !0 }
+                {
+                  name: 'ownedElement',
+                  type: 'DiagramElement',
+                  isReadOnly: !0,
+                  isMany: !0,
+                  isVirtual: !0
+                }
               ]
             },
             { name: 'Node', isAbstract: !0, superClass: ['DiagramElement'] },
@@ -13145,9 +14244,27 @@
               isAbstract: !0,
               superClass: ['DiagramElement'],
               properties: [
-                { name: 'source', type: 'DiagramElement', isReadOnly: !0, isVirtual: !0, isReference: !0 },
-                { name: 'target', type: 'DiagramElement', isReadOnly: !0, isVirtual: !0, isReference: !0 },
-                { name: 'waypoint', isUnique: !1, isMany: !0, type: 'dc:Point', xml: { serialize: 'xsi:type' } }
+                {
+                  name: 'source',
+                  type: 'DiagramElement',
+                  isReadOnly: !0,
+                  isVirtual: !0,
+                  isReference: !0
+                },
+                {
+                  name: 'target',
+                  type: 'DiagramElement',
+                  isReadOnly: !0,
+                  isVirtual: !0,
+                  isReference: !0
+                },
+                {
+                  name: 'waypoint',
+                  isUnique: !1,
+                  isMany: !0,
+                  type: 'dc:Point',
+                  xml: { serialize: 'xsi:type' }
+                }
               ]
             },
             {
@@ -13217,7 +14334,11 @@
               superClass: ['Node'],
               properties: [{ name: 'bounds', type: 'dc:Bounds' }]
             },
-            { name: 'Style', isAbstract: !0, properties: [{ name: 'id', isAttr: !0, isId: !0, type: 'String' }] },
+            {
+              name: 'Style',
+              isAbstract: !0,
+              properties: [{ name: 'id', isAttr: !0, isId: !0, type: 'String' }]
+            },
             { name: 'Extension', properties: [{ name: 'values', isMany: !0, type: 'Element' }] }
           ],
           associations: [],
@@ -13285,7 +14406,9 @@
       function ti(e) {
         return function () {
           if (!window.Promise)
-            throw new Error('Promises is not supported in this environment. Please polyfill Promise.')
+            throw new Error(
+              'Promises is not supported in this environment. Please polyfill Promise.'
+            )
           var t = arguments.length
           if (!(t >= 1 && w(arguments[t - 1]))) return e.apply(this, arguments)
           var n = arguments[t - 1]
@@ -13355,7 +14478,9 @@
           var n = e.bpmnElement
           n
             ? i[n.id]
-              ? l(t('multiple DI elements defined for {element}', { element: ei(n) }), { element: n })
+              ? l(t('multiple DI elements defined for {element}', { element: ei(n) }), {
+                  element: n
+                })
               : ((i[n.id] = e), ni(n))
             : l(t('no bpmnElement referenced in {element}', { element: ei(e) }), { element: e })
         }
@@ -13483,7 +14608,12 @@
                 })(a))
               )
                 throw new Error(t('no process or collaboration to display'))
-              l(t('correcting missing bpmnElement on {plane} to {rootElement}', { plane: ei(f), rootElement: ei(v) })),
+              l(
+                t('correcting missing bpmnElement on {plane} to {rootElement}', {
+                  plane: ei(f),
+                  rootElement: ei(v)
+                })
+              ),
                 (f.bpmnElement = v),
                 c(f)
             }
@@ -13496,7 +14626,10 @@
             else {
               if (!ri(v, 'bpmn:Collaboration'))
                 throw new Error(
-                  t('unsupported bpmnElement for {plane}: {rootElement}', { plane: ei(f), rootElement: ei(v) })
+                  t('unsupported bpmnElement for {plane}: {rootElement}', {
+                    plane: ei(f),
+                    rootElement: ei(v)
+                  })
                 )
               ;(b = A),
                 O((g = v).participants, o(C, b)),
@@ -13703,7 +14836,13 @@
                   ;(s =
                     n._emit(
                       'import.parse.complete',
-                      ((o = { error: null, definitions: s, elementsById: p, references: l, warnings: c }),
+                      ((o = {
+                        error: null,
+                        definitions: s,
+                        elementsById: p,
+                        references: l,
+                        warnings: c
+                      }),
                       (a = n.get('eventBus').createEvent(o)),
                       Object.defineProperty(a, 'context', {
                         enumerable: !0,
@@ -13714,7 +14853,11 @@
                                 'import.parse.complete <context> is deprecated and will be removed in future library versions'
                               )
                             ),
-                            { warnings: o.warnings, references: o.references, elementsById: o.elementsById }
+                            {
+                              warnings: o.warnings,
+                              references: o.references,
+                              elementsById: o.elementsById
+                            }
                           )
                         }
                       }),
@@ -13724,7 +14867,9 @@
                       .importDefinitions(s, t)
                       .then(function (e) {
                         var t = [].concat(c, e.warnings || [])
-                        return n._emit('import.done', { error: null, warnings: t }), r({ warnings: t })
+                        return (
+                          n._emit('import.done', { error: null, warnings: t }), r({ warnings: t })
+                        )
                       })
                       .catch(function (e) {
                         var t = [].concat(c, e.warnings || [])
@@ -13902,7 +15047,10 @@
           var r = n.modules || this.getModules(),
             i = n.additionalModules || [],
             o = [].concat([{ bpmnjs: ['value', this], moddle: ['value', t] }], r, i),
-            a = K(J(n, ['additionalModules']), { canvas: K({}, n.canvas, { container: e }), modules: o })
+            a = K(J(n, ['additionalModules']), {
+              canvas: K({}, n.canvas, { container: e }),
+              modules: o
+            })
           Nn.call(this, a), n && n.container && this.attachTo(n.container)
         }),
         (vi.prototype._emit = function (e, t) {
@@ -14037,7 +15185,10 @@
           u = {},
           d = n.computeStyle
         function m(e, t) {
-          var n = K({ fill: 'black', strokeWidth: 1, strokeLinecap: 'round', strokeDasharray: 'none' }, t.attrs),
+          var n = K(
+              { fill: 'black', strokeWidth: 1, strokeLinecap: 'round', strokeDasharray: 'none' },
+              t.attrs
+            ),
             r = t.ref || { x: 0, y: 0 },
             o = t.scale || 1
           'none' === n.strokeDasharray && (n.strokeDasharray = [1e4, 1])
@@ -14067,7 +15218,12 @@
                 if ('sequenceflow-end' === t) {
                   var i = Ne('path')
                   Se(i, { d: 'M 1 5 L 11 10 L 1 15 Z' }),
-                    m(e, { element: i, ref: { x: 11, y: 10 }, scale: 0.5, attrs: { fill: r, stroke: r } })
+                    m(e, {
+                      element: i,
+                      ref: { x: 11, y: 10 },
+                      scale: 0.5,
+                      attrs: { fill: r, stroke: r }
+                    })
                 }
                 if ('messageflow-start' === t) {
                   var o = Ne('circle')
@@ -14077,7 +15233,11 @@
                 if ('messageflow-end' === t) {
                   var a = Ne('path')
                   Se(a, { d: 'm 1 5 l 0 -3 l 7 3 l -7 3 z' }),
-                    m(e, { element: a, attrs: { fill: n, stroke: r, strokeLinecap: 'butt' }, ref: { x: 8.5, y: 5 } })
+                    m(e, {
+                      element: a,
+                      attrs: { fill: n, stroke: r, strokeLinecap: 'butt' },
+                      ref: { x: 8.5, y: 5 }
+                    })
                 }
                 if ('association-start' === t) {
                   var s = Ne('path')
@@ -14102,7 +15262,12 @@
                 if ('conditional-flow-marker' === t) {
                   var c = Ne('path')
                   Se(c, { d: 'M 0 10 L 8 6 L 16 10 L 8 14 Z' }),
-                    m(e, { element: c, attrs: { fill: n, stroke: r }, ref: { x: -1, y: 10 }, scale: 0.5 })
+                    m(e, {
+                      element: c,
+                      attrs: { fill: n, stroke: r },
+                      ref: { x: -1, y: 10 },
+                      scale: 0.5
+                    })
                 }
                 if ('conditional-default-flow-marker' === t) {
                   var p = Ne('path')
@@ -14116,16 +15281,24 @@
         function v(e, t, n, r, i) {
           x(r) && ((i = r), (r = 0)),
             (r = r || 0),
-            'none' === (i = d(i, { stroke: 'black', strokeWidth: 2, fill: 'white' })).fill && delete i.fillOpacity
+            'none' === (i = d(i, { stroke: 'black', strokeWidth: 2, fill: 'white' })).fill &&
+              delete i.fillOpacity
           var o = t / 2,
             a = n / 2,
             s = Ne('circle')
           return Se(s, { cx: o, cy: a, r: Math.round((t + n) / 4 - r) }), Se(s, i), Ce(e, s), s
         }
         function g(e, t, n, r, i, o) {
-          x(i) && ((o = i), (i = 0)), (i = i || 0), (o = d(o, { stroke: 'black', strokeWidth: 2, fill: 'white' }))
+          x(i) && ((o = i), (i = 0)),
+            (i = i || 0),
+            (o = d(o, { stroke: 'black', strokeWidth: 2, fill: 'white' }))
           var a = Ne('rect')
-          return Se(a, { x: i, y: i, width: t - 2 * i, height: n - 2 * i, rx: r, ry: r }), Se(a, o), Ce(e, a), a
+          return (
+            Se(a, { x: i, y: i, width: t - 2 * i, height: n - 2 * i, rx: r, ry: r }),
+            Se(a, o),
+            Ce(e, a),
+            a
+          )
         }
         function y(e, t, n) {
           var r = St(t, (n = d(n, ['no-fill'], { stroke: 'black', strokeWidth: 2, fill: 'none' })))
@@ -14189,7 +15362,11 @@
         }
         function k(e, t, n) {
           jn(
-            C(e, t, { box: { height: 30, width: n.height }, align: 'center-middle', style: { fill: Bi(n, c, l) } }),
+            C(e, t, {
+              box: { height: 30, width: n.height },
+              align: 'center-middle',
+              style: { fill: Bi(n, c, l) }
+            }),
             0,
             1 * n.height,
             270
@@ -14207,7 +15384,12 @@
           'bpmn:StartEvent': function (e, t) {
             var n = { fill: Oi(t, s), stroke: Ti(t, l) }
             Si(t).isInterrupting ||
-              (n = { strokeDasharray: '6', strokeLinecap: 'round', fill: Oi(t, s), stroke: Ti(t, l) })
+              (n = {
+                strokeDasharray: '6',
+                strokeLinecap: 'round',
+                fill: Oi(t, s),
+                stroke: Ti(t, l)
+              })
             var r = E('bpmn:Event')(e, t, n)
             return w(t, e), r
           },
@@ -14225,7 +15407,11 @@
             )
           },
           'bpmn:TimerEventDefinition': function (e, t) {
-            var n = v(e, t.width, t.height, 0.2 * t.height, { strokeWidth: 2, fill: Oi(t, s), stroke: Ti(t, l) })
+            var n = v(e, t.width, t.height, 0.2 * t.height, {
+              strokeWidth: 2,
+              fill: Oi(t, s),
+              stroke: Ti(t, l)
+            })
             b(
               e,
               r.getScaledPath('EVENT_TIMER_WH', {
@@ -14382,12 +15568,18 @@
           },
           'bpmn:IntermediateEvent': function (e, t) {
             var n = E('bpmn:Event')(e, t, { strokeWidth: 1, fill: Oi(t, s), stroke: Ti(t, l) })
-            return v(e, t.width, t.height, 3, { strokeWidth: 1, fill: Oi(t, 'none'), stroke: Ti(t, l) }), w(t, e), n
+            return (
+              v(e, t.width, t.height, 3, { strokeWidth: 1, fill: Oi(t, 'none'), stroke: Ti(t, l) }),
+              w(t, e),
+              n
+            )
           },
           'bpmn:IntermediateCatchEvent': _('bpmn:IntermediateEvent'),
           'bpmn:IntermediateThrowEvent': _('bpmn:IntermediateEvent'),
           'bpmn:Activity': function (e, t, n) {
-            return 'fillOpacity' in (n = n || {}) || (n.fillOpacity = Mi), g(e, t.width, t.height, 10, n)
+            return (
+              'fillOpacity' in (n = n || {}) || (n.fillOpacity = Mi), g(e, t.width, t.height, 10, n)
+            )
           },
           'bpmn:Task': function (e, t) {
             var n = { fill: Oi(t, s), stroke: Ti(t, l) },
@@ -14470,7 +15662,9 @@
             return (
               i.instantiate
                 ? (v(e, 28, 28, 4.4, { strokeWidth: 1 }),
-                  (n = r.getScaledPath('TASK_TYPE_INSTANTIATING_SEND', { abspos: { x: 7.77, y: 9.52 } })))
+                  (n = r.getScaledPath('TASK_TYPE_INSTANTIATING_SEND', {
+                    abspos: { x: 7.77, y: 9.52 }
+                  })))
                 : (n = r.getScaledPath('TASK_TYPE_SEND', {
                     xScaleFactor: 0.9,
                     yScaleFactor: 0.9,
@@ -14495,15 +15689,21 @@
           'bpmn:BusinessRuleTask': function (e, t) {
             var n = E('bpmn:Task')(e, t)
             return (
-              Se(b(e, r.getScaledPath('TASK_TYPE_BUSINESS_RULE_HEADER', { abspos: { x: 8, y: 8 } })), {
-                strokeWidth: 1,
-                fill: Oi(t, '#aaaaaa'),
-                stroke: Ti(t, l)
-              }),
-              Se(b(e, r.getScaledPath('TASK_TYPE_BUSINESS_RULE_MAIN', { abspos: { x: 8, y: 8 } })), {
-                strokeWidth: 1,
-                stroke: Ti(t, l)
-              }),
+              Se(
+                b(e, r.getScaledPath('TASK_TYPE_BUSINESS_RULE_HEADER', { abspos: { x: 8, y: 8 } })),
+                {
+                  strokeWidth: 1,
+                  fill: Oi(t, '#aaaaaa'),
+                  stroke: Ti(t, l)
+                }
+              ),
+              Se(
+                b(e, r.getScaledPath('TASK_TYPE_BUSINESS_RULE_MAIN', { abspos: { x: 8, y: 8 } })),
+                {
+                  strokeWidth: 1,
+                  stroke: Ti(t, l)
+                }
+              ),
               n
             )
           },
@@ -14543,19 +15743,36 @@
                     { stroke: Ti(t, l) }
                   ),
                   k(e, Si(t).name, t))
-                : C(e, Si(t).name, { box: t, align: 'center-middle', style: { fill: Bi(t, c, l) } }),
+                : C(e, Si(t).name, {
+                    box: t,
+                    align: 'center-middle',
+                    style: { fill: Bi(t, c, l) }
+                  }),
               !!Si(t).participantMultiplicity && E('ParticipantMultiplicityMarker')(e, t),
               r
             )
           },
           'bpmn:Lane': function (e, t, n) {
-            var r = g(e, t.width, t.height, 0, K({ fill: Oi(t, s), fillOpacity: 0.35, stroke: Ti(t, l) }, n)),
+            var r = g(
+                e,
+                t.width,
+                t.height,
+                0,
+                K({ fill: Oi(t, s), fillOpacity: 0.35, stroke: Ti(t, l) }, n)
+              ),
               i = Si(t)
             return 'bpmn:Lane' === i.$type && k(e, i.name, t), r
           },
           'bpmn:InclusiveGateway': function (e, t) {
             var n = E('bpmn:Gateway')(e, t)
-            return v(e, t.width, t.height, 0.24 * t.height, { strokeWidth: 2.5, fill: Oi(t, s), stroke: Ti(t, l) }), n
+            return (
+              v(e, t.width, t.height, 0.24 * t.height, {
+                strokeWidth: 2.5,
+                fill: Oi(t, s),
+                stroke: Ti(t, l)
+              }),
+              n
+            )
           },
           'bpmn:ExclusiveGateway': function (e, t) {
             var n = E('bpmn:Gateway')(e, t),
@@ -14566,7 +15783,11 @@
                 containerHeight: t.height,
                 position: { mx: 0.32, my: 0.3 }
               })
-            return li(t).isMarkerVisible && b(e, i, { strokeWidth: 1, fill: Ti(t, l), stroke: Ti(t, l) }), n
+            return (
+              li(t).isMarkerVisible &&
+                b(e, i, { strokeWidth: 1, fill: Ti(t, l), stroke: Ti(t, l) }),
+              n
+            )
           },
           'bpmn:ComplexGateway': function (e, t) {
             var n = E('bpmn:Gateway')(e, t)
@@ -14605,7 +15826,11 @@
           'bpmn:EventBasedGateway': function (e, t) {
             var n = Si(t),
               i = E('bpmn:Gateway')(e, t)
-            v(e, t.width, t.height, 0.2 * t.height, { strokeWidth: 1, fill: 'none', stroke: Ti(t, l) })
+            v(e, t.width, t.height, 0.2 * t.height, {
+              strokeWidth: 1,
+              fill: 'none',
+              stroke: Ti(t, l)
+            })
             var o = n.eventGatewayType,
               a = !!n.instantiate
             if ('Parallel' === o) {
@@ -14619,7 +15844,12 @@
               Se(b(e, s), { strokeWidth: 1, fill: 'none' })
             } else
               'Exclusive' === o &&
-                (a || Se(v(e, t.width, t.height, 0.26 * t.height), { strokeWidth: 1, fill: 'none', stroke: Ti(t, l) }),
+                (a ||
+                  Se(v(e, t.width, t.height, 0.26 * t.height), {
+                    strokeWidth: 1,
+                    fill: 'none',
+                    stroke: Ti(t, l)
+                  }),
                 (function () {
                   var n = r.getScaledPath('GATEWAY_EVENT_BASED', {
                       xScaleFactor: 0.18,
@@ -14658,7 +15888,11 @@
               r = S(t),
               i = Oi(t, s),
               o = Ti(t, l),
-              a = b(e, r, { strokeLinejoin: 'round', markerEnd: f('sequenceflow-end', i, o), stroke: Ti(t, l) }),
+              a = b(e, r, {
+                strokeLinejoin: 'round',
+                markerEnd: f('sequenceflow-end', i, o),
+                stroke: Ti(t, l)
+              }),
               c = Si(t)
             return (
               t.source &&
@@ -14679,7 +15913,12 @@
               o = Ti(t, l)
             return (
               (n = K(
-                { strokeDasharray: '0.5, 5', strokeLinecap: 'round', strokeLinejoin: 'round', stroke: Ti(t, l) },
+                {
+                  strokeDasharray: '0.5, 5',
+                  strokeLinecap: 'round',
+                  strokeLinejoin: 'round',
+                  stroke: Ti(t, l)
+                },
                 n || {}
               )),
               ('One' !== r.associationDirection && 'Both' !== r.associationDirection) ||
@@ -14720,7 +15959,11 @@
                 ? ((m.fill = 'white'), (m.stroke = 'black'))
                 : ((m.fill = '#888'), (m.stroke = 'white'))
               var h = b(e, d, m),
-                v = C(e, n.messageRef.name, { align: 'center-top', fitBox: !0, style: { fill: Ti(t, c) } }),
+                v = C(e, n.messageRef.name, {
+                  align: 'center-top',
+                  fitBox: !0,
+                  style: { fill: Ti(t, c) }
+                }),
                 g = h.getBBox(),
                 y = v.getBBox()
               jn(v, u.x - y.width / 2, u.y + g.height / 2 + 10, 0)
@@ -14806,7 +16049,11 @@
           label: function (e, t) {
             return (function (e, t) {
               var n = { width: 90, height: 30, x: t.width / 2 + t.x, y: t.height / 2 + t.y }
-              return C(e, Pi(t), { box: n, fitBox: !0, style: K({}, o.getExternalStyle(), { fill: Bi(t, c, l) }) })
+              return C(e, Pi(t), {
+                box: n,
+                fitBox: !0,
+                style: K({}, o.getExternalStyle(), { fill: Bi(t, c, l) })
+              })
             })(e, t)
           },
           'bpmn:TextAnnotation': function (e, t) {
@@ -14823,7 +16070,12 @@
                 }),
                 { stroke: Ti(t, l) }
               ),
-              C(e, Si(t).text || '', { box: t, align: 'left-top', padding: 5, style: { fill: Bi(t, c, l) } }),
+              C(e, Si(t).text || '', {
+                box: t,
+                align: 'left-top',
+                padding: 5,
+                style: { fill: Bi(t, c, l) }
+              }),
               n
             )
           },
@@ -14842,7 +16094,11 @@
             )
           },
           SubProcessMarker: function (e, t) {
-            Mn(g(e, 14, 14, 0, { strokeWidth: 1, fill: Oi(t, s), stroke: Ti(t, l) }), t.width / 2 - 7.5, t.height - 20),
+            Mn(
+              g(e, 14, 14, 0, { strokeWidth: 1, fill: Oi(t, s), stroke: Ti(t, l) }),
+              t.width / 2 - 7.5,
+              t.height - 20
+            ),
               A(
                 'sub-process',
                 e,
@@ -14865,7 +16121,10 @@
                 yScaleFactor: 1,
                 containerWidth: t.width,
                 containerHeight: t.height,
-                position: { mx: (t.width / 2 + n.parallel) / t.width, my: (t.height - 20) / t.height }
+                position: {
+                  mx: (t.width / 2 + n.parallel) / t.width,
+                  my: (t.height - 20) / t.height
+                }
               }),
               { fill: Oi(t, s), stroke: Ti(t, l) }
             )
@@ -14893,7 +16152,10 @@
                 yScaleFactor: 1,
                 containerWidth: t.width,
                 containerHeight: t.height,
-                position: { mx: (t.width / 2 + n.compensation) / t.width, my: (t.height - 13) / t.height }
+                position: {
+                  mx: (t.width / 2 + n.compensation) / t.width,
+                  my: (t.height - 13) / t.height
+                }
               }),
               { strokeWidth: 1, fill: Oi(t, s), stroke: Ti(t, l) }
             )
@@ -14909,7 +16171,13 @@
                 containerHeight: t.height,
                 position: { mx: (t.width / 2 + n.loop) / t.width, my: (t.height - 7) / t.height }
               }),
-              { strokeWidth: 1, fill: Oi(t, s), stroke: Ti(t, l), strokeLinecap: 'round', strokeMiterlimit: 0.5 }
+              {
+                strokeWidth: 1,
+                fill: Oi(t, s),
+                stroke: Ti(t, l),
+                strokeLinecap: 'round',
+                strokeMiterlimit: 0.5
+              }
             )
           },
           AdhocMarker: function (e, t, n) {
@@ -14949,7 +16217,14 @@
         ;(this._drawPath = b), (this._renderer = E)
       }
       u()(Di, it),
-        (Di.$inject = ['config.bpmnRenderer', 'eventBus', 'styles', 'pathMap', 'canvas', 'textRenderer']),
+        (Di.$inject = [
+          'config.bpmnRenderer',
+          'eventBus',
+          'styles',
+          'pathMap',
+          'canvas',
+          'textRenderer'
+        ]),
         (Di.prototype.canRender = function (e) {
           return oi(e, 'bpmn:BaseElement')
         }),
@@ -15023,7 +16298,8 @@
       function Ii(e, t, n) {
         for (var r, i = e.shift(), o = i; ; ) {
           if (
-            (((r = zi(o, n)).width = o ? r.width : 0), ' ' === o || '' === o || r.width < Math.round(t) || o.length < 2)
+            (((r = zi(o, n)).width = o ? r.width : 0),
+            ' ' === o || '' === o || r.width < Math.round(t) || o.length < 2)
           )
             return Ni(e, o, i, r)
           o = Li(o, r.width, t)
@@ -15061,7 +16337,12 @@
       }
       function Vi(e) {
         var t = K(
-            { fontFamily: 'Arial, sans-serif', fontSize: 12, fontWeight: 'normal', lineHeight: 1.2 },
+            {
+              fontFamily: 'Arial, sans-serif',
+              fontSize: 12,
+              fontWeight: 'normal',
+              lineHeight: 1.2
+            },
             (e && e.defaultStyle) || {}
           ),
           n = parseInt(t.fontSize, 10) - 1,
@@ -15108,11 +16389,14 @@
               return { horizontal: t[0] || 'center', vertical: t[1] || 'top' }
             })(t.align || this._config.align),
             a = (function (e) {
-              return x(e) ? K({ top: 0, left: 0, right: 0, bottom: 0 }, e) : { top: e, left: e, right: e, bottom: e }
+              return x(e)
+                ? K({ top: 0, left: 0, right: 0, bottom: 0 }, e)
+                : { top: e, left: e, right: e, bottom: e }
             })(void 0 !== t.padding ? t.padding : this._config.padding),
             s = t.fitBox || !1,
             l = (function (e) {
-              if ('fontSize' in e && 'lineHeight' in e) return e.lineHeight * parseInt(e.fontSize, 10)
+              if ('fontSize' in e && 'lineHeight' in e)
+                return e.lineHeight * parseInt(e.fontSize, 10)
             })(i),
             c = e.split(/\u00AD?\r?\n/),
             p = [],
@@ -15406,7 +16690,9 @@
                 TASK_TYPE_MANUAL: {
                   d: 'm {mx},{my} c 0.234,-0.01 5.604,0.008 8.029,0.004 0.808,0 1.271,-0.172 1.417,-0.752 0.227,-0.898 -0.334,-1.314 -1.338,-1.316 -2.467,-0.01 -7.886,-0.004 -8.108,-0.004 -0.014,-0.079 0.016,-0.533 0,-0.61 0.195,-0.042 8.507,0.006 9.616,0.002 0.877,-0.007 1.35,-0.438 1.353,-1.208 0.003,-0.768 -0.479,-1.09 -1.35,-1.091 -2.968,-0.002 -9.619,-0.013 -9.619,-0.013 v -0.591 c 0,0 5.052,-0.016 7.225,-0.016 0.888,-0.002 1.354,-0.416 1.351,-1.193 -0.006,-0.761 -0.492,-1.196 -1.361,-1.196 -3.473,-0.005 -10.86,-0.003 -11.0829995,-0.003 -0.022,-0.047 -0.045,-0.094 -0.069,-0.139 0.3939995,-0.319 2.0409995,-1.626 2.4149995,-2.017 0.469,-0.4870005 0.519,-1.1650005 0.162,-1.6040005 -0.414,-0.511 -0.973,-0.5 -1.48,-0.236 -1.4609995,0.764 -6.5999995,3.6430005 -7.7329995,4.2710005 -0.9,0.499 -1.516,1.253 -1.882,2.19 -0.37000002,0.95 -0.17,2.01 -0.166,2.979 0.004,0.718 -0.27300002,1.345 -0.055,2.063 0.629,2.087 2.425,3.312 4.859,3.318 4.6179995,0.014 9.2379995,-0.139 13.8569995,-0.158 0.755,-0.004 1.171,-0.301 1.182,-1.033 0.012,-0.754 -0.423,-0.969 -1.183,-0.973 -1.778,-0.01 -5.824,-0.004 -6.04,-0.004 10e-4,-0.084 0.003,-0.586 10e-4,-0.67 z'
                 },
-                TASK_TYPE_INSTANTIATING_SEND: { d: 'm {mx},{my} l 0,8.4 l 12.6,0 l 0,-8.4 z l 6.3,3.6 l 6.3,-3.6' },
+                TASK_TYPE_INSTANTIATING_SEND: {
+                  d: 'm {mx},{my} l 0,8.4 l 12.6,0 l 0,-8.4 z l 6.3,3.6 l 6.3,-3.6'
+                },
                 TASK_TYPE_SERVICE: {
                   d: 'm {mx},{my} v -1.71335 c 0.352326,-0.0705 0.703932,-0.17838 1.047628,-0.32133 0.344416,-0.14465 0.665822,-0.32133 0.966377,-0.52145 l 1.19431,1.18005 1.567487,-1.57688 -1.195028,-1.18014 c 0.403376,-0.61394 0.683079,-1.29908 0.825447,-2.01824 l 1.622133,-0.01 v -2.2196 l -1.636514,0.01 c -0.07333,-0.35153 -0.178319,-0.70024 -0.323564,-1.04372 -0.145244,-0.34406 -0.321407,-0.6644 -0.522735,-0.96217 l 1.131035,-1.13631 -1.583305,-1.56293 -1.129598,1.13589 c -0.614052,-0.40108 -1.302883,-0.68093 -2.022633,-0.82247 l 0.0093,-1.61852 h -2.241173 l 0.0042,1.63124 c -0.353763,0.0736 -0.705369,0.17977 -1.049785,0.32371 -0.344415,0.14437 -0.665102,0.32092 -0.9635006,0.52046 l -1.1698628,-1.15823 -1.5667691,1.5792 1.1684265,1.15669 c -0.4026573,0.61283 -0.68308,1.29797 -0.8247287,2.01713 l -1.6588041,0.003 v 2.22174 l 1.6724648,-0.006 c 0.073327,0.35077 0.1797598,0.70243 0.3242851,1.04472 0.1452428,0.34448 0.3214064,0.6644 0.5227339,0.96066 l -1.1993431,1.19723 1.5840256,1.56011 1.1964668,-1.19348 c 0.6140517,0.40346 1.3028827,0.68232 2.0233517,0.82331 l 7.19e-4,1.69892 h 2.226848 z m 0.221462,-3.9957 c -1.788948,0.7502 -3.8576,-0.0928 -4.6097055,-1.87438 -0.7521065,-1.78321 0.090598,-3.84627 1.8802645,-4.59604 1.78823,-0.74936 3.856881,0.0929 4.608987,1.87437 0.752106,1.78165 -0.0906,3.84612 -1.879546,4.59605 z'
                 },
@@ -15414,8 +16700,12 @@
                   d: 'm {mx},{my} c -1.788948,0.7502 -3.8576,-0.0928 -4.6097055,-1.87438 -0.7521065,-1.78321 0.090598,-3.84627 1.8802645,-4.59604 1.78823,-0.74936 3.856881,0.0929 4.608987,1.87437 0.752106,1.78165 -0.0906,3.84612 -1.879546,4.59605 z'
                 },
                 TASK_TYPE_BUSINESS_RULE_HEADER: { d: 'm {mx},{my} 0,4 20,0 0,-4 z' },
-                TASK_TYPE_BUSINESS_RULE_MAIN: { d: 'm {mx},{my} 0,12 20,0 0,-12 zm 0,8 l 20,0 m -13,-4 l 0,8' },
-                MESSAGE_FLOW_MARKER: { d: 'm {mx},{my} m -10.5 ,-7 l 0,14 l 21,0 l 0,-14 z l 10.5,6 l 10.5,-6' }
+                TASK_TYPE_BUSINESS_RULE_MAIN: {
+                  d: 'm {mx},{my} 0,12 20,0 0,-12 zm 0,8 l 20,0 m -13,-4 l 0,8'
+                },
+                MESSAGE_FLOW_MARKER: {
+                  d: 'm {mx},{my} m -10.5 ,-7 l 0,14 l 21,0 l 0,-14 z l 10.5,6 l 10.5,-6'
+                }
               }),
                 (this.getRawPath = function (e) {
                   return this.pathMap[e].d
@@ -15426,7 +16716,8 @@
                     i = this.pathMap[e]
                   t.abspos
                     ? ((n = t.abspos.x), (r = t.abspos.y))
-                    : ((n = t.containerWidth * t.position.mx), (r = t.containerHeight * t.position.my))
+                    : ((n = t.containerWidth * t.position.mx),
+                      (r = t.containerHeight * t.position.my))
                   var o,
                     a,
                     s = {}
@@ -15439,7 +16730,8 @@
                       p++
                     )
                       s['y' + p] = i.heightElements[p] * l
-                    for (var u = 0; u < i.widthElements.length; u++) s['x' + u] = i.widthElements[u] * c
+                    for (var u = 0; u < i.widthElements.length; u++)
+                      s['x' + u] = i.widthElements[u] * c
                   }
                   return (
                     (o = i.d),
@@ -15449,7 +16741,8 @@
                         var r = n
                         return (
                           t.replace(Hi, function (e, t, n, i, o) {
-                            ;(t = t || i), r && (t in r && (r = r[t]), 'function' == typeof r && o && (r = r()))
+                            ;(t = t || i),
+                              r && (t in r && (r = r[t]), 'function' == typeof r && o && (r = r()))
                           }),
                           (r = (null == r || r == n ? e : r) + '')
                         )
@@ -15542,7 +16835,14 @@
           (this._translate = i),
           (this._textRenderer = o)
       }
-      ;(eo.$inject = ['eventBus', 'canvas', 'elementFactory', 'elementRegistry', 'translate', 'textRenderer']),
+      ;(eo.$inject = [
+        'eventBus',
+        'canvas',
+        'elementFactory',
+        'elementRegistry',
+        'translate',
+        'textRenderer'
+      ]),
         (eo.prototype.add = function (e, t, n) {
           var r,
             i,
@@ -15581,7 +16881,9 @@
               this._canvas.addShape(r, n, o)
           } else {
             if (!oi(t, 'bpmndi:BPMNEdge'))
-              throw new Error(a('unknown di {di} for element {semantic}', { di: ei(t), semantic: ei(e) }))
+              throw new Error(
+                a('unknown di {di} for element {semantic}', { di: ei(t), semantic: ei(e) })
+              )
             var u = this._getSource(e),
               d = this._getTarget(e)
             ;(i = n && (n.hidden || n.collapsed)),
@@ -15592,7 +16894,11 @@
               oi(e, 'bpmn:SequenceFlow') && (o = 0),
               this._canvas.addConnection(r, n, o)
           }
-          return Gi(e) && Pi(r) && this.addLabel(e, t, r), this._eventBus.fire('bpmnElement.added', { element: r }), r
+          return (
+            Gi(e) && Pi(r) && this.addLabel(e, t, r),
+            this._eventBus.fire('bpmnElement.added', { element: r }),
+            r
+          )
         }),
         (eo.prototype._attachBoundary = function (e, t) {
           var n = this._translate,
@@ -15712,7 +17018,9 @@
           ;(function (e, t) {
             return !(l[e] || so)(t)
           })(n, r) ||
-            (i ? (a = t.getGraphics(i)) : (o = r.delegateTarget || r.target) && ((a = o), (i = t.get(a))),
+            (i
+              ? (a = t.getGraphics(i))
+              : (o = r.delegateTarget || r.target) && ((a = o), (i = t.get(a))),
             a &&
               i &&
               !1 === e.fire(n, { element: i, gfx: a, originalEvent: r }) &&
@@ -15787,7 +17095,10 @@
           d = h('djs-hit djs-hit-click-stroke'),
           m = { all: h('djs-hit djs-hit-all'), 'click-stroke': d, stroke: u }
         function h(e, t) {
-          return (t = K({ stroke: 'white', strokeWidth: 15 }, t || {})), n.cls(e, ['no-fill', 'no-border'], t)
+          return (
+            (t = K({ stroke: 'white', strokeWidth: 15 }, t || {})),
+            n.cls(e, ['no-fill', 'no-border'], t)
+          )
         }
         function f(e, t) {
           var n = m[t]
@@ -15806,7 +17117,8 @@
               i = e.isFrame
             return r
               ? this.createWaypointsHit(t, r)
-              : ((n = i ? 'stroke' : 'all'), this.createBoxHit(t, n, { width: e.width, height: e.height }))
+              : ((n = i ? 'stroke' : 'all'),
+                this.createBoxHit(t, n, { width: e.width, height: e.height }))
           }),
           (this.createWaypointsHit = function (e, t) {
             var n = St(t)
@@ -15898,7 +17210,8 @@
             n = t.indexOf(e)
           if (-1 !== n) {
             var r = t.slice()
-            t.splice(n, 1), this._eventBus.fire('selection.changed', { oldSelection: r, newSelection: t })
+            t.splice(n, 1),
+              this._eventBus.fire('selection.changed', { oldSelection: r, newSelection: t })
           }
         }),
         (go.prototype.get = function () {
@@ -16006,7 +17319,8 @@
         selectionBehavior: ['type', Eo]
       }
       function wo(e) {
-        ;(this._counter = 0), (this._prefix = (e ? e + '-' : '') + Math.floor(1e9 * Math.random()) + '-')
+        ;(this._counter = 0),
+          (this._prefix = (e ? e + '-' : '') + Math.floor(1e9 * Math.random()) + '-')
       }
       wo.prototype.next = function () {
         return this._prefix + ++this._counter
@@ -16023,7 +17337,9 @@
           (this._overlayContainers = []),
           (this._overlayRoot =
             ((i = n.getContainer()),
-            (o = ye('<div class="djs-overlay-container" style="position: absolute; width: 0; height: 0;" />')),
+            (o = ye(
+              '<div class="djs-overlay-container" style="position: absolute; width: 0; height: 0;" />'
+            )),
             i.insertBefore(o, i.firstChild),
             o)),
           this._init()
@@ -16043,21 +17359,31 @@
       ;(Po.$inject = ['config.overlays', 'eventBus', 'canvas', 'elementRegistry']),
         (Po.prototype.get = function (e) {
           if (
-            (C(e) && (e = { id: e }), C(e.element) && (e.element = this._elementRegistry.get(e.element)), e.element)
+            (C(e) && (e = { id: e }),
+            C(e.element) && (e.element = this._elementRegistry.get(e.element)),
+            e.element)
           ) {
             var t = this._getOverlayContainer(e.element, !0)
             return t ? (e.type ? S(t.overlays, V({ type: e.type })) : t.overlays.slice()) : []
           }
-          return e.type ? S(this._overlays, V({ type: e.type })) : e.id ? this._overlays[e.id] : null
+          return e.type
+            ? S(this._overlays, V({ type: e.type }))
+            : e.id
+            ? this._overlays[e.id]
+            : null
         }),
         (Po.prototype.add = function (e, t, n) {
-          if ((x(t) && ((n = t), (t = null)), e.id || (e = this._elementRegistry.get(e)), !n.position))
+          if (
+            (x(t) && ((n = t), (t = null)), e.id || (e = this._elementRegistry.get(e)), !n.position)
+          )
             throw new Error('must specifiy overlay position')
           if (!n.html) throw new Error('must specifiy overlay html')
           if (!e) throw new Error('invalid element specified')
           var r = this._ids.next()
           return (
-            (n = K({}, this._overlayDefaults, n, { id: r, type: t, element: e, html: n.html })), this._addOverlay(n), r
+            (n = K({}, this._overlayDefaults, n, { id: r, type: t, element: e, html: n.html })),
+            this._addOverlay(n),
+            r
           )
         }),
         (Po.prototype.remove = function (e) {
@@ -16068,7 +17394,11 @@
             var t = n._getOverlayContainer(e.element, !0)
             if (
               (e &&
-                (_e(e.html), _e(e.htmlContainer), delete e.htmlContainer, delete e.element, delete n._overlays[e.id]),
+                (_e(e.html),
+                _e(e.htmlContainer),
+                delete e.htmlContainer,
+                delete e.element,
+                delete n._overlays[e.id]),
               t)
             ) {
               var r = t.overlays.indexOf(e)
@@ -16105,7 +17435,8 @@
             a = r.left,
             s = r.top
           void 0 !== r.right && ((t = o.waypoints ? Dt(o).width : o.width), (a = -1 * r.right + t)),
-            void 0 !== r.bottom && ((n = o.waypoints ? Dt(o).height : o.height), (s = -1 * r.bottom + n)),
+            void 0 !== r.bottom &&
+              ((n = o.waypoints ? Dt(o).height : o.height), (s = -1 * r.bottom + n)),
             ko(i, a || 0, s || 0),
             this._updateOverlayVisibilty(e, this._canvas.viewbox())
         }),
@@ -16135,7 +17466,9 @@
           o.get && o.constructor.prototype.jquery && (o = o.get(0)),
             C(o) && (o = ye(o)),
             (n = this._getOverlayContainer(i)),
-            (t = ye('<div class="djs-overlay" data-overlay-id="' + r + '" style="position: absolute">')).appendChild(o),
+            (t = ye(
+              '<div class="djs-overlay" data-overlay-id="' + r + '" style="position: absolute">'
+            )).appendChild(o),
             e.type && re(t).add('djs-overlay-' + e.type),
             So(t, this._canvas.findRoot(i) === this._canvas.getRootElement()),
             (e.htmlContainer = t),
@@ -16152,7 +17485,9 @@
             o = n && n.maxZoom,
             a = e.htmlContainer,
             s = !0
-          ;(r !== this._canvas.getRootElement() || (n && ((b(i) && i > t.scale) || (b(o) && o < t.scale)))) && (s = !1),
+          ;(r !== this._canvas.getRootElement() ||
+            (n && ((b(i) && i > t.scale) || (b(o) && o < t.scale)))) &&
+            (s = !1),
             So(a, s),
             this._updateOverlayScale(e, t)
         }),
@@ -16220,7 +17555,8 @@
       function Bo(e, t, n, r) {
         e.on('element.changed', function (r) {
           var i = r.element
-          ;(i.parent || i === t.getRootElement()) && (r.gfx = n.getGraphics(i)), r.gfx && e.fire(Rt(i) + '.changed', r)
+          ;(i.parent || i === t.getRootElement()) && (r.gfx = n.getGraphics(i)),
+            r.gfx && e.fire(Rt(i) + '.changed', r)
         }),
           e.on('elements.changed', function (t) {
             var n = t.elements
@@ -16297,7 +17633,8 @@
           ],
           function (e) {
             Mo.prototype[e] = function (t, n, r, i, o) {
-              ;(w(t) || _(t)) && ((o = i), (i = r), (r = n), (n = t), (t = null)), this.on(t, e, n, r, i, o)
+              ;(w(t) || _(t)) && ((o = i), (i = r), (r = n), (n = t), (t = null)),
+                this.on(t, e, n, r, i, o)
             }
           }
         ),
@@ -16386,11 +17723,16 @@
           var i = e.element,
             o = t.viewbox(),
             a = r.get(i)
-          if ((r.set(n, { x: o.x, y: o.y, zoom: o.scale }), (n = i), !oi(i, 'bpmn:Collaboration') || a)) {
+          if (
+            (r.set(n, { x: o.x, y: o.y, zoom: o.scale }),
+            (n = i),
+            !oi(i, 'bpmn:Collaboration') || a)
+          ) {
             a = a || { x: 0, y: 0, zoom: 1 }
             var s = (o.x - a.x) * o.scale,
               l = (o.y - a.y) * o.scale
-            ;(0 === s && 0 === l) || t.scroll({ dx: s, dy: l }), a.zoom !== o.scale && t.zoom(a.zoom, { x: 0, y: 0 })
+            ;(0 === s && 0 === l) || t.scroll({ dx: s, dy: l }),
+              a.zoom !== o.scale && t.zoom(a.zoom, { x: 0, y: 0 })
           }
         }),
           e.on('diagram.clear', function () {
@@ -16425,7 +17767,8 @@
             ;-1 !== t && this._entries.splice(t, 1)
           })
       }
-      ;(Uo.$inject = ['eventBus', 'elementRegistry', 'overlays', 'canvas']), (Wo.$inject = ['eventBus', 'canvas'])
+      ;(Uo.$inject = ['eventBus', 'elementRegistry', 'overlays', 'canvas']),
+        (Wo.$inject = ['eventBus', 'canvas'])
       function Qo(e, t) {
         ;(this._eventBus = e), (this._moddle = t)
         var n = this
@@ -16463,7 +17806,9 @@
             if (i) {
               var o = i.$parent
               oi(i, 'bpmn:SubProcess') && !t.isExpanded && n.push(i),
-                oi(o, 'bpmn:SubProcess') && o !== e.bpmnElement && r.push({ diElement: t, parent: o })
+                oi(o, 'bpmn:SubProcess') &&
+                  o !== e.bpmnElement &&
+                  r.push({ diElement: t, parent: o })
             }
           })
           var i = []
@@ -16516,13 +17861,21 @@
           var t = this._moddle.create('bpmndi:BPMNPlane', { bpmnElement: e }),
             n = this._moddle.create('bpmndi:BPMNDiagram', { plane: t })
           return (
-            (t.$parent = n), (t.bpmnElement = e), (n.$parent = this._definitions), this._definitions.diagrams.push(n), n
+            (t.$parent = n),
+            (t.bpmnElement = e),
+            (n.$parent = this._definitions),
+            this._definitions.diagrams.push(n),
+            n
           )
         }),
         (Qo.$inject = ['eventBus', 'moddle'])
       var Yo = 250
       function Jo(e, t, n, r) {
-        Mo.call(this, t), (this._canvas = e), (this._eventBus = t), (this._elementRegistry = n), (this._overlays = r)
+        Mo.call(this, t),
+          (this._canvas = e),
+          (this._eventBus = t),
+          (this._elementRegistry = n),
+          (this._overlays = r)
         var i = this
         this.executed(
           'shape.toggleCollapse',
@@ -16618,7 +17971,12 @@
         (Jo.$inject = ['canvas', 'eventBus', 'elementRegistry', 'overlays'])
       const Xo = {
         __depends__: [To, jo, Ro],
-        __init__: ['drilldownBreadcrumbs', 'drilldownOverlayBehavior', 'drilldownCentering', 'subprocessCompatibility'],
+        __init__: [
+          'drilldownBreadcrumbs',
+          'drilldownOverlayBehavior',
+          'drilldownCentering',
+          'subprocessCompatibility'
+        ],
         drilldownBreadcrumbs: ['type', Uo],
         drilldownCentering: ['type', Wo],
         drilldownOverlayBehavior: ['type', Jo],
@@ -16636,7 +17994,9 @@
       function na(e) {
         return e.shiftKey
       }
-      u()(Zo, vi), (Zo.prototype._modules = [to, Ui, _o, To, Xo]), (Zo.prototype._moddleExtensions = {})
+      u()(Zo, vi),
+        (Zo.prototype._modules = [to, Ui, _o, To, Xo]),
+        (Zo.prototype._moddleExtensions = {})
       var ra = 'keyboard.keydown'
       function ia(e, t) {
         var n = this
@@ -16765,10 +18125,15 @@
               if (ta('0', n) && ea(n)) return t.trigger('zoom', { value: 1 }), !0
             }),
             n('removeSelection', function (e) {
-              if (ta(['Backspace', 'Delete', 'Del'], e.keyEvent)) return t.trigger('removeSelection'), !0
+              if (ta(['Backspace', 'Delete', 'Del'], e.keyEvent))
+                return t.trigger('removeSelection'), !0
             })
         })
-      const pa = { __init__: ['keyboard', 'keyboardBindings'], keyboard: ['type', ia], keyboardBindings: ['type', ca] }
+      const pa = {
+        __init__: ['keyboard', 'keyboardBindings'],
+        keyboard: ['type', ia],
+        keyboardBindings: ['type', ca]
+      }
       var ua = { moveSpeed: 50, moveSpeedAccelerated: 200 }
       function da(e, t, n) {
         var r = this
@@ -16778,7 +18143,10 @@
               i = r._config
             if (
               t.isCmd(n) &&
-              t.isKey(['ArrowLeft', 'Left', 'ArrowUp', 'Up', 'ArrowDown', 'Down', 'ArrowRight', 'Right'], n)
+              t.isKey(
+                ['ArrowLeft', 'Left', 'ArrowUp', 'Up', 'ArrowDown', 'Down', 'ArrowRight', 'Right'],
+                n
+              )
             ) {
               var o,
                 a = t.isShift(n) ? i.moveSpeedAccelerated : i.moveSpeed
@@ -16861,7 +18229,8 @@
           !n.dragging &&
             ((i = l), Math.sqrt(Math.pow(i.x, 2) + Math.pow(i.y, 2)) > 15) &&
             ((n.dragging = !0), 0 === a && ga(e), fa('grab')),
-            n.dragging && ((l = ba(s, n.last || n.start)), t.scroll({ dx: l.x, dy: l.y }), (n.last = s)),
+            n.dragging &&
+              ((l = ba(s, n.last || n.start)), t.scroll({ dx: l.x, dy: l.y }), (n.last = s)),
             r.preventDefault()
         }
         function i(e) {
@@ -16923,7 +18292,8 @@
         }),
         (Pa.prototype.zoom = function (e, t) {
           var n = _a(Ca, 20)
-          ;(this._totalDelta += e), Math.abs(this._totalDelta) > 0.1 && (this._zoom(e, t, n), (this._totalDelta = 0))
+          ;(this._totalDelta += e),
+            Math.abs(this._totalDelta) > 0.1 && (this._zoom(e, t, n), (this._totalDelta = 0))
         }),
         (Pa.prototype._handleWheel = function (e) {
           if (!ce(e.target, '.djs-scrollable', !0)) {
@@ -16936,8 +18306,11 @@
             if (((o *= r ? (0 === e.deltaMode ? 0.02 : 0.32) : 0 === e.deltaMode ? 1 : 16), r)) {
               var a = t.getBoundingClientRect(),
                 s = { x: e.clientX - a.left, y: e.clientY - a.top }
-              ;(n = Math.sqrt(Math.pow(e.deltaY, 2) + Math.pow(e.deltaX, 2)) * wa(e.deltaY) * o), this.zoom(n, s)
-            } else (n = i ? { dx: o * e.deltaY, dy: 0 } : { dx: o * e.deltaX, dy: o * e.deltaY }), this.scroll(n)
+              ;(n = Math.sqrt(Math.pow(e.deltaY, 2) + Math.pow(e.deltaX, 2)) * wa(e.deltaY) * o),
+                this.zoom(n, s)
+            } else
+              (n = i ? { dx: o * e.deltaY, dy: 0 } : { dx: o * e.deltaX, dy: o * e.deltaY }),
+                this.scroll(n)
           }
         }),
         (Pa.prototype.stepZoom = function (e, t) {
@@ -16960,7 +18333,10 @@
             n = this._handleWheel,
             r = this._enabled
           return (
-            void 0 === e && (e = !r), r !== e && he[e ? 'bind' : 'unbind'](t, 'wheel', n, !1), (this._enabled = e), e
+            void 0 === e && (e = !r),
+            r !== e && he[e ? 'bind' : 'unbind'](t, 'wheel', n, !1),
+            (this._enabled = e),
+            e
           )
         }),
         (Pa.prototype._init = function (e) {
@@ -16983,7 +18359,9 @@
         e.preventDefault(),
           'function' == typeof e.stopPropagation
             ? e.stopPropagation()
-            : e.srcEvent && 'function' == typeof e.srcEvent.stopPropagation && e.srcEvent.stopPropagation(),
+            : e.srcEvent &&
+              'function' == typeof e.srcEvent.stopPropagation &&
+              e.srcEvent.stopPropagation(),
           'function' == typeof e.stopImmediatePropagation && e.stopImmediatePropagation()
       }
       function Da(e) {
@@ -17006,7 +18384,11 @@
         ),
           he.bind(e, 'touchend', t, !0),
           he.bind(e, 'touchcancel', t, !0)
-        var n = new (Ta().Manager)(e, { inputClass: Ta().TouchInput, recognizers: [], domEvents: !0 }),
+        var n = new (Ta().Manager)(e, {
+            inputClass: Ta().TouchInput,
+            recognizers: [],
+            domEvents: !0
+          }),
           r = new (Ta().Tap)(),
           i = new (Ta().Pan)({ threshold: 10 }),
           o = new (Ta().Press)(),
@@ -17057,7 +18439,8 @@
                 i = u(document.elementFromPoint(n.x, n.y)),
                 o = i && r.get(i)
               o !== e.hover &&
-                (e.hover && a.out(e), o && (a.hover({ element: o, gfx: i }), (e.hover = o), (e.hoverGfx = i)))
+                (e.hover && a.out(e),
+                o && (a.hover({ element: o, gfx: i }), (e.hover = o), (e.hoverGfx = i)))
             }
           }),
           l &&
@@ -17119,7 +18502,10 @@
                     t.zoom(o, r), Ma(e)
                   }
                   function a(e) {
-                    o.off('pinchmove', i), o.off('pinchend', a), o.off('pinchcancel', a), o.reset(!0)
+                    o.off('pinchmove', i),
+                      o.off('pinchend', a),
+                      o.off('pinchcancel', a),
+                      o.reset(!0)
                   }
                   o.on('pinchmove', i), o.on('pinchend', a), o.on('pinchcancel', a)
                 })
@@ -17132,7 +18518,14 @@
           n.addBBoxMarker(e.svg)
         })
       }
-      ;(Ra.$inject = ['injector', 'canvas', 'eventBus', 'elementRegistry', 'interactionEvents', 'touchFix']),
+      ;(Ra.$inject = [
+        'injector',
+        'canvas',
+        'eventBus',
+        'elementRegistry',
+        'interactionEvents',
+        'touchFix'
+      ]),
         (za.$inject = ['canvas', 'eventBus']),
         (za.prototype.addBBoxMarker = function (e) {
           var t = { fill: 'none', class: 'outer-bound-marker' },
@@ -17179,7 +18572,10 @@
         (qa.prototype._getOrientationDetails = function (e) {
           var t = 'x',
             n = 'width'
-          return -1 !== ['top', 'bottom', 'middle'].indexOf(e) && ((t = 'y'), (n = 'height')), { axis: t, dimension: n }
+          return (
+            -1 !== ['top', 'bottom', 'middle'].indexOf(e) && ((t = 'y'), (n = 'height')),
+            { axis: t, dimension: n }
+          )
         }),
         (qa.prototype._isType = function (e, t) {
           return -1 !== t.indexOf(e)
@@ -17425,7 +18821,9 @@
                 o = 30,
                 a = 'left'
               return (
-                oi(e, 'bpmn:BoundaryEvent') && -1 !== (a = tn(e, e.host, -25)).indexOf('top') && (o *= -1),
+                oi(e, 'bpmn:BoundaryEvent') &&
+                  -1 !== (a = tn(e, e.host, -25)).indexOf('top') &&
+                  (o *= -1),
                 $a(
                   e,
                   t,
@@ -17593,7 +18991,8 @@
         (as.$inject = ['eventBus', 'modeling']),
         (as.prototype.canResize = function (e, t) {
           if (oi(t.di, 'bpmndi:BPMNPlane')) return !1
-          if (!oi(t, 'bpmn:Participant') && !oi(t, 'bpmn:Lane') && !oi(t, 'bpmn:SubProcess')) return !1
+          if (!oi(t, 'bpmn:Participant') && !oi(t, 'bpmn:Lane') && !oi(t, 'bpmn:SubProcess'))
+            return !1
           var n = !0
           return (
             O(e, function (e) {
@@ -17670,8 +19069,14 @@
             m = i.localStart,
             h = a(u),
             v = ba(h, m)
-          if (!i.active && (r || ((o = d), Math.sqrt(Math.pow(o.x, 2) + Math.pow(o.y, 2)) > i.threshold))) {
-            if ((K(l, { x: ps(m.x + c.x), y: ps(m.y + c.y), dx: 0, dy: 0 }, { originalEvent: e }), !1 === s('start')))
+          if (
+            !i.active &&
+            (r || ((o = d), Math.sqrt(Math.pow(o.x, 2) + Math.pow(o.y, 2)) > i.threshold))
+          ) {
+            if (
+              (K(l, { x: ps(m.x + c.x), y: ps(m.y + c.y), dx: 0, dy: 0 }, { originalEvent: e }),
+              !1 === s('start'))
+            )
               return f()
             ;(i.active = !0),
               i.keepSelection || ((l.previousSelection = n.get()), n.select(null)),
@@ -17680,7 +19085,12 @@
           }
           io(e),
             i.active &&
-              (K(l, { x: ps(h.x + c.x), y: ps(h.y + c.y), dx: ps(v.x), dy: ps(v.y) }, { originalEvent: e }), s('move'))
+              (K(
+                l,
+                { x: ps(h.x + c.x), y: ps(h.y + c.y), dx: ps(v.x), dy: ps(v.y) },
+                { originalEvent: e }
+              ),
+              s('move'))
         }
         function c(e) {
           var t = !0
@@ -17767,7 +19177,15 @@
                 return 'undefined' != typeof TouchEvent && e instanceof TouchEvent
               })(g)),
               (i = K(
-                { prefix: r, data: x, payload: {}, globalStart: y, displacement: ba(n, b), localStart: b, isTouch: E },
+                {
+                  prefix: r,
+                  data: x,
+                  payload: {},
+                  globalStart: y,
+                  displacement: ba(n, b),
+                  localStart: b,
+                  isTouch: E
+                },
                 v
               )),
               v.manual ||
@@ -17879,7 +19297,8 @@
         return (
           (function (e, t) {
             var n, r
-            for (n = 0; (r = e[n]); n++) if (Ht(r, t) <= 10) return { point: e[n], bendpoint: !0, index: n }
+            for (n = 0; (r = e[n]); n++)
+              if (Ht(r, t) <= 10) return { point: e[n], bendpoint: !0, index: n }
             return null
           })(e, t) ||
           (function (e, t) {
@@ -17951,7 +19370,10 @@
               a = At('rect')
             lt(a, { x: -7, y: -1.5, width: 14, height: 3 }), mt(a).add('djs-visual'), ot(i, a)
             var s = At('rect')
-            lt(s, { x: -o / 2, y: -7, width: o, height: 14 }), mt(s).add('djs-hit'), ot(i, s), Dn(i, 'v' === r ? 90 : 0)
+            lt(s, { x: -o / 2, y: -7, width: o, height: 14 }),
+              mt(s).add('djs-hit'),
+              ot(i, s),
+              Dn(i, 'v' === r ? 90 : 0)
           })(r, t, n, o),
           mt(r).add('djs-segment-dragger'),
           mt(r).add('h' === o ? 'horizontal' : 'vertical'),
@@ -17995,7 +19417,8 @@
         }
         function c(e, t) {
           for (var n, r, i, a = t.waypoints, s = 1; s < a.length; s++)
-            Ut((n = a[s - 1]), (r = a[s])) && (lt((i = ws(e, n, r)), { 'data-segment-idx': s }), o(i, 'mousemove', t))
+            Ut((n = a[s - 1]), (r = a[s])) &&
+              (lt((i = ws(e, n, r)), { 'data-segment-idx': s }), o(i, 'mousemove', t))
         }
         function p(e) {
           var t = a(e)
@@ -18097,7 +19520,10 @@
                             i = e.waypoints
                           return t.index <= 0 || t.bendpoint
                             ? null
-                            : (r = Ut((n = { start: i[t.index - 1], end: i[t.index] }).start, n.end))
+                            : (r = Ut(
+                                (n = { start: i[t.index - 1], end: i[t.index] }).start,
+                                n.end
+                              ))
                             ? Cs('h' === r ? n.end.x - n.start.x : n.end.y - n.start.y) / 2
                             : null
                         })(n, a)
@@ -18133,7 +19559,13 @@
           (this.getBendpointsContainer = a),
           (this.getSegmentDragger = s)
       }
-      Ps.$inject = ['eventBus', 'canvas', 'interactionEvents', 'bendpointMove', 'connectionSegmentMove']
+      Ps.$inject = [
+        'eventBus',
+        'canvas',
+        'interactionEvents',
+        'bendpointMove',
+        'connectionSegmentMove'
+      ]
       var ks = Math.round,
         Ss = 'reconnectStart',
         Os = 'reconnectEnd',
@@ -18157,7 +19589,15 @@
                   data: {
                     connection: t,
                     connectionGfx: l,
-                    context: { allowed: m, bendpointIndex: o, connection: t, source: c, target: p, insert: a, type: s }
+                    context: {
+                      allowed: m,
+                      bendpointIndex: o,
+                      connection: t,
+                      source: c,
+                      target: p,
+                      insert: a,
+                      type: s
+                    }
                   }
                 })
           }),
@@ -18171,10 +19611,22 @@
               l = n.type
             if (((n.hover = s), s)) {
               var c = l === Ts ? 'connection.updateWaypoints' : 'connection.reconnect'
-              if ((t = n.allowed = i.allowed(c, { connection: r, source: l === Ss ? s : o, target: l === Os ? s : a })))
+              if (
+                (t = n.allowed =
+                  i.allowed(c, {
+                    connection: r,
+                    source: l === Ss ? s : o,
+                    target: l === Os ? s : a
+                  }))
+              )
                 return (n.source = l === Ss ? s : o), void (n.target = l === Os ? s : a)
               !1 === t &&
-                (t = n.allowed = i.allowed(c, { connection: r, source: l === Os ? s : a, target: l === Ss ? s : o })),
+                (t = n.allowed =
+                  i.allowed(c, {
+                    connection: r,
+                    source: l === Os ? s : a,
+                    target: l === Ss ? s : o
+                  })),
                 t && ((n.source = l === Os ? s : a), (n.target = l === Ss ? s : o))
             }
           }),
@@ -18207,15 +19659,19 @@
                     (function (e) {
                       e = e.slice()
                       for (var t, n, r, i = 0; e[i]; )
-                        (t = e[i]), (n = e[i - 1]), 0 === Ht(t, (r = e[i + 1])) || $t(n, r, t) ? e.splice(i, 1) : i++
+                        (t = e[i]),
+                          (n = e[i - 1]),
+                          0 === Ht(t, (r = e[i + 1])) || $t(n, r, t) ? e.splice(i, 1) : i++
                       return e
                     })(s),
                     u
                   ))
                 : (p === Ss
-                    ? ((u.docking = 'source'), js(t) && ((u.docking = 'target'), (u.newWaypoints = s.reverse())))
+                    ? ((u.docking = 'source'),
+                      js(t) && ((u.docking = 'target'), (u.newWaypoints = s.reverse())))
                     : p === Os &&
-                      ((u.docking = 'target'), js(t) && ((u.docking = 'source'), (u.newWaypoints = s.reverse()))),
+                      ((u.docking = 'target'),
+                      js(t) && ((u.docking = 'source'), (u.newWaypoints = s.reverse()))),
                   o.reconnect(i, l, c, d, u))
             },
             this
@@ -18226,14 +19682,24 @@
           n = e.source,
           r = e.target,
           i = e.type
-        return i === Ss ? t && r && t === r && n !== r : i === Os ? t && n && t === n && n !== r : void 0
+        return i === Ss
+          ? t && r && t === r && n !== r
+          : i === Os
+          ? t && n && t === n && n !== r
+          : void 0
       }
       ;(Bs.$inject = ['injector', 'eventBus', 'canvas', 'dragging', 'rules', 'modeling']),
         (Bs.prototype.cropWaypoints = function (e, t) {
           var n = this._injector.get('connectionDocking', !1)
           if (!n) return t
           var r = e.waypoints
-          return (e.waypoints = t), (e.waypoints = n.getCroppedWaypoints(e)), (t = e.waypoints), (e.waypoints = r), t
+          return (
+            (e.waypoints = t),
+            (e.waypoints = n.getCroppedWaypoints(e)),
+            (t = e.waypoints),
+            (e.waypoints = r),
+            t
+          )
         })
       var Ms = 'updateWaypoints',
         Ds = 'connect-ok',
@@ -18265,7 +19731,9 @@
               o = t.type
             if (i) {
               if ((r.addMarker(i, zs), o === Ms)) return
-              n ? (r.removeMarker(i, Rs), r.addMarker(i, Ds)) : !1 === n && (r.removeMarker(i, Ds), r.addMarker(i, Rs))
+              n
+                ? (r.removeMarker(i, Rs), r.addMarker(i, Ds))
+                : !1 === n && (r.removeMarker(i, Ds), r.addMarker(i, Rs))
             }
           }),
           n.on(['bendpoint.move.out', 'bendpoint.move.cleanup'], 1100, function (e) {
@@ -18295,15 +19763,22 @@
                 h.connectionEnd && (f.connectionEnd = h.connectionEnd),
                 'reconnectStart' === l
                   ? js(n)
-                    ? ((f.connectionEnd = f.connectionEnd || m), (f.source = u), (f.target = s || p), (d = d.reverse()))
-                    : ((f.connectionStart = f.connectionStart || m), (f.source = s || p), (f.target = u))
+                    ? ((f.connectionEnd = f.connectionEnd || m),
+                      (f.source = u),
+                      (f.target = s || p),
+                      (d = d.reverse()))
+                    : ((f.connectionStart = f.connectionStart || m),
+                      (f.source = s || p),
+                      (f.target = u))
                   : 'reconnectEnd' === l
                   ? js(n)
                     ? ((f.connectionStart = f.connectionStart || m),
                       (f.source = s || u),
                       (f.target = p),
                       (d = d.reverse()))
-                    : ((f.connectionEnd = f.connectionEnd || m), (f.source = p), (f.target = s || u))
+                    : ((f.connectionEnd = f.connectionEnd || m),
+                      (f.source = p),
+                      (f.target = s || u))
                   : ((f.noCropping = !0), (f.noLayout = !0), (d[o] = m)),
                 l === Ms && (d = e.cropWaypoints(c, d)),
                 (f.waypoints = d),
@@ -18412,10 +19887,14 @@
               (d[a] = h),
               o < 2 &&
                 ((t = tn(i.source, m)),
-                1 === o ? 'intersect' === t && (d.shift(), (d[0] = m), v--) : 'intersect' !== t && (d.unshift(c), v++)),
+                1 === o
+                  ? 'intersect' === t && (d.shift(), (d[0] = m), v--)
+                  : 'intersect' !== t && (d.unshift(c), v++)),
               a > f - 3 &&
                 ((n = tn(i.target, h)),
-                a === f - 2 ? 'intersect' === n && (d.pop(), (d[d.length - 1] = h)) : 'intersect' !== n && d.push(p)),
+                a === f - 2
+                  ? 'intersect' === n && (d.pop(), (d[d.length - 1] = h))
+                  : 'intersect' !== n && d.push(p)),
               (r.newWaypoints = i.waypoints = s(i, d)),
               (function (e, t, n) {
                 var r,
@@ -18475,7 +19954,9 @@
               ),
               l = s(n, a.waypoints),
               c = a.segmentOffset,
-              p = { segmentMove: { segmentStartIndex: t.segmentStartIndex, newSegmentStartIndex: i + c } }
+              p = {
+                segmentMove: { segmentStartIndex: t.segmentStartIndex, newSegmentStartIndex: i + c }
+              }
             o.updateWaypoints(n, l, p)
           })
       }
@@ -18489,7 +19970,9 @@
         return { x: e.x + e.width, y: e.y + e.height }
       }
       function Js(e, t) {
-        return !e || isNaN(e.x) || isNaN(e.y) ? t : { x: Qs(e.x + e.width / 2), y: Qs(e.y + e.height / 2) }
+        return !e || isNaN(e.x) || isNaN(e.y)
+          ? t
+          : { x: Qs(e.x + e.width / 2), y: Qs(e.y + e.height / 2) }
       }
       function Xs(e, t) {
         var n = e.snapped
@@ -18501,7 +19984,9 @@
         var r,
           i = e[t],
           o = (e.snapped = e.snapped || {})
-        return !1 === n ? (o[t] = !1) : ((o[t] = !0), (r = n - i), (e[t] += r), (e['d' + t] += r)), i
+        return (
+          !1 === n ? (o[t] = !1) : ((o[t] = !0), (r = n - i), (e[t] += r), (e['d' + t] += r)), i
+        )
       }
       function el(e) {
         return e.children || []
@@ -18541,7 +20026,10 @@
                 l > i.length - 3 && p.unshift(n(r.target)),
                 (e.snapPoints = t = { horizontal: [], vertical: [] }),
                 O(p, function (e) {
-                  e && ((e = e.original || e), 'y' === c && t.horizontal.push(e.y), 'x' === c && t.vertical.push(e.x))
+                  e &&
+                    ((e = e.original || e),
+                    'y' === c && t.horizontal.push(e.y),
+                    'x' === c && t.vertical.push(e.x))
                 }),
                 t
               )
@@ -18629,7 +20117,10 @@
           }),
           (this.start = function (e, n, r, i) {
             x(r) || ((i = r), (r = en(n))),
-              t.init(e, 'connect', { autoActivate: i, data: { shape: n, context: { start: n, connectionStart: r } } })
+              t.init(e, 'connect', {
+                autoActivate: i,
+                data: { shape: n, context: { start: n, connectionStart: r } }
+              })
           })
       }
       function al(e) {
@@ -18657,7 +20148,12 @@
               u = c,
               d = p
             al(t) && ((u = p), (d = c)),
-              r.drawPreview(t, n, { source: o || a, target: l || i, connectionStart: u, connectionEnd: d })
+              r.drawPreview(t, n, {
+                source: o || a,
+                target: l || i,
+                connectionStart: u,
+                connectionEnd: d
+              })
           }),
           t.on('connect.hover', 900, function (e) {
             var t = e.context,
@@ -18730,7 +20226,8 @@
                     connectionEnd: d,
                     waypoints: n.waypoints || r.waypoints
                   })),
-                (r.waypoints && r.waypoints.length) || (r.waypoints = [l ? en(l) : u, c ? en(c) : d]),
+                (r.waypoints && r.waypoints.length) ||
+                  (r.waypoints = [l ? en(l) : u, c ? en(c) : d]),
                 this._connectionDocking &&
                   (l || c) &&
                   !h &&
@@ -18774,7 +20271,12 @@
         (ul.prototype.createNoopConnection = function (e, t) {
           var n = At('polyline')
           return (
-            lt(n, { stroke: '#333', strokeDasharray: [1], strokeWidth: 2, 'pointer-events': 'none' }),
+            lt(n, {
+              stroke: '#333',
+              strokeDasharray: [1],
+              strokeWidth: 2,
+              'pointer-events': 'none'
+            }),
             lt(n, { points: [e.x, e.y, t.x, t.y] }),
             n
           )
@@ -18865,8 +20367,13 @@
           'paddingLeft'
         ])
         return (
-          K(o.style, { boxSizing: 'border-box', width: '100%', outline: 'none', wordWrap: 'break-word' }, l),
-          r.centerVertically && K(o.style, { position: 'absolute', top: '50%', transform: 'translate(0, -50%)' }, l),
+          K(
+            o.style,
+            { boxSizing: 'border-box', width: '100%', outline: 'none', wordWrap: 'break-word' },
+            l
+          ),
+          r.centerVertically &&
+            K(o.style, { position: 'absolute', top: '50%', transform: 'translate(0, -50%)' }, l),
           (o.innerText = n),
           he.bind(o, 'keydown', this.keyHandler),
           he.bind(o, 'mousedown', vl),
@@ -18884,7 +20391,9 @@
             r = this.style
           if (
             (e.preventDefault(),
-            (t = e.clipboardData ? e.clipboardData.getData('text/plain') : window.clipboardData.getData('Text')),
+            (t = e.clipboardData
+              ? e.clipboardData.getData('text/plain')
+              : window.clipboardData.getData('Text')),
             this.insertText(t),
             n.autoResize)
           ) {
@@ -18893,7 +20402,8 @@
           }
         }),
         (gl.prototype.insertText = function (e) {
-          ;(e = e.replace(/\r\n|\r|\n/g, '\n')), document.execCommand('insertText', !1, e) || this._insertTextIE(e)
+          ;(e = e.replace(/\r\n|\r|\n/g, '\n')),
+            document.execCommand('insertText', !1, e) || this._insertTextIE(e)
         }),
         (gl.prototype._insertTextIE = function (e) {
           var t,
@@ -18960,12 +20470,18 @@
                   e.resizeHandler({ width: c, height: p, dx: n.clientX - s, dy: n.clientY - l })
               },
               d = function e(t) {
-                fl(t), vl(t), he.unbind(document, 'mousemove', u, !1), he.unbind(document, 'mouseup', e, !1)
+                fl(t),
+                  vl(t),
+                  he.unbind(document, 'mousemove', u, !1),
+                  he.unbind(document, 'mouseup', e, !1)
               }
             he.bind(n, 'mousedown', function (e) {
               fl(e), vl(e), (s = e.clientX), (l = e.clientY)
               var n = t.getBoundingClientRect()
-              ;(c = n.width), (p = n.height), he.bind(document, 'mousemove', u), he.bind(document, 'mouseup', d)
+              ;(c = n.width),
+                (p = n.height),
+                he.bind(document, 'mousemove', u),
+                he.bind(document, 'mouseup', d)
             })
           }
           K(n.style, {
@@ -19022,7 +20538,10 @@
           this._eventBus.fire('directEditing.' + e, t || { active: this._active })
         }),
         (yl.prototype.close = function () {
-          this._textbox.destroy(), this._fire('deactivate'), (this._active = null), (this.resizable = void 0)
+          this._textbox.destroy(),
+            this._fire('deactivate'),
+            (this._active = null),
+            (this.resizable = void 0)
         }),
         (yl.prototype.complete = function () {
           var e = this._active
@@ -19078,7 +20597,9 @@
       function El(e, t, n) {
         ;(this._eventBus = t), (this._overlays = n)
         var r = b(e && e.scale) ? e.scale : { min: 1, max: 1.5 }
-        ;(this._overlaysConfig = { position: { right: -9, top: -6 }, scale: r }), (this._current = null), this._init()
+        ;(this._overlaysConfig = { position: { right: -9, top: -6 }, scale: r }),
+          (this._current = null),
+          this._init()
       }
       ;(El.$inject = ['config.contextPad', 'eventBus', 'overlays']),
         (El.prototype._init = function () {
@@ -19198,7 +20719,10 @@
       var _l = ['marker-start', 'marker-mid', 'marker-end'],
         wl = ['circle', 'ellipse', 'line', 'path', 'polygon', 'polyline', 'rect']
       function Cl(e, t, n, r) {
-        ;(this._elementRegistry = e), (this._canvas = n), (this._styles = r), (this._clonedMarkers = {})
+        ;(this._elementRegistry = e),
+          (this._canvas = n),
+          (this._styles = r),
+          (this._clonedMarkers = {})
         var i = this
         t.on('drag.cleanup', function () {
           O(i._clonedMarkers, function (e) {
@@ -19215,23 +20739,36 @@
           var r = gt((n = n || this.getGfx(e))),
             i = n.getBoundingClientRect()
           return (
-            this._cloneMarkers(Bn(r)), lt(r, this._styles.cls('djs-dragger', [], { x: i.top, y: i.left })), ot(t, r), r
+            this._cloneMarkers(Bn(r)),
+            lt(r, this._styles.cls('djs-dragger', [], { x: i.top, y: i.left })),
+            ot(t, r),
+            r
           )
         }),
         (Cl.prototype.addFrame = function (e, t) {
-          var n = At('rect', { class: 'djs-resize-overlay', width: e.width, height: e.height, x: e.x, y: e.y })
+          var n = At('rect', {
+            class: 'djs-resize-overlay',
+            width: e.width,
+            height: e.height,
+            x: e.x,
+            y: e.y
+          })
           return ot(t, n), n
         }),
         (Cl.prototype._cloneMarkers = function (e) {
           var t,
             n = this
-          if (e.childNodes) for (var r = 0; r < e.childNodes.length; r++) n._cloneMarkers(e.childNodes[r])
+          if (e.childNodes)
+            for (var r = 0; r < e.childNodes.length; r++) n._cloneMarkers(e.childNodes[r])
           ;(t = e),
             -1 !== wl.indexOf(t.nodeName) &&
               _l.forEach(function (t) {
                 if (lt(e, t)) {
                   var r = (function (e, t, n) {
-                    return Ee('marker#' + lt(e, t).match(/url\(['"]?#([^'"]*)['"]?\)/)[1], n || document)
+                    return Ee(
+                      'marker#' + lt(e, t).match(/url\(['"]?#([^'"]*)['"]?\)/)[1],
+                      n || document
+                    )
                   })(e, t, n._canvas.getContainer())
                   n._cloneMarker(e, r, t)
                 }
@@ -19242,7 +20779,9 @@
             i = this._clonedMarkers[r]
           if (!i) {
             var o = r + '-clone'
-            ;((i = gt(t)).id = o), mt(i).add('djs-dragger').add('djs-dragger-marker'), (this._clonedMarkers[r] = i)
+            ;((i = gt(t)).id = o),
+              mt(i).add('djs-dragger').add('djs-dragger-marker'),
+              (this._clonedMarkers[r] = i)
             var a = Ee('defs', this._canvas._svg)
             a || ((a = At('defs')), ot(this._canvas._svg, a)), ot(a, i)
           }
@@ -19371,7 +20910,11 @@
                   })),
                   K(e, { x: e.x - o.x - o.width / 2, y: e.y - o.y - o.height / 2 })
               }),
-                t.init(e, Bl, { cursor: 'grabbing', autoActivate: !0, data: { shape: i, elements: n, context: r } })
+                t.init(e, Bl, {
+                  cursor: 'grabbing',
+                  autoActivate: !0,
+                  data: { shape: i, elements: n, context: r }
+                })
             }
           })
       }
@@ -19407,7 +20950,9 @@
                     e.hidden ||
                       (e.waypoints
                         ? ((i = n._createContainer('connection', o)), n.drawConnection(Bn(i), e))
-                        : ((i = n._createContainer('shape', o)), n.drawShape(Bn(i), e), Mn(i, e.x, e.y)),
+                        : ((i = n._createContainer('shape', o)),
+                          n.drawShape(Bn(i), e),
+                          Mn(i, e.x, e.y)),
                       r.addDragger(e, t, i))
                   }),
                   t
@@ -19549,7 +21094,12 @@
             t = this._current.position,
             n = this._current.className
           return (
-            K(e.style, { position: 'absolute', left: t.x + 'px', top: t.y + 'px', visibility: 'hidden' }),
+            K(e.style, {
+              position: 'absolute',
+              left: t.x + 'px',
+              top: t.y + 'px',
+              visibility: 'hidden'
+            }),
             re(e).add(n),
             e
           )
@@ -19738,7 +21288,16 @@
         var n = t.indexOf(e)
         return -1 === n ? t : t.splice(n, 1)
       }
-      ;(Wl.$inject = ['canvas', 'create', 'clipboard', 'elementFactory', 'eventBus', 'modeling', 'mouse', 'rules']),
+      ;(Wl.$inject = [
+        'canvas',
+        'create',
+        'clipboard',
+        'elementFactory',
+        'eventBus',
+        'modeling',
+        'mouse',
+        'rules'
+      ]),
         (Wl.prototype.copy = function (e) {
           var t, n
           return (
@@ -19798,8 +21357,12 @@
                         (o = r[e.id] = t.createConnection(a)),
                         void i.push(o))
                       : Ql(a)
-                      ? ((a.labelTarget = r[a.labelTarget]), (o = r[e.id] = t.createLabel(a)), void i.push(o))
-                      : (a.host && (a.host = r[a.host]), (o = r[e.id] = t.createShape(a)), void i.push(o))
+                      ? ((a.labelTarget = r[a.labelTarget]),
+                        (o = r[e.id] = t.createLabel(a)),
+                        void i.push(o))
+                      : (a.host && (a.host = r[a.host]),
+                        (o = r[e.id] = t.createShape(a)),
+                        void i.push(o))
                   )
                 })
             }),
@@ -19818,7 +21381,8 @@
         (Wl.prototype.hasRelations = function (e, t) {
           var n, r
           return !(
-            (Gl(e) && ((n = k(t, V({ id: e.source.id }))), (r = k(t, V({ id: e.target.id }))), !n || !r)) ||
+            (Gl(e) &&
+              ((n = k(t, V({ id: e.source.id }))), (r = k(t, V({ id: e.target.id }))), !n || !r)) ||
             (Ql(e) && !k(t, V({ id: e.labelTarget.id })))
           )
         }),
@@ -19919,7 +21483,11 @@
             var r,
               i = t.parent,
               o = t.property
-            if ('processRef' === t.propertyName && oi(i, 'bpmn:Participant') && oi(o, 'bpmn:Process'))
+            if (
+              'processRef' === t.propertyName &&
+              oi(i, 'bpmn:Participant') &&
+              oi(o, 'bpmn:Process')
+            )
               return (r = e.create('bpmn:Process')), n.copyElement(o, r)
           }),
           t.on('copyPaste.pasteElements', function () {
@@ -19934,7 +21502,8 @@
               c = t.descriptor,
               p = c.oldBusinessObject,
               u = c.oldDi
-            if (ec(c)) return (c.businessObject = si(l[c.labelTarget])), void (c.di = li(l[c.labelTarget]))
+            if (ec(c))
+              return (c.businessObject = si(l[c.labelTarget])), void (c.di = li(l[c.labelTarget]))
             ;(i = e.create(p.$type)),
               (c.businessObject = n.copyElement(p, i)),
               ((o = e.create(u.$type)).bpmnElement = i),
@@ -19993,7 +21562,11 @@
             var t = e.parent,
               n = x(t) && t.$descriptor,
               r = e.propertyName
-            return (!r || -1 === tc.indexOf(r)) && !(r && n && !k(n.properties, V({ name: r }))) && void 0
+            return (
+              (!r || -1 === tc.indexOf(r)) &&
+              !(r && n && !k(n.properties, V({ name: r }))) &&
+              void 0
+            )
           }),
           e.on('moddleCopy.canSetCopiedProperty', function (e) {
             var t,
@@ -20034,7 +21607,11 @@
                 P(e, n) && (i = e.get(n))
                 var o = r.copyProperty(i, t, n)
                 !1 !==
-                  r._eventBus.fire('moddleCopy.canSetCopiedProperty', { parent: t, property: o, propertyName: n }) &&
+                  r._eventBus.fire('moddleCopy.canSetCopiedProperty', {
+                    parent: t,
+                    property: o,
+                    propertyName: n
+                  }) &&
                   b(o) &&
                   t.set(n, o)
               })),
@@ -20043,7 +21620,11 @@
         }),
         (nc.prototype.copyProperty = function (e, t, n) {
           var r = this,
-            i = this._eventBus.fire('moddleCopy.canCopyProperty', { parent: t, property: e, propertyName: n })
+            i = this._eventBus.fire('moddleCopy.canCopyProperty', {
+              parent: t,
+              property: e,
+              propertyName: n
+            })
           if (!1 !== i) {
             if (i) return x(i) && i.$type && !i.$parent && (i.$parent = t), i
             var o = this._moddle.getPropertyDescriptor(t, n)
@@ -20091,7 +21672,13 @@
           return r.replaceShape(e, K({}, t, { x: l, y: c, width: i, height: o }), n)
         })
       const sc = { __init__: ['replace'], replace: ['type', ac] }
-      var lc = ['cancelActivity', 'instantiate', 'eventGatewayType', 'triggeredByEvent', 'isInterrupting']
+      var lc = [
+        'cancelActivity',
+        'instantiate',
+        'eventGatewayType',
+        'triggeredByEvent',
+        'isInterrupting'
+      ]
       function cc(e, t, n, r, i, o, a) {
         this.replaceElement = function (s, l, c) {
           c = c || {}
@@ -20104,7 +21691,11 @@
               var n = e && P(e, 'collapsed') ? e.collapsed : !Ei(e)
               return (
                 n !==
-                (t && (P(t, 'collapsed') || P(t, 'isExpanded')) ? (P(t, 'collapsed') ? t.collapsed : !t.isExpanded) : n)
+                (t && (P(t, 'collapsed') || P(t, 'isExpanded'))
+                  ? P(t, 'collapsed')
+                    ? t.collapsed
+                    : !t.isExpanded
+                  : n)
               )
             })(s, l)
           )
@@ -20137,13 +21728,21 @@
             (d = n.copyElement(u, d, b)),
             l.eventDefinitionType &&
               (uc(d, l.eventDefinitionType) ||
-                ((m.eventDefinitionType = l.eventDefinitionType), (m.eventDefinitionAttrs = l.eventDefinitionAttrs))),
+                ((m.eventDefinitionType = l.eventDefinitionType),
+                (m.eventDefinitionAttrs = l.eventDefinitionAttrs))),
             oi(u, 'bpmn:Activity') &&
-              (pc(u) ? (m.isExpanded = Ei(s)) : l && P(l, 'isExpanded') && (m.isExpanded = l.isExpanded),
-              Ei(s) && !oi(u, 'bpmn:Task') && m.isExpanded && ((m.width = s.width), (m.height = s.height))),
+              (pc(u)
+                ? (m.isExpanded = Ei(s))
+                : l && P(l, 'isExpanded') && (m.isExpanded = l.isExpanded),
+              Ei(s) &&
+                !oi(u, 'bpmn:Task') &&
+                m.isExpanded &&
+                ((m.width = s.width), (m.height = s.height))),
             pc(u) && !pc(d) && (c.moveChildren = !1),
             oi(u, 'bpmn:Participant') &&
-              (!0 === l.isExpanded ? (d.processRef = e.create('bpmn:Process')) : (c.moveChildren = !1),
+              (!0 === l.isExpanded
+                ? (d.processRef = e.create('bpmn:Process'))
+                : (c.moveChildren = !1),
               (m.width = s.width),
               (m.height = t.getDefaultSize(m).height)),
             o.allowed('shape.resize', { shape: d }) ||
@@ -20152,7 +21751,10 @@
             ai(u, ['bpmn:ExclusiveGateway', 'bpmn:InclusiveGateway', 'bpmn:Activity']) &&
               ai(d, ['bpmn:ExclusiveGateway', 'bpmn:InclusiveGateway', 'bpmn:Activity']) &&
               (d.default = u.default),
-            l.host && !oi(u, 'bpmn:BoundaryEvent') && oi(d, 'bpmn:BoundaryEvent') && (m.host = l.host),
+            l.host &&
+              !oi(u, 'bpmn:BoundaryEvent') &&
+              oi(d, 'bpmn:BoundaryEvent') &&
+              (m.host = l.host),
             ('bpmn:DataStoreReference' !== m.type && 'bpmn:DataObjectReference' !== m.type) ||
               (m.x = s.x + (s.width - m.width) / 2),
             (m = i.replaceElement(s, m, c)),
@@ -20173,7 +21775,15 @@
           })
         )
       }
-      cc.$inject = ['bpmnFactory', 'elementFactory', 'moddleCopy', 'modeling', 'replace', 'rules', 'selection']
+      cc.$inject = [
+        'bpmnFactory',
+        'elementFactory',
+        'moddleCopy',
+        'modeling',
+        'replace',
+        'rules',
+        'selection'
+      ]
       const dc = { __depends__: [ic, sc, _o], bpmnReplace: ['type', cc] }
       function mc(e) {
         return function (t) {
@@ -20222,7 +21832,10 @@
             label: 'Conditional Start Event',
             actionName: 'replace-with-conditional-start',
             className: 'bpmn-icon-start-event-condition',
-            target: { type: 'bpmn:StartEvent', eventDefinitionType: 'bpmn:ConditionalEventDefinition' }
+            target: {
+              type: 'bpmn:StartEvent',
+              eventDefinitionType: 'bpmn:ConditionalEventDefinition'
+            }
           },
           {
             label: 'Signal Start Event',
@@ -20274,31 +21887,46 @@
             label: 'Message Intermediate Catch Event',
             actionName: 'replace-with-message-intermediate-catch',
             className: 'bpmn-icon-intermediate-event-catch-message',
-            target: { type: 'bpmn:IntermediateCatchEvent', eventDefinitionType: 'bpmn:MessageEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateCatchEvent',
+              eventDefinitionType: 'bpmn:MessageEventDefinition'
+            }
           },
           {
             label: 'Message Intermediate Throw Event',
             actionName: 'replace-with-message-intermediate-throw',
             className: 'bpmn-icon-intermediate-event-throw-message',
-            target: { type: 'bpmn:IntermediateThrowEvent', eventDefinitionType: 'bpmn:MessageEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateThrowEvent',
+              eventDefinitionType: 'bpmn:MessageEventDefinition'
+            }
           },
           {
             label: 'Timer Intermediate Catch Event',
             actionName: 'replace-with-timer-intermediate-catch',
             className: 'bpmn-icon-intermediate-event-catch-timer',
-            target: { type: 'bpmn:IntermediateCatchEvent', eventDefinitionType: 'bpmn:TimerEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateCatchEvent',
+              eventDefinitionType: 'bpmn:TimerEventDefinition'
+            }
           },
           {
             label: 'Escalation Intermediate Throw Event',
             actionName: 'replace-with-escalation-intermediate-throw',
             className: 'bpmn-icon-intermediate-event-throw-escalation',
-            target: { type: 'bpmn:IntermediateThrowEvent', eventDefinitionType: 'bpmn:EscalationEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateThrowEvent',
+              eventDefinitionType: 'bpmn:EscalationEventDefinition'
+            }
           },
           {
             label: 'Conditional Intermediate Catch Event',
             actionName: 'replace-with-conditional-intermediate-catch',
             className: 'bpmn-icon-intermediate-event-catch-condition',
-            target: { type: 'bpmn:IntermediateCatchEvent', eventDefinitionType: 'bpmn:ConditionalEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateCatchEvent',
+              eventDefinitionType: 'bpmn:ConditionalEventDefinition'
+            }
           },
           {
             label: 'Link Intermediate Catch Event',
@@ -20324,19 +21952,28 @@
             label: 'Compensation Intermediate Throw Event',
             actionName: 'replace-with-compensation-intermediate-throw',
             className: 'bpmn-icon-intermediate-event-throw-compensation',
-            target: { type: 'bpmn:IntermediateThrowEvent', eventDefinitionType: 'bpmn:CompensateEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateThrowEvent',
+              eventDefinitionType: 'bpmn:CompensateEventDefinition'
+            }
           },
           {
             label: 'Signal Intermediate Catch Event',
             actionName: 'replace-with-signal-intermediate-catch',
             className: 'bpmn-icon-intermediate-event-catch-signal',
-            target: { type: 'bpmn:IntermediateCatchEvent', eventDefinitionType: 'bpmn:SignalEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateCatchEvent',
+              eventDefinitionType: 'bpmn:SignalEventDefinition'
+            }
           },
           {
             label: 'Signal Intermediate Throw Event',
             actionName: 'replace-with-signal-intermediate-throw',
             className: 'bpmn-icon-intermediate-event-throw-signal',
-            target: { type: 'bpmn:IntermediateThrowEvent', eventDefinitionType: 'bpmn:SignalEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateThrowEvent',
+              eventDefinitionType: 'bpmn:SignalEventDefinition'
+            }
           }
         ],
         gc = [
@@ -20430,7 +22067,11 @@
             label: 'Event based Gateway',
             actionName: 'replace-with-event-based-gateway',
             className: 'bpmn-icon-gateway-eventbased',
-            target: { type: 'bpmn:EventBasedGateway', instantiate: !1, eventGatewayType: 'Exclusive' }
+            target: {
+              type: 'bpmn:EventBasedGateway',
+              instantiate: !1,
+              eventGatewayType: 'Exclusive'
+            }
           }
         ],
         bc = [
@@ -20570,7 +22211,10 @@
             label: 'Message Boundary Event',
             actionName: 'replace-with-message-boundary',
             className: 'bpmn-icon-intermediate-event-catch-message',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:MessageEventDefinition' }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:MessageEventDefinition'
+            }
           },
           {
             label: 'Timer Boundary Event',
@@ -20582,13 +22226,19 @@
             label: 'Escalation Boundary Event',
             actionName: 'replace-with-escalation-boundary',
             className: 'bpmn-icon-intermediate-event-catch-escalation',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:EscalationEventDefinition' }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:EscalationEventDefinition'
+            }
           },
           {
             label: 'Conditional Boundary Event',
             actionName: 'replace-with-conditional-boundary',
             className: 'bpmn-icon-intermediate-event-catch-condition',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:ConditionalEventDefinition' }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:ConditionalEventDefinition'
+            }
           },
           {
             label: 'Error Boundary Event',
@@ -20600,19 +22250,28 @@
             label: 'Cancel Boundary Event',
             actionName: 'replace-with-cancel-boundary',
             className: 'bpmn-icon-intermediate-event-catch-cancel',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:CancelEventDefinition' }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:CancelEventDefinition'
+            }
           },
           {
             label: 'Signal Boundary Event',
             actionName: 'replace-with-signal-boundary',
             className: 'bpmn-icon-intermediate-event-catch-signal',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:SignalEventDefinition' }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:SignalEventDefinition'
+            }
           },
           {
             label: 'Compensation Boundary Event',
             actionName: 'replace-with-compensation-boundary',
             className: 'bpmn-icon-intermediate-event-catch-compensation',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:CompensateEventDefinition' }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:CompensateEventDefinition'
+            }
           },
           {
             label: 'Message Boundary Event (non-interrupting)',
@@ -20628,7 +22287,11 @@
             label: 'Timer Boundary Event (non-interrupting)',
             actionName: 'replace-with-non-interrupting-timer-boundary',
             className: 'bpmn-icon-intermediate-event-catch-non-interrupting-timer',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:TimerEventDefinition', cancelActivity: !1 }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:TimerEventDefinition',
+              cancelActivity: !1
+            }
           },
           {
             label: 'Escalation Boundary Event (non-interrupting)',
@@ -20678,7 +22341,10 @@
             label: 'Conditional Start Event',
             actionName: 'replace-with-conditional-start',
             className: 'bpmn-icon-start-event-condition',
-            target: { type: 'bpmn:StartEvent', eventDefinitionType: 'bpmn:ConditionalEventDefinition' }
+            target: {
+              type: 'bpmn:StartEvent',
+              eventDefinitionType: 'bpmn:ConditionalEventDefinition'
+            }
           },
           {
             label: 'Signal Start Event',
@@ -20696,25 +22362,39 @@
             label: 'Escalation Start Event',
             actionName: 'replace-with-escalation-start',
             className: 'bpmn-icon-start-event-escalation',
-            target: { type: 'bpmn:StartEvent', eventDefinitionType: 'bpmn:EscalationEventDefinition' }
+            target: {
+              type: 'bpmn:StartEvent',
+              eventDefinitionType: 'bpmn:EscalationEventDefinition'
+            }
           },
           {
             label: 'Compensation Start Event',
             actionName: 'replace-with-compensation-start',
             className: 'bpmn-icon-start-event-compensation',
-            target: { type: 'bpmn:StartEvent', eventDefinitionType: 'bpmn:CompensateEventDefinition' }
+            target: {
+              type: 'bpmn:StartEvent',
+              eventDefinitionType: 'bpmn:CompensateEventDefinition'
+            }
           },
           {
             label: 'Message Start Event (non-interrupting)',
             actionName: 'replace-with-non-interrupting-message-start',
             className: 'bpmn-icon-start-event-non-interrupting-message',
-            target: { type: 'bpmn:StartEvent', eventDefinitionType: 'bpmn:MessageEventDefinition', isInterrupting: !1 }
+            target: {
+              type: 'bpmn:StartEvent',
+              eventDefinitionType: 'bpmn:MessageEventDefinition',
+              isInterrupting: !1
+            }
           },
           {
             label: 'Timer Start Event (non-interrupting)',
             actionName: 'replace-with-non-interrupting-timer-start',
             className: 'bpmn-icon-start-event-non-interrupting-timer',
-            target: { type: 'bpmn:StartEvent', eventDefinitionType: 'bpmn:TimerEventDefinition', isInterrupting: !1 }
+            target: {
+              type: 'bpmn:StartEvent',
+              eventDefinitionType: 'bpmn:TimerEventDefinition',
+              isInterrupting: !1
+            }
           },
           {
             label: 'Conditional Start Event (non-interrupting)',
@@ -20730,7 +22410,11 @@
             label: 'Signal Start Event (non-interrupting)',
             actionName: 'replace-with-non-interrupting-signal-start',
             className: 'bpmn-icon-start-event-non-interrupting-signal',
-            target: { type: 'bpmn:StartEvent', eventDefinitionType: 'bpmn:SignalEventDefinition', isInterrupting: !1 }
+            target: {
+              type: 'bpmn:StartEvent',
+              eventDefinitionType: 'bpmn:SignalEventDefinition',
+              isInterrupting: !1
+            }
           },
           {
             label: 'Escalation Start Event (non-interrupting)',
@@ -20744,8 +22428,16 @@
           }
         ],
         kc = [
-          { label: 'Sequence Flow', actionName: 'replace-with-sequence-flow', className: 'bpmn-icon-connection' },
-          { label: 'Default Flow', actionName: 'replace-with-default-flow', className: 'bpmn-icon-default-flow' },
+          {
+            label: 'Sequence Flow',
+            actionName: 'replace-with-sequence-flow',
+            className: 'bpmn-icon-connection'
+          },
+          {
+            label: 'Default Flow',
+            actionName: 'replace-with-default-flow',
+            className: 'bpmn-icon-default-flow'
+          },
           {
             label: 'Conditional Flow',
             actionName: 'replace-with-conditional-flow',
@@ -20779,7 +22471,15 @@
           (this._translate = a),
           this.register()
       }
-      ;(Oc.$inject = ['bpmnFactory', 'popupMenu', 'modeling', 'moddle', 'bpmnReplace', 'rules', 'translate']),
+      ;(Oc.$inject = [
+        'bpmnFactory',
+        'popupMenu',
+        'modeling',
+        'moddle',
+        'bpmnReplace',
+        'rules',
+        'translate'
+      ]),
         (Oc.prototype.register = function () {
           this._popupMenu.registerProvider('bpmn-replace', this)
         }),
@@ -20812,7 +22512,8 @@
             ? ((t = S(gc, function (e) {
                 return (
                   !(
-                    'bpmn:CancelEventDefinition' == e.target.eventDefinitionType && !oi(n.$parent, 'bpmn:Transaction')
+                    'bpmn:CancelEventDefinition' == e.target.eventDefinitionType &&
+                    !oi(n.$parent, 'bpmn:Transaction')
                   ) && r(e)
                 )
               })),
@@ -20820,7 +22521,10 @@
             : oi(n, 'bpmn:BoundaryEvent')
             ? ((t = S(Cc, function (e) {
                 var t = e.target
-                if ('bpmn:CancelEventDefinition' == t.eventDefinitionType && !oi(n.attachedToRef, 'bpmn:Transaction'))
+                if (
+                  'bpmn:CancelEventDefinition' == t.eventDefinitionType &&
+                  !oi(n.attachedToRef, 'bpmn:Transaction')
+                )
                   return !1
                 var i = !1 !== t.cancelActivity,
                   o = n.cancelActivity == i
@@ -20863,7 +22567,10 @@
             oi(e, 'bpmn:Activity') && !_i(e) && (t = t.concat(this._getLoopEntries(e))),
             oi(e, 'bpmn:DataObjectReference') && (t = t.concat(this._getDataObjectIsCollection(e))),
             oi(e, 'bpmn:Participant') && (t = t.concat(this._getParticipantMultiplicity(e))),
-            !oi(e, 'bpmn:SubProcess') || oi(e, 'bpmn:Transaction') || _i(e) || t.push(this._getAdHocEntry(e)),
+            !oi(e, 'bpmn:SubProcess') ||
+              oi(e, 'bpmn:Transaction') ||
+              _i(e) ||
+              t.push(this._getAdHocEntry(e)),
             t
           )
         }),
@@ -20974,7 +22681,10 @@
                 title: n('Parallel Multi Instance'),
                 active: a,
                 action: r,
-                options: { loopCharacteristics: 'bpmn:MultiInstanceLoopCharacteristics', isSequential: !1 }
+                options: {
+                  loopCharacteristics: 'bpmn:MultiInstanceLoopCharacteristics',
+                  isSequential: !1
+                }
               },
               {
                 id: 'toggle-sequential-mi',
@@ -20982,7 +22692,10 @@
                 title: n('Sequential Multi Instance'),
                 active: i,
                 action: r,
-                options: { loopCharacteristics: 'bpmn:MultiInstanceLoopCharacteristics', isSequential: !0 }
+                options: {
+                  loopCharacteristics: 'bpmn:MultiInstanceLoopCharacteristics',
+                  isSequential: !0
+                }
               },
               {
                 id: 'toggle-loop',
@@ -21048,7 +22761,11 @@
             }
           }
         })
-      const Tc = { __depends__: [Vl, dc], __init__: ['replaceMenuProvider'], replaceMenuProvider: ['type', Oc] }
+      const Tc = {
+        __depends__: [Vl, dc],
+        __init__: ['replaceMenuProvider'],
+        replaceMenuProvider: ['type', Oc]
+      }
       function Bc(e, t) {
         for ('string' == typeof t && (t = [t]); (e = e.parent); ) if (ai(e, t)) return e
         return null
@@ -21060,7 +22777,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -21068,7 +22788,12 @@
       var Mc = Math.max,
         Dc = Math.min
       function Rc(e, t) {
-        return { top: e.top - t.top, right: e.right - t.right, bottom: e.bottom - t.bottom, left: e.left - t.left }
+        return {
+          top: e.top - t.top,
+          right: e.right - t.right,
+          bottom: e.bottom - t.bottom,
+          left: e.left - t.left
+        }
       }
       function zc(e, t) {
         return {
@@ -21082,7 +22807,11 @@
         var r = t[e],
           i = n.min && n.min[e],
           o = n.max && n.max[e]
-        return _(i) && (r = (/top|left/.test(e) ? Dc : Mc)(r, i)), _(o) && (r = (/top|left/.test(e) ? Mc : Dc)(r, o)), r
+        return (
+          _(i) && (r = (/top|left/.test(e) ? Dc : Mc)(r, i)),
+          _(o) && (r = (/top|left/.test(e) ? Mc : Dc)(r, o)),
+          r
+        )
       }
       function Nc(e, t) {
         return void 0 !== e ? e : 20
@@ -21191,7 +22920,8 @@
               o.start(t, a, { source: n })
             }
             return (
-              'string' != typeof n && ((i = n), (n = p('Append {type}', { type: e.replace(/^bpmn:/, '') }))),
+              'string' != typeof n &&
+                ((i = n), (n = p('Append {type}', { type: e.replace(/^bpmn:/, '') }))),
               {
                 group: 'model',
                 className: t,
@@ -21262,7 +22992,11 @@
           oi(d, 'bpmn:FlowNode') &&
             (oi(d, 'bpmn:EventBasedGateway')
               ? K(u, {
-                  'append.receive-task': h('bpmn:ReceiveTask', 'bpmn-icon-receive-task', p('Append ReceiveTask')),
+                  'append.receive-task': h(
+                    'bpmn:ReceiveTask',
+                    'bpmn-icon-receive-task',
+                    p('Append ReceiveTask')
+                  ),
                   'append.message-intermediate-event': h(
                     'bpmn:IntermediateCatchEvent',
                     'bpmn-icon-intermediate-event-catch-message',
@@ -21290,17 +23024,30 @@
                 })
               : Qc(d, 'bpmn:BoundaryEvent', 'bpmn:CompensateEventDefinition')
               ? K(u, {
-                  'append.compensation-activity': h('bpmn:Task', 'bpmn-icon-task', p('Append compensation activity'), {
-                    isForCompensation: !0
-                  })
+                  'append.compensation-activity': h(
+                    'bpmn:Task',
+                    'bpmn-icon-task',
+                    p('Append compensation activity'),
+                    {
+                      isForCompensation: !0
+                    }
+                  )
                 })
               : oi(d, 'bpmn:EndEvent') ||
                 d.isForCompensation ||
                 Qc(d, 'bpmn:IntermediateThrowEvent', 'bpmn:LinkEventDefinition') ||
                 _i(d) ||
                 K(u, {
-                  'append.end-event': h('bpmn:EndEvent', 'bpmn-icon-end-event-none', p('Append EndEvent')),
-                  'append.gateway': h('bpmn:ExclusiveGateway', 'bpmn-icon-gateway-none', p('Append Gateway')),
+                  'append.end-event': h(
+                    'bpmn:EndEvent',
+                    'bpmn-icon-end-event-none',
+                    p('Append EndEvent')
+                  ),
+                  'append.gateway': h(
+                    'bpmn:ExclusiveGateway',
+                    'bpmn-icon-gateway-none',
+                    p('Append Gateway')
+                  ),
                   'append.append-task': h('bpmn:Task', 'bpmn-icon-task', p('Append Task')),
                   'append.intermediate-event': h(
                     'bpmn:IntermediateThrowEvent',
@@ -21332,13 +23079,22 @@
                   }
                 }
               }),
-            ai(d, ['bpmn:FlowNode', 'bpmn:InteractionNode', 'bpmn:DataObjectReference', 'bpmn:DataStoreReference']) &&
+            ai(d, [
+              'bpmn:FlowNode',
+              'bpmn:InteractionNode',
+              'bpmn:DataObjectReference',
+              'bpmn:DataStoreReference'
+            ]) &&
               K(u, {
                 'append.text-annotation': h('bpmn:TextAnnotation', 'bpmn-icon-text-annotation'),
                 connect: {
                   group: 'connect',
                   className: 'bpmn-icon-connection-multi',
-                  title: p('Connect using ' + (d.isForCompensation ? '' : 'Sequence/MessageFlow or ') + 'Association'),
+                  title: p(
+                    'Connect using ' +
+                      (d.isForCompensation ? '' : 'Sequence/MessageFlow or ') +
+                      'Association'
+                  ),
                   action: { click: m, dragstart: m }
                 }
               }),
@@ -21361,7 +23117,9 @@
                 }
               }),
             oi(d, 'bpmn:Group') &&
-              K(u, { 'append.text-annotation': h('bpmn:TextAnnotation', 'bpmn-icon-text-annotation') })
+              K(u, {
+                'append.text-annotation': h('bpmn:TextAnnotation', 'bpmn-icon-text-annotation')
+              })
           var g = l.allowed('elements.delete', { elements: [e] })
           return (
             E(g) && (g = g[0] === e),
@@ -21417,7 +23175,9 @@
           if (
             !(
               e.length < 3 ||
-              (this._setOrientation(t), (r = this._filterElements(e)), (n = this._createGroups(r)).length <= 2)
+              (this._setOrientation(t),
+              (r = this._filterElements(e)),
+              (n = this._createGroups(r)).length <= 2)
             )
           )
             return i.distributeElements(n, this._axis, this._dimension), n
@@ -21457,7 +23217,10 @@
           ;(this._axis = t[0]), (this._dimension = t[1])
         }),
         (Jc.prototype._hasIntersection = function (e, t) {
-          return Math.max(e.min, e.max) >= Math.min(t.min, t.max) && Math.min(e.min, e.max) <= Math.max(t.min, t.max)
+          return (
+            Math.max(e.min, e.max) >= Math.min(t.min, t.max) &&
+            Math.min(e.min, e.max) <= Math.max(t.min, t.max)
+          )
         }),
         (Jc.prototype._findRange = function (e) {
           var t = e[this._axis]
@@ -21483,7 +23246,11 @@
         })
       }
       Zc.$inject = ['distributeElements']
-      const ep = { __depends__: [Xc], __init__: ['bpmnDistributeElements'], bpmnDistributeElements: ['type', Zc] }
+      const ep = {
+        __depends__: [Xc],
+        __init__: ['bpmnDistributeElements'],
+        bpmnDistributeElements: ['type', Zc]
+      }
       var tp = 'is not a registered action'
       function np(e, t) {
         this._actions = {}
@@ -21680,7 +23447,8 @@
         e.on(['create.init', 'shape.move.init'], function (e) {
           var t = e.context
           ai(e.shape, ['bpmn:Participant', 'bpmn:SubProcess', 'bpmn:TextAnnotation']) &&
-            (t.gridSnappingContext || (t.gridSnappingContext = {}), (t.gridSnappingContext.snapLocation = 'top-left'))
+            (t.gridSnappingContext || (t.gridSnappingContext = {}),
+            (t.gridSnappingContext.snapLocation = 'top-left'))
         })
       }
       function lp(e, t, n) {
@@ -21728,7 +23496,10 @@
                           : (s || (s = o.snapOffset = {}),
                             _(s[t]) || (s[t] = 0),
                             i
-                              ? (n.get(i.id) || (pp(t) ? (s[t] += i[t] + i.width / 2) : (s[t] += i[t] + i.height / 2)),
+                              ? (n.get(i.id) ||
+                                  (pp(t)
+                                    ? (s[t] += i[t] + i.width / 2)
+                                    : (s[t] += i[t] + i.height / 2)),
                                 a
                                   ? ('x' === t
                                       ? /left/.test(a)
@@ -21752,7 +23523,9 @@
                       a || (a = o.snapConstraints = {}), a[t] || (a[t] = {})
                       var s = n.direction
                       r &&
-                        (pp(t) ? ((a.x.min = r.left), (a.x.max = r.right)) : ((a.y.min = r.top), (a.y.max = r.bottom)))
+                        (pp(t)
+                          ? ((a.x.min = r.left), (a.x.max = r.right))
+                          : ((a.y.min = r.top), (a.y.max = r.bottom)))
                       var l = i.min,
                         c = i.max
                       return (
@@ -21855,7 +23628,11 @@
           )
         }),
         (mp.prototype.snapComplex = function (e, t) {
-          return /w|e/.test(t) && (e = this.snapHorizontally(e, t)), /n|s/.test(t) && (e = this.snapVertically(e, t)), e
+          return (
+            /w|e/.test(t) && (e = this.snapHorizontally(e, t)),
+            /n|s/.test(t) && (e = this.snapVertically(e, t)),
+            e
+          )
         }),
         (mp.prototype.snapHorizontally = function (e, t) {
           var n = this._gridSnapping,
@@ -21866,7 +23643,8 @@
             (o.width = n.snapValue(e.width, { min: e.width })),
             i &&
               (r
-                ? ((o.x = n.snapValue(e.x, { max: e.x })), (o.width += n.snapValue(e.x - o.x, { min: e.x - o.x })))
+                ? ((o.x = n.snapValue(e.x, { max: e.x })),
+                  (o.width += n.snapValue(e.x - o.x, { min: e.x - o.x })))
                 : (e.x = e.x + e.width - o.width)),
             K(e, o),
             e
@@ -21881,7 +23659,8 @@
             (o.height = n.snapValue(e.height, { min: e.height })),
             r &&
               (i
-                ? ((o.y = n.snapValue(e.y, { max: e.y })), (o.height += n.snapValue(e.y - o.y, { min: e.y - o.y })))
+                ? ((o.y = n.snapValue(e.y, { max: e.y })),
+                  (o.height += n.snapValue(e.y - o.y, { min: e.y - o.y })))
                 : (e.y = e.y + e.height - o.height)),
             K(e, o),
             e
@@ -21931,7 +23710,8 @@
             oi(o, 'bpmn:Process') &&
             o.children.length &&
             r.createConstraints &&
-            ((i.width = n.snapValue(i.width, { min: i.width })), (i.height = n.snapValue(i.height, { min: i.height })))
+            ((i.width = n.snapValue(i.width, { min: i.width })),
+            (i.height = n.snapValue(i.height, { min: i.height })))
         })
       }
       function yp(e, t, n) {
@@ -21973,7 +23753,8 @@
           var t,
             n = this._gridSnapping
           e = e.slice()
-          for (var r = 1; r < e.length - 2; r++) (t = bp(n, e[r], e[r + 1])), (e[r] = t[0]), (e[r + 1] = t[1])
+          for (var r = 1; r < e.length - 2; r++)
+            (t = bp(n, e[r], e[r + 1])), (e[r] = t[0]), (e[r + 1] = t[1])
           return e
         })
       const Ap = {
@@ -22014,12 +23795,19 @@
       }
       ;(Ep.$inject = ['eventBus', 'interactionEvents']),
         (Ep.prototype.createDefaultHit = function (e, t) {
-          return this._interactionEvents.removeHits(t), this._interactionEvents.createDefaultHit(e, t), !0
+          return (
+            this._interactionEvents.removeHits(t),
+            this._interactionEvents.createDefaultHit(e, t),
+            !0
+          )
         }),
         (Ep.prototype.createParticipantHit = function (e, t) {
           return (
             this._interactionEvents.removeHits(t),
-            this._interactionEvents.createBoxHit(t, 'click-stroke', { width: e.width, height: e.height }),
+            this._interactionEvents.createBoxHit(t, 'click-stroke', {
+              width: e.width,
+              height: e.height
+            }),
             this._interactionEvents.createBoxHit(t, 'all', { width: 30, height: e.height }),
             !0
           )
@@ -22027,7 +23815,10 @@
         (Ep.prototype.createSubProcessHit = function (e, t) {
           return (
             this._interactionEvents.removeHits(t),
-            this._interactionEvents.createBoxHit(t, 'click-stroke', { width: e.width, height: e.height }),
+            this._interactionEvents.createBoxHit(t, 'click-stroke', {
+              width: e.width,
+              height: e.height
+            }),
             this._interactionEvents.createBoxHit(t, 'all', { width: e.width, height: 30 }),
             !0
           )
@@ -22053,31 +23844,49 @@
             }),
             n('spaceTool', function (n) {
               var r = n.keyEvent
-              if (!e.hasModifier(r)) return e.isKey(['s', 'S'], r) ? (t.trigger('spaceTool'), !0) : void 0
+              if (!e.hasModifier(r))
+                return e.isKey(['s', 'S'], r) ? (t.trigger('spaceTool'), !0) : void 0
             }),
             n('lassoTool', function (n) {
               var r = n.keyEvent
-              if (!e.hasModifier(r)) return e.isKey(['l', 'L'], r) ? (t.trigger('lassoTool'), !0) : void 0
+              if (!e.hasModifier(r))
+                return e.isKey(['l', 'L'], r) ? (t.trigger('lassoTool'), !0) : void 0
             }),
             n('handTool', function (n) {
               var r = n.keyEvent
-              if (!e.hasModifier(r)) return e.isKey(['h', 'H'], r) ? (t.trigger('handTool'), !0) : void 0
+              if (!e.hasModifier(r))
+                return e.isKey(['h', 'H'], r) ? (t.trigger('handTool'), !0) : void 0
             }),
             n('globalConnectTool', function (n) {
               var r = n.keyEvent
-              if (!e.hasModifier(r)) return e.isKey(['c', 'C'], r) ? (t.trigger('globalConnectTool'), !0) : void 0
+              if (!e.hasModifier(r))
+                return e.isKey(['c', 'C'], r) ? (t.trigger('globalConnectTool'), !0) : void 0
             }),
             n('directEditing', function (n) {
               var r = n.keyEvent
-              if (!e.hasModifier(r)) return e.isKey(['e', 'E'], r) ? (t.trigger('directEditing'), !0) : void 0
+              if (!e.hasModifier(r))
+                return e.isKey(['e', 'E'], r) ? (t.trigger('directEditing'), !0) : void 0
             })
         })
-      const wp = { __depends__: [pa], __init__: ['keyboardBindings'], keyboardBindings: ['type', _p] }
+      const wp = {
+        __depends__: [pa],
+        __init__: ['keyboardBindings'],
+        keyboardBindings: ['type', _p]
+      }
       var Cp = { moveSpeed: 1, moveSpeedAccelerated: 10 },
         Pp = 'left',
         kp = 'right',
         Sp = 'down',
-        Op = { ArrowLeft: Pp, Left: Pp, ArrowUp: 'up', Up: 'up', ArrowRight: kp, Right: kp, ArrowDown: Sp, Down: Sp },
+        Op = {
+          ArrowLeft: Pp,
+          Left: Pp,
+          ArrowUp: 'up',
+          Up: 'up',
+          ArrowRight: kp,
+          Right: kp,
+          ArrowDown: Sp,
+          Down: Sp
+        },
         Tp = {
           left: function (e) {
             return { x: -e, y: 0 }
@@ -22113,7 +23922,11 @@
           })
       }
       Bp.$inject = ['config.keyboardMoveSelection', 'keyboard', 'modeling', 'rules', 'selection']
-      const jp = { __depends__: [pa, _o], __init__: ['keyboardMoveSelection'], keyboardMoveSelection: ['type', Bp] }
+      const jp = {
+        __depends__: [pa, _o],
+        __init__: ['keyboardMoveSelection'],
+        keyboardMoveSelection: ['type', Bp]
+      }
       function Mp(e, t, n, r) {
         ;(this._dragging = r), (this._rules = t)
         var i = this
@@ -22121,7 +23934,9 @@
           var t, n, r
           ;(n = (t = e.context).resizeConstraints),
             (r = t.minBounds),
-            void 0 === n && (void 0 === r && (r = i.computeMinResizeBox(t)), (t.resizeConstraints = { min: Xt(r) }))
+            void 0 === n &&
+              (void 0 === r && (r = i.computeMinResizeBox(t)),
+              (t.resizeConstraints = { min: Xt(r) }))
         }),
           e.on('resize.move', function (e) {
             var t = { x: e.dx, y: e.dy }
@@ -22166,7 +23981,9 @@
               if (r) {
                 if (
                   !(function (e, t) {
-                    return e.x !== t.x || e.y !== t.y || e.width !== t.width || e.height !== t.height
+                    return (
+                      e.x !== t.x || e.y !== t.y || e.width !== t.width || e.height !== t.height
+                    )
                   })(t, (i = Yt(i)))
                 )
                   return
@@ -22203,9 +24020,16 @@
           var r,
             i,
             o = this._dragging
-          if (('string' == typeof n && (n = { direction: n }), !(i = (r = K({ shape: t }, n)).direction)))
+          if (
+            ('string' == typeof n && (n = { direction: n }),
+            !(i = (r = K({ shape: t }, n)).direction))
+          )
             throw new Error('must provide a direction (n|w|s|e|nw|se|ne|sw)')
-          o.init(e, Dp(t, i), 'resize', { autoActivate: !0, cursor: Rp(i), data: { shape: t, context: r } })
+          o.init(e, Dp(t, i), 'resize', {
+            autoActivate: !0,
+            cursor: Rp(i),
+            data: { shape: t, context: r }
+          })
         }),
         (Mp.prototype.computeMinResizeBox = function (e) {
           var t,
@@ -22245,7 +24069,8 @@
           var r, i, o, a
           ;(i = (r = e.context).shape),
             (o = r.newBounds),
-            (a = r.frame) || ((a = r.frame = n.addFrame(i, t.getActiveLayer())), t.addMarker(i, zp)),
+            (a = r.frame) ||
+              ((a = r.frame = n.addFrame(i, t.getActiveLayer())), t.addMarker(i, zp)),
             o.width > 5 && lt(a, { x: o.x, width: o.width }),
             o.height > 5 && lt(a, { y: o.y, height: o.height }),
             r.canExecute ? mt(a).remove(Ip) : mt(a).add(Ip)
@@ -22287,9 +24112,14 @@
               )
             })(r),
             a = At('g')
-          mt(a).add('djs-resizer'), mt(a).add('djs-resizer-' + e.id), mt(a).add('djs-resizer-' + r), ot(i, a)
+          mt(a).add('djs-resizer'),
+            mt(a).add('djs-resizer-' + e.id),
+            mt(a).add('djs-resizer-' + r),
+            ot(i, a)
           var s = At('rect')
-          lt(s, { x: -2 + o.x, y: -2 + o.y, width: 4, height: 4 }), mt(s).add('djs-resizer-visual'), ot(a, s)
+          lt(s, { x: -2 + o.x, y: -2 + o.y, width: 4, height: 4 }),
+            mt(s).add('djs-resizer-visual'),
+            ot(a, s)
           var l = At('rect')
           return (
             lt(l, { x: -10 + o.x, y: -10 + o.y, width: 20, height: 20 }),
@@ -22390,7 +24220,8 @@
             K(n, this.getEditingBBox(e))
             var r = {}
             return (
-              (ai(e, ['bpmn:Task', 'bpmn:Participant', 'bpmn:Lane', 'bpmn:CallActivity']) || $p(e)) &&
+              (ai(e, ['bpmn:Task', 'bpmn:Participant', 'bpmn:Lane', 'bpmn:CallActivity']) ||
+                $p(e)) &&
                 K(r, { centerVertically: !0 }),
               Gi(e) && K(r, { autoResize: !0 }),
               oi(e, 'bpmn:TextAnnotation') && K(r, { resizable: !0, autoResize: !0 }),
@@ -22421,7 +24252,12 @@
             (function (e) {
               return oi(e, 'bpmn:Participant') && Ei(e)
             })(e)) &&
-            (K(a, { width: r.height, height: 30 * s, x: r.x - r.height / 2 + 15 * s, y: o - (30 * s) / 2 }),
+            (K(a, {
+              width: r.height,
+              height: 30 * s,
+              x: r.x - r.height / 2 + 15 * s,
+              y: o - (30 * s) / 2
+            }),
             K(h, {
               fontSize: d + 'px',
               lineHeight: m,
@@ -22463,14 +24299,24 @@
           if (
             (n.labelTarget &&
               (K(a, { width: f, height: r.height + v + g, x: i - f / 2, y: r.y - v }),
-              K(h, { fontSize: p + 'px', lineHeight: u, paddingTop: v + 'px', paddingBottom: g + 'px' })),
+              K(h, {
+                fontSize: p + 'px',
+                lineHeight: u,
+                paddingTop: v + 'px',
+                paddingBottom: g + 'px'
+              })),
             Gi(n) && !Qi(n) && !Yi(n))
           ) {
             var y = Ki(e),
               b = t.getAbsoluteBBox({ x: y.x, y: y.y, width: 0, height: 0 }),
               A = p + v + g
             K(a, { width: f, height: A, x: b.x - f / 2, y: b.y - A / 2 }),
-              K(h, { fontSize: p + 'px', lineHeight: u, paddingTop: v + 'px', paddingBottom: g + 'px' })
+              K(h, {
+                fontSize: p + 'px',
+                lineHeight: u,
+                paddingTop: v + 'px',
+                paddingBottom: g + 'px'
+              })
           }
           return (
             oi(e, 'bpmn:TextAnnotation') &&
@@ -22492,7 +24338,12 @@
           if (
             (oi(e, 'bpmn:TextAnnotation') &&
               ((o = this._canvas.getAbsoluteBBox(e)),
-              (i = { x: e.x, y: e.y, width: (e.width / o.width) * r.width, height: (e.height / o.height) * r.height })),
+              (i = {
+                x: e.x,
+                y: e.y,
+                width: (e.width / o.width) * r.width,
+                height: (e.height / o.height) * r.height
+              })),
             oi(e, 'bpmn:Group') && !si(e).categoryValueRef)
           ) {
             var s = qp(si(this._canvas.getRootElement()).$parent, this._bpmnFactory)
@@ -22635,13 +24486,16 @@
           }
         }
         Mo.call(this, e),
-          this.postExecuted(['connection.create', 'connection.layout', 'connection.updateWaypoints'], function (e) {
-            var t = e.context,
-              r = t.connection,
-              i = r.source,
-              o = r.target
-            !1 !== (t.hints || {}).createElementsBehavior && (n(i), n(o))
-          }),
+          this.postExecuted(
+            ['connection.create', 'connection.layout', 'connection.updateWaypoints'],
+            function (e) {
+              var t = e.context,
+                r = t.connection,
+                i = r.source,
+                o = r.target
+              !1 !== (t.hints || {}).createElementsBehavior && (n(i), n(o))
+            }
+          ),
           this.postExecuted(['label.create'], function (e) {
             var t = e.context,
               r = t.shape
@@ -22731,7 +24585,9 @@
           )
       }
       function nu(e, t) {
-        return !Yi(e) && ai(e, ['bpmn:IntermediateThrowEvent', 'bpmn:IntermediateCatchEvent']) && !!t
+        return (
+          !Yi(e) && ai(e, ['bpmn:IntermediateThrowEvent', 'bpmn:IntermediateCatchEvent']) && !!t
+        )
       }
       function ru(e, t, n) {
         function r(e) {
@@ -22744,7 +24600,10 @@
             var t = e.context.source,
               i = e.context.target,
               o = r(i)
-            oi(t, 'bpmn:EventBasedGateway') && oi(i, 'bpmn:ReceiveTask') && o.length > 0 && n.removeElements(o)
+            oi(t, 'bpmn:EventBasedGateway') &&
+              oi(i, 'bpmn:ReceiveTask') &&
+              o.length > 0 &&
+              n.removeElements(o)
           }),
           this.postExecute('connection.reconnect', function (e) {
             var t = e.context.oldSource,
@@ -22797,7 +24656,8 @@
             r = (n = si(e).eventDefinitions) && n[0],
             i = { type: 'bpmn:BoundaryEvent', host: t }
           return (
-            r && (i.eventDefinitionType = r.$type), this._bpmnReplace.replaceElement(e, i, { layoutConnection: !1 })
+            r && (i.eventDefinitionType = r.$type),
+            this._bpmnReplace.replaceElement(e, i, { layoutConnection: !1 })
           )
         }),
         (ru.$inject = ['eventBus', 'moddle', 'modeling']),
@@ -22927,7 +24787,9 @@
                 o = t.participant
               if (r) {
                 var a = r.children.slice()
-                o ? i === o && n.moveElements(a, { x: 0, y: 0 }, o) : n.moveElements(a, { x: 0, y: 0 }, i)
+                o
+                  ? i === o && n.moveElements(a, { x: 0, y: 0 }, o)
+                  : n.moveElements(a, { x: 0, y: 0 }, i)
               }
             },
             !0
@@ -22970,8 +24832,14 @@
             l ? ((t = n(l, !0)), (m.targetRef = t)) : (m.targetRef = null)
         }
         Mo.call(this, e),
-          this.executed(['connection.create', 'connection.delete', 'connection.move', 'connection.reconnect'], pu(i)),
-          this.reverted(['connection.create', 'connection.delete', 'connection.move', 'connection.reconnect'], pu(i))
+          this.executed(
+            ['connection.create', 'connection.delete', 'connection.move', 'connection.reconnect'],
+            pu(i)
+          ),
+          this.reverted(
+            ['connection.create', 'connection.delete', 'connection.move', 'connection.reconnect'],
+            pu(i)
+          )
       }
       function pu(e) {
         return function (t) {
@@ -23028,7 +24896,10 @@
           this.postExecute('shape.create', function (e) {
             var t = e.context.shape,
               n = t.parent
-            oi(t, 'bpmn:DataStoreReference') && 'label' !== t.type && oi(n, 'bpmn:Collaboration') && o(t)
+            oi(t, 'bpmn:DataStoreReference') &&
+              'label' !== t.type &&
+              oi(n, 'bpmn:Collaboration') &&
+              o(t)
           }),
           this.postExecute('shape.move', function (e) {
             var t = e.context,
@@ -23162,7 +25033,11 @@
             f = e.incoming.slice(),
             v = Es(m, (d = _(i.width) ? en(i) : i))
           if (v) {
-            if (((o = m.slice(0, v.index)), (a = m.slice(v.index + (v.bendpoint ? 1 : 0))), !o.length || !a.length))
+            if (
+              ((o = m.slice(0, v.index)),
+              (a = m.slice(v.index + (v.bendpoint ? 1 : 0))),
+              !o.length || !a.length)
+            )
               return
             ;(s = v.bendpoint ? m[v.index] : d),
               (1 !== o.length && gu(e, o[o.length - 1])) || o.push(yu(s)),
@@ -23172,7 +25047,9 @@
             (c = r.target),
             t.canConnect(l, e, r) && (n.reconnectEnd(r, e, o || d), (p = r)),
             t.canConnect(e, c, r) &&
-              (p ? (u = n.connect(e, c, { type: r.type, waypoints: a })) : (n.reconnectStart(r, e, a || d), (u = r)))
+              (p
+                ? (u = n.connect(e, c, { type: r.type, waypoints: a }))
+                : (n.reconnectStart(r, e, a || d), (u = r)))
           var g = [].concat(
             (p &&
               S(f, function (e) {
@@ -23341,7 +25218,9 @@
               !ai(r, ['bpmn:Lane', 'bpmn:Participant']) &&
               ((t.hover = Wc(i)), (t.hoverGfx = e.getGraphics(t.hover)))
             var o = n.getRootElement()
-            i !== o && (r.labelTarget || oi(r, 'bpmn:Group')) && ((t.hover = o), (t.hoverGfx = e.getGraphics(t.hover)))
+            i !== o &&
+              (r.labelTarget || oi(r, 'bpmn:Group')) &&
+              ((t.hover = o), (t.hoverGfx = e.getGraphics(t.hover)))
           }
         ),
           t.on(
@@ -23365,7 +25244,9 @@
             var n = t.context,
               r = t.hover,
               i = n.type
-            oi(r, 'bpmn:Lane') && /reconnect/.test(i) && ((t.hover = Wc(r) || r), (t.hoverGfx = e.getGraphics(t.hover)))
+            oi(r, 'bpmn:Lane') &&
+              /reconnect/.test(i) &&
+              ((t.hover = Wc(r) || r), (t.hoverGfx = e.getGraphics(t.hover)))
           }),
           t.on(['connect.start'], Eu, function (e) {
             var t = e.context,
@@ -23430,7 +25311,8 @@
           r.on('moddleCopy.canCopyProperty', 2e3, function (n) {
             var r,
               i = n.property
-            if (oi(i, 'bpmn:CategoryValue')) return (r = qp(t.getDefinitions(), e)), o.copyElement(i, r)
+            if (oi(i, 'bpmn:CategoryValue'))
+              return (r = qp(t.getDefinitions(), e)), o.copyElement(i, r)
           })
       }
       function wu(e, t, n, r) {
@@ -23456,7 +25338,8 @@
             r,
             i = e.element
           i.waypoints &&
-            (t((r = (n = i).waypoints)[0], r[1], en(n.source)), t(r[r.length - 1], r[r.length - 2], en(n.target)))
+            (t((r = (n = i).waypoints)[0], r[1], en(n.source)),
+            t(r[r.length - 1], r[r.length - 2], en(n.target)))
         })
       }
       function Pu(e, t) {
@@ -23499,7 +25382,14 @@
         return Su({ x: e.x - t.x, y: e.y - t.y })
       }
       ;(xu.$inject = ['elementRegistry', 'eventBus', 'canvas']),
-        (_u.$inject = ['bpmnFactory', 'bpmnjs', 'elementRegistry', 'eventBus', 'injector', 'moddleCopy']),
+        (_u.$inject = [
+          'bpmnFactory',
+          'bpmnjs',
+          'elementRegistry',
+          'eventBus',
+          'injector',
+          'moddleCopy'
+        ]),
         u()(_u, Mo),
         (Cu.$inject = ['eventBus']),
         (ku.$inject = ['eventBus']),
@@ -23604,8 +25494,13 @@
             var n = e.context,
               i = n.element,
               o = n.properties
-            if (('name' in o && t.updateLabel(i, o.name), 'text' in o && oi(i, 'bpmn:TextAnnotation'))) {
-              var a = r.getTextAnnotationBounds({ x: i.x, y: i.y, width: i.width, height: i.height }, o.text || '')
+            if (
+              ('name' in o && t.updateLabel(i, o.name), 'text' in o && oi(i, 'bpmn:TextAnnotation'))
+            ) {
+              var a = r.getTextAnnotationBounds(
+                { x: i.x, y: i.y, width: i.width, height: i.height },
+                o.text || ''
+              )
               t.updateLabel(i, o.text, a)
             }
           }),
@@ -23617,7 +25512,12 @@
               if (!Yi(i) && Gi(i) && Pi(i)) {
                 var a = Ki(i),
                   s = r.getExternalLabelBounds(Gu, Pi(i))
-                t.createLabel(i, a, { id: o.id + '_label', businessObject: o, width: s.width, height: s.height })
+                t.createLabel(i, a, {
+                  id: o.id + '_label',
+                  businessObject: o,
+                  width: s.width,
+                  height: s.height
+                })
               }
             }
           }),
@@ -23635,7 +25535,8 @@
             o &&
               oi(o, 'bpmn:BaseElement') &&
               ((t = li(o)).label ||
-                ((t.label = n.create('bpmndi:BPMNLabel', { bounds: n.create('dc:Bounds') })), (i.di = t)),
+                ((t.label = n.create('bpmndi:BPMNLabel', { bounds: n.create('dc:Bounds') })),
+                (i.di = t)),
               K(t.label.bounds, { x: i.x, y: i.y, width: i.width, height: i.height }))
           }),
           this.postExecute(['connection.layout', 'connection.updateWaypoints'], function (e) {
@@ -23682,7 +25583,9 @@
                                 : ((i = Nu(e, n)), (o = Nu(e, r)), (s = Lu(n, r, e, Du(i, o)))),
                               s.length < 1)
                             )
-                              throw new Error('expected between [1, 2] circle -> line intersections')
+                              throw new Error(
+                                'expected between [1, 2] circle -> line intersections'
+                              )
                             1 === s.length &&
                               (l = {
                                 type: 'bendpoint',
@@ -23722,7 +25625,11 @@
                               : (i >= p && (l = c ? i + 1 : i - 1),
                                 i < p &&
                                   ((l = i),
-                                  c && 'bendpoint' !== n.type && p - 1 === i && Hu(t, p) < n.relativeLocation && l++),
+                                  c &&
+                                    'bendpoint' !== n.type &&
+                                    p - 1 === i &&
+                                    Hu(t, p) < n.relativeLocation &&
+                                    l++),
                                 l)
                           }
                           return 0 === o
@@ -23746,7 +25653,11 @@
                         v = $u(n, l),
                         g = $u(t, c),
                         y = s.position,
-                        b = ((m = y), (h = ju((d = v)[0], d[1])), (f = ju(d[0], m)), 0 === h ? 0 : f / h),
+                        b =
+                          ((m = y),
+                          (h = ju((d = v)[0], d[1])),
+                          (f = ju(d[0], m)),
+                          0 === h ? 0 : f / h),
                         A = ((p = g), (u = Ou(v)), Ou(p) - u)
                       if ('bendpoint' === s.type) {
                         var E = t.length - n.length,
@@ -23766,7 +25677,10 @@
                         O =
                           ((C = { x: a.x - y.x, y: a.y - y.y }),
                           (P = A)
-                            ? { x: Math.cos(P) * C.x - Math.sin(P) * C.y, y: Math.sin(P) * C.x + Math.cos(P) * C.y }
+                            ? {
+                                x: Math.cos(P) * C.x - Math.sin(P) * C.y,
+                                y: Math.sin(P) * C.x + Math.cos(P) * C.y
+                              }
                             : C)
                       return Jt({ x: (i = k + O.x - a.x), y: (o = S + O.y - a.y) })
                     })(r, o, a, i)
@@ -23926,7 +25840,12 @@
             oi(a, 'bpmn:FlowNode') &&
             ((r = e),
             (i = n('flow elements must be children of pools/participants')),
-            t.add({ position: { x: r.x + 5, y: r.y + 5 }, type: 'error', timeout: 2e3, html: '<div>' + i + '</div>' }))
+            t.add({
+              position: { x: r.x + 5, y: r.y + 5 },
+              type: 'error',
+              timeout: 2e3,
+              html: '<div>' + i + '</div>'
+            }))
         })
       }
       function od(e, t) {
@@ -23952,7 +25871,11 @@
             if (1 === a.incoming.length && 1 === a.outgoing.length) {
               var s = a.incoming[0],
                 l = a.outgoing[0]
-              if (oi(s, 'bpmn:SequenceFlow') && oi(l, 'bpmn:SequenceFlow') && t.canConnect(s.source, l.target, s)) {
+              if (
+                oi(s, 'bpmn:SequenceFlow') &&
+                oi(l, 'bpmn:SequenceFlow') &&
+                t.canConnect(s.source, l.target, s)
+              ) {
                 var c =
                   ((r = s.waypoints),
                   (i = l.waypoints),
@@ -23997,9 +25920,11 @@
             a = e.target
           e.parent &&
             (oi(e, 'bpmn:SequenceFlow') &&
-              (n.canConnectSequenceFlow(o, a) || (i = !0), n.canConnectMessageFlow(o, a) && (r = 'bpmn:MessageFlow')),
+              (n.canConnectSequenceFlow(o, a) || (i = !0),
+              n.canConnectMessageFlow(o, a) && (r = 'bpmn:MessageFlow')),
             oi(e, 'bpmn:MessageFlow') &&
-              (n.canConnectMessageFlow(o, a) || (i = !0), n.canConnectSequenceFlow(o, a) && (r = 'bpmn:SequenceFlow')),
+              (n.canConnectMessageFlow(o, a) || (i = !0),
+              n.canConnectSequenceFlow(o, a) && (r = 'bpmn:SequenceFlow')),
             oi(e, 'bpmn:Association') && !n.canConnectAssociation(o, a) && (i = !0),
             i && t.removeConnection(e),
             r && t.connect(o, a, { type: r, waypoints: e.waypoints.slice() }))
@@ -24040,7 +25965,9 @@
             i.default &&
               (n = k(o.outgoing, V({ id: o.businessObject.default.id }))) &&
               t.updateProperties(n, { conditionExpression: void 0 }),
-              i.conditionExpression && a.sourceRef.default === a && t.updateProperties(o.source, { default: void 0 })
+              i.conditionExpression &&
+                a.sourceRef.default === a &&
+                t.updateProperties(o.source, { default: void 0 })
           })
       }
       function pd(e, t, n, r, i, o) {
@@ -24123,7 +26050,14 @@
           }),
             t && i.select(e)
         }),
-        (pd.$inject = ['bpmnReplace', 'bpmnRules', 'elementRegistry', 'injector', 'modeling', 'selection'])
+        (pd.$inject = [
+          'bpmnReplace',
+          'bpmnRules',
+          'elementRegistry',
+          'injector',
+          'modeling',
+          'selection'
+        ])
       var ud = { width: 300, height: 150 },
         dd = { width: 140, height: 120 },
         md = { width: 50, height: 30 }
@@ -24157,7 +26091,11 @@
                 }),
                 r.children
                   .filter(function (e) {
-                    return !e.hidden && !e.waypoints && (oi(e, 'bpmn:FlowElement') || oi(e, 'bpmn:Artifact'))
+                    return (
+                      !e.hidden &&
+                      !e.waypoints &&
+                      (oi(e, 'bpmn:FlowElement') || oi(e, 'bpmn:Artifact'))
+                    )
                   })
                   .forEach(function (e) {
                     var n = Xt(e)
@@ -24248,7 +26186,9 @@
               var n = t.shape
               if (o(n)) {
                 var r = l(si(n))
-                r && !a(r) && (Vt(e.getDefinitions().get('rootElements'), r), (t.addedRootElement = r))
+                r &&
+                  !a(r) &&
+                  (Vt(e.getDefinitions().get('rootElements'), r), (t.addedRootElement = r))
               }
             },
             !0
@@ -24605,7 +26545,8 @@
                         (i.height = Math.max(n.height, i.height)),
                         (i.x = n.x + (n.width - i.width) / 2),
                         (i.y = n.y + (n.height - i.height) / 2))
-                      : ((i.x = e.x + (e.width - i.width) / 2), (i.y = e.y + (e.height - i.height) / 2)),
+                      : ((i.x = e.x + (e.width - i.width) / 2),
+                        (i.y = e.y + (e.height - i.height) / 2)),
                     i
                   )
                 })(i, o)),
@@ -24617,7 +26558,9 @@
           this.preExecute('shape.delete', function (e) {
             var t = e.context.shape,
               i = t.businessObject
-            Yi(t) || (oi(t, 'bpmn:Participant') && Ei(t) && n.ids.unclaim(i.processRef.id), r.unclaimId(i.id, i))
+            Yi(t) ||
+              (oi(t, 'bpmn:Participant') && Ei(t) && n.ids.unclaim(i.processRef.id),
+              r.unclaimId(i.id, i))
           }),
           this.preExecute('connection.delete', function (e) {
             var t = e.context.connection.businessObject
@@ -24667,14 +26610,18 @@
               r.leave() && (t.updateLaneRefs(r.flowNodes, r.lanes), (r = null))
             })()
           }),
-          this.preExecute(['shape.create', 'shape.move', 'shape.delete', 'shape.resize'], function (e) {
-            var t = e.context.shape,
-              i = (function () {
-                if (!r) throw new Error(n('out of bounds release'))
-                return r
-              })()
-            t.labelTarget || (oi(t, 'bpmn:Lane') && i.addLane(t), oi(t, 'bpmn:FlowNode') && i.addFlowNode(t))
-          })
+          this.preExecute(
+            ['shape.create', 'shape.move', 'shape.delete', 'shape.resize'],
+            function (e) {
+              var t = e.context.shape,
+                i = (function () {
+                  if (!r) throw new Error(n('out of bounds release'))
+                  return r
+                })()
+              t.labelTarget ||
+                (oi(t, 'bpmn:Lane') && i.addLane(t), oi(t, 'bpmn:FlowNode') && i.addFlowNode(t))
+            }
+          )
       }
       function Dd() {
         ;(this.flowNodes = []),
@@ -24734,7 +26681,10 @@
             n = this._elementFactory,
             r = t.create('bpmndi:BPMNPlane', { bpmnElement: e }),
             i = t.create('bpmndi:BPMNDiagram', { plane: r })
-          return (r.$parent = i), n.createRoot({ id: Vo(e), type: e.$type, di: r, businessObject: e, collapsed: !0 })
+          return (
+            (r.$parent = i),
+            n.createRoot({ id: Vo(e), type: e.$type, di: r, businessObject: e, collapsed: !0 })
+          )
         }),
         (kd.prototype._removeDiagram = function (e) {
           var t = this._bpmnjs.getDefinitions().diagrams,
@@ -24743,7 +26693,15 @@
             })
           return t.splice(t.indexOf(n), 1), n
         }),
-        (kd.$inject = ['canvas', 'eventBus', 'modeling', 'elementFactory', 'bpmnFactory', 'bpmnjs', 'elementRegistry']),
+        (kd.$inject = [
+          'canvas',
+          'eventBus',
+          'modeling',
+          'elementFactory',
+          'bpmnFactory',
+          'bpmnjs',
+          'elementRegistry'
+        ]),
         (Sd.$inject = ['injector', 'modeling']),
         u()(Sd, Mo),
         u()(Od, Mo),
@@ -24924,7 +26882,10 @@
               ? t === e.parent
               : oi(e, 'bpmn:Lane')
               ? oi(t, 'bpmn:Participant') || oi(t, 'bpmn:Lane')
-              : !(oi(e, 'bpmn:BoundaryEvent') && ((r = e), !si(r).cancelActivity || (!Zd(r) && !em(r)))) &&
+              : !(
+                  oi(e, 'bpmn:BoundaryEvent') &&
+                  ((r = e), !si(r).cancelActivity || (!Zd(r) && !em(r)))
+                ) &&
                 (oi(e, 'bpmn:FlowElement') && !oi(e, 'bpmn:DataStoreReference')
                   ? oi(t, 'bpmn:FlowElementsContainer')
                     ? Ei(t)
@@ -24934,7 +26895,13 @@
                       return !!e.get('processRef')
                     })
                   : ai(e, ['bpmn:Artifact', 'bpmn:DataAssociation', 'bpmn:DataStoreReference'])
-                  ? ai(t, ['bpmn:Collaboration', 'bpmn:Lane', 'bpmn:Participant', 'bpmn:Process', 'bpmn:SubProcess'])
+                  ? ai(t, [
+                      'bpmn:Collaboration',
+                      'bpmn:Lane',
+                      'bpmn:Participant',
+                      'bpmn:Process',
+                      'bpmn:SubProcess'
+                    ])
                   : !!oi(e, 'bpmn:MessageFlow') &&
                     (oi(t, 'bpmn:Collaboration') || e.source.parent == t || e.target.parent == t))))
         )
@@ -24997,7 +26964,8 @@
               (oi(e, 'bpmn:StartEvent') &&
                 'label' !== e.type &&
                 Jd(e, t) &&
-                (xi(e) || r.replacements.push({ oldElementId: e.id, newElementType: 'bpmn:StartEvent' }),
+                (xi(e) ||
+                  r.replacements.push({ oldElementId: e.id, newElementType: 'bpmn:StartEvent' }),
                 ((function (e) {
                   return wi(e, 'bpmn:ErrorEventDefinition')
                 })(e) ||
@@ -25024,7 +26992,10 @@
                     r.replacements.push({ oldElementId: e.id, newElementType: 'bpmn:EndEvent' }),
                   oi(e, 'bpmn:BoundaryEvent') &&
                     nm(e, t, 0, n) &&
-                    r.replacements.push({ oldElementId: e.id, newElementType: 'bpmn:BoundaryEvent' })))
+                    r.replacements.push({
+                      oldElementId: e.id,
+                      newElementType: 'bpmn:BoundaryEvent'
+                    })))
           }),
           !!r.replacements.length && r
         )
@@ -25078,12 +27049,14 @@
           !(hm(e) && !hm(t)) &&
           oi((n = e), 'bpmn:InteractionNode') &&
           !oi(n, 'bpmn:BoundaryEvent') &&
-          (!oi(n, 'bpmn:Event') || (oi(n, 'bpmn:ThrowEvent') && Wd(n, 'bpmn:MessageEventDefinition'))) &&
+          (!oi(n, 'bpmn:Event') ||
+            (oi(n, 'bpmn:ThrowEvent') && Wd(n, 'bpmn:MessageEventDefinition'))) &&
           (function (e) {
             return (
               oi(e, 'bpmn:InteractionNode') &&
               !Hd(e) &&
-              (!oi(e, 'bpmn:Event') || (oi(e, 'bpmn:CatchEvent') && Wd(e, 'bpmn:MessageEventDefinition'))) &&
+              (!oi(e, 'bpmn:Event') ||
+                (oi(e, 'bpmn:CatchEvent') && Wd(e, 'bpmn:MessageEventDefinition'))) &&
               !(oi(e, 'bpmn:BoundaryEvent') && !Ud(e, 'bpmn:MessageEventDefinition'))
             )
           })(t) &&
@@ -25212,7 +27185,11 @@
               return (
                 !(Qd(r) && !um(t, r)) &&
                 B(t, function (e) {
-                  return Qd(e) ? Yd(e.source, e.target, e) : e.host ? nm(e, e.host, 0, n) : om(e, r, null)
+                  return Qd(e)
+                    ? Yd(e.source, e.target, e)
+                    : e.host
+                    ? nm(e, e.host, 0, n)
+                    : om(e, r, null)
                 })
               )
             }),
@@ -25297,7 +27274,10 @@
           { type: 'bpmn:MessageFlow', order: { level: 9, containers: ['bpmn:Collaboration'] } },
           {
             type: 'bpmn:Association',
-            order: { level: 6, containers: ['bpmn:Participant', 'bpmn:FlowElementsContainer', 'bpmn:Collaboration'] }
+            order: {
+              level: 6,
+              containers: ['bpmn:Participant', 'bpmn:FlowElementsContainer', 'bpmn:Collaboration']
+            }
           },
           { type: 'bpmn:BoundaryEvent', order: { level: 8 } },
           {
@@ -25326,7 +27306,8 @@
           return t
         }
         this.getOrdering = function (e, n) {
-          if (e.labelTarget) return { parent: t.findRoot(e.labelTarget) || t.getRootElement(), index: -1 }
+          if (e.labelTarget)
+            return { parent: t.findRoot(e.labelTarget) || t.getRootElement(), index: -1 }
           var r = i(e)
           r.containers &&
             (n = (function (e, t, n) {
@@ -25356,7 +27337,11 @@
         rt()(ym, Mo),
         (bm.$inject = ['eventBus', 'canvas', 'translate']),
         u()(bm, ym)
-      const Am = { __depends__: [Ui], __init__: ['bpmnOrderingProvider'], bpmnOrderingProvider: ['type', bm] }
+      const Am = {
+        __depends__: [Ui],
+        __init__: ['bpmnOrderingProvider'],
+        bpmnOrderingProvider: ['type', bm]
+      }
       function Em(e, t) {
         ;(this._handlerMap = {}),
           (this._stack = []),
@@ -25391,7 +27376,9 @@
           return i
         }),
         (Em.prototype.clear = function (e) {
-          ;(this._stack.length = 0), (this._stackIdx = -1), !1 !== e && this._fire('changed', { trigger: 'clear' })
+          ;(this._stack.length = 0),
+            (this._stackIdx = -1),
+            !1 !== e && this._fire('changed', { trigger: 'clear' })
         }),
         (Em.prototype.undo = function () {
           var e,
@@ -25483,21 +27470,30 @@
             o = this._getHandler(r)
           if (!o) throw new Error('no command handler registered for <' + r + '>')
           this._pushAction(e),
-            t || (this._fire(r, 'preExecute', e), o.preExecute && o.preExecute(i), this._fire(r, 'preExecuted', e)),
+            t ||
+              (this._fire(r, 'preExecute', e),
+              o.preExecute && o.preExecute(i),
+              this._fire(r, 'preExecuted', e)),
             this._atomicDo(function () {
               n._fire(r, 'execute', e),
                 o.execute && n._markDirty(o.execute(i)),
                 n._executedAction(e, t),
                 n._fire(r, 'executed', e)
             }),
-            t || (this._fire(r, 'postExecute', e), o.postExecute && o.postExecute(i), this._fire(r, 'postExecuted', e)),
+            t ||
+              (this._fire(r, 'postExecute', e),
+              o.postExecute && o.postExecute(i),
+              this._fire(r, 'postExecuted', e)),
             this._popAction(e)
         }),
         (Em.prototype._pushAction = function (e) {
           var t = this._currentExecution,
             n = t.actions,
             r = n[0]
-          if (t.atomic) throw new Error('illegal invocation in <execute> or <revert> phase (action: ' + e.command + ')')
+          if (t.atomic)
+            throw new Error(
+              'illegal invocation in <execute> or <revert> phase (action: ' + e.command + ')'
+            )
           e.id || (e.id = (r && r.id) || this._createId()), n.push(e)
         }),
         (Em.prototype._popAction = function () {
@@ -25546,7 +27542,9 @@
           (this._tooltips = {}),
           (this._tooltipRoot =
             ((n = t.getContainer()),
-            (r = ye('<div class="djs-tooltip-container" style="position: absolute; width: 0; height: 0;" />')),
+            (r = ye(
+              '<div class="djs-tooltip-container" style="position: absolute; width: 0; height: 0;" />'
+            )),
             n.insertBefore(r, n.firstChild),
             r))
         var i = this
@@ -25567,7 +27565,10 @@
           if (!e.html) throw new Error('must specifiy tooltip html')
           var t = this._ids.next()
           return (
-            (e = K({}, this._tooltipDefaults, e, { id: t })), this._addTooltip(e), e.timeout && this.setTimeout(e), t
+            (e = K({}, this._tooltipDefaults, e, { id: t })),
+            this._addTooltip(e),
+            e.timeout && this.setTimeout(e),
+            t
           )
         }),
         (Pm.prototype.trigger = function (e, t) {
@@ -25597,7 +27598,8 @@
         }),
         (Pm.prototype.remove = function (e) {
           var t = this.get(e)
-          t && (_e(t.html), _e(t.htmlContainer), delete t.htmlContainer, delete this._tooltips[t.id])
+          t &&
+            (_e(t.html), _e(t.htmlContainer), delete t.htmlContainer, delete this._tooltips[t.id])
         }),
         (Pm.prototype.show = function () {
           wm(this._tooltipRoot)
@@ -25618,7 +27620,9 @@
             i = this._tooltipRoot
           r.get && r.constructor.prototype.jquery && (r = r.get(0)),
             C(r) && (r = ye(r)),
-            (t = ye('<div data-tooltip-id="' + n + '" class="djs-tooltip" style="position: absolute">')).appendChild(r),
+            (t = ye(
+              '<div data-tooltip-id="' + n + '" class="djs-tooltip" style="position: absolute">'
+            )).appendChild(r),
             e.type && re(t).add('djs-tooltip-' + e.type),
             e.className && re(t).add(e.className),
             (e.htmlContainer = t),
@@ -25702,7 +27706,8 @@
             var t = e.context,
               n = t.shape,
               r = n.labelTarget
-            r && ((t.labelTargetIndex = qt(r.labels, n)), (t.labelTarget = r), (n.labelTarget = null))
+            r &&
+              ((t.labelTargetIndex = qt(r.labels, n)), (t.labelTarget = r), (n.labelTarget = null))
           }),
           this.revert('shape.delete', function (e) {
             var t = e.context,
@@ -25796,12 +27801,18 @@
             O(e.context.shapes, function (e) {
               O(e.attachers, function (e) {
                 O(e.outgoing.slice(), function (e) {
-                  r.allowed('connection.reconnect', { connection: e, source: e.source, target: e.target }) ||
-                    i.removeConnection(e)
+                  r.allowed('connection.reconnect', {
+                    connection: e,
+                    source: e.source,
+                    target: e.target
+                  }) || i.removeConnection(e)
                 }),
                   O(e.incoming.slice(), function (e) {
-                    r.allowed('connection.reconnect', { connection: e, source: e.source, target: e.target }) ||
-                      i.removeConnection(e)
+                    r.allowed('connection.reconnect', {
+                      connection: e,
+                      source: e.source,
+                      target: e.target
+                    }) || i.removeConnection(e)
                   })
               })
             })
@@ -25885,7 +27896,8 @@
           n.on(
             t.tool + '.init',
             function (t) {
-              if (!t.context.reactivate && this.isActive(e)) return this.setActive(null), void r.cancel()
+              if (!t.context.reactivate && this.isActive(e))
+                return this.setActive(null), void r.cancel()
               this.setActive(e)
             },
             this
@@ -25977,7 +27989,15 @@
       function Ym(e) {
         return !!e.labelTarget
       }
-      ;(Um.$inject = ['canvas', 'dragging', 'eventBus', 'modeling', 'rules', 'toolManager', 'mouse']),
+      ;(Um.$inject = [
+        'canvas',
+        'dragging',
+        'eventBus',
+        'modeling',
+        'rules',
+        'toolManager',
+        'mouse'
+      ]),
         (Um.prototype.activateSelection = function (e, t, n) {
           this._dragging.init(e, 'spaceTool.selection', {
             autoActivate: t,
@@ -25987,7 +28007,11 @@
           })
         }),
         (Um.prototype.activateMakeSpace = function (e) {
-          this._dragging.init(e, 'spaceTool', { autoActivate: !0, cursor: qm, data: { context: {} } })
+          this._dragging.init(e, 'spaceTool', {
+            autoActivate: !0,
+            cursor: qm,
+            data: { context: {} }
+          })
         }),
         (Um.prototype.makeSpace = function (e, t, n, r, i) {
           return this._modeling.createSpace(e, t, n, r, i)
@@ -26057,12 +28081,16 @@
                       var v = i && i[e.id]
                       v &&
                         ('n' === n
-                          ? ((p = r + e[Vm[t]] - v[Vm[t]]), (c.bottom = l = _(l) ? Math.min(l, p) : p))
+                          ? ((p = r + e[Vm[t]] - v[Vm[t]]),
+                            (c.bottom = l = _(l) ? Math.min(l, p) : p))
                           : 'w' === n
-                          ? ((p = r + e[Vm[t]] - v[Vm[t]]), (c.right = l = _(l) ? Math.min(l, p) : p))
+                          ? ((p = r + e[Vm[t]] - v[Vm[t]]),
+                            (c.right = l = _(l) ? Math.min(l, p) : p))
                           : 's' === n
                           ? ((p = r - e[Vm[t]] + v[Vm[t]]), (c.top = s = _(s) ? Math.max(s, p) : p))
-                          : 'e' === n && ((p = r - e[Vm[t]] + v[Vm[t]]), (c.left = s = _(s) ? Math.max(s, p) : p)))
+                          : 'e' === n &&
+                            ((p = r - e[Vm[t]] + v[Vm[t]]),
+                            (c.left = s = _(s) ? Math.max(s, p) : p)))
                     }),
                     c
                   )
@@ -26130,7 +28158,10 @@
           var a = At('path')
           lt(a, 'd', 'M 0,-10000 L 0,10000'), mt(a).add('djs-crosshair'), ot(o, a)
           var s = At('path')
-          lt(s, 'd', 'M -10000,0 L 10000,0'), mt(s).add('djs-crosshair'), ot(o, s), (i.crosshairGroup = o)
+          lt(s, 'd', 'M -10000,0 L 10000,0'),
+            mt(s).add('djs-crosshair'),
+            ot(o, s),
+            (i.crosshairGroup = o)
         }),
           e.on('spaceTool.selection.move', function (e) {
             Mn(e.context.crosshairGroup, e.x, e.y)
@@ -26148,7 +28179,10 @@
             if (a.initialized) {
               if (!a.dragGroup) {
                 var u = n.getLayer('space')
-                lt((s = At('path')), 'd', 'M0,0 L0,0'), mt(s).add('djs-crosshair'), ot(u, s), (a.line = s)
+                lt((s = At('path')), 'd', 'M0,0 L0,0'),
+                  mt(s).add('djs-crosshair'),
+                  ot(u, s),
+                  (a.line = s)
                 var d = At('g')
                 lt(d, r.cls('djs-drag-group', ['no-events'])),
                   ot(n.getActiveLayer(), d),
@@ -26204,7 +28238,10 @@
                   (a.frames = h)
               }
               lt(s, {
-                d: { x: 'M' + e.x + ', -10000 L' + e.x + ', 10000', y: 'M -10000, ' + e.y + ' L 10000, ' + e.y }[l]
+                d: {
+                  x: 'M' + e.x + ', -10000 L' + e.x + ', 10000',
+                  y: 'M -10000, ' + e.y + ' L 10000, ' + e.y
+                }[l]
               })
               var f = { x: e.dx, y: e.dy }
               ;(f[{ x: 'y', y: 'x' }[a.axis]] = 0),
@@ -26287,14 +28324,28 @@
             delete e.context.cropped
           }),
           this.executed(
-            ['shape.move', 'shape.create', 'shape.delete', 'connection.create', 'connection.move', 'connection.delete'],
+            [
+              'shape.move',
+              'shape.create',
+              'shape.delete',
+              'connection.create',
+              'connection.move',
+              'connection.delete'
+            ],
             ih(function (e) {
               var t = e.context
               i.updateParent(t.shape || t.connection, t.oldParent)
             })
           ),
           this.reverted(
-            ['shape.move', 'shape.create', 'shape.delete', 'connection.create', 'connection.move', 'connection.delete'],
+            [
+              'shape.move',
+              'shape.create',
+              'shape.delete',
+              'connection.create',
+              'connection.move',
+              'connection.delete'
+            ],
             ih(function (e) {
               var t = e.context,
                 n = t.shape || t.connection,
@@ -26319,10 +28370,22 @@
           e.on('shape.changed', function (e) {
             'label' === e.element.type && a({ context: { shape: e.element } })
           }),
-          this.executed(['connection.create', 'connection.move', 'connection.delete', 'connection.reconnect'], ih(s)),
-          this.reverted(['connection.create', 'connection.move', 'connection.delete', 'connection.reconnect'], ih(s)),
-          this.executed(['connection.layout', 'connection.move', 'connection.updateWaypoints'], ih(l)),
-          this.reverted(['connection.layout', 'connection.move', 'connection.updateWaypoints'], ih(l)),
+          this.executed(
+            ['connection.create', 'connection.move', 'connection.delete', 'connection.reconnect'],
+            ih(s)
+          ),
+          this.reverted(
+            ['connection.create', 'connection.move', 'connection.delete', 'connection.reconnect'],
+            ih(s)
+          ),
+          this.executed(
+            ['connection.layout', 'connection.move', 'connection.updateWaypoints'],
+            ih(l)
+          ),
+          this.reverted(
+            ['connection.layout', 'connection.move', 'connection.updateWaypoints'],
+            ih(l)
+          ),
           this.executed(
             'connection.reconnect',
             ih(function (e) {
@@ -26422,7 +28485,10 @@
           return this.create('bpmndi:BPMNLabel', { bounds: this.createDiBounds() })
         }),
         (nh.prototype.createDiShape = function (e, t) {
-          return this.create('bpmndi:BPMNShape', K({ bpmnElement: e, bounds: this.createDiBounds() }, t))
+          return this.create(
+            'bpmndi:BPMNShape',
+            K({ bpmnElement: e, bounds: this.createDiBounds() }, t)
+          )
         }),
         (nh.prototype.createDiBounds = function (e) {
           return this.create('dc:Bounds', e)
@@ -26437,7 +28503,10 @@
           return this.create('dc:Point', Y(e, ['x', 'y']))
         }),
         (nh.prototype.createDiEdge = function (e, t) {
-          return this.create('bpmndi:BPMNEdge', K({ bpmnElement: e, waypoint: this.createDiWaypoints([]) }, t))
+          return this.create(
+            'bpmndi:BPMNEdge',
+            K({ bpmnElement: e, waypoint: this.createDiWaypoints([]) }, t)
+          )
         }),
         (nh.prototype.createDiPlane = function (e, t) {
           return this.create('bpmndi:BPMNPlane', K({ bpmnElement: e }, t))
@@ -26452,7 +28521,10 @@
         }),
         (rh.prototype.updateParent = function (e, t) {
           if (
-            !(e instanceof _n || (oi(e, 'bpmn:DataStoreReference') && e.parent && oi(e.parent, 'bpmn:Collaboration')))
+            !(
+              e instanceof _n ||
+              (oi(e, 'bpmn:DataStoreReference') && e.parent && oi(e.parent, 'bpmn:Collaboration'))
+            )
           ) {
             var n = e.parent,
               r = e.businessObject,
@@ -26460,10 +28532,13 @@
               o = n && n.businessObject,
               a = li(n)
             oi(e, 'bpmn:FlowNode') && this.updateFlowNodeRefs(r, o, t && t.businessObject),
-              oi(e, 'bpmn:DataOutputAssociation') && (o = e.source ? e.source.businessObject : null),
+              oi(e, 'bpmn:DataOutputAssociation') &&
+                (o = e.source ? e.source.businessObject : null),
               oi(e, 'bpmn:DataInputAssociation') && (o = e.target ? e.target.businessObject : null),
               this.updateSemanticParent(r, o),
-              oi(e, 'bpmn:DataObjectReference') && r.dataObjectRef && this.updateSemanticParent(r.dataObjectRef, o),
+              oi(e, 'bpmn:DataObjectReference') &&
+                r.dataObjectRef &&
+                this.updateSemanticParent(r.dataObjectRef, o),
               this.updateDiParent(i, a)
           }
         }),
@@ -26489,7 +28564,8 @@
         }),
         (rh.prototype.updateFlowNodeRefs = function (e, t, n) {
           n !== t &&
-            (oi(n, 'bpmn:Lane') && Ft(n.get('flowNodeRef'), e), oi(t, 'bpmn:Lane') && Vt(t.get('flowNodeRef'), e))
+            (oi(n, 'bpmn:Lane') && Ft(n.get('flowNodeRef'), e),
+            oi(t, 'bpmn:Lane') && Vt(t.get('flowNodeRef'), e))
         }),
         (rh.prototype.updateDiConnection = function (e, t, n) {
           var r = li(e),
@@ -26508,7 +28584,9 @@
           var t, n
           return oi(e, 'bpmn:Lane')
             ? ((t = e.childLaneSet) ||
-                ((t = this._bpmnFactory.create('bpmn:LaneSet')), (e.childLaneSet = t), (t.$parent = e)),
+                ((t = this._bpmnFactory.create('bpmn:LaneSet')),
+                (e.childLaneSet = t),
+                (t.$parent = e)),
               t)
             : (oi(e, 'bpmn:Participant') && (e = e.processRef),
               (t = (n = e.get('laneSets'))[0]) ||
@@ -26534,7 +28612,14 @@
                   } while (oi(t, 'bpmn:Lane'))
               r = 'flowElements'
             } else if (oi(e, 'bpmn:Artifact')) {
-              for (; t && !oi(t, 'bpmn:Process') && !oi(t, 'bpmn:SubProcess') && !oi(t, 'bpmn:Collaboration'); ) {
+              for (
+                ;
+                t &&
+                !oi(t, 'bpmn:Process') &&
+                !oi(t, 'bpmn:SubProcess') &&
+                !oi(t, 'bpmn:Collaboration');
+
+              ) {
                 if (oi(t, 'bpmn:Participant')) {
                   t = t.processRef
                   break
@@ -26558,7 +28643,10 @@
               oi(e, 'bpmn:DataOutputAssociation')
                 ? (r = 'dataOutputAssociations')
                 : oi(e, 'bpmn:DataInputAssociation') && (r = 'dataInputAssociations')
-            if (!r) throw new Error(i('no parent for {element} in {parent}', { element: e.id, parent: t.id }))
+            if (!r)
+              throw new Error(
+                i('no parent for {element} in {parent}', { element: e.id, parent: t.id })
+              )
             var s
             if (
               (e.$parent && Ft((s = e.$parent.get(r)), e),
@@ -26583,9 +28671,13 @@
             s = si(n.target)
           if (oi(r, 'bpmn:DataAssociation'))
             oi(r, 'bpmn:DataInputAssociation')
-              ? ((r.get('sourceRef')[0] = o), (t = e.parent || e.newParent || s), this.updateSemanticParent(r, s, t))
+              ? ((r.get('sourceRef')[0] = o),
+                (t = e.parent || e.newParent || s),
+                this.updateSemanticParent(r, s, t))
               : oi(r, 'bpmn:DataOutputAssociation') &&
-                ((t = e.parent || e.newParent || o), this.updateSemanticParent(r, o, t), (r.targetRef = s))
+                ((t = e.parent || e.newParent || o),
+                this.updateSemanticParent(r, o, t),
+                (r.targetRef = s))
           else {
             var l = oi(r, 'bpmn:SequenceFlow')
             r.sourceRef !== o &&
@@ -26625,7 +28717,14 @@
             if (!t.type) throw new Error(o('no shape type specified'))
             ni((a = this._bpmnFactory.create(t.type)))
           }
-          if (!ai(s, ['bpmndi:BPMNShape', 'bpmndi:BPMNEdge', 'bpmndi:BPMNDiagram', 'bpmndi:BPMNPlane'])) {
+          if (
+            !ai(s, [
+              'bpmndi:BPMNShape',
+              'bpmndi:BPMNEdge',
+              'bpmndi:BPMNDiagram',
+              'bpmndi:BPMNPlane'
+            ])
+          ) {
             var l = K(s || {}, { id: a.id + '_di' })
             s =
               'root' === e
@@ -26637,9 +28736,12 @@
           return (
             oi(a, 'bpmn:Group') && (t = K({ isFrame: !0 }, t)),
             (function (e, t, n) {
-              O(['processRef', 'isInterrupting', 'associationDirection', 'isForCompensation'], function (n) {
-                void 0 !== t[n] && ah(e, t, n)
-              })
+              O(
+                ['processRef', 'isInterrupting', 'associationDirection', 'isForCompensation'],
+                function (n) {
+                  void 0 !== t[n] && ah(e, t, n)
+                }
+              )
             })(a, t),
             t.isExpanded && ah(s, t, 'isExpanded'),
             oi(a, 'bpmn:SubProcess') && (t.collapsed = !Ei(a, s)),
@@ -26726,7 +28828,8 @@
           var n = e.target || t.parent,
             r = e.shape,
             i = e.hints || {}
-          ;(r = e.shape = this._modeling.createShape(r, e.position, n, { attach: i.attach })), (e.shape = r)
+          ;(r = e.shape = this._modeling.createShape(r, e.position, n, { attach: i.attach })),
+            (e.shape = r)
         }),
         (lh.prototype.postExecute = function (e) {
           var t,
@@ -26789,7 +28892,10 @@
           O(t, function (e) {
             dh(e) &&
               (e.waypoints = M(e.waypoints, function (e) {
-                return { x: ph(e.x - s.x - s.width / 2 + i.x), y: ph(e.y - s.y - s.height / 2 + i.y) }
+                return {
+                  x: ph(e.x - s.x - s.width / 2 + i.x),
+                  y: ph(e.y - s.y - s.height / 2 + i.y)
+                }
               })),
               K(e, { x: ph(e.x - s.x - s.width / 2 + i.x), y: ph(e.y - s.y - s.height / 2 + i.y) })
           })
@@ -26826,7 +28932,9 @@
           if (!r) throw new Error('parent required')
           if (!n) throw new Error('position required')
           return (
-            void 0 !== n.width ? K(t, n) : K(t, { x: n.x - mh(t.width / 2), y: n.y - mh(t.height / 2) }),
+            void 0 !== n.width
+              ? K(t, n)
+              : K(t, { x: n.x - mh(t.width / 2), y: n.y - mh(t.height / 2) }),
             this._canvas.addShape(t, r, i),
             t
           )
@@ -26885,7 +28993,13 @@
           var t = e.connection,
             n = e.parent,
             r = e.parentIndex
-          return (t.source = e.source), (t.target = e.target), Vt(n.children, t, r), this._canvas.addConnection(t, n), t
+          return (
+            (t.source = e.source),
+            (t.target = e.target),
+            Vt(n.children, t, r),
+            this._canvas.addConnection(t, n),
+            t
+          )
         }),
         (bh.$inject = ['modeling', 'elementRegistry']),
         (bh.prototype.postExecute = function (e) {
@@ -26997,7 +29111,9 @@
         var n = []
         return (
           O(e, function (e) {
-            ;(e.hidden = t), (n = n.concat(e)), e.children && (n = n.concat(Fh(e.children, e.collapsed || t)))
+            ;(e.hidden = t),
+              (n = n.concat(e)),
+              e.children && (n = n.concat(Fh(e.children, e.collapsed || t)))
           }),
           n
         )
@@ -27006,7 +29122,9 @@
         var n = []
         return (
           O(e, function (e) {
-            ;(e.hidden = t[e.id]), (n = n.concat(e)), e.children && (n = n.concat(Vh(e.children, t)))
+            ;(e.hidden = t[e.id]),
+              (n = n.concat(e)),
+              e.children && (n = n.concat(Vh(e.children, t)))
           }),
           n
         )
@@ -27031,7 +29149,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -27057,7 +29178,8 @@
           r = e.axis,
           i = e.dimension
         function o(e, t) {
-          ;(e.range.min = Math.min(t[r], e.range.min)), (e.range.max = Math.max(t[r] + t[i], e.range.max))
+          ;(e.range.min = Math.min(t[r], e.range.min)),
+            (e.range.max = Math.max(t[r] + t[i], e.range.max))
         }
         function a(e) {
           return e[r] + e[i] / 2
@@ -27113,7 +29235,11 @@
         (_h.$inject = ['layouter', 'canvas']),
         (_h.prototype.execute = function (e) {
           var t = e.connection
-          return K(e, { oldWaypoints: t.waypoints }), (t.waypoints = this._layouter.layoutConnection(t, e.hints)), t
+          return (
+            K(e, { oldWaypoints: t.waypoints }),
+            (t.waypoints = this._layouter.layoutConnection(t, e.hints)),
+            t
+          )
         }),
         (_h.prototype.revert = function (e) {
           var t = e.connection
@@ -27131,7 +29257,9 @@
             Vt(r.children, t, i),
             (t.parent = r),
             O(t.waypoints, function (e) {
-              ;(e.x += n.x), (e.y += n.y), e.original && ((e.original.x += n.x), (e.original.y += n.y))
+              ;(e.x += n.x),
+                (e.y += n.y),
+                e.original && ((e.original.x += n.x), (e.original.y += n.y))
             }),
             t
           )
@@ -27147,7 +29275,9 @@
             Vt(r.children, t, i),
             (t.parent = r),
             O(t.waypoints, function (e) {
-              ;(e.x -= o.x), (e.y -= o.y), e.original && ((e.original.x -= o.x), (e.original.y -= o.y))
+              ;(e.x -= o.x),
+                (e.y -= o.y),
+                e.original && ((e.original.x -= o.x), (e.original.y -= o.y))
             }),
             t
           )
@@ -27183,7 +29313,13 @@
                       return (r[e.id] = e), O(e.incoming, l), O(e.outgoing, l), e.children
                     a[e.id] = i[e.id] = e
                   }),
-                  { allShapes: r, allConnections: i, topLevel: s, enclosedConnections: a, enclosedElements: o }
+                  {
+                    allShapes: r,
+                    allConnections: i,
+                    topLevel: s,
+                    enclosedConnections: a,
+                    enclosedElements: o
+                  }
                 )
               })(e, !!t, this)
             ),
@@ -27297,7 +29433,9 @@
           o.connectionStart && (a.connectionStart = o.connectionStart),
             o.connectionEnd && (a.connectionEnd = o.connectionEnd),
             !1 !== o.layoutConnection &&
-              (!n || (r && 'source' !== o.docking) || (a.connectionStart = a.connectionStart || Th(E(i) ? i[0] : i)),
+              (!n ||
+                (r && 'source' !== o.docking) ||
+                (a.connectionStart = a.connectionStart || Th(E(i) ? i[0] : i)),
               !r ||
                 (n && 'target' !== o.docking) ||
                 (a.connectionEnd = a.connectionEnd || Th(E(i) ? i[i.length - 1] : i)),
@@ -27328,7 +29466,8 @@
             u = { x: o.x, y: o.y, width: o.width, height: o.height }
           ;(t = e.newShape = e.newShape || n.createShape(a, p, o.parent, s)),
             o.host && r.updateAttachment(t, o.host),
-            !1 !== s.moveChildren && ((c = o.children.slice()), r.moveElements(c, { x: 0, y: 0 }, t, s))
+            !1 !== s.moveChildren &&
+              ((c = o.children.slice()), r.moveElements(c, { x: 0, y: 0 }, t, s))
           var d = o.incoming.slice(),
             m = o.outgoing.slice()
           O(d, function (e) {
@@ -27363,7 +29502,8 @@
             throw new Error('newBounds must have {x, y, width, height} properties')
           if (r && (n.width < r.width || n.height < r.height))
             throw new Error('width and height cannot be less than minimum height and width')
-          if ((!r && n.width < 10) || n.height < 10) throw new Error('width and height cannot be less than 10px')
+          if ((!r && n.width < 10) || n.height < 10)
+            throw new Error('width and height cannot be less than 10px')
           return (
             (e.oldBounds = { width: t.width, height: t.height, x: t.x, y: t.y }),
             K(t, { width: n.width, height: n.height, x: n.x, y: n.y }),
@@ -27797,7 +29937,8 @@
               })(t, s)
           return (
             Xh(s, a) && (o.unclaim(a.id), i.updateId(t, s.id), o.claim(s.id, a)),
-            'default' in s && (s.default && n.push(i.get(s.default.id)), a.default && n.push(i.get(a.default.id))),
+            'default' in s &&
+              (s.default && n.push(i.get(s.default.id)), a.default && n.push(i.get(a.default.id))),
             Zh(t, s),
             (e.oldProperties = l),
             (e.changed = n),
@@ -27819,7 +29960,11 @@
             i = t.businessObject,
             o = this._elementRegistry,
             a = this._moddle.ids
-          return Zh(t, r), Xh(n, i) && (a.unclaim(n.id), o.updateId(t, r.id), a.claim(r.id, i)), e.changed
+          return (
+            Zh(t, r),
+            Xh(n, i) && (a.unclaim(n.id), o.updateId(t, r.id), a.claim(r.id, i)),
+            e.changed
+          )
         })
       var ef = ['default']
       function tf(e, t) {
@@ -27882,7 +30027,11 @@
             a = o === r,
             s = a ? r : r.parent
           Uc(s).length ||
-            n.createShape({ type: 'bpmn:Lane' }, { x: r.x + Hc, y: r.y, width: r.width - Hc, height: r.height }, s)
+            n.createShape(
+              { type: 'bpmn:Lane' },
+              { x: r.x + Hc, y: r.y, width: r.width - Hc, height: r.height },
+              s
+            )
           var l = []
           jt(o, function (e) {
             return (
@@ -27903,7 +30052,12 @@
           t.makeSpace(m.movingShapes, m.resizingShapes, { x: 0, y: c }, d, u),
             (e.newLane = n.createShape(
               { type: 'bpmn:Lane' },
-              { x: r.x + (a ? Hc : 0), y: p - ('top' === i ? 120 : 0), width: r.width - (a ? Hc : 0), height: 120 },
+              {
+                x: r.x + (a ? Hc : 0),
+                y: p - ('top' === i ? 120 : 0),
+                width: r.width - (a ? Hc : 0),
+                height: 120
+              },
               s
             ))
         }),
@@ -27960,7 +30114,10 @@
                         (Vc(p.top - i.bottom) < 10 && (n = o.bottom - p.top),
                         Vc(p.bottom - i.bottom) < 5 && (l = o.bottom - p.bottom)),
                       (n || r || l || c) &&
-                        s.push({ shape: t, newBounds: zc(t, { top: n, right: r, bottom: l, left: c }) })
+                        s.push({
+                          shape: t,
+                          newBounds: zc(t, { top: n, right: r, bottom: l, left: c })
+                        })
                   }
                 }),
                 s
@@ -27984,7 +30141,9 @@
             u = [],
             d = []
           jt(p, function (e) {
-            return u.push(e), (oi(e, 'bpmn:Lane') || oi(e, 'bpmn:Participant')) && d.push(e), e.children
+            return (
+              u.push(e), (oi(e, 'bpmn:Lane') || oi(e, 'bpmn:Participant')) && d.push(e), e.children
+            )
           }),
             (c.bottom || c.top) &&
               ((n = c.bottom || c.top),
@@ -28150,7 +30309,10 @@
                       moddleElement: li(e).label,
                       properties: { color: i['background-color'] }
                     })
-                  : r._commandStack.execute('element.updateProperties', { element: e, properties: { di: t } })
+                  : r._commandStack.execute('element.updateProperties', {
+                      element: e,
+                      properties: { di: t }
+                    })
             })
         })
       var df = { width: 0, height: 0 }
@@ -28167,7 +30329,8 @@
             (function (e, t) {
               if (!Gi(e)) {
                 var r = li(e)
-                t && !r.label && (r.label = n.create('bpmndi:BPMNLabel')), !t && r.label && (r.label = null)
+                t && !r.label && (r.label = n.create('bpmndi:BPMNLabel')),
+                  !t && r.label && (r.label = null)
               }
             })(e, t),
             [r, i]
@@ -28179,7 +30342,8 @@
             i = t.newLabel
           if (!Yi(n) && Gi(n) && !Qi(n) && !hf(i)) {
             var o = Ki(n)
-            ;(o = { x: o.x, y: o.y + 7 }), e.createLabel(n, o, { id: r.id + '_label', businessObject: r, di: n.di })
+            ;(o = { x: o.x, y: o.y + 7 }),
+              e.createLabel(n, o, { id: r.id + '_label', businessObject: r, di: n.di })
           }
         }),
           (this.execute = function (e) {
@@ -28229,14 +30393,23 @@
           )
         }),
         (ff.prototype.updateLabel = function (e, t, n, r) {
-          this._commandStack.execute('element.updateLabel', { element: e, newLabel: t, newBounds: n, hints: r || {} })
+          this._commandStack.execute('element.updateLabel', {
+            element: e,
+            newLabel: t,
+            newBounds: n,
+            hints: r || {}
+          })
         }),
         (ff.prototype.connect = function (e, t, n, r) {
           var i = this._bpmnRules
           if ((n || (n = i.canConnect(e, t)), n)) return this.createConnection(e, t, n, e.parent, r)
         }),
         (ff.prototype.updateModdleProperties = function (e, t, n) {
-          this._commandStack.execute('element.updateModdleProperties', { element: e, moddleElement: t, properties: n })
+          this._commandStack.execute('element.updateModdleProperties', {
+            element: e,
+            moddleElement: t,
+            properties: n
+          })
         }),
         (ff.prototype.updateProperties = function (e, t) {
           this._commandStack.execute('element.updateProperties', { element: e, properties: t })
@@ -28270,7 +30443,8 @@
           this._commandStack.execute('id.updateClaim', { id: e, element: t })
         }),
         (ff.prototype.setColor = function (e, t) {
-          e.length || (e = [e]), this._commandStack.execute('element.setColor', { elements: e, colors: t })
+          e.length || (e = [e]),
+            this._commandStack.execute('element.setColor', { elements: e, colors: t })
         }),
         (vf.prototype.layoutConnection = function (e, t) {
           return [
@@ -28288,7 +30462,11 @@
           s = n.split(':')[0],
           l = gf((t.x - e.x) / 2 + e.x),
           c = gf((t.y - e.y) / 2 + e.y),
-          p = ((o = a), { t: /top/, r: /right/, b: /bottom/, l: /left/, h: /left|right/, v: /top|bottom/ }[s].test(o)),
+          p =
+            ((o = a),
+            { t: /top/, r: /right/, b: /bottom/, l: /left/, h: /left|right/, v: /top|bottom/ }[
+              s
+            ].test(o)),
           u = /h|r|l/.test(s),
           d = !1
         return (
@@ -28299,7 +30477,8 @@
                 return !{ t: /top/, r: /right/, b: /bottom/, l: /left/, h: /./, v: /./ }[t].test(e)
               })(a, s)
                 ? u
-                  ? ((d = c === e.y), (r = { x: e.x + 20 * (/l/.test(s) ? -1 : 1), y: d ? c + 20 : c }))
+                  ? ((d = c === e.y),
+                    (r = { x: e.x + 20 * (/l/.test(s) ? -1 : 1), y: d ? c + 20 : c }))
                   : (r = { x: (d = l === e.x) ? l + 20 : l, y: e.y + 20 * (/t/.test(s) ? -1 : 1) })
                 : (r = { x: l, y: c })),
           { waypoints: Ef(e, r, i).concat(r), directions: i, turnNextDirections: d }
@@ -28315,7 +30494,9 @@
           })((n = n || 'h:h'))
         )
           throw new Error(
-            'unknown directions: <' + n + '>: must be specified as <start>:<end> with start/end in { h,v,t,r,b,l }'
+            'unknown directions: <' +
+              n +
+              '>: must be specified as <start>:<end> with start/end in { h,v,t,r,b,l }'
           )
         if (Cf(n)) {
           var r = (function (e, t, n) {
@@ -28332,9 +30513,13 @@
             o = (function (e, t) {
               var n = e.directions.split(':')[1],
                 r = t.directions.split(':')[0]
-              e.turnNextDirections && (n = 'h' == n ? 'v' : 'h'), t.turnNextDirections && (r = 'h' == r ? 'v' : 'h')
+              e.turnNextDirections && (n = 'h' == n ? 'v' : 'h'),
+                t.turnNextDirections && (r = 'h' == r ? 'v' : 'h')
               var i = n + ':' + r
-              return { waypoints: Ef(e.waypoints[e.waypoints.length - 1], t.waypoints[0], i), directions: i }
+              return {
+                waypoints: Ef(e.waypoints[e.waypoints.length - 1], t.waypoints[0], i),
+                directions: i
+              }
             })(r, i)
           return [].concat(r.waypoints, o.waypoints, i.waypoints)
         }
@@ -28449,7 +30634,8 @@
           })(a[1], o, n)),
           (i = (function (e, t, n) {
             var r
-            for (r = e.length - 2; 0 !== r; r--) if (Wt(e[r], t, 20) || Wt(e[r], n, 20)) return e.slice(r)
+            for (r = e.length - 2; 0 !== r; r--)
+              if (Wt(e[r], t, 20) || Wt(e[r], n, 20)) return e.slice(r)
             return e
           })(a, e, t)) !== a && (a = wf(e, t, n, i)),
           a && Ut(a) ? null : a
@@ -28459,7 +30645,11 @@
         return e && /t|r|b|l/.test(e)
       }
       function Pf(e, t, n, r) {
-        if (('h' === n && (n = /left/.test(r) ? 'l' : 'r'), 'v' === n && (n = /top/.test(r) ? 't' : 'b'), 't' === n))
+        if (
+          ('h' === n && (n = /left/.test(r) ? 'l' : 'r'),
+          'v' === n && (n = /top/.test(r) ? 't' : 'b'),
+          't' === n)
+        )
           return { original: e, x: e.x, y: t.y }
         if ('r' === n) return { original: e, x: t.x + t.width, y: e.y }
         if ('b' === n) return { original: e, x: e.x, y: t.y + t.height }
@@ -28503,7 +30693,11 @@
         return e ? e.original || e : en(t)
       }
       function Df(e, t) {
-        return oi(t, 'bpmn:Activity') && oi(e, 'bpmn:BoundaryEvent') && t.businessObject.isForCompensation
+        return (
+          oi(t, 'bpmn:Activity') &&
+          oi(e, 'bpmn:BoundaryEvent') &&
+          t.businessObject.isForCompensation
+        )
       }
       function Rf(e) {
         return oi(e, 'bpmn:SubProcess') && Ei(e)
@@ -28539,7 +30733,19 @@
         return l
           ? (function (e, t, n, r, i) {
               var o = t ? e : Nf(e)
-              return [Of[o] + ':' + (t ? (Lf(e) ? (qf('y', n, r, i) ? 'h' : 'b') : qf('x', n, r, i) ? 'v' : 'l') : 'v')]
+              return [
+                Of[o] +
+                  ':' +
+                  (t
+                    ? Lf(e)
+                      ? qf('y', n, r, i)
+                        ? 'h'
+                        : 'b'
+                      : qf('x', n, r, i)
+                      ? 'v'
+                      : 'l'
+                    : 'v')
+              ]
             })(s, c, e, t, n)
           : [
               (function (e, t, n) {
@@ -28577,7 +30783,11 @@
             ]
       }
       function qf(e, t, n, r) {
-        return !(Hf(e, r, n, 40) || Hf(e, r, { x: n.x + n.width, y: n.y + n.height }, 40) || Hf(e, r, en(t), 40))
+        return !(
+          Hf(e, r, n, 40) ||
+          Hf(e, r, { x: n.x + n.width, y: n.y + n.height }, 40) ||
+          Hf(e, r, en(t), 40)
+        )
       }
       function Hf(e, t, n, r) {
         return Math.abs(t[e] - n[e]) < r
@@ -28630,7 +30840,10 @@
                         E(n) && ((i = n), (o = r), (n = en(e)), (r = en(t))),
                         (i = i || []),
                         (a =
-                          -1 !== (o = K({ preferredLayouts: [] }, o)).preferredLayouts.indexOf('straight') &&
+                          -1 !==
+                            (o = K({ preferredLayouts: [] }, o)).preferredLayouts.indexOf(
+                              'straight'
+                            ) &&
                           (function (e, t, n, r, i) {
                             var o,
                               a,
@@ -28647,7 +30860,10 @@
                                           {
                                             x: void 0 !== s.x ? s.x : n.x,
                                             y: void 0 !== s.y ? s.y : n.y,
-                                            original: { x: void 0 !== s.x ? s.x : n.x, y: void 0 !== s.y ? s.y : n.y }
+                                            original: {
+                                              x: void 0 !== s.x ? s.x : n.x,
+                                              y: void 0 !== s.y ? s.y : n.y
+                                            }
                                           },
                                           { x: r.x, y: r.y }
                                         ])
@@ -28659,7 +30875,10 @@
                                         {
                                           x: void 0 !== s.x ? s.x : r.x,
                                           y: void 0 !== s.y ? s.y : r.y,
-                                          original: { x: void 0 !== s.x ? s.x : r.x, y: void 0 !== s.y ? s.y : r.y }
+                                          original: {
+                                            x: void 0 !== s.x ? s.x : r.x,
+                                            y: void 0 !== s.y ? s.y : r.y
+                                          }
                                         }
                                       ])
                                     : null)
@@ -28674,7 +30893,9 @@
                           })(t, e, r, i))
                           ? a
                           : (a = o.connectionStart && wf(e, t, n, i)) ||
-                            (!o.connectionStart && !o.connectionEnd && i && i.length ? i : xf(e, t, n, r, o))
+                            (!o.connectionStart && !o.connectionEnd && i && i.length
+                              ? i
+                              : xf(e, t, n, r, o))
                       )
                     })(i, o, s, l, a, (n = K(n, t)))
                   )),
@@ -28693,7 +30914,11 @@
           var r,
             i,
             o = e.waypoints
-          return { point: (i = o[(r = n ? 0 : o.length - 1)]), actual: this._getIntersection(t, e, n) || i, idx: r }
+          return {
+            point: (i = o[(r = n ? 0 : o.length - 1)]),
+            actual: this._getIntersection(t, e, n) || i,
+            idx: r
+          }
         }),
         (Uf.prototype._getIntersection = function (e, t, n) {
           return nn(this._getShapePath(e), this._getConnectionPath(t), n)
@@ -28728,7 +30953,11 @@
               return { x: e.x + Gf(e.width / 2), y: e.y + Gf(e.height / 2) }
             })(n)
             return (
-              t.init(e, o, 'shape.move', { cursor: 'grabbing', autoActivate: r, data: { shape: n, context: i || {} } }),
+              t.init(e, o, 'shape.move', {
+                cursor: 'grabbing',
+                autoActivate: r,
+                data: { shape: n, context: i || {} }
+              }),
               !0
             )
           }
@@ -28761,7 +30990,10 @@
               r = n.validatedShapes,
               i = e.hover,
               a = { x: e.dx, y: e.dy }
-            ;(t = o(r, a, { x: e.x, y: e.y }, i)), (n.delta = a), (n.canExecute = t), (n.target = null !== t ? i : null)
+            ;(t = o(r, a, { x: e.x, y: e.y }, i)),
+              (n.delta = a),
+              (n.canExecute = t),
+              (n.target = null !== t ? i : null)
           }),
           e.on('shape.move.end', function (e) {
             var t = e.context,
@@ -28772,7 +31004,8 @@
             if (!1 === i) return !1
             ;(r.x = Gf(r.x)),
               (r.y = Gf(r.y)),
-              (0 === r.x && 0 === r.y) || n.moveElements(a, r, t.target, { primaryShape: t.shape, attach: o })
+              (0 === r.x && 0 === r.y) ||
+                n.moveElements(a, r, t.target, { primaryShape: t.shape, attach: o })
           }),
           e.on('element.mousedown', function (e) {
             if (so(e)) {
@@ -28817,7 +31050,9 @@
             })
           if (!a.dragGroup) {
             var p = At('g')
-            lt(p, n.cls('djs-drag-group', ['no-events'])), ot(t.getActiveLayer(), p), (a.dragGroup = p)
+            lt(p, n.cls('djs-drag-group', ['no-events'])),
+              ot(t.getActiveLayer(), p),
+              (a.dragGroup = p)
           }
           c.forEach(function (e) {
             r.addDragger(e, a.dragGroup)
@@ -28910,7 +31145,9 @@
           return this._getProviders().reduce(iv, {})
         }),
         (rv.prototype._rebuild = function () {
-          this._diagramInitialized && this._getProviders().length && (this._container || this._init(), this._update())
+          this._diagramInitialized &&
+            this._getProviders().length &&
+            (this._container || this._init(), this._update())
         }),
         (rv.prototype._init = function () {
           var e = this,
@@ -28945,7 +31182,10 @@
             i = this._eventBus,
             o = re(r),
             a = re(n)
-          ;(t = 'twoColumn' in e ? e.twoColumn : this._needsCollapse(n.clientHeight, this._entries || {})),
+          ;(t =
+            'twoColumn' in e
+              ? e.twoColumn
+              : this._needsCollapse(n.clientHeight, this._entries || {})),
             o.toggle('two-column', t),
             a.toggle('djs-palette-two-column', t),
             'open' in e && (o.toggle(nv, e.open), a.toggle('djs-palette-open', e.open)),
@@ -28962,7 +31202,11 @@
               var o,
                 a,
                 s,
-                l = t.html || (t.separator ? '<hr class="separator" />' : '<div class="entry" draggable="true"></div>'),
+                l =
+                  t.html ||
+                  (t.separator
+                    ? '<hr class="separator" />'
+                    : '<div class="entry" draggable="true"></div>'),
                 c = ye(l)
               i.appendChild(c),
                 t.separator ||
@@ -29013,13 +31257,16 @@
         (rv.prototype.updateToolHighlight = function (e) {
           var t
           this._toolsContainer ||
-            ((t = Ee('.djs-palette-entries', this._container)), (this._toolsContainer = Ee('[data-group=tools]', t))),
+            ((t = Ee('.djs-palette-entries', this._container)),
+            (this._toolsContainer = Ee('[data-group=tools]', t))),
             O(this._toolsContainer.children, function (t) {
               var n = t.getAttribute('data-action')
               if (n) {
                 var r = re(t)
                 ;(n = n.replace('-tool', '')),
-                  r.contains('entry') && n === e ? r.add('highlighted-entry') : r.remove('highlighted-entry')
+                  r.contains('entry') && n === e
+                    ? r.add('highlighted-entry')
+                    : r.remove('highlighted-entry')
               }
             })
         }),
@@ -29057,7 +31304,13 @@
               (function (e) {
                 var n,
                   r = t.getActiveLayer()
-                lt((n = e.frame = At('rect')), { class: 'djs-lasso-overlay', width: 1, height: 1, x: 0, y: 0 }),
+                lt((n = e.frame = At('rect')), {
+                  class: 'djs-lasso-overlay',
+                  width: 1,
+                  height: 1,
+                  x: 0,
+                  y: 0
+                }),
                   ot(r, n)
               })(n)
           }),
@@ -29092,7 +31345,15 @@
           ? { x: n.x, y: n.y, width: t.x - n.x, height: t.y - n.y }
           : { x: n.x, y: n.y, width: 0, height: 0 }
       }
-      ;(sv.$inject = ['eventBus', 'canvas', 'dragging', 'elementRegistry', 'selection', 'toolManager', 'mouse']),
+      ;(sv.$inject = [
+        'eventBus',
+        'canvas',
+        'dragging',
+        'elementRegistry',
+        'selection',
+        'toolManager',
+        'mouse'
+      ]),
         (sv.prototype.activateLasso = function (e, t) {
           this._dragging.init(e, 'lasso', { autoActivate: t, cursor: av, data: { context: {} } })
         }),
@@ -29115,7 +31376,10 @@
                   !_(t.x) && r.y > t.y && (n[e.id] = e),
                   r.x > t.x &&
                     r.y > t.y &&
-                    (_(t.width) && _(t.height) && r.width + r.x < t.width + t.x && r.height + r.y < t.height + t.y
+                    (_(t.width) &&
+                    _(t.height) &&
+                    r.width + r.x < t.width + t.x &&
+                    r.height + r.y < t.height + t.y
                       ? (n[e.id] = e)
                       : (_(t.width) && _(t.height)) || (n[e.id] = e))
               }),
@@ -29141,7 +31405,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -29204,7 +31471,11 @@
       ;(mv.$inject = ['eventBus', 'canvas', 'dragging', 'injector', 'toolManager', 'mouse']),
         (mv.prototype.activateMove = function (e, t, n) {
           'object' === pv(t) && ((n = t), (t = !1)),
-            this._dragging.init(e, 'hand.move', { autoActivate: t, cursor: dv, data: { context: n || {} } })
+            this._dragging.init(e, 'hand.move', {
+              autoActivate: t,
+              cursor: dv,
+              data: { context: n || {} }
+            })
         }),
         (mv.prototype.activateHand = function (e, t, n) {
           this._dragging.init(e, 'hand', {
@@ -29231,7 +31502,10 @@
         ;(this._dragging = t),
           (this._rules = o),
           (this._mouse = a),
-          i.registerTool('global-connect', { tool: 'global-connect', dragging: 'global-connect.drag' }),
+          i.registerTool('global-connect', {
+            tool: 'global-connect',
+            dragging: 'global-connect.drag'
+          }),
           e.on('global-connect.hover', function (e) {
             var t = e.context,
               n = e.hover,
@@ -29258,9 +31532,21 @@
               )
           })
       }
-      ;(yv.$inject = ['eventBus', 'dragging', 'connect', 'canvas', 'toolManager', 'rules', 'mouse']),
+      ;(yv.$inject = [
+        'eventBus',
+        'dragging',
+        'connect',
+        'canvas',
+        'toolManager',
+        'rules',
+        'mouse'
+      ]),
         (yv.prototype.start = function (e, t) {
-          this._dragging.init(e, 'global-connect', { autoActivate: t, trapClick: !1, data: { context: {} } })
+          this._dragging.init(e, 'global-connect', {
+            autoActivate: t,
+            trapClick: !1,
+            data: { context: {} }
+          })
         }),
         (yv.prototype.toggle = function () {
           if (this.isActive()) return this._dragging.cancel()
@@ -29369,14 +31655,24 @@
                 }
               },
               'tool-separator': { group: 'tools', separator: !0 },
-              'create.start-event': c('bpmn:StartEvent', 'event', 'bpmn-icon-start-event-none', l('Create StartEvent')),
+              'create.start-event': c(
+                'bpmn:StartEvent',
+                'event',
+                'bpmn-icon-start-event-none',
+                l('Create StartEvent')
+              ),
               'create.intermediate-event': c(
                 'bpmn:IntermediateThrowEvent',
                 'event',
                 'bpmn-icon-intermediate-event-none',
                 l('Create Intermediate/Boundary Event')
               ),
-              'create.end-event': c('bpmn:EndEvent', 'event', 'bpmn-icon-end-event-none', l('Create EndEvent')),
+              'create.end-event': c(
+                'bpmn:EndEvent',
+                'event',
+                'bpmn-icon-end-event-none',
+                l('Create EndEvent')
+              ),
               'create.exclusive-gateway': c(
                 'bpmn:ExclusiveGateway',
                 'gateway',
@@ -29450,8 +31746,13 @@
                   })(o)
           })
       }
-      ;(xv.$inject = ['eventBus', 'elementRegistry', 'elementFactory', 'canvas', 'previewSupport']), u()(xv, Mo)
-      const _v = { __depends__: [Pl], __init__: ['bpmnReplacePreview'], bpmnReplacePreview: ['type', xv] }
+      ;(xv.$inject = ['eventBus', 'elementRegistry', 'elementFactory', 'canvas', 'previewSupport']),
+        u()(xv, Mo)
+      const _v = {
+        __depends__: [Pl],
+        __init__: ['bpmnReplacePreview'],
+        bpmnReplacePreview: ['type', xv]
+      }
       var wv = ['x', 'y'],
         Cv = Math.abs
       function Pv(e) {
@@ -29470,7 +31771,9 @@
               (function (e, t, n) {
                 wv.forEach(function (r) {
                   var i = Ov(r, t)
-                  e[r] < t[r] + n ? Zs(e, r, t[r] + n) : e[r] > t[r] + i - n && Zs(e, r, t[r] + i - n)
+                  e[r] < t[r] + n
+                    ? Zs(e, r, t[r] + n)
+                    : e[r] > t[r] + i - n && Zs(e, r, t[r] + i - n)
                 })
               })(
                 e,
@@ -29482,7 +31785,12 @@
             o &&
             ((t = r),
             j(
-              ['bpmn:Association', 'bpmn:DataInputAssociation', 'bpmn:DataOutputAssociation', 'bpmn:SequenceFlow'],
+              [
+                'bpmn:Association',
+                'bpmn:DataInputAssociation',
+                'bpmn:DataOutputAssociation',
+                'bpmn:SequenceFlow'
+              ],
               function (e) {
                 return Sv(t, e)
               }
@@ -29524,7 +31832,8 @@
                     }
                   })(e))
               : Sv(r, 'bpmn:MessageFlow')
-              ? (oi(i, 'bpmn:Event') && (n.connectionStart = Js(i)), oi(o, 'bpmn:Event') && kv(e, Js(o)))
+              ? (oi(i, 'bpmn:Event') && (n.connectionStart = Js(i)),
+                oi(o, 'bpmn:Event') && kv(e, Js(o)))
               : (n.connectionStart = n.initialConnectionStart))
         })
       }
@@ -29538,7 +31847,10 @@
         return 'x' === e ? t.width : t.height
       }
       function Tv() {
-        ;(this._targets = {}), (this._snapOrigins = {}), (this._snapLocations = []), (this._defaultSnaps = {})
+        ;(this._targets = {}),
+          (this._snapOrigins = {}),
+          (this._snapLocations = []),
+          (this._defaultSnaps = {})
       }
       function Bv(e) {
         this._snapValues = {}
@@ -29549,16 +31861,21 @@
           t.on(['create.start', 'shape.move.start'], function (e) {
             r.initSnap(e)
           }),
-          t.on(['create.move', 'create.end', 'shape.move.move', 'shape.move.end'], 1250, function (e) {
-            var t = e.context,
-              i = t.shape,
-              o = t.snapContext,
-              a = t.target
-            if ((!e.originalEvent || !ea(e.originalEvent)) && !Xs(e) && a) {
-              var s = o.pointsForTarget(a)
-              s.initialized || ((s = r.addSnapTargetPoints(s, i, a)).initialized = !0), n.snap(e, s)
+          t.on(
+            ['create.move', 'create.end', 'shape.move.move', 'shape.move.end'],
+            1250,
+            function (e) {
+              var t = e.context,
+                i = t.shape,
+                o = t.snapContext,
+                a = t.target
+              if ((!e.originalEvent || !ea(e.originalEvent)) && !Xs(e) && a) {
+                var s = o.pointsForTarget(a)
+                s.initialized || ((s = r.addSnapTargetPoints(s, i, a)).initialized = !0),
+                  n.snap(e, s)
+              }
             }
-          }),
+          ),
           t.on(['create.cleanup', 'shape.move.cleanup'], function () {
             n.hide()
           })
@@ -29569,23 +31886,31 @@
       function Dv(e, t) {
         t.invoke(jv, this),
           e.on(['create.move', 'create.end'], 1500, Rv),
-          e.on(['create.move', 'create.end', 'shape.move.move', 'shape.move.end'], 1500, function (e) {
-            var t = e.context,
-              n = t.canExecute,
-              r = t.target
-            n &&
-              ('attach' === n || n.attach) &&
-              !Xs(e) &&
-              (function (e, t) {
-                var n,
-                  r = Xt(t),
-                  i = zd(e, t),
-                  o = e.context.shape
-                ;(n = o.parent ? { x: 0, y: 0 } : en(o)),
-                  /top/.test(i) ? Zs(e, 'y', r.top - n.y) : /bottom/.test(i) && Zs(e, 'y', r.bottom - n.y),
-                  /left/.test(i) ? Zs(e, 'x', r.left - n.x) : /right/.test(i) && Zs(e, 'x', r.right - n.x)
-              })(e, r)
-          })
+          e.on(
+            ['create.move', 'create.end', 'shape.move.move', 'shape.move.end'],
+            1500,
+            function (e) {
+              var t = e.context,
+                n = t.canExecute,
+                r = t.target
+              n &&
+                ('attach' === n || n.attach) &&
+                !Xs(e) &&
+                (function (e, t) {
+                  var n,
+                    r = Xt(t),
+                    i = zd(e, t),
+                    o = e.context.shape
+                  ;(n = o.parent ? { x: 0, y: 0 } : en(o)),
+                    /top/.test(i)
+                      ? Zs(e, 'y', r.top - n.y)
+                      : /bottom/.test(i) && Zs(e, 'y', r.bottom - n.y),
+                    /left/.test(i)
+                      ? Zs(e, 'x', r.left - n.x)
+                      : /right/.test(i) && Zs(e, 'x', r.right - n.x)
+                })(e, r)
+            }
+          )
       }
       function Rv(e) {
         var t = e.context.createConstraints
@@ -29649,7 +31974,8 @@
           return this._snapOrigins[e]
         }),
         (Tv.prototype.setSnapOrigin = function (e, t) {
-          ;(this._snapOrigins[e] = t), -1 === this._snapLocations.indexOf(e) && this._snapLocations.push(e)
+          ;(this._snapOrigins[e] = t),
+            -1 === this._snapLocations.indexOf(e) && this._snapLocations.push(e)
         }),
         (Tv.prototype.addDefaultSnap = function (e, t) {
           var n = this._defaultSnaps[e]
@@ -29678,7 +32004,8 @@
             i &&
             (function (e, t, n) {
               var r, i
-              for (n = void 0 === n ? 10 : n, r = 0; r < t.length; r++) if (((i = t[r]), Gs(i - e) <= n)) return i
+              for (n = void 0 === n ? 10 : n, r = 0; r < t.length; r++)
+                if (((i = t[r]), Gs(i - e) <= n)) return i
             })(e[n], i[n], r)
           )
         }),
@@ -29698,7 +32025,8 @@
             i = r.shape,
             o = r.snapContext
           o || (o = r.snapContext = new Tv())
-          var a = (t = n.get(i.id) ? Js(i, e) : { x: e.x + Js(i).x, y: e.y + Js(i).y }).x - i.width / 2,
+          var a =
+              (t = n.get(i.id) ? Js(i, e) : { x: e.x + Js(i).x, y: e.y + Js(i).y }).x - i.width / 2,
             s = t.y - i.height / 2,
             l = t.x + i.width / 2,
             c = t.y + i.height / 2
@@ -29836,7 +32164,9 @@
             if (
               (O(['x', 'y'], function (e) {
                 var n
-                i[e] || (void 0 !== (n = t.snap(a, r, e, 7)) && (i[e] = { value: n, originValue: n - o[e] }))
+                i[e] ||
+                  (void 0 !== (n = t.snap(a, r, e, 7)) &&
+                    (i[e] = { value: n, originValue: n - o[e] }))
               }),
               i.x && i.y)
             )
@@ -29871,7 +32201,10 @@
           )
         }),
         (Fv.prototype._createSnapLines = function () {
-          this._snapLines = { horizontal: this._createLine('horizontal'), vertical: this._createLine('vertical') }
+          this._snapLines = {
+            horizontal: this._createLine('horizontal'),
+            vertical: this._createLine('vertical')
+          }
         }),
         (Fv.prototype.showSnapLine = function (e, t) {
           var n = this.getSnapLine(e)
@@ -29918,7 +32251,12 @@
             return (
               e.forEach(function (e) {
                 e.matched
-                  ? (t += '<strong class="' + qv.RESULT_HIGHLIGHT_CLASS + '">' + Lo(e.matched) + '</strong>')
+                  ? (t +=
+                      '<strong class="' +
+                      qv.RESULT_HIGHLIGHT_CLASS +
+                      '">' +
+                      Lo(e.matched) +
+                      '</strong>')
                   : (t += Lo(e.normal))
               }),
               '' !== t ? t : null
@@ -29993,7 +32331,9 @@
             var t = e.offsetTop,
               n = this._resultsContainer.scrollTop,
               r = t - this._resultsContainer.clientHeight + e.clientHeight
-            t < n ? (this._resultsContainer.scrollTop = t) : n < r && (this._resultsContainer.scrollTop = r)
+            t < n
+              ? (this._resultsContainer.scrollTop = t)
+              : n < r && (this._resultsContainer.scrollTop = r)
           }
         }),
         (qv.prototype._clearResults = function () {
@@ -30207,7 +32547,8 @@
                 l,
                 c = -e[n] + r[n],
                 p = t.get('gridSnapping', !1)
-              p && ((a = c), (s = p.getGridSpacing()), l || (l = 'round'), (c = Math[l](a / s) * s)),
+              p &&
+                ((a = c), (s = p.getGridSpacing()), l || (l = 'round'), (c = Math[l](a / s) * s)),
                 (o[n] = Math.abs(c) < i ? 0 : c)
             }),
             o
@@ -30218,7 +32559,8 @@
             n = i.getRootElement().children
           if (n.length) {
             var o = a(t, e)
-            ;(0 === o.x && 0 === o.y) || r.execute('elements.alignToOrigin', { elements: n, delta: o })
+            ;(0 === o.x && 0 === o.y) ||
+              r.execute('elements.alignToOrigin', { elements: n, delta: o })
           }
         }
         function l(e) {
@@ -30256,7 +32598,14 @@
           (this.computeAdjustment = a),
           (this._config = e)
       }
-      Jv.$inject = ['config.alignToOrigin', 'injector', 'eventBus', 'commandStack', 'canvas', 'modeling']
+      Jv.$inject = [
+        'config.alignToOrigin',
+        'injector',
+        'eventBus',
+        'commandStack',
+        'canvas',
+        'modeling'
+      ]
       const Xv = { __init__: ['alignToOrigin'], alignToOrigin: ['type', Jv] }
       function Zv(e, t) {
         if (!e) throw new Error('config.exporter = { name, version } not configured')
@@ -30285,7 +32634,9 @@
           var r = e.get(t)
           if (!r) {
             if (n.optional) return null
-            throw t ? new Error('element with id <' + t + '> does not exist') : new Error('argument required')
+            throw t
+              ? new Error('element with id <' + t + '> does not exist')
+              : new Error('argument required')
           }
           return r
         }
@@ -30296,7 +32647,9 @@
           var r = e.get(t)
           if (!r) {
             if (n.optional) return null
-            throw t ? new Error('element with id <' + t + '> does not exist') : new Error('argument required')
+            throw t
+              ? new Error('element with id <' + t + '> does not exist')
+              : new Error('argument required')
           }
           if (r.waypoints) throw new Error('element <' + t + '> is a connection')
           return r
@@ -30312,7 +32665,9 @@
                 var r = e.get(t)
                 if (!r) {
                   if (n.optional) return null
-                  throw t ? new Error('element with id <' + t + '> does not exist') : new Error('argument required')
+                  throw t
+                    ? new Error('element with id <' + t + '> does not exist')
+                    : new Error('argument required')
                 }
                 if (r.waypoints) throw new Error('element <' + t + '> is a connection')
                 return r
@@ -30323,7 +32678,9 @@
           )
         }
       }
-      ;(ng.$inject = ['elementRegistry']), (rg.$inject = ['elementRegistry']), (ig.$inject = ['elementRegistry'])
+      ;(ng.$inject = ['elementRegistry']),
+        (rg.$inject = ['elementRegistry']),
+        (ig.$inject = ['elementRegistry'])
       var og = n(1385),
         ag = n.n(og),
         sg = n(5409),
@@ -30404,7 +32761,8 @@
         (Dg.prototype._bind = function (e) {
           e.cli &&
             e.cli.bindTo &&
-            (console.info('bpmn-js-cli is available via window.' + e.cli.bindTo), (window[e.cli.bindTo] = this))
+            (console.info('bpmn-js-cli is available via window.' + e.cli.bindTo),
+            (window[e.cli.bindTo] = this))
         }),
         (Dg.prototype._registerParser = function (e, t) {
           var n,
@@ -30431,7 +32789,9 @@
           }
         }),
         (Dg.prototype._registerParsers = function () {
-          this._registerParser('string', Bg), this._registerParser('number', Mg), this._registerParser('bool', jg)
+          this._registerParser('string', Bg),
+            this._registerParser('number', Mg),
+            this._registerParser('bool', jg)
         }),
         (Dg.prototype._registerCommands = function () {
           var e = this
@@ -30472,11 +32832,16 @@
             n,
             r = e.shift(),
             i = this._commands[r]
-          if (!i) throw new Error('no command <' + r + '>, execute <commands> to get a list of available commands')
+          if (!i)
+            throw new Error(
+              'no command <' + r + '>, execute <commands> to get a list of available commands'
+            )
           try {
             ;(t = this.parseArguments(e, i)), (n = i.exec.apply(this, t))
           } catch (t) {
-            throw new Error('failed to execute <' + r + '> with args <[' + e.join(', ') + ']> : ' + t.stack)
+            throw new Error(
+              'failed to execute <' + r + '> with args <[' + e.join(', ') + ']> : ' + t.stack
+            )
           }
           return n
         })
@@ -30605,7 +32970,11 @@
                 ? Gg(m.type, m.props, m.key, null, m.__v)
                 : m)
           ) {
-            if (((m.__ = n), (m.__b = n.__b + 1), null === (d = g[p]) || (d && m.key == d.key && m.type === d.type)))
+            if (
+              ((m.__ = n),
+              (m.__b = n.__b + 1),
+              null === (d = g[p]) || (d && m.key == d.key && m.type === d.type))
+            )
               g[p] = void 0
             else
               for (u = 0; u < y; u++) {
@@ -30617,25 +32986,34 @@
               }
             ly(e, m, (d = d || Vg), i, o, a, s, l, c),
               (h = m.__e),
-              (u = m.ref) && d.ref != u && (v || (v = []), d.ref && v.push(d.ref, null, m), v.push(u, m.__c || h, m)),
+              (u = m.ref) &&
+                d.ref != u &&
+                (v || (v = []), d.ref && v.push(d.ref, null, m), v.push(u, m.__c || h, m)),
               null != h
                 ? (null == f && (f = h),
                   'function' == typeof m.type && null != m.__k && m.__k === d.__k
                     ? (m.__d = l = ty(m, l, e))
                     : (l = ry(e, m, d, g, h, l)),
-                  c || 'option' !== n.type ? 'function' == typeof n.type && (n.__d = l) : (e.value = ''))
+                  c || 'option' !== n.type
+                    ? 'function' == typeof n.type && (n.__d = l)
+                    : (e.value = ''))
                 : l && d.__e == l && l.parentNode != e && (l = Yg(d))
           }
         for (n.__e = f, p = y; p--; )
           null != g[p] &&
-            ('function' == typeof n.type && null != g[p].__e && g[p].__e == n.__d && (n.__d = Yg(r, p + 1)),
+            ('function' == typeof n.type &&
+              null != g[p].__e &&
+              g[p].__e == n.__d &&
+              (n.__d = Yg(r, p + 1)),
             dy(g[p], g[p]))
         if (v) for (p = 0; p < v.length; p++) uy(v[p], v[++p], v[++p])
       }
       function ty(e, t, n) {
         var r, i
         for (r = 0; r < e.__k.length; r++)
-          (i = e.__k[r]) && ((i.__ = e), (t = 'function' == typeof i.type ? ty(i, t, n) : ry(n, i, i, e.__k, i.__e, t)))
+          (i = e.__k[r]) &&
+            ((i.__ = e),
+            (t = 'function' == typeof i.type ? ty(i, t, n) : ry(n, i, i, e.__k, i.__e, t)))
         return t
       }
       function ny(e, t) {
@@ -30663,7 +33041,9 @@
         return void 0 !== a ? a : i.nextSibling
       }
       function iy(e, t, n) {
-        '-' === t[0] ? e.setProperty(t, n) : (e[t] = null == n ? '' : 'number' != typeof n || Hg.test(t) ? n : n + 'px')
+        '-' === t[0]
+          ? e.setProperty(t, n)
+          : (e[t] = null == n ? '' : 'number' != typeof n || Hg.test(t) ? n : n + 'px')
       }
       function oy(e, t, n, r, i) {
         var o
@@ -30679,16 +33059,27 @@
             (t = t.toLowerCase() in e ? t.toLowerCase().slice(2) : t.slice(2)),
             e.l || (e.l = {}),
             (e.l[t + o] = n),
-            n ? r || e.addEventListener(t, o ? sy : ay, o) : e.removeEventListener(t, o ? sy : ay, o)
+            n
+              ? r || e.addEventListener(t, o ? sy : ay, o)
+              : e.removeEventListener(t, o ? sy : ay, o)
         else if ('dangerouslySetInnerHTML' !== t) {
           if (i) t = t.replace(/xlink[H:h]/, 'h').replace(/sName$/, 's')
-          else if ('href' !== t && 'list' !== t && 'form' !== t && 'tabIndex' !== t && 'download' !== t && t in e)
+          else if (
+            'href' !== t &&
+            'list' !== t &&
+            'form' !== t &&
+            'tabIndex' !== t &&
+            'download' !== t &&
+            t in e
+          )
             try {
               e[t] = null == n ? '' : n
               break e
             } catch (e) {}
           'function' == typeof n ||
-            (null != n && (!1 !== n || ('a' === t[0] && 'r' === t[1])) ? e.setAttribute(t, n) : e.removeAttribute(t))
+            (null != n && (!1 !== n || ('a' === t[0] && 'r' === t[1]))
+              ? e.setAttribute(t, n)
+              : e.removeAttribute(t))
         }
       }
       function ay(e) {
@@ -30711,7 +33102,8 @@
           b,
           A = t.type
         if (void 0 !== t.constructor) return null
-        null != n.__h && ((l = n.__h), (s = t.__e = n.__e), (t.__h = null), (o = [s])), (c = zg.__b) && c(t)
+        null != n.__h && ((l = n.__h), (s = t.__e = n.__e), (t.__h = null), (o = [s])),
+          (c = zg.__b) && c(t)
         try {
           e: if ('function' == typeof A) {
             if (
@@ -30732,12 +33124,15 @@
                   (p.__h = [])),
               null == p.__s && (p.__s = p.state),
               null != A.getDerivedStateFromProps &&
-                (p.__s == p.state && (p.__s = $g({}, p.__s)), $g(p.__s, A.getDerivedStateFromProps(v, p.__s))),
+                (p.__s == p.state && (p.__s = $g({}, p.__s)),
+                $g(p.__s, A.getDerivedStateFromProps(v, p.__s))),
               (d = p.props),
               (m = p.state),
               u)
             )
-              null == A.getDerivedStateFromProps && null != p.componentWillMount && p.componentWillMount(),
+              null == A.getDerivedStateFromProps &&
+                null != p.componentWillMount &&
+                p.componentWillMount(),
                 null != p.componentDidMount && p.__h.push(p.componentDidMount)
             else {
               if (
@@ -30745,7 +33140,9 @@
                   v !== d &&
                   null != p.componentWillReceiveProps &&
                   p.componentWillReceiveProps(v, y),
-                (!p.__e && null != p.shouldComponentUpdate && !1 === p.shouldComponentUpdate(v, p.__s, y)) ||
+                (!p.__e &&
+                  null != p.shouldComponentUpdate &&
+                  !1 === p.shouldComponentUpdate(v, p.__s, y)) ||
                   t.__v === n.__v)
               ) {
                 ;(p.props = v),
@@ -30785,10 +33182,14 @@
               f && (p.__E = p.__ = null),
               (p.__e = !1)
           } else
-            null == o && t.__v === n.__v ? ((t.__k = n.__k), (t.__e = n.__e)) : (t.__e = py(n.__e, t, n, r, i, o, a, l))
+            null == o && t.__v === n.__v
+              ? ((t.__k = n.__k), (t.__e = n.__e))
+              : (t.__e = py(n.__e, t, n, r, i, o, a, l))
           ;(c = zg.diffed) && c(t)
         } catch (e) {
-          ;(t.__v = null), (l || null != o) && ((t.__e = s), (t.__h = !!l), (o[o.indexOf(s)] = null)), zg.__e(e, t, n)
+          ;(t.__v = null),
+            (l || null != o) && ((t.__e = s), (t.__h = !!l), (o[o.indexOf(s)] = null)),
+            zg.__e(e, t, n)
         }
       }
       function cy(e, t) {
@@ -30822,7 +33223,9 @@
             }
         if (null == e) {
           if (null === h) return document.createTextNode(m)
-          ;(e = i ? document.createElementNS('http://www.w3.org/2000/svg', h) : document.createElement(h, m.is && m)),
+          ;(e = i
+            ? document.createElementNS('http://www.w3.org/2000/svg', h)
+            : document.createElement(h, m.is && m)),
             (o = null),
             (s = !1)
         }
@@ -30835,7 +33238,8 @@
             !s)
           ) {
             if (null != o)
-              for (d = {}, u = 0; u < e.attributes.length; u++) d[e.attributes[u].name] = e.attributes[u].value
+              for (d = {}, u = 0; u < e.attributes.length; u++)
+                d[e.attributes[u].name] = e.attributes[u].value
             ;(p || c) &&
               ((p && ((c && p.__html == c.__html) || p.__html === e.innerHTML)) ||
                 (e.innerHTML = (p && p.__html) || ''))
@@ -30858,7 +33262,18 @@
             t.__k = []
           else if (
             ((f = t.props.children),
-            ey(e, Array.isArray(f) ? f : [f], t, n, r, i && 'foreignObject' !== h, o, a, e.firstChild, s),
+            ey(
+              e,
+              Array.isArray(f) ? f : [f],
+              t,
+              n,
+              r,
+              i && 'foreignObject' !== h,
+              o,
+              a,
+              e.firstChild,
+              s
+            ),
             null != o)
           )
             for (f = o.length; f--; ) null != o[f] && Ug(o[f])
@@ -30867,7 +33282,10 @@
               void 0 !== (f = m.value) &&
               (f !== e.value || ('progress' === h && !f)) &&
               oy(e, 'value', f, d.value, !1),
-            'checked' in m && void 0 !== (f = m.checked) && f !== e.checked && oy(e, 'checked', f, d.checked, !1))
+            'checked' in m &&
+              void 0 !== (f = m.checked) &&
+              f !== e.checked &&
+              oy(e, 'checked', f, d.checked, !1))
         }
         return e
       }
@@ -30973,7 +33391,10 @@
       }),
         (Kg.prototype.setState = function (e, t) {
           var n
-          ;(n = null != this.__s && this.__s !== this.state ? this.__s : (this.__s = $g({}, this.state))),
+          ;(n =
+            null != this.__s && this.__s !== this.state
+              ? this.__s
+              : (this.__s = $g({}, this.state))),
             'function' == typeof e && (e = e($g({}, n), this.props)),
             e && $g(n, e),
             null != e && this.__v && (t && this.__h.push(t), Xg(this))
@@ -30983,7 +33404,10 @@
         }),
         (Kg.prototype.render = Qg),
         (Ig = []),
-        (Ng = 'function' == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout),
+        (Ng =
+          'function' == typeof Promise
+            ? Promise.prototype.then.bind(Promise.resolve())
+            : setTimeout),
         (Zg.__r = 0),
         (Fg = 0)
       var vy,
@@ -31293,7 +33717,8 @@
           }).apply(this, arguments)
       }
       function pb(e) {
-        for (var t = arguments.length, n = new Array(t > 1 ? t - 1 : 0), r = 1; r < t; r++) n[r - 1] = arguments[r]
+        for (var t = arguments.length, n = new Array(t > 1 ? t - 1 : 0), r = 1; r < t; r++)
+          n[r - 1] = arguments[r]
         return cb.apply(void 0, [e].concat(n))
       }
       var ub = n(3588),
@@ -31305,7 +33730,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -31331,7 +33759,8 @@
       zg.__e = function (e, t, n) {
         if (e.then)
           for (var r, i = t; (i = i.__); )
-            if ((r = i.__c) && r.__c) return null == t.__e && ((t.__e = n.__e), (t.__k = n.__k)), r.__c(e, t)
+            if ((r = i.__c) && r.__c)
+              return null == t.__e && ((t.__e = n.__e), (t.__k = n.__k)), r.__c(e, t)
         gb(e, t, n)
       }
       var yb = zg.unmount
@@ -31374,7 +33803,9 @@
                           })),
                         t.__c &&
                           t.__c.__P === n &&
-                          (t.__e && r.insertBefore(t.__e, t.__d), (t.__c.__e = !0), (t.__c.__P = r))),
+                          (t.__e && r.insertBefore(t.__e, t.__d),
+                          (t.__c.__e = !0),
+                          (t.__c.__P = r))),
                       t
                     )
                   })(e, e.__c.__P, e.__c.__O)
@@ -31423,7 +33854,10 @@
           return i && (i.__h = null), [Wg(Qg, null, t.__e ? null : e.children), i]
         })
       var xb = function (e, t, n) {
-        if ((++n[1] === n[0] && e.o.delete(t), e.props.revealOrder && ('t' !== e.props.revealOrder[0] || !e.o.size)))
+        if (
+          (++n[1] === n[0] && e.o.delete(t),
+          e.props.revealOrder && ('t' !== e.props.revealOrder[0] || !e.o.size))
+        )
           for (n = e.u; n; ) {
             for (; n.length > 3; ) n.pop()()
             if (n[1] < n[0]) break
@@ -31462,20 +33896,26 @@
         wb =
           /^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|fill|flood|font|glyph(?!R)|horiz|marker(?!H|W|U)|overline|paint|stop|strikethrough|stroke|text(?!L)|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/,
         Cb = function (e) {
-          return ('undefined' != typeof Symbol && 'symbol' == mb(Symbol()) ? /fil|che|rad/i : /fil|che|ra/i).test(e)
+          return (
+            'undefined' != typeof Symbol && 'symbol' == mb(Symbol())
+              ? /fil|che|rad/i
+              : /fil|che|ra/i
+          ).test(e)
         }
       ;(Kg.prototype.isReactComponent = {}),
-        ['componentWillMount', 'componentWillReceiveProps', 'componentWillUpdate'].forEach(function (e) {
-          Object.defineProperty(Kg.prototype, e, {
-            configurable: !0,
-            get: function () {
-              return this['UNSAFE_' + e]
-            },
-            set: function (t) {
-              Object.defineProperty(this, e, { configurable: !0, writable: !0, value: t })
-            }
-          })
-        })
+        ['componentWillMount', 'componentWillReceiveProps', 'componentWillUpdate'].forEach(
+          function (e) {
+            Object.defineProperty(Kg.prototype, e, {
+              configurable: !0,
+              get: function () {
+                return this['UNSAFE_' + e]
+              },
+              set: function (t) {
+                Object.defineProperty(this, e, { configurable: !0, writable: !0, value: t })
+              }
+            })
+          }
+        )
       var Pb = zg.event
       function kb() {}
       function Sb() {
@@ -31576,7 +34016,8 @@
             __source: r,
             __self: i
           }
-        if ('function' == typeof e && (s = e.defaultProps)) for (l in s) void 0 === o[l] && (o[l] = s[l])
+        if ('function' == typeof e && (s = e.defaultProps))
+          for (l in s) void 0 === o[l] && (o[l] = s[l])
         return zg.vnode && zg.vnode(c), c
       }
       var Rb = ['children', 'class', 'onClick']
@@ -31640,7 +34081,10 @@
             if (Array.isArray(e)) return e
           })(e) ||
           (function (e, t) {
-            var n = null == e ? null : ('undefined' != typeof Symbol && e[Symbol.iterator]) || e['@@iterator']
+            var n =
+              null == e
+                ? null
+                : ('undefined' != typeof Symbol && e[Symbol.iterator]) || e['@@iterator']
             if (null != n) {
               var r,
                 i,
@@ -31648,7 +34092,11 @@
                 a = !0,
                 s = !1
               try {
-                for (n = n.call(e); !(a = (r = n.next()).done) && (o.push(r.value), !t || o.length !== t); a = !0);
+                for (
+                  n = n.call(e);
+                  !(a = (r = n.next()).done) && (o.push(r.value), !t || o.length !== t);
+                  a = !0
+                );
               } catch (e) {
                 ;(s = !0), (i = e)
               } finally {
@@ -31718,7 +34166,12 @@
       function Hb(e, t, n) {
         return (
           t in e
-            ? Object.defineProperty(e, t, { value: n, enumerable: !0, configurable: !0, writable: !0 })
+            ? Object.defineProperty(e, t, {
+                value: n,
+                enumerable: !0,
+                configurable: !0,
+                writable: !0
+              })
             : (e[t] = n),
           e
         )
@@ -31788,7 +34241,12 @@
           )
         )
       }
-      Gb.defaultProps = { width: '16', height: '16', fill: 'none', xmlns: 'http://www.w3.org/2000/svg' }
+      Gb.defaultProps = {
+        width: '16',
+        height: '16',
+        fill: 'none',
+        xmlns: 'http://www.w3.org/2000/svg'
+      }
       var Qb = function (e) {
         return Db(
           'svg',
@@ -31797,7 +34255,10 @@
             {},
             {
               children: [
-                Db('path', { d: 'M5.8 7.06V5.95h4.307v1.11H5.8zm0 3.071v-1.11h4.307v1.11H5.8z', fill: '#505562' }),
+                Db('path', {
+                  d: 'M5.8 7.06V5.95h4.307v1.11H5.8zm0 3.071v-1.11h4.307v1.11H5.8z',
+                  fill: '#505562'
+                }),
                 Db('path', {
                   fillRule: 'evenodd',
                   clipRule: 'evenodd',
@@ -31822,7 +34283,10 @@
             {},
             {
               children: [
-                Db('path', { d: 'M5.845 7.04V5.93h4.307v1.11H5.845zm0 3.07V9h4.307v1.11H5.845z', fill: '#505562' }),
+                Db('path', {
+                  d: 'M5.845 7.04V5.93h4.307v1.11H5.845zm0 3.07V9h4.307v1.11H5.845z',
+                  fill: '#505562'
+                }),
                 Db('path', {
                   fillRule: 'evenodd',
                   clipRule: 'evenodd',
@@ -31856,7 +34320,9 @@
               class: 'bio-properties-panel-header-labels',
               children: [
                 Db('div', { title: l, class: 'bio-properties-panel-header-type', children: l }),
-                s ? Db('div', { title: s, class: 'bio-properties-panel-header-label', children: s }) : null
+                s
+                  ? Db('div', { title: s, class: 'bio-properties-panel-header-label', children: s })
+                  : null
               ]
             }),
             Db('div', {
@@ -31941,7 +34407,9 @@
             function () {
               i &&
                 n.current &&
-                (w(n.current.focus) && n.current.focus(), w(n.current.select) && n.current.select(), o(!1))
+                (w(n.current.focus) && n.current.focus(),
+                w(n.current.select) && n.current.select(),
+                o(!1))
             },
             [i]
           ),
@@ -32015,7 +34483,11 @@
                 return c(!l)
               },
               children: [
-                Db('div', { title: o, class: 'bio-properties-panel-group-header-title', children: o }),
+                Db('div', {
+                  title: o,
+                  class: 'bio-properties-panel-group-header-title',
+                  children: o
+                }),
                 Db('div', {
                   class: 'bio-properties-panel-group-header-buttons',
                   children: [
@@ -32024,7 +34496,9 @@
                       title: 'Toggle section',
                       class: 'bio-properties-panel-group-header-button bio-properties-panel-arrow',
                       children: Db($b, {
-                        class: l ? 'bio-properties-panel-arrow-down' : 'bio-properties-panel-arrow-right'
+                        class: l
+                          ? 'bio-properties-panel-arrow-down'
+                          : 'bio-properties-panel-arrow-right'
                       })
                     })
                   ]
@@ -32098,7 +34572,8 @@
                   if ('__proto__' === e) throw new Error('illegal key: __proto__')
                   var o = n[t + 1],
                     a = i[e]
-                  b(o) && A(a) && (a = i[e] = isNaN(+o) ? {} : []), y(o) ? (y(r) ? delete i[e] : (i[e] = r)) : (i = a)
+                  b(o) && A(a) && (a = i[e] = isNaN(+o) ? {} : []),
+                    y(o) ? (y(r) ? delete i[e] : (i[e] = r)) : (i = a)
                 }),
                 h(o)
             }
@@ -32237,7 +34712,10 @@
                 if (Array.isArray(e)) return Fb(e)
               })((r = t)) ||
                 (function (e) {
-                  if (('undefined' != typeof Symbol && null != e[Symbol.iterator]) || null != e['@@iterator'])
+                  if (
+                    ('undefined' != typeof Symbol && null != e[Symbol.iterator]) ||
+                    null != e['@@iterator']
+                  )
                     return Array.from(e)
                 })(r) ||
                 Lb(r) ||
@@ -32289,7 +34767,10 @@
               },
               children: t.entry
             })
-          : Db('div', { class: 'bio-properties-panel-dropdown-button__menu-item', children: t.entry })
+          : Db('div', {
+              class: 'bio-properties-panel-dropdown-button__menu-item',
+              children: t.entry
+            })
       }
       function mA(e) {
         var t = e.children,
@@ -32318,7 +34799,9 @@
                 if (Object.getOwnPropertySymbols) {
                   var o = Object.getOwnPropertySymbols(e)
                   for (r = 0; r < o.length; r++)
-                    (n = o[r]), t.indexOf(n) >= 0 || (Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]))
+                    (n = o[r]),
+                      t.indexOf(n) >= 0 ||
+                        (Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]))
                 }
                 return i
               })(e, Rb)
@@ -32372,7 +34855,9 @@
                   title: 'Toggle list item',
                   class: 'bio-properties-panel-arrow  bio-properties-panel-collapsible-entry-arrow',
                   children: Db($b, {
-                    class: c ? 'bio-properties-panel-arrow-down' : 'bio-properties-panel-arrow-right'
+                    class: c
+                      ? 'bio-properties-panel-arrow-down'
+                      : 'bio-properties-panel-arrow-right'
                   })
                 }),
                 s
@@ -32413,7 +34898,10 @@
             },
             [n, t]
           ),
-          Db('div', { class: 'bio-properties-panel-list-item', children: Db(hA, qb(qb({}, e), {}, { open: n })) })
+          Db('div', {
+            class: 'bio-properties-panel-list-item',
+            children: Db(hA, qb(qb({}, e), {}, { open: n }))
+          })
         )
       }
       var vA = function () {}
@@ -32502,27 +34990,43 @@
           'data-group-id': 'group-' + r,
           children: [
             Db('div', {
-              class: db()('bio-properties-panel-group-header', C ? '' : 'empty', C && u ? 'open' : ''),
+              class: db()(
+                'bio-properties-panel-group-header',
+                C ? '' : 'empty',
+                C && u ? 'open' : ''
+              ),
               onClick: C ? w : vA,
               children: [
-                Db('div', { title: o, class: 'bio-properties-panel-group-header-title', children: o }),
+                Db('div', {
+                  title: o,
+                  class: 'bio-properties-panel-group-header-title',
+                  children: o
+                }),
                 Db('div', {
                   class: 'bio-properties-panel-group-header-buttons',
                   children: [
                     t
                       ? Db('button', {
                           title: 'Create new list item',
-                          class: 'bio-properties-panel-group-header-button bio-properties-panel-add-entry',
+                          class:
+                            'bio-properties-panel-group-header-button bio-properties-panel-add-entry',
                           onClick: t,
                           children: [
                             Db(Ub, {}),
-                            C ? null : Db('span', { class: 'bio-properties-panel-add-entry-label', children: 'Create' })
+                            C
+                              ? null
+                              : Db('span', {
+                                  class: 'bio-properties-panel-add-entry-label',
+                                  children: 'Create'
+                                })
                           ]
                         })
                       : null,
                     C
                       ? Db('div', {
-                          title: 'List contains '.concat(i.length, ' item').concat(1 != i.length ? 's' : ''),
+                          title: 'List contains '
+                            .concat(i.length, ' item')
+                            .concat(1 != i.length ? 's' : ''),
                           class: 'bio-properties-panel-list-badge',
                           children: i.length
                         })
@@ -32530,9 +35034,12 @@
                     C
                       ? Db('button', {
                           title: 'Toggle section',
-                          class: 'bio-properties-panel-group-header-button bio-properties-panel-arrow',
+                          class:
+                            'bio-properties-panel-group-header-button bio-properties-panel-arrow',
                           children: Db($b, {
-                            class: u ? 'bio-properties-panel-arrow-down' : 'bio-properties-panel-arrow-right'
+                            class: u
+                              ? 'bio-properties-panel-arrow-down'
+                              : 'bio-properties-panel-arrow-right'
                           })
                         })
                       : null
@@ -32732,12 +35239,19 @@
                         class: 'bio-properties-panel-add-entry',
                         children: [
                           Db(Ub, {}),
-                          v ? null : Db('span', { class: 'bio-properties-panel-add-entry-label', children: 'Create' })
+                          v
+                            ? null
+                            : Db('span', {
+                                class: 'bio-properties-panel-add-entry-label',
+                                children: 'Create'
+                              })
                         ]
                       }),
                       v &&
                         Db('div', {
-                          title: 'List contains '.concat(i.length, ' item').concat(1 != i.length ? 's' : ''),
+                          title: 'List contains '
+                            .concat(i.length, ' item')
+                            .concat(1 != i.length ? 's' : ''),
                           class: 'bio-properties-panel-list-badge',
                           children: i.length
                         }),
@@ -32746,7 +35260,9 @@
                           title: 'Toggle list item',
                           class: 'bio-properties-panel-arrow',
                           children: Db($b, {
-                            class: h ? 'bio-properties-panel-arrow-down' : 'bio-properties-panel-arrow-right'
+                            class: h
+                              ? 'bio-properties-panel-arrow-down'
+                              : 'bio-properties-panel-arrow-right'
                           })
                         })
                     ]
@@ -32815,7 +35331,8 @@
                       Db('button', {
                         type: 'button',
                         title: 'Delete item',
-                        class: 'bio-properties-panel-remove-entry bio-properties-panel-remove-list-entry',
+                        class:
+                          'bio-properties-panel-remove-entry bio-properties-panel-remove-list-entry',
                         onClick: function () {
                           return s && s(e)
                         },
@@ -32938,7 +35455,11 @@
           r = void 0 !== n && n
         return Db('i', {
           class: 'bio-properties-panel-feel-icon',
-          title: t + ('required' === r ? ' must be a FEEL expression' : ' can optionally be a FEEL expression'),
+          title:
+            t +
+            ('required' === r
+              ? ' must be a FEEL expression'
+              : ' can optionally be a FEEL expression'),
           children: Db('required' === r ? Qb : Kb, {})
         })
       }
@@ -32975,7 +35496,10 @@
               id: FA(t),
               name: t,
               spellCheck: 'false',
-              class: db()('bio-properties-panel-input', u ? 'bio-properties-panel-input-monospace' : ''),
+              class: db()(
+                'bio-properties-panel-input',
+                u ? 'bio-properties-panel-input-monospace' : ''
+              ),
               onInput: d,
               onFocus: e.onFocus,
               onBlur: e.onBlur,
@@ -33605,7 +36129,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -33641,8 +36168,16 @@
             {
               required: ['name', 'id', 'appliesTo', 'properties'],
               properties: {
-                name: { $id: '#/name', type: 'string', description: 'The name of the element template.' },
-                id: { $id: '#/id', type: 'string', description: 'The identifier of the element template.' },
+                name: {
+                  $id: '#/name',
+                  type: 'string',
+                  description: 'The name of the element template.'
+                },
+                id: {
+                  $id: '#/id',
+                  type: 'string',
+                  description: 'The identifier of the element template.'
+                },
                 description: {
                   $id: '#/description',
                   type: 'string',
@@ -33669,7 +36204,8 @@
                     type: 'string',
                     pattern: '^[\\w\\d]+:[\\w\\d]+$',
                     errorMessage: {
-                      pattern: 'invalid item for "appliesTo", should contain namespaced property, example: "bpmn:Task"'
+                      pattern:
+                        'invalid item for "appliesTo", should contain namespaced property, example: "bpmn:Task"'
                     },
                     allOf: [
                       {
@@ -33724,7 +36260,8 @@
                 entriesVisible: {
                   $id: '#/entriesVisible',
                   type: 'boolean',
-                  description: 'Select whether non-template entries are visible in the properties panel.'
+                  description:
+                    'Select whether non-template entries are visible in the properties panel.'
                 },
                 groups: {
                   $id: '#/groups',
@@ -33737,10 +36274,17 @@
                     default: {},
                     required: ['id', 'label'],
                     errorMessage: {
-                      required: { id: 'missing id for group "${0#}"', label: 'missing label for group "${0#}"' }
+                      required: {
+                        id: 'missing id for group "${0#}"',
+                        label: 'missing label for group "${0#}"'
+                      }
                     },
                     properties: {
-                      id: { $id: '#/groups/group/id', type: 'string', description: 'The id of the custom group' },
+                      id: {
+                        $id: '#/groups/group/id',
+                        type: 'string',
+                        description: 'The id of the custom group'
+                      },
                       label: {
                         $id: '#/groups/group/label',
                         type: 'string',
@@ -33753,7 +36297,9 @@
                   $id: '#/documentaionRef',
                   type: 'string',
                   pattern: '^(https|http)://.*',
-                  errorMessage: { pattern: 'Malformed documentation URL, must match "^(https|http)://.*"' }
+                  errorMessage: {
+                    pattern: 'Malformed documentation URL, must match "^(https|http)://.*"'
+                  }
                 }
               },
               errorMessage: {
@@ -33781,7 +36327,10 @@
                         id: 'Error_1',
                         properties: [
                           { value: 'error-code', binding: { type: 'property', name: 'errorCode' } },
-                          { value: 'error-message', binding: { type: 'property', name: 'camunda:errorMessage' } },
+                          {
+                            value: 'error-message',
+                            binding: { type: 'property', name: 'camunda:errorMessage' }
+                          },
                           { value: 'error-name', binding: { type: 'property', name: 'name' } }
                         ]
                       }
@@ -33799,13 +36348,17 @@
                     type: 'string',
                     description: 'The type of a scope.',
                     enum: ['camunda:Connector', 'bpmn:Error'],
-                    errorMessage: 'invalid scope type ${0}; must be any of { camunda:Connector, bpmn:Error }'
+                    errorMessage:
+                      'invalid scope type ${0}; must be any of { camunda:Connector, bpmn:Error }'
                   },
                   properties: {
                     $id: '#/scopes/properties',
                     description: 'List of properties of a scope.',
                     default: [],
-                    allOf: [{ $ref: '#/definitions/properties/allOf/0' }, { $ref: '#/definitions/properties/allOf/1' }]
+                    allOf: [
+                      { $ref: '#/definitions/properties/allOf/0' },
+                      { $ref: '#/definitions/properties/allOf/1' }
+                    ]
                   }
                 },
                 required: ['type', 'properties'],
@@ -33830,14 +36383,23 @@
             {
               type: 'array',
               description: 'List of properties of the element template.',
-              allOf: [{ examples: [[{ label: 'Name', type: 'String', binding: { type: 'property', name: 'name' } }]] }],
+              allOf: [
+                {
+                  examples: [
+                    [{ label: 'Name', type: 'String', binding: { type: 'property', name: 'name' } }]
+                  ]
+                }
+              ],
               items: {
                 type: 'object',
                 default: {},
                 allOf: [
                   {
                     if: { properties: { type: { const: 'Dropdown' } }, required: ['type'] },
-                    then: { required: ['choices'], errorMessage: 'must provide choices=[] with "Dropdown" type' }
+                    then: {
+                      required: ['choices'],
+                      errorMessage: 'must provide choices=[] with "Dropdown" type'
+                    }
                   }
                 ],
                 properties: {
@@ -33957,7 +36519,9 @@
                 allOf: [
                   {
                     if: {
-                      properties: { binding: { properties: { type: { const: 'property' } }, required: ['type'] } },
+                      properties: {
+                        binding: { properties: { type: { const: 'property' } }, required: ['type'] }
+                      },
                       required: ['binding']
                     },
                     then: {
@@ -33973,7 +36537,10 @@
                   {
                     if: {
                       properties: {
-                        binding: { properties: { type: { const: 'camunda:executionListener' } }, required: ['type'] }
+                        binding: {
+                          properties: { type: { const: 'camunda:executionListener' } },
+                          required: ['type']
+                        }
                       },
                       required: ['binding']
                     },
@@ -34022,7 +36589,9 @@
                     if: {
                       properties: {
                         binding: {
-                          properties: { type: { enum: ['camunda:inputParameter', 'camunda:field'] } },
+                          properties: {
+                            type: { enum: ['camunda:inputParameter', 'camunda:field'] }
+                          },
                           required: ['type']
                         }
                       },
@@ -34050,21 +36619,38 @@
                       {
                         if: {
                           properties: {
-                            type: { enum: ['property', 'camunda:property', 'camunda:inputParameter', 'camunda:field'] }
+                            type: {
+                              enum: [
+                                'property',
+                                'camunda:property',
+                                'camunda:inputParameter',
+                                'camunda:field'
+                              ]
+                            }
                           },
                           required: ['type']
                         },
-                        then: { required: ['name'], errorMessage: 'property.binding ${0/type} requires name' }
+                        then: {
+                          required: ['name'],
+                          errorMessage: 'property.binding ${0/type} requires name'
+                        }
                       },
                       {
-                        if: { properties: { type: { const: 'camunda:outputParameter' } }, required: ['type'] },
-                        then: { required: ['source'], errorMessage: 'property.binding ${0/type} requires source' }
+                        if: {
+                          properties: { type: { const: 'camunda:outputParameter' } },
+                          required: ['type']
+                        },
+                        then: {
+                          required: ['source'],
+                          errorMessage: 'property.binding ${0/type} requires source'
+                        }
                       },
                       {
                         if: { properties: { type: { const: 'camunda:in' } }, required: ['type'] },
                         then: {
                           anyOf: [{ required: ['variables'] }, { required: ['target'] }],
-                          errorMessage: 'property.binding ${0/type} requires variables, target, or both'
+                          errorMessage:
+                            'property.binding ${0/type} requires variables, target, or both'
                         }
                       },
                       {
@@ -34073,25 +36659,46 @@
                           oneOf: [
                             {
                               required: ['variables'],
-                              not: { anyOf: [{ required: ['source'] }, { required: ['sourceExpression'] }] }
+                              not: {
+                                anyOf: [
+                                  { required: ['source'] },
+                                  { required: ['sourceExpression'] }
+                                ]
+                              }
                             },
                             {
                               required: ['source'],
-                              not: { anyOf: [{ required: ['variables'] }, { required: ['sourceExpression'] }] }
+                              not: {
+                                anyOf: [
+                                  { required: ['variables'] },
+                                  { required: ['sourceExpression'] }
+                                ]
+                              }
                             },
                             {
                               required: ['sourceExpression'],
-                              not: { anyOf: [{ required: ['variables'] }, { required: ['source'] }] }
+                              not: {
+                                anyOf: [{ required: ['variables'] }, { required: ['source'] }]
+                              }
                             },
-                            { required: ['variables', 'sourceExpression'], not: { required: ['source'] } },
-                            { required: ['variables', 'source'], not: { required: ['sourceExpression'] } }
+                            {
+                              required: ['variables', 'sourceExpression'],
+                              not: { required: ['source'] }
+                            },
+                            {
+                              required: ['variables', 'source'],
+                              not: { required: ['sourceExpression'] }
+                            }
                           ],
                           errorMessage:
                             'property.binding ${0/type} requires one of the following: variables, sourceExpression, source, (sourceExpression and variables), or (source and variables)'
                         }
                       },
                       {
-                        if: { properties: { type: { const: 'camunda:errorEventDefinition' } }, required: ['type'] },
+                        if: {
+                          properties: { type: { const: 'camunda:errorEventDefinition' } },
+                          required: ['type']
+                        },
                         then: {
                           oneOf: [{ required: ['errorRef'] }],
                           errorMessage: 'property.binding ${0/type} requires errorRef'
@@ -34141,7 +36748,8 @@
                       event: {
                         $id: '#/properties/property/binding/event',
                         type: 'string',
-                        description: 'The event type of a property binding (camunda:executionListener).'
+                        description:
+                          'The event type of a property binding (camunda:executionListener).'
                       },
                       scriptFormat: {
                         $id: '#/properties/property/binding/scriptFormat',
@@ -34152,7 +36760,8 @@
                       source: {
                         $id: '#/properties/property/binding/source',
                         type: 'string',
-                        description: 'The source value of a property binding (camunda:outputParameter, camunda:out).'
+                        description:
+                          'The source value of a property binding (camunda:outputParameter, camunda:out).'
                       },
                       target: {
                         $id: '#/properties/property/binding/target',
@@ -34174,7 +36783,8 @@
                       sourceExpression: {
                         $id: '#/properties/property/binding/sourceExpression',
                         type: 'string',
-                        description: 'The string containing the expression for the source attribute (camunda:out).'
+                        description:
+                          'The string containing the expression for the source attribute (camunda:out).'
                       }
                     }
                   }
@@ -34186,14 +36796,23 @@
         RE = {
           type: 'array',
           description: 'List of properties of the element template.',
-          allOf: [{ examples: [[{ label: 'Name', type: 'String', binding: { type: 'property', name: 'name' } }]] }],
+          allOf: [
+            {
+              examples: [
+                [{ label: 'Name', type: 'String', binding: { type: 'property', name: 'name' } }]
+              ]
+            }
+          ],
           items: {
             type: 'object',
             default: {},
             allOf: [
               {
                 if: { properties: { type: { const: 'Dropdown' } }, required: ['type'] },
-                then: { required: ['choices'], errorMessage: 'must provide choices=[] with "Dropdown" type' }
+                then: {
+                  required: ['choices'],
+                  errorMessage: 'must provide choices=[] with "Dropdown" type'
+                }
               }
             ],
             properties: {
@@ -34212,7 +36831,11 @@
                 type: 'string',
                 description: 'The label of a control field.'
               },
-              type: { $id: '#/properties/property/type', type: 'string', description: 'The type of a control field.' },
+              type: {
+                $id: '#/properties/property/type',
+                type: 'string',
+                description: 'The type of a control field.'
+              },
               editable: {
                 $id: '#/properties/property/editable',
                 type: 'boolean',
@@ -34309,7 +36932,9 @@
             allOf: [
               {
                 if: {
-                  properties: { binding: { properties: { type: { const: 'property' } }, required: ['type'] } },
+                  properties: {
+                    binding: { properties: { type: { const: 'property' } }, required: ['type'] }
+                  },
                   required: ['binding']
                 },
                 then: {
@@ -34325,7 +36950,10 @@
               {
                 if: {
                   properties: {
-                    binding: { properties: { type: { const: 'camunda:executionListener' } }, required: ['type'] }
+                    binding: {
+                      properties: { type: { const: 'camunda:executionListener' } },
+                      required: ['type']
+                    }
                   },
                   required: ['binding']
                 },
@@ -34402,15 +37030,31 @@
                   {
                     if: {
                       properties: {
-                        type: { enum: ['property', 'camunda:property', 'camunda:inputParameter', 'camunda:field'] }
+                        type: {
+                          enum: [
+                            'property',
+                            'camunda:property',
+                            'camunda:inputParameter',
+                            'camunda:field'
+                          ]
+                        }
                       },
                       required: ['type']
                     },
-                    then: { required: ['name'], errorMessage: 'property.binding ${0/type} requires name' }
+                    then: {
+                      required: ['name'],
+                      errorMessage: 'property.binding ${0/type} requires name'
+                    }
                   },
                   {
-                    if: { properties: { type: { const: 'camunda:outputParameter' } }, required: ['type'] },
-                    then: { required: ['source'], errorMessage: 'property.binding ${0/type} requires source' }
+                    if: {
+                      properties: { type: { const: 'camunda:outputParameter' } },
+                      required: ['type']
+                    },
+                    then: {
+                      required: ['source'],
+                      errorMessage: 'property.binding ${0/type} requires source'
+                    }
                   },
                   {
                     if: { properties: { type: { const: 'camunda:in' } }, required: ['type'] },
@@ -34425,25 +37069,38 @@
                       oneOf: [
                         {
                           required: ['variables'],
-                          not: { anyOf: [{ required: ['source'] }, { required: ['sourceExpression'] }] }
+                          not: {
+                            anyOf: [{ required: ['source'] }, { required: ['sourceExpression'] }]
+                          }
                         },
                         {
                           required: ['source'],
-                          not: { anyOf: [{ required: ['variables'] }, { required: ['sourceExpression'] }] }
+                          not: {
+                            anyOf: [{ required: ['variables'] }, { required: ['sourceExpression'] }]
+                          }
                         },
                         {
                           required: ['sourceExpression'],
                           not: { anyOf: [{ required: ['variables'] }, { required: ['source'] }] }
                         },
-                        { required: ['variables', 'sourceExpression'], not: { required: ['source'] } },
-                        { required: ['variables', 'source'], not: { required: ['sourceExpression'] } }
+                        {
+                          required: ['variables', 'sourceExpression'],
+                          not: { required: ['source'] }
+                        },
+                        {
+                          required: ['variables', 'source'],
+                          not: { required: ['sourceExpression'] }
+                        }
                       ],
                       errorMessage:
                         'property.binding ${0/type} requires one of the following: variables, sourceExpression, source, (sourceExpression and variables), or (source and variables)'
                     }
                   },
                   {
-                    if: { properties: { type: { const: 'camunda:errorEventDefinition' } }, required: ['type'] },
+                    if: {
+                      properties: { type: { const: 'camunda:errorEventDefinition' } },
+                      required: ['type']
+                    },
                     then: {
                       oneOf: [{ required: ['errorRef'] }],
                       errorMessage: 'property.binding ${0/type} requires errorRef'
@@ -34504,7 +37161,8 @@
                   source: {
                     $id: '#/properties/property/binding/source',
                     type: 'string',
-                    description: 'The source value of a property binding (camunda:outputParameter, camunda:out).'
+                    description:
+                      'The source value of a property binding (camunda:outputParameter, camunda:out).'
                   },
                   target: {
                     $id: '#/properties/property/binding/target',
@@ -34526,7 +37184,8 @@
                   sourceExpression: {
                     $id: '#/properties/property/binding/sourceExpression',
                     type: 'string',
-                    description: 'The string containing the expression for the source attribute (camunda:out).'
+                    description:
+                      'The string containing the expression for the source attribute (camunda:out).'
                   }
                 }
               }
@@ -34535,7 +37194,11 @@
         },
         IE = new RegExp('^[\\w\\d]+:[\\w\\d]+$', 'u'),
         NE = new RegExp('^(https|http)://.*', 'u'),
-        LE = { required: 'missingProperty', dependencies: 'property', dependentRequired: 'property' }
+        LE = {
+          required: 'missingProperty',
+          dependencies: 'property',
+          dependentRequired: 'property'
+        }
       function FE(e) {
         var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
           n = t.dataPath,
@@ -34687,7 +37350,8 @@
                         dataPath: r + '/appliesTo/' + g,
                         schemaPath: '#/allOf/0/properties/appliesTo/items/errorMessage',
                         params: { errors: x[P] },
-                        message: P in _ ? _[P]() : ME.allOf[0].properties.appliesTo.items.errorMessage[P]
+                        message:
+                          P in _ ? _[P]() : ME.allOf[0].properties.appliesTo.items.errorMessage[P]
                       }
                       null === i ? (i = [k]) : i.push(k), o++
                     }
@@ -34766,7 +37430,10 @@
                         !q.emUsed &&
                         q.dataPath === r + '/elementType/value' &&
                         q.keyword in L &&
-                        0 === q.schemaPath.indexOf('#/allOf/0/properties/elementType/properties/value') &&
+                        0 ===
+                          q.schemaPath.indexOf(
+                            '#/allOf/0/properties/elementType/properties/value'
+                          ) &&
                         /^\/[^\/]*$/.test(q.schemaPath.slice(49)) &&
                         (L[q.keyword].push(q), (q.emUsed = !0))
                     }
@@ -34780,9 +37447,13 @@
                       var $ = {
                         keyword: 'errorMessage',
                         dataPath: r + '/elementType/value',
-                        schemaPath: '#/allOf/0/properties/elementType/properties/value/errorMessage',
+                        schemaPath:
+                          '#/allOf/0/properties/elementType/properties/value/errorMessage',
                         params: { errors: L[H] },
-                        message: H in F ? F[H]() : ME.allOf[0].properties.elementType.properties.value.errorMessage[H]
+                        message:
+                          H in F
+                            ? F[H]()
+                            : ME.allOf[0].properties.elementType.properties.value.errorMessage[H]
                       }
                       null === i ? (i = [$]) : i.push($), o++
                     }
@@ -34828,7 +37499,8 @@
                     ne.keyword in Z &&
                     0 === ne.schemaPath.indexOf('#/allOf/0/properties/elementType') &&
                     /^\/[^\/]*$/.test(ne.schemaPath.slice(32)) &&
-                    ((Y = LE[ne.keyword]), (J = Z[ne.keyword][ne.params[Y]]) && (J.push(ne), (ne.emUsed = !0)))
+                    ((Y = LE[ne.keyword]),
+                    (J = Z[ne.keyword][ne.params[Y]]) && (J.push(ne), (ne.emUsed = !0)))
                 }
               } catch (e) {
                 te.e(e)
@@ -34970,7 +37642,8 @@
                             (v.keyword in m) &&
                             0 === v.schemaPath.indexOf('#/allOf/0/properties/groups/items') &&
                             /^\/[^\/]*$/.test(v.schemaPath.slice(33)) &&
-                            ((p = LE[v.keyword]), (u = m[v.keyword][v.params[p]]) && (u.push(v), (v.emUsed = !0)))
+                            ((p = LE[v.keyword]),
+                            (u = m[v.keyword][v.params[p]]) && (u.push(v), (v.emUsed = !0)))
                         }
                       } catch (e) {
                         f.e(e)
@@ -34986,7 +37659,9 @@
                                 dataPath: r + '/groups/' + e,
                                 schemaPath: '#/allOf/0/properties/groups/items/errorMessage',
                                 params: { errors: u },
-                                message: b ? b() : ME.allOf[0].properties.groups.items.errorMessage[g][y]
+                                message: b
+                                  ? b()
+                                  : ME.allOf[0].properties.groups.items.errorMessage[g][y]
                               }
                             null === i ? (i = [A]) : i.push(A), o++
                           }
@@ -35073,7 +37748,8 @@
                     dataPath: r + '/documentationRef',
                     schemaPath: '#/allOf/0/properties/documentationRef/errorMessage',
                     params: { errors: _e[ke] },
-                    message: ke in we ? we[ke]() : ME.allOf[0].properties.documentationRef.errorMessage[ke]
+                    message:
+                      ke in we ? we[ke]() : ME.allOf[0].properties.documentationRef.errorMessage[ke]
                   }
                   null === i ? (i = [Se]) : i.push(Se), o++
                 }
@@ -35110,7 +37786,8 @@
                 Le.keyword in ze &&
                 0 === Le.schemaPath.indexOf('#/allOf/0') &&
                 /^\/[^\/]*$/.test(Le.schemaPath.slice(9)) &&
-                ((Me = LE[Le.keyword]), (De = ze[Le.keyword][Le.params[Me]]) && (De.push(Le), (Le.emUsed = !0)))
+                ((Me = LE[Le.keyword]),
+                (De = ze[Le.keyword][Le.params[Me]]) && (De.push(Le), (Le.emUsed = !0)))
             }
           } catch (e) {
             Ne.e(e)
@@ -35187,8 +37864,14 @@
                           (ct.dataPath !== r + '/properties/' + Ye &&
                             (0 !== ct.dataPath.indexOf(r + '/properties/' + Ye) ||
                               '/' !== ct.dataPath[r + '/properties/' + Ye.length])) ||
-                          0 !== ct.schemaPath.indexOf('#/definitions/properties/allOf/0/items/allOf/0/then') ||
-                          '/' !== ct.schemaPath['#/definitions/properties/allOf/0/items/allOf/0/then'.length] ||
+                          0 !==
+                            ct.schemaPath.indexOf(
+                              '#/definitions/properties/allOf/0/items/allOf/0/then'
+                            ) ||
+                          '/' !==
+                            ct.schemaPath[
+                              '#/definitions/properties/allOf/0/items/allOf/0/then'.length
+                            ] ||
                           (st.push(ct), (ct.emUsed = !0))
                       }
                     } catch (e) {
@@ -35200,7 +37883,8 @@
                       var pt = {
                         keyword: 'errorMessage',
                         dataPath: r + '/properties/' + Ye,
-                        schemaPath: '#/definitions/properties/allOf/0/items/allOf/0/then/errorMessage',
+                        schemaPath:
+                          '#/definitions/properties/allOf/0/items/allOf/0/then/errorMessage',
                         params: { errors: st },
                         message: 'must provide choices=[] with "Dropdown" type'
                       }
@@ -35251,7 +37935,8 @@
                     var yt = {
                       keyword: 'type',
                       dataPath: r + '/properties/' + Ye + '/description',
-                      schemaPath: '#/definitions/properties/allOf/0/items/properties/description/type',
+                      schemaPath:
+                        '#/definitions/properties/allOf/0/items/properties/description/type',
                       params: { type: 'string' },
                       message: 'should be string'
                     }
@@ -35297,7 +37982,8 @@
                             var Pt = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + Ye + '/choices/' + wt,
-                              schemaPath: '#/definitions/properties/allOf/0/items/properties/choices/items/required',
+                              schemaPath:
+                                '#/definitions/properties/allOf/0/items/properties/choices/items/required',
                               params: { missingProperty: 'value' },
                               message: "should have required property 'value'"
                             }
@@ -35307,7 +37993,8 @@
                             var kt = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + Ye + '/choices/' + wt,
-                              schemaPath: '#/definitions/properties/allOf/0/items/properties/choices/items/required',
+                              schemaPath:
+                                '#/definitions/properties/allOf/0/items/properties/choices/items/required',
                               params: { missingProperty: 'name' },
                               message: "should have required property 'name'"
                             }
@@ -35339,7 +38026,8 @@
                           var Tt = {
                             keyword: 'type',
                             dataPath: r + '/properties/' + Ye + '/choices/' + wt,
-                            schemaPath: '#/definitions/properties/allOf/0/items/properties/choices/items/type',
+                            schemaPath:
+                              '#/definitions/properties/allOf/0/items/properties/choices/items/type',
                             params: { type: 'object' },
                             message: 'should be object'
                           }
@@ -35355,15 +38043,22 @@
                               'errorMessage' === Dt.keyword ||
                                 Dt.emUsed ||
                                 (Dt.dataPath !== r + '/properties/' + Ye + '/choices/' + wt &&
-                                  (0 !== Dt.dataPath.indexOf(r + '/properties/' + Ye + '/choices/' + wt) ||
-                                    '/' !== Dt.dataPath[r + '/properties/' + Ye + '/choices/' + wt.length])) ||
+                                  (0 !==
+                                    Dt.dataPath.indexOf(
+                                      r + '/properties/' + Ye + '/choices/' + wt
+                                    ) ||
+                                    '/' !==
+                                      Dt.dataPath[
+                                        r + '/properties/' + Ye + '/choices/' + wt.length
+                                      ])) ||
                                 0 !==
                                   Dt.schemaPath.indexOf(
                                     '#/definitions/properties/allOf/0/items/properties/choices/items'
                                   ) ||
                                 '/' !==
                                   Dt.schemaPath[
-                                    '#/definitions/properties/allOf/0/items/properties/choices/items'.length
+                                    '#/definitions/properties/allOf/0/items/properties/choices/items'
+                                      .length
                                   ] ||
                                 (jt.push(Dt), (Dt.emUsed = !0))
                             }
@@ -35403,7 +38098,8 @@
                       var Ft = {
                         keyword: 'type',
                         dataPath: r + '/properties/' + Ye + '/choices',
-                        schemaPath: '#/definitions/properties/allOf/0/items/properties/choices/type',
+                        schemaPath:
+                          '#/definitions/properties/allOf/0/items/properties/choices/type',
                         params: { type: 'array' },
                         message: 'should be array'
                       }
@@ -35500,7 +38196,12 @@
                           }
                           null === i ? (i = [tn]) : i.push(tn), o++
                         }
-                        if (((Zt = en === o) && Gt ? ((Gt = !1), (Qt = [Qt, 1])) : Zt && ((Gt = !0), (Qt = 1)), Gt))
+                        if (
+                          ((Zt = en === o) && Gt
+                            ? ((Gt = !1), (Qt = [Qt, 1]))
+                            : Zt && ((Gt = !0), (Qt = 1)),
+                          Gt)
+                        )
                           (o = Wt), null !== i && (Wt ? (i.length = Wt) : (i = null))
                         else {
                           var nn = {
@@ -35518,7 +38219,8 @@
                       var rn = {
                         keyword: 'type',
                         dataPath: r + '/properties/' + Ye + '/constraints',
-                        schemaPath: '#/definitions/properties/allOf/0/items/properties/constraints/type',
+                        schemaPath:
+                          '#/definitions/properties/allOf/0/items/properties/constraints/type',
                         params: { type: 'object' },
                         message: 'should be object'
                       }
@@ -35579,16 +38281,27 @@
                             null === i ? (i = [u]) : i.push(u), o++
                           }
                       }
-                    if (((un = s === o), (o = n), null !== i && (n ? (i.length = n) : (i = null)), un)) {
+                    if (
+                      ((un = s === o), (o = n), null !== i && (n ? (i.length = n) : (i = null)), un)
+                    ) {
                       var d = o
                       if (t && 'object' == OE(t) && !Array.isArray(t) && void 0 !== t.type) {
                         var m = t.type
-                        if ('String' !== m && 'Text' !== m && 'Hidden' !== m && 'Dropdown' !== m && 'Boolean' !== m) {
+                        if (
+                          'String' !== m &&
+                          'Text' !== m &&
+                          'Hidden' !== m &&
+                          'Dropdown' !== m &&
+                          'Boolean' !== m
+                        ) {
                           var h = {
                             keyword: 'enum',
                             dataPath: r + '/properties/' + e + '/type',
-                            schemaPath: '#/definitions/properties/allOf/1/items/allOf/0/then/properties/type/enum',
-                            params: { allowedValues: DE.allOf[1].items.allOf[0].then.properties.type.enum },
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/allOf/0/then/properties/type/enum',
+                            params: {
+                              allowedValues: DE.allOf[1].items.allOf[0].then.properties.type.enum
+                            },
                             message: 'should be equal to one of the allowed values'
                           }
                           null === i ? (i = [h]) : i.push(h), o++
@@ -35611,7 +38324,8 @@
                                   ) ||
                                 '/' !==
                                   y.schemaPath[
-                                    '#/definitions/properties/allOf/1/items/allOf/0/then/properties/type'.length
+                                    '#/definitions/properties/allOf/1/items/allOf/0/then/properties/type'
+                                      .length
                                   ] ||
                                 (v.push(y), (y.emUsed = !0))
                             }
@@ -35675,20 +38389,28 @@
                           if (void 0 === O.type) {
                             var T = {}
                             null === i ? (i = [T]) : i.push(T), o++
-                          } else if (void 0 !== O.type && !TE(O.type, 'camunda:executionListener')) {
+                          } else if (
+                            void 0 !== O.type &&
+                            !TE(O.type, 'camunda:executionListener')
+                          ) {
                             var B = {}
                             null === i ? (i = [B]) : i.push(B), o++
                           }
                       }
-                    if (((dn = k === o), (o = C), null !== i && (C ? (i.length = C) : (i = null)), dn)) {
+                    if (
+                      ((dn = k === o), (o = C), null !== i && (C ? (i.length = C) : (i = null)), dn)
+                    ) {
                       var j = o
                       if (t && 'object' == OE(t) && !Array.isArray(t) && void 0 !== t.type) {
                         if ('Hidden' !== t.type) {
                           var M = {
                             keyword: 'enum',
                             dataPath: r + '/properties/' + e + '/type',
-                            schemaPath: '#/definitions/properties/allOf/1/items/allOf/1/then/properties/type/enum',
-                            params: { allowedValues: DE.allOf[1].items.allOf[1].then.properties.type.enum },
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/allOf/1/then/properties/type/enum',
+                            params: {
+                              allowedValues: DE.allOf[1].items.allOf[1].then.properties.type.enum
+                            },
                             message: 'should be equal to one of the allowed values'
                           }
                           null === i ? (i = [M]) : i.push(M), o++
@@ -35711,7 +38433,8 @@
                                   ) ||
                                 '/' !==
                                   I.schemaPath[
-                                    '#/definitions/properties/allOf/1/items/allOf/1/then/properties/type'.length
+                                    '#/definitions/properties/allOf/1/items/allOf/1/then/properties/type'
+                                      .length
                                   ] ||
                                 (R.push(I), (I.emUsed = !0))
                             }
@@ -35790,7 +38513,9 @@
                             }
                           }
                       }
-                    if (((mn = W === o), (o = $), null !== i && ($ ? (i.length = $) : (i = null)), mn)) {
+                    if (
+                      ((mn = W === o), (o = $), null !== i && ($ ? (i.length = $) : (i = null)), mn)
+                    ) {
                       var X = o
                       if (t && 'object' == OE(t) && !Array.isArray(t) && void 0 !== t.type) {
                         var Z = t.type
@@ -35798,8 +38523,11 @@
                           var ee = {
                             keyword: 'enum',
                             dataPath: r + '/properties/' + e + '/type',
-                            schemaPath: '#/definitions/properties/allOf/1/items/allOf/2/then/properties/type/enum',
-                            params: { allowedValues: DE.allOf[1].items.allOf[2].then.properties.type.enum },
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/allOf/2/then/properties/type/enum',
+                            params: {
+                              allowedValues: DE.allOf[1].items.allOf[2].then.properties.type.enum
+                            },
                             message: 'should be equal to one of the allowed values'
                           }
                           null === i ? (i = [ee]) : i.push(ee), o++
@@ -35815,14 +38543,16 @@
                                 ie.emUsed ||
                                 (ie.dataPath !== r + '/properties/' + e + '/type' &&
                                   (0 !== ie.dataPath.indexOf(r + '/properties/' + e + '/type') ||
-                                    '/' !== ie.dataPath[r + '/properties/' + e + '/type'.length])) ||
+                                    '/' !==
+                                      ie.dataPath[r + '/properties/' + e + '/type'.length])) ||
                                 0 !==
                                   ie.schemaPath.indexOf(
                                     '#/definitions/properties/allOf/1/items/allOf/2/then/properties/type'
                                   ) ||
                                 '/' !==
                                   ie.schemaPath[
-                                    '#/definitions/properties/allOf/1/items/allOf/2/then/properties/type'.length
+                                    '#/definitions/properties/allOf/1/items/allOf/2/then/properties/type'
+                                      .length
                                   ] ||
                                 (ne.push(ie), (ie.emUsed = !0))
                             }
@@ -35896,16 +38626,29 @@
                             }
                           }
                       }
-                    if (((hn = me === o), (o = ue), null !== i && (ue ? (i.length = ue) : (i = null)), hn)) {
+                    if (
+                      ((hn = me === o),
+                      (o = ue),
+                      null !== i && (ue ? (i.length = ue) : (i = null)),
+                      hn)
+                    ) {
                       var be = o
                       if (t && 'object' == OE(t) && !Array.isArray(t) && void 0 !== t.type) {
                         var Ae = t.type
-                        if ('String' !== Ae && 'Text' !== Ae && 'Hidden' !== Ae && 'Dropdown' !== Ae) {
+                        if (
+                          'String' !== Ae &&
+                          'Text' !== Ae &&
+                          'Hidden' !== Ae &&
+                          'Dropdown' !== Ae
+                        ) {
                           var Ee = {
                             keyword: 'enum',
                             dataPath: r + '/properties/' + e + '/type',
-                            schemaPath: '#/definitions/properties/allOf/1/items/allOf/3/then/properties/type/enum',
-                            params: { allowedValues: DE.allOf[1].items.allOf[3].then.properties.type.enum },
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/allOf/3/then/properties/type/enum',
+                            params: {
+                              allowedValues: DE.allOf[1].items.allOf[3].then.properties.type.enum
+                            },
                             message: 'should be equal to one of the allowed values'
                           }
                           null === i ? (i = [Ee]) : i.push(Ee), o++
@@ -35921,14 +38664,16 @@
                                 Ce.emUsed ||
                                 (Ce.dataPath !== r + '/properties/' + e + '/type' &&
                                   (0 !== Ce.dataPath.indexOf(r + '/properties/' + e + '/type') ||
-                                    '/' !== Ce.dataPath[r + '/properties/' + e + '/type'.length])) ||
+                                    '/' !==
+                                      Ce.dataPath[r + '/properties/' + e + '/type'.length])) ||
                                 0 !==
                                   Ce.schemaPath.indexOf(
                                     '#/definitions/properties/allOf/1/items/allOf/3/then/properties/type'
                                   ) ||
                                 '/' !==
                                   Ce.schemaPath[
-                                    '#/definitions/properties/allOf/1/items/allOf/3/then/properties/type'.length
+                                    '#/definitions/properties/allOf/1/items/allOf/3/then/properties/type'
+                                      .length
                                   ] ||
                                 (_e.push(Ce), (Ce.emUsed = !0))
                             }
@@ -36013,9 +38758,19 @@
                               null === i ? (i = [Le]) : i.push(Le), o++
                             }
                           }
-                        if (((fn = ze === o), (o = De), null !== i && (De ? (i.length = De) : (i = null)), fn)) {
+                        if (
+                          ((fn = ze === o),
+                          (o = De),
+                          null !== i && (De ? (i.length = De) : (i = null)),
+                          fn)
+                        ) {
                           var Fe = o
-                          if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.name) {
+                          if (
+                            Me &&
+                            'object' == OE(Me) &&
+                            !Array.isArray(Me) &&
+                            void 0 === Me.name
+                          ) {
                             var Ve = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + e + '/binding',
@@ -36036,15 +38791,18 @@
                                 'errorMessage' === Ue.keyword ||
                                   Ue.emUsed ||
                                   (Ue.dataPath !== r + '/properties/' + e + '/binding' &&
-                                    (0 !== Ue.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
-                                      '/' !== Ue.dataPath[r + '/properties/' + e + '/binding'.length])) ||
+                                    (0 !==
+                                      Ue.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
+                                      '/' !==
+                                        Ue.dataPath[r + '/properties/' + e + '/binding'.length])) ||
                                   0 !==
                                     Ue.schemaPath.indexOf(
                                       '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/then'
                                     ) ||
                                   '/' !==
                                     Ue.schemaPath[
-                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/then'.length
+                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/then'
+                                        .length
                                     ] ||
                                   (He.push(Ue), (Ue.emUsed = !0))
                               }
@@ -36060,7 +38818,10 @@
                                 schemaPath:
                                   '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/then/errorMessage',
                                 params: { errors: He },
-                                message: 'property.binding ' + JSON.stringify(Me && Me.type) + ' requires name'
+                                message:
+                                  'property.binding ' +
+                                  JSON.stringify(Me && Me.type) +
+                                  ' requires name'
                               }
                               null === i ? (i = [We]) : i.push(We), o++
                             }
@@ -36085,7 +38846,8 @@
                           var Xe = {
                             keyword: 'if',
                             dataPath: r + '/properties/' + e + '/binding',
-                            schemaPath: '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/if',
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/if',
                             params: { failingKeyword: 'then' },
                             message: 'should match "then" schema'
                           }
@@ -36098,13 +38860,26 @@
                           if (void 0 === Me.type) {
                             var nt = {}
                             null === i ? (i = [nt]) : i.push(nt), o++
-                          } else if (void 0 !== Me.type && !TE(Me.type, 'camunda:outputParameter')) {
+                          } else if (
+                            void 0 !== Me.type &&
+                            !TE(Me.type, 'camunda:outputParameter')
+                          ) {
                             var rt = {}
                             null === i ? (i = [rt]) : i.push(rt), o++
                           }
-                        if (((vn = tt === o), (o = Ze), null !== i && (Ze ? (i.length = Ze) : (i = null)), vn)) {
+                        if (
+                          ((vn = tt === o),
+                          (o = Ze),
+                          null !== i && (Ze ? (i.length = Ze) : (i = null)),
+                          vn)
+                        ) {
                           var it = o
-                          if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.source) {
+                          if (
+                            Me &&
+                            'object' == OE(Me) &&
+                            !Array.isArray(Me) &&
+                            void 0 === Me.source
+                          ) {
                             var ot = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + e + '/binding',
@@ -36125,15 +38900,18 @@
                                 'errorMessage' === ct.keyword ||
                                   ct.emUsed ||
                                   (ct.dataPath !== r + '/properties/' + e + '/binding' &&
-                                    (0 !== ct.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
-                                      '/' !== ct.dataPath[r + '/properties/' + e + '/binding'.length])) ||
+                                    (0 !==
+                                      ct.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
+                                      '/' !==
+                                        ct.dataPath[r + '/properties/' + e + '/binding'.length])) ||
                                   0 !==
                                     ct.schemaPath.indexOf(
                                       '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/then'
                                     ) ||
                                   '/' !==
                                     ct.schemaPath[
-                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/then'.length
+                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/then'
+                                        .length
                                     ] ||
                                   (st.push(ct), (ct.emUsed = !0))
                               }
@@ -36149,7 +38927,10 @@
                                 schemaPath:
                                   '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/then/errorMessage',
                                 params: { errors: st },
-                                message: 'property.binding ' + JSON.stringify(Me && Me.type) + ' requires source'
+                                message:
+                                  'property.binding ' +
+                                  JSON.stringify(Me && Me.type) +
+                                  ' requires source'
                               }
                               null === i ? (i = [pt]) : i.push(pt), o++
                             }
@@ -36174,7 +38955,8 @@
                           var ft = {
                             keyword: 'if',
                             dataPath: r + '/properties/' + e + '/binding',
-                            schemaPath: '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/if',
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/if',
                             params: { failingKeyword: 'then' },
                             message: 'should match "then" schema'
                           }
@@ -36191,12 +38973,22 @@
                             var At = {}
                             null === i ? (i = [At]) : i.push(At), o++
                           }
-                        if (((yn = yt === o), (o = vt), null !== i && (vt ? (i.length = vt) : (i = null)), yn)) {
+                        if (
+                          ((yn = yt === o),
+                          (o = vt),
+                          null !== i && (vt ? (i.length = vt) : (i = null)),
+                          yn)
+                        ) {
                           var Et = o,
                             xt = o,
                             _t = !1,
                             wt = o
-                          if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.variables) {
+                          if (
+                            Me &&
+                            'object' == OE(Me) &&
+                            !Array.isArray(Me) &&
+                            void 0 === Me.variables
+                          ) {
                             var Ct = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + e + '/binding',
@@ -36209,7 +39001,12 @@
                           }
                           if (((gn = wt === o), !(_t = _t || gn))) {
                             var Pt = o
-                            if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.target) {
+                            if (
+                              Me &&
+                              'object' == OE(Me) &&
+                              !Array.isArray(Me) &&
+                              void 0 === Me.target
+                            ) {
                               var kt = {
                                 keyword: 'required',
                                 dataPath: r + '/properties/' + e + '/binding',
@@ -36244,15 +39041,18 @@
                                 'errorMessage' === jt.keyword ||
                                   jt.emUsed ||
                                   (jt.dataPath !== r + '/properties/' + e + '/binding' &&
-                                    (0 !== jt.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
-                                      '/' !== jt.dataPath[r + '/properties/' + e + '/binding'.length])) ||
+                                    (0 !==
+                                      jt.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
+                                      '/' !==
+                                        jt.dataPath[r + '/properties/' + e + '/binding'.length])) ||
                                   0 !==
                                     jt.schemaPath.indexOf(
                                       '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/then'
                                     ) ||
                                   '/' !==
                                     jt.schemaPath[
-                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/then'.length
+                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/then'
+                                        .length
                                     ] ||
                                   (Tt.push(jt), (jt.emUsed = !0))
                               }
@@ -36296,7 +39096,8 @@
                           var Nt = {
                             keyword: 'if',
                             dataPath: r + '/properties/' + e + '/binding',
-                            schemaPath: '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/if',
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/if',
                             params: { failingKeyword: 'then' },
                             message: 'should match "then" schema'
                           }
@@ -36313,7 +39114,12 @@
                             var Ht = {}
                             null === i ? (i = [Ht]) : i.push(Ht), o++
                           }
-                        if (((_n = Vt === o), (o = Lt), null !== i && (Lt ? (i.length = Lt) : (i = null)), _n)) {
+                        if (
+                          ((_n = Vt === o),
+                          (o = Lt),
+                          null !== i && (Lt ? (i.length = Lt) : (i = null)),
+                          _n)
+                        ) {
                           var $t = o,
                             Ut = o,
                             Wt = !1,
@@ -36324,13 +39130,23 @@
                             Jt = o,
                             Xt = !1,
                             Zt = o
-                          if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.source) {
+                          if (
+                            Me &&
+                            'object' == OE(Me) &&
+                            !Array.isArray(Me) &&
+                            void 0 === Me.source
+                          ) {
                             var en = {}
                             null === i ? (i = [en]) : i.push(en), o++
                           }
                           if (((bn = Zt === o), !(Xt = Xt || bn))) {
                             var tn = o
-                            if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.sourceExpression) {
+                            if (
+                              Me &&
+                              'object' == OE(Me) &&
+                              !Array.isArray(Me) &&
+                              void 0 === Me.sourceExpression
+                            ) {
                               var nn = {}
                               null === i ? (i = [nn]) : i.push(nn), o++
                             }
@@ -36352,7 +39168,12 @@
                             }
                             null === i ? (i = [on]) : i.push(on), o++
                           } else (o = Kt), null !== i && (Kt ? (i.length = Kt) : (i = null))
-                          if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.variables) {
+                          if (
+                            Me &&
+                            'object' == OE(Me) &&
+                            !Array.isArray(Me) &&
+                            void 0 === Me.variables
+                          ) {
                             var an = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + e + '/binding',
@@ -36370,13 +39191,23 @@
                             pn = o,
                             Cn = !1,
                             Pn = o
-                          if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.variables) {
+                          if (
+                            Me &&
+                            'object' == OE(Me) &&
+                            !Array.isArray(Me) &&
+                            void 0 === Me.variables
+                          ) {
                             var kn = {}
                             null === i ? (i = [kn]) : i.push(kn), o++
                           }
                           if (((An = Pn === o), !(Cn = Cn || An))) {
                             var Sn = o
-                            if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.sourceExpression) {
+                            if (
+                              Me &&
+                              'object' == OE(Me) &&
+                              !Array.isArray(Me) &&
+                              void 0 === Me.sourceExpression
+                            ) {
                               var On = {}
                               null === i ? (i = [On]) : i.push(On), o++
                             }
@@ -36398,7 +39229,12 @@
                             }
                             null === i ? (i = [Bn]) : i.push(Bn), o++
                           } else (o = ln), null !== i && (ln ? (i.length = ln) : (i = null))
-                          if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.source) {
+                          if (
+                            Me &&
+                            'object' == OE(Me) &&
+                            !Array.isArray(Me) &&
+                            void 0 === Me.source
+                          ) {
                             var jn = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + e + '/binding',
@@ -36418,13 +39254,23 @@
                               zn = o,
                               In = !1,
                               Nn = o
-                            if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.variables) {
+                            if (
+                              Me &&
+                              'object' == OE(Me) &&
+                              !Array.isArray(Me) &&
+                              void 0 === Me.variables
+                            ) {
                               var Ln = {}
                               null === i ? (i = [Ln]) : i.push(Ln), o++
                             }
                             if (((En = Nn === o), !(In = In || En))) {
                               var Fn = o
-                              if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.source) {
+                              if (
+                                Me &&
+                                'object' == OE(Me) &&
+                                !Array.isArray(Me) &&
+                                void 0 === Me.source
+                              ) {
                                 var Vn = {}
                                 null === i ? (i = [Vn]) : i.push(Vn), o++
                               }
@@ -36446,7 +39292,12 @@
                               }
                               null === i ? (i = [Hn]) : i.push(Hn), o++
                             } else (o = Dn), null !== i && (Dn ? (i.length = Dn) : (i = null))
-                            if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.sourceExpression) {
+                            if (
+                              Me &&
+                              'object' == OE(Me) &&
+                              !Array.isArray(Me) &&
+                              void 0 === Me.sourceExpression
+                            ) {
                               var $n = {
                                 keyword: 'required',
                                 dataPath: r + '/properties/' + e + '/binding',
@@ -36463,7 +39314,12 @@
                               var Un = o,
                                 Wn = o,
                                 Gn = o
-                              if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.source) {
+                              if (
+                                Me &&
+                                'object' == OE(Me) &&
+                                !Array.isArray(Me) &&
+                                void 0 === Me.source
+                              ) {
                                 var Qn = {}
                                 null === i ? (i = [Qn]) : i.push(Qn), o++
                               }
@@ -36508,7 +39364,12 @@
                                 var Xn = o,
                                   Zn = o,
                                   er = o
-                                if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.sourceExpression) {
+                                if (
+                                  Me &&
+                                  'object' == OE(Me) &&
+                                  !Array.isArray(Me) &&
+                                  void 0 === Me.sourceExpression
+                                ) {
                                   var tr = {}
                                   null === i ? (i = [tr]) : i.push(tr), o++
                                 }
@@ -36547,7 +39408,9 @@
                                     null === i ? (i = [ir]) : i.push(ir), o++
                                   }
                                 }
-                                ;(xn = Xn === o) && Wt ? ((Wt = !1), (Gt = [Gt, 4])) : xn && ((Wt = !0), (Gt = 4))
+                                ;(xn = Xn === o) && Wt
+                                  ? ((Wt = !1), (Gt = [Gt, 4]))
+                                  : xn && ((Wt = !0), (Gt = 4))
                               }
                             }
                           }
@@ -36573,15 +39436,18 @@
                                 'errorMessage' === cr.keyword ||
                                   cr.emUsed ||
                                   (cr.dataPath !== r + '/properties/' + e + '/binding' &&
-                                    (0 !== cr.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
-                                      '/' !== cr.dataPath[r + '/properties/' + e + '/binding'.length])) ||
+                                    (0 !==
+                                      cr.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
+                                      '/' !==
+                                        cr.dataPath[r + '/properties/' + e + '/binding'.length])) ||
                                   0 !==
                                     cr.schemaPath.indexOf(
                                       '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then'
                                     ) ||
                                   '/' !==
                                     cr.schemaPath[
-                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then'.length
+                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then'
+                                        .length
                                     ] ||
                                   (sr.push(cr), (cr.emUsed = !0))
                               }
@@ -36625,7 +39491,8 @@
                           var fr = {
                             keyword: 'if',
                             dataPath: r + '/properties/' + e + '/binding',
-                            schemaPath: '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/if',
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/if',
                             params: { failingKeyword: 'then' },
                             message: 'should match "then" schema'
                           }
@@ -36638,17 +39505,30 @@
                           if (void 0 === Me.type) {
                             var br = {}
                             null === i ? (i = [br]) : i.push(br), o++
-                          } else if (void 0 !== Me.type && !TE(Me.type, 'camunda:errorEventDefinition')) {
+                          } else if (
+                            void 0 !== Me.type &&
+                            !TE(Me.type, 'camunda:errorEventDefinition')
+                          ) {
                             var Ar = {}
                             null === i ? (i = [Ar]) : i.push(Ar), o++
                           }
-                        if (((wn = yr === o), (o = vr), null !== i && (vr ? (i.length = vr) : (i = null)), wn)) {
+                        if (
+                          ((wn = yr === o),
+                          (o = vr),
+                          null !== i && (vr ? (i.length = vr) : (i = null)),
+                          wn)
+                        ) {
                           var Er = o,
                             xr = o,
                             _r = !1,
                             wr = null,
                             Cr = o
-                          if (Me && 'object' == OE(Me) && !Array.isArray(Me) && void 0 === Me.errorRef) {
+                          if (
+                            Me &&
+                            'object' == OE(Me) &&
+                            !Array.isArray(Me) &&
+                            void 0 === Me.errorRef
+                          ) {
                             var Pr = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + e + '/binding',
@@ -36682,15 +39562,18 @@
                                 'errorMessage' === Br.keyword ||
                                   Br.emUsed ||
                                   (Br.dataPath !== r + '/properties/' + e + '/binding' &&
-                                    (0 !== Br.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
-                                      '/' !== Br.dataPath[r + '/properties/' + e + '/binding'.length])) ||
+                                    (0 !==
+                                      Br.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
+                                      '/' !==
+                                        Br.dataPath[r + '/properties/' + e + '/binding'.length])) ||
                                   0 !==
                                     Br.schemaPath.indexOf(
                                       '#/definitions/properties/allOf/1/items/properties/binding/allOf/4/then'
                                     ) ||
                                   '/' !==
                                     Br.schemaPath[
-                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/4/then'.length
+                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/4/then'
+                                        .length
                                     ] ||
                                   (Or.push(Br), (Br.emUsed = !0))
                               }
@@ -36706,7 +39589,10 @@
                                 schemaPath:
                                   '#/definitions/properties/allOf/1/items/properties/binding/allOf/4/then/errorMessage',
                                 params: { errors: Or },
-                                message: 'property.binding ' + JSON.stringify(Me && Me.type) + ' requires errorRef'
+                                message:
+                                  'property.binding ' +
+                                  JSON.stringify(Me && Me.type) +
+                                  ' requires errorRef'
                               }
                               null === i ? (i = [jr]) : i.push(jr), o++
                             }
@@ -36731,7 +39617,8 @@
                           var Ir = {
                             keyword: 'if',
                             dataPath: r + '/properties/' + e + '/binding',
-                            schemaPath: '#/definitions/properties/allOf/1/items/properties/binding/allOf/4/if',
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/properties/binding/allOf/4/if',
                             params: { failingKeyword: 'then' },
                             message: 'should match "then" schema'
                           }
@@ -36742,7 +39629,8 @@
                             var Nr = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + e + '/binding',
-                              schemaPath: '#/definitions/properties/allOf/1/items/properties/binding/required',
+                              schemaPath:
+                                '#/definitions/properties/allOf/1/items/properties/binding/required',
                               params: { missingProperty: 'type' },
                               message: "should have required property 'type'"
                             }
@@ -36778,7 +39666,10 @@
                                 dataPath: r + '/properties/' + e + '/binding/type',
                                 schemaPath:
                                   '#/definitions/properties/allOf/1/items/properties/binding/properties/type/enum',
-                                params: { allowedValues: DE.allOf[1].items.properties.binding.properties.type.enum },
+                                params: {
+                                  allowedValues:
+                                    DE.allOf[1].items.properties.binding.properties.type.enum
+                                },
                                 message: 'should be equal to one of the allowed values'
                               }
                               null === i ? (i = [Vr]) : i.push(Vr), o++
@@ -36793,8 +39684,14 @@
                                   'errorMessage' === Ur.keyword ||
                                     Ur.emUsed ||
                                     (Ur.dataPath !== r + '/properties/' + e + '/binding/type' &&
-                                      (0 !== Ur.dataPath.indexOf(r + '/properties/' + e + '/binding/type') ||
-                                        '/' !== Ur.dataPath[r + '/properties/' + e + '/binding/type'.length])) ||
+                                      (0 !==
+                                        Ur.dataPath.indexOf(
+                                          r + '/properties/' + e + '/binding/type'
+                                        ) ||
+                                        '/' !==
+                                          Ur.dataPath[
+                                            r + '/properties/' + e + '/binding/type'.length
+                                          ])) ||
                                     0 !==
                                       Ur.schemaPath.indexOf(
                                         '#/definitions/properties/allOf/1/items/properties/binding/properties/type'
@@ -36927,14 +39824,18 @@
                                 schemaPath:
                                   '#/definitions/properties/allOf/1/items/properties/binding/properties/variables/enum',
                                 params: {
-                                  allowedValues: DE.allOf[1].items.properties.binding.properties.variables.enum
+                                  allowedValues:
+                                    DE.allOf[1].items.properties.binding.properties.variables.enum
                                 },
                                 message: 'should be equal to one of the allowed values'
                               }
                               null === i ? (i = [oi]) : i.push(oi), o++
                             }
                           }
-                          if (void 0 !== Me.sourceExpression && 'string' != typeof Me.sourceExpression) {
+                          if (
+                            void 0 !== Me.sourceExpression &&
+                            'string' != typeof Me.sourceExpression
+                          ) {
                             var ai = {
                               keyword: 'type',
                               dataPath: r + '/properties/' + e + '/binding/sourceExpression',
@@ -36949,7 +39850,8 @@
                           var si = {
                             keyword: 'type',
                             dataPath: r + '/properties/' + e + '/binding',
-                            schemaPath: '#/definitions/properties/allOf/1/items/properties/binding/type',
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/properties/binding/type',
                             params: { type: 'object' },
                             message: 'should be object'
                           }
@@ -37061,7 +39963,9 @@
                         var c = {}
                         null === i ? (i = [c]) : i.push(c), o++
                       }
-                    if (((Tn = s === o), (o = n), null !== i && (n ? (i.length = n) : (i = null)), Tn)) {
+                    if (
+                      ((Tn = s === o), (o = n), null !== i && (n ? (i.length = n) : (i = null)), Tn)
+                    ) {
                       var p = o
                       if (t && 'object' == OE(t) && !Array.isArray(t) && void 0 === t.id) {
                         var u = {
@@ -37085,8 +39989,10 @@
                               (f.dataPath !== r + '/scopes/' + e &&
                                 (0 !== f.dataPath.indexOf(r + '/scopes/' + e) ||
                                   '/' !== f.dataPath[r + '/scopes/' + e.length])) ||
-                              0 !== f.schemaPath.indexOf('#/properties/scopes/items/allOf/0/then') ||
-                              '/' !== f.schemaPath['#/properties/scopes/items/allOf/0/then'.length] ||
+                              0 !==
+                                f.schemaPath.indexOf('#/properties/scopes/items/allOf/0/then') ||
+                              '/' !==
+                                f.schemaPath['#/properties/scopes/items/allOf/0/then'.length] ||
                               (m.push(f), (f.emUsed = !0))
                           }
                         } catch (e) {
@@ -37169,7 +40075,9 @@
                             keyword: 'enum',
                             dataPath: r + '/scopes/' + e + '/type',
                             schemaPath: '#/properties/scopes/items/properties/type/enum',
-                            params: { allowedValues: ME.properties.scopes.items.properties.type.enum },
+                            params: {
+                              allowedValues: ME.properties.scopes.items.properties.type.enum
+                            },
                             message: 'should be equal to one of the allowed values'
                           }
                           null === i ? (i = [P]) : i.push(P), o++
@@ -37186,8 +40094,14 @@
                                 (T.dataPath !== r + '/scopes/' + e + '/type' &&
                                   (0 !== T.dataPath.indexOf(r + '/scopes/' + e + '/type') ||
                                     '/' !== T.dataPath[r + '/scopes/' + e + '/type'.length])) ||
-                                0 !== T.schemaPath.indexOf('#/properties/scopes/items/properties/type') ||
-                                '/' !== T.schemaPath['#/properties/scopes/items/properties/type'.length] ||
+                                0 !==
+                                  T.schemaPath.indexOf(
+                                    '#/properties/scopes/items/properties/type'
+                                  ) ||
+                                '/' !==
+                                  T.schemaPath[
+                                    '#/properties/scopes/items/properties/type'.length
+                                  ] ||
                                 (S.push(T), (T.emUsed = !0))
                             }
                           } catch (e) {
@@ -37240,13 +40154,24 @@
                                 var $ = {}
                                 null === i ? (i = [$]) : i.push($), o++
                               }
-                            if (((Bn = q === o), (o = F), null !== i && (F ? (i.length = F) : (i = null)), Bn)) {
+                            if (
+                              ((Bn = q === o),
+                              (o = F),
+                              null !== i && (F ? (i.length = F) : (i = null)),
+                              Bn)
+                            ) {
                               var U = o
-                              if (L && 'object' == OE(L) && !Array.isArray(L) && void 0 === L.choices) {
+                              if (
+                                L &&
+                                'object' == OE(L) &&
+                                !Array.isArray(L) &&
+                                void 0 === L.choices
+                              ) {
                                 var W = {
                                   keyword: 'required',
                                   dataPath: r + '/scopes/' + e + '/properties/' + N,
-                                  schemaPath: '#/definitions/properties/allOf/0/items/allOf/0/then/required',
+                                  schemaPath:
+                                    '#/definitions/properties/allOf/0/items/allOf/0/then/required',
                                   params: { missingProperty: 'choices' },
                                   message: "should have required property 'choices'"
                                 }
@@ -37262,12 +40187,23 @@
                                     'errorMessage' === Y.keyword ||
                                       Y.emUsed ||
                                       (Y.dataPath !== r + '/scopes/' + e + '/properties/' + N &&
-                                        (0 !== Y.dataPath.indexOf(r + '/scopes/' + e + '/properties/' + N) ||
-                                          '/' !== Y.dataPath[r + '/scopes/' + e + '/properties/' + N.length])) ||
+                                        (0 !==
+                                          Y.dataPath.indexOf(
+                                            r + '/scopes/' + e + '/properties/' + N
+                                          ) ||
+                                          '/' !==
+                                            Y.dataPath[
+                                              r + '/scopes/' + e + '/properties/' + N.length
+                                            ])) ||
                                       0 !==
-                                        Y.schemaPath.indexOf('#/definitions/properties/allOf/0/items/allOf/0/then') ||
+                                        Y.schemaPath.indexOf(
+                                          '#/definitions/properties/allOf/0/items/allOf/0/then'
+                                        ) ||
                                       '/' !==
-                                        Y.schemaPath['#/definitions/properties/allOf/0/items/allOf/0/then'.length] ||
+                                        Y.schemaPath[
+                                          '#/definitions/properties/allOf/0/items/allOf/0/then'
+                                            .length
+                                        ] ||
                                       (Q.push(Y), (Y.emUsed = !0))
                                   }
                                 } catch (e) {
@@ -37279,7 +40215,8 @@
                                   var J = {
                                     keyword: 'errorMessage',
                                     dataPath: r + '/scopes/' + e + '/properties/' + N,
-                                    schemaPath: '#/definitions/properties/allOf/0/items/allOf/0/then/errorMessage',
+                                    schemaPath:
+                                      '#/definitions/properties/allOf/0/items/allOf/0/then/errorMessage',
                                     params: { errors: Q },
                                     message: 'must provide choices=[] with "Dropdown" type'
                                   }
@@ -37319,7 +40256,8 @@
                                   var ie = {
                                     keyword: 'type',
                                     dataPath: r + '/scopes/' + e + '/properties/' + N + '/value',
-                                    schemaPath: '#/definitions/properties/allOf/0/items/properties/value/type',
+                                    schemaPath:
+                                      '#/definitions/properties/allOf/0/items/properties/value/type',
                                     params: { type: RE.items.properties.value.type },
                                     message: 'should be string,boolean'
                                   }
@@ -37329,8 +40267,10 @@
                               if (void 0 !== L.description && 'string' != typeof L.description) {
                                 var oe = {
                                   keyword: 'type',
-                                  dataPath: r + '/scopes/' + e + '/properties/' + N + '/description',
-                                  schemaPath: '#/definitions/properties/allOf/0/items/properties/description/type',
+                                  dataPath:
+                                    r + '/scopes/' + e + '/properties/' + N + '/description',
+                                  schemaPath:
+                                    '#/definitions/properties/allOf/0/items/properties/description/type',
                                   params: { type: 'string' },
                                   message: 'should be string'
                                 }
@@ -37340,7 +40280,8 @@
                                 var ae = {
                                   keyword: 'type',
                                   dataPath: r + '/scopes/' + e + '/properties/' + N + '/label',
-                                  schemaPath: '#/definitions/properties/allOf/0/items/properties/label/type',
+                                  schemaPath:
+                                    '#/definitions/properties/allOf/0/items/properties/label/type',
                                   params: { type: 'string' },
                                   message: 'should be string'
                                 }
@@ -37350,7 +40291,8 @@
                                 var se = {
                                   keyword: 'type',
                                   dataPath: r + '/scopes/' + e + '/properties/' + N + '/type',
-                                  schemaPath: '#/definitions/properties/allOf/0/items/properties/type/type',
+                                  schemaPath:
+                                    '#/definitions/properties/allOf/0/items/properties/type/type',
                                   params: { type: 'string' },
                                   message: 'should be string'
                                 }
@@ -37360,7 +40302,8 @@
                                 var le = {
                                   keyword: 'type',
                                   dataPath: r + '/scopes/' + e + '/properties/' + N + '/editable',
-                                  schemaPath: '#/definitions/properties/allOf/0/items/properties/editable/type',
+                                  schemaPath:
+                                    '#/definitions/properties/allOf/0/items/properties/editable/type',
                                   params: { type: 'boolean' },
                                   message: 'should be boolean'
                                 }
@@ -37375,7 +40318,14 @@
                                       if (void 0 === de.value) {
                                         var me = {
                                           keyword: 'required',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + N + '/choices/' + ue,
+                                          dataPath:
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            N +
+                                            '/choices/' +
+                                            ue,
                                           schemaPath:
                                             '#/definitions/properties/allOf/0/items/properties/choices/items/required',
                                           params: { missingProperty: 'value' },
@@ -37386,7 +40336,14 @@
                                       if (void 0 === de.name) {
                                         var he = {
                                           keyword: 'required',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + N + '/choices/' + ue,
+                                          dataPath:
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            N +
+                                            '/choices/' +
+                                            ue,
                                           schemaPath:
                                             '#/definitions/properties/allOf/0/items/properties/choices/items/required',
                                           params: { missingProperty: 'name' },
@@ -37398,7 +40355,14 @@
                                         var fe = {
                                           keyword: 'type',
                                           dataPath:
-                                            r + '/scopes/' + e + '/properties/' + N + '/choices/' + ue + '/name',
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            N +
+                                            '/choices/' +
+                                            ue +
+                                            '/name',
                                           schemaPath:
                                             '#/definitions/properties/allOf/0/items/properties/choices/items/properties/name/type',
                                           params: { type: 'string' },
@@ -37410,7 +40374,14 @@
                                         var ve = {
                                           keyword: 'type',
                                           dataPath:
-                                            r + '/scopes/' + e + '/properties/' + N + '/choices/' + ue + '/value',
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            N +
+                                            '/choices/' +
+                                            ue +
+                                            '/value',
                                           schemaPath:
                                             '#/definitions/properties/allOf/0/items/properties/choices/items/properties/value/type',
                                           params: { type: 'string' },
@@ -37421,7 +40392,14 @@
                                     } else {
                                       var ge = {
                                         keyword: 'type',
-                                        dataPath: r + '/scopes/' + e + '/properties/' + N + '/choices/' + ue,
+                                        dataPath:
+                                          r +
+                                          '/scopes/' +
+                                          e +
+                                          '/properties/' +
+                                          N +
+                                          '/choices/' +
+                                          ue,
                                         schemaPath:
                                           '#/definitions/properties/allOf/0/items/properties/choices/items/type',
                                         params: { type: 'object' },
@@ -37439,14 +40417,32 @@
                                           'errorMessage' === Ee.keyword ||
                                             Ee.emUsed ||
                                             (Ee.dataPath !==
-                                              r + '/scopes/' + e + '/properties/' + N + '/choices/' + ue &&
+                                              r +
+                                                '/scopes/' +
+                                                e +
+                                                '/properties/' +
+                                                N +
+                                                '/choices/' +
+                                                ue &&
                                               (0 !==
                                                 Ee.dataPath.indexOf(
-                                                  r + '/scopes/' + e + '/properties/' + N + '/choices/' + ue
+                                                  r +
+                                                    '/scopes/' +
+                                                    e +
+                                                    '/properties/' +
+                                                    N +
+                                                    '/choices/' +
+                                                    ue
                                                 ) ||
                                                 '/' !==
                                                   Ee.dataPath[
-                                                    r + '/scopes/' + e + '/properties/' + N + '/choices/' + ue.length
+                                                    r +
+                                                      '/scopes/' +
+                                                      e +
+                                                      '/properties/' +
+                                                      N +
+                                                      '/choices/' +
+                                                      ue.length
                                                   ])) ||
                                             0 !==
                                               Ee.schemaPath.indexOf(
@@ -37454,7 +40450,8 @@
                                               ) ||
                                             '/' !==
                                               Ee.schemaPath[
-                                                '#/definitions/properties/allOf/0/items/properties/choices/items'.length
+                                                '#/definitions/properties/allOf/0/items/properties/choices/items'
+                                                  .length
                                               ] ||
                                             (be.push(Ee), (Ee.emUsed = !0))
                                         }
@@ -37466,11 +40463,19 @@
                                       if (be.length) {
                                         var xe = {
                                           keyword: 'errorMessage',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + N + '/choices/' + ue,
+                                          dataPath:
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            N +
+                                            '/choices/' +
+                                            ue,
                                           schemaPath:
                                             '#/definitions/properties/allOf/0/items/properties/choices/items/errorMessage',
                                           params: { errors: be },
-                                          message: '{ name, value } must be specified for "Dropdown" choices'
+                                          message:
+                                            '{ name, value } must be specified for "Dropdown" choices'
                                         }
                                         null === i ? (i = [xe]) : i.push(xe), o++
                                       }
@@ -37494,7 +40499,8 @@
                                   var ke = {
                                     keyword: 'type',
                                     dataPath: r + '/scopes/' + e + '/properties/' + N + '/choices',
-                                    schemaPath: '#/definitions/properties/allOf/0/items/properties/choices/type',
+                                    schemaPath:
+                                      '#/definitions/properties/allOf/0/items/properties/choices/type',
                                     params: { type: 'array' },
                                     message: 'should be array'
                                   }
@@ -37507,7 +40513,13 @@
                                   if (void 0 !== Se.notEmpty && 'boolean' != typeof Se.notEmpty) {
                                     var Oe = {
                                       keyword: 'type',
-                                      dataPath: r + '/scopes/' + e + '/properties/' + N + '/constraints/notEmpty',
+                                      dataPath:
+                                        r +
+                                        '/scopes/' +
+                                        e +
+                                        '/properties/' +
+                                        N +
+                                        '/constraints/notEmpty',
                                       schemaPath:
                                         '#/definitions/properties/allOf/0/items/properties/constraints/properties/notEmpty/type',
                                       params: { type: 'boolean' },
@@ -37518,7 +40530,13 @@
                                   if (void 0 !== Se.minLength && 'number' != typeof Se.minLength) {
                                     var Te = {
                                       keyword: 'type',
-                                      dataPath: r + '/scopes/' + e + '/properties/' + N + '/constraints/minLength',
+                                      dataPath:
+                                        r +
+                                        '/scopes/' +
+                                        e +
+                                        '/properties/' +
+                                        N +
+                                        '/constraints/minLength',
                                       schemaPath:
                                         '#/definitions/properties/allOf/0/items/properties/constraints/properties/minLength/type',
                                       params: { type: 'number' },
@@ -37529,7 +40547,13 @@
                                   if (void 0 !== Se.maxLength && 'number' != typeof Se.maxLength) {
                                     var Be = {
                                       keyword: 'type',
-                                      dataPath: r + '/scopes/' + e + '/properties/' + N + '/constraints/maxLength',
+                                      dataPath:
+                                        r +
+                                        '/scopes/' +
+                                        e +
+                                        '/properties/' +
+                                        N +
+                                        '/constraints/maxLength',
                                       schemaPath:
                                         '#/definitions/properties/allOf/0/items/properties/constraints/properties/maxLength/type',
                                       params: { type: 'number' },
@@ -37548,7 +40572,12 @@
                                         var Ie = {
                                           keyword: 'type',
                                           dataPath:
-                                            r + '/scopes/' + e + '/properties/' + N + '/constraints/pattern/value',
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            N +
+                                            '/constraints/pattern/value',
                                           schemaPath:
                                             '#/definitions/properties/allOf/0/items/properties/constraints/properties/pattern/oneOf/0/properties/value/type',
                                           params: { type: 'string' },
@@ -37560,7 +40589,12 @@
                                         var Ne = {
                                           keyword: 'type',
                                           dataPath:
-                                            r + '/scopes/' + e + '/properties/' + N + '/constraints/pattern/message',
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            N +
+                                            '/constraints/pattern/message',
                                           schemaPath:
                                             '#/definitions/properties/allOf/0/items/properties/constraints/properties/pattern/oneOf/0/properties/message/type',
                                           params: { type: 'string' },
@@ -37571,7 +40605,13 @@
                                     } else {
                                       var Le = {
                                         keyword: 'type',
-                                        dataPath: r + '/scopes/' + e + '/properties/' + N + '/constraints/pattern',
+                                        dataPath:
+                                          r +
+                                          '/scopes/' +
+                                          e +
+                                          '/properties/' +
+                                          N +
+                                          '/constraints/pattern',
                                         schemaPath:
                                           '#/definitions/properties/allOf/0/items/properties/constraints/properties/pattern/oneOf/0/type',
                                         params: { type: 'object' },
@@ -37584,7 +40624,13 @@
                                     if ('string' != typeof je) {
                                       var Ve = {
                                         keyword: 'type',
-                                        dataPath: r + '/scopes/' + e + '/properties/' + N + '/constraints/pattern',
+                                        dataPath:
+                                          r +
+                                          '/scopes/' +
+                                          e +
+                                          '/properties/' +
+                                          N +
+                                          '/constraints/pattern',
                                         schemaPath:
                                           '#/definitions/properties/allOf/0/items/properties/constraints/properties/pattern/oneOf/1/type',
                                         params: { type: 'string' },
@@ -37602,7 +40648,13 @@
                                     else {
                                       var qe = {
                                         keyword: 'oneOf',
-                                        dataPath: r + '/scopes/' + e + '/properties/' + N + '/constraints/pattern',
+                                        dataPath:
+                                          r +
+                                          '/scopes/' +
+                                          e +
+                                          '/properties/' +
+                                          N +
+                                          '/constraints/pattern',
                                         schemaPath:
                                           '#/definitions/properties/allOf/0/items/properties/constraints/properties/pattern/oneOf',
                                         params: { passingSchemas: Re },
@@ -37614,8 +40666,10 @@
                                 } else {
                                   var He = {
                                     keyword: 'type',
-                                    dataPath: r + '/scopes/' + e + '/properties/' + N + '/constraints',
-                                    schemaPath: '#/definitions/properties/allOf/0/items/properties/constraints/type',
+                                    dataPath:
+                                      r + '/scopes/' + e + '/properties/' + N + '/constraints',
+                                    schemaPath:
+                                      '#/definitions/properties/allOf/0/items/properties/constraints/type',
                                     params: { type: 'object' },
                                     message: 'should be object'
                                   }
@@ -37626,7 +40680,8 @@
                                 var $e = {
                                   keyword: 'type',
                                   dataPath: r + '/scopes/' + e + '/properties/' + N + '/group',
-                                  schemaPath: '#/definitions/properties/allOf/0/items/properties/group/type',
+                                  schemaPath:
+                                    '#/definitions/properties/allOf/0/items/properties/group/type',
                                   params: { type: 'string' },
                                   message: 'should be string'
                                 }
@@ -37676,9 +40731,19 @@
                                         null === i ? (i = [d]) : i.push(d), o++
                                       }
                                   }
-                                if (((Mn = l === o), (o = a), null !== i && (a ? (i.length = a) : (i = null)), Mn)) {
+                                if (
+                                  ((Mn = l === o),
+                                  (o = a),
+                                  null !== i && (a ? (i.length = a) : (i = null)),
+                                  Mn)
+                                ) {
                                   var m = o
-                                  if (n && 'object' == OE(n) && !Array.isArray(n) && void 0 !== n.type) {
+                                  if (
+                                    n &&
+                                    'object' == OE(n) &&
+                                    !Array.isArray(n) &&
+                                    void 0 !== n.type
+                                  ) {
                                     var h = n.type
                                     if (
                                       'String' !== h &&
@@ -37692,7 +40757,9 @@
                                         dataPath: r + '/scopes/' + e + '/properties/' + t + '/type',
                                         schemaPath:
                                           '#/definitions/properties/allOf/1/items/allOf/0/then/properties/type/enum',
-                                        params: { allowedValues: zE.items.allOf[0].then.properties.type.enum },
+                                        params: {
+                                          allowedValues: zE.items.allOf[0].then.properties.type.enum
+                                        },
                                         message: 'should be equal to one of the allowed values'
                                       }
                                       null === i ? (i = [f]) : i.push(f), o++
@@ -37706,12 +40773,20 @@
                                           var b = v.value
                                           'errorMessage' === b.keyword ||
                                             b.emUsed ||
-                                            (b.dataPath !== r + '/scopes/' + e + '/properties/' + t + '/type' &&
+                                            (b.dataPath !==
+                                              r + '/scopes/' + e + '/properties/' + t + '/type' &&
                                               (0 !==
-                                                b.dataPath.indexOf(r + '/scopes/' + e + '/properties/' + t + '/type') ||
+                                                b.dataPath.indexOf(
+                                                  r + '/scopes/' + e + '/properties/' + t + '/type'
+                                                ) ||
                                                 '/' !==
                                                   b.dataPath[
-                                                    r + '/scopes/' + e + '/properties/' + t + '/type'.length
+                                                    r +
+                                                      '/scopes/' +
+                                                      e +
+                                                      '/properties/' +
+                                                      t +
+                                                      '/type'.length
                                                   ])) ||
                                             0 !==
                                               b.schemaPath.indexOf(
@@ -37732,7 +40807,8 @@
                                       if (g.length) {
                                         var A = {
                                           keyword: 'errorMessage',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/type',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/type',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/allOf/0/then/properties/type/errorMessage',
                                           params: { errors: g },
@@ -37784,21 +40860,36 @@
                                       if (void 0 === T.type) {
                                         var B = {}
                                         null === i ? (i = [B]) : i.push(B), o++
-                                      } else if (void 0 !== T.type && !TE(T.type, 'camunda:executionListener')) {
+                                      } else if (
+                                        void 0 !== T.type &&
+                                        !TE(T.type, 'camunda:executionListener')
+                                      ) {
                                         var j = {}
                                         null === i ? (i = [j]) : i.push(j), o++
                                       }
                                   }
-                                if (((Dn = S === o), (o = P), null !== i && (P ? (i.length = P) : (i = null)), Dn)) {
+                                if (
+                                  ((Dn = S === o),
+                                  (o = P),
+                                  null !== i && (P ? (i.length = P) : (i = null)),
+                                  Dn)
+                                ) {
                                   var M = o
-                                  if (n && 'object' == OE(n) && !Array.isArray(n) && void 0 !== n.type) {
+                                  if (
+                                    n &&
+                                    'object' == OE(n) &&
+                                    !Array.isArray(n) &&
+                                    void 0 !== n.type
+                                  ) {
                                     if ('Hidden' !== n.type) {
                                       var D = {
                                         keyword: 'enum',
                                         dataPath: r + '/scopes/' + e + '/properties/' + t + '/type',
                                         schemaPath:
                                           '#/definitions/properties/allOf/1/items/allOf/1/then/properties/type/enum',
-                                        params: { allowedValues: zE.items.allOf[1].then.properties.type.enum },
+                                        params: {
+                                          allowedValues: zE.items.allOf[1].then.properties.type.enum
+                                        },
                                         message: 'should be equal to one of the allowed values'
                                       }
                                       null === i ? (i = [D]) : i.push(D), o++
@@ -37812,12 +40903,20 @@
                                           var L = R.value
                                           'errorMessage' === L.keyword ||
                                             L.emUsed ||
-                                            (L.dataPath !== r + '/scopes/' + e + '/properties/' + t + '/type' &&
+                                            (L.dataPath !==
+                                              r + '/scopes/' + e + '/properties/' + t + '/type' &&
                                               (0 !==
-                                                L.dataPath.indexOf(r + '/scopes/' + e + '/properties/' + t + '/type') ||
+                                                L.dataPath.indexOf(
+                                                  r + '/scopes/' + e + '/properties/' + t + '/type'
+                                                ) ||
                                                 '/' !==
                                                   L.dataPath[
-                                                    r + '/scopes/' + e + '/properties/' + t + '/type'.length
+                                                    r +
+                                                      '/scopes/' +
+                                                      e +
+                                                      '/properties/' +
+                                                      t +
+                                                      '/type'.length
                                                   ])) ||
                                             0 !==
                                               L.schemaPath.indexOf(
@@ -37838,7 +40937,8 @@
                                       if (I.length) {
                                         var F = {
                                           keyword: 'errorMessage',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/type',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/type',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/allOf/1/then/properties/type/errorMessage',
                                           params: { errors: I },
@@ -37905,9 +41005,19 @@
                                         }
                                       }
                                   }
-                                if (((Rn = Q === o), (o = W), null !== i && (W ? (i.length = W) : (i = null)), Rn)) {
+                                if (
+                                  ((Rn = Q === o),
+                                  (o = W),
+                                  null !== i && (W ? (i.length = W) : (i = null)),
+                                  Rn)
+                                ) {
                                   var ee = o
-                                  if (n && 'object' == OE(n) && !Array.isArray(n) && void 0 !== n.type) {
+                                  if (
+                                    n &&
+                                    'object' == OE(n) &&
+                                    !Array.isArray(n) &&
+                                    void 0 !== n.type
+                                  ) {
                                     var te = n.type
                                     if ('String' !== te && 'Hidden' !== te && 'Dropdown' !== te) {
                                       var ne = {
@@ -37915,7 +41025,9 @@
                                         dataPath: r + '/scopes/' + e + '/properties/' + t + '/type',
                                         schemaPath:
                                           '#/definitions/properties/allOf/1/items/allOf/2/then/properties/type/enum',
-                                        params: { allowedValues: zE.items.allOf[2].then.properties.type.enum },
+                                        params: {
+                                          allowedValues: zE.items.allOf[2].then.properties.type.enum
+                                        },
                                         message: 'should be equal to one of the allowed values'
                                       }
                                       null === i ? (i = [ne]) : i.push(ne), o++
@@ -37929,14 +41041,20 @@
                                           var ae = re.value
                                           'errorMessage' === ae.keyword ||
                                             ae.emUsed ||
-                                            (ae.dataPath !== r + '/scopes/' + e + '/properties/' + t + '/type' &&
+                                            (ae.dataPath !==
+                                              r + '/scopes/' + e + '/properties/' + t + '/type' &&
                                               (0 !==
                                                 ae.dataPath.indexOf(
                                                   r + '/scopes/' + e + '/properties/' + t + '/type'
                                                 ) ||
                                                 '/' !==
                                                   ae.dataPath[
-                                                    r + '/scopes/' + e + '/properties/' + t + '/type'.length
+                                                    r +
+                                                      '/scopes/' +
+                                                      e +
+                                                      '/properties/' +
+                                                      t +
+                                                      '/type'.length
                                                   ])) ||
                                             0 !==
                                               ae.schemaPath.indexOf(
@@ -37957,7 +41075,8 @@
                                       if (ie.length) {
                                         var se = {
                                           keyword: 'errorMessage',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/type',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/type',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/allOf/2/then/properties/type/errorMessage',
                                           params: { errors: ie },
@@ -38013,25 +41132,43 @@
                                         null === i ? (i = [ye]) : i.push(ye), o++
                                       } else if (void 0 !== ge.type) {
                                         var be = ge.type
-                                        if ('camunda:inputParameter' !== be && 'camunda:field' !== be) {
+                                        if (
+                                          'camunda:inputParameter' !== be &&
+                                          'camunda:field' !== be
+                                        ) {
                                           var Ae = {}
                                           null === i ? (i = [Ae]) : i.push(Ae), o++
                                         }
                                       }
                                   }
                                 if (
-                                  ((zn = fe === o), (o = me), null !== i && (me ? (i.length = me) : (i = null)), zn)
+                                  ((zn = fe === o),
+                                  (o = me),
+                                  null !== i && (me ? (i.length = me) : (i = null)),
+                                  zn)
                                 ) {
                                   var Ee = o
-                                  if (n && 'object' == OE(n) && !Array.isArray(n) && void 0 !== n.type) {
+                                  if (
+                                    n &&
+                                    'object' == OE(n) &&
+                                    !Array.isArray(n) &&
+                                    void 0 !== n.type
+                                  ) {
                                     var xe = n.type
-                                    if ('String' !== xe && 'Text' !== xe && 'Hidden' !== xe && 'Dropdown' !== xe) {
+                                    if (
+                                      'String' !== xe &&
+                                      'Text' !== xe &&
+                                      'Hidden' !== xe &&
+                                      'Dropdown' !== xe
+                                    ) {
                                       var _e = {
                                         keyword: 'enum',
                                         dataPath: r + '/scopes/' + e + '/properties/' + t + '/type',
                                         schemaPath:
                                           '#/definitions/properties/allOf/1/items/allOf/3/then/properties/type/enum',
-                                        params: { allowedValues: zE.items.allOf[3].then.properties.type.enum },
+                                        params: {
+                                          allowedValues: zE.items.allOf[3].then.properties.type.enum
+                                        },
                                         message: 'should be equal to one of the allowed values'
                                       }
                                       null === i ? (i = [_e]) : i.push(_e), o++
@@ -38045,14 +41182,20 @@
                                           var ke = we.value
                                           'errorMessage' === ke.keyword ||
                                             ke.emUsed ||
-                                            (ke.dataPath !== r + '/scopes/' + e + '/properties/' + t + '/type' &&
+                                            (ke.dataPath !==
+                                              r + '/scopes/' + e + '/properties/' + t + '/type' &&
                                               (0 !==
                                                 ke.dataPath.indexOf(
                                                   r + '/scopes/' + e + '/properties/' + t + '/type'
                                                 ) ||
                                                 '/' !==
                                                   ke.dataPath[
-                                                    r + '/scopes/' + e + '/properties/' + t + '/type'.length
+                                                    r +
+                                                      '/scopes/' +
+                                                      e +
+                                                      '/properties/' +
+                                                      t +
+                                                      '/type'.length
                                                   ])) ||
                                             0 !==
                                               ke.schemaPath.indexOf(
@@ -38073,7 +41216,8 @@
                                       if (Ce.length) {
                                         var Se = {
                                           keyword: 'errorMessage',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/type',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/type',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/allOf/3/then/properties/type/errorMessage',
                                           params: { errors: Ce },
@@ -38147,13 +41291,22 @@
                                         }
                                       }
                                     if (
-                                      ((In = Ne === o), (o = ze), null !== i && (ze ? (i.length = ze) : (i = null)), In)
+                                      ((In = Ne === o),
+                                      (o = ze),
+                                      null !== i && (ze ? (i.length = ze) : (i = null)),
+                                      In)
                                     ) {
                                       var qe = o
-                                      if (Re && 'object' == OE(Re) && !Array.isArray(Re) && void 0 === Re.name) {
+                                      if (
+                                        Re &&
+                                        'object' == OE(Re) &&
+                                        !Array.isArray(Re) &&
+                                        void 0 === Re.name
+                                      ) {
                                         var He = {
                                           keyword: 'required',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/binding',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/then/required',
                                           params: { missingProperty: 'name' },
@@ -38170,14 +41323,30 @@
                                             var Ge = $e.value
                                             'errorMessage' === Ge.keyword ||
                                               Ge.emUsed ||
-                                              (Ge.dataPath !== r + '/scopes/' + e + '/properties/' + t + '/binding' &&
+                                              (Ge.dataPath !==
+                                                r +
+                                                  '/scopes/' +
+                                                  e +
+                                                  '/properties/' +
+                                                  t +
+                                                  '/binding' &&
                                                 (0 !==
                                                   Ge.dataPath.indexOf(
-                                                    r + '/scopes/' + e + '/properties/' + t + '/binding'
+                                                    r +
+                                                      '/scopes/' +
+                                                      e +
+                                                      '/properties/' +
+                                                      t +
+                                                      '/binding'
                                                   ) ||
                                                   '/' !==
                                                     Ge.dataPath[
-                                                      r + '/scopes/' + e + '/properties/' + t + '/binding'.length
+                                                      r +
+                                                        '/scopes/' +
+                                                        e +
+                                                        '/properties/' +
+                                                        t +
+                                                        '/binding'.length
                                                     ])) ||
                                               0 !==
                                                 Ge.schemaPath.indexOf(
@@ -38198,12 +41367,15 @@
                                         if (Ue.length) {
                                           var Qe = {
                                             keyword: 'errorMessage',
-                                            dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                            dataPath:
+                                              r + '/scopes/' + e + '/properties/' + t + '/binding',
                                             schemaPath:
                                               '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/then/errorMessage',
                                             params: { errors: Ue },
                                             message:
-                                              'property.binding ' + JSON.stringify(Re && Re.type) + ' requires name'
+                                              'property.binding ' +
+                                              JSON.stringify(Re && Re.type) +
+                                              ' requires name'
                                           }
                                           null === i ? (i = [Qe]) : i.push(Qe), o++
                                         }
@@ -38227,7 +41399,8 @@
                                     if (!Ie) {
                                       var Ze = {
                                         keyword: 'if',
-                                        dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                        dataPath:
+                                          r + '/scopes/' + e + '/properties/' + t + '/binding',
                                         schemaPath:
                                           '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/if',
                                         params: { failingKeyword: 'then' },
@@ -38242,18 +41415,30 @@
                                       if (void 0 === Re.type) {
                                         var rt = {}
                                         null === i ? (i = [rt]) : i.push(rt), o++
-                                      } else if (void 0 !== Re.type && !TE(Re.type, 'camunda:outputParameter')) {
+                                      } else if (
+                                        void 0 !== Re.type &&
+                                        !TE(Re.type, 'camunda:outputParameter')
+                                      ) {
                                         var it = {}
                                         null === i ? (i = [it]) : i.push(it), o++
                                       }
                                     if (
-                                      ((Nn = nt === o), (o = et), null !== i && (et ? (i.length = et) : (i = null)), Nn)
+                                      ((Nn = nt === o),
+                                      (o = et),
+                                      null !== i && (et ? (i.length = et) : (i = null)),
+                                      Nn)
                                     ) {
                                       var ot = o
-                                      if (Re && 'object' == OE(Re) && !Array.isArray(Re) && void 0 === Re.source) {
+                                      if (
+                                        Re &&
+                                        'object' == OE(Re) &&
+                                        !Array.isArray(Re) &&
+                                        void 0 === Re.source
+                                      ) {
                                         var at = {
                                           keyword: 'required',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/binding',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/then/required',
                                           params: { missingProperty: 'source' },
@@ -38270,14 +41455,30 @@
                                             var pt = st.value
                                             'errorMessage' === pt.keyword ||
                                               pt.emUsed ||
-                                              (pt.dataPath !== r + '/scopes/' + e + '/properties/' + t + '/binding' &&
+                                              (pt.dataPath !==
+                                                r +
+                                                  '/scopes/' +
+                                                  e +
+                                                  '/properties/' +
+                                                  t +
+                                                  '/binding' &&
                                                 (0 !==
                                                   pt.dataPath.indexOf(
-                                                    r + '/scopes/' + e + '/properties/' + t + '/binding'
+                                                    r +
+                                                      '/scopes/' +
+                                                      e +
+                                                      '/properties/' +
+                                                      t +
+                                                      '/binding'
                                                   ) ||
                                                   '/' !==
                                                     pt.dataPath[
-                                                      r + '/scopes/' + e + '/properties/' + t + '/binding'.length
+                                                      r +
+                                                        '/scopes/' +
+                                                        e +
+                                                        '/properties/' +
+                                                        t +
+                                                        '/binding'.length
                                                     ])) ||
                                               0 !==
                                                 pt.schemaPath.indexOf(
@@ -38298,12 +41499,15 @@
                                         if (lt.length) {
                                           var ut = {
                                             keyword: 'errorMessage',
-                                            dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                            dataPath:
+                                              r + '/scopes/' + e + '/properties/' + t + '/binding',
                                             schemaPath:
                                               '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/then/errorMessage',
                                             params: { errors: lt },
                                             message:
-                                              'property.binding ' + JSON.stringify(Re && Re.type) + ' requires source'
+                                              'property.binding ' +
+                                              JSON.stringify(Re && Re.type) +
+                                              ' requires source'
                                           }
                                           null === i ? (i = [ut]) : i.push(ut), o++
                                         }
@@ -38327,7 +41531,8 @@
                                     if (!tt) {
                                       var vt = {
                                         keyword: 'if',
-                                        dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                        dataPath:
+                                          r + '/scopes/' + e + '/properties/' + t + '/binding',
                                         schemaPath:
                                           '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/if',
                                         params: { failingKeyword: 'then' },
@@ -38347,16 +41552,25 @@
                                         null === i ? (i = [Et]) : i.push(Et), o++
                                       }
                                     if (
-                                      ((Fn = bt === o), (o = gt), null !== i && (gt ? (i.length = gt) : (i = null)), Fn)
+                                      ((Fn = bt === o),
+                                      (o = gt),
+                                      null !== i && (gt ? (i.length = gt) : (i = null)),
+                                      Fn)
                                     ) {
                                       var xt = o,
                                         _t = o,
                                         wt = !1,
                                         Ct = o
-                                      if (Re && 'object' == OE(Re) && !Array.isArray(Re) && void 0 === Re.variables) {
+                                      if (
+                                        Re &&
+                                        'object' == OE(Re) &&
+                                        !Array.isArray(Re) &&
+                                        void 0 === Re.variables
+                                      ) {
                                         var Pt = {
                                           keyword: 'required',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/binding',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/then/anyOf/0/required',
                                           params: { missingProperty: 'variables' },
@@ -38366,10 +41580,16 @@
                                       }
                                       if (((Ln = Ct === o), !(wt = wt || Ln))) {
                                         var kt = o
-                                        if (Re && 'object' == OE(Re) && !Array.isArray(Re) && void 0 === Re.target) {
+                                        if (
+                                          Re &&
+                                          'object' == OE(Re) &&
+                                          !Array.isArray(Re) &&
+                                          void 0 === Re.target
+                                        ) {
                                           var St = {
                                             keyword: 'required',
-                                            dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                            dataPath:
+                                              r + '/scopes/' + e + '/properties/' + t + '/binding',
                                             schemaPath:
                                               '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/then/anyOf/1/required',
                                             params: { missingProperty: 'target' },
@@ -38379,11 +41599,13 @@
                                         }
                                         ;(Ln = kt === o), (wt = wt || Ln)
                                       }
-                                      if (wt) (o = _t), null !== i && (_t ? (i.length = _t) : (i = null))
+                                      if (wt)
+                                        (o = _t), null !== i && (_t ? (i.length = _t) : (i = null))
                                       else {
                                         var Ot = {
                                           keyword: 'anyOf',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/binding',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/then/anyOf',
                                           params: {},
@@ -38400,14 +41622,30 @@
                                             var Mt = Tt.value
                                             'errorMessage' === Mt.keyword ||
                                               Mt.emUsed ||
-                                              (Mt.dataPath !== r + '/scopes/' + e + '/properties/' + t + '/binding' &&
+                                              (Mt.dataPath !==
+                                                r +
+                                                  '/scopes/' +
+                                                  e +
+                                                  '/properties/' +
+                                                  t +
+                                                  '/binding' &&
                                                 (0 !==
                                                   Mt.dataPath.indexOf(
-                                                    r + '/scopes/' + e + '/properties/' + t + '/binding'
+                                                    r +
+                                                      '/scopes/' +
+                                                      e +
+                                                      '/properties/' +
+                                                      t +
+                                                      '/binding'
                                                   ) ||
                                                   '/' !==
                                                     Mt.dataPath[
-                                                      r + '/scopes/' + e + '/properties/' + t + '/binding'.length
+                                                      r +
+                                                        '/scopes/' +
+                                                        e +
+                                                        '/properties/' +
+                                                        t +
+                                                        '/binding'.length
                                                     ])) ||
                                               0 !==
                                                 Mt.schemaPath.indexOf(
@@ -38428,7 +41666,8 @@
                                         if (Bt.length) {
                                           var Dt = {
                                             keyword: 'errorMessage',
-                                            dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                            dataPath:
+                                              r + '/scopes/' + e + '/properties/' + t + '/binding',
                                             schemaPath:
                                               '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/then/errorMessage',
                                             params: { errors: Bt },
@@ -38459,7 +41698,8 @@
                                     if (!yt) {
                                       var Lt = {
                                         keyword: 'if',
-                                        dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                        dataPath:
+                                          r + '/scopes/' + e + '/properties/' + t + '/binding',
                                         schemaPath:
                                           '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/if',
                                         params: { failingKeyword: 'then' },
@@ -38474,12 +41714,18 @@
                                       if (void 0 === Re.type) {
                                         var Ht = {}
                                         null === i ? (i = [Ht]) : i.push(Ht), o++
-                                      } else if (void 0 !== Re.type && !TE(Re.type, 'camunda:out')) {
+                                      } else if (
+                                        void 0 !== Re.type &&
+                                        !TE(Re.type, 'camunda:out')
+                                      ) {
                                         var $t = {}
                                         null === i ? (i = [$t]) : i.push($t), o++
                                       }
                                     if (
-                                      ((Un = qt === o), (o = Ft), null !== i && (Ft ? (i.length = Ft) : (i = null)), Un)
+                                      ((Un = qt === o),
+                                      (o = Ft),
+                                      null !== i && (Ft ? (i.length = Ft) : (i = null)),
+                                      Un)
                                     ) {
                                       var Ut = o,
                                         Wt = o,
@@ -38491,7 +41737,12 @@
                                         Xt = o,
                                         Zt = !1,
                                         en = o
-                                      if (Re && 'object' == OE(Re) && !Array.isArray(Re) && void 0 === Re.source) {
+                                      if (
+                                        Re &&
+                                        'object' == OE(Re) &&
+                                        !Array.isArray(Re) &&
+                                        void 0 === Re.source
+                                      ) {
                                         var tn = {}
                                         null === i ? (i = [tn]) : i.push(tn), o++
                                       }
@@ -38508,7 +41759,8 @@
                                         }
                                         ;(Vn = nn === o), (Zt = Zt || Vn)
                                       }
-                                      if (Zt) (o = Xt), null !== i && (Xt ? (i.length = Xt) : (i = null))
+                                      if (Zt)
+                                        (o = Xt), null !== i && (Xt ? (i.length = Xt) : (i = null))
                                       else {
                                         var on = {}
                                         null === i ? (i = [on]) : i.push(on), o++
@@ -38516,18 +41768,26 @@
                                       if (Jt === o) {
                                         var an = {
                                           keyword: 'not',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/binding',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/oneOf/0/not',
                                           params: {},
                                           message: 'should NOT be valid'
                                         }
                                         null === i ? (i = [an]) : i.push(an), o++
-                                      } else (o = Yt), null !== i && (Yt ? (i.length = Yt) : (i = null))
-                                      if (Re && 'object' == OE(Re) && !Array.isArray(Re) && void 0 === Re.variables) {
+                                      } else
+                                        (o = Yt), null !== i && (Yt ? (i.length = Yt) : (i = null))
+                                      if (
+                                        Re &&
+                                        'object' == OE(Re) &&
+                                        !Array.isArray(Re) &&
+                                        void 0 === Re.variables
+                                      ) {
                                         var sn = {
                                           keyword: 'required',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/binding',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/oneOf/0/required',
                                           params: { missingProperty: 'variables' },
@@ -38542,7 +41802,12 @@
                                         un = o,
                                         dn = !1,
                                         mn = o
-                                      if (Re && 'object' == OE(Re) && !Array.isArray(Re) && void 0 === Re.variables) {
+                                      if (
+                                        Re &&
+                                        'object' == OE(Re) &&
+                                        !Array.isArray(Re) &&
+                                        void 0 === Re.variables
+                                      ) {
                                         var hn = {}
                                         null === i ? (i = [hn]) : i.push(hn), o++
                                       }
@@ -38559,7 +41824,8 @@
                                         }
                                         ;(qn = fn === o), (dn = dn || qn)
                                       }
-                                      if (dn) (o = un), null !== i && (un ? (i.length = un) : (i = null))
+                                      if (dn)
+                                        (o = un), null !== i && (un ? (i.length = un) : (i = null))
                                       else {
                                         var gn = {}
                                         null === i ? (i = [gn]) : i.push(gn), o++
@@ -38567,18 +41833,26 @@
                                       if (pn === o) {
                                         var yn = {
                                           keyword: 'not',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/binding',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/oneOf/1/not',
                                           params: {},
                                           message: 'should NOT be valid'
                                         }
                                         null === i ? (i = [yn]) : i.push(yn), o++
-                                      } else (o = cn), null !== i && (cn ? (i.length = cn) : (i = null))
-                                      if (Re && 'object' == OE(Re) && !Array.isArray(Re) && void 0 === Re.source) {
+                                      } else
+                                        (o = cn), null !== i && (cn ? (i.length = cn) : (i = null))
+                                      if (
+                                        Re &&
+                                        'object' == OE(Re) &&
+                                        !Array.isArray(Re) &&
+                                        void 0 === Re.source
+                                      ) {
                                         var bn = {
                                           keyword: 'required',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/binding',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/oneOf/1/required',
                                           params: { missingProperty: 'source' },
@@ -38595,19 +41869,31 @@
                                           _n = o,
                                           wn = !1,
                                           Cn = o
-                                        if (Re && 'object' == OE(Re) && !Array.isArray(Re) && void 0 === Re.variables) {
+                                        if (
+                                          Re &&
+                                          'object' == OE(Re) &&
+                                          !Array.isArray(Re) &&
+                                          void 0 === Re.variables
+                                        ) {
                                           var Pn = {}
                                           null === i ? (i = [Pn]) : i.push(Pn), o++
                                         }
                                         if (((Hn = Cn === o), !(wn = wn || Hn))) {
                                           var kn = o
-                                          if (Re && 'object' == OE(Re) && !Array.isArray(Re) && void 0 === Re.source) {
+                                          if (
+                                            Re &&
+                                            'object' == OE(Re) &&
+                                            !Array.isArray(Re) &&
+                                            void 0 === Re.source
+                                          ) {
                                             var Sn = {}
                                             null === i ? (i = [Sn]) : i.push(Sn), o++
                                           }
                                           ;(Hn = kn === o), (wn = wn || Hn)
                                         }
-                                        if (wn) (o = _n), null !== i && (_n ? (i.length = _n) : (i = null))
+                                        if (wn)
+                                          (o = _n),
+                                            null !== i && (_n ? (i.length = _n) : (i = null))
                                         else {
                                           var On = {}
                                           null === i ? (i = [On]) : i.push(On), o++
@@ -38615,14 +41901,17 @@
                                         if (xn === o) {
                                           var Tn = {
                                             keyword: 'not',
-                                            dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                            dataPath:
+                                              r + '/scopes/' + e + '/properties/' + t + '/binding',
                                             schemaPath:
                                               '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/oneOf/2/not',
                                             params: {},
                                             message: 'should NOT be valid'
                                           }
                                           null === i ? (i = [Tn]) : i.push(Tn), o++
-                                        } else (o = En), null !== i && (En ? (i.length = En) : (i = null))
+                                        } else
+                                          (o = En),
+                                            null !== i && (En ? (i.length = En) : (i = null))
                                         if (
                                           Re &&
                                           'object' == OE(Re) &&
@@ -38631,11 +41920,13 @@
                                         ) {
                                           var Bn = {
                                             keyword: 'required',
-                                            dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                            dataPath:
+                                              r + '/scopes/' + e + '/properties/' + t + '/binding',
                                             schemaPath:
                                               '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/oneOf/2/required',
                                             params: { missingProperty: 'sourceExpression' },
-                                            message: "should have required property 'sourceExpression'"
+                                            message:
+                                              "should have required property 'sourceExpression'"
                                           }
                                           null === i ? (i = [Bn]) : i.push(Bn), o++
                                         }
@@ -38645,26 +41936,45 @@
                                           var jn = o,
                                             Gn = o,
                                             Qn = o
-                                          if (Re && 'object' == OE(Re) && !Array.isArray(Re) && void 0 === Re.source) {
+                                          if (
+                                            Re &&
+                                            'object' == OE(Re) &&
+                                            !Array.isArray(Re) &&
+                                            void 0 === Re.source
+                                          ) {
                                             var Kn = {}
                                             null === i ? (i = [Kn]) : i.push(Kn), o++
                                           }
                                           if (Qn === o) {
                                             var Yn = {
                                               keyword: 'not',
-                                              dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                              dataPath:
+                                                r +
+                                                '/scopes/' +
+                                                e +
+                                                '/properties/' +
+                                                t +
+                                                '/binding',
                                               schemaPath:
                                                 '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/oneOf/3/not',
                                               params: {},
                                               message: 'should NOT be valid'
                                             }
                                             null === i ? (i = [Yn]) : i.push(Yn), o++
-                                          } else (o = Gn), null !== i && (Gn ? (i.length = Gn) : (i = null))
+                                          } else
+                                            (o = Gn),
+                                              null !== i && (Gn ? (i.length = Gn) : (i = null))
                                           if (Re && 'object' == OE(Re) && !Array.isArray(Re)) {
                                             if (void 0 === Re.variables) {
                                               var Jn = {
                                                 keyword: 'required',
-                                                dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                                dataPath:
+                                                  r +
+                                                  '/scopes/' +
+                                                  e +
+                                                  '/properties/' +
+                                                  t +
+                                                  '/binding',
                                                 schemaPath:
                                                   '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/oneOf/3/required',
                                                 params: { missingProperty: 'variables' },
@@ -38675,11 +41985,18 @@
                                             if (void 0 === Re.sourceExpression) {
                                               var Xn = {
                                                 keyword: 'required',
-                                                dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                                dataPath:
+                                                  r +
+                                                  '/scopes/' +
+                                                  e +
+                                                  '/properties/' +
+                                                  t +
+                                                  '/binding',
                                                 schemaPath:
                                                   '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/oneOf/3/required',
                                                 params: { missingProperty: 'sourceExpression' },
-                                                message: "should have required property 'sourceExpression'"
+                                                message:
+                                                  "should have required property 'sourceExpression'"
                                               }
                                               null === i ? (i = [Xn]) : i.push(Xn), o++
                                             }
@@ -38702,30 +42019,51 @@
                                             if (tr === o) {
                                               var rr = {
                                                 keyword: 'not',
-                                                dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                                dataPath:
+                                                  r +
+                                                  '/scopes/' +
+                                                  e +
+                                                  '/properties/' +
+                                                  t +
+                                                  '/binding',
                                                 schemaPath:
                                                   '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/oneOf/4/not',
                                                 params: {},
                                                 message: 'should NOT be valid'
                                               }
                                               null === i ? (i = [rr]) : i.push(rr), o++
-                                            } else (o = er), null !== i && (er ? (i.length = er) : (i = null))
+                                            } else
+                                              (o = er),
+                                                null !== i && (er ? (i.length = er) : (i = null))
                                             if (Re && 'object' == OE(Re) && !Array.isArray(Re)) {
                                               if (void 0 === Re.variables) {
                                                 var ir = {
                                                   keyword: 'required',
-                                                  dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                                  dataPath:
+                                                    r +
+                                                    '/scopes/' +
+                                                    e +
+                                                    '/properties/' +
+                                                    t +
+                                                    '/binding',
                                                   schemaPath:
                                                     '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/oneOf/4/required',
                                                   params: { missingProperty: 'variables' },
-                                                  message: "should have required property 'variables'"
+                                                  message:
+                                                    "should have required property 'variables'"
                                                 }
                                                 null === i ? (i = [ir]) : i.push(ir), o++
                                               }
                                               if (void 0 === Re.source) {
                                                 var or = {
                                                   keyword: 'required',
-                                                  dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                                  dataPath:
+                                                    r +
+                                                    '/scopes/' +
+                                                    e +
+                                                    '/properties/' +
+                                                    t +
+                                                    '/binding',
                                                   schemaPath:
                                                     '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/oneOf/4/required',
                                                   params: { missingProperty: 'source' },
@@ -38740,11 +42078,13 @@
                                           }
                                         }
                                       }
-                                      if (Gt) (o = Wt), null !== i && (Wt ? (i.length = Wt) : (i = null))
+                                      if (Gt)
+                                        (o = Wt), null !== i && (Wt ? (i.length = Wt) : (i = null))
                                       else {
                                         var ar = {
                                           keyword: 'oneOf',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/binding',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/oneOf',
                                           params: { passingSchemas: Qt },
@@ -38761,14 +42101,30 @@
                                             var pr = sr.value
                                             'errorMessage' === pr.keyword ||
                                               pr.emUsed ||
-                                              (pr.dataPath !== r + '/scopes/' + e + '/properties/' + t + '/binding' &&
+                                              (pr.dataPath !==
+                                                r +
+                                                  '/scopes/' +
+                                                  e +
+                                                  '/properties/' +
+                                                  t +
+                                                  '/binding' &&
                                                 (0 !==
                                                   pr.dataPath.indexOf(
-                                                    r + '/scopes/' + e + '/properties/' + t + '/binding'
+                                                    r +
+                                                      '/scopes/' +
+                                                      e +
+                                                      '/properties/' +
+                                                      t +
+                                                      '/binding'
                                                   ) ||
                                                   '/' !==
                                                     pr.dataPath[
-                                                      r + '/scopes/' + e + '/properties/' + t + '/binding'.length
+                                                      r +
+                                                        '/scopes/' +
+                                                        e +
+                                                        '/properties/' +
+                                                        t +
+                                                        '/binding'.length
                                                     ])) ||
                                               0 !==
                                                 pr.schemaPath.indexOf(
@@ -38789,7 +42145,8 @@
                                         if (lr.length) {
                                           var ur = {
                                             keyword: 'errorMessage',
-                                            dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                            dataPath:
+                                              r + '/scopes/' + e + '/properties/' + t + '/binding',
                                             schemaPath:
                                               '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/then/errorMessage',
                                             params: { errors: lr },
@@ -38820,7 +42177,8 @@
                                     if (!Vt) {
                                       var vr = {
                                         keyword: 'if',
-                                        dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                        dataPath:
+                                          r + '/scopes/' + e + '/properties/' + t + '/binding',
                                         schemaPath:
                                           '#/definitions/properties/allOf/1/items/properties/binding/allOf/3/if',
                                         params: { failingKeyword: 'then' },
@@ -38835,22 +42193,34 @@
                                       if (void 0 === Re.type) {
                                         var Ar = {}
                                         null === i ? (i = [Ar]) : i.push(Ar), o++
-                                      } else if (void 0 !== Re.type && !TE(Re.type, 'camunda:errorEventDefinition')) {
+                                      } else if (
+                                        void 0 !== Re.type &&
+                                        !TE(Re.type, 'camunda:errorEventDefinition')
+                                      ) {
                                         var Er = {}
                                         null === i ? (i = [Er]) : i.push(Er), o++
                                       }
                                     if (
-                                      ((Wn = br === o), (o = gr), null !== i && (gr ? (i.length = gr) : (i = null)), Wn)
+                                      ((Wn = br === o),
+                                      (o = gr),
+                                      null !== i && (gr ? (i.length = gr) : (i = null)),
+                                      Wn)
                                     ) {
                                       var xr = o,
                                         _r = o,
                                         wr = !1,
                                         Cr = null,
                                         Pr = o
-                                      if (Re && 'object' == OE(Re) && !Array.isArray(Re) && void 0 === Re.errorRef) {
+                                      if (
+                                        Re &&
+                                        'object' == OE(Re) &&
+                                        !Array.isArray(Re) &&
+                                        void 0 === Re.errorRef
+                                      ) {
                                         var kr = {
                                           keyword: 'required',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/binding',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/allOf/4/then/oneOf/0/required',
                                           params: { missingProperty: 'errorRef' },
@@ -38863,7 +42233,8 @@
                                       else {
                                         var Sr = {
                                           keyword: 'oneOf',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/binding',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/allOf/4/then/oneOf',
                                           params: { passingSchemas: Cr },
@@ -38880,14 +42251,30 @@
                                             var jr = Or.value
                                             'errorMessage' === jr.keyword ||
                                               jr.emUsed ||
-                                              (jr.dataPath !== r + '/scopes/' + e + '/properties/' + t + '/binding' &&
+                                              (jr.dataPath !==
+                                                r +
+                                                  '/scopes/' +
+                                                  e +
+                                                  '/properties/' +
+                                                  t +
+                                                  '/binding' &&
                                                 (0 !==
                                                   jr.dataPath.indexOf(
-                                                    r + '/scopes/' + e + '/properties/' + t + '/binding'
+                                                    r +
+                                                      '/scopes/' +
+                                                      e +
+                                                      '/properties/' +
+                                                      t +
+                                                      '/binding'
                                                   ) ||
                                                   '/' !==
                                                     jr.dataPath[
-                                                      r + '/scopes/' + e + '/properties/' + t + '/binding'.length
+                                                      r +
+                                                        '/scopes/' +
+                                                        e +
+                                                        '/properties/' +
+                                                        t +
+                                                        '/binding'.length
                                                     ])) ||
                                               0 !==
                                                 jr.schemaPath.indexOf(
@@ -38908,12 +42295,15 @@
                                         if (Tr.length) {
                                           var Mr = {
                                             keyword: 'errorMessage',
-                                            dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                            dataPath:
+                                              r + '/scopes/' + e + '/properties/' + t + '/binding',
                                             schemaPath:
                                               '#/definitions/properties/allOf/1/items/properties/binding/allOf/4/then/errorMessage',
                                             params: { errors: Tr },
                                             message:
-                                              'property.binding ' + JSON.stringify(Re && Re.type) + ' requires errorRef'
+                                              'property.binding ' +
+                                              JSON.stringify(Re && Re.type) +
+                                              ' requires errorRef'
                                           }
                                           null === i ? (i = [Mr]) : i.push(Mr), o++
                                         }
@@ -38937,7 +42327,8 @@
                                     if (!yr) {
                                       var Nr = {
                                         keyword: 'if',
-                                        dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                        dataPath:
+                                          r + '/scopes/' + e + '/properties/' + t + '/binding',
                                         schemaPath:
                                           '#/definitions/properties/allOf/1/items/properties/binding/allOf/4/if',
                                         params: { failingKeyword: 'then' },
@@ -38949,7 +42340,8 @@
                                       if (void 0 === Re.type) {
                                         var Lr = {
                                           keyword: 'required',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                          dataPath:
+                                            r + '/scopes/' + e + '/properties/' + t + '/binding',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/required',
                                           params: { missingProperty: 'type' },
@@ -38962,7 +42354,13 @@
                                         if ('string' != typeof Fr) {
                                           var Vr = {
                                             keyword: 'type',
-                                            dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding/type',
+                                            dataPath:
+                                              r +
+                                              '/scopes/' +
+                                              e +
+                                              '/properties/' +
+                                              t +
+                                              '/binding/type',
                                             schemaPath:
                                               '#/definitions/properties/allOf/1/items/properties/binding/properties/type/type',
                                             params: { type: 'string' },
@@ -38984,10 +42382,19 @@
                                         ) {
                                           var qr = {
                                             keyword: 'enum',
-                                            dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding/type',
+                                            dataPath:
+                                              r +
+                                              '/scopes/' +
+                                              e +
+                                              '/properties/' +
+                                              t +
+                                              '/binding/type',
                                             schemaPath:
                                               '#/definitions/properties/allOf/1/items/properties/binding/properties/type/enum',
-                                            params: { allowedValues: zE.items.properties.binding.properties.type.enum },
+                                            params: {
+                                              allowedValues:
+                                                zE.items.properties.binding.properties.type.enum
+                                            },
                                             message: 'should be equal to one of the allowed values'
                                           }
                                           null === i ? (i = [qr]) : i.push(qr), o++
@@ -39002,14 +42409,29 @@
                                               'errorMessage' === Wr.keyword ||
                                                 Wr.emUsed ||
                                                 (Wr.dataPath !==
-                                                  r + '/scopes/' + e + '/properties/' + t + '/binding/type' &&
+                                                  r +
+                                                    '/scopes/' +
+                                                    e +
+                                                    '/properties/' +
+                                                    t +
+                                                    '/binding/type' &&
                                                   (0 !==
                                                     Wr.dataPath.indexOf(
-                                                      r + '/scopes/' + e + '/properties/' + t + '/binding/type'
+                                                      r +
+                                                        '/scopes/' +
+                                                        e +
+                                                        '/properties/' +
+                                                        t +
+                                                        '/binding/type'
                                                     ) ||
                                                     '/' !==
                                                       Wr.dataPath[
-                                                        r + '/scopes/' + e + '/properties/' + t + '/binding/type'.length
+                                                        r +
+                                                          '/scopes/' +
+                                                          e +
+                                                          '/properties/' +
+                                                          t +
+                                                          '/binding/type'.length
                                                       ])) ||
                                                 0 !==
                                                   Wr.schemaPath.indexOf(
@@ -39030,7 +42452,13 @@
                                           if ($r.length) {
                                             var Gr = {
                                               keyword: 'errorMessage',
-                                              dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding/type',
+                                              dataPath:
+                                                r +
+                                                '/scopes/' +
+                                                e +
+                                                '/properties/' +
+                                                t +
+                                                '/binding/type',
                                               schemaPath:
                                                 '#/definitions/properties/allOf/1/items/properties/binding/properties/type/errorMessage',
                                               params: { errors: $r },
@@ -39060,7 +42488,13 @@
                                       if (void 0 !== Re.name && 'string' != typeof Re.name) {
                                         var Xr = {
                                           keyword: 'type',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding/name',
+                                          dataPath:
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            t +
+                                            '/binding/name',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/properties/name/type',
                                           params: { type: 'string' },
@@ -39071,7 +42505,13 @@
                                       if (void 0 !== Re.event && 'string' != typeof Re.event) {
                                         var Zr = {
                                           keyword: 'type',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding/event',
+                                          dataPath:
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            t +
+                                            '/binding/event',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/properties/event/type',
                                           params: { type: 'string' },
@@ -39079,10 +42519,19 @@
                                         }
                                         null === i ? (i = [Zr]) : i.push(Zr), o++
                                       }
-                                      if (void 0 !== Re.scriptFormat && 'string' != typeof Re.scriptFormat) {
+                                      if (
+                                        void 0 !== Re.scriptFormat &&
+                                        'string' != typeof Re.scriptFormat
+                                      ) {
                                         var ei = {
                                           keyword: 'type',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding/scriptFormat',
+                                          dataPath:
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            t +
+                                            '/binding/scriptFormat',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/properties/scriptFormat/type',
                                           params: { type: 'string' },
@@ -39093,7 +42542,13 @@
                                       if (void 0 !== Re.source && 'string' != typeof Re.source) {
                                         var ti = {
                                           keyword: 'type',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding/source',
+                                          dataPath:
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            t +
+                                            '/binding/source',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/properties/source/type',
                                           params: { type: 'string' },
@@ -39104,7 +42559,13 @@
                                       if (void 0 !== Re.target && 'string' != typeof Re.target) {
                                         var ni = {
                                           keyword: 'type',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding/target',
+                                          dataPath:
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            t +
+                                            '/binding/target',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/properties/target/type',
                                           params: { type: 'string' },
@@ -39112,10 +42573,19 @@
                                         }
                                         null === i ? (i = [ni]) : i.push(ni), o++
                                       }
-                                      if (void 0 !== Re.expression && 'boolean' != typeof Re.expression) {
+                                      if (
+                                        void 0 !== Re.expression &&
+                                        'boolean' != typeof Re.expression
+                                      ) {
                                         var ri = {
                                           keyword: 'type',
-                                          dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding/expression',
+                                          dataPath:
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            t +
+                                            '/binding/expression',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/properties/expression/type',
                                           params: { type: 'boolean' },
@@ -39128,7 +42598,13 @@
                                         if ('string' != typeof ii) {
                                           var oi = {
                                             keyword: 'type',
-                                            dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding/variables',
+                                            dataPath:
+                                              r +
+                                              '/scopes/' +
+                                              e +
+                                              '/properties/' +
+                                              t +
+                                              '/binding/variables',
                                             schemaPath:
                                               '#/definitions/properties/allOf/1/items/properties/binding/properties/variables/type',
                                             params: { type: 'string' },
@@ -39139,22 +42615,38 @@
                                         if ('all' !== ii && 'local' !== ii) {
                                           var ai = {
                                             keyword: 'enum',
-                                            dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding/variables',
+                                            dataPath:
+                                              r +
+                                              '/scopes/' +
+                                              e +
+                                              '/properties/' +
+                                              t +
+                                              '/binding/variables',
                                             schemaPath:
                                               '#/definitions/properties/allOf/1/items/properties/binding/properties/variables/enum',
                                             params: {
-                                              allowedValues: zE.items.properties.binding.properties.variables.enum
+                                              allowedValues:
+                                                zE.items.properties.binding.properties.variables
+                                                  .enum
                                             },
                                             message: 'should be equal to one of the allowed values'
                                           }
                                           null === i ? (i = [ai]) : i.push(ai), o++
                                         }
                                       }
-                                      if (void 0 !== Re.sourceExpression && 'string' != typeof Re.sourceExpression) {
+                                      if (
+                                        void 0 !== Re.sourceExpression &&
+                                        'string' != typeof Re.sourceExpression
+                                      ) {
                                         var si = {
                                           keyword: 'type',
                                           dataPath:
-                                            r + '/scopes/' + e + '/properties/' + t + '/binding/sourceExpression',
+                                            r +
+                                            '/scopes/' +
+                                            e +
+                                            '/properties/' +
+                                            t +
+                                            '/binding/sourceExpression',
                                           schemaPath:
                                             '#/definitions/properties/allOf/1/items/properties/binding/properties/sourceExpression/type',
                                           params: { type: 'string' },
@@ -39165,8 +42657,10 @@
                                     } else {
                                       var li = {
                                         keyword: 'type',
-                                        dataPath: r + '/scopes/' + e + '/properties/' + t + '/binding',
-                                        schemaPath: '#/definitions/properties/allOf/1/items/properties/binding/type',
+                                        dataPath:
+                                          r + '/scopes/' + e + '/properties/' + t + '/binding',
+                                        schemaPath:
+                                          '#/definitions/properties/allOf/1/items/properties/binding/type',
                                         params: { type: 'object' },
                                         message: 'should be object'
                                       }
@@ -39191,7 +42685,11 @@
                                     hi = {
                                       required: {
                                         binding: function () {
-                                          return 'missing binding for property "' + JSON.stringify(t) + '"'
+                                          return (
+                                            'missing binding for property "' +
+                                            JSON.stringify(t) +
+                                            '"'
+                                          )
                                         }
                                       }
                                     },
@@ -39203,10 +42701,14 @@
                                         !vi.emUsed &&
                                         vi.dataPath === r + '/scopes/' + e + '/properties/' + t &&
                                         (vi.keyword in mi) &&
-                                        0 === vi.schemaPath.indexOf('#/definitions/properties/allOf/1/items') &&
+                                        0 ===
+                                          vi.schemaPath.indexOf(
+                                            '#/definitions/properties/allOf/1/items'
+                                          ) &&
                                         /^\/[^\/]*$/.test(vi.schemaPath.slice(38)) &&
                                         ((pi = LE[vi.keyword]),
-                                        (ui = mi[vi.keyword][vi.params[pi]]) && (ui.push(vi), (vi.emUsed = !0)))
+                                        (ui = mi[vi.keyword][vi.params[pi]]) &&
+                                          (ui.push(vi), (vi.emUsed = !0)))
                                     }
                                   } catch (e) {
                                     fi.e(e)
@@ -39220,7 +42722,8 @@
                                           Ai = {
                                             keyword: 'errorMessage',
                                             dataPath: r + '/scopes/' + e + '/properties/' + t,
-                                            schemaPath: '#/definitions/properties/allOf/1/items/errorMessage',
+                                            schemaPath:
+                                              '#/definitions/properties/allOf/1/items/errorMessage',
                                             params: { errors: ui },
                                             message: bi ? bi() : zE.items.errorMessage[gi][yi]
                                           }
@@ -39276,7 +42779,11 @@
                         nt = {
                           required: {
                             properties: function () {
-                              return 'invalid scope ' + JSON.stringify(t && t.type) + ', missing properties=[]'
+                              return (
+                                'invalid scope ' +
+                                JSON.stringify(t && t.type) +
+                                ', missing properties=[]'
+                              )
                             }
                           }
                         },
@@ -39378,8 +42885,12 @@
           f = c
         if (Array.isArray(e))
           for (var v = e.length, g = 0; g < v; g++)
-            FE(e[g], { dataPath: r + '/' + g, parentData: e, parentDataProperty: g, rootData: s }) ||
-              (c = (l = null === l ? FE.errors : l.concat(FE.errors)).length)
+            FE(e[g], {
+              dataPath: r + '/' + g,
+              parentData: e,
+              parentDataProperty: g,
+              rootData: s
+            }) || (c = (l = null === l ? FE.errors : l.concat(FE.errors)).length)
         else {
           var y = {
             keyword: 'type',
@@ -39526,7 +43037,13 @@
                           if (HE(c)) {
                             s && f(',')
                             var p = r + '/' + ZE(l)
-                            v(o), g(p, 'key'), f(YE(l)), g(p, 'keyEnd'), f(':'), a && f(' '), e(c, o, p)
+                            v(o),
+                              g(p, 'key'),
+                              f(YE(l)),
+                              g(p, 'keyEnd'),
+                              f(':'),
+                              a && f(' '),
+                              e(c, o, p)
                           }
                         }
                         v(n), f('}')
@@ -39542,7 +43059,13 @@
                           if (HE(d)) {
                             s || f(','), (s = !1)
                             var m = r + '/' + ZE(u)
-                            v(o), g(m, 'key'), f(YE(u)), g(m, 'keyEnd'), f(':'), a && f(' '), e(d, o, m)
+                            v(o),
+                              g(m, 'key'),
+                              f(YE(u)),
+                              g(m, 'keyEnd'),
+                              f(':'),
+                              a && f(' '),
+                              e(d, o, m)
                           }
                           c = l.next()
                         }
@@ -39559,7 +43082,8 @@
               }
               function v(e) {
                 if (a) {
-                  for (c += '\n' + y(e, a), u++, d = 0; e--; ) o ? ((u += o), (d = i)) : (d += i), (m += r)
+                  for (c += '\n' + y(e, a), u++, d = 0; e--; )
+                    o ? ((u += o), (d = i)) : (d += i), (m += r)
                   m += 1
                 }
               }
@@ -39611,8 +43135,16 @@
             {
               required: ['name', 'id', 'appliesTo', 'properties'],
               properties: {
-                name: { $id: '#/name', type: 'string', description: 'The name of the element template.' },
-                id: { $id: '#/id', type: 'string', description: 'The identifier of the element template.' },
+                name: {
+                  $id: '#/name',
+                  type: 'string',
+                  description: 'The name of the element template.'
+                },
+                id: {
+                  $id: '#/id',
+                  type: 'string',
+                  description: 'The identifier of the element template.'
+                },
                 description: {
                   $id: '#/description',
                   type: 'string',
@@ -39639,7 +43171,8 @@
                     type: 'string',
                     pattern: '^[\\w\\d]+:[\\w\\d]+$',
                     errorMessage: {
-                      pattern: 'invalid item for "appliesTo", should contain namespaced property, example: "bpmn:Task"'
+                      pattern:
+                        'invalid item for "appliesTo", should contain namespaced property, example: "bpmn:Task"'
                     },
                     allOf: [
                       {
@@ -39694,7 +43227,8 @@
                 entriesVisible: {
                   $id: '#/entriesVisible',
                   type: 'boolean',
-                  description: 'Select whether non-template entries are visible in the properties panel.'
+                  description:
+                    'Select whether non-template entries are visible in the properties panel.'
                 },
                 groups: {
                   $id: '#/groups',
@@ -39707,10 +43241,17 @@
                     default: {},
                     required: ['id', 'label'],
                     errorMessage: {
-                      required: { id: 'missing id for group "${0#}"', label: 'missing label for group "${0#}"' }
+                      required: {
+                        id: 'missing id for group "${0#}"',
+                        label: 'missing label for group "${0#}"'
+                      }
                     },
                     properties: {
-                      id: { $id: '#/groups/group/id', type: 'string', description: 'The id of the custom group' },
+                      id: {
+                        $id: '#/groups/group/id',
+                        type: 'string',
+                        description: 'The id of the custom group'
+                      },
                       label: {
                         $id: '#/groups/group/label',
                         type: 'string',
@@ -39723,7 +43264,9 @@
                   $id: '#/documentaionRef',
                   type: 'string',
                   pattern: '^(https|http)://.*',
-                  errorMessage: { pattern: 'Malformed documentation URL, must match "^(https|http)://.*"' }
+                  errorMessage: {
+                    pattern: 'Malformed documentation URL, must match "^(https|http)://.*"'
+                  }
                 }
               },
               errorMessage: {
@@ -39749,7 +43292,9 @@
                   type: 'string',
                   description: 'The URL of an icon.',
                   pattern: '^(https?|data):.*',
-                  errorMessage: { pattern: 'Malformed icon source, must be a valid HTTP(s) or data URL' }
+                  errorMessage: {
+                    pattern: 'Malformed icon source, must be a valid HTTP(s) or data URL'
+                  }
                 }
               },
               required: ['contents'],
@@ -39762,14 +43307,23 @@
             {
               type: 'array',
               description: 'List of properties of the element template.',
-              allOf: [{ examples: [[{ label: 'Name', type: 'String', binding: { type: 'property', name: 'name' } }]] }],
+              allOf: [
+                {
+                  examples: [
+                    [{ label: 'Name', type: 'String', binding: { type: 'property', name: 'name' } }]
+                  ]
+                }
+              ],
               items: {
                 type: 'object',
                 default: {},
                 allOf: [
                   {
                     if: { properties: { type: { const: 'Dropdown' } }, required: ['type'] },
-                    then: { required: ['choices'], errorMessage: 'must provide choices=[] with "Dropdown" type' }
+                    then: {
+                      required: ['choices'],
+                      errorMessage: 'must provide choices=[] with "Dropdown" type'
+                    }
                   }
                 ],
                 properties: {
@@ -39889,7 +43443,9 @@
                 allOf: [
                   {
                     if: {
-                      properties: { binding: { properties: { type: { const: 'property' } }, required: ['type'] } },
+                      properties: {
+                        binding: { properties: { type: { const: 'property' } }, required: ['type'] }
+                      },
                       required: ['binding']
                     },
                     then: {
@@ -39908,7 +43464,12 @@
                         binding: {
                           properties: {
                             type: {
-                              enum: ['zeebe:input', 'zeebe:output', 'zeebe:taskHeader', 'zeebe:taskDefinition:type']
+                              enum: [
+                                'zeebe:input',
+                                'zeebe:output',
+                                'zeebe:taskHeader',
+                                'zeebe:taskDefinition:type'
+                              ]
                             }
                           },
                           required: ['type']
@@ -39951,7 +43512,8 @@
                           properties: {
                             notEmpty: {
                               const: !1,
-                              errorMessage: 'optional is not allowed for truthy "notEmpty" constraint'
+                              errorMessage:
+                                'optional is not allowed for truthy "notEmpty" constraint'
                             }
                           },
                           required: ['notEmpty']
@@ -39981,16 +43543,31 @@
                     required: ['type'],
                     allOf: [
                       {
-                        if: { properties: { type: { enum: ['property', 'zeebe:input'] } }, required: ['type'] },
-                        then: { required: ['name'], errorMessage: 'property.binding ${0/type} requires name' }
+                        if: {
+                          properties: { type: { enum: ['property', 'zeebe:input'] } },
+                          required: ['type']
+                        },
+                        then: {
+                          required: ['name'],
+                          errorMessage: 'property.binding ${0/type} requires name'
+                        }
                       },
                       {
                         if: { properties: { type: { const: 'zeebe:output' } }, required: ['type'] },
-                        then: { required: ['source'], errorMessage: 'property.binding ${0/type} requires source' }
+                        then: {
+                          required: ['source'],
+                          errorMessage: 'property.binding ${0/type} requires source'
+                        }
                       },
                       {
-                        if: { properties: { type: { const: 'zeebe:taskHeader' } }, required: ['type'] },
-                        then: { required: ['key'], errorMessage: 'property.binding ${0/type} requires key' }
+                        if: {
+                          properties: { type: { const: 'zeebe:taskHeader' } },
+                          required: ['type']
+                        },
+                        then: {
+                          required: ['key'],
+                          errorMessage: 'property.binding ${0/type} requires key'
+                        }
                       },
                       {
                         examples: [
@@ -40055,7 +43632,11 @@
         ax = new RegExp('^[\\w\\d]+:[\\w\\d]+$', 'u'),
         sx = new RegExp('^(https|http)://.*', 'u'),
         lx = new RegExp('^(https?|data):.*', 'u'),
-        cx = { required: 'missingProperty', dependencies: 'property', dependentRequired: 'property' }
+        cx = {
+          required: 'missingProperty',
+          dependencies: 'property',
+          dependentRequired: 'property'
+        }
       function px(e) {
         var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
           n = t.dataPath,
@@ -40207,7 +43788,8 @@
                         dataPath: r + '/appliesTo/' + g,
                         schemaPath: '#/allOf/0/properties/appliesTo/items/errorMessage',
                         params: { errors: x[P] },
-                        message: P in _ ? _[P]() : ix.allOf[0].properties.appliesTo.items.errorMessage[P]
+                        message:
+                          P in _ ? _[P]() : ix.allOf[0].properties.appliesTo.items.errorMessage[P]
                       }
                       null === i ? (i = [k]) : i.push(k), o++
                     }
@@ -40286,7 +43868,10 @@
                         !q.emUsed &&
                         q.dataPath === r + '/elementType/value' &&
                         q.keyword in L &&
-                        0 === q.schemaPath.indexOf('#/allOf/0/properties/elementType/properties/value') &&
+                        0 ===
+                          q.schemaPath.indexOf(
+                            '#/allOf/0/properties/elementType/properties/value'
+                          ) &&
                         /^\/[^\/]*$/.test(q.schemaPath.slice(49)) &&
                         (L[q.keyword].push(q), (q.emUsed = !0))
                     }
@@ -40300,9 +43885,13 @@
                       var $ = {
                         keyword: 'errorMessage',
                         dataPath: r + '/elementType/value',
-                        schemaPath: '#/allOf/0/properties/elementType/properties/value/errorMessage',
+                        schemaPath:
+                          '#/allOf/0/properties/elementType/properties/value/errorMessage',
                         params: { errors: L[H] },
-                        message: H in F ? F[H]() : ix.allOf[0].properties.elementType.properties.value.errorMessage[H]
+                        message:
+                          H in F
+                            ? F[H]()
+                            : ix.allOf[0].properties.elementType.properties.value.errorMessage[H]
                       }
                       null === i ? (i = [$]) : i.push($), o++
                     }
@@ -40348,7 +43937,8 @@
                     ne.keyword in Z &&
                     0 === ne.schemaPath.indexOf('#/allOf/0/properties/elementType') &&
                     /^\/[^\/]*$/.test(ne.schemaPath.slice(32)) &&
-                    ((Y = cx[ne.keyword]), (J = Z[ne.keyword][ne.params[Y]]) && (J.push(ne), (ne.emUsed = !0)))
+                    ((Y = cx[ne.keyword]),
+                    (J = Z[ne.keyword][ne.params[Y]]) && (J.push(ne), (ne.emUsed = !0)))
                 }
               } catch (e) {
                 te.e(e)
@@ -40490,7 +44080,8 @@
                             (v.keyword in m) &&
                             0 === v.schemaPath.indexOf('#/allOf/0/properties/groups/items') &&
                             /^\/[^\/]*$/.test(v.schemaPath.slice(33)) &&
-                            ((p = cx[v.keyword]), (u = m[v.keyword][v.params[p]]) && (u.push(v), (v.emUsed = !0)))
+                            ((p = cx[v.keyword]),
+                            (u = m[v.keyword][v.params[p]]) && (u.push(v), (v.emUsed = !0)))
                         }
                       } catch (e) {
                         f.e(e)
@@ -40506,7 +44097,9 @@
                                 dataPath: r + '/groups/' + e,
                                 schemaPath: '#/allOf/0/properties/groups/items/errorMessage',
                                 params: { errors: u },
-                                message: b ? b() : ix.allOf[0].properties.groups.items.errorMessage[g][y]
+                                message: b
+                                  ? b()
+                                  : ix.allOf[0].properties.groups.items.errorMessage[g][y]
                               }
                             null === i ? (i = [A]) : i.push(A), o++
                           }
@@ -40593,7 +44186,8 @@
                     dataPath: r + '/documentationRef',
                     schemaPath: '#/allOf/0/properties/documentationRef/errorMessage',
                     params: { errors: _e[ke] },
-                    message: ke in we ? we[ke]() : ix.allOf[0].properties.documentationRef.errorMessage[ke]
+                    message:
+                      ke in we ? we[ke]() : ix.allOf[0].properties.documentationRef.errorMessage[ke]
                   }
                   null === i ? (i = [Se]) : i.push(Se), o++
                 }
@@ -40630,7 +44224,8 @@
                 Le.keyword in ze &&
                 0 === Le.schemaPath.indexOf('#/allOf/0') &&
                 /^\/[^\/]*$/.test(Le.schemaPath.slice(9)) &&
-                ((Me = cx[Le.keyword]), (De = ze[Le.keyword][Le.params[Me]]) && (De.push(Le), (Le.emUsed = !0)))
+                ((Me = cx[Le.keyword]),
+                (De = ze[Le.keyword][Le.params[Me]]) && (De.push(Le), (Le.emUsed = !0)))
             }
           } catch (e) {
             Ne.e(e)
@@ -40707,8 +44302,14 @@
                           (ct.dataPath !== r + '/properties/' + Ye &&
                             (0 !== ct.dataPath.indexOf(r + '/properties/' + Ye) ||
                               '/' !== ct.dataPath[r + '/properties/' + Ye.length])) ||
-                          0 !== ct.schemaPath.indexOf('#/definitions/properties/allOf/0/items/allOf/0/then') ||
-                          '/' !== ct.schemaPath['#/definitions/properties/allOf/0/items/allOf/0/then'.length] ||
+                          0 !==
+                            ct.schemaPath.indexOf(
+                              '#/definitions/properties/allOf/0/items/allOf/0/then'
+                            ) ||
+                          '/' !==
+                            ct.schemaPath[
+                              '#/definitions/properties/allOf/0/items/allOf/0/then'.length
+                            ] ||
                           (st.push(ct), (ct.emUsed = !0))
                       }
                     } catch (e) {
@@ -40720,7 +44321,8 @@
                       var pt = {
                         keyword: 'errorMessage',
                         dataPath: r + '/properties/' + Ye,
-                        schemaPath: '#/definitions/properties/allOf/0/items/allOf/0/then/errorMessage',
+                        schemaPath:
+                          '#/definitions/properties/allOf/0/items/allOf/0/then/errorMessage',
                         params: { errors: st },
                         message: 'must provide choices=[] with "Dropdown" type'
                       }
@@ -40771,7 +44373,8 @@
                     var yt = {
                       keyword: 'type',
                       dataPath: r + '/properties/' + Ye + '/description',
-                      schemaPath: '#/definitions/properties/allOf/0/items/properties/description/type',
+                      schemaPath:
+                        '#/definitions/properties/allOf/0/items/properties/description/type',
                       params: { type: 'string' },
                       message: 'should be string'
                     }
@@ -40817,7 +44420,8 @@
                             var Pt = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + Ye + '/choices/' + wt,
-                              schemaPath: '#/definitions/properties/allOf/0/items/properties/choices/items/required',
+                              schemaPath:
+                                '#/definitions/properties/allOf/0/items/properties/choices/items/required',
                               params: { missingProperty: 'value' },
                               message: "should have required property 'value'"
                             }
@@ -40827,7 +44431,8 @@
                             var kt = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + Ye + '/choices/' + wt,
-                              schemaPath: '#/definitions/properties/allOf/0/items/properties/choices/items/required',
+                              schemaPath:
+                                '#/definitions/properties/allOf/0/items/properties/choices/items/required',
                               params: { missingProperty: 'name' },
                               message: "should have required property 'name'"
                             }
@@ -40859,7 +44464,8 @@
                           var Tt = {
                             keyword: 'type',
                             dataPath: r + '/properties/' + Ye + '/choices/' + wt,
-                            schemaPath: '#/definitions/properties/allOf/0/items/properties/choices/items/type',
+                            schemaPath:
+                              '#/definitions/properties/allOf/0/items/properties/choices/items/type',
                             params: { type: 'object' },
                             message: 'should be object'
                           }
@@ -40875,15 +44481,22 @@
                               'errorMessage' === Dt.keyword ||
                                 Dt.emUsed ||
                                 (Dt.dataPath !== r + '/properties/' + Ye + '/choices/' + wt &&
-                                  (0 !== Dt.dataPath.indexOf(r + '/properties/' + Ye + '/choices/' + wt) ||
-                                    '/' !== Dt.dataPath[r + '/properties/' + Ye + '/choices/' + wt.length])) ||
+                                  (0 !==
+                                    Dt.dataPath.indexOf(
+                                      r + '/properties/' + Ye + '/choices/' + wt
+                                    ) ||
+                                    '/' !==
+                                      Dt.dataPath[
+                                        r + '/properties/' + Ye + '/choices/' + wt.length
+                                      ])) ||
                                 0 !==
                                   Dt.schemaPath.indexOf(
                                     '#/definitions/properties/allOf/0/items/properties/choices/items'
                                   ) ||
                                 '/' !==
                                   Dt.schemaPath[
-                                    '#/definitions/properties/allOf/0/items/properties/choices/items'.length
+                                    '#/definitions/properties/allOf/0/items/properties/choices/items'
+                                      .length
                                   ] ||
                                 (jt.push(Dt), (Dt.emUsed = !0))
                             }
@@ -40923,7 +44536,8 @@
                       var Ft = {
                         keyword: 'type',
                         dataPath: r + '/properties/' + Ye + '/choices',
-                        schemaPath: '#/definitions/properties/allOf/0/items/properties/choices/type',
+                        schemaPath:
+                          '#/definitions/properties/allOf/0/items/properties/choices/type',
                         params: { type: 'array' },
                         message: 'should be array'
                       }
@@ -41020,7 +44634,12 @@
                           }
                           null === i ? (i = [tn]) : i.push(tn), o++
                         }
-                        if (((Zt = en === o) && Gt ? ((Gt = !1), (Qt = [Qt, 1])) : Zt && ((Gt = !0), (Qt = 1)), Gt))
+                        if (
+                          ((Zt = en === o) && Gt
+                            ? ((Gt = !1), (Qt = [Qt, 1]))
+                            : Zt && ((Gt = !0), (Qt = 1)),
+                          Gt)
+                        )
                           (o = Wt), null !== i && (Wt ? (i.length = Wt) : (i = null))
                         else {
                           var nn = {
@@ -41038,7 +44657,8 @@
                       var rn = {
                         keyword: 'type',
                         dataPath: r + '/properties/' + Ye + '/constraints',
-                        schemaPath: '#/definitions/properties/allOf/0/items/properties/constraints/type',
+                        schemaPath:
+                          '#/definitions/properties/allOf/0/items/properties/constraints/type',
                         params: { type: 'object' },
                         message: 'should be object'
                       }
@@ -41099,16 +44719,27 @@
                             null === i ? (i = [u]) : i.push(u), o++
                           }
                       }
-                    if (((un = s === o), (o = n), null !== i && (n ? (i.length = n) : (i = null)), un)) {
+                    if (
+                      ((un = s === o), (o = n), null !== i && (n ? (i.length = n) : (i = null)), un)
+                    ) {
                       var d = o
                       if (t && 'object' == OE(t) && !Array.isArray(t) && void 0 !== t.type) {
                         var m = t.type
-                        if ('String' !== m && 'Text' !== m && 'Hidden' !== m && 'Dropdown' !== m && 'Boolean' !== m) {
+                        if (
+                          'String' !== m &&
+                          'Text' !== m &&
+                          'Hidden' !== m &&
+                          'Dropdown' !== m &&
+                          'Boolean' !== m
+                        ) {
                           var h = {
                             keyword: 'enum',
                             dataPath: r + '/properties/' + e + '/type',
-                            schemaPath: '#/definitions/properties/allOf/1/items/allOf/0/then/properties/type/enum',
-                            params: { allowedValues: ox.allOf[1].items.allOf[0].then.properties.type.enum },
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/allOf/0/then/properties/type/enum',
+                            params: {
+                              allowedValues: ox.allOf[1].items.allOf[0].then.properties.type.enum
+                            },
                             message: 'should be equal to one of the allowed values'
                           }
                           null === i ? (i = [h]) : i.push(h), o++
@@ -41131,7 +44762,8 @@
                                   ) ||
                                 '/' !==
                                   y.schemaPath[
-                                    '#/definitions/properties/allOf/1/items/allOf/0/then/properties/type'.length
+                                    '#/definitions/properties/allOf/1/items/allOf/0/then/properties/type'
+                                      .length
                                   ] ||
                                 (v.push(y), (y.emUsed = !0))
                             }
@@ -41208,7 +44840,9 @@
                             }
                           }
                       }
-                    if (((dn = k === o), (o = C), null !== i && (C ? (i.length = C) : (i = null)), dn)) {
+                    if (
+                      ((dn = k === o), (o = C), null !== i && (C ? (i.length = C) : (i = null)), dn)
+                    ) {
                       var M = o
                       if (t && 'object' == OE(t) && !Array.isArray(t) && void 0 !== t.type) {
                         var D = t.type
@@ -41216,8 +44850,11 @@
                           var R = {
                             keyword: 'enum',
                             dataPath: r + '/properties/' + e + '/type',
-                            schemaPath: '#/definitions/properties/allOf/1/items/allOf/1/then/properties/type/enum',
-                            params: { allowedValues: ox.allOf[1].items.allOf[1].then.properties.type.enum },
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/allOf/1/then/properties/type/enum',
+                            params: {
+                              allowedValues: ox.allOf[1].items.allOf[1].then.properties.type.enum
+                            },
                             message: 'should be equal to one of the allowed values'
                           }
                           null === i ? (i = [R]) : i.push(R), o++
@@ -41240,7 +44877,8 @@
                                   ) ||
                                 '/' !==
                                   L.schemaPath[
-                                    '#/definitions/properties/allOf/1/items/allOf/1/then/properties/type'.length
+                                    '#/definitions/properties/allOf/1/items/allOf/1/then/properties/type'
+                                      .length
                                   ] ||
                                 (I.push(L), (L.emUsed = !0))
                             }
@@ -41304,7 +44942,9 @@
                         var Y = {}
                         null === i ? (i = [Y]) : i.push(Y), o++
                       }
-                    if (((mn = Q === o), (o = W), null !== i && (W ? (i.length = W) : (i = null)), mn)) {
+                    if (
+                      ((mn = Q === o), (o = W), null !== i && (W ? (i.length = W) : (i = null)), mn)
+                    ) {
                       var J = o
                       if (t && 'object' == OE(t) && !Array.isArray(t) && void 0 !== t.binding) {
                         var X = t.binding
@@ -41329,7 +44969,9 @@
                                 schemaPath:
                                   '#/definitions/properties/allOf/1/items/allOf/2/then/properties/binding/properties/type/enum',
                                 params: {
-                                  allowedValues: ox.allOf[1].items.allOf[2].then.properties.binding.properties.type.enum
+                                  allowedValues:
+                                    ox.allOf[1].items.allOf[2].then.properties.binding.properties
+                                      .type.enum
                                 },
                                 message: 'should be equal to one of the allowed values'
                               }
@@ -41345,8 +44987,14 @@
                                   'errorMessage' === oe.keyword ||
                                     oe.emUsed ||
                                     (oe.dataPath !== r + '/properties/' + e + '/binding/type' &&
-                                      (0 !== oe.dataPath.indexOf(r + '/properties/' + e + '/binding/type') ||
-                                        '/' !== oe.dataPath[r + '/properties/' + e + '/binding/type'.length])) ||
+                                      (0 !==
+                                        oe.dataPath.indexOf(
+                                          r + '/properties/' + e + '/binding/type'
+                                        ) ||
+                                        '/' !==
+                                          oe.dataPath[
+                                            r + '/properties/' + e + '/binding/type'.length
+                                          ])) ||
                                     0 !==
                                       oe.schemaPath.indexOf(
                                         '#/definitions/properties/allOf/1/items/allOf/2/then/properties/binding/properties/type'
@@ -41418,7 +45066,12 @@
                         var ve = {}
                         null === i ? (i = [ve]) : i.push(ve), o++
                       }
-                    if (((hn = he === o), (o = de), null !== i && (de ? (i.length = de) : (i = null)), hn)) {
+                    if (
+                      ((hn = he === o),
+                      (o = de),
+                      null !== i && (de ? (i.length = de) : (i = null)),
+                      hn)
+                    ) {
                       var ge = o
                       if (t && 'object' == OE(t) && !Array.isArray(t) && void 0 !== t.constraints) {
                         var ye = t.constraints
@@ -41455,10 +45108,16 @@
                                   var we = Ee.value
                                   'errorMessage' === we.keyword ||
                                     we.emUsed ||
-                                    (we.dataPath !== r + '/properties/' + e + '/constraints/notEmpty' &&
-                                      (0 !== we.dataPath.indexOf(r + '/properties/' + e + '/constraints/notEmpty') ||
+                                    (we.dataPath !==
+                                      r + '/properties/' + e + '/constraints/notEmpty' &&
+                                      (0 !==
+                                        we.dataPath.indexOf(
+                                          r + '/properties/' + e + '/constraints/notEmpty'
+                                        ) ||
                                         '/' !==
-                                          we.dataPath[r + '/properties/' + e + '/constraints/notEmpty'.length])) ||
+                                          we.dataPath[
+                                            r + '/properties/' + e + '/constraints/notEmpty'.length
+                                          ])) ||
                                     0 !==
                                       we.schemaPath.indexOf(
                                         '#/definitions/properties/allOf/1/items/allOf/3/then/properties/constraints/properties/notEmpty'
@@ -41482,7 +45141,8 @@
                                   schemaPath:
                                     '#/definitions/properties/allOf/1/items/allOf/3/then/properties/constraints/properties/notEmpty/errorMessage',
                                   params: { errors: xe },
-                                  message: 'optional is not allowed for truthy "notEmpty" constraint'
+                                  message:
+                                    'optional is not allowed for truthy "notEmpty" constraint'
                                 }
                                 null === i ? (i = [Ce]) : i.push(Ce), o++
                               }
@@ -41535,14 +45195,20 @@
                           null === i ? (i = [Ne]) : i.push(Ne), o++
                         } else (o = Re), null !== i && (Re ? (i.length = Re) : (i = null))
                       }
-                    if (((fn = Me === o), (o = Be), null !== i && (Be ? (i.length = Be) : (i = null)), fn)) {
+                    if (
+                      ((fn = Me === o),
+                      (o = Be),
+                      null !== i && (Be ? (i.length = Be) : (i = null)),
+                      fn)
+                    ) {
                       var Le = o
                       if (t && 'object' == OE(t) && !Array.isArray(t)) {
                         if (void 0 === t.type) {
                           var Fe = {
                             keyword: 'required',
                             dataPath: r + '/properties/' + e,
-                            schemaPath: '#/definitions/properties/allOf/1/items/allOf/4/then/required',
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/allOf/4/then/required',
                             params: { missingProperty: 'type' },
                             message: "should have required property 'type'"
                           }
@@ -41554,8 +45220,11 @@
                             var qe = {
                               keyword: 'enum',
                               dataPath: r + '/properties/' + e + '/type',
-                              schemaPath: '#/definitions/properties/allOf/1/items/allOf/4/then/properties/type/enum',
-                              params: { allowedValues: ox.allOf[1].items.allOf[4].then.properties.type.enum },
+                              schemaPath:
+                                '#/definitions/properties/allOf/1/items/allOf/4/then/properties/type/enum',
+                              params: {
+                                allowedValues: ox.allOf[1].items.allOf[4].then.properties.type.enum
+                              },
                               message: 'should be equal to one of the allowed values'
                             }
                             null === i ? (i = [qe]) : i.push(qe), o++
@@ -41571,14 +45240,16 @@
                                   We.emUsed ||
                                   (We.dataPath !== r + '/properties/' + e + '/type' &&
                                     (0 !== We.dataPath.indexOf(r + '/properties/' + e + '/type') ||
-                                      '/' !== We.dataPath[r + '/properties/' + e + '/type'.length])) ||
+                                      '/' !==
+                                        We.dataPath[r + '/properties/' + e + '/type'.length])) ||
                                   0 !==
                                     We.schemaPath.indexOf(
                                       '#/definitions/properties/allOf/1/items/allOf/4/then/properties/type'
                                     ) ||
                                   '/' !==
                                     We.schemaPath[
-                                      '#/definitions/properties/allOf/1/items/allOf/4/then/properties/type'.length
+                                      '#/definitions/properties/allOf/1/items/allOf/4/then/properties/type'
+                                        .length
                                     ] ||
                                   ($e.push(We), (We.emUsed = !0))
                               }
@@ -41654,9 +45325,19 @@
                               null === i ? (i = [st]) : i.push(st), o++
                             }
                           }
-                        if (((vn = it === o), (o = nt), null !== i && (nt ? (i.length = nt) : (i = null)), vn)) {
+                        if (
+                          ((vn = it === o),
+                          (o = nt),
+                          null !== i && (nt ? (i.length = nt) : (i = null)),
+                          vn)
+                        ) {
                           var lt = o
-                          if (tt && 'object' == OE(tt) && !Array.isArray(tt) && void 0 === tt.name) {
+                          if (
+                            tt &&
+                            'object' == OE(tt) &&
+                            !Array.isArray(tt) &&
+                            void 0 === tt.name
+                          ) {
                             var ct = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + e + '/binding',
@@ -41677,15 +45358,18 @@
                                 'errorMessage' === mt.keyword ||
                                   mt.emUsed ||
                                   (mt.dataPath !== r + '/properties/' + e + '/binding' &&
-                                    (0 !== mt.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
-                                      '/' !== mt.dataPath[r + '/properties/' + e + '/binding'.length])) ||
+                                    (0 !==
+                                      mt.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
+                                      '/' !==
+                                        mt.dataPath[r + '/properties/' + e + '/binding'.length])) ||
                                   0 !==
                                     mt.schemaPath.indexOf(
                                       '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/then'
                                     ) ||
                                   '/' !==
                                     mt.schemaPath[
-                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/then'.length
+                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/then'
+                                        .length
                                     ] ||
                                   (ut.push(mt), (mt.emUsed = !0))
                               }
@@ -41701,7 +45385,10 @@
                                 schemaPath:
                                   '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/then/errorMessage',
                                 params: { errors: ut },
-                                message: 'property.binding ' + JSON.stringify(tt && tt.type) + ' requires name'
+                                message:
+                                  'property.binding ' +
+                                  JSON.stringify(tt && tt.type) +
+                                  ' requires name'
                               }
                               null === i ? (i = [ht]) : i.push(ht), o++
                             }
@@ -41726,7 +45413,8 @@
                           var bt = {
                             keyword: 'if',
                             dataPath: r + '/properties/' + e + '/binding',
-                            schemaPath: '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/if',
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/properties/binding/allOf/0/if',
                             params: { failingKeyword: 'then' },
                             message: 'should match "then" schema'
                           }
@@ -41743,9 +45431,19 @@
                             var wt = {}
                             null === i ? (i = [wt]) : i.push(wt), o++
                           }
-                        if (((gn = xt === o), (o = At), null !== i && (At ? (i.length = At) : (i = null)), gn)) {
+                        if (
+                          ((gn = xt === o),
+                          (o = At),
+                          null !== i && (At ? (i.length = At) : (i = null)),
+                          gn)
+                        ) {
                           var Ct = o
-                          if (tt && 'object' == OE(tt) && !Array.isArray(tt) && void 0 === tt.source) {
+                          if (
+                            tt &&
+                            'object' == OE(tt) &&
+                            !Array.isArray(tt) &&
+                            void 0 === tt.source
+                          ) {
                             var Pt = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + e + '/binding',
@@ -41766,15 +45464,18 @@
                                 'errorMessage' === Tt.keyword ||
                                   Tt.emUsed ||
                                   (Tt.dataPath !== r + '/properties/' + e + '/binding' &&
-                                    (0 !== Tt.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
-                                      '/' !== Tt.dataPath[r + '/properties/' + e + '/binding'.length])) ||
+                                    (0 !==
+                                      Tt.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
+                                      '/' !==
+                                        Tt.dataPath[r + '/properties/' + e + '/binding'.length])) ||
                                   0 !==
                                     Tt.schemaPath.indexOf(
                                       '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/then'
                                     ) ||
                                   '/' !==
                                     Tt.schemaPath[
-                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/then'.length
+                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/then'
+                                        .length
                                     ] ||
                                   (St.push(Tt), (Tt.emUsed = !0))
                               }
@@ -41790,7 +45491,10 @@
                                 schemaPath:
                                   '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/then/errorMessage',
                                 params: { errors: St },
-                                message: 'property.binding ' + JSON.stringify(tt && tt.type) + ' requires source'
+                                message:
+                                  'property.binding ' +
+                                  JSON.stringify(tt && tt.type) +
+                                  ' requires source'
                               }
                               null === i ? (i = [Bt]) : i.push(Bt), o++
                             }
@@ -41815,7 +45519,8 @@
                           var zt = {
                             keyword: 'if',
                             dataPath: r + '/properties/' + e + '/binding',
-                            schemaPath: '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/if',
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/properties/binding/allOf/1/if',
                             params: { failingKeyword: 'then' },
                             message: 'should match "then" schema'
                           }
@@ -41832,7 +45537,12 @@
                             var Vt = {}
                             null === i ? (i = [Vt]) : i.push(Vt), o++
                           }
-                        if (((yn = Lt === o), (o = It), null !== i && (It ? (i.length = It) : (i = null)), yn)) {
+                        if (
+                          ((yn = Lt === o),
+                          (o = It),
+                          null !== i && (It ? (i.length = It) : (i = null)),
+                          yn)
+                        ) {
                           var qt = o
                           if (tt && 'object' == OE(tt) && !Array.isArray(tt) && void 0 === tt.key) {
                             var Ht = {
@@ -41855,15 +45565,18 @@
                                 'errorMessage' === Gt.keyword ||
                                   Gt.emUsed ||
                                   (Gt.dataPath !== r + '/properties/' + e + '/binding' &&
-                                    (0 !== Gt.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
-                                      '/' !== Gt.dataPath[r + '/properties/' + e + '/binding'.length])) ||
+                                    (0 !==
+                                      Gt.dataPath.indexOf(r + '/properties/' + e + '/binding') ||
+                                      '/' !==
+                                        Gt.dataPath[r + '/properties/' + e + '/binding'.length])) ||
                                   0 !==
                                     Gt.schemaPath.indexOf(
                                       '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/then'
                                     ) ||
                                   '/' !==
                                     Gt.schemaPath[
-                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/then'.length
+                                      '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/then'
+                                        .length
                                     ] ||
                                   (Ut.push(Gt), (Gt.emUsed = !0))
                               }
@@ -41879,7 +45592,10 @@
                                 schemaPath:
                                   '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/then/errorMessage',
                                 params: { errors: Ut },
-                                message: 'property.binding ' + JSON.stringify(tt && tt.type) + ' requires key'
+                                message:
+                                  'property.binding ' +
+                                  JSON.stringify(tt && tt.type) +
+                                  ' requires key'
                               }
                               null === i ? (i = [Qt]) : i.push(Qt), o++
                             }
@@ -41904,7 +45620,8 @@
                           var Zt = {
                             keyword: 'if',
                             dataPath: r + '/properties/' + e + '/binding',
-                            schemaPath: '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/if',
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/properties/binding/allOf/2/if',
                             params: { failingKeyword: 'then' },
                             message: 'should match "then" schema'
                           }
@@ -41915,7 +45632,8 @@
                             var en = {
                               keyword: 'required',
                               dataPath: r + '/properties/' + e + '/binding',
-                              schemaPath: '#/definitions/properties/allOf/1/items/properties/binding/required',
+                              schemaPath:
+                                '#/definitions/properties/allOf/1/items/properties/binding/required',
                               params: { missingProperty: 'type' },
                               message: "should have required property 'type'"
                             }
@@ -41946,7 +45664,10 @@
                                 dataPath: r + '/properties/' + e + '/binding/type',
                                 schemaPath:
                                   '#/definitions/properties/allOf/1/items/properties/binding/properties/type/enum',
-                                params: { allowedValues: ox.allOf[1].items.properties.binding.properties.type.enum },
+                                params: {
+                                  allowedValues:
+                                    ox.allOf[1].items.properties.binding.properties.type.enum
+                                },
                                 message: 'should be equal to one of the allowed values'
                               }
                               null === i ? (i = [rn]) : i.push(rn), o++
@@ -41961,8 +45682,14 @@
                                   'errorMessage' === ln.keyword ||
                                     ln.emUsed ||
                                     (ln.dataPath !== r + '/properties/' + e + '/binding/type' &&
-                                      (0 !== ln.dataPath.indexOf(r + '/properties/' + e + '/binding/type') ||
-                                        '/' !== ln.dataPath[r + '/properties/' + e + '/binding/type'.length])) ||
+                                      (0 !==
+                                        ln.dataPath.indexOf(
+                                          r + '/properties/' + e + '/binding/type'
+                                        ) ||
+                                        '/' !==
+                                          ln.dataPath[
+                                            r + '/properties/' + e + '/binding/type'.length
+                                          ])) ||
                                     0 !==
                                       ln.schemaPath.indexOf(
                                         '#/definitions/properties/allOf/1/items/properties/binding/properties/type'
@@ -42046,7 +45773,8 @@
                           var Cn = {
                             keyword: 'type',
                             dataPath: r + '/properties/' + e + '/binding',
-                            schemaPath: '#/definitions/properties/allOf/1/items/properties/binding/type',
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/properties/binding/type',
                             params: { type: 'object' },
                             message: 'should be object'
                           }
@@ -42057,7 +45785,8 @@
                         var Pn = {
                           keyword: 'type',
                           dataPath: r + '/properties/' + e + '/optional',
-                          schemaPath: '#/definitions/properties/allOf/1/items/properties/optional/type',
+                          schemaPath:
+                            '#/definitions/properties/allOf/1/items/properties/optional/type',
                           params: { type: 'boolean' },
                           message: 'should be boolean'
                         }
@@ -42069,7 +45798,8 @@
                           var Sn = {
                             keyword: 'type',
                             dataPath: r + '/properties/' + e + '/feel',
-                            schemaPath: '#/definitions/properties/allOf/1/items/properties/feel/type',
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/properties/feel/type',
                             params: { type: 'string' },
                             message: 'should be string'
                           }
@@ -42079,7 +45809,8 @@
                           var On = {
                             keyword: 'enum',
                             dataPath: r + '/properties/' + e + '/feel',
-                            schemaPath: '#/definitions/properties/allOf/1/items/properties/feel/enum',
+                            schemaPath:
+                              '#/definitions/properties/allOf/1/items/properties/feel/enum',
                             params: { allowedValues: ox.allOf[1].items.properties.feel.enum },
                             message: 'should be equal to one of the allowed values'
                           }
@@ -42237,7 +45968,10 @@
                         dataPath: r + '/icon/contents',
                         schemaPath: '#/properties/icon/properties/contents/errorMessage',
                         params: { errors: Pn[Tn] },
-                        message: Tn in kn ? kn[Tn]() : ix.properties.icon.properties.contents.errorMessage[Tn]
+                        message:
+                          Tn in kn
+                            ? kn[Tn]()
+                            : ix.properties.icon.properties.contents.errorMessage[Tn]
                       }
                       null === i ? (i = [Bn]) : i.push(Bn), o++
                     }
@@ -42283,7 +46017,8 @@
                     Hn.keyword in Fn &&
                     0 === Hn.schemaPath.indexOf('#/properties/icon') &&
                     /^\/[^\/]*$/.test(Hn.schemaPath.slice(17)) &&
-                    ((In = cx[Hn.keyword]), (Nn = Fn[Hn.keyword][Hn.params[In]]) && (Nn.push(Hn), (Hn.emUsed = !0)))
+                    ((In = cx[Hn.keyword]),
+                    (Nn = Fn[Hn.keyword][Hn.params[In]]) && (Nn.push(Hn), (Hn.emUsed = !0)))
                 }
               } catch (e) {
                 qn.e(e)
@@ -42352,8 +46087,12 @@
           f = c
         if (Array.isArray(e))
           for (var v = e.length, g = 0; g < v; g++)
-            px(e[g], { dataPath: r + '/' + g, parentData: e, parentDataProperty: g, rootData: s }) ||
-              (c = (l = null === l ? px.errors : l.concat(px.errors)).length)
+            px(e[g], {
+              dataPath: r + '/' + g,
+              parentData: e,
+              parentDataProperty: g,
+              rootData: s
+            }) || (c = (l = null === l ? px.errors : l.concat(px.errors)).length)
         else {
           var y = {
             keyword: 'type',
@@ -42473,7 +46212,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -42481,7 +46223,9 @@
       function W_(e, t) {
         if ('function' != typeof t && null !== t)
           throw new TypeError('Super expression must either be null or a function')
-        ;(e.prototype = Object.create(t && t.prototype, { constructor: { value: e, writable: !0, configurable: !0 } })),
+        ;(e.prototype = Object.create(t && t.prototype, {
+          constructor: { value: e, writable: !0, configurable: !0 }
+        })),
           t && G_(e, t)
       }
       function G_(e, t) {
@@ -42497,7 +46241,9 @@
           if (Reflect.construct.sham) return !1
           if ('function' == typeof Proxy) return !0
           try {
-            return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0
+            return (
+              Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0
+            )
           } catch (e) {
             return !1
           }
@@ -42515,7 +46261,10 @@
       function K_(e, t) {
         return !t || ('object' !== U_(t) && 'function' != typeof t)
           ? (function (e) {
-              if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
+              if (void 0 === e)
+                throw new ReferenceError(
+                  "this hasn't been initialised - super() hasn't been called"
+                )
               return e
             })(e)
           : t
@@ -42578,7 +46327,10 @@
             if (Array.isArray(e)) return sw(e)
           })(e) ||
           (function (e) {
-            if (('undefined' != typeof Symbol && null != e[Symbol.iterator]) || null != e['@@iterator'])
+            if (
+              ('undefined' != typeof Symbol && null != e[Symbol.iterator]) ||
+              null != e['@@iterator']
+            )
               return Array.from(e)
           })(e) ||
           aw(e) ||
@@ -42634,7 +46386,12 @@
       function iw(e, t, n) {
         return (
           t in e
-            ? Object.defineProperty(e, t, { value: n, enumerable: !0, configurable: !0, writable: !0 })
+            ? Object.defineProperty(e, t, {
+                value: n,
+                enumerable: !0,
+                configurable: !0,
+                writable: !0
+              })
             : (e[t] = n),
           e
         )
@@ -42645,7 +46402,10 @@
             if (Array.isArray(e)) return e
           })(e) ||
           (function (e, t) {
-            var n = null == e ? null : ('undefined' != typeof Symbol && e[Symbol.iterator]) || e['@@iterator']
+            var n =
+              null == e
+                ? null
+                : ('undefined' != typeof Symbol && e[Symbol.iterator]) || e['@@iterator']
             if (null != n) {
               var r,
                 i,
@@ -42653,7 +46413,11 @@
                 a = !0,
                 s = !1
               try {
-                for (n = n.call(e); !(a = (r = n.next()).done) && (o.push(r.value), !t || o.length !== t); a = !0);
+                for (
+                  n = n.call(e);
+                  !(a = (r = n.next()).done) && (o.push(r.value), !t || o.length !== t);
+                  a = !0
+                );
               } catch (e) {
                 ;(s = !0), (i = e)
               } finally {
@@ -42709,7 +46473,9 @@
         if (Object.getOwnPropertySymbols) {
           var o = Object.getOwnPropertySymbols(e)
           for (r = 0; r < o.length; r++)
-            (n = o[r]), t.indexOf(n) >= 0 || (Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]))
+            (n = o[r]),
+              t.indexOf(n) >= 0 ||
+                (Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]))
         }
         return i
       }
@@ -44763,7 +48529,11 @@
           (function (e) {
             var t = si(e),
               n = si(e.source)
-            return !(!oi(e, 'bpmn:SequenceFlow') || !n) && t.conditionExpression && oi(n, 'bpmn:Activity')
+            return (
+              !(!oi(e, 'bpmn:SequenceFlow') || !n) &&
+              t.conditionExpression &&
+              oi(n, 'bpmn:Activity')
+            )
           })(e) && (t = 'ConditionalFlow'),
           t
         )
@@ -45016,13 +48786,18 @@
                         e.providers.push(t)
                       }),
                       this._eventBus.fire('propertiesPanel.providersChanged'))
-                    : console.error('Properties provider does not implement #getGroups(element) API')
+                    : console.error(
+                        'Properties provider does not implement #getGroups(element) API'
+                      )
               }
             },
             {
               key: '_getProviders',
               value: function () {
-                var e = this._eventBus.createEvent({ type: 'propertiesPanel.getProviders', providers: [] })
+                var e = this._eventBus.createEvent({
+                  type: 'propertiesPanel.getProviders',
+                  providers: []
+                })
                 return this._eventBus.fire(e), e.providers
               }
             },
@@ -45050,7 +48825,8 @@
             {
               key: '_destroy',
               value: function () {
-                this._container && (hy(null, this._container), this._eventBus.fire('propertiesPanel.destroyed'))
+                this._container &&
+                  (hy(null, this._container), this._eventBus.fire('propertiesPanel.destroyed'))
               }
             }
           ]),
@@ -45103,7 +48879,9 @@
         return SP(e, 'bpmn:ErrorEventDefinition')
       }
       function wP(e) {
-        return ai(e, ['bpmn:StartEvent', 'bpmn:IntermediateCatchEvent', 'bpmn:BoundaryEvent']) && !!PP(e)
+        return (
+          ai(e, ['bpmn:StartEvent', 'bpmn:IntermediateCatchEvent', 'bpmn:BoundaryEvent']) && !!PP(e)
+        )
       }
       function CP(e) {
         if (e)
@@ -45333,7 +49111,11 @@
           var o = QP(t && t.get('documentation'))
           return o
             ? i
-              ? r.execute('element.updateModdleProperties', { element: e, moddleElement: o, properties: { text: i } })
+              ? r.execute('element.updateModdleProperties', {
+                  element: e,
+                  moddleElement: o,
+                  properties: { text: i }
+                })
               : r.execute('element.updateModdleProperties', {
                   element: e,
                   moddleElement: t,
@@ -45652,7 +49434,13 @@
               return s.get('isExecutable')
             })
         }
-        return wA({ element: r, id: 'isExecutable', label: a('Executable'), getValue: t, setValue: n })
+        return wA({
+          element: r,
+          id: 'isExecutable',
+          label: a('Executable'),
+          getValue: t,
+          setValue: n
+        })
       }
       var hk = /\s/,
         fk = /^([a-z][\w-.]*:)?[a-z_][\w-.]*$/i,
@@ -45698,7 +49486,10 @@
         })
       }
       function Ak(e) {
-        return ai((t = e.element), ['bpmn:IntermediateThrowEvent', 'bpmn:IntermediateCatchEvent']) && BP(t)
+        return ai((t = e.element), [
+          'bpmn:IntermediateThrowEvent',
+          'bpmn:IntermediateCatchEvent'
+        ]) && BP(t)
           ? [{ id: 'linkName', component: Ek, isEdited: $A }]
           : []
         var t
@@ -45717,7 +49508,11 @@
             return o.get('name')
           },
           setValue: function (e) {
-            n.execute('element.updateModdleProperties', { element: t, moddleElement: o, properties: { name: e } })
+            n.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: o,
+              properties: { name: e }
+            })
           },
           debounce: i
         })
@@ -45742,7 +49537,9 @@
         )
           return []
         var n = [{ id: 'messageRef', component: wk, isEdited: jA }]
-        return TP(t) && (n = [].concat(X_(n), [{ id: 'messageName', component: Ck, isEdited: $A }])), n
+        return (
+          TP(t) && (n = [].concat(X_(n), [{ id: 'messageName', component: Ck, isEdited: $A }])), n
+        )
       }
       function wk(e) {
         var t = e.element,
@@ -45960,7 +49757,12 @@
                         var r = (function (e, t) {
                           var n = t.create('bpmn:CategoryValue'),
                             r = t.create('bpmn:Category', { categoryValue: [n] })
-                          return Vt(e.get('rootElements'), r), (si(r).$parent = e), (si(n).$parent = r), n
+                          return (
+                            Vt(e.get('rootElements'), r),
+                            (si(r).$parent = e),
+                            (si(n).$parent = r),
+                            n
+                          )
                         })(si(t).$parent, n)
                         e.categoryValueRef = r
                       })(r, i.getRootElement(), o),
@@ -45999,7 +49801,11 @@
             return o.get('name')
           },
           setValue: function (e) {
-            n.execute('element.updateModdleProperties', { element: t, moddleElement: o, properties: { name: e } })
+            n.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: o,
+              properties: { name: e }
+            })
           },
           debounce: i
         })
@@ -46018,7 +49824,11 @@
             return o.get('id')
           },
           setValue: function (e) {
-            n.execute('element.updateModdleProperties', { element: t, moddleElement: o, properties: { id: e } })
+            n.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: o,
+              properties: { id: e }
+            })
           },
           debounce: i,
           validate: function (e) {
@@ -46036,7 +49846,9 @@
         )
           return []
         var n = [{ id: 'signalRef', component: Lk, isEdited: jA }]
-        return MP(t) && (n = [].concat(X_(n), [{ id: 'signalName', component: Fk, isEdited: $A }])), n
+        return (
+          MP(t) && (n = [].concat(X_(n), [{ id: 'signalName', component: Fk, isEdited: $A }])), n
+        )
       }
       function Lk(e) {
         var t = e.element,
@@ -46173,7 +49985,11 @@
               a.$parent = n
               var s = { timeDuration: void 0, timeDate: void 0, timeCycle: void 0 }
               '' !== e && (s[e] = a),
-                i.execute('element.updateModdleProperties', { element: t, moddleElement: n, properties: s })
+                i.execute('element.updateModdleProperties', {
+                  element: t,
+                  moddleElement: n,
+                  properties: s
+                })
             }
           },
           getOptions: function (e) {
@@ -46202,7 +50018,11 @@
             return s && s.get('body')
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: t, moddleElement: s, properties: { body: e } })
+            i.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: s,
+              properties: { body: e }
+            })
           },
           debounce: a,
           description: $k(r, o)
@@ -46214,11 +50034,19 @@
             return Db('div', {
               children: [
                 Db('p', {
-                  children: t('A specific point in time defined as ISO 8601 combined date and time representation.')
+                  children: t(
+                    'A specific point in time defined as ISO 8601 combined date and time representation.'
+                  )
                 }),
                 Db('ul', {
                   children: [
-                    Db('li', { children: [Db('code', { children: '2019-10-01T12:00:00Z' }), ' - ', t('UTC time')] }),
+                    Db('li', {
+                      children: [
+                        Db('code', { children: '2019-10-01T12:00:00Z' }),
+                        ' - ',
+                        t('UTC time')
+                      ]
+                    }),
                     Db('li', {
                       children: [
                         Db('code', { children: '2019-10-02T08:09:40+02:00' }),
@@ -46243,9 +50071,19 @@
                 Db('ul', {
                   children: [
                     Db('li', {
-                      children: [Db('code', { children: 'R5/PT10S' }), ' - ', t('every 10 seconds, up to 5 times')]
+                      children: [
+                        Db('code', { children: 'R5/PT10S' }),
+                        ' - ',
+                        t('every 10 seconds, up to 5 times')
+                      ]
                     }),
-                    Db('li', { children: [Db('code', { children: 'R/P1D' }), ' - ', t('every day, infinitely')] })
+                    Db('li', {
+                      children: [
+                        Db('code', { children: 'R/P1D' }),
+                        ' - ',
+                        t('every day, infinitely')
+                      ]
+                    })
                   ]
                 }),
                 Db('a', {
@@ -46262,8 +50100,16 @@
                 Db('p', { children: t('A time duration defined as ISO 8601 durations format.') }),
                 Db('ul', {
                   children: [
-                    Db('li', { children: [Db('code', { children: 'PT15S' }), ' - ', t('15 seconds')] }),
-                    Db('li', { children: [Db('code', { children: 'PT1H30M' }), ' - ', t('1 hour and 30 minutes')] }),
+                    Db('li', {
+                      children: [Db('code', { children: 'PT15S' }), ' - ', t('15 seconds')]
+                    }),
+                    Db('li', {
+                      children: [
+                        Db('code', { children: 'PT1H30M' }),
+                        ' - ',
+                        t('1 hour and 30 minutes')
+                      ]
+                    }),
                     Db('li', { children: [Db('code', { children: 'P14D' }), ' - ', t('14 days')] })
                   ]
                 }),
@@ -46286,7 +50132,11 @@
           label: 'General',
           entries: [].concat(
             X_(
-              ai({ element: e }.element, ['bpmn:Collaboration', 'bpmn:DataAssociation', 'bpmn:Association'])
+              ai({ element: e }.element, [
+                'bpmn:Collaboration',
+                'bpmn:DataAssociation',
+                'bpmn:Association'
+              ])
                 ? []
                 : [{ id: 'name', component: Mk, isEdited: $A }]
             ),
@@ -46298,11 +50148,21 @@
         }
       }
       function Gk(e) {
-        var t = { label: 'Compensation', id: 'compensation', component: oA, entries: X_(NP({ element: e })) }
+        var t = {
+          label: 'Compensation',
+          id: 'compensation',
+          component: oA,
+          entries: X_(NP({ element: e }))
+        }
         return t.entries.length ? t : null
       }
       function Qk(e) {
-        return { id: 'documentation', label: 'Documentation', entries: X_(UP({ element: e })), component: oA }
+        return {
+          id: 'documentation',
+          label: 'Documentation',
+          entries: X_(UP({ element: e })),
+          component: oA
+        }
       }
       function Kk(e) {
         var t = { id: 'error', label: 'Error', component: oA, entries: X_(rk({ element: e })) }
@@ -46321,7 +50181,12 @@
         return t.entries.length ? t : null
       }
       function Zk(e) {
-        var t = { id: 'escalation', label: 'Escalation', component: oA, entries: X_(lk({ element: e })) }
+        var t = {
+          id: 'escalation',
+          label: 'Escalation',
+          component: oA,
+          entries: X_(lk({ element: e }))
+        }
         return t.entries.length ? t : null
       }
       function eS(e) {
@@ -46329,7 +50194,12 @@
         return t.entries.length ? t : null
       }
       function tS(e) {
-        var t = { label: 'Multi-instance', id: 'multiInstance', component: oA, entries: X_(Pk({ element: e })) }
+        var t = {
+          label: 'Multi-instance',
+          id: 'multiInstance',
+          component: oA,
+          entries: X_(Pk({ element: e }))
+        }
         return t.entries.length ? t : null
       }
       function nS(e) {
@@ -46357,7 +50227,11 @@
           (n.$parent = a),
           o.push({
             cmd: 'element.updateModdleProperties',
-            context: { element: e, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [n]) } }
+            context: {
+              element: e,
+              moddleElement: a,
+              properties: { values: [].concat(X_(a.get('values')), [n]) }
+            }
           }),
           i.execute('properties-panel.multi-command-executor', o)
       }
@@ -46367,7 +50241,11 @@
           o = i.get('values').filter(function (e) {
             return !n.includes(e)
           })
-        r.execute('element.updateModdleProperties', { element: e, moddleElement: i, properties: { values: o } })
+        r.execute('element.updateModdleProperties', {
+          element: e,
+          moddleElement: i,
+          properties: { values: o }
+        })
       }
       function oS(e) {
         var t = e.element,
@@ -46398,7 +50276,11 @@
               ((s = JP('zeebe:AssignmentDefinition', {}, a, r)),
               i.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: t, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+                context: {
+                  element: t,
+                  moddleElement: a,
+                  properties: { values: [].concat(X_(a.get('values')), [s]) }
+                }
               })),
               i.push({
                 cmd: 'element.updateModdleProperties',
@@ -46438,7 +50320,11 @@
               ((s = JP('zeebe:AssignmentDefinition', {}, a, r)),
               i.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: t, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+                context: {
+                  element: t,
+                  moddleElement: a,
+                  properties: { values: [].concat(X_(a.get('values')), [s]) }
+                }
               })),
               i.push({
                 cmd: 'element.updateModdleProperties',
@@ -46464,9 +50350,18 @@
                 return function (t) {
                   return t.concat(
                     (function (e) {
-                      return [Wk(e), Qk(e), Gk(e), Kk(e), Xk(e), Yk(e), tS(e), Jk(e), Zk(e), eS(e)].filter(function (
-                        e
-                      ) {
+                      return [
+                        Wk(e),
+                        Qk(e),
+                        Gk(e),
+                        Kk(e),
+                        Xk(e),
+                        Yk(e),
+                        tS(e),
+                        Jk(e),
+                        Zk(e),
+                        eS(e)
+                      ].filter(function (e) {
                         return null !== e
                       })
                     })(e)
@@ -46506,7 +50401,10 @@
             var t = e.error
             if (!t) return !1
             var n = t.requiredExtensionElement
-            return 'extensionElementRequired' === t.type && ['zeebe:CalledDecision', 'zeebe:TaskDefinition'].includes(n)
+            return (
+              'extensionElementRequired' === t.type &&
+              ['zeebe:CalledDecision', 'zeebe:TaskDefinition'].includes(n)
+            )
           })
         return BA({
           element: t,
@@ -46539,7 +50437,11 @@
                     ((s = JP('bpmn:ExtensionElements', { values: [] }, o, n)),
                     a.push({
                       cmd: 'element.updateModdleProperties',
-                      context: { element: e, moddleElement: o, properties: { extensionElements: s } }
+                      context: {
+                        element: e,
+                        moddleElement: o,
+                        properties: { extensionElements: s }
+                      }
                     })),
                     (t.$parent = s),
                     oi(t, 'zeebe:TaskDefinition')
@@ -46547,7 +50449,11 @@
                       : oi(t, 'zeebe:CalledDecision') && (i = Zy(s.get('values'), dS(e))),
                     a.push({
                       cmd: 'element.updateModdleProperties',
-                      context: { element: e, moddleElement: s, properties: { values: [].concat(X_(i), [t]) } }
+                      context: {
+                        element: e,
+                        moddleElement: s,
+                        properties: { values: [].concat(X_(i), [t]) }
+                      }
                     }),
                     r.execute('properties-panel.multi-command-executor', a)
                 })(t, n, i, r))
@@ -46610,7 +50516,11 @@
               ((s = JP('zeebe:CalledDecision', {}, a, i)),
               n.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: t, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+                context: {
+                  element: t,
+                  moddleElement: a,
+                  properties: { values: [].concat(X_(a.get('values')), [s]) }
+                }
               })),
               n.push({
                 cmd: 'element.updateModdleProperties',
@@ -46654,7 +50564,11 @@
               ((s = JP('zeebe:CalledDecision', {}, a, i)),
               n.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: t, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+                context: {
+                  element: t,
+                  moddleElement: a,
+                  properties: { values: [].concat(X_(a.get('values')), [s]) }
+                }
               })),
               n.push({
                 cmd: 'element.updateModdleProperties',
@@ -46702,7 +50616,10 @@
               o = si(t),
               a = t.source
             a.businessObject.default === o &&
-              i.push({ cmd: 'element.updateProperties', context: { element: a, properties: { default: void 0 } } })
+              i.push({
+                cmd: 'element.updateProperties',
+                context: { element: a, properties: { default: void 0 } }
+              })
             var s = e && '' != e ? JP('bpmn:FormalExpression', { body: e }, o, r) : void 0
             i.push({
               cmd: 'element.updateProperties',
@@ -46749,7 +50666,9 @@
           },
           setValue: function (e) {
             r.resetForm(t),
-              'camundaForm' === e ? r.setUserTaskForm(t, '') : 'formKey' === e && r.setFormDefinition(t, '')
+              'camundaForm' === e
+                ? r.setUserTaskForm(t, '')
+                : 'formKey' === e && r.setFormDefinition(t, '')
           },
           getOptions: function () {
             return [
@@ -46818,7 +50737,8 @@
             s = [],
             l = i.get('extensionElements')
           qy(l) &&
-            ((l = JP('bpmn:ExtensionElements', { values: [] }, i, e)), s.push(PS(t, i, { extensionElements: l })))
+            ((l = JP('bpmn:ExtensionElements', { values: [] }, i, e)),
+            s.push(PS(t, i, { extensionElements: l })))
           var c = n(t)
           if (c) r && s.push(PS(t, c, { formKey: r }))
           else {
@@ -46857,7 +50777,8 @@
                   o = s(t),
                   a = o.get('extensionElements')
                 a ||
-                  ((a = JP('bpmn:ExtensionElements', { values: [] }, o, e)), i.push(PS(t, o, { extensionElements: a })))
+                  ((a = JP('bpmn:ExtensionElements', { values: [] }, o, e)),
+                  i.push(PS(t, o, { extensionElements: a })))
                 var l = r(t)
                 return (
                   l ||
@@ -46885,13 +50806,17 @@
               a = r(e)
             if (a) {
               var l = Zy(i.get('values'), a)
-              o.push(PS(e, i, { values: l })), t.execute('properties-panel.multi-command-executor', o)
+              o.push(PS(e, i, { values: l })),
+                t.execute('properties-panel.multi-command-executor', o)
             } else t.execute('properties-panel.multi-command-executor', o)
           }
         }
       }
       function PS(e, t, n) {
-        return { cmd: 'element.updateModdleProperties', context: { element: e, moddleElement: t, properties: n } }
+        return {
+          cmd: 'element.updateModdleProperties',
+          context: { element: e, moddleElement: t, properties: n }
+        }
       }
       function kS(e) {
         var t = e.idPrefix,
@@ -46916,7 +50841,11 @@
             return e.key
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { key: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { key: e }
+            })
           },
           debounce: a
         })
@@ -46936,7 +50865,11 @@
             return e.value
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { value: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { value: e }
+            })
           },
           debounce: a
         })
@@ -46975,7 +50908,11 @@
               var s = si(n).get('extensionElements')
               i.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: n, moddleElement: s, properties: { values: Zy(s.get('values'), o) } }
+                context: {
+                  element: n,
+                  moddleElement: s,
+                  properties: { values: Zy(s.get('values'), o) }
+                }
               })
             }
             t.execute('properties-panel.multi-command-executor', i)
@@ -47002,12 +50939,20 @@
             ((s = JP('zeebe:TaskHeaders', { values: [] }, a, t)),
             i.push({
               cmd: 'element.updateModdleProperties',
-              context: { element: r, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+              context: {
+                element: r,
+                moddleElement: a,
+                properties: { values: [].concat(X_(a.get('values')), [s]) }
+              }
             }))
           var l = JP('zeebe:Header', {}, s, t)
           i.push({
             cmd: 'element.updateModdleProperties',
-            context: { element: r, moddleElement: s, properties: { values: [].concat(X_(s.get('values')), [l]) } }
+            context: {
+              element: r,
+              moddleElement: s,
+              properties: { values: [].concat(X_(s.get('values')), [l]) }
+            }
           }),
             n.execute('properties-panel.multi-command-executor', i)
         }
@@ -47035,7 +50980,11 @@
             return e.target
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { target: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { target: e }
+            })
           },
           debounce: a
         })
@@ -47056,7 +51005,11 @@
             return e.source
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { source: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { source: e }
+            })
           },
           debounce: a
         })
@@ -47121,7 +51074,11 @@
             ((s = FS({ inputParameters: [], outputParameters: [] }, a, n)),
             i.push({
               cmd: 'element.updateModdleProperties',
-              context: { element: t, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+              context: {
+                element: t,
+                moddleElement: a,
+                properties: { values: [].concat(X_(a.get('values')), [s]) }
+              }
             }))
           var l = JP('zeebe:Input', { source: '= source', target: XP('InputVariable_') }, s, n)
           i.push({
@@ -47176,7 +51133,8 @@
               n = void 0 === t ? {} : t
             return (
               (0, YA.QY)(e.path, l) ||
-              ('extensionElementRequired' === n.type && 'zeebe:Subscription' === n.requiredExtensionElement)
+              ('extensionElementRequired' === n.type &&
+                'zeebe:Subscription' === n.requiredExtensionElement)
             )
           })
         return HA({
@@ -47205,7 +51163,11 @@
               ((s = JP('zeebe:Subscription', {}, a, n)),
               i.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: t, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+                context: {
+                  element: t,
+                  moddleElement: a,
+                  properties: { values: [].concat(X_(a.get('values')), [s]) }
+                }
               })),
               i.push({
                 cmd: 'element.updateModdleProperties',
@@ -47235,7 +51197,10 @@
               n = void 0 === t ? {} : t,
               r = n.requiredExtensionElement,
               i = n.type
-            return (0, YA.QY)(e.path, l) || ('extensionElementRequired' === i && 'zeebe:LoopCharacteristics' === r)
+            return (
+              (0, YA.QY)(e.path, l) ||
+              ('extensionElementRequired' === i && 'zeebe:LoopCharacteristics' === r)
+            )
           })
         return HA({
           element: t,
@@ -47378,7 +51343,11 @@
           ((l = JP('zeebe:LoopCharacteristics', {}, s, i)),
           a.push({
             cmd: 'element.updateModdleProperties',
-            context: { element: e, moddleElement: s, properties: { values: [].concat(X_(s.get('values')), [l]) } }
+            context: {
+              element: e,
+              moddleElement: s,
+              properties: { values: [].concat(X_(s.get('values')), [l]) }
+            }
           })),
           a.push({
             cmd: 'element.updateModdleProperties',
@@ -47434,11 +51403,19 @@
               ((s = JP('zeebe:CalledElement', {}, a, r)),
               i.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: t, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+                context: {
+                  element: t,
+                  moddleElement: a,
+                  properties: { values: [].concat(X_(a.get('values')), [s]) }
+                }
               })),
               i.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: t, moddleElement: s, properties: { propagateAllChildVariables: e } }
+                context: {
+                  element: t,
+                  moddleElement: s,
+                  properties: { propagateAllChildVariables: e }
+                }
               }),
               n.execute('properties-panel.multi-command-executor', i)
           }
@@ -47492,7 +51469,11 @@
             ((s = FS({ inputParameters: [], outputParameters: [] }, a, n)),
             i.push({
               cmd: 'element.updateModdleProperties',
-              context: { element: t, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+              context: {
+                element: t,
+                moddleElement: a,
+                properties: { values: [].concat(X_(a.get('values')), [s]) }
+              }
             }))
           var l = JP('zeebe:Output', { source: '= source', target: XP('OutputVariable_') }, s, n)
           i.push({
@@ -47521,7 +51502,10 @@
               n = void 0 === t ? {} : t,
               r = n.type,
               i = n.requiredExtensionElement
-            return (0, YA.QY)(e.path, c) || ('extensionElementRequired' === r && 'zeebe:CalledElement' === i)
+            return (
+              (0, YA.QY)(e.path, c) ||
+              ('extensionElementRequired' === r && 'zeebe:CalledElement' === i)
+            )
           })
         return HA({
           element: t,
@@ -47549,7 +51533,11 @@
               ((s = JP('zeebe:CalledElement', {}, a, i)),
               n.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: t, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+                context: {
+                  element: t,
+                  moddleElement: a,
+                  properties: { values: [].concat(X_(a.get('values')), [s]) }
+                }
               })),
               n.push({
                 cmd: 'element.updateModdleProperties',
@@ -47576,7 +51564,10 @@
               n = void 0 === t ? {} : t,
               r = n.type,
               i = n.requiredExtensionElement
-            return (0, YA.QY)(e.path, c) || ('extensionElementRequired' === r && 'zeebe:TaskDefinition' === i)
+            return (
+              (0, YA.QY)(e.path, c) ||
+              ('extensionElementRequired' === r && 'zeebe:TaskDefinition' === i)
+            )
           })
         return HA({
           element: t,
@@ -47601,7 +51592,11 @@
               ((s = JP('zeebe:TaskDefinition', {}, a, i)),
               n.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: t, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+                context: {
+                  element: t,
+                  moddleElement: a,
+                  properties: { values: [].concat(X_(a.get('values')), [s]) }
+                }
               })),
               n.push({
                 cmd: 'element.updateModdleProperties',
@@ -47646,7 +51641,11 @@
               ((s = JP('zeebe:TaskDefinition', {}, a, i)),
               n.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: t, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+                context: {
+                  element: t,
+                  moddleElement: a,
+                  properties: { values: [].concat(X_(a.get('values')), [s]) }
+                }
               })),
               n.push({
                 cmd: 'element.updateModdleProperties',
@@ -47680,7 +51679,12 @@
               var i = r.create('bpmn:FormalExpression', { body: void 0 })
               i.$parent = o
               var s = { timeDuration: void 0, timeDate: void 0, timeCycle: void 0 }
-              ;(s[e] = i), n.execute('element.updateModdleProperties', { element: t, moddleElement: o, properties: s })
+              ;(s[e] = i),
+                n.execute('element.updateModdleProperties', {
+                  element: t,
+                  moddleElement: o,
+                  properties: s
+                })
             }
           },
           getOptions: function (e) {
@@ -47711,7 +51715,11 @@
             return s && s.get('body')
           },
           setValue: function (e) {
-            n.execute('element.updateModdleProperties', { element: t, moddleElement: s, properties: { body: e } })
+            n.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: s,
+              properties: { body: e }
+            })
           },
           debounce: i,
           description: hO(a, r)
@@ -47761,7 +51769,10 @@
           case 'timeCycle':
             return !!oi(t, 'bpmn:StartEvent') || !(!oi(t, 'bpmn:BoundaryEvent') || n.cancelActivity)
           case 'timeDuration':
-            return !!oi(t, 'bpmn:IntermediateCatchEvent') || !(!oi(t, 'bpmn:BoundaryEvent') || n.cancelActivity)
+            return (
+              !!oi(t, 'bpmn:IntermediateCatchEvent') ||
+              !(!oi(t, 'bpmn:BoundaryEvent') || n.cancelActivity)
+            )
           default:
             return
         }
@@ -47772,11 +51783,19 @@
             return Db('div', {
               children: [
                 Db('p', {
-                  children: t('A specific point in time defined as ISO 8601 combined date and time representation.')
+                  children: t(
+                    'A specific point in time defined as ISO 8601 combined date and time representation.'
+                  )
                 }),
                 Db('ul', {
                   children: [
-                    Db('li', { children: [Db('code', { children: '2019-10-01T12:00:00Z' }), ' - ', t('UTC time')] }),
+                    Db('li', {
+                      children: [
+                        Db('code', { children: '2019-10-01T12:00:00Z' }),
+                        ' - ',
+                        t('UTC time')
+                      ]
+                    }),
                     Db('li', {
                       children: [
                         Db('code', { children: '2019-10-02T08:09:40+02:00' }),
@@ -47802,9 +51821,19 @@
                 Db('ul', {
                   children: [
                     Db('li', {
-                      children: [Db('code', { children: 'R5/PT10S' }), ' - ', t('every 10 seconds, up to 5 times')]
+                      children: [
+                        Db('code', { children: 'R5/PT10S' }),
+                        ' - ',
+                        t('every 10 seconds, up to 5 times')
+                      ]
                     }),
-                    Db('li', { children: [Db('code', { children: 'R/P1D' }), ' - ', t('every day, infinitely')] })
+                    Db('li', {
+                      children: [
+                        Db('code', { children: 'R/P1D' }),
+                        ' - ',
+                        t('every day, infinitely')
+                      ]
+                    })
                   ]
                 }),
                 Db('a', {
@@ -47822,8 +51851,16 @@
                 Db('p', { children: t('A time duration defined as ISO 8601 durations format.') }),
                 Db('ul', {
                   children: [
-                    Db('li', { children: [Db('code', { children: 'PT15S' }), ' - ', t('15 seconds')] }),
-                    Db('li', { children: [Db('code', { children: 'PT1H30M' }), ' - ', t('1 hour and 30 minutes')] }),
+                    Db('li', {
+                      children: [Db('code', { children: 'PT15S' }), ' - ', t('15 seconds')]
+                    }),
+                    Db('li', {
+                      children: [
+                        Db('code', { children: 'PT1H30M' }),
+                        ' - ',
+                        t('1 hour and 30 minutes')
+                      ]
+                    }),
                     Db('li', { children: [Db('code', { children: 'P14D' }), ' - ', t('14 days')] })
                   ]
                 }),
@@ -47850,7 +51887,12 @@
             return t.entries.length ? t : null
           },
           function (e) {
-            var t = { id: 'calledDecision', label: 'Called decision', entries: X_(hS({ element: e })), component: oA }
+            var t = {
+              id: 'calledDecision',
+              label: 'Called decision',
+              entries: X_(hS({ element: e })),
+              component: oA
+            }
             return t.entries.length ? t : null
           },
           function (e) {
@@ -47890,11 +51932,21 @@
             return n.entries.length ? n : null
           },
           function (e, t) {
-            var n = { id: 'form', label: 'Form', entries: X_(ES({ element: e, injector: t })), component: oA }
+            var n = {
+              id: 'form',
+              label: 'Form',
+              entries: X_(ES({ element: e, injector: t })),
+              component: oA
+            }
             return n.entries.length ? n : null
           },
           function (e) {
-            var t = { id: 'condition', label: 'Condition', entries: X_(yS({ element: e })), component: oA }
+            var t = {
+              id: 'condition',
+              label: 'Condition',
+              entries: X_(yS({ element: e })),
+              component: oA
+            }
             return t.entries.length ? t : null
           },
           function (e) {
@@ -47904,7 +51956,9 @@
                 label: 'Called element',
                 entries: X_(
                   ((t = { element: e }),
-                  oi(t.element, 'bpmn:CallActivity') ? [{ id: 'targetProcessId', component: aO, isEdited: $A }] : [])
+                  oi(t.element, 'bpmn:CallActivity')
+                    ? [{ id: 'targetProcessId', component: aO, isEdited: $A }]
+                    : [])
                 ),
                 component: oA
               }
@@ -47919,7 +51973,12 @@
                 if (
                   !(function (e) {
                     return (
-                      ai(e, ['bpmn:UserTask', 'bpmn:SubProcess', 'bpmn:CallActivity', 'bpmn:BusinessRuleTask']) || TS(e)
+                      ai(e, [
+                        'bpmn:UserTask',
+                        'bpmn:SubProcess',
+                        'bpmn:CallActivity',
+                        'bpmn:BusinessRuleTask'
+                      ]) || TS(e)
                     )
                   })(t)
                 )
@@ -48073,7 +52132,11 @@
                                       !(!oi(e, 'bpmn:StartEvent') || !_i(e.parent))
                                     )
                                   })(t) &&
-                                  r.push({ id: 'messageSubscriptionCorrelationKey', component: $S, isEdited: $A }),
+                                  r.push({
+                                    id: 'messageSubscriptionCorrelationKey',
+                                    component: $S,
+                                    isEdited: $A
+                                  }),
                                 r
                               )
                             })({ element: t })),
@@ -48095,9 +52158,22 @@
                               var r = []
                               return (
                                 mO('timeCycle', t) || mO('timeDate', t)
-                                  ? (r.push({ id: 'timerEventDefinitionType', component: pO, isEdited: jA }),
-                                    n && r.push({ id: 'timerEventDefinitionValue', component: uO, isEdited: $A }))
-                                  : r.push({ id: 'timerEventDefinitionDurationValue', component: dO, isEdited: $A }),
+                                  ? (r.push({
+                                      id: 'timerEventDefinitionType',
+                                      component: pO,
+                                      isEdited: jA
+                                    }),
+                                    n &&
+                                      r.push({
+                                        id: 'timerEventDefinitionValue',
+                                        component: uO,
+                                        isEdited: $A
+                                      }))
+                                  : r.push({
+                                      id: 'timerEventDefinitionDurationValue',
+                                      component: dO,
+                                      isEdited: $A
+                                    }),
                                 r
                               )
                             })({ element: t })
@@ -48109,11 +52185,27 @@
                           (n.entries = X_(
                             JS({ element: t }.element)
                               ? [
-                                  { id: 'multiInstance-inputCollection', component: WS, isEdited: $A },
+                                  {
+                                    id: 'multiInstance-inputCollection',
+                                    component: WS,
+                                    isEdited: $A
+                                  },
                                   { id: 'multiInstance-inputElement', component: GS, isEdited: $A },
-                                  { id: 'multiInstance-outputCollection', component: QS, isEdited: $A },
-                                  { id: 'multiInstance-outputElement', component: KS, isEdited: $A },
-                                  { id: 'multiInstance-completionCondition', component: YS, isEdited: $A }
+                                  {
+                                    id: 'multiInstance-outputCollection',
+                                    component: QS,
+                                    isEdited: $A
+                                  },
+                                  {
+                                    id: 'multiInstance-outputElement',
+                                    component: KS,
+                                    isEdited: $A
+                                  },
+                                  {
+                                    id: 'multiInstance-completionCondition',
+                                    component: YS,
+                                    isEdited: $A
+                                  }
                                 ]
                               : []
                           ))
@@ -48196,7 +52288,11 @@
           },
           setValue: function (e) {
             var r = { 'camunda:asyncBefore': e, 'camunda:async': void 0 }
-            n.execute('element.updateModdleProperties', { element: t, moddleElement: i, properties: r })
+            n.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: i,
+              properties: r
+            })
           }
         })
       }
@@ -48469,7 +52565,10 @@
           debounce: i
         })
       }
-      var IO = { 'camunda:variableMappingClass': void 0, 'camunda:variableMappingDelegateExpression': void 0 }
+      var IO = {
+        'camunda:variableMappingClass': void 0,
+        'camunda:variableMappingDelegateExpression': void 0
+      }
       function NO(e) {
         var t = e.element,
           n = pw('commandStack'),
@@ -48510,7 +52609,10 @@
             return si(t).get('camunda:variableMappingDelegateExpression')
           },
           setValue: function (e) {
-            n.updateProperties(t, { variableMappingDelegateExpression: e || '', variableMappingClass: void 0 })
+            n.updateProperties(t, {
+              variableMappingDelegateExpression: e || '',
+              variableMappingClass: void 0
+            })
           },
           debounce: i
         })
@@ -48528,7 +52630,10 @@
             return si(t).get('camunda:variableMappingClass')
           },
           setValue: function (e) {
-            n.updateProperties(t, { variableMappingDelegateExpression: void 0, variableMappingClass: e || '' })
+            n.updateProperties(t, {
+              variableMappingDelegateExpression: void 0,
+              variableMappingClass: e || ''
+            })
           },
           debounce: i
         })
@@ -48561,9 +52666,17 @@
                       n = si(e.element).get('camunda:calledElementBinding')
                     return (
                       'version' === n
-                        ? t.splice(-1, 0, { id: 'calledElementVersion', component: TO, isEdited: $A })
+                        ? t.splice(-1, 0, {
+                            id: 'calledElementVersion',
+                            component: TO,
+                            isEdited: $A
+                          })
                         : 'versionTag' === n &&
-                          t.splice(-1, 0, { id: 'calledElementVersionTag', component: BO, isEdited: $A }),
+                          t.splice(-1, 0, {
+                            id: 'calledElementVersionTag',
+                            component: BO,
+                            isEdited: $A
+                          }),
                       t
                     )
                   })({ element: t })
@@ -48571,11 +52684,21 @@
                   X_(UO({ element: t })),
                   X_(
                     (function (e) {
-                      var t = [{ id: 'calledElementDelegateVariableMappingType', component: NO, isEdited: jA }],
+                      var t = [
+                          {
+                            id: 'calledElementDelegateVariableMappingType',
+                            component: NO,
+                            isEdited: jA
+                          }
+                        ],
                         n = VO(e.element)
                       return (
                         'class' === n
-                          ? t.push({ id: 'calledElementVariableMappingClass', component: FO, isEdited: $A })
+                          ? t.push({
+                              id: 'calledElementVariableMappingClass',
+                              component: FO,
+                              isEdited: $A
+                            })
                           : 'delegateExpression' === n &&
                             t.push({
                               id: 'calledElementVariableMappingDelegateExpression',
@@ -48600,7 +52723,11 @@
                     ]
                     return (
                       'version' === si(e.element).get('camunda:caseBinding') &&
-                        t.splice(-1, 0, { id: 'calledElementCaseVersion', component: RO, isEdited: $A }),
+                        t.splice(-1, 0, {
+                          id: 'calledElementCaseVersion',
+                          component: RO,
+                          isEdited: $A
+                        }),
                       t
                     )
                   })({ element: t })
@@ -48649,7 +52776,11 @@
       }
       function UO(e) {
         var t = [{ id: 'calledElementBusinessKey', component: WO, isEdited: CA }]
-        return KO(e.element) && t.push({ id: 'calledElementBusinessKeyExpression', component: GO, isEdited: $A }), t
+        return (
+          KO(e.element) &&
+            t.push({ id: 'calledElementBusinessKeyExpression', component: GO, isEdited: $A }),
+          t
+        )
       }
       function WO(e) {
         var t = e.element,
@@ -48713,7 +52844,11 @@
       }
       function QO(e) {
         var t = si(e)
-        return void 0 !== t.get('calledElement') ? 'bpmn' : void 0 !== t.get('camunda:caseRef') ? 'cmmn' : ''
+        return void 0 !== t.get('calledElement')
+          ? 'bpmn'
+          : void 0 !== t.get('camunda:caseRef')
+          ? 'cmmn'
+          : ''
       }
       function KO(e) {
         return void 0 !== YO(e)
@@ -48819,7 +52954,8 @@
                   n = []
                 return (
                   n.push({ id: 'conditionVariableName', component: cT, isEdited: $A }),
-                  oi(t, 'bpmn:StartEvent') || n.push({ id: 'conditionVariableEvents', component: pT, isEdited: $A }),
+                  oi(t, 'bpmn:StartEvent') ||
+                    n.push({ id: 'conditionVariableEvents', component: pT, isEdited: $A }),
                   n
                 )
               })({ element: t })
@@ -48840,13 +52976,15 @@
                       t.push({ id: 'conditionScriptType', component: aT, isEdited: jA }),
                       'script' === n
                         ? t.push({ id: 'conditionScriptValue', component: sT, isEdited: LA })
-                        : 'resource' === n && t.push({ id: 'conditionScriptResource', component: lT, isEdited: $A }),
+                        : 'resource' === n &&
+                          t.push({ id: 'conditionScriptResource', component: lT, isEdited: $A }),
                       t
                     )
                   })({ element: t })
                 )
               )
-            : 'expression' === r && n.push({ id: 'conditionExpression', component: iT, isEdited: $A }),
+            : 'expression' === r &&
+              n.push({ id: 'conditionExpression', component: iT, isEdited: $A }),
           n
         )
       }
@@ -48932,8 +53070,15 @@
             return fT(t)
           },
           setValue: function (e) {
-            var r = { body: 'script' === e ? '' : void 0, 'camunda:resource': 'resource' === e ? '' : void 0 }
-            n.execute('element.updateModdleProperties', { element: t, moddleElement: hT(t), properties: r })
+            var r = {
+              body: 'script' === e ? '' : void 0,
+              'camunda:resource': 'resource' === e ? '' : void 0
+            }
+            n.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: hT(t),
+              properties: r
+            })
           },
           getOptions: function () {
             return [
@@ -49033,7 +53178,12 @@
           debounce: i
         })
       }
-      var uT = ['bpmn:Activity', 'bpmn:ExclusiveGateway', 'bpmn:InclusiveGateway', 'bpmn:ComplexGateway']
+      var uT = [
+        'bpmn:Activity',
+        'bpmn:ExclusiveGateway',
+        'bpmn:InclusiveGateway',
+        'bpmn:ComplexGateway'
+      ]
       function dT(e) {
         return !!oi(e, 'bpmn:Event') && SP(e, 'bpmn:ConditionalEventDefinition')
       }
@@ -49043,7 +53193,11 @@
       }
       function hT(e) {
         var t = si(e)
-        return oi(t, 'bpmn:SequenceFlow') ? t.get('conditionExpression') : dT(t) ? dT(t).get('condition') : void 0
+        return oi(t, 'bpmn:SequenceFlow')
+          ? t.get('conditionExpression')
+          : dT(t)
+          ? dT(t).get('condition')
+          : void 0
       }
       function fT(e) {
         return void 0 !== hT(e).get('camunda:resource') ? 'resource' : 'script'
@@ -49051,7 +53205,10 @@
       function vT(e, t) {
         var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : void 0
         oi(e, 'bpmn:SequenceFlow')
-          ? t.execute('element.updateProperties', { element: e, properties: { conditionExpression: n } })
+          ? t.execute('element.updateProperties', {
+              element: e,
+              properties: { conditionExpression: n }
+            })
           : t.execute('element.updateModdleProperties', {
               element: e,
               moddleElement: dT(e),
@@ -49071,8 +53228,16 @@
         return (
           i.push({ id: a + 'scriptFormat', component: bT, isEdited: $A, idPrefix: a, script: n }),
           i.push({ id: a + 'scriptType', component: AT, isEdited: jA, idPrefix: a, script: n }),
-          'script' === o && i.push({ id: a + 'scriptValue', component: ET, isEdited: LA, idPrefix: a, script: n }),
-          'resource' === o && i.push({ id: a + 'scriptResource', component: xT, isEdited: $A, idPrefix: a, script: n }),
+          'script' === o &&
+            i.push({ id: a + 'scriptValue', component: ET, isEdited: LA, idPrefix: a, script: n }),
+          'resource' === o &&
+            i.push({
+              id: a + 'scriptResource',
+              component: xT,
+              isEdited: $A,
+              idPrefix: a,
+              script: n
+            }),
           i
         )
       }
@@ -49122,7 +53287,11 @@
                 (iw((n = {}), s, 'script' === e ? '' : void 0),
                 iw(n, 'camunda:resource', 'resource' === e ? '' : void 0),
                 n)
-            i.execute('element.updateModdleProperties', { element: t, moddleElement: a, properties: r })
+            i.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: a,
+              properties: r
+            })
           },
           getOptions: function () {
             return [
@@ -49187,7 +53356,11 @@
       }
       function _T(e) {
         var t = si(e)
-        return void 0 !== wT(t) ? 'script' : void 0 !== t.get('camunda:resource') ? 'resource' : void 0
+        return void 0 !== wT(t)
+          ? 'script'
+          : void 0 !== t.get('camunda:resource')
+          ? 'resource'
+          : void 0
       }
       function wT(e) {
         return e.get(CT(e))
@@ -49225,7 +53398,11 @@
         var t = 'stringOrExpression',
           n = e.get('definition')
         return (
-          void 0 !== n && (t = { 'camunda:Map': 'map', 'camunda:List': 'list', 'camunda:Script': 'script' }[n.$type]), t
+          void 0 !== n &&
+            (t = { 'camunda:Map': 'map', 'camunda:List': 'list', 'camunda:Script': 'script' }[
+              n.$type
+            ]),
+          t
         )
       }
       function jT(e, t, n, r) {
@@ -49234,7 +53411,11 @@
           a = i ? 'inputParameters' : 'outputParameters'
         return {
           cmd: 'element.updateModdleProperties',
-          context: { element: e, moddleElement: n, properties: iw({}, a, [].concat(X_(n.get(a)), [o])) }
+          context: {
+            element: e,
+            moddleElement: n,
+            properties: iw({}, a, [].concat(X_(n.get(a)), [o]))
+          }
         }
       }
       function MT(e, t, n) {
@@ -49253,7 +53434,11 @@
             ((a = JP('camunda:InputOutput', { inputParameters: [], outputParameters: [] }, o, n)),
             r.push({
               cmd: 'element.updateModdleProperties',
-              context: { element: e, moddleElement: o, properties: { values: [].concat(X_(o.get('values')), [a]) } }
+              context: {
+                element: e,
+                moddleElement: o,
+                properties: { values: [].concat(X_(o.get('values')), [a]) }
+              }
             })),
           r.push(jT(e, t, a, n)),
           r
@@ -49329,7 +53514,11 @@
             return IT(r) ? a[r.$type] : r.get('value')
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { value: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { value: e }
+            })
           }
         })
       }
@@ -49427,7 +53616,11 @@
             return n.get('key')
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: t, moddleElement: n, properties: { key: e } })
+            i.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: n,
+              properties: { key: e }
+            })
           },
           debounce: a
         })
@@ -49449,7 +53642,11 @@
             return HT(s) ? l[s.$type] : n.get('value')
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: t, moddleElement: n, properties: { value: e } })
+            i.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: n,
+              properties: { value: e }
+            })
           },
           disabled: HT(s),
           debounce: a
@@ -49479,14 +53676,21 @@
             { id: t + '-type', component: GT, isEdited: jA, idPrefix: t, parameter: r }
           ]
         if ('stringOrExpression' === i)
-          o.push({ id: t + '-stringOrExpression', component: QT, isEdited: LA, idPrefix: t, parameter: r })
+          o.push({
+            id: t + '-stringOrExpression',
+            component: QT,
+            isEdited: LA,
+            idPrefix: t,
+            parameter: r
+          })
         else if ('script' === i) {
           var a = r.get('definition')
           o = [].concat(X_(o), X_(yT({ element: n, prefix: t + '-', script: a })))
         } else
           'list' === i
             ? o.push({ id: ''.concat(t, '-list'), component: RT, idPrefix: t, parameter: r })
-            : 'map' === i && o.push({ id: ''.concat(t, '-map'), component: LT, idPrefix: t, parameter: r })
+            : 'map' === i &&
+              o.push({ id: ''.concat(t, '-map'), component: LT, idPrefix: t, parameter: r })
         return o
       }
       function WT(e) {
@@ -49504,7 +53708,11 @@
             return e.get('name')
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { name: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { name: e }
+            })
           },
           debounce: a
         })
@@ -49533,7 +53741,11 @@
               : 'list' === e
               ? (t.definition = s('camunda:List'))
               : 'map' === e && (t.definition = s('camunda:Map')),
-              o.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: t })
+              o.execute('element.updateModdleProperties', {
+                element: n,
+                moddleElement: r,
+                properties: t
+              })
           },
           getOptions: function () {
             return [
@@ -49561,7 +53773,11 @@
             return e.get('value')
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { value: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { value: e }
+            })
           },
           rows: 1,
           debounce: a
@@ -49723,14 +53939,43 @@
       function cB(e) {
         var t = e.idPrefix,
           n = e.errorEventDefinition,
-          r = [{ id: t + '-errorRef', component: pB, isEdited: jA, errorEventDefinition: n, idPrefix: t }],
+          r = [
+            {
+              id: t + '-errorRef',
+              component: pB,
+              isEdited: jA,
+              errorEventDefinition: n,
+              idPrefix: t
+            }
+          ],
           i = n.get('errorRef')
         return (
           i &&
             (r = [].concat(X_(r), [
-              { id: t + '-errorName', component: uB, isEdited: $A, error: i, errorEventDefinition: n, idPrefix: t },
-              { id: t + '-errorCode', component: dB, isEdited: $A, error: i, errorEventDefinition: n, idPrefix: t },
-              { id: t + '-errorMessage', component: mB, isEdited: $A, error: i, errorEventDefinition: n, idPrefix: t }
+              {
+                id: t + '-errorName',
+                component: uB,
+                isEdited: $A,
+                error: i,
+                errorEventDefinition: n,
+                idPrefix: t
+              },
+              {
+                id: t + '-errorCode',
+                component: dB,
+                isEdited: $A,
+                error: i,
+                errorEventDefinition: n,
+                idPrefix: t
+              },
+              {
+                id: t + '-errorMessage',
+                component: mB,
+                isEdited: $A,
+                error: i,
+                errorEventDefinition: n,
+                idPrefix: t
+              }
             ])),
           r.push({ id: t + '-expression', component: hB, errorEventDefinition: n, idPrefix: t }),
           r
@@ -49965,7 +54210,11 @@
             return r.name
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { name: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { name: e }
+            })
           },
           debounce: a
         })
@@ -49985,7 +54234,11 @@
             return r.value
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { value: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { value: e }
+            })
           },
           debounce: a
         })
@@ -50010,7 +54263,11 @@
               var s = si(n).get('extensionElements')
               i.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: n, moddleElement: s, properties: { values: Zy(s.get('values'), o) } }
+                context: {
+                  element: n,
+                  moddleElement: s,
+                  properties: { values: Zy(s.get('values'), o) }
+                }
               })
             }
             t.execute('properties-panel.multi-command-executor', i)
@@ -50037,12 +54294,20 @@
             ((s = JP('camunda:Properties', { values: [] }, a, t)),
             i.push({
               cmd: 'element.updateModdleProperties',
-              context: { element: r, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+              context: {
+                element: r,
+                moddleElement: a,
+                properties: { values: [].concat(X_(a.get('values')), [s]) }
+              }
             }))
           var l = JP('camunda:Property', {}, s, t)
           i.push({
             cmd: 'element.updateModdleProperties',
-            context: { element: r, moddleElement: s, properties: { values: [].concat(X_(s.get('values')), [l]) } }
+            context: {
+              element: r,
+              moddleElement: s,
+              properties: { values: [].concat(X_(s.get('values')), [l]) }
+            }
           }),
             n.execute('properties-panel.multi-command-executor', i)
         }
@@ -50118,7 +54383,11 @@
             return e.name
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { name: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { name: e }
+            })
           },
           debounce: a
         })
@@ -50138,7 +54407,12 @@
           },
           setValue: function (e) {
             var t = Object.assign({}, OB)
-            ;(t[e] = ''), i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: t })
+            ;(t[e] = ''),
+              i.execute('element.updateModdleProperties', {
+                element: n,
+                moddleElement: r,
+                properties: t
+              })
           },
           getOptions: function (e) {
             return [
@@ -50166,14 +54440,20 @@
             var t = DB(r),
               o = Object.assign({}, OB)
             ;(o[t] = e || ''),
-              i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: o })
+              i.execute('element.updateModdleProperties', {
+                element: n,
+                moddleElement: r,
+                properties: o
+              })
           },
           debounce: a
         })
       }
       function DB(e) {
         return (
-          ('string' in e ? 'string' : 'expression' in e && 'expression') || ('stringValue' in e && 'string') || 'string'
+          ('string' in e ? 'string' : 'expression' in e && 'expression') ||
+          ('stringValue' in e && 'string') ||
+          'string'
         )
       }
       function RB(e) {
@@ -50224,7 +54504,11 @@
             return r.name
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { name: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { name: e }
+            })
           },
           debounce: a
         })
@@ -50244,7 +54528,11 @@
             return r.config
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { config: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { config: e }
+            })
           },
           debounce: a
         })
@@ -50273,7 +54561,11 @@
             return r.id
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { id: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { id: e }
+            })
           },
           debounce: a
         })
@@ -50293,7 +54585,11 @@
             return r.value
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { value: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { value: e }
+            })
           },
           debounce: a
         })
@@ -50322,7 +54618,11 @@
             return r.id
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { id: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { id: e }
+            })
           },
           debounce: a
         })
@@ -50342,7 +54642,11 @@
             return r.name
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { name: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { name: e }
+            })
           },
           debounce: a
         })
@@ -50360,7 +54664,8 @@
           GB.includes(n.get('type')) ||
             r.push({ id: t + '-formFieldCustomType', component: XB, idPrefix: t, formField: n }),
           r.push({ id: t + '-formFieldDefaultValue', component: ZB, idPrefix: t, formField: n }),
-          'enum' === n.get('type') && r.push({ id: t + '-formFieldValues', component: tj, formField: n, idPrefix: t }),
+          'enum' === n.get('type') &&
+            r.push({ id: t + '-formFieldValues', component: tj, formField: n, idPrefix: t }),
           r.push(
             { id: t + '-formFieldConstraints', component: rj, formField: n, idPrefix: t },
             { id: t + '-formFieldProperties', component: oj, formField: n, idPrefix: t }
@@ -50384,7 +54689,11 @@
             return r.get('id')
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { id: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { id: e }
+            })
           },
           debounce: a
         })
@@ -50404,7 +54713,11 @@
             return r.get('label')
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { label: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { label: e }
+            })
           },
           debounce: a
         })
@@ -50424,7 +54737,11 @@
             return GB.includes(e) ? e : ''
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { type: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { type: e }
+            })
           },
           getOptions: function () {
             var e = [
@@ -50455,7 +54772,11 @@
           },
           setValue: function (e) {
             var t = e || ''
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { type: t } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { type: t }
+            })
           },
           debounce: a
         })
@@ -50562,7 +54883,9 @@
           p = (c && c.get('constraints')) || []
         return Db(kA, {
           element: t,
-          autoFocusEntry: '[data-entry-id="'.concat(i, '-constraint-').concat(p.length - 1, '"] input'),
+          autoFocusEntry: '[data-entry-id="'
+            .concat(i, '-constraint-')
+            .concat(p.length - 1, '"] input'),
           id: i,
           label: s('Constraints'),
           items: p,
@@ -50650,7 +54973,11 @@
             var r = JP('camunda:Property', { id: void 0, value: void 0 }, c, o)
             e.push({
               cmd: 'element.updateModdleProperties',
-              context: { element: t, moddleElement: c, properties: { values: [].concat(X_(c.get('values')), [r]) } }
+              context: {
+                element: t,
+                moddleElement: c,
+                properties: { values: [].concat(X_(c.get('values')), [r]) }
+              }
             }),
               a.execute('properties-panel.multi-command-executor', e)
           },
@@ -50674,7 +55001,11 @@
             a = JP('camunda:FormField', {}, o, t)
           i.push({
             cmd: 'element.updateModdleProperties',
-            context: { element: r, moddleElement: o, properties: { fields: [].concat(X_(o.get('fields')), [a]) } }
+            context: {
+              element: r,
+              moddleElement: o,
+              properties: { fields: [].concat(X_(o.get('fields')), [a]) }
+            }
           }),
             n.execute('properties-panel.multi-command-executor', i)
         }
@@ -50689,7 +55020,11 @@
             o = cj(n)
           if (o && o.length) {
             var a = Zy(i.get('fields'), r)
-            t.execute('element.updateModdleProperties', { element: n, moddleElement: i, properties: { fields: a } })
+            t.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: i,
+              properties: { fields: a }
+            })
           }
         }
       }
@@ -50700,7 +55035,11 @@
         var t = lj(si(e))
         return t && t.fields
       }
-      var pj = { 'camunda:formRef': void 0, 'camunda:formRefBinding': void 0, 'camunda:formRefVersion': void 0 },
+      var pj = {
+          'camunda:formRef': void 0,
+          'camunda:formRefBinding': void 0,
+          'camunda:formRefVersion': void 0
+        },
         uj = { 'camunda:formKey': void 0 }
       function dj(e) {
         var t = e.element,
@@ -50736,7 +55075,11 @@
                   mj(e) &&
                   i.push({
                     cmd: 'element.updateModdleProperties',
-                    context: { element: e, moddleElement: r, properties: { values: Zy(r.get('values'), mj(e)) } }
+                    context: {
+                      element: e,
+                      moddleElement: r,
+                      properties: { values: Zy(r.get('values'), mj(e)) }
+                    }
                   }),
                 i
               )
@@ -50751,7 +55094,11 @@
               var s = JP('camunda:FormData', { fields: [] }, a, r)
               n.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: t, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [s]) } }
+                context: {
+                  element: t,
+                  moddleElement: a,
+                  properties: { values: [].concat(X_(a.get('values')), [s]) }
+                }
               })
             } else
               'formKey' === e
@@ -50786,13 +55133,20 @@
         var t = e.element
         if (
           !(function (e) {
-            return (oi(e, 'bpmn:StartEvent') && !oi(e.parent, 'bpmn:SubProcess')) || oi(e, 'bpmn:UserTask')
+            return (
+              (oi(e, 'bpmn:StartEvent') && !oi(e.parent, 'bpmn:SubProcess')) ||
+              oi(e, 'bpmn:UserTask')
+            )
           })(t)
         )
           return []
         var n = (function (e) {
             var t = si(e)
-            return Hy(t.get('camunda:formKey')) ? 'formKey' : Hy(t.get('camunda:formRef')) ? 'formRef' : void 0
+            return Hy(t.get('camunda:formKey'))
+              ? 'formKey'
+              : Hy(t.get('camunda:formRef'))
+              ? 'formRef'
+              : void 0
           })(t),
           r = hj(t),
           i = X_([{ id: 'formType', component: dj, isEdited: jA }])
@@ -50961,7 +55315,11 @@
                 'camunda:decisionRefVersionTag': void 0,
                 'camunda:decisionRefBinding': e
               }
-            n.execute('element.updateModdleProperties', { element: t, moddleElement: r, properties: i })
+            n.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: r,
+              properties: i
+            })
           },
           getOptions: function () {
             return [
@@ -51139,11 +55497,15 @@
               s = Bj,
               l = o.get('extensionElements')
             if (
-              (Vj(e) && (s = rw(rw({}, s), {}, iw({}, e, Vj(i) ? o.get('camunda:'.concat(i)) : ''))),
-              JT(o) && ((s = rw(rw({}, s), jj)), 'dmn' === e && (s = rw(rw({}, s), {}, { 'camunda:decisionRef': '' }))),
+              (Vj(e) &&
+                (s = rw(rw({}, s), {}, iw({}, e, Vj(i) ? o.get('camunda:'.concat(i)) : ''))),
+              JT(o) &&
+                ((s = rw(rw({}, s), jj)),
+                'dmn' === e && (s = rw(rw({}, s), {}, { 'camunda:decisionRef': '' }))),
               XT(o) &&
                 ((s = rw(rw({}, s), Mj)),
-                'external' === e && (s = rw(rw({}, s), {}, { 'camunda:type': 'external', 'camunda:topic': '' }))),
+                'external' === e &&
+                  (s = rw(rw({}, s), {}, { 'camunda:type': 'external', 'camunda:topic': '' }))),
               YT(o))
             ) {
               var c = (function (e) {
@@ -51166,11 +55528,16 @@
                 'connector' === e)
               ) {
                 l ||
-                  ((l = JP('bpmn:ExtensionElements', { values: [] }, o, n)), a.push(qj(t, o, { extensionElements: l })))
+                  ((l = JP('bpmn:ExtensionElements', { values: [] }, o, n)),
+                  a.push(qj(t, o, { extensionElements: l })))
                 var p = JP('camunda:Connector', {}, l, n)
                 a.push({
                   cmd: 'element.updateModdleProperties',
-                  context: { element: t, moddleElement: l, properties: { values: [].concat(X_(l.get('values')), [p]) } }
+                  context: {
+                    element: t,
+                    moddleElement: l,
+                    properties: { values: [].concat(X_(l.get('values')), [p]) }
+                  }
                 })
               }
             }
@@ -51211,7 +55578,10 @@
         return ['class', 'expression', 'delegateExpression'].includes(e)
       }
       function qj(e, t, n) {
-        return { cmd: 'element.updateModdleProperties', context: { element: e, moddleElement: t, properties: n } }
+        return {
+          cmd: 'element.updateModdleProperties',
+          context: { element: e, moddleElement: t, properties: n }
+        }
       }
       function Hj(e) {
         var t = e.element
@@ -51241,8 +55611,10 @@
                       'dmn' !== r ||
                         (n.push({ id: 'decisionRef', component: xj, isEdited: $A }),
                         n.push({ id: 'decisionRefBinding', component: _j, isEdited: jA }),
-                        'version' === i && n.push({ id: 'decisionRefVersion', component: wj, isEdited: $A }),
-                        'versionTag' === i && n.push({ id: 'decisionRefVersionTag', component: Cj, isEdited: $A }),
+                        'version' === i &&
+                          n.push({ id: 'decisionRefVersion', component: wj, isEdited: $A }),
+                        'versionTag' === i &&
+                          n.push({ id: 'decisionRefVersionTag', component: Cj, isEdited: $A }),
                         n.push({ id: 'decisionRefTenantId', component: Pj, isEdited: $A }),
                         n.push({ id: 'decisionRefResultVariable', component: kj, isEdited: $A }),
                         Tj(t) && n.push({ id: 'mapDecisionResult', component: Sj, isEdited: jA })),
@@ -51440,12 +55812,16 @@
         var t = e.element
         if (
           !(function (e) {
-            return jP(e) ? ai(e, ['bpmn:IntermediateThrowEvent', 'bpmn:EndEvent']) : oi(e, 'bpmn:CallActivity')
+            return jP(e)
+              ? ai(e, ['bpmn:IntermediateThrowEvent', 'bpmn:EndEvent'])
+              : oi(e, 'bpmn:CallActivity')
           })(t)
         )
           return []
         var n = [{ id: 'inMapping-propagation', component: Zj, isEdited: CA }]
-        return nM(t) && n.push({ id: 'inMapping-propagation-local', component: eM, isEdited: CA }), n
+        return (
+          nM(t) && n.push({ id: 'inMapping-propagation-local', component: eM, isEdited: CA }), n
+        )
       }
       function Zj(e) {
         var t = e.element,
@@ -51460,7 +55836,9 @@
           setValue: function (e) {
             var i, o
             e
-              ? ((i = jP(t) || si(t)), (o = JP('camunda:In', { variables: 'all' }, null, r)), rS(t, i, o, r, n))
+              ? ((i = jP(t) || si(t)),
+                (o = JP('camunda:In', { variables: 'all' }, null, r)),
+                rS(t, i, o, r, n))
               : (function () {
                   var e = jP(t) || si(t),
                     r = tM(t)
@@ -51482,7 +55860,11 @@
             return i.get('camunda:local')
           },
           setValue: function (e) {
-            n.execute('element.updateModdleProperties', { element: t, moddleElement: i, properties: { local: e } })
+            n.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: i,
+              properties: { local: e }
+            })
           }
         })
       }
@@ -51510,7 +55892,8 @@
         return (
           i.push({ id: t + '-type', component: oM, idPrefix: t, mapping: n }),
           'source' === r && i.push({ id: t + '-source', component: aM, idPrefix: t, mapping: n }),
-          'sourceExpression' === r && i.push({ id: t + '-sourceExpression', component: sM, idPrefix: t, mapping: n }),
+          'sourceExpression' === r &&
+            i.push({ id: t + '-sourceExpression', component: sM, idPrefix: t, mapping: n }),
           i.push({ id: t + '-target', component: lM, idPrefix: t, mapping: n }),
           i.push({ id: t + '-local', component: cM, idPrefix: t, mapping: n }),
           i
@@ -51531,7 +55914,11 @@
           },
           setValue: function (e) {
             var t = rw(rw({}, rM), {}, iw({}, e, ''))
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: t })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: t
+            })
           },
           getOptions: function () {
             return [
@@ -51556,7 +55943,11 @@
             return e.get('camunda:source')
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { source: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { source: e }
+            })
           },
           debounce: a
         })
@@ -51600,7 +55991,11 @@
             return e.get('camunda:target')
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { target: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { target: e }
+            })
           },
           debounce: a
         })
@@ -51619,13 +56014,22 @@
             return r.get('camunda:local')
           },
           setValue: function (e) {
-            i.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: { local: e } })
+            i.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: { local: e }
+            })
           }
         })
       }
       function pM(e) {
         var t = ''
-        return void 0 !== e.source ? (t = 'source') : void 0 !== e.sourceExpression && (t = 'sourceExpression'), t
+        return (
+          void 0 !== e.source
+            ? (t = 'source')
+            : void 0 !== e.sourceExpression && (t = 'sourceExpression'),
+          t
+        )
       }
       function uM(e) {
         var t = e.commandStack,
@@ -51730,7 +56134,11 @@
               ((s = JP('camunda:FailedJobRetryTimeCycle', {}, o, n)),
               i.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: t, moddleElement: o, properties: { values: [].concat(X_(o.get('values')), [s]) } }
+                context: {
+                  element: t,
+                  moddleElement: o,
+                  properties: { values: [].concat(X_(o.get('values')), [s]) }
+                }
               })),
               i.push({
                 cmd: 'element.updateModdleProperties',
@@ -51818,7 +56226,11 @@
           },
           setValue: function (e) {
             var r = { 'camunda:asyncBefore': e, 'camunda:async': void 0 }
-            n.execute('element.updateModdleProperties', { element: t, moddleElement: i, properties: r })
+            n.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: i,
+              properties: r
+            })
           }
         })
       }
@@ -51893,7 +56305,11 @@
               ((s = JP('camunda:FailedJobRetryTimeCycle', {}, o, n)),
               i.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: a, moddleElement: o, properties: { values: [].concat(X_(o.get('values')), [s]) } }
+                context: {
+                  element: a,
+                  moddleElement: o,
+                  properties: { values: [].concat(X_(o.get('values')), [s]) }
+                }
               })),
               i.push({
                 cmd: 'element.updateModdleProperties',
@@ -51929,7 +56345,9 @@
         )
           return []
         var n = [{ id: 'outMapping-propagation', component: BM, isEdited: CA }]
-        return DM(t) && n.push({ id: 'outMapping-propagation-local', component: jM, isEdited: CA }), n
+        return (
+          DM(t) && n.push({ id: 'outMapping-propagation-local', component: jM, isEdited: CA }), n
+        )
       }
       function BM(e) {
         var t = e.element,
@@ -51944,7 +56362,9 @@
           setValue: function (e) {
             var i, o
             e
-              ? ((i = si(t)), (o = JP('camunda:Out', { variables: 'all' }, null, r)), rS(t, i, o, r, n))
+              ? ((i = si(t)),
+                (o = JP('camunda:Out', { variables: 'all' }, null, r)),
+                rS(t, i, o, r, n))
               : (function () {
                   var e = si(t),
                     r = MM(t)
@@ -51966,7 +56386,11 @@
             return i.get('camunda:local')
           },
           setValue: function (e) {
-            n.execute('element.updateModdleProperties', { element: t, moddleElement: i, properties: { local: e } })
+            n.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: i,
+              properties: { local: e }
+            })
           }
         })
       }
@@ -52025,14 +56449,30 @@
           n = e.commandStack,
           r = e.element
         return function (e) {
-          e.stopPropagation(), n.execute('properties-panel.multi-command-executor', MT(r, 'camunda:OutputParameter', t))
+          e.stopPropagation(),
+            n.execute(
+              'properties-panel.multi-command-executor',
+              MT(r, 'camunda:OutputParameter', t)
+            )
         }
       }
-      var LM = ['bpmn:Activity', 'bpmn:Event', 'bpmn:Gateway', 'bpmn:SequenceFlow', 'bpmn:Process', 'bpmn:Participant'],
+      var LM = [
+          'bpmn:Activity',
+          'bpmn:Event',
+          'bpmn:Gateway',
+          'bpmn:SequenceFlow',
+          'bpmn:Process',
+          'bpmn:Participant'
+        ],
         FM = rw(
-          rw(rw(rw({}, { script: void 0, resource: void 0, scriptFormat: void 0 }), { class: void 0 }), {
-            expression: void 0
-          }),
+          rw(
+            rw(rw({}, { script: void 0, resource: void 0, scriptFormat: void 0 }), {
+              class: void 0
+            }),
+            {
+              expression: void 0
+            }
+          ),
           { delegateExpression: void 0 }
         ),
         VM = { eventDefinitions: void 0, event: void 0 },
@@ -52112,12 +56552,20 @@
             var t = (function (e, t) {
               switch (e) {
                 case 'timeout':
-                  return rw(rw({}, VM), {}, { eventDefinitions: [t.create('bpmn:TimerEventDefinition')], event: e })
+                  return rw(
+                    rw({}, VM),
+                    {},
+                    { eventDefinitions: [t.create('bpmn:TimerEventDefinition')], event: e }
+                  )
                 default:
                   return rw(rw({}, VM), {}, { event: e })
               }
             })(e, o)
-            a.execute('element.updateModdleProperties', { element: n, moddleElement: r, properties: t })
+            a.execute('element.updateModdleProperties', {
+              element: n,
+              moddleElement: r,
+              properties: t
+            })
           },
           getOptions: function () {
             return oi(r, 'camunda:TaskListener')
@@ -52292,7 +56740,11 @@
         return eB(e)
       }
       function nD(e, t) {
-        return 'camunda:TaskListener' === t ? 'create' : oi(e, 'bpmn:SequenceFlow') ? 'take' : 'start'
+        return 'camunda:TaskListener' === t
+          ? 'create'
+          : oi(e, 'bpmn:SequenceFlow')
+          ? 'take'
+          : 'start'
       }
       function rD(e, t) {
         return ''.concat(e, '-').concat(t)
@@ -52314,7 +56766,10 @@
         if (
           !(function (e) {
             var t = si(e)
-            return ai(e, ['bpmn:Process', 'bpmn:SubProcess']) || (oi(e, 'bpmn:Participant') && t.get('processRef'))
+            return (
+              ai(e, ['bpmn:Process', 'bpmn:SubProcess']) ||
+              (oi(e, 'bpmn:Participant') && t.get('processRef'))
+            )
           })(t)
         )
           return null
@@ -52400,7 +56855,11 @@
             : o
           ).map(function (e, n) {
             var r = t.id + '-variable-' + n
-            return { id: r, label: e.name, entries: X_(sD({ idPrefix: r, multiScope: s, variable: e })) }
+            return {
+              id: r,
+              label: e.name,
+              entries: X_(sD({ idPrefix: r, multiScope: s, variable: e }))
+            }
           }),
           shouldSort: !1
         }
@@ -52758,7 +57217,12 @@
           return n.entries.length ? n : null
         },
         function (e) {
-          var t = { label: 'Forms', id: 'CamundaPlatform__Form', component: oA, entries: X_(fj({ element: e })) }
+          var t = {
+            label: 'Forms',
+            id: 'CamundaPlatform__Form',
+            component: oA,
+            entries: X_(fj({ element: e }))
+          }
           return t.entries.length ? t : null
         },
         function (e, t) {
@@ -52770,7 +57234,11 @@
               if (
                 (function (e) {
                   var t = lj(e)
-                  return ((oi(e, 'bpmn:StartEvent') && !oi(e.parent, 'bpmn:SubProcess')) || oi(e, 'bpmn:UserTask')) && t
+                  return (
+                    ((oi(e, 'bpmn:StartEvent') && !oi(e.parent, 'bpmn:SubProcess')) ||
+                      oi(e, 'bpmn:UserTask')) &&
+                    t
+                  )
                 })(t)
               ) {
                 var r = cj(t) || [],
@@ -52834,7 +57302,12 @@
           return t.entries.length ? t : null
         },
         function (e) {
-          var t = { label: 'Script', id: 'CamundaPlatform__Script', component: oA, entries: X_(uD({ element: e })) }
+          var t = {
+            label: 'Script',
+            id: 'CamundaPlatform__Script',
+            component: oA,
+            entries: X_(uD({ element: e }))
+          }
           return t.entries.length ? t : null
         },
         function (e) {
@@ -52890,7 +57363,9 @@
                 n = e.injector
               if (
                 !(function (e) {
-                  return jP(e) ? ai(e, ['bpmn:IntermediateThrowEvent', 'bpmn:EndEvent']) : oi(e, 'bpmn:CallActivity')
+                  return jP(e)
+                    ? ai(e, ['bpmn:IntermediateThrowEvent', 'bpmn:EndEvent'])
+                    : oi(e, 'bpmn:CallActivity')
                 })(t)
               )
                 return null
@@ -52948,7 +57423,10 @@
                 }),
                 add: function (e) {
                   e.stopPropagation(),
-                    o.execute('properties-panel.multi-command-executor', MT(t, 'camunda:InputParameter', i))
+                    o.execute(
+                      'properties-panel.multi-command-executor',
+                      MT(t, 'camunda:InputParameter', i)
+                    )
                 }
               }
             })({ element: e, injector: t })
@@ -52981,7 +57459,12 @@
                   var n = [],
                     a = kT(r)
                   a ||
-                    ((a = JP('camunda:InputOutput', { inputParameters: [], outputParameters: [] }, r, o)),
+                    ((a = JP(
+                      'camunda:InputOutput',
+                      { inputParameters: [], outputParameters: [] },
+                      r,
+                      o
+                    )),
                     n.push({
                       cmd: 'element.updateModdleProperties',
                       context: { element: t, moddleElement: r, properties: { inputOutput: a } }
@@ -53099,7 +57582,12 @@
                   var n = [],
                     a = kT(r)
                   a ||
-                    ((a = JP('camunda:InputOutput', { inputParameters: [], outputParameters: [] }, r, o)),
+                    ((a = JP(
+                      'camunda:InputOutput',
+                      { inputParameters: [], outputParameters: [] },
+                      r,
+                      o
+                    )),
                     n.push({
                       cmd: 'element.updateModdleProperties',
                       context: { element: t, moddleElement: r, properties: { inputOutput: a } }
@@ -53123,7 +57611,11 @@
         },
         function (e, t) {
           var n = rw(
-            { label: 'Execution listeners', id: 'CamundaPlatform__ExecutionListener', component: gA },
+            {
+              label: 'Execution listeners',
+              id: 'CamundaPlatform__ExecutionListener',
+              component: gA
+            },
             (function (e) {
               var t = e.element,
                 n = e.injector
@@ -53153,7 +57645,11 @@
         },
         function (e, t) {
           var n = rw(
-            { label: 'Extension properties', id: 'CamundaPlatform__ExtensionProperties', component: gA },
+            {
+              label: 'Extension properties',
+              id: 'CamundaPlatform__ExtensionProperties',
+              component: gA
+            },
             (function (e) {
               var t = e.element,
                 n = e.injector,
@@ -53240,7 +57736,12 @@
           return t.entries.length ? t : null
         },
         function (e) {
-          var t = { label: 'Tasklist', id: 'CamundaPlatform__Tasklist', component: oA, entries: X_(mD({ element: e })) }
+          var t = {
+            label: 'Tasklist',
+            id: 'CamundaPlatform__Tasklist',
+            component: oA,
+            entries: X_(mD({ element: e }))
+          }
           return t.entries.length ? t : null
         }
       ]
@@ -53340,7 +57841,10 @@
           var n = e.value
           if (!t.scriptFormat) return n === t.source
           var r = e.get('camunda:definition')
-          return !(!r || t.scriptFormat !== r.get('camunda:scriptFormat')) && r.get('camunda:value') === t.source
+          return (
+            !(!r || t.scriptFormat !== r.get('camunda:scriptFormat')) &&
+            r.get('camunda:value') === t.source
+          )
         })
       }
       function ID(e, t) {
@@ -53388,7 +57892,8 @@
                               (function (e) {
                                 var t = e.element,
                                   n = si(t)
-                                return oi(t, 'bpmn:Process') || (oi(t, 'bpmn:Participant') && n.get('processRef'))
+                                return oi(t, 'bpmn:Process') ||
+                                  (oi(t, 'bpmn:Participant') && n.get('processRef'))
                                   ? [{ id: 'versionTag', component: ED, isEdited: $A }]
                                   : []
                               })({ element: t })
@@ -53450,7 +57955,11 @@
                             (i.push(
                               { id: 'collection', component: bM, isEdited: $A },
                               { id: 'elementVariable', component: AM, isEdited: $A },
-                              { id: 'multiInstanceAsynchronousBefore', component: EM, isEdited: CA },
+                              {
+                                id: 'multiInstanceAsynchronousBefore',
+                                component: EM,
+                                isEdited: CA
+                              },
                               { id: 'multiInstanceAsynchronousAfter', component: xM, isEdited: CA }
                             ),
                             (SM((t = r)) || kM(t)) &&
@@ -53521,7 +58030,9 @@
             {
               key: 'getAll',
               value: function (e) {
-                return !qy(e) && this._templates[e] ? nb(this._templates[e]) : Ly(nb(this._templates).map(nb))
+                return !qy(e) && this._templates[e]
+                  ? nb(this._templates[e])
+                  : Ly(nb(this._templates).map(nb))
               }
             },
             {
@@ -53555,7 +58066,9 @@
               key: 'applyTemplate',
               value: function (e, t) {
                 var n = { element: e, newTemplate: t, oldTemplate: this.get(e) }
-                return this._commandStack.execute('propertiesPanel.camunda.changeTemplate', n), n.element
+                return (
+                  this._commandStack.execute('propertiesPanel.camunda.changeTemplate', n), n.element
+                )
               }
             }
           ]),
@@ -53568,7 +58081,12 @@
         var t = Q_(n)
         function n(e, r) {
           var i
-          return Z_(this, n), ((i = t.call(this, r))._commandStack = r), (i._templateElementFactory = e), i
+          return (
+            Z_(this, n),
+            ((i = t.call(this, r))._commandStack = r),
+            (i._templateElementFactory = e),
+            i
+          )
         }
         return (
           tw(n, [
@@ -53598,7 +58116,9 @@
               key: 'applyTemplate',
               value: function (e, t) {
                 var n = { element: e, newTemplate: t, oldTemplate: this.get(e) }
-                return this._commandStack.execute('propertiesPanel.zeebe.changeTemplate', n), n.element
+                return (
+                  this._commandStack.execute('propertiesPanel.zeebe.changeTemplate', n), n.element
+                )
               }
             }
           ]),
@@ -53621,7 +58141,9 @@
               {
                 key: 'addAll',
                 value: function (e) {
-                  return $y(e) ? e.forEach(this.add, this) : this._logError('templates must be []'), this
+                  return (
+                    $y(e) ? e.forEach(this.add, this) : this._logError('templates must be []'), this
+                  )
                 }
               },
               {
@@ -53657,7 +58179,10 @@
                   if (this._templatesById[r] && this._templatesById[r][i])
                     return '_' === i
                       ? this._logError('template id <'.concat(r, '> already used'), e)
-                      : this._logError('template id <'.concat(r, '> and version <').concat(i, '> already used'), e)
+                      : this._logError(
+                          'template id <'.concat(r, '> and version <').concat(i, '> already used'),
+                          e
+                        )
                   var a = this._validateElementType(e)
                   if (a) return a
                   var s = ex(e, BE),
@@ -53684,14 +58209,20 @@
                         return t._isType(n, e)
                       })
                     )
-                      return this._logError('template does not apply to requested element type <'.concat(n, '>'), e)
+                      return this._logError(
+                        'template does not apply to requested element type <'.concat(n, '>'),
+                        e
+                      )
                     var i,
                       o = J_(r)
                     try {
                       for (o.s(); !(i = o.n()).done; ) {
                         var a = i.value
                         if (!this._canMorph(a, n))
-                          return this._logError('can not morph <'.concat(a, '> into <').concat(n, '>'), e)
+                          return this._logError(
+                            'can not morph <'.concat(a, '> into <').concat(n, '>'),
+                            e
+                          )
                       }
                     } catch (e) {
                       o.e(e)
@@ -53791,7 +58322,10 @@
                   if (this._templatesById[r] && this._templatesById[r][i])
                     return '_' === i
                       ? this._logError('template id <'.concat(r, '> already used'), e)
-                      : this._logError('template id <'.concat(r, '> and version <').concat(i, '> already used'), e)
+                      : this._logError(
+                          'template id <'.concat(r, '> and version <').concat(i, '> already used'),
+                          e
+                        )
                   var s = this._validateElementType(e)
                   if (s) return s
                   var l = ex(e, nx),
@@ -54009,7 +58543,11 @@
       oR.$inject = ['elementTemplates', 'injector']
       var dR = (function () {
         function e(t, n, r, i) {
-          Z_(this, e), (this._bpmnFactory = t), (this._bpmnReplace = n), (this._commandStack = r), (this._modeling = i)
+          Z_(this, e),
+            (this._bpmnFactory = t),
+            (this._bpmnReplace = n),
+            (this._commandStack = r),
+            (this._modeling = i)
         }
         return (
           tw(e, [
@@ -54077,7 +58615,11 @@
                       l = {}
                     ;(i && fR(o, i)) ||
                       ((l[a] = s),
-                      r.execute('element.updateModdleProperties', { element: e, moddleElement: o, properties: l }))
+                      r.execute('element.updateModdleProperties', {
+                        element: e,
+                        moddleElement: o,
+                        properties: l
+                      }))
                   })
                 }
               }
@@ -54104,7 +58646,11 @@
                       if (!fR(p, s)) {
                         var m = {}
                         'zeebe:taskDefinition:type' === c && (m = { type: u }),
-                          i.execute('element.updateModdleProperties', { element: e, moddleElement: p, properties: m })
+                          i.execute('element.updateModdleProperties', {
+                            element: e,
+                            moddleElement: p,
+                            properties: m
+                          })
                       }
                     } else 'zeebe:taskDefinition:type' === d && (o = cR(u, r)), i.execute('element.updateModdleProperties', { element: e, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [o]) } })
                   })
@@ -54131,8 +58677,12 @@
                       properties: { values: [].concat(X_(a.get('values')), [s]) }
                     }))
                   var l,
-                    c = s.get('zeebe:inputParameters') ? s.get('zeebe:inputParameters').slice() : [],
-                    p = s.get('zeebe:outputParameters') ? s.get('zeebe:outputParameters').slice() : []
+                    c = s.get('zeebe:inputParameters')
+                      ? s.get('zeebe:inputParameters').slice()
+                      : [],
+                    p = s.get('zeebe:outputParameters')
+                      ? s.get('zeebe:outputParameters').slice()
+                      : []
                   o.forEach(function (n) {
                     var o,
                       u,
@@ -54145,7 +58695,11 @@
                       ? ((pR(h, n) || fR(m, d)) && (oi(m, 'zeebe:Input') ? vR(c, m) : vR(p, m)),
                         fR(m, d) ||
                           ((u = oi(m, 'zeebe:Input') ? { source: h } : { target: h }),
-                          i.execute('element.updateModdleProperties', { element: e, moddleElement: m, properties: u })))
+                          i.execute('element.updateModdleProperties', {
+                            element: e,
+                            moddleElement: m,
+                            properties: u
+                          })))
                       : pR(h, n) &&
                         ('zeebe:input' === v
                           ? ((l = 'inputParameters'), (o = aR(f, h, r)))
@@ -54206,7 +58760,11 @@
                     if (o && c) {
                       if (!fR(c, o)) {
                         var d = { value: p }
-                        i.execute('element.updateModdleProperties', { element: e, moddleElement: c, properties: d })
+                        i.execute('element.updateModdleProperties', {
+                          element: e,
+                          moddleElement: c,
+                          properties: d
+                        })
                       }
                       vR(l, c)
                     } else {
@@ -54235,7 +58793,11 @@
               key: '_updateTaskType',
               value: function (e, t) {
                 var n = t.elementType
-                return n ? (e.$type === n.value ? e : this._bpmnReplace.replaceElement(e, { type: n.value })) : e
+                return n
+                  ? e.$type === n.value
+                    ? e
+                    : this._bpmnReplace.replaceElement(e, { type: n.value })
+                  : e
               }
             }
           ]),
@@ -54465,7 +59027,13 @@
               (this._bpmnFactory = t),
               (this._elementFactory = n),
               (this._moddle = r),
-              (this._providers = (iw((i = {}), CR, AR), iw(i, SR, ER), iw(i, PR, xR), iw(i, kR, _R), iw(i, OR, wR), i))
+              (this._providers =
+                (iw((i = {}), CR, AR),
+                iw(i, SR, ER),
+                iw(i, PR, xR),
+                iw(i, kR, _R),
+                iw(i, OR, wR),
+                i))
           }
           return (
             tw(e, [
@@ -54574,11 +59142,20 @@
                   return !d && u(!p)
                 },
                 children: [
-                  Db('div', { title: r, class: 'bio-properties-panel-group-header-title', children: r }),
+                  Db('div', {
+                    title: r,
+                    class: 'bio-properties-panel-group-header-title',
+                    children: r
+                  }),
                   Db('div', {
                     class: 'bio-properties-panel-group-header-buttons',
                     children: [
-                      Db(NR, { element: o, getTemplateId: n, unlinkTemplate: i, updateTemplate: a }),
+                      Db(NR, {
+                        element: o,
+                        getTemplateId: n,
+                        unlinkTemplate: i,
+                        updateTemplate: a
+                      }),
                       !d && Db(IR, { open: p })
                     ]
                   })
@@ -54601,7 +59178,9 @@
         return Db(mA, {
           title: 'Toggle section',
           class: 'bio-properties-panel-arrow',
-          children: Db($b, { class: t ? 'bio-properties-panel-arrow-down' : 'bio-properties-panel-arrow-right' })
+          children: Db($b, {
+            class: t ? 'bio-properties-panel-arrow-down' : 'bio-properties-panel-arrow-right'
+          })
         })
       }
       function NR(e) {
@@ -54676,12 +59255,18 @@
           menuItems: o,
           class: 'bio-properties-panel-applied-template-button',
           children: Db(mA, {
-            children: [Db('span', { children: r('Applied') }), Db($b, { class: 'bio-properties-panel-arrow-down' })]
+            children: [
+              Db('span', { children: r('Applied') }),
+              Db($b, { class: 'bio-properties-panel-arrow-down' })
+            ]
           })
         })
       }
       function VR() {
-        return Db('span', { class: 'bio-properties-panel-remove-template', children: pw('translate')('Remove') })
+        return Db('span', {
+          class: 'bio-properties-panel-remove-template',
+          children: pw('translate')('Remove')
+        })
       }
       function qR(e) {
         var t = e.element,
@@ -54708,7 +59293,10 @@
           menuItems: o,
           class: 'bio-properties-panel-template-not-found',
           children: Db(mA, {
-            children: [Db('span', { children: r('Not found') }), Db($b, { class: 'bio-properties-panel-arrow-down' })]
+            children: [
+              Db('span', { children: r('Not found') }),
+              Db($b, { class: 'bio-properties-panel-arrow-down' })
+            ]
           })
         })
       }
@@ -54765,9 +59353,12 @@
         var t = e.newerTemplate
         return Db('div', {
           class: 'bio-properties-panel-template-update-available-text',
-          children: pw('translate')('A new version of the template is available: {templateVersion}', {
-            templateVersion: eR(t)
-          })
+          children: pw('translate')(
+            'A new version of the template is available: {templateVersion}',
+            {
+              templateVersion: eR(t)
+            }
+          )
         })
       }
       function WR(e) {
@@ -54799,7 +59390,9 @@
         var t = e.id,
           n = e.template,
           r = pw('translate')
-        return n.description ? Db(YR, { id: t, label: r('Description'), content: n.description }) : null
+        return n.description
+          ? Db(YR, { id: t, label: r('Description'), content: n.description })
+          : null
       }
       function YR(e) {
         var t = e.id,
@@ -54848,11 +59441,14 @@
                 var i = e[r],
                   o = i.name,
                   a = i.value
-                'on' === o.substring(0, 2) && ZR.options.allowEvents && (a = new Function(a)), (n[o] = a)
+                'on' === o.substring(0, 2) && ZR.options.allowEvents && (a = new Function(a)),
+                  (n[o] = a)
               }
               return n
             })(e.attributes),
-            (s = (a = e.childNodes) && Array.prototype.map.call(a, ZR).filter(tz)) && s.length ? s : null
+            (s = (a = e.childNodes) && Array.prototype.map.call(a, ZR).filter(tz)) && s.length
+              ? s
+              : null
           )
         return ZR.visitor && ZR.visitor(l), l
       }
@@ -54898,7 +59494,9 @@
               if (((this.map = {}), e))
                 for (var t in e)
                   if (e.hasOwnProperty(t)) {
-                    var n = t.replace(/([A-Z]+)([A-Z][a-z0-9])|([a-z0-9]+)([A-Z])/g, '$1$3-$2$4').toLowerCase()
+                    var n = t
+                      .replace(/([A-Z]+)([A-Z][a-z0-9])|([a-z0-9]+)([A-Z])/g, '$1$3-$2$4')
+                      .toLowerCase()
                     this.map[n] = e[t]
                   }
             }),
@@ -54916,7 +59514,10 @@
                 p = e.trim,
                 u = (function (e, t) {
                   var n = {}
-                  for (var r in e) Object.prototype.hasOwnProperty.call(e, r) && -1 === t.indexOf(r) && (n[r] = e[r])
+                  for (var r in e)
+                    Object.prototype.hasOwnProperty.call(e, r) &&
+                      -1 === t.indexOf(r) &&
+                      (n[r] = e[r])
                   return n
                 })(e, [
                   'wrap',
@@ -54942,7 +59543,8 @@
                       a = 'html' === t ? 'text/html' : 'application/xml'
                     'html' === t
                       ? ((o = 'body'), (i = '<!DOCTYPE html>\n<html><body>' + e + '</body></html>'))
-                      : ((o = 'xml'), (i = '<?xml version="1.0" encoding="UTF-8"?>\n<xml>' + e + '</xml>'))
+                      : ((o = 'xml'),
+                        (i = '<?xml version="1.0" encoding="UTF-8"?>\n<xml>' + e + '</xml>'))
                     try {
                       n = new DOMParser().parseFromString(i, a)
                     } catch (e) {
@@ -54954,7 +59556,10 @@
                         ((n =
                           JR ||
                           (JR = (function () {
-                            if (document.implementation && document.implementation.createHTMLDocument)
+                            if (
+                              document.implementation &&
+                              document.implementation.createHTMLDocument
+                            )
                               return document.implementation.createHTMLDocument('')
                             var e = document.createElement('iframe')
                             return (
@@ -54996,7 +59601,9 @@
               } catch (e) {
                 s
                   ? s({ error: e })
-                  : 'undefined' != typeof console && console.error && console.error('preact-markup: ' + e)
+                  : 'undefined' != typeof console &&
+                    console.error &&
+                    console.error('preact-markup: ' + e)
               }
               if (!1 === t) return n || null
               var h = u.hasOwnProperty('className') ? 'className' : 'class',
@@ -55038,11 +59645,15 @@
           'strong'
         ],
         az = ['align', 'alt', 'class', 'href', 'id', 'name', 'rel', 'target', 'src'],
-        sz = /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+        sz =
+          /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
         lz = /[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205F\u3000]/g,
         cz = document.createElement('form')
       function pz(e) {
-        var t = new DOMParser().parseFromString('<!DOCTYPE html>\n<html><body><div>'.concat(e), 'text/html')
+        var t = new DOMParser().parseFromString(
+          '<!DOCTYPE html>\n<html><body><div>'.concat(e),
+          'text/html'
+        )
         t.normalize()
         var n = t.body.firstChild
         return n ? (uz(n), new XMLSerializer().serializeToString(n)) : ''
@@ -55281,7 +59892,11 @@
             })
             u.push({
               cmd: 'element.updateModdleProperties',
-              context: { element: n, moddleElement: o, properties: { values: [].concat(X_(f), [m]) } }
+              context: {
+                element: n,
+                moddleElement: o,
+                properties: { values: [].concat(X_(f), [m]) }
+              }
             })
           }
           if (jR.includes(p)) {
@@ -55291,7 +59906,11 @@
                 ((v = JP('zeebe:IoMapping', null, s, e)),
                 u.push({
                   cmd: 'element.updateModdleProperties',
-                  context: { element: n, moddleElement: o, properties: { values: [].concat(X_(o.get('values')), [v]) } }
+                  context: {
+                    element: n,
+                    moddleElement: o,
+                    properties: { values: [].concat(X_(o.get('values')), [v]) }
+                  }
                 })),
               p === PR)
             ) {
@@ -55329,7 +59948,11 @@
               ((_ = JP('zeebe:TaskHeaders', null, s, e)),
               u.push({
                 cmd: 'element.updateModdleProperties',
-                context: { element: n, moddleElement: o, properties: { values: [].concat(X_(o.get('values')), [_]) } }
+                context: {
+                  element: n,
+                  moddleElement: o,
+                  properties: { values: [].concat(X_(o.get('values')), [_]) }
+                }
               }))
             var w = OD(_, l),
               C = lR(l, i, e),
@@ -55338,7 +59961,11 @@
               })
             u.push({
               cmd: 'element.updateModdleProperties',
-              context: { element: n, moddleElement: _, properties: { values: [].concat(X_(P), [C]) } }
+              context: {
+                element: n,
+                moddleElement: _,
+                properties: { values: [].concat(X_(P), [C]) }
+              }
             })
           }
           if (!u.length) throw wz(n, r)
@@ -55369,11 +59996,16 @@
       function wz(e, t) {
         var n = si(e).get('id'),
           r = t.binding.type
-        return new Error('unknown binding <'.concat(r, '> for element <').concat(n, '>, this should never happen'))
+        return new Error(
+          'unknown binding <'.concat(r, '> for element <').concat(n, '>, this should never happen')
+        )
       }
       var Cz = (function () {
         function e(t, n, r) {
-          Z_(this, e), n.registerProvider(300, this), (this._elementTemplates = t), (this._injector = r)
+          Z_(this, e),
+            n.registerProvider(300, this),
+            (this._elementTemplates = t),
+            (this._injector = r)
         }
         return (
           tw(e, [
@@ -55426,7 +60058,11 @@
                                   templateId: ''.concat(i, '-').concat(n)
                                 })
                               }),
-                              l.length && vz(r, rw(rw({}, fz), {}, { element: t, properties: l, templateId: i })),
+                              l.length &&
+                                vz(
+                                  r,
+                                  rw(rw({}, fz), {}, { element: t, properties: l, templateId: i })
+                                ),
                               r
                             )
                           })({ element: e, elementTemplate: r })
@@ -55469,7 +60105,11 @@
       Cz.$inject = ['elementTemplates', 'propertiesPanel', 'injector']
       var kz = {
         __depends__: [yR, RR, Ui, yO],
-        __init__: ['elementTemplatesLoader', 'replaceBehavior', 'elementTemplatesPropertiesProvider'],
+        __init__: [
+          'elementTemplatesLoader',
+          'replaceBehavior',
+          'elementTemplatesPropertiesProvider'
+        ],
         elementTemplates: ['type', VD],
         elementTemplatesLoader: ['type', YD],
         replaceBehavior: ['type', oR],
@@ -55549,7 +60189,8 @@
             if (a && !0 === r && !l) (n.target = a), (n.sourceExpression = t)
             else if (a || r || 'local' !== l)
               if (a && !r && 'local' === l) (n.local = !0), (n.source = t), (n.target = a)
-              else if (a && r && 'local' === l) (n.local = !0), (n.sourceExpression = t), (n.target = a)
+              else if (a && r && 'local' === l)
+                (n.local = !0), (n.sourceExpression = t), (n.target = a)
               else {
                 if (a || r || 'all' !== l)
                   throw new Error('invalid configuration for camunda:in element template binding')
@@ -55562,10 +60203,13 @@
             if (i || !o || l)
               if (i || o || 'all' !== l)
                 if (i && !o && 'local' === l) (n.local = !0), (n.source = i), (n.target = t)
-                else if (!i && o && 'local' === l) (n.local = !0), (n.sourceExpression = o), (n.target = t)
+                else if (!i && o && 'local' === l)
+                  (n.local = !0), (n.sourceExpression = o), (n.target = t)
                 else {
                   if (i || o || 'local' !== l)
-                    throw new Error('invalid configuration for camunda:out element template binding')
+                    throw new Error(
+                      'invalid configuration for camunda:out element template binding'
+                    )
                   ;(n.local = !0), (n.variables = 'all')
                 }
               else n.variables = 'all'
@@ -55723,7 +60367,9 @@
                             o = e.event,
                             a = e.scriptFormat
                           return (
-                            a ? (i = n.create('camunda:Script', { scriptFormat: a, value: t })) : (r = t),
+                            a
+                              ? (i = n.create('camunda:Script', { scriptFormat: a, value: t }))
+                              : (r = t),
                             n.create('camunda:ExecutionListener', { event: o, value: r, script: i })
                           )
                         })(e.binding, e.value, n)
@@ -55755,7 +60401,9 @@
                     })
                   if (a.length) {
                     r || (r = this._getOrCreateExtensionElements(e))
-                    var s = ai(r, ['camunda:ExecutionListener', 'camunda:TaskListener']) ? 'fields' : 'values',
+                    var s = ai(r, ['camunda:ExecutionListener', 'camunda:TaskListener'])
+                        ? 'fields'
+                        : 'values',
                       l = jD(e, ['camunda:Field'])
                     a.forEach(function (n) {
                       var a = qz(t, n),
@@ -55800,7 +60448,9 @@
                     i = this._commandStack,
                     o = n.properties.filter(function (e) {
                       var t = e.binding.type
-                      return 'camunda:in' === t || 'camunda:in:businessKey' === t || 'camunda:out' === t
+                      return (
+                        'camunda:in' === t || 'camunda:in:businessKey' === t || 'camunda:out' === t
+                      )
                     })
                   if (o.length) {
                     var a = this._getOrCreateExtensionElements(jP(e) || e),
@@ -55883,8 +60533,12 @@
                             properties: { values: [].concat(X_(r.get('values')), [s]) }
                           }))
                     var l,
-                      c = s.get('camunda:inputParameters') ? s.get('camunda:inputParameters').slice() : [],
-                      p = s.get('camunda:outputParameters') ? s.get('camunda:outputParameters').slice() : []
+                      c = s.get('camunda:inputParameters')
+                        ? s.get('camunda:inputParameters').slice()
+                        : [],
+                      p = s.get('camunda:outputParameters')
+                        ? s.get('camunda:outputParameters').slice()
+                        : []
                     a.forEach(function (n) {
                       var a,
                         u,
@@ -55953,7 +60607,9 @@
                     })
                   if (a.length) {
                     var s = BD(
-                      (r = r ? this._getOrCreateExtensionElements(r) : this._getOrCreateExtensionElements(e)),
+                      (r = r
+                        ? this._getOrCreateExtensionElements(r)
+                        : this._getOrCreateExtensionElements(e)),
                       'camunda:Properties'
                     )
                     s ||
@@ -56015,10 +60671,17 @@
                     p.get('body') === c && (u.body = s),
                       p.get('language') === l.scriptFormat && (u.language = a.scriptFormat),
                       tb(u).length &&
-                        i.execute('element.updateModdleProperties', { element: e, moddleElement: p, properties: u })
+                        i.execute('element.updateModdleProperties', {
+                          element: e,
+                          moddleElement: p,
+                          properties: u
+                        })
                   } else
                     o.updateProperties(e, {
-                      conditionExpression: r.create('bpmn:FormalExpression', { body: s, language: a.scriptFormat })
+                      conditionExpression: r.create('bpmn:FormalExpression', {
+                        body: s,
+                        language: a.scriptFormat
+                      })
                     })
                 }
               },
@@ -56046,7 +60709,11 @@
                             Lz.forEach(function (e) {
                               e !== c && (s[e] = void 0)
                             }),
-                          o.execute('element.updateModdleProperties', { element: e, moddleElement: r, properties: s })
+                          o.execute('element.updateModdleProperties', {
+                            element: e,
+                            moddleElement: r,
+                            properties: s
+                          })
                       }
                     }))
                 }
@@ -56107,7 +60774,11 @@
                 key: '_updateTaskType',
                 value: function (e, t) {
                   var n = t.elementType
-                  return n ? (e.$type === n.value ? e : this._bpmnReplace.replaceElement(e, { type: n.value })) : e
+                  return n
+                    ? e.$type === n.value
+                      ? e
+                      : this._bpmnReplace.replaceElement(e, { type: n.value })
+                    : e
                 }
               }
             ]),
@@ -56121,7 +60792,9 @@
           o = i.type
         if ('camunda:field' === o) {
           if (
-            ((n = ai(r, ['camunda:ExecutionListener', 'camunda:TaskListener']) ? 'camunda:fields' : 'bpmn:values'),
+            ((n = ai(r, ['camunda:ExecutionListener', 'camunda:TaskListener'])
+              ? 'camunda:fields'
+              : 'bpmn:values'),
             !r || !r.get(n) || !r.get(n).length)
           )
             return
@@ -56187,7 +60860,10 @@
             : 'camunda:in' === o
             ? Ky(n, function (e) {
                 var t = e.binding
-                if ('camunda:in' === t.type && !((t.expression && !r.expression) || (!t.expression && r.expression)))
+                if (
+                  'camunda:in' === t.type &&
+                  !((t.expression && !r.expression) || (!t.expression && r.expression))
+                )
                   return t.target === r.target
               })
             : 'camunda:in:businessKey' === o
@@ -56197,13 +60873,17 @@
             : 'camunda:out' === o
             ? Ky(n, function (e) {
                 var t = e.binding
-                return 'camunda:out' === t.type && (t.source === r.source || t.sourceExpression === r.sourceExpression)
+                return (
+                  'camunda:out' === t.type &&
+                  (t.source === r.source || t.sourceExpression === r.sourceExpression)
+                )
               })
             : 'camunda:inputParameter' === o
             ? Ky(n, function (e) {
                 var t = e.binding,
                   n = t.name
-                if ('camunda:inputParameter' === t.type) return n === i && t.scriptFormat === r.scriptFormat
+                if ('camunda:inputParameter' === t.type)
+                  return n === i && t.scriptFormat === r.scriptFormat
               })
             : 'camunda:outputParameter' === o
             ? Ky(n, function (e) {
@@ -56461,7 +61141,8 @@
             if (y) {
               if (l === Qz) return y.get('camunda:businessKey')
               if (l === Jz) return y.get('camunda:target')
-              if (l === Kz) return i.expression ? y.get('camunda:sourceExpression') : y.get('camunda:source')
+              if (l === Kz)
+                return i.expression ? y.get('camunda:sourceExpression') : y.get('camunda:source')
             }
             return a
           }
@@ -56547,7 +61228,11 @@
               }),
                 m.push({
                   cmd: 'element.updateModdleProperties',
-                  context: { element: n, moddleElement: a, properties: { values: [].concat(X_(a.get('values')), [y]) } }
+                  context: {
+                    element: n,
+                    moddleElement: a,
+                    properties: { values: [].concat(X_(a.get('values')), [y]) }
+                  }
                 })
             }
           }
@@ -56591,7 +61276,11 @@
               })
             m.push({
               cmd: 'element.updateModdleProperties',
-              context: { element: n, moddleElement: x, properties: { values: [].concat(X_(C), [w]) } }
+              context: {
+                element: n,
+                moddleElement: x,
+                properties: { values: [].concat(X_(C), [w]) }
+              }
             })
           }
           if (nI.includes(u)) {
@@ -56653,7 +61342,11 @@
             })
             m.push({
               cmd: 'element.updateModdleProperties',
-              context: { element: n, moddleElement: a, properties: { values: [].concat(X_(R), [M]) } }
+              context: {
+                element: n,
+                moddleElement: a,
+                properties: { values: [].concat(X_(R), [M]) }
+              }
             })
           }
           if (!m.length) throw fI(n, r)
@@ -56693,7 +61386,9 @@
       function fI(e, t) {
         var n = si(e).get('id'),
           r = t.binding.type
-        return new Error('unknown binding <'.concat(r, '> for element <').concat(n, '>, this should never happen'))
+        return new Error(
+          'unknown binding <'.concat(r, '> for element <').concat(n, '>, this should never happen')
+        )
       }
       function vI(e) {
         var t = e.errorEventDefinition,
@@ -56722,7 +61417,10 @@
         return Db('div', {
           class: 'bio-properties-panel-entry',
           'data-entry-id': e.id,
-          children: Db('div', { class: 'bio-properties-panel-description', children: Db(mz, { description: e.text }) })
+          children: Db('div', {
+            class: 'bio-properties-panel-description',
+            children: Db(mz, { description: e.text })
+          })
         })
       }
       function bI(e) {
@@ -56756,7 +61454,8 @@
                     if (p) {
                       i = p
                       var u = Oz(a, s, n)
-                      ;(u.$parent = p), (o = { inputParameters: p.get('camunda:inputParameters').concat(u) })
+                      ;(u.$parent = p),
+                        (o = { inputParameters: p.get('camunda:inputParameters').concat(u) })
                     } else {
                       i = c
                       var d = AI(a, s, n, c)
@@ -56790,7 +61489,10 @@
         return Db('div', {
           class: 'bio-properties-panel-entry',
           'data-entry-id': e.id,
-          children: Db('div', { class: 'bio-properties-panel-description', children: Db(mz, { description: e.text }) })
+          children: Db('div', {
+            class: 'bio-properties-panel-description',
+            children: Db(mz, { description: e.text })
+          })
         })
       }
       function xI(e) {
@@ -56824,7 +61526,8 @@
                     if (p) {
                       i = p
                       var u = Tz(a, s, n)
-                      ;(u.$parent = p), (o = { outputParameters: p.get('camunda:outputParameters').concat(u) })
+                      ;(u.$parent = p),
+                        (o = { outputParameters: p.get('camunda:outputParameters').concat(u) })
                     } else {
                       i = c
                       var d = wI(a, s, n, c)
@@ -56866,7 +61569,11 @@
             return i.get('camunda:name')
           },
           setValue: function (e) {
-            o.execute('element.updateModdleProperties', { element: t, moddleElement: i, properties: { name: e } })
+            o.execute('element.updateModdleProperties', {
+              element: t,
+              moddleElement: i,
+              properties: { name: e }
+            })
           },
           validate: function (e) {
             return e
@@ -56882,7 +61589,30 @@
           o = JP('camunda:InputOutput', { inputParameters: [], outputParameters: [i] }, r, n)
         return (i.$parent = o), o
       }
-      var CI, PI, kI, SI, OI, TI, BI, jI, MI, DI, RI, zI, II, NI, LI, FI, VI, qI, HI, $I, UI, WI, GI, QI
+      var CI,
+        PI,
+        kI,
+        SI,
+        OI,
+        TI,
+        BI,
+        jI,
+        MI,
+        DI,
+        RI,
+        zI,
+        II,
+        NI,
+        LI,
+        FI,
+        VI,
+        qI,
+        HI,
+        $I,
+        UI,
+        WI,
+        GI,
+        QI
       function KI(e, t, n) {
         var r = t.findIndex(function (t) {
           return t.id === e
@@ -56891,7 +61621,10 @@
       }
       ;(function () {
         function e(t, n, r) {
-          Z_(this, e), n.registerProvider(300, this), (this._elementTemplates = t), (this._injector = r)
+          Z_(this, e),
+            n.registerProvider(300, this),
+            (this._elementTemplates = t),
+            (this._injector = r)
         }
         return (
           tw(e, [
@@ -56958,7 +61691,12 @@
                                         inputParameter: c,
                                         property: r
                                       }),
-                                      o && u.unshift({ id: ''.concat(p, '-description'), component: yI, text: o }),
+                                      o &&
+                                        u.unshift({
+                                          id: ''.concat(p, '-description'),
+                                          component: yI,
+                                          text: o
+                                        }),
                                       { id: p, label: a || s, entries: u }
                                     )
                                   })({ element: e, index: n, property: t })
@@ -56996,7 +61734,12 @@
                                       d = ''.concat(t.id, '-outputParameter-').concat(n),
                                       m = []
                                     return (
-                                      a && m.push({ id: ''.concat(d, '-description'), component: EI, text: a }),
+                                      a &&
+                                        m.push({
+                                          id: ''.concat(d, '-description'),
+                                          component: EI,
+                                          text: a
+                                        }),
                                       m.push({
                                         id: ''.concat(d, '-local-variable-assignment'),
                                         component: xI,
@@ -57044,7 +61787,11 @@
                                         c = []
                                       return (
                                         (c = gI(
-                                          (c = cB({ idPrefix: l, element: t, errorEventDefinition: s })),
+                                          (c = cB({
+                                            idPrefix: l,
+                                            element: t,
+                                            errorEventDefinition: s
+                                          })),
                                           '-errorRef'
                                         )),
                                         (c = gI(c, '-expression')).push({
@@ -57090,7 +61837,11 @@
                                   templateId: ''.concat(i, '-').concat(n)
                                 })
                               }),
-                              c.length && aI(r, rw(rw({}, oI), {}, { element: t, properties: c, templateId: i })),
+                              c.length &&
+                                aI(
+                                  r,
+                                  rw(rw({}, oI), {}, { element: t, properties: c, templateId: i })
+                                ),
                               $y(s) &&
                                 s.forEach(function (e) {
                                   var n = e.properties,
@@ -57146,7 +61897,10 @@
             if (Array.isArray(e)) return tN(e)
           })(e) ||
           (function (e) {
-            if (('undefined' != typeof Symbol && null != e[Symbol.iterator]) || null != e['@@iterator'])
+            if (
+              ('undefined' != typeof Symbol && null != e[Symbol.iterator]) ||
+              null != e['@@iterator']
+            )
               return Array.from(e)
           })(e) ||
           eN(e) ||
@@ -57163,7 +61917,10 @@
             if (Array.isArray(e)) return e
           })(e) ||
           (function (e, t) {
-            var n = null == e ? null : ('undefined' != typeof Symbol && e[Symbol.iterator]) || e['@@iterator']
+            var n =
+              null == e
+                ? null
+                : ('undefined' != typeof Symbol && e[Symbol.iterator]) || e['@@iterator']
             if (null != n) {
               var r,
                 i,
@@ -57171,7 +61928,11 @@
                 a = !0,
                 s = !1
               try {
-                for (n = n.call(e); !(a = (r = n.next()).done) && (o.push(r.value), !t || o.length !== t); a = !0);
+                for (
+                  n = n.call(e);
+                  !(a = (r = n.next()).done) && (o.push(r.value), !t || o.length !== t);
+                  a = !0
+                );
               } catch (e) {
                 ;(s = !0), (i = e)
               } finally {
@@ -57212,7 +61973,10 @@
         return r
       }
       function nN(e, t) {
-        return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } }))
+        return (
+          t || (t = e.slice(0)),
+          Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } }))
+        )
       }
       function rN(e) {
         return (rN =
@@ -57221,7 +61985,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -57242,7 +62009,9 @@
         if (Object.getOwnPropertySymbols) {
           var o = Object.getOwnPropertySymbols(e)
           for (r = 0; r < o.length; r++)
-            (n = o[r]), t.indexOf(n) >= 0 || (Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]))
+            (n = o[r]),
+              t.indexOf(n) >= 0 ||
+                (Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]))
         }
         return i
       }
@@ -57276,7 +62045,12 @@
       function sN(e, t, n) {
         return (
           t in e
-            ? Object.defineProperty(e, t, { value: n, enumerable: !0, configurable: !0, writable: !0 })
+            ? Object.defineProperty(e, t, {
+                value: n,
+                enumerable: !0,
+                configurable: !0,
+                writable: !0
+              })
             : (e[t] = n),
           e
         )
@@ -57288,15 +62062,17 @@
           encodeURIComponent(
             '\n<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">\n<path fill-rule="evenodd" clip-rule="evenodd" d="M15.8125 11.0069C14.7767 11.0079 13.7689 11.343 12.9388 11.9625L10.0375 9.06127C10.6643 8.2372 11.0026 7.22976 11 6.19439C11.0056 3.96215 9.47542 2.01909 7.30408 1.50118C5.13274 0.983268 2.89029 2.02648 1.88772 4.02092C0.885144 6.01536 1.38567 8.43742 3.09667 9.87109C4.80766 11.3048 7.27994 11.3737 9.06813 10.0375L11.9625 12.9388C10.6267 14.7264 10.6952 17.1979 12.1278 18.9089C13.5605 20.6199 15.9814 21.1216 17.976 20.1207C19.9706 19.1199 21.0155 16.8791 20.5 14.7079C19.9846 12.5366 18.0441 11.0045 15.8125 11.0069ZM2.75001 6.19439C2.75001 4.29591 4.28903 2.75689 6.18751 2.75689C8.08599 2.75689 9.62501 4.29591 9.62501 6.19439C9.62501 8.09287 8.08599 9.63189 6.18751 9.63189C4.28903 9.63189 2.75001 8.09287 2.75001 6.19439Z" fill="#22242A"/>\n</svg>\n'
           ),
-        pN = '\n<svg width="22" height="22" viewBox="0 0 5.82 5.82" xmlns="http://www.w3.org/2000/svg">\n  '.concat(
-          lN,
-          '\n</svg>\n'
-        ),
+        pN =
+          '\n<svg width="22" height="22" viewBox="0 0 5.82 5.82" xmlns="http://www.w3.org/2000/svg">\n  '.concat(
+            lN,
+            '\n</svg>\n'
+          ),
         uN = 'data:image/svg+xml;utf8,' + encodeURIComponent(pN),
-        dN = '\n<svg width="46" height="46" viewBox="-2 -2 9.82 9.82" xmlns="http://www.w3.org/2000/svg">\n  '.concat(
-          lN,
-          '\n</svg>\n'
-        ),
+        dN =
+          '\n<svg width="46" height="46" viewBox="-2 -2 9.82 9.82" xmlns="http://www.w3.org/2000/svg">\n  '.concat(
+            lN,
+            '\n</svg>\n'
+          ),
         mN = 'data:image/svg+xml;utf8,' + encodeURIComponent(dN)
       function hN(e, t, n, r, i, o, a, s, l, c) {
         ;(this._create = n),
@@ -57312,7 +62088,10 @@
           this._isAppendAnything() && c.registerProvider(499, this)
       }
       function fN(e, t, n, r) {
-        ;(this._injector = e), (this._selection = t), (this._connectorsExtension = n), (this._mouse = r)
+        ;(this._injector = e),
+          (this._selection = t),
+          (this._connectorsExtension = n),
+          (this._mouse = r)
         var i = e.get('keyboard', !1)
         i && this.registerKeyboardBindings(i)
       }
@@ -57346,7 +62125,11 @@
           var n = this,
             r = this._appendMenu
           if (!r.isEmpty(t)) {
-            var i = aN(aN({}, this._getAppendMenuPosition(t)), {}, { cursor: e && { x: e.x, y: e.y } })
+            var i = aN(
+              aN({}, this._getAppendMenuPosition(t)),
+              {},
+              { cursor: e && { x: e.x, y: e.y } }
+            )
             return r
               .open(t, i)
               .then(function (e) {
@@ -57371,7 +62154,11 @@
         (hN.prototype.replaceAnything = function (e, t) {
           var n = this._replaceMenu
           if (!n.isEmpty(t)) {
-            var r = aN(aN({}, this._getReplaceMenuPosition(t)), {}, { cursor: e && { x: e.x, y: e.y } })
+            var r = aN(
+              aN({}, this._getReplaceMenuPosition(t)),
+              {},
+              { cursor: e && { x: e.x, y: e.y } }
+            )
             return n.open(t, r).catch(function (e) {
               'user-canceled' !== e && console.error('replace-anything :: error', e)
             })
@@ -57601,7 +62388,11 @@
                 ? SN(m.type, m.props, m.key, null, m.__v)
                 : m)
           ) {
-            if (((m.__ = n), (m.__b = n.__b + 1), null === (d = g[p]) || (d && m.key == d.key && m.type === d.type)))
+            if (
+              ((m.__ = n),
+              (m.__b = n.__b + 1),
+              null === (d = g[p]) || (d && m.key == d.key && m.type === d.type))
+            )
               g[p] = void 0
             else
               for (u = 0; u < y; u++) {
@@ -57613,7 +62404,9 @@
               }
             qN(e, m, (d = d || xN), i, o, a, s, l, c),
               (h = m.__e),
-              (u = m.ref) && d.ref != u && (v || (v = []), d.ref && v.push(d.ref, null, m), v.push(u, m.__c || h, m)),
+              (u = m.ref) &&
+                d.ref != u &&
+                (v || (v = []), d.ref && v.push(d.ref, null, m), v.push(u, m.__c || h, m)),
               null != h
                 ? (null == f && (f = h),
                   'function' == typeof m.type && m.__k === d.__k
@@ -57624,13 +62417,17 @@
           }
         for (n.__e = f, p = y; p--; )
           null != g[p] &&
-            ('function' == typeof n.type && null != g[p].__e && g[p].__e == n.__d && (n.__d = BN(r, p + 1)),
+            ('function' == typeof n.type &&
+              null != g[p].__e &&
+              g[p].__e == n.__d &&
+              (n.__d = BN(r, p + 1)),
             UN(g[p], g[p]))
         if (v) for (p = 0; p < v.length; p++) $N(v[p], v[++p], v[++p])
       }
       function zN(e, t, n) {
         for (var r, i = e.__k, o = 0; i && o < i.length; o++)
-          (r = i[o]) && ((r.__ = e), (t = 'function' == typeof r.type ? zN(r, t, n) : IN(n, r, r, i, r.__e, t)))
+          (r = i[o]) &&
+            ((r.__ = e), (t = 'function' == typeof r.type ? zN(r, t, n) : IN(n, r, r, i, r.__e, t)))
         return t
       }
       function IN(e, t, n, r, i, o) {
@@ -57645,7 +62442,9 @@
         return void 0 !== a ? a : i.nextSibling
       }
       function NN(e, t, n) {
-        '-' === t[0] ? e.setProperty(t, n) : (e[t] = null == n ? '' : 'number' != typeof n || wN.test(t) ? n : n + 'px')
+        '-' === t[0]
+          ? e.setProperty(t, n)
+          : (e[t] = null == n ? '' : 'number' != typeof n || wN.test(t) ? n : n + 'px')
       }
       function LN(e, t, n, r, i) {
         var o
@@ -57661,16 +62460,27 @@
             (t = t.toLowerCase() in e ? t.toLowerCase().slice(2) : t.slice(2)),
             e.l || (e.l = {}),
             (e.l[t + o] = n),
-            n ? r || e.addEventListener(t, o ? VN : FN, o) : e.removeEventListener(t, o ? VN : FN, o)
+            n
+              ? r || e.addEventListener(t, o ? VN : FN, o)
+              : e.removeEventListener(t, o ? VN : FN, o)
         else if ('dangerouslySetInnerHTML' !== t) {
           if (i) t = t.replace(/xlink[H:h]/, 'h').replace(/sName$/, 's')
-          else if ('href' !== t && 'list' !== t && 'form' !== t && 'tabIndex' !== t && 'download' !== t && t in e)
+          else if (
+            'href' !== t &&
+            'list' !== t &&
+            'form' !== t &&
+            'tabIndex' !== t &&
+            'download' !== t &&
+            t in e
+          )
             try {
               e[t] = null == n ? '' : n
               break e
             } catch (e) {}
           'function' == typeof n ||
-            (null != n && (!1 !== n || ('a' === t[0] && 'r' === t[1])) ? e.setAttribute(t, n) : e.removeAttribute(t))
+            (null != n && (!1 !== n || ('a' === t[0] && 'r' === t[1]))
+              ? e.setAttribute(t, n)
+              : e.removeAttribute(t))
         }
       }
       function FN(e) {
@@ -57693,7 +62503,8 @@
           b,
           A = t.type
         if (void 0 !== t.constructor) return null
-        null != n.__h && ((l = n.__h), (s = t.__e = n.__e), (t.__h = null), (o = [s])), (c = gN.__b) && c(t)
+        null != n.__h && ((l = n.__h), (s = t.__e = n.__e), (t.__h = null), (o = [s])),
+          (c = gN.__b) && c(t)
         try {
           e: if ('function' == typeof A) {
             if (
@@ -57714,12 +62525,15 @@
                   (p.__h = [])),
               null == p.__s && (p.__s = p.state),
               null != A.getDerivedStateFromProps &&
-                (p.__s == p.state && (p.__s = CN({}, p.__s)), CN(p.__s, A.getDerivedStateFromProps(v, p.__s))),
+                (p.__s == p.state && (p.__s = CN({}, p.__s)),
+                CN(p.__s, A.getDerivedStateFromProps(v, p.__s))),
               (d = p.props),
               (m = p.state),
               u)
             )
-              null == A.getDerivedStateFromProps && null != p.componentWillMount && p.componentWillMount(),
+              null == A.getDerivedStateFromProps &&
+                null != p.componentWillMount &&
+                p.componentWillMount(),
                 null != p.componentDidMount && p.__h.push(p.componentDidMount)
             else {
               if (
@@ -57727,7 +62541,9 @@
                   v !== d &&
                   null != p.componentWillReceiveProps &&
                   p.componentWillReceiveProps(v, y),
-                (!p.__e && null != p.shouldComponentUpdate && !1 === p.shouldComponentUpdate(v, p.__s, y)) ||
+                (!p.__e &&
+                  null != p.shouldComponentUpdate &&
+                  !1 === p.shouldComponentUpdate(v, p.__s, y)) ||
                   t.__v === n.__v)
               ) {
                 ;(p.props = v),
@@ -57779,7 +62595,11 @@
                     h = 0
                   if (('svg' === m && (i = !0), null != o))
                     for (; h < o.length; h++)
-                      if ((l = o[h]) && 'setAttribute' in l == !!m && (m ? l.localName === m : 3 === l.nodeType)) {
+                      if (
+                        (l = o[h]) &&
+                        'setAttribute' in l == !!m &&
+                        (m ? l.localName === m : 3 === l.nodeType)
+                      ) {
                         ;(e = l), (o[h] = null)
                         break
                       }
@@ -57809,7 +62629,8 @@
                     if (
                       ((function (e, t, n, r, i) {
                         var o
-                        for (o in n) 'children' === o || 'key' === o || o in t || LN(e, o, null, n[o], r)
+                        for (o in n)
+                          'children' === o || 'key' === o || o in t || LN(e, o, null, n[o], r)
                         for (o in t)
                           (i && 'function' != typeof t[o]) ||
                             'children' === o ||
@@ -57853,7 +62674,9 @@
                 })(n.__e, t, n, r, i, o, a, l))
           ;(c = gN.diffed) && c(t)
         } catch (e) {
-          ;(t.__v = null), (l || null != o) && ((t.__e = s), (t.__h = !!l), (o[o.indexOf(s)] = null)), gN.__e(e, t, n)
+          ;(t.__v = null),
+            (l || null != o) && ((t.__e = s), (t.__h = !!l), (o[o.indexOf(s)] = null)),
+            gN.__e(e, t, n)
         }
       }
       function HN(e, t) {
@@ -57892,7 +62715,8 @@
             }
           r.base = r.__P = null
         }
-        if ((r = e.__k)) for (i = 0; i < r.length; i++) r[i] && UN(r[i], t, 'function' != typeof e.type)
+        if ((r = e.__k))
+          for (i = 0; i < r.length; i++) r[i] && UN(r[i], t, 'function' != typeof e.type)
         n || null == e.__e || PN(e.__e), (e.__e = e.__d = void 0)
       }
       function WN(e, t, n) {
@@ -57939,7 +62763,10 @@
         (yN = 0),
         (TN.prototype.setState = function (e, t) {
           var n
-          ;(n = null != this.__s && this.__s !== this.state ? this.__s : (this.__s = CN({}, this.state))),
+          ;(n =
+            null != this.__s && this.__s !== this.state
+              ? this.__s
+              : (this.__s = CN({}, this.state))),
             'function' == typeof e && (e = e(CN({}, n), this.props)),
             e && CN(n, e),
             null != e && this.__v && (t && this.__h.push(t), MN(this))
@@ -57949,7 +62776,10 @@
         }),
         (TN.prototype.render = ON),
         (bN = []),
-        (AN = 'function' == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout),
+        (AN =
+          'function' == typeof Promise
+            ? Promise.prototype.then.bind(Promise.resolve())
+            : setTimeout),
         (DN.__r = 0)
       var QN,
         KN,
@@ -57969,7 +62799,9 @@
               : 6 === s
               ? (i[1][n[++a]] += l + '')
               : s
-              ? ((o = t.apply(l, e(t, l, r, ['', null]))), i.push(o), l[0] ? (n[0] |= 2) : ((n[a - 2] = 0), (n[a] = o)))
+              ? ((o = t.apply(l, e(t, l, r, ['', null]))),
+                i.push(o),
+                l[0] ? (n[0] |= 2) : ((n[a - 2] = 0), (n[a] = o)))
               : i.push(l)
           }
           return i
@@ -58033,7 +62865,11 @@
                               ('=' === t
                                 ? ((r = 5), (n = i), (i = ''))
                                 : '/' === t && (r < 5 || '>' === e[l][c + 1])
-                                ? (s(), 3 === r && (a = a[0]), (r = a), (a = a[0]).push(2, 0, r), (r = 0))
+                                ? (s(),
+                                  3 === r && (a = a[0]),
+                                  (r = a),
+                                  (a = a[0]).push(2, 0, r),
+                                  (r = 0))
                                 : ' ' === t || '\t' === t || '\n' === t || '\r' === t
                                 ? (s(), (r = 2))
                                 : (i += t)),
@@ -58208,7 +63044,8 @@
           r = ''
         if ('string' == typeof e || 'number' == typeof e) r += e
         else if ('object' === rN(e))
-          if (Array.isArray(e)) for (t = 0; t < e.length; t++) e[t] && (n = AL(e[t])) && (r && (r += ' '), (r += n))
+          if (Array.isArray(e))
+            for (t = 0; t < e.length; t++) e[t] && (n = AL(e[t])) && (r && (r += ' '), (r += n))
           else for (t in e) e[t] && (r && (r += ' '), (r += t))
         return r
       }
@@ -58326,7 +63163,14 @@
             a = o.promise,
             s = o.resolve
           return (
-            (this._open = { renderFn: e, promise: a, resolve: s, position: n, className: r, element: i }),
+            (this._open = {
+              renderFn: e,
+              promise: a,
+              resolve: s,
+              position: n,
+              className: r,
+              element: i
+            }),
             this._emit('open'),
             this._refresh(),
             this._open.promise
@@ -58424,7 +63268,11 @@
           t.label || t.name,
           t.imageUrl &&
             ZN(
-              OI || (OI = nN(['\n            <img class="cmd-change-menu__entry-icon" src=', ' />\n          '])),
+              OI ||
+                (OI = nN([
+                  '\n            <img class="cmd-change-menu__entry-icon" src=',
+                  ' />\n          '
+                ])),
               t.imageUrl
             ),
           t.label || t.name,
@@ -58488,7 +63336,11 @@
           function () {
             var t = e.entries.filter(function (e) {
               return (
-                !o || [e.name, e.description || '', e.search || ''].join('---').toLowerCase().includes(o.toLowerCase())
+                !o ||
+                [e.name, e.description || '', e.search || '']
+                  .join('---')
+                  .toLowerCase()
+                  .includes(o.toLowerCase())
               )
             })
             t.includes(u) || d(t[0]), c(t)
@@ -58576,7 +63428,10 @@
           }),
           !l.length &&
             ZN(
-              RI || (RI = nN(['\n          <li class="cmd-change-menu__muted-entry">No template found</li>\n        ']))
+              RI ||
+                (RI = nN([
+                  '\n          <li class="cmd-change-menu__muted-entry">No template found</li>\n        '
+                ]))
             )
         )
       }
@@ -58601,7 +63456,8 @@
           return this._changeMenu.open(
             function (n) {
               return ZN(
-                jI || (jI = nN(['\n    <', '\n      entries=', '\n      onClose=', '\n    />\n  '])),
+                jI ||
+                  (jI = nN(['\n    <', '\n      entries=', '\n      onClose=', '\n    />\n  '])),
                 TL,
                 t._toEntries(e),
                 n
@@ -58635,7 +63491,13 @@
           function () {
             var t = e.entries.filter(function (e) {
               if (!a) return !0
-              var t = [e.name ? 'connector' : '', e.name, e.description || '', e.label || '', e.search || '']
+              var t = [
+                e.name ? 'connector' : '',
+                e.name,
+                e.description || '',
+                e.label || '',
+                e.search || ''
+              ]
                 .join('---')
                 .toLowerCase()
               return a
@@ -58748,7 +63610,12 @@
             )
           }),
           !c.length &&
-            ZN(FI || (FI = nN(['\n        <li class="cmd-change-menu__muted-entry">Nothing found</li>\n      '])))
+            ZN(
+              FI ||
+                (FI = nN([
+                  '\n        <li class="cmd-change-menu__muted-entry">Nothing found</li>\n      '
+                ]))
+            )
         )
       }
       ;(jL.$inject = ['elementTemplates', 'popupMenu', 'changeMenu']),
@@ -58839,7 +63706,9 @@
         })
       var DL = Object.values(e).flat()
       function RL(e, t, n) {
-        ;(this._elementTemplates = e), (this._translate = n), t.registerProvider('bpmn-replace', 100, this)
+        ;(this._elementTemplates = e),
+          (this._translate = n),
+          t.registerProvider('bpmn-replace', 100, this)
       }
       ;(RL.prototype._getUnlinkEntry = function (e, t) {
         var n = this._elementTemplates,
@@ -58899,7 +63768,11 @@
           }
         }),
         (RL.$inject = ['elementTemplates', 'popupMenu', 'translate'])
-      var zL = { __init__: ['unlinkEntryProvider'], replaceMenu: ['type', jL], unlinkEntryProvider: ['type', RL] },
+      var zL = {
+          __init__: ['unlinkEntryProvider'],
+          replaceMenu: ['type', jL],
+          unlinkEntryProvider: ['type', RL]
+        },
         IL = { id: 'events', name: 'Events' },
         NL = { id: 'events', name: 'Tasks' },
         LL = { id: 'data', name: 'Data' },
@@ -58955,7 +63828,10 @@
             label: 'Conditional Start Event',
             actionName: 'replace-with-conditional-start',
             className: 'bpmn-icon-start-event-condition',
-            target: { type: 'bpmn:StartEvent', eventDefinitionType: 'bpmn:ConditionalEventDefinition' }
+            target: {
+              type: 'bpmn:StartEvent',
+              eventDefinitionType: 'bpmn:ConditionalEventDefinition'
+            }
           },
           {
             label: 'Signal Start Event',
@@ -58971,31 +63847,46 @@
             label: 'Message Intermediate Catch Event',
             actionName: 'replace-with-message-intermediate-catch',
             className: 'bpmn-icon-intermediate-event-catch-message',
-            target: { type: 'bpmn:IntermediateCatchEvent', eventDefinitionType: 'bpmn:MessageEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateCatchEvent',
+              eventDefinitionType: 'bpmn:MessageEventDefinition'
+            }
           },
           {
             label: 'Message Intermediate Throw Event',
             actionName: 'replace-with-message-intermediate-throw',
             className: 'bpmn-icon-intermediate-event-throw-message',
-            target: { type: 'bpmn:IntermediateThrowEvent', eventDefinitionType: 'bpmn:MessageEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateThrowEvent',
+              eventDefinitionType: 'bpmn:MessageEventDefinition'
+            }
           },
           {
             label: 'Timer Intermediate Catch Event',
             actionName: 'replace-with-timer-intermediate-catch',
             className: 'bpmn-icon-intermediate-event-catch-timer',
-            target: { type: 'bpmn:IntermediateCatchEvent', eventDefinitionType: 'bpmn:TimerEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateCatchEvent',
+              eventDefinitionType: 'bpmn:TimerEventDefinition'
+            }
           },
           {
             label: 'Escalation Intermediate Throw Event',
             actionName: 'replace-with-escalation-intermediate-throw',
             className: 'bpmn-icon-intermediate-event-throw-escalation',
-            target: { type: 'bpmn:IntermediateThrowEvent', eventDefinitionType: 'bpmn:EscalationEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateThrowEvent',
+              eventDefinitionType: 'bpmn:EscalationEventDefinition'
+            }
           },
           {
             label: 'Conditional Intermediate Catch Event',
             actionName: 'replace-with-conditional-intermediate-catch',
             className: 'bpmn-icon-intermediate-event-catch-condition',
-            target: { type: 'bpmn:IntermediateCatchEvent', eventDefinitionType: 'bpmn:ConditionalEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateCatchEvent',
+              eventDefinitionType: 'bpmn:ConditionalEventDefinition'
+            }
           },
           {
             label: 'Link Intermediate Catch Event',
@@ -59021,19 +63912,28 @@
             label: 'Compensation Intermediate Throw Event',
             actionName: 'replace-with-compensation-intermediate-throw',
             className: 'bpmn-icon-intermediate-event-throw-compensation',
-            target: { type: 'bpmn:IntermediateThrowEvent', eventDefinitionType: 'bpmn:CompensateEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateThrowEvent',
+              eventDefinitionType: 'bpmn:CompensateEventDefinition'
+            }
           },
           {
             label: 'Signal Intermediate Catch Event',
             actionName: 'replace-with-signal-intermediate-catch',
             className: 'bpmn-icon-intermediate-event-catch-signal',
-            target: { type: 'bpmn:IntermediateCatchEvent', eventDefinitionType: 'bpmn:SignalEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateCatchEvent',
+              eventDefinitionType: 'bpmn:SignalEventDefinition'
+            }
           },
           {
             label: 'Signal Intermediate Throw Event',
             actionName: 'replace-with-signal-intermediate-throw',
             className: 'bpmn-icon-intermediate-event-throw-signal',
-            target: { type: 'bpmn:IntermediateThrowEvent', eventDefinitionType: 'bpmn:SignalEventDefinition' }
+            target: {
+              type: 'bpmn:IntermediateThrowEvent',
+              eventDefinitionType: 'bpmn:SignalEventDefinition'
+            }
           }
         ].map(function (e) {
           return aN(aN({}, e), {}, { category: IL })
@@ -59043,7 +63943,10 @@
             label: 'Message Boundary Event',
             actionName: 'replace-with-message-boundary',
             className: 'bpmn-icon-intermediate-event-catch-message',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:MessageEventDefinition' }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:MessageEventDefinition'
+            }
           },
           {
             label: 'Timer Boundary Event',
@@ -59055,13 +63958,19 @@
             label: 'Escalation Boundary Event',
             actionName: 'replace-with-escalation-boundary',
             className: 'bpmn-icon-intermediate-event-catch-escalation',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:EscalationEventDefinition' }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:EscalationEventDefinition'
+            }
           },
           {
             label: 'Conditional Boundary Event',
             actionName: 'replace-with-conditional-boundary',
             className: 'bpmn-icon-intermediate-event-catch-condition',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:ConditionalEventDefinition' }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:ConditionalEventDefinition'
+            }
           },
           {
             label: 'Error Boundary Event',
@@ -59073,19 +63982,28 @@
             label: 'Cancel Boundary Event',
             actionName: 'replace-with-cancel-boundary',
             className: 'bpmn-icon-intermediate-event-catch-cancel',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:CancelEventDefinition' }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:CancelEventDefinition'
+            }
           },
           {
             label: 'Signal Boundary Event',
             actionName: 'replace-with-signal-boundary',
             className: 'bpmn-icon-intermediate-event-catch-signal',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:SignalEventDefinition' }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:SignalEventDefinition'
+            }
           },
           {
             label: 'Compensation Boundary Event',
             actionName: 'replace-with-compensation-boundary',
             className: 'bpmn-icon-intermediate-event-catch-compensation',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:CompensateEventDefinition' }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:CompensateEventDefinition'
+            }
           },
           {
             label: 'Message Boundary Event (non-interrupting)',
@@ -59101,7 +64019,11 @@
             label: 'Timer Boundary Event (non-interrupting)',
             actionName: 'replace-with-non-interrupting-timer-boundary',
             className: 'bpmn-icon-intermediate-event-catch-non-interrupting-timer',
-            target: { type: 'bpmn:BoundaryEvent', eventDefinitionType: 'bpmn:TimerEventDefinition', cancelActivity: !1 }
+            target: {
+              type: 'bpmn:BoundaryEvent',
+              eventDefinitionType: 'bpmn:TimerEventDefinition',
+              cancelActivity: !1
+            }
           },
           {
             label: 'Escalation Boundary Event (non-interrupting)',
@@ -59214,7 +64136,11 @@
             label: 'Event based Gateway',
             actionName: 'replace-with-event-based-gateway',
             className: 'bpmn-icon-gateway-eventbased',
-            target: { type: 'bpmn:EventBasedGateway', instantiate: !1, eventGatewayType: 'Exclusive' }
+            target: {
+              type: 'bpmn:EventBasedGateway',
+              instantiate: !1,
+              eventGatewayType: 'Exclusive'
+            }
           }
         ].map(function (e) {
           return aN(aN({}, e), {}, { category: qL })
@@ -59347,7 +64273,18 @@
         ].map(function (e) {
           return aN(aN({}, e), {}, { category: FL })
         }),
-        ZL = [].concat(XI(QL), XI(YL), XI(KL), XI(HL), XI($L), XI(UL), XI(GL), XI(WL), XI(JL), XI(XL))
+        ZL = [].concat(
+          XI(QL),
+          XI(YL),
+          XI(KL),
+          XI(HL),
+          XI($L),
+          XI(UL),
+          XI(GL),
+          XI(WL),
+          XI(JL),
+          XI(XL)
+        )
       function eF(e, t, n, r, i) {
         ;(this._config = e),
           (this._elementTemplates = t),
@@ -59381,7 +64318,13 @@
           function () {
             var e = n.filter(function (e) {
               if (!p) return -1 !== e.rating
-              var t = [e.name ? 'connector' : '', e.name, e.description || '', e.label || '', e.search || '']
+              var t = [
+                e.name ? 'connector' : '',
+                e.name,
+                e.description || '',
+                e.label || '',
+                e.search || ''
+              ]
                 .join('---')
                 .toLowerCase()
               return p
@@ -59483,10 +64426,21 @@
             )
           }),
           !m.length &&
-            ZN($I || ($I = nN(['\n          <li class="cmd-change-menu__muted-entry">Nothing found</li>\n        '])))
+            ZN(
+              $I ||
+                ($I = nN([
+                  '\n          <li class="cmd-change-menu__muted-entry">Nothing found</li>\n        '
+                ]))
+            )
         )
       }
-      ;(eF.$inject = ['config.connectorsExtension', 'elementTemplates', 'elementFactory', 'injector', 'changeMenu']),
+      ;(eF.$inject = [
+        'config.connectorsExtension',
+        'elementTemplates',
+        'elementFactory',
+        'injector',
+        'changeMenu'
+      ]),
         (eF.prototype._isAppendAnything = function () {
           return (this._config && this._config.appendAnything) || !1
         }),
@@ -59591,7 +64545,10 @@
         })
       var nF = { appendMenu: ['type', eF] }
       function rF(e, t, n, r) {
-        ;(this._elementTemplates = e), (this._elementFactory = t), (this._injector = n), (this._changeMenu = r)
+        ;(this._elementTemplates = e),
+          (this._elementFactory = t),
+          (this._injector = n),
+          (this._changeMenu = r)
       }
       function iF(e) {
         var t = e.onClose,
@@ -59616,7 +64573,13 @@
           function () {
             var e = n.filter(function (e) {
               if (!s) return -1 !== e.rating
-              var t = [e.name ? 'connector' : '', e.name, e.description || '', e.label || '', e.search || '']
+              var t = [
+                e.name ? 'connector' : '',
+                e.name,
+                e.description || '',
+                e.label || '',
+                e.search || ''
+              ]
                 .join('---')
                 .toLowerCase()
               return s
@@ -59714,7 +64677,12 @@
             )
           }),
           !p.length &&
-            ZN(QI || (QI = nN(['\n          <li class="cmd-change-menu__muted-entry">Nothing found</li>\n        '])))
+            ZN(
+              QI ||
+                (QI = nN([
+                  '\n          <li class="cmd-change-menu__muted-entry">Nothing found</li>\n        '
+                ]))
+            )
         )
       }
       ;(rF.$inject = ['elementTemplates', 'elementFactory', 'injector', 'changeMenu']),
@@ -59784,11 +64752,19 @@
             n = this._getContext(),
             r = n.entries,
             i = function (e) {
-              return ZN(UI || (UI = nN(['\n    <', '\n      entries=', '\n      onClose=', '\n    />\n  '])), iF, r, e)
+              return ZN(
+                UI ||
+                  (UI = nN(['\n    <', '\n      entries=', '\n      onClose=', '\n    />\n  '])),
+                iF,
+                r,
+                e
+              )
             }
-          return this._changeMenu.open(i, { position: t, className: 'cmd-create-menu' }).then(function (e) {
-            return e || Promise.reject('user-canceled')
-          })
+          return this._changeMenu
+            .open(i, { position: t, className: 'cmd-create-menu' })
+            .then(function (e) {
+              return e || Promise.reject('user-canceled')
+            })
         })
       var oF = {
           __depends__: [CL, BL, zL, nF, { createMenu: ['type', rF] }],
@@ -59821,7 +64797,8 @@
         function n() {
           this.constructor = e
         }
-        hF(e, t), (e.prototype = null === t ? Object.create(t) : ((n.prototype = t.prototype), new n()))
+        hF(e, t),
+          (e.prototype = null === t ? Object.create(t) : ((n.prototype = t.prototype), new n()))
       }
       var vF,
         gF,
@@ -59830,7 +64807,8 @@
             Object.assign ||
             function (e) {
               for (var t, n = 1, r = arguments.length; n < r; n++)
-                for (var i in (t = arguments[n])) Object.prototype.hasOwnProperty.call(t, i) && (e[i] = t[i])
+                for (var i in (t = arguments[n]))
+                  Object.prototype.hasOwnProperty.call(t, i) && (e[i] = t[i])
               return e
             }).apply(this, arguments)
         }
@@ -59926,7 +64904,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -59988,7 +64969,9 @@
               }),
               (this._setResult = function (e, n) {
                 t._state === PF.PENDING &&
-                  (NF(n) ? n.then(t._resolve, t._reject) : ((t._state = e), (t._value = n), t._executeHandlers()))
+                  (NF(n)
+                    ? n.then(t._resolve, t._reject)
+                    : ((t._state = e), (t._value = n), t._executeHandlers()))
               }),
               (this._attachHandler = function (e) {
                 ;(t._handlers = t._handlers.concat(e)), t._executeHandlers()
@@ -60153,14 +65136,22 @@
             }),
             (e.prototype.setTag = function (e, t) {
               var n
-              return (this._tags = yF(yF({}, this._tags), (((n = {})[e] = t), n))), this._notifyScopeListeners(), this
+              return (
+                (this._tags = yF(yF({}, this._tags), (((n = {})[e] = t), n))),
+                this._notifyScopeListeners(),
+                this
+              )
             }),
             (e.prototype.setExtras = function (e) {
               return (this._extra = yF(yF({}, this._extra), e)), this._notifyScopeListeners(), this
             }),
             (e.prototype.setExtra = function (e, t) {
               var n
-              return (this._extra = yF(yF({}, this._extra), (((n = {})[e] = t), n))), this._notifyScopeListeners(), this
+              return (
+                (this._extra = yF(yF({}, this._extra), (((n = {})[e] = t), n))),
+                this._notifyScopeListeners(),
+                this
+              )
             }),
             (e.prototype.setFingerprint = function (e) {
               return (this._fingerprint = e), this._notifyScopeListeners(), this
@@ -60201,7 +65192,8 @@
                   ? void 0
                   : t.transaction
                 : (
-                    null === (r = null === (n = i) || void 0 === n ? void 0 : n.spanRecorder) || void 0 === r
+                    null === (r = null === (n = i) || void 0 === n ? void 0 : n.spanRecorder) ||
+                    void 0 === r
                       ? void 0
                       : r.spans[0]
                   )
@@ -60209,7 +65201,9 @@
                 : void 0
             }),
             (e.prototype.setSession = function (e) {
-              return e ? (this._session = e) : delete this._session, this._notifyScopeListeners(), this
+              return (
+                e ? (this._session = e) : delete this._session, this._notifyScopeListeners(), this
+              )
             }),
             (e.prototype.getSession = function () {
               return this._session
@@ -60262,7 +65256,11 @@
               var n = 'number' == typeof t ? Math.min(t, 100) : 100
               if (n <= 0) return this
               var r = yF({ timestamp: (0, _F.yW)() }, e)
-              return (this._breadcrumbs = EF(this._breadcrumbs, [r]).slice(-n)), this._notifyScopeListeners(), this
+              return (
+                (this._breadcrumbs = EF(this._breadcrumbs, [r]).slice(-n)),
+                this._notifyScopeListeners(),
+                this
+              )
             }),
             (e.prototype.clearBreadcrumbs = function () {
               return (this._breadcrumbs = []), this._notifyScopeListeners(), this
@@ -60270,9 +65268,15 @@
             (e.prototype.applyToEvent = function (e, t) {
               var n
               if (
-                (this._extra && Object.keys(this._extra).length && (e.extra = yF(yF({}, this._extra), e.extra)),
-                this._tags && Object.keys(this._tags).length && (e.tags = yF(yF({}, this._tags), e.tags)),
-                this._user && Object.keys(this._user).length && (e.user = yF(yF({}, this._user), e.user)),
+                (this._extra &&
+                  Object.keys(this._extra).length &&
+                  (e.extra = yF(yF({}, this._extra), e.extra)),
+                this._tags &&
+                  Object.keys(this._tags).length &&
+                  (e.tags = yF(yF({}, this._tags), e.tags)),
+                this._user &&
+                  Object.keys(this._user).length &&
+                  (e.user = yF(yF({}, this._user), e.user)),
                 this._contexts &&
                   Object.keys(this._contexts).length &&
                   (e.contexts = yF(yF({}, this._contexts), e.contexts)),
@@ -60324,7 +65328,11 @@
                 (this._notifyingListeners = !1))
             }),
             (e.prototype._applyFingerprint = function (e) {
-              ;(e.fingerprint = e.fingerprint ? (Array.isArray(e.fingerprint) ? e.fingerprint : [e.fingerprint]) : []),
+              ;(e.fingerprint = e.fingerprint
+                ? Array.isArray(e.fingerprint)
+                  ? e.fingerprint
+                  : [e.fingerprint]
+                : []),
                 this._fingerprint && (e.fingerprint = e.fingerprint.concat(this._fingerprint)),
                 e.fingerprint && !e.fingerprint.length && delete e.fingerprint
             }),
@@ -60346,7 +65354,9 @@
         try {
           for (
             var n = e, r = [], i = 0, o = 0, a = ' > '.length, s = void 0;
-            n && i++ < 5 && !('html' === (s = UF(n, t)) || (i > 1 && o + r.length * a + s.length >= 80));
+            n &&
+            i++ < 5 &&
+            !('html' === (s = UF(n, t)) || (i > 1 && o + r.length * a + s.length >= 80));
 
           )
             r.push(s), (o += s.length), (n = n.parentNode)
@@ -60383,12 +65393,14 @@
         else if ((c.id && p.push('#' + c.id), (i = c.className) && MF(i)))
           for (o = i.split(/\s+/), l = 0; l < o.length; l++) p.push('.' + o[l])
         var d = ['type', 'name', 'title', 'alt']
-        for (l = 0; l < d.length; l++) (a = d[l]), (s = c.getAttribute(a)) && p.push('[' + a + '="' + s + '"]')
+        for (l = 0; l < d.length; l++)
+          (a = d[l]), (s = c.getAttribute(a)) && p.push('[' + a + '="' + s + '"]')
         return p.join('')
       }
       var WF = (function () {
           function e() {
-            ;(this._hasWeakSet = 'function' == typeof WeakSet), (this._inner = this._hasWeakSet ? new WeakSet() : [])
+            ;(this._hasWeakSet = 'function' == typeof WeakSet),
+              (this._inner = this._hasWeakSet ? new WeakSet() : [])
           }
           return (
             (e.prototype.memoize = function (e) {
@@ -60417,7 +65429,10 @@
         }
       }
       function KF(e, t) {
-        return void 0 === t && (t = 0), 'string' != typeof e || 0 === t || e.length <= t ? e : e.substr(0, t) + '...'
+        return (
+          void 0 === t && (t = 0),
+          'string' != typeof e || 0 === t || e.length <= t ? e : e.substr(0, t) + '...'
+        )
       }
       function YF(e, t) {
         if (!Array.isArray(e)) return ''
@@ -60448,7 +65463,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -60488,7 +65506,10 @@
           } catch (e) {
             o.currentTarget = '<unknown>'
           }
-          for (var r in ('undefined' != typeof CustomEvent && LF(e, CustomEvent) && (o.detail = i.detail), i))
+          for (var r in ('undefined' != typeof CustomEvent &&
+            LF(e, CustomEvent) &&
+            (o.detail = i.detail),
+          i))
             Object.prototype.hasOwnProperty.call(i, r) && (o[r] = i)
           return o
         }
@@ -60549,7 +65570,8 @@
         var o = eV(t),
           a = Array.isArray(t) ? [] : {}
         if (r.memoize(t)) return '[Circular ~]'
-        for (var s in o) Object.prototype.hasOwnProperty.call(o, s) && (a[s] = rV(s, o[s], n - 1, r))
+        for (var s in o)
+          Object.prototype.hasOwnProperty.call(o, s) && (a[s] = rV(s, o[s], n - 1, r))
         return r.unmemoize(t), a
       }
       function iV(e, t) {
@@ -60651,7 +65673,10 @@
                 timestamp: new Date(1e3 * this.timestamp).toISOString(),
                 status: this.status,
                 errors: this.errors,
-                did: 'number' == typeof this.did || 'string' == typeof this.did ? '' + this.did : void 0,
+                did:
+                  'number' == typeof this.did || 'string' == typeof this.did
+                    ? '' + this.did
+                    : void 0,
                 duration: this.duration,
                 attrs: aV({
                   release: this.release,
@@ -60808,7 +65833,9 @@
               try {
                 return t.getIntegration(e)
               } catch (t) {
-                return kF.warn('Cannot retrieve integration ' + e.id + ' from the current Hub'), null
+                return (
+                  kF.warn('Cannot retrieve integration ' + e.id + ' from the current Hub'), null
+                )
               }
             }),
             (e.prototype.startSpan = function (e) {
@@ -60828,13 +65855,16 @@
               var e, t, n, r, i
               null ===
                 (n =
-                  null === (t = null === (e = this.getStackTop()) || void 0 === e ? void 0 : e.scope) || void 0 === t
+                  null ===
+                    (t = null === (e = this.getStackTop()) || void 0 === e ? void 0 : e.scope) ||
+                  void 0 === t
                     ? void 0
                     : t.getSession()) ||
                 void 0 === n ||
                 n.close(),
                 this._sendSessionUpdate(),
-                null === (i = null === (r = this.getStackTop()) || void 0 === r ? void 0 : r.scope) ||
+                null ===
+                  (i = null === (r = this.getStackTop()) || void 0 === r ? void 0 : r.scope) ||
                   void 0 === i ||
                   i.setSession()
             }),
@@ -60847,11 +65877,19 @@
                 a = i.environment,
                 s = ((0, xF.Rf)().navigator || {}).userAgent,
                 l = new sV(
-                  yF(yF(yF({ release: o, environment: a }, n && { user: n.getUser() }), s && { userAgent: s }), e)
+                  yF(
+                    yF(
+                      yF({ release: o, environment: a }, n && { user: n.getUser() }),
+                      s && { userAgent: s }
+                    ),
+                    e
+                  )
                 )
               if (n) {
                 var c = n.getSession && n.getSession()
-                c && c.status === vF.Ok && c.update({ status: vF.Exited }), this.endSession(), n.setSession(l)
+                c && c.status === vF.Ok && c.update({ status: vF.Exited }),
+                  this.endSession(),
+                  n.setSession(l)
               }
               return l
             }),
@@ -60875,7 +65913,8 @@
               for (var t = [], n = 1; n < arguments.length; n++) t[n - 1] = arguments[n]
               var r = cV(),
                 i = r.__SENTRY__
-              if (i && i.extensions && 'function' == typeof i.extensions[e]) return i.extensions[e].apply(this, t)
+              if (i && i.extensions && 'function' == typeof i.extensions[e])
+                return i.extensions[e].apply(this, t)
               kF.warn('Extension method ' + e + " couldn't be found, doing nothing.")
             }),
             e
@@ -60901,8 +65940,11 @@
                   var i =
                     null ===
                       (r =
-                        null === (n = null === (t = cV().__SENTRY__) || void 0 === t ? void 0 : t.extensions) ||
-                        void 0 === n
+                        null ===
+                          (n =
+                            null === (t = cV().__SENTRY__) || void 0 === t
+                              ? void 0
+                              : t.extensions) || void 0 === n
                           ? void 0
                           : n.domain) || void 0 === r
                       ? void 0
@@ -60949,16 +65991,27 @@
                   var i = n.getClient(),
                     o = i ? i.getOptions() : {},
                     a = 'function' == typeof r._mergeOptions ? r._mergeOptions(o) : {}
-                  return 'function' != typeof r._shouldDropEvent ? t : r._shouldDropEvent(t, a) ? null : t
+                  return 'function' != typeof r._shouldDropEvent
+                    ? t
+                    : r._shouldDropEvent(t, a)
+                    ? null
+                    : t
                 }
                 return t
               })
             }),
             (e.prototype._shouldDropEvent = function (e, t) {
               return this._isSentryError(e, t)
-                ? (kF.warn('Event dropped due to being internal Sentry Error.\nEvent: ' + (0, xF.jH)(e)), !0)
+                ? (kF.warn(
+                    'Event dropped due to being internal Sentry Error.\nEvent: ' + (0, xF.jH)(e)
+                  ),
+                  !0)
                 : this._isIgnoredError(e, t)
-                ? (kF.warn('Event dropped due to being matched by `ignoreErrors` option.\nEvent: ' + (0, xF.jH)(e)), !0)
+                ? (kF.warn(
+                    'Event dropped due to being matched by `ignoreErrors` option.\nEvent: ' +
+                      (0, xF.jH)(e)
+                  ),
+                  !0)
                 : this._isDeniedUrl(e, t)
                 ? (kF.warn(
                     'Event dropped due to being matched by `denyUrls` option.\nEvent: ' +
@@ -61038,7 +66091,8 @@
                     e.denyUrls || []
                   ),
                   ignoreErrors: EF(this._options.ignoreErrors || [], e.ignoreErrors || [], vV),
-                  ignoreInternal: void 0 === this._options.ignoreInternal || this._options.ignoreInternal
+                  ignoreInternal:
+                    void 0 === this._options.ignoreInternal || this._options.ignoreInternal
                 }
               )
             }),
@@ -61065,7 +66119,9 @@
                 }
                 if (e.exception) {
                   var n =
-                    e.exception.values && e.exception.values[0].stacktrace && e.exception.values[0].stacktrace.frames
+                    e.exception.values &&
+                    e.exception.values[0].stacktrace &&
+                    e.exception.values[0].stacktrace.frames
                   return (n && n[n.length - 1].filename) || null
                 }
                 return null
@@ -61135,7 +66191,8 @@
                         ZF(CV.console, e, function (t) {
                           return function () {
                             for (var n = [], r = 0; r < arguments.length; r++) n[r] = arguments[r]
-                            OV('console', { args: n, level: e }), t && Function.prototype.apply.call(t, CV.console, n)
+                            OV('console', { args: n, level: e }),
+                              t && Function.prototype.apply.call(t, CV.console, n)
                           }
                         })
                     })
@@ -61177,8 +66234,11 @@
                                     o &&
                                       ((o.refCount -= 1),
                                       o.refCount <= 0 &&
-                                        (e.call(this, t, o.handler, r), (o.handler = void 0), delete i[t]),
-                                      0 === Object.keys(i).length && delete this.__sentry_instrumentation_handlers__)
+                                        (e.call(this, t, o.handler, r),
+                                        (o.handler = void 0),
+                                        delete i[t]),
+                                      0 === Object.keys(i).length &&
+                                        delete this.__sentry_instrumentation_handlers__)
                                   } catch (e) {}
                                 return e.call(this, t, n, r)
                               }
@@ -61198,7 +66258,10 @@
                           for (var r = [], i = 0; i < arguments.length; i++) r[i] = arguments[i]
                           var o = this,
                             a = r[1]
-                          ;(o.__sentry_xhr__ = { method: MF(r[0]) ? r[0].toUpperCase() : r[0], url: r[1] }),
+                          ;(o.__sentry_xhr__ = {
+                            method: MF(r[0]) ? r[0].toUpperCase() : r[0],
+                            url: r[1]
+                          }),
                             MF(a) &&
                               'POST' === o.__sentry_xhr__.method &&
                               a.match(/sentry_key/) &&
@@ -61213,17 +66276,25 @@
                                 if (-1 !== n) {
                                   e.splice(n)
                                   var i = t.splice(n)[0]
-                                  o.__sentry_xhr__ && void 0 !== i[0] && (o.__sentry_xhr__.body = i[0])
+                                  o.__sentry_xhr__ &&
+                                    void 0 !== i[0] &&
+                                    (o.__sentry_xhr__.body = i[0])
                                 }
                               } catch (e) {}
-                              OV('xhr', { args: r, endTimestamp: Date.now(), startTimestamp: Date.now(), xhr: o })
+                              OV('xhr', {
+                                args: r,
+                                endTimestamp: Date.now(),
+                                startTimestamp: Date.now(),
+                                xhr: o
+                              })
                             }
                           }
                           return (
                             'onreadystatechange' in o && 'function' == typeof o.onreadystatechange
                               ? ZF(o, 'onreadystatechange', function (e) {
                                   return function () {
-                                    for (var t = [], n = 0; n < arguments.length; n++) t[n] = arguments[n]
+                                    for (var t = [], n = 0; n < arguments.length; n++)
+                                      t[n] = arguments[n]
                                     return s(), e.apply(o, t)
                                   }
                                 })
@@ -61258,25 +66329,43 @@
                         var r = n.createElement('iframe')
                         ;(r.hidden = !0),
                           n.head.appendChild(r),
-                          r.contentWindow && r.contentWindow.fetch && (t = AV(r.contentWindow.fetch)),
+                          r.contentWindow &&
+                            r.contentWindow.fetch &&
+                            (t = AV(r.contentWindow.fetch)),
                           n.head.removeChild(r)
                       } catch (e) {
-                        kF.warn('Could not create sandbox iframe for pure fetch check, bailing to window.fetch: ', e)
+                        kF.warn(
+                          'Could not create sandbox iframe for pure fetch check, bailing to window.fetch: ',
+                          e
+                        )
                       }
                     return t
                   })() &&
                     ZF(CV, 'fetch', function (e) {
                       return function () {
                         for (var t = [], n = 0; n < arguments.length; n++) t[n] = arguments[n]
-                        var r = { args: t, fetchData: { method: TV(t), url: BV(t) }, startTimestamp: Date.now() }
+                        var r = {
+                          args: t,
+                          fetchData: { method: TV(t), url: BV(t) },
+                          startTimestamp: Date.now()
+                        }
                         return (
                           OV('fetch', yF({}, r)),
                           e.apply(CV, t).then(
                             function (e) {
-                              return OV('fetch', yF(yF({}, r), { endTimestamp: Date.now(), response: e })), e
+                              return (
+                                OV(
+                                  'fetch',
+                                  yF(yF({}, r), { endTimestamp: Date.now(), response: e })
+                                ),
+                                e
+                              )
                             },
                             function (e) {
-                              throw (OV('fetch', yF(yF({}, r), { endTimestamp: Date.now(), error: e })), e)
+                              throw (
+                                (OV('fetch', yF(yF({}, r), { endTimestamp: Date.now(), error: e })),
+                                e)
+                              )
                             }
                           )
                         )
@@ -61325,7 +66414,8 @@
                   ;(MV = CV.onerror),
                     (CV.onerror = function (e, t, n, r, i) {
                       return (
-                        OV('error', { column: r, error: i, line: n, msg: e, url: t }), !!MV && MV.apply(this, arguments)
+                        OV('error', { column: r, error: i, line: n, msg: e, url: t }),
+                        !!MV && MV.apply(this, arguments)
                       )
                     })
                   break
@@ -61350,7 +66440,12 @@
                 a(t)
               } catch (t) {
                 kF.error(
-                  'Error while triggering instrumentation handler.\nType: ' + e + '\nName: ' + QF(a) + '\nError: ' + t
+                  'Error while triggering instrumentation handler.\nType: ' +
+                    e +
+                    '\nName: ' +
+                    QF(a) +
+                    '\nError: ' +
+                    t
                 )
               }
             }
@@ -61377,7 +66472,11 @@
       function BV(e) {
         return (
           void 0 === e && (e = []),
-          'string' == typeof e[0] ? e[0] : 'Request' in CV && LF(e[0], Request) ? e[0].url : String(e[0])
+          'string' == typeof e[0]
+            ? e[0]
+            : 'Request' in CV && LF(e[0], Request)
+            ? e[0].url
+            : String(e[0])
         )
       }
       function jV(e, t) {
@@ -61392,7 +66491,8 @@
                 try {
                   var t = e.target
                   if (!t || !t.tagName) return !0
-                  if ('INPUT' === t.tagName || 'TEXTAREA' === t.tagName || t.isContentEditable) return !1
+                  if ('INPUT' === t.tagName || 'TEXTAREA' === t.tagName || t.isContentEditable)
+                    return !1
                 } catch (e) {}
                 return !0
               })(n)
@@ -61482,7 +66582,15 @@
                 var m = u.match(/^\d+/)
                 m && (u = m[0])
               }
-              this._fromComponents({ host: s, pass: a, path: p, projectId: u, port: c, protocol: r, publicKey: i })
+              this._fromComponents({
+                host: s,
+                pass: a,
+                path: p,
+                projectId: u,
+                port: c,
+                protocol: r,
+                publicKey: i
+              })
             }),
             (e.prototype._fromComponents = function (e) {
               'user' in e && !('publicKey' in e) && (e.publicKey = e.user),
@@ -61506,7 +66614,8 @@
                 throw new IV('Invalid Dsn: Invalid projectId ' + this.projectId)
               if ('http' !== this.protocol && 'https' !== this.protocol)
                 throw new IV('Invalid Dsn: Invalid protocol ' + this.protocol)
-              if (this.port && isNaN(parseInt(this.port, 10))) throw new IV('Invalid Dsn: Invalid port ' + this.port)
+              if (this.port && isNaN(parseInt(this.port, 10)))
+                throw new IV('Invalid Dsn: Invalid port ' + this.port)
             }),
             e
           )
@@ -61633,12 +66742,16 @@
                           return e.name
                         }),
                         o = 'Debug'
-                      return -1 !== i.indexOf(o) && r.push.apply(r, EF(r.splice(i.indexOf(o), 1))), r
+                      return (
+                        -1 !== i.indexOf(o) && r.push.apply(r, EF(r.splice(i.indexOf(o), 1))), r
+                      )
                     })(e).forEach(function (e) {
                       ;(t[e.name] = e),
                         (function (e) {
                           ;-1 === FV.indexOf(e.name) &&
-                            (e.setupOnce(HF, uV), FV.push(e.name), kF.log('Integration installed: ' + e.name))
+                            (e.setupOnce(HF, uV),
+                            FV.push(e.name),
+                            kF.log('Integration installed: ' + e.name))
                         })(e)
                     }),
                     t
@@ -61649,7 +66762,9 @@
               try {
                 return this._integrations[e.id] || null
               } catch (t) {
-                return kF.warn('Cannot retrieve integration ' + e.id + ' from the current Client'), null
+                return (
+                  kF.warn('Cannot retrieve integration ' + e.id + ' from the current Client'), null
+                )
               }
             }),
             (e.prototype._updateSessionFromEvent = function (e, t) {
@@ -61680,7 +66795,9 @@
               }
               var p = e.status === vF.Ok
               ;((p && 0 === e.errors) || (p && i)) &&
-                (e.update(yF(yF({}, i && { status: vF.Crashed }), { errors: e.errors || Number(o || i) })),
+                (e.update(
+                  yF(yF({}, i && { status: vF.Crashed }), { errors: e.errors || Number(o || i) })
+                ),
                 this.captureSession(e))
             }),
             (e.prototype._sendSession = function (e) {
@@ -61763,7 +66880,8 @@
             }),
             (e.prototype._applyIntegrationsMetadata = function (e) {
               var t = Object.keys(this._integrations)
-              t.length > 0 && ((e.sdk = e.sdk || {}), (e.sdk.integrations = EF(e.sdk.integrations || [], t)))
+              t.length > 0 &&
+                ((e.sdk = e.sdk || {}), (e.sdk.integrations = EF(e.sdk.integrations || [], t)))
             }),
             (e.prototype._sendEvent = function (e) {
               this._getBackend().sendEvent(e)
@@ -61783,23 +66901,28 @@
                 i = this.getOptions(),
                 o = i.beforeSend,
                 a = i.sampleRate
-              if (!this._isEnabled()) return FF.reject(new IV('SDK not enabled, will not capture event.'))
+              if (!this._isEnabled())
+                return FF.reject(new IV('SDK not enabled, will not capture event.'))
               var s = 'transaction' === e.type
               return !s && 'number' == typeof a && Math.random() > a
                 ? FF.reject(
                     new IV(
-                      "Discarding event because it's not included in the random sample (sampling rate = " + a + ')'
+                      "Discarding event because it's not included in the random sample (sampling rate = " +
+                        a +
+                        ')'
                     )
                   )
                 : this._prepareEvent(e, n, t)
                     .then(function (e) {
-                      if (null === e) throw new IV('An event processor returned null, will not send event.')
+                      if (null === e)
+                        throw new IV('An event processor returned null, will not send event.')
                       if ((t && t.data && !0 === t.data.__sentry__) || s || !o) return e
                       var n = o(e, t)
                       return r._ensureBeforeSendRv(n)
                     })
                     .then(function (e) {
-                      if (null === e) throw new IV('`beforeSend` returned `null`, will not send event.')
+                      if (null === e)
+                        throw new IV('`beforeSend` returned `null`, will not send event.')
                       var t = n && n.getSession && n.getSession()
                       return !s && t && r._updateSessionFromEvent(t, e), r._sendEvent(e), e
                     })
@@ -61959,7 +67082,8 @@
       function eq(e) {
         var t = null,
           n = 0
-        e && ('number' == typeof e.framesToPop ? (n = e.framesToPop) : ZV.test(e.message) && (n = 1))
+        e &&
+          ('number' == typeof e.framesToPop ? (n = e.framesToPop) : ZV.test(e.message) && (n = 1))
         try {
           if (
             (t = (function (e) {
@@ -62004,7 +67128,10 @@
                     0 === n[2].indexOf('eval') &&
                     (t = XV.exec(n[2])) &&
                     ((n[2] = t[1]), (n[3] = t[2]), (n[4] = t[3]))
-                  var l = n[2] && 0 === n[2].indexOf('address at ') ? n[2].substr('address at '.length) : n[2],
+                  var l =
+                      n[2] && 0 === n[2].indexOf('address at ')
+                        ? n[2].substr('address at '.length)
+                        : n[2],
                     c = n[1] || GV,
                     p = -1 !== c.indexOf('safari-extension'),
                     u = -1 !== c.indexOf('safari-web-extension')
@@ -62019,12 +67146,21 @@
                       column: n[4] ? +n[4] : null
                     })
                 } else if ((n = YV.exec(o[a])))
-                  r = { url: n[2], func: n[1] || GV, args: [], line: +n[3], column: n[4] ? +n[4] : null }
+                  r = {
+                    url: n[2],
+                    func: n[1] || GV,
+                    args: [],
+                    line: +n[3],
+                    column: n[4] ? +n[4] : null
+                  }
                 else {
                   if (!(n = KV.exec(o[a]))) continue
                   n[3] && n[3].indexOf(' > eval') > -1 && (t = JV.exec(n[3]))
                     ? ((n[1] = n[1] || 'eval'), (n[3] = t[1]), (n[4] = t[2]), (n[5] = ''))
-                    : 0 !== a || n[5] || void 0 === e.columnNumber || (i[0].column = e.columnNumber + 1),
+                    : 0 !== a ||
+                      n[5] ||
+                      void 0 === e.columnNumber ||
+                      (i[0].column = e.columnNumber + 1),
                     (r = {
                       url: n[3],
                       func: n[1] || GV,
@@ -62051,7 +67187,11 @@
       }
       function nq(e) {
         var t = e && e.message
-        return t ? (t.error && 'string' == typeof t.error.message ? t.error.message : t) : 'No error message'
+        return t
+          ? t.error && 'string' == typeof t.error.message
+            ? t.error.message
+            : t
+          : 'No error message'
       }
       function rq(e) {
         var t = oq(e.stack),
@@ -62071,7 +67211,8 @@
           n = t[0].func || '',
           r = t[t.length - 1].func || ''
         return (
-          (-1 === n.indexOf('captureMessage') && -1 === n.indexOf('captureException')) || (t = t.slice(1)),
+          (-1 === n.indexOf('captureMessage') && -1 === n.indexOf('captureException')) ||
+            (t = t.slice(1)),
           -1 !== r.indexOf('sentryWrapped') && (t = t.slice(0, -1)),
           t
             .slice(0, 50)
@@ -62110,7 +67251,11 @@
                   values: [
                     {
                       type: zF(e) ? e.constructor.name : n ? 'UnhandledRejection' : 'Error',
-                      value: 'Non-Error ' + (n ? 'promise rejection' : 'exception') + ' captured with keys: ' + oV(e)
+                      value:
+                        'Non-Error ' +
+                        (n ? 'promise rejection' : 'exception') +
+                        ' captured with keys: ' +
+                        oV(e)
                     }
                   ]
                 },
@@ -62178,11 +67323,14 @@
           a = o.transactionSampling,
           s = (function (e, t) {
             var n = {}
-            for (var r in e) Object.prototype.hasOwnProperty.call(e, r) && t.indexOf(r) < 0 && (n[r] = e[r])
+            for (var r in e)
+              Object.prototype.hasOwnProperty.call(e, r) && t.indexOf(r) < 0 && (n[r] = e[r])
             if (null != e && 'function' == typeof Object.getOwnPropertySymbols) {
               var i = 0
               for (r = Object.getOwnPropertySymbols(e); i < r.length; i++)
-                t.indexOf(r[i]) < 0 && Object.prototype.propertyIsEnumerable.call(e, r[i]) && (n[r[i]] = e[r[i]])
+                t.indexOf(r[i]) < 0 &&
+                  Object.prototype.propertyIsEnumerable.call(e, r[i]) &&
+                  (n[r[i]] = e[r[i]])
             }
             return n
           })(o, ['transactionSampling']),
@@ -62193,7 +67341,9 @@
         var u = {
           body: JSON.stringify(n ? cq(e, t.metadata.sdk) : e),
           type: r,
-          url: i ? t.getEnvelopeEndpointWithUrlEncodedAuth() : t.getStoreEndpointWithUrlEncodedAuth()
+          url: i
+            ? t.getEnvelopeEndpointWithUrlEncodedAuth()
+            : t.getStoreEndpointWithUrlEncodedAuth()
         }
         if (i) {
           var d =
@@ -62239,7 +67389,9 @@
               return this.getStoreEndpoint() + '?' + this._encodedAuth()
             }),
             (e.prototype.getEnvelopeEndpointWithUrlEncodedAuth = function () {
-              return this.forceEnvelope() ? this._tunnel : this._getEnvelopeEndpoint() + '?' + this._encodedAuth()
+              return this.forceEnvelope()
+                ? this._tunnel
+                : this._getEnvelopeEndpoint() + '?' + this._encodedAuth()
             }),
             (e.prototype.getStoreEndpointPath = function () {
               var e = this.getDsn()
@@ -62302,7 +67454,8 @@
             }),
             (e.prototype.add = function (e) {
               var t = this
-              if (!this.isReady()) return FF.reject(new IV('Not adding Promise due to buffer limit reached.'))
+              if (!this.isReady())
+                return FF.reject(new IV('Not adding Promise due to buffer limit reached.'))
               var n = e()
               return (
                 -1 === this._buffer.indexOf(n) && this._buffer.push(n),
@@ -62340,7 +67493,12 @@
             e
           )
         })(),
-        hq = { event: 'error', transaction: 'transaction', session: 'session', attachment: 'attachment' },
+        hq = {
+          event: 'error',
+          transaction: 'transaction',
+          session: 'session',
+          attachment: 'attachment'
+        },
         fq = (function () {
           function e(e) {
             ;(this.options = e),
@@ -62364,7 +67522,9 @@
                 o = e.reject,
                 a = qV.fromHttpCode(n.status)
               this._handleRateLimit(r) &&
-                kF.warn('Too many ' + t + ' requests, backing off until: ' + this._disabledUntil(t)),
+                kF.warn(
+                  'Too many ' + t + ' requests, backing off until: ' + this._disabledUntil(t)
+                ),
                 a !== qV.Success ? o(n) : i({ status: a })
             }),
             (e.prototype._disabledUntil = function (e) {
@@ -62389,7 +67549,11 @@
                       u = parseInt(p[0], 10),
                       d = 1e3 * (isNaN(u) ? 60 : u)
                     try {
-                      for (var m = ((r = void 0), bF(p[1].split(';'))), h = m.next(); !h.done; h = m.next()) {
+                      for (
+                        var m = ((r = void 0), bF(p[1].split(';'))), h = m.next();
+                        !h.done;
+                        h = m.next()
+                      ) {
                         var f = h.value
                         this._rateLimits[f || 'all'] = new Date(o + d)
                       }
@@ -62429,7 +67593,9 @@
                 if (AV(n.fetch)) return n.fetch.bind(n)
                 var r = n.document,
                   i = n.fetch
-                if ('function' == typeof (null === (e = r) || void 0 === e ? void 0 : e.createElement))
+                if (
+                  'function' == typeof (null === (e = r) || void 0 === e ? void 0 : e.createElement)
+                )
                   try {
                     var o = r.createElement('iframe')
                     ;(o.hidden = !0),
@@ -62438,7 +67604,10 @@
                         (i = o.contentWindow.fetch),
                       r.head.removeChild(o)
                   } catch (e) {
-                    kF.warn('Could not create sandbox iframe for pure fetch check, bailing to window.fetch: ', e)
+                    kF.warn(
+                      'Could not create sandbox iframe for pure fetch check, bailing to window.fetch: ',
+                      e
+                    )
                   }
                 return i.bind(n)
               })())
@@ -62469,7 +67638,8 @@
                 })
               var r = { body: e.body, method: 'POST', referrerPolicy: EV() ? 'origin' : '' }
               return (
-                void 0 !== this.options.fetchParameters && Object.assign(r, this.options.fetchParameters),
+                void 0 !== this.options.fetchParameters &&
+                  Object.assign(r, this.options.fetchParameters),
                 void 0 !== this.options.headers && (r.headers = this.options.headers),
                 this._buffer.add(function () {
                   return new FF(function (t, i) {
@@ -62479,7 +67649,13 @@
                           'x-sentry-rate-limits': r.headers.get('X-Sentry-Rate-Limits'),
                           'retry-after': r.headers.get('Retry-After')
                         }
-                        n._handleResponse({ requestType: e.type, response: r, headers: o, resolve: t, reject: i })
+                        n._handleResponse({
+                          requestType: e.type,
+                          response: r,
+                          headers: o,
+                          resolve: t,
+                          reject: i
+                        })
                       })
                       .catch(i)
                   })
@@ -62524,12 +67700,19 @@
                             'x-sentry-rate-limits': i.getResponseHeader('X-Sentry-Rate-Limits'),
                             'retry-after': i.getResponseHeader('Retry-After')
                           }
-                          n._handleResponse({ requestType: e.type, response: i, headers: o, resolve: t, reject: r })
+                          n._handleResponse({
+                            requestType: e.type,
+                            response: i,
+                            headers: o,
+                            resolve: t,
+                            reject: r
+                          })
                         }
                       }),
                       i.open('POST', e.url),
                       n.options.headers))
-                        n.options.headers.hasOwnProperty(o) && i.setRequestHeader(o, n.options.headers[o])
+                        n.options.headers.hasOwnProperty(o) &&
+                          i.setRequestHeader(o, n.options.headers[o])
                       i.send(e.body)
                     })
                   })
@@ -62545,7 +67728,9 @@
             fF(t, e),
             (t.prototype.eventFromException = function (e, t) {
               return (function (e, t, n) {
-                var r = aq(t, (n && n.syntheticException) || void 0, { attachStacktrace: e.attachStacktrace })
+                var r = aq(t, (n && n.syntheticException) || void 0, {
+                  attachStacktrace: e.attachStacktrace
+                })
                 return (
                   (0, xF.EG)(r, { handled: !0, type: 'generic' }),
                   (r.level = $V.Error),
@@ -62559,7 +67744,9 @@
                 void 0 === t && (t = $V.Info),
                 (function (e, t, n, r) {
                   void 0 === n && (n = $V.Info)
-                  var i = sq(t, (r && r.syntheticException) || void 0, { attachStacktrace: e.attachStacktrace })
+                  var i = sq(t, (r && r.syntheticException) || void 0, {
+                    attachStacktrace: e.attachStacktrace
+                  })
                   return (i.level = n), r && r.event_id && (i.event_id = r.event_id), FF.resolve(i)
                 })(this._options, e, t, n)
               )
@@ -62571,7 +67758,11 @@
                 tunnel: this._options.tunnel,
                 _metadata: this._options._metadata
               })
-              return this._options.transport ? new this._options.transport(t) : bV() ? new vq(t) : new gq(t)
+              return this._options.transport
+                ? new this._options.transport(t)
+                : bV()
+                ? new vq(t)
+                : new gq(t)
             }),
             t
           )
@@ -62580,7 +67771,9 @@
         for (var t = [], n = 1; n < arguments.length; n++) t[n - 1] = arguments[n]
         var r = uV()
         if (r && r[e]) return r[e].apply(r, EF(t))
-        throw new Error('No hub defined or ' + e + ' was not found on the hub, please open a bug report.')
+        throw new Error(
+          'No hub defined or ' + e + ' was not found on the hub, please open a bug report.'
+        )
       }
       function Aq(e, t) {
         var n
@@ -62589,7 +67782,11 @@
         } catch (e) {
           n = e
         }
-        return bq('captureException', e, { captureContext: t, originalException: e, syntheticException: n })
+        return bq('captureException', e, {
+          captureContext: t,
+          originalException: e,
+          syntheticException: n
+        })
       }
       function Eq(e) {
         bq('withScope', e)
@@ -62665,7 +67862,10 @@
                 return typeof e
               }
             : function (e) {
-                return e && 'function' == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype
+                return e &&
+                  'function' == typeof Symbol &&
+                  e.constructor === Symbol &&
+                  e !== Symbol.prototype
                   ? 'symbol'
                   : typeof e
               })(e)
@@ -62673,7 +67873,10 @@
       var kq = (function () {
           function e(t) {
             ;(this.name = e.id),
-              (this._options = yF({ console: !0, dom: !0, fetch: !0, history: !0, sentry: !0, xhr: !0 }, t))
+              (this._options = yF(
+                { console: !0, dom: !0, fetch: !0, history: !0, sentry: !0, xhr: !0 },
+                t
+              ))
           }
           return (
             (e.prototype.addSentryBreadcrumb = function (e) {
@@ -62740,14 +67943,16 @@
               }
               if ('assert' === e.level) {
                 if (!1 !== e.args[0]) return
-                ;(t.message = 'Assertion failed: ' + (YF(e.args.slice(1), ' ') || 'console.assert')),
+                ;(t.message =
+                  'Assertion failed: ' + (YF(e.args.slice(1), ' ') || 'console.assert')),
                   (t.data.arguments = e.args.slice(1))
               }
               uV().addBreadcrumb(t, { input: e.args, level: e.level })
             }),
             (e.prototype._domBreadcrumb = function (e) {
               var t,
-                n = 'object' === Pq(this._options.dom) ? this._options.dom.serializeAttribute : void 0
+                n =
+                  'object' === Pq(this._options.dom) ? this._options.dom.serializeAttribute : void 0
               'string' == typeof n && (n = [n])
               try {
                 t = e.event.target ? $F(e.event.target, n) : $F(e.event, n)
@@ -62840,7 +68045,10 @@
                     : kF.error('Trying to call showReportDialog with Sentry Client disabled'))
             }),
             (t.prototype._prepareEvent = function (t, n, r) {
-              return (t.platform = t.platform || 'javascript'), e.prototype._prepareEvent.call(this, t, n, r)
+              return (
+                (t.platform = t.platform || 'javascript'),
+                e.prototype._prepareEvent.call(this, t, n, r)
+              )
             }),
             (t.prototype._sendEvent = function (t) {
               var n = this.getIntegration(kq)
@@ -62884,7 +68092,13 @@
           function e(t) {
             ;(this.name = e.id),
               (this._options = yF(
-                { XMLHttpRequest: !0, eventTarget: !0, requestAnimationFrame: !0, setInterval: !0, setTimeout: !0 },
+                {
+                  XMLHttpRequest: !0,
+                  eventTarget: !0,
+                  requestAnimationFrame: !0,
+                  setInterval: !0,
+                  setTimeout: !0
+                },
                 t
               ))
           }
@@ -62892,22 +68106,27 @@
             (e.prototype.setupOnce = function () {
               var e = (0, xF.Rf)()
               this._options.setTimeout && ZF(e, 'setTimeout', this._wrapTimeFunction.bind(this)),
-                this._options.setInterval && ZF(e, 'setInterval', this._wrapTimeFunction.bind(this)),
-                this._options.requestAnimationFrame && ZF(e, 'requestAnimationFrame', this._wrapRAF.bind(this)),
+                this._options.setInterval &&
+                  ZF(e, 'setInterval', this._wrapTimeFunction.bind(this)),
+                this._options.requestAnimationFrame &&
+                  ZF(e, 'requestAnimationFrame', this._wrapRAF.bind(this)),
                 this._options.XMLHttpRequest &&
                   'XMLHttpRequest' in e &&
                   ZF(XMLHttpRequest.prototype, 'send', this._wrapXHR.bind(this)),
                 this._options.eventTarget &&
-                  (Array.isArray(this._options.eventTarget) ? this._options.eventTarget : Oq).forEach(
-                    this._wrapEventTarget.bind(this)
-                  )
+                  (Array.isArray(this._options.eventTarget)
+                    ? this._options.eventTarget
+                    : Oq
+                  ).forEach(this._wrapEventTarget.bind(this))
             }),
             (e.prototype._wrapTimeFunction = function (e) {
               return function () {
                 for (var t = [], n = 0; n < arguments.length; n++) t[n] = arguments[n]
                 var r = t[0]
                 return (
-                  (t[0] = Cq(r, { mechanism: { data: { function: QF(e) }, handled: !0, type: 'instrument' } })),
+                  (t[0] = Cq(r, {
+                    mechanism: { data: { function: QF(e) }, handled: !0, type: 'instrument' }
+                  })),
                   e.apply(this, t)
                 )
               }
@@ -62981,9 +68200,17 @@
                       'function' == typeof r[e] &&
                       ZF(r, e, function (t) {
                         var n = {
-                          mechanism: { data: { function: e, handler: QF(t) }, handled: !0, type: 'instrument' }
+                          mechanism: {
+                            data: { function: e, handler: QF(t) },
+                            handled: !0,
+                            type: 'instrument'
+                          }
                         }
-                        return t.__sentry_original__ && (n.mechanism.data.handler = QF(t.__sentry_original__)), Cq(t, n)
+                        return (
+                          t.__sentry_original__ &&
+                            (n.mechanism.data.handler = QF(t.__sentry_original__)),
+                          Cq(t, n)
+                        )
                       })
                   }),
                   e.apply(this, t)
@@ -63033,7 +68260,8 @@
                                 n.line,
                                 n.column
                               )
-                      ;(0, xF.EG)(l, { handled: !1, type: 'onerror' }), i.captureEvent(l, { originalException: r })
+                      ;(0, xF.EG)(l, { handled: !1, type: 'onerror' }),
+                        i.captureEvent(l, { originalException: r })
                     }
                   },
                   type: 'error'
@@ -63047,7 +68275,9 @@
                   callback: function (n) {
                     var r = n
                     try {
-                      'reason' in n ? (r = n.reason) : 'detail' in n && 'reason' in n.detail && (r = n.detail.reason)
+                      'reason' in n
+                        ? (r = n.reason)
+                        : 'detail' in n && 'reason' in n.detail && (r = n.detail.reason)
                     } catch (e) {}
                     var i = uV(),
                       o = i.getIntegration(e),
@@ -63056,7 +68286,10 @@
                     var s = i.getClient(),
                       l = DF(r)
                         ? t._eventFromRejectionWithPrimitive(r)
-                        : aq(r, void 0, { attachStacktrace: s && s.getOptions().attachStacktrace, rejection: !0 })
+                        : aq(r, void 0, {
+                            attachStacktrace: s && s.getOptions().attachStacktrace,
+                            rejection: !0
+                          })
                     ;(l.level = $V.Error),
                       (0, xF.EG)(l, { handled: !1, type: 'onunhandledrejection' }),
                       i.captureEvent(l, { originalException: r })
@@ -63092,7 +68325,8 @@
                 (e.exception.values = e.exception.values || []),
                 (e.exception.values[0] = e.exception.values[0] || {}),
                 (e.exception.values[0].stacktrace = e.exception.values[0].stacktrace || {}),
-                (e.exception.values[0].stacktrace.frames = e.exception.values[0].stacktrace.frames || [])
+                (e.exception.values[0].stacktrace.frames =
+                  e.exception.values[0].stacktrace.frames || [])
               var i = isNaN(parseInt(r, 10)) ? void 0 : r,
                 o = isNaN(parseInt(n, 10)) ? void 0 : n,
                 a = MF(t) && t.length > 0 ? t : (0, xF.l4)()
@@ -63114,7 +68348,10 @@
         })(),
         jq = (function () {
           function e(t) {
-            void 0 === t && (t = {}), (this.name = e.id), (this._key = t.key || 'cause'), (this._limit = t.limit || 5)
+            void 0 === t && (t = {}),
+              (this.name = e.id),
+              (this._key = t.key || 'cause'),
+              (this._limit = t.limit || 5)
           }
           return (
             (e.prototype.setupOnce = function () {
@@ -63124,12 +68361,14 @@
               })
             }),
             (e.prototype._handler = function (e, t) {
-              if (!(e.exception && e.exception.values && t && LF(t.originalException, Error))) return e
+              if (!(e.exception && e.exception.values && t && LF(t.originalException, Error)))
+                return e
               var n = this._walkErrorTree(t.originalException, this._key)
               return (e.exception.values = EF(n, e.exception.values)), e
             }),
             (e.prototype._walkErrorTree = function (e, t, n) {
-              if ((void 0 === n && (n = []), !LF(e[t], Error) || n.length + 1 >= this._limit)) return n
+              if ((void 0 === n && (n = []), !LF(e[t], Error) || n.length + 1 >= this._limit))
+                return n
               var r = rq(eq(e[t]))
               return this._walkErrorTree(e[t], t, EF([r], n))
             }),
@@ -63248,7 +68487,10 @@
                     a = (Dq.document || {}).referrer,
                     s = (Dq.navigator || {}).userAgent,
                     l = yF(
-                      yF(yF({}, null === (i = t.request) || void 0 === i ? void 0 : i.headers), a && { Referer: a }),
+                      yF(
+                        yF({}, null === (i = t.request) || void 0 === i ? void 0 : i.headers),
+                        a && { Referer: a }
+                      ),
                       s && { 'User-Agent': s }
                     ),
                     c = yF(yF({}, o && { url: o }), { headers: l })
@@ -63277,10 +68519,11 @@
         return Array.prototype.slice.call(e)
       }
       function Lq(e) {
-        var t = '<div class="drop-overlay"><div class="box"><div class="label">{label}</div></div></div>'.replace(
-          '{label}',
-          e
-        )
+        var t =
+          '<div class="drop-overlay"><div class="box"><div class="label">{label}</div></div></div>'.replace(
+            '{label}',
+            e
+          )
         return ye(t)
       }
       function Fq(e) {
@@ -63322,11 +68565,16 @@
                       callback: function (t) {
                         var n = t.from,
                           r = t.to
-                        void 0 !== n && n !== r && (e.startSession({ ignoreDuration: !0 }), e.captureSession())
+                        void 0 !== n &&
+                          n !== r &&
+                          (e.startSession({ ignoreDuration: !0 }), e.captureSession())
                       },
                       type: 'history'
                     }))
-                } else kF.warn('Session tracking in non-browser environment with @sentry/browser is not supported.')
+                } else
+                  kF.warn(
+                    'Session tracking in non-browser environment with @sentry/browser is not supported.'
+                  )
               })()
         })({
           dsn: 'https://396f66329e384c1d8617484db0ce06dd@o313460.ingest.sentry.io/5218065',
@@ -63336,7 +68584,8 @@
           bq('setTag', 'component', 'bpmn')
         try {
           bq('setUser', {
-            id: (window.localStorage.__bio_demo_id = window.localStorage.__bio_demo_id || '_' + Math.random())
+            id: (window.localStorage.__bio_demo_id =
+              window.localStorage.__bio_demo_id || '_' + Math.random())
           })
         } catch (e) {}
       })()
@@ -63593,9 +68842,11 @@
         'bio.toggleFullscreen': function () {
           var e
           ;(e = document.querySelector('html')),
-            (document.fullscreenElement ? document.exitFullscreen() : e.requestFullscreen()).catch(function (e) {
-              console.warn('fullscreen toggle failed', e)
-            })
+            (document.fullscreenElement ? document.exitFullscreen() : e.requestFullscreen()).catch(
+              function (e) {
+                console.warn('fullscreen toggle failed', e)
+              }
+            )
         },
         'bio.createNew': oH,
         'bio.openLocal': function () {
@@ -63614,7 +68865,8 @@
         'bio.showKeyboard': function (e) {
           var t = sH['keybindings-dialog'],
             n = navigator.platform
-          ;/Mac/.test(n) ? t.find('.bindings-default').remove() : t.find('.bindings-mac').remove(), eH(t)
+          ;/Mac/.test(n) ? t.find('.bindings-default').remove() : t.find('.bindings-mac').remove(),
+            eH(t)
         },
         'bio.showAbout': function (e) {
           eH(sH['about-dialog'])
