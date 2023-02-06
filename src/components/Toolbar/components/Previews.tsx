@@ -3,10 +3,12 @@ import { defineComponent } from 'vue'
 import BpmnModdle from 'bpmn-moddle'
 import modeler from '@/store/modeler'
 import { NButton, NPopover, NCode, useDialog } from 'naive-ui'
+import { useI18n } from 'vue-i18n'
 
 const Previews = defineComponent({
   name: 'Previews',
   setup() {
+    const { t } = useI18n()
     const previewModel = useDialog()
     const modelerStore = modeler()
 
@@ -23,7 +25,7 @@ const Previews = defineComponent({
         const { xml } = await modeler.saveXML({ format: true, preamble: true })
 
         previewModel.create({
-          title: '流程预览',
+          title: t('toolbar.previewAs'),
           showIcon: false,
           content: () => (
             <div class="preview-model">
@@ -48,7 +50,7 @@ const Previews = defineComponent({
       const jsonStr = await moddle.fromXML(xml!)
 
       previewModel.create({
-        title: '流程预览',
+        title: t('toolbar.previewAs'),
         showIcon: false,
         content: () => (
           <div class="preview-model">
@@ -63,16 +65,16 @@ const Previews = defineComponent({
         v-slots={{
           trigger: () => (
             <NButton type="info" secondary>
-              预览文件
+              {t('toolbar.previewAs')}
             </NButton>
           ),
           default: () => (
             <div class="button-list_column">
               <NButton type="info" onClick={openXMLPreviewModel}>
-                预览XML
+                {t('toolbar.previewAsXML')}
               </NButton>
               <NButton type="info" onClick={openJsonPreviewModel}>
-                预览JSON
+                {t('toolbar.previewAsJSON')}
               </NButton>
             </div>
           )

@@ -5,10 +5,12 @@ import editor from '@/store/editor'
 import modeler from '@/store/modeler'
 import ToggleMode from 'bpmn-js-token-simulation/lib/features/toggle-mode/modeler/ToggleMode'
 import EventBus from 'diagram-js/lib/core/EventBus'
+import { useI18n } from 'vue-i18n'
 
 const ExternalTools = defineComponent({
   name: 'ExternalTools',
   setup() {
+    const { t } = useI18n()
     const moduleStore = modeler()
 
     let minimap: any | null = null
@@ -68,7 +70,7 @@ const ExternalTools = defineComponent({
         </div>
       )
       shortcutKeysModel.create({
-        title: '键盘快捷键',
+        title: t('toolbar.bpmnShortcutKeys'),
         showIcon: false,
         content: () => (
           <div>
@@ -91,7 +93,7 @@ const ExternalTools = defineComponent({
       listeners.value = Object.keys(eventBus._listeners).sort()
 
       eventsModel.create({
-        title: '事件列表',
+        title: t('toolbar.bpmnShortcutKeys'),
         showIcon: false,
         content: () => (
           <div class="event-listeners-box">
@@ -117,7 +119,7 @@ const ExternalTools = defineComponent({
       <NButtonGroup>
         <NPopover
           v-slots={{
-            default: () => '开启/关闭流程模拟',
+            default: () => t('toolbar.toggleProcessMock'),
             trigger: () => (
               <NButton onClick={mockSimulation}>
                 <LucideIcon name="Bot" size={16}></LucideIcon>
@@ -127,7 +129,7 @@ const ExternalTools = defineComponent({
         ></NPopover>
         <NPopover
           v-slots={{
-            default: () => '查看bpmn事件',
+            default: () => t('toolbar.bpmnEvents'),
             trigger: () => (
               <NButton onClick={openEventsModel}>
                 <LucideIcon name="Podcast" size={16}></LucideIcon>
@@ -138,7 +140,7 @@ const ExternalTools = defineComponent({
         {minimapStatus.value && (
           <NPopover
             v-slots={{
-              default: () => '展开/收起小地图',
+              default: () => t('toolbar.toggleMinimap'),
               trigger: () => (
                 <NButton onClick={() => minimapToggle()}>
                   <LucideIcon name="Map" size={16}></LucideIcon>
@@ -150,7 +152,7 @@ const ExternalTools = defineComponent({
         {lintEnable.value && (
           <NPopover
             v-slots={{
-              default: () => '开启/关闭流程校验',
+              default: () => t('toolbar.toggleProcessLint'),
               trigger: () => (
                 <NButton onClick={() => lintToggle()}>
                   <LucideIcon name="FileCheck" size={16}></LucideIcon>
@@ -162,7 +164,7 @@ const ExternalTools = defineComponent({
         {shortcutKeysEnable.value && (
           <NPopover
             v-slots={{
-              default: () => '键盘快捷键',
+              default: () => t('toolbar.bpmnShortcutKeys'),
               trigger: () => (
                 <NButton onClick={() => openShortcutKeysModel()}>
                   <LucideIcon name="Keyboard" size={16}></LucideIcon>
