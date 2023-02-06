@@ -1,11 +1,11 @@
 <template>
   <n-collapse-item name="element-documentations">
     <template #header>
-      <collapse-title title="附加文档">
+      <collapse-title :title="$t('panel.documentationSettings')">
         <lucide-icon name="FileText" />
       </collapse-title>
     </template>
-    <edit-item label="Documentation" :label-width="120">
+    <edit-item :label="$t('panel.documentationBody')" :label-width="120">
       <n-input v-model:value="elementDoc" type="textarea" @change="updateElementDoc" />
     </edit-item>
   </n-collapse-item>

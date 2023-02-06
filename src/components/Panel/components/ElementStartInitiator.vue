@@ -1,12 +1,12 @@
 <template>
   <n-collapse-item name="element-start-initiator">
     <template #header>
-      <collapse-title title="启动器">
+      <collapse-title :title="$t('panel.startInitiator')">
         <lucide-icon name="PlayCircle" />
       </collapse-title>
     </template>
     <div class="element-start-initiator">
-      <edit-item label="Initiator">
+      <edit-item :label="$t('panel.initiator')">
         <n-input v-model:value="initiator" @change="setElementInitiator" />
       </edit-item>
     </div>

@@ -1,7 +1,7 @@
 <template>
   <n-collapse-item name="element-extension-properties">
     <template #header>
-      <collapse-title title="扩展属性">
+      <collapse-title :title="$t('panel.extensionProperties')">
         <lucide-icon name="FileCog" />
       </collapse-title>
     </template>
@@ -15,26 +15,26 @@
 
       <n-button type="info" class="inline-large-button" secondary @click="openPropertyModel">
         <lucide-icon :size="20" name="Plus" />
-        <span>添加扩展属性</span>
+        <span>{{ $t('panel.addExtensionProperties') }}</span>
       </n-button>
     </div>
 
     <n-modal
       v-model:show="modelVisible"
       preset="dialog"
-      title="添加扩展属性"
+      :title="$t('panel.addExtensionProperties')"
       :style="{ width: '640px' }"
     >
       <n-form ref="formRef" :model="newProperty" :rules="rules" aria-modal="true">
-        <n-form-item path="name" label="属性名称( Name )">
+        <n-form-item path="name" :label="$t('panel.propertyName')">
           <n-input v-model:value="newProperty.name" @keydown.enter.prevent />
         </n-form-item>
-        <n-form-item path="value" label="属性值( Value )">
+        <n-form-item path="value" :label="$t('panel.propertyValue')">
           <n-input v-model:value="newProperty.value" @keydown.enter.prevent />
         </n-form-item>
       </n-form>
       <template #action>
-        <n-button size="small" type="info" @click="addProperty">确认</n-button>
+        <n-button size="small" type="info" @click="addProperty">{{ $t('panel.confirm') }}</n-button>
       </template>
     </n-modal>
   </n-collapse-item>
@@ -58,8 +58,26 @@
     name: 'ElementExtensionProperties',
     data() {
       return {
-        columns: [
-          { title: '序号', key: 'index', render: (a, index) => index + 1, width: 50 },
+        extensions: [],
+        extensionsRaw: [],
+        newProperty: { name: '', value: '' },
+        rules: {
+          name: { required: true, message: '属性名称不能为空', trigger: ['blur', 'change'] },
+          value: { required: true, message: '属性值不能为空', trigger: ['blur', 'change'] }
+        },
+        modelVisible: false
+      }
+    },
+    computed: {
+      ...mapState(modelerStore, ['getActive', 'getActiveId']),
+      columns() {
+        return [
+          {
+            title: this.$t('panel.index'),
+            key: 'index',
+            render: (a, index) => index + 1,
+            width: 60
+          },
           {
             title: 'Name',
             key: 'name',
@@ -75,7 +93,7 @@
             }
           },
           {
-            title: '操作',
+            title: this.$t('panel.operations'),
             key: 'operation',
             width: 80,
             align: 'center',
@@ -89,23 +107,12 @@
                   onClick: () => this.removeProperty(index)
                 },
                 {
-                  default: () => '移除'
+                  default: () => this.$t('panel.remove')
                 }
               )
           }
-        ],
-        extensions: [],
-        extensionsRaw: [],
-        newProperty: { name: '', value: '' },
-        rules: {
-          name: { required: true, message: '属性名称不能为空', trigger: ['blur', 'change'] },
-          value: { required: true, message: '属性值不能为空', trigger: ['blur', 'change'] }
-        },
-        modelVisible: false
+        ]
       }
-    },
-    computed: {
-      ...mapState(modelerStore, ['getActive', 'getActiveId'])
     },
     watch: {
       getActiveId: {
