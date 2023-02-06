@@ -33,9 +33,11 @@ export default defineStore('editor', {
   },
   actions: {
     updateConfiguration(conf: Partial<EditorSettings>) {
+      sessionStorage.setItem('lang', <string>conf.language)
       this.$state.editorSettings = { ...this.$state.editorSettings, ...conf }
     },
     updateLanguage(lang: string) {
+      sessionStorage.setItem('lang', lang)
       this.$state.editorSettings.language = lang || 'zh_CN'
     }
   }
