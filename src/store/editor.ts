@@ -9,6 +9,7 @@ const state = {
 export default defineStore('editor', {
   state: () => state,
   getters: {
+    getLocales: (state) => state.editorSettings.language,
     getProcessDef: (state) => ({
       processName: state.editorSettings.processName,
       processId: state.editorSettings.processId
@@ -33,6 +34,9 @@ export default defineStore('editor', {
   actions: {
     updateConfiguration(conf: Partial<EditorSettings>) {
       this.$state.editorSettings = { ...this.$state.editorSettings, ...conf }
+    },
+    updateLanguage(lang: string) {
+      this.$state.editorSettings.language = lang || 'zh_CN'
     }
   }
 })

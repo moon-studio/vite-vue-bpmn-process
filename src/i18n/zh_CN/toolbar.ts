@@ -27,7 +27,7 @@ export default {
 
   toggleProcessMock: '开启/关闭流程模拟',
   toggleProcessLint: '开启/关闭流程校验',
-  toggleMiniMap: '展开/收起小地图',
+  toggleMinimap: '展开/收起小地图',
   bpmnEvents: '查看bpmn事件',
   bpmnShortcutKeys: '键盘快捷键'
 }

@@ -1,5 +1,6 @@
 export default {
   preferences: '偏好设置',
+  language: '语言设置',
   processName: '流程名称',
   processId: '流程ID',
   toolbar: '工具栏',
@@ -28,5 +29,7 @@ export default {
 
   camunda: 'Camunda',
   activiti: 'Activiti',
-  flowable: 'Flowable'
+  flowable: 'Flowable',
+
+  'There are different states under TemplateChooser': "在'模板扩展'下有不同状态"
 }
