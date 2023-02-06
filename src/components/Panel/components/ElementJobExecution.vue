@@ -1,15 +1,15 @@
 <template>
   <n-collapse-item name="element-external-task">
     <template #header>
-      <collapse-title title="执行作业">
+      <collapse-title :title="$t('panel.executionJob')">
         <lucide-icon name="CalendarClock" />
       </collapse-title>
     </template>
     <div class="element-external-task">
-      <edit-item v-if="tpVisible" label="任务优先级" :label-width="100">
+      <edit-item v-if="tpVisible" :label="$t('panel.taskPriority')" :label-width="100">
         <n-input v-model:value="taskPriority" maxlength="32" @change="setExternalTaskPriority" />
       </edit-item>
-      <edit-item v-if="rtVisible" label="重试周期" :label-width="100">
+      <edit-item v-if="rtVisible" :label="$t('panel.retryTimeCycle')" :label-width="100">
         <n-input v-model:value="retryTimeCycle" maxlength="32" @change="setRetryTimeCycle" />
       </edit-item>
     </div>

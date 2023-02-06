@@ -1,7 +1,7 @@
 <template>
   <n-collapse-item name="element-execution-listeners">
     <template #header>
-      <collapse-title title="执行监听">
+      <collapse-title :title="$t('panel.executionListeners')">
         <lucide-icon name="Radio" />
       </collapse-title>
     </template>
@@ -15,14 +15,14 @@
 
       <n-button type="info" class="inline-large-button" secondary @click="openListenerModel(-1)">
         <lucide-icon :size="20" name="Plus" />
-        <span>添加执行监听</span>
+        <span>{{ $t('panel.addExecutionListener') }}</span>
       </n-button>
     </div>
 
     <n-modal
       v-model:show="modelVisible"
       preset="dialog"
-      title="添加执行监听器"
+      :title="$t('panel.addExecutionListener')"
       :style="{ width: '640px' }"
     >
       <n-form
@@ -32,10 +32,10 @@
         class="need-filled"
         aria-modal="true"
       >
-        <n-form-item path="event" label="事件类型( Event Type )">
+        <n-form-item path="event" :label="$t('panel.executionListenerEventType')">
           <n-select v-model:value="newListener.event" :options="listenerEventTypeOptions" />
         </n-form-item>
-        <n-form-item path="type" label="监听器类型( Listener Type )">
+        <n-form-item path="type" :label="$t('panel.executionListenerType')">
           <n-select
             v-model:value="newListener.type"
             :options="listenerTypeOptions"
@@ -45,21 +45,21 @@
         <n-form-item
           v-if="formItemVisible.listenerType === 'class'"
           path="class"
-          label="Java类( Java Class )"
+          :label="$t('panel.javaClass')"
         >
           <n-input v-model:value="newListener.class" @keydown.enter.prevent />
         </n-form-item>
         <n-form-item
           v-if="formItemVisible.listenerType === 'expression'"
           path="expression"
-          label="条件表达式( Expression )"
+          :label="$t('panel.expression')"
         >
           <n-input v-model:value="newListener.expression" @keydown.enter.prevent />
         </n-form-item>
         <n-form-item
           v-if="formItemVisible.listenerType === 'delegateExpression'"
           path="delegateExpression"
-          label="代理条件表达式( Delegate Expression )"
+          :label="$t('panel.delegateExpression')"
         >
           <n-input v-model:value="newListener.delegateExpression" @keydown.enter.prevent />
         </n-form-item>
@@ -67,11 +67,11 @@
           <n-form-item
             key="scriptFormat"
             path="script.scriptFormat"
-            label="脚本格式( Script Format )"
+            :label="$t('panel.scriptFormat')"
           >
             <n-input v-model:value="newListener.script.scriptFormat" @keydown.enter.prevent />
           </n-form-item>
-          <n-form-item key="scriptType" path="script.scriptType" label="脚本类型( Script Type )">
+          <n-form-item key="scriptType" path="script.scriptType" :label="$t('panel.scriptType')">
             <n-select
               v-model:value="newListener.script.scriptType"
               :options="scriptTypeOptions"
@@ -82,7 +82,7 @@
             v-if="formItemVisible.scriptType === 'inline'"
             key="scriptContent"
             path="script.value"
-            label="脚本内容( Script Content )"
+            :label="$t('panel.scriptBody')"
           >
             <n-input
               v-model:value="newListener.script.value"
@@ -94,21 +94,23 @@
             v-if="formItemVisible.scriptType === 'external'"
             key="scriptResource"
             path="script.resource"
-            label="外链脚本地址( Script Resource )"
+            :label="$t('panel.scriptResource')"
           >
             <n-input v-model:value="newListener.script.resource" @keydown.enter.prevent />
           </n-form-item>
         </template>
       </n-form>
       <template #action>
-        <n-button size="small" type="info" @click="saveExecutionListener">确认</n-button>
+        <n-button size="small" type="info" @click="saveExecutionListener">{{
+          $t('panel.confirm')
+        }}</n-button>
       </template>
     </n-modal>
   </n-collapse-item>
 </template>
 
 <script lang="ts">
-  import { defineComponent, h, markRaw, ref, computed, nextTick, onMounted } from 'vue'
+  import { defineComponent, h, markRaw, ref, computed, nextTick, onMounted, ComputedRef } from 'vue'
   import { FormInst, FormRules, DataTableColumns, NButton } from 'naive-ui'
   import modeler from '@/store/modeler'
   import { ModdleElement } from 'bpmn-moddle'
@@ -124,10 +126,12 @@
   } from '@/bo-utils/executionListenersUtil'
   import { getScriptType } from '@/bo-utils/scriptUtil'
   import EventEmitter from '@/utils/EventEmitter'
+  import { useI18n } from 'vue-i18n'
 
   export default defineComponent({
     name: 'ElementExecutionListeners',
     setup() {
+      const { t } = useI18n()
       const modelerStore = modeler()
       const getActive = computed(() => modelerStore.getActive!)
       const getActiveId = computed<string>(() => modelerStore.getActiveId!)
@@ -163,12 +167,12 @@
         event: { required: true, trigger: ['blur', 'change'], message: '事件类型不能为空' },
         type: { required: true, trigger: ['blur', 'change'], message: '监听器类型不能为空' }
       }
-      const columns: DataTableColumns<ExecutionListenerForm> = [
-        { title: '序号', key: 'index', render: (a, index) => index + 1, width: 50 },
+      const columns: ComputedRef<DataTableColumns<ExecutionListenerForm>> = computed(() => [
+        { title: t('panel.index'), key: 'index', render: (a, index) => index + 1, width: 60 },
         { title: 'EventType', key: 'event', ellipsis: { tooltip: true } },
         { title: 'ListenerType', key: 'type', ellipsis: { tooltip: true } },
         {
-          title: '操作',
+          title: t('panel.operations'),
           key: 'operation',
           width: 140,
           align: 'center',
@@ -182,7 +186,7 @@
                   type: 'info',
                   onClick: () => openListenerModel(index, row)
                 },
-                { default: () => '编辑' }
+                { default: () => t('panel.edit') }
               ),
               h(
                 NButton,
@@ -192,11 +196,11 @@
                   type: 'error',
                   onClick: () => removeListener(index)
                 },
-                { default: () => '移除' }
+                { default: () => t('panel.remove') }
               )
             ])
         }
-      ]
+      ])
 
       const updateListenerType = (value: string) => {
         formItemVisible.value.listenerType = value

@@ -5,10 +5,12 @@ import EventEmitter from '@/utils/EventEmitter'
 import type Modeler from 'bpmn-js/lib/Modeler'
 import type Canvas from 'diagram-js/lib/core/Canvas'
 import { CanvasEvent } from 'diagram-js/lib/core/EventBus'
+import { useI18n } from 'vue-i18n'
 
 const Scales = defineComponent({
   name: 'Scales',
   setup() {
+    const { t } = useI18n()
     const currentScale = ref(1)
     let canvas: Canvas | null = null
 
@@ -41,7 +43,7 @@ const Scales = defineComponent({
       <NButtonGroup>
         <NPopover
           v-slots={{
-            default: () => '缩小视图',
+            default: () => t('toolbar.zoomOut'),
             trigger: () => (
               <NButton onClick={() => zoomOut()}>
                 <LucideIcon name="ZoomOut" size={16}></LucideIcon>
@@ -51,7 +53,7 @@ const Scales = defineComponent({
         ></NPopover>
         <NPopover
           v-slots={{
-            default: () => '重置缩放',
+            default: () => t('toolbar.zoomReset'),
             trigger: () => (
               <NButton onClick={() => zoomReset('fit-viewport')}>
                 <span style="text-align: center; display: inline-block; width: 40px">
@@ -63,7 +65,7 @@ const Scales = defineComponent({
         ></NPopover>
         <NPopover
           v-slots={{
-            default: () => '放大视图',
+            default: () => t('toolbar.zoomIn'),
             trigger: () => (
               <NButton onClick={() => zoomIn()}>
                 <LucideIcon name="ZoomIn" size={16}></LucideIcon>

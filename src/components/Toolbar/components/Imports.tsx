@@ -1,10 +1,12 @@
 import { defineComponent, ref } from 'vue'
 import { NButton } from 'naive-ui'
 import modeler from '@/store/modeler'
+import { useI18n } from 'vue-i18n'
 
 const Imports = defineComponent({
   name: 'Imports',
   setup() {
+    const { t } = useI18n()
     const modelerStore = modeler()
     const importRef = ref<HTMLInputElement | null>(null)
 
@@ -28,7 +30,7 @@ const Imports = defineComponent({
     return () => (
       <span>
         <NButton type="info" secondary onClick={openImportWindow}>
-          打开文件
+          {t('toolbar.openFile')}
         </NButton>
         <input
           type="file"

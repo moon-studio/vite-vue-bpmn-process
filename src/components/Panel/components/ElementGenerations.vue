@@ -1,25 +1,25 @@
 <template>
   <n-collapse-item name="base-info">
     <template #header>
-      <collapse-title title="常规信息">
+      <collapse-title :title="$t('panel.general')">
         <lucide-icon name="Info" />
       </collapse-title>
     </template>
 
-    <edit-item label="ID">
+    <edit-item :label="$t('panel.id')">
       <n-input v-model:value="elementId" maxlength="32" @change="updateElementId" />
     </edit-item>
 
-    <edit-item label="Name">
+    <edit-item :label="$t('panel.name')">
       <n-input v-model:value="elementName" maxlength="20" @change="updateElementName" />
     </edit-item>
 
     <template v-if="isProcess">
-      <edit-item key="version" label="Version">
+      <edit-item key="version" :label="$t('panel.version')">
         <n-input v-model:value="elementVersion" maxlength="20" @change="updateElementVersion" />
       </edit-item>
 
-      <edit-item key="executable" label="Executable">
+      <edit-item key="executable" :label="$t('panel.executable')">
         <n-switch v-model:value="elementExecutable" @update:value="updateElementExecutable" />
       </edit-item>
     </template>

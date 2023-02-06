@@ -2,10 +2,12 @@ import { defineComponent } from 'vue'
 import { NButton, NPopover } from 'naive-ui'
 import { downloadFile, setEncoded } from '@/utils/files'
 import modeler from '@/store/modeler'
+import { useI18n } from 'vue-i18n'
 
 const Exports = defineComponent({
   name: 'Exports',
   setup() {
+    const { t } = useI18n()
     const moderlerStore = modeler()
     // 下载流程图到本地
     /**
@@ -53,19 +55,19 @@ const Exports = defineComponent({
         v-slots={{
           trigger: () => (
             <NButton type="info" secondary>
-              导出为...
+              {t('toolbar.exportAs')}
             </NButton>
           ),
           default: () => (
             <div class="button-list_column">
               <NButton type="info" onClick={downloadProcessAsBpmn}>
-                导出为Bpmn
+                {t('toolbar.exportAsBPMN')}
               </NButton>
               <NButton type="info" onClick={downloadProcessAsXml}>
-                导出为XML
+                {t('toolbar.exportAsXML')}
               </NButton>
               <NButton type="info" onClick={downloadProcessAsSvg}>
-                导出为SVG
+                {t('toolbar.exportAsSVG')}
               </NButton>
             </div>
           )

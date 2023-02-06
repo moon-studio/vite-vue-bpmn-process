@@ -1,17 +1,17 @@
 <template>
   <n-collapse-item name="element-async-continuations">
     <template #header>
-      <collapse-title title="异步属性">
+      <collapse-title :title="$t('panel.asyncContinuations')">
         <lucide-icon name="Shuffle" />
       </collapse-title>
     </template>
-    <edit-item label="Before" :label-width="120">
+    <edit-item :label="$t('panel.asyncBefore')" :label-width="120">
       <n-switch v-model:value="acBefore" @update:value="updateElementACBefore" />
     </edit-item>
-    <edit-item label="After" :label-width="120">
+    <edit-item :label="$t('panel.asyncAfter')" :label-width="120">
       <n-switch v-model:value="acAfter" @update:value="updateElementACAfter" />
     </edit-item>
-    <edit-item v-if="showExclusive" label="Exclusive" :label-width="120">
+    <edit-item v-if="showExclusive" :label="$t('panel.asyncExclusive')" :label-width="120">
       <n-switch v-model:value="acExclusive" @update:value="updateElementACExclusive" />
     </edit-item>
   </n-collapse-item>

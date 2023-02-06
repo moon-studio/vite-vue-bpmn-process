@@ -5,10 +5,12 @@ import type Modeler from 'bpmn-js/lib/Modeler'
 import type CommandStack from 'diagram-js/lib/command/CommandStack'
 import { createNewDiagram } from '@/utils'
 import LucideIcon from '@/components/common/LucideIcon.vue'
+import { useI18n } from 'vue-i18n'
 
 const Commands = defineComponent({
   name: 'Commands',
   setup() {
+    const { t } = useI18n()
     let command: CommandStack | null = null
 
     EventEmitter.on('modeler-init', (modeler: Modeler) => {
@@ -32,7 +34,7 @@ const Commands = defineComponent({
       <NButtonGroup>
         <NPopover
           v-slots={{
-            default: () => '撤销',
+            default: () => t('toolbar.undo'),
             trigger: () => (
               <NButton onClick={undo}>
                 <LucideIcon name="Undo2" size={16}></LucideIcon>
@@ -42,7 +44,7 @@ const Commands = defineComponent({
         ></NPopover>
         <NPopover
           v-slots={{
-            default: () => '恢复',
+            default: () => t('toolbar.redo'),
             trigger: () => (
               <NButton onClick={redo}>
                 <LucideIcon name="Redo2" size={16}></LucideIcon>
@@ -52,7 +54,7 @@ const Commands = defineComponent({
         ></NPopover>
         <NPopover
           v-slots={{
-            default: () => '擦除重做',
+            default: () => t('toolbar.restart'),
             trigger: () => (
               <NButton onClick={restart}>
                 <LucideIcon name="Eraser" size={16}></LucideIcon>
