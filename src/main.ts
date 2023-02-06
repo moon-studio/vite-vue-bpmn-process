@@ -78,9 +78,17 @@ import CollapseTitle from '@/components/common/CollapseTitle.vue'
 
 import 'virtual:svg-icons-register'
 
+import { createI18n } from 'vue-i18n'
+
 const app = createApp(App)
 
 const pinia = createPinia()
+
+const i18n = createI18n({
+  // something vue-i18n options here ...
+})
+
+app.use(i18n)
 app.use(pinia)
 app.use(naive)
 app.component('LucideIcon', LucideIcon)

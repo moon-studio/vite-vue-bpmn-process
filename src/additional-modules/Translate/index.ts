@@ -1,4 +1,4 @@
-import zhCN from './zh-cn'
+import zhCN from '../../i18n-files/zh-cn'
 
 export function customTranslate(template: string, replacements?: Record<string, string>) {
   replacements = replacements || {}

@@ -15,7 +15,7 @@
 
       <n-button type="info" class="inline-large-button" secondary @click="openListenerModel(-1)">
         <lucide-icon :size="20" name="Plus" />
-        <span>添加执行监听</span>
+        <span>添加执行监听器</span>
       </n-button>
     </div>
 
