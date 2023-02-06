@@ -16,6 +16,8 @@ import { defaultSettings } from '@/config'
 import editor from '@/store/editor'
 import LucideIcon from '@/components/common/LucideIcon.vue'
 
+import { useI18n } from 'vue-i18n'
+
 const props = {
   settings: {
     type: Object as PropType<EditorSettings>,
@@ -28,6 +30,8 @@ const Setting = defineComponent({
   props: props,
   emits: ['update:settings'],
   setup(props) {
+    const { t, locale } = useI18n()
+
     const modelVisible = ref(false)
     const editorStore = editor()
 
@@ -65,6 +69,7 @@ const Setting = defineComponent({
         if (editorSettings.value.penalMode !== 'custom') {
           editorSettings.value.processEngine = 'camunda'
         }
+        locale.value = editorSettings.value.language
         editorSettings.value && editorStore.updateConfiguration(toRaw(editorSettings.value))
       },
       { deep: true }
@@ -78,7 +83,7 @@ const Setting = defineComponent({
 
         <NDrawer v-model={[modelVisible.value, 'show']} width={560}>
           <NDrawerContent
-            title="偏好设置"
+            title={t('configForm.preferences')}
             closable={true}
             v-slots={{
               footer: () => (
@@ -97,89 +102,98 @@ const Setting = defineComponent({
               )
             }}
           >
-            <NForm labelWidth={120} labelAlign="right" size="small" labelPlacement="left">
-              <NFormItem label="流程名称：">
+            <NForm labelAlign="right" size="small" labelPlacement="left">
+              <NFormItem label={t('configForm.language')}>
+                <NRadioGroup v-model={[editorSettings.value.language, 'value']}>
+                  <NRadio value="zh_CN">简体中文</NRadio>
+                  <NRadio value="en_US">English</NRadio>
+                </NRadioGroup>
+              </NFormItem>
+              <NFormItem label={t('configForm.processName')}>
                 <NInput
                   v-model={[editorSettings.value.processName, 'value']}
                   clearable={true}
                 ></NInput>
               </NFormItem>
-              <NFormItem label="流程ID：">
+              <NFormItem label={t('configForm.processId')}>
                 <NInput
                   v-model={[editorSettings.value.processId, 'value']}
                   clearable={true}
                 ></NInput>
               </NFormItem>
-              <NFormItem label="工具栏：">
+              <NFormItem label={t('configForm.toolbar')}>
                 <NSwitch v-model={[editorSettings.value.toolbar, 'value']}></NSwitch>
               </NFormItem>
-              <NFormItem label="小地图：">
+              <NFormItem label={t('configForm.miniMap')}>
                 <NSwitch v-model={[editorSettings.value.miniMap, 'value']}></NSwitch>
               </NFormItem>
-              <NFormItem label="流程校验：">
+              <NFormItem label={t('configForm.useLint')}>
                 <NSwitch v-model={[editorSettings.value.useLint, 'value']}></NSwitch>
               </NFormItem>
-              <NFormItem label="模板选项扩展：">
+              <NFormItem label={t('configForm.templateChooser')}>
                 <NSwitch v-model={[editorSettings.value.templateChooser, 'value']}></NSwitch>
               </NFormItem>
-              <NFormItem label="右键增强：" feedback="在'模板扩展'下有不同状态">
+              <NFormItem
+                label={t('configForm.contextmenu')}
+                feedback={t('configForm.there_are_different_states_under_TemplateChooser')}
+              >
                 <NSwitch v-model={[editorSettings.value.contextmenu, 'value']}></NSwitch>
               </NFormItem>
-              <NFormItem label="自定义右键菜单：">
+              <NFormItem label={t('configForm.customContextmenu')}>
                 <NSwitch v-model={[editorSettings.value.customContextmenu, 'value']}></NSwitch>
               </NFormItem>
-              <NFormItem label="流程引擎：">
+              <NFormItem label={t('configForm.processEngine')}>
                 <NRadioGroup v-model={[editorSettings.value.processEngine, 'value']}>
-                  <NRadio value="camunda">Camunda</NRadio>
-                  <NRadio value="activiti">Activiti</NRadio>
-                  <NRadio value="flowable">Flowable</NRadio>
+                  <NRadio value="camunda">{t('Camunda')}</NRadio>
+                  <NRadio value="activiti">{t('Activeti')}</NRadio>
+                  <NRadio value="flowable">{t('Flowable')}</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="背景设置：">
+              <NFormItem label={t('configForm.background')}>
                 <NRadioGroup v-model={[editorSettings.value.bg, 'value']}>
-                  <NRadio value="grid-image">自定义网格</NRadio>
-                  <NRadio value="grid">默认网点</NRadio>
-                  <NRadio value="image">图片</NRadio>
-                  <NRadio value="none">空</NRadio>
+                  <NRadio value="grid-image">{t('configForm.gridImage')}</NRadio>
+                  <NRadio value="grid">{t('configForm.grid')}</NRadio>
+                  <NRadio value="image">{t('configForm.image')}</NRadio>
+                  <NRadio value="none">{t('configForm.none')}</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="Penal模式：">
+              <NFormItem label={t('configForm.penalMode')}>
                 <NRadioGroup v-model={[editorSettings.value.penalMode, 'value']}>
-                  <NRadio value="default">默认</NRadio>
+                  <NRadio value="default">{t('configForm.default')}</NRadio>
                   <NRadio value="rewrite" disabled={true}>
-                    重写版
+                    {t('configForm.rewrite')}
                   </NRadio>
-                  <NRadio value="custom">自定义</NRadio>
+                  <NRadio value="custom">{t('configForm.custom')}</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="Palette模式：">
+              <NFormItem label={t('configForm.paletteMode')}>
                 <NRadioGroup v-model={[editorSettings.value.paletteMode, 'value']}>
-                  <NRadio value="default">默认</NRadio>
-                  <NRadio value="rewrite">重写版</NRadio>
-                  <NRadio value="enhancement">扩展版</NRadio>
-                  <NRadio value="custom">自定义</NRadio>
+                  <NRadio value="default">{t('configForm.default')}</NRadio>
+                  <NRadio value="rewrite">{t('configForm.rewrite')}</NRadio>
+                  <NRadio value="enhancement">{t('configForm.enhancement')}</NRadio>
+                  <NRadio value="custom">{t('configForm.custom')}</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="ContextPad模式：">
+              <NFormItem label={t('configForm.contextPadMode')}>
                 <NRadioGroup v-model={[editorSettings.value.contextPadMode, 'value']}>
-                  <NRadio value="default">默认</NRadio>
-                  <NRadio value="rewrite">重写版</NRadio>
-                  <NRadio value="enhancement">扩展版</NRadio>
+                  <NRadio value="default">{t('configForm.default')}</NRadio>
+                  <NRadio value="rewrite">{t('configForm.rewrite')}</NRadio>
+                  <NRadio value="enhancement">{t('configForm.enhancement')}</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="Renderer模式：">
+              <NFormItem label={t('configForm.rendererMode')}>
                 <NRadioGroup v-model={[editorSettings.value.rendererMode, 'value']}>
-                  <NRadio value="default">默认</NRadio>
-                  <NRadio value="rewrite">重写版</NRadio>
-                  <NRadio value="enhancement">扩展版</NRadio>
+                  <NRadio value="default">{t('configForm.default')}</NRadio>
+                  <NRadio value="rewrite">{t('configForm.rewrite')}</NRadio>
+                  <NRadio value="enhancement">{t('configForm.enhancement')}</NRadio>
                 </NRadioGroup>
               </NFormItem>
-              <NFormItem label="其他示例扩展：" feedback="AutoPlace, Rules 等">
+              <NFormItem label={t('configForm.otherModule')} feedback="AutoPlace, Rules ...">
                 <NSwitch v-model={[editorSettings.value.otherModule, 'value']}></NSwitch>
               </NFormItem>
               {editorSettings.value.rendererMode === 'rewrite' && (
                 <NFormItem
-                  label="自定义主题："
+                  label={t('configForm.customTheme')}
                   class="theme-list"
                   labelAlign="left"
                   labelPlacement="top"
