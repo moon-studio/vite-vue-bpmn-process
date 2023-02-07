@@ -23,7 +23,8 @@ const Imports = defineComponent({
           const xmlStr = this.result
           modelerStore.getModeler!.importXML(xmlStr as string)
         }
-        window.requestAnimationFrame(() => (importRef.value = null))
+        importRef.value.value = ''
+        importRef.value.files = null
       }
     }
 
