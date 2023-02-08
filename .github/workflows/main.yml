@@ -22,7 +22,7 @@ jobs:
       # 执行npm脚本打包项目
       - name: Install and Build
         run: |
-          yarn install
+          npm install
           npm run build
 
       # 发布到个人仓库
