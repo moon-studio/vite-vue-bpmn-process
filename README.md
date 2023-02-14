@@ -36,6 +36,12 @@ React 项目也可以参考自定义插件和属性更新方式。
 
 > 码云：https://gitee.com/MiyueSC/vite-vue-bpmn-process
 
+> 🚀Tips:
+> 
+> Diagram.js 最近已经实现了 Type Declares 声明，具体请查看 [Diagram.js](https://github.com/bpmn-io/diagram-js) 的 **type-declarations** 分支~
+> 
+> Bpmn.js 的 Type Declares 声明 目前已经加入到 bpmn-io 团队的任务面板中，但目前处于 **积压状态**。
+
 ## 友情赞助
 
 生活不易，猪猪叹气。如果对您有帮助，您可以请我喝杯咖啡。十分感谢 (毕竟这个项目还是写了几个月， typescript 部分实在是太难写了)~ ~ ~ ~
