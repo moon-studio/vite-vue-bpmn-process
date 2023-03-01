@@ -516,38 +516,6 @@ class RewriteRenderer extends BaseRenderer {
       return text
     }
 
-    function renderButton(parentGfx, text, options) {
-      const button = svgCreate('rect')
-      const attrs = computeStyle(options, {
-        stroke: 'black',
-        strokeWidth: 2,
-        fill: 'white'
-      })
-      const offset = 4
-
-      svgAttr(button, {
-        x: 40,
-        y: 8,
-        width: 60 - offset * 2,
-        height: 36 - offset * 2,
-        rx: offset,
-        ry: offset
-      })
-      svgAttr(button, attrs)
-
-      svgAppend(parentGfx, button)
-      svgOn(
-        button,
-        'click',
-        function (event) {
-          event.stopPropagation()
-          alert('task button click')
-        },
-        false
-      )
-      return button
-    }
-
     function renderEmbeddedLabel(parentGfx, element, align) {
       const semantic = getSemantic(element)
 
@@ -1148,8 +1116,6 @@ class RewriteRenderer extends BaseRenderer {
           fill: getStrokeColor(element, defaultTaskColor),
           stroke: getStrokeColor(element, defaultTaskColor)
         })
-
-        renderButton(parentGfx, '1111', {})
 
         return task
       },
