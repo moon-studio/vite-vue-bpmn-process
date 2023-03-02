@@ -15,14 +15,14 @@ import MiyueModdleDescriptors from '@/moddle-extensions/miyue.json'
 import {
   BpmnPropertiesPanelModule,
   BpmnPropertiesProviderModule,
-  CloudElementTemplatesPropertiesProviderModule,
   CamundaPlatformPropertiesProviderModule
 } from 'bpmn-js-properties-panel'
-import CamundaExtensionModule from 'camunda-bpmn-moddle/lib'
+
+import CamundaExtensionModule from 'camunda-bpmn-moddle/resources/camunda.json'
 
 // 官方扩展工具 元素模板选择
-import ElementTemplateChooserModule from '@bpmn-io/element-template-chooser'
-import ConnectorsExtensionModule from 'bpmn-js-connectors-extension'
+// import ElementTemplateChooserModule from '@bpmn-io/element-template-chooser'
+// import ConnectorsExtensionModule from 'bpmn-js-connectors-extension'
 
 import Grid from 'diagram-js/lib/features/grid-snapping/visuals'
 
@@ -44,6 +44,8 @@ import bpmnlint from '@/additional-modules/Lint/bpmnlint'
 
 // 小地图
 import minimapModule from 'diagram-js-minimap'
+
+import BpmnColorPickerModule from 'bpmn-js-color-picker'
 
 export default function (settings: Ref<EditorSettings>) {
   const modules: ModuleDeclaration[] = [] // modules 扩展模块数组
@@ -80,20 +82,20 @@ export default function (settings: Ref<EditorSettings>) {
       options['propertiesPanel'] = { parent: '#camunda-penal' }
       moddle['camunda'] = camundaModdleDescriptors
     }
-    if (settings.value.templateChooser) {
-      modules.push(
-        CloudElementTemplatesPropertiesProviderModule,
-        ElementTemplateChooserModule,
-        ConnectorsExtensionModule
-      )
-      options['exporter'] = {
-        name: 'element-template-chooser',
-        version: '0.0.1'
-      }
-      options['connectorsExtension'] = {
-        appendAnything: true
-      }
-    }
+    // if (settings.value.templateChooser) {
+    //   modules.push(
+    //     CloudElementTemplatesPropertiesProviderModule,
+    //     ElementTemplateChooserModule,
+    //     ConnectorsExtensionModule
+    //   )
+    //   options['exporter'] = {
+    //     name: 'element-template-chooser',
+    //     version: '0.0.1'
+    //   }
+    //   options['connectorsExtension'] = {
+    //     appendAnything: true
+    //   }
+    // }
   }
 
   // 设置 lint 校验
@@ -126,6 +128,8 @@ export default function (settings: Ref<EditorSettings>) {
     modules.push(AutoPlace)
 
     modules.push(TokenSimulationModule)
+
+    modules.push(BpmnColorPickerModule)
 
     // 设置键盘事件绑定
     options['keyboard'] = {
