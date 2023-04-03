@@ -263,7 +263,6 @@ declare module 'bpmn-js/lib/draw/PathMap' {
 // bpmn 文本渲染
 declare module 'bpmn-js/lib/draw/TextRenderer' {
   import { Bounds } from 'diagram-js/lib/core/Canvas'
-  import { ModuleConstructor } from 'didi'
 
   export type TextStyle = {
     fontFamily: string
@@ -272,7 +271,7 @@ declare module 'bpmn-js/lib/draw/TextRenderer' {
     lineHeight: number
   }
 
-  export default class TextRenderer extends ModuleConstructor {
+  export default class TextRenderer {
     constructor(config: any)
     getExternalLabelBounds(bounds: Bounds, text: string): Bounds
     getTextAnnotationBounds(bounds: Bounds, text: string): Bounds
@@ -304,9 +303,8 @@ declare module 'bpmn-js/lib/import/BpmnImporter' {
   import { Translate } from 'diagram-js/lib/i18n/translate'
   import { Base } from 'diagram-js/lib/model'
   import TextRenderer from 'bpmn-js/lib/draw/TextRenderer'
-  import { ModuleConstructor } from 'didi'
 
-  export default class BpmnImporter extends ModuleConstructor {
+  export default class BpmnImporter {
     constructor(
       eventBus: EventBus,
       canvas: Canvas,
@@ -393,9 +391,8 @@ declare module 'bpmn-js/lib/features/modeling/BpmnFactory' {
   import BpmnModdle from 'bpmn-moddle'
   import { Base } from 'diagram-js/lib/model'
   import { ModdleElement } from 'bpmn-moddle'
-  import { ModuleConstructor } from 'didi'
 
-  export default class BpmnFactory extends ModuleConstructor {
+  export default class BpmnFactory {
     constructor(moddle: BpmnModdle)
     protected _model: BpmnModdle
     protected _needsId<E extends Base>(element: E): boolean
@@ -492,10 +489,9 @@ declare module 'bpmn-js/lib/features/modeling/ElementFactory' {
 // 定位
 declare module 'bpmn-js/lib/features/auto-place/BpmnAutoPlace' {
   import EventBus from 'diagram-js/lib/core/EventBus'
-  import { ModuleConstructor } from 'didi'
 
   // 在实例化时注册一个 autoPlace 事件监听，触发时返回 要连接到源的目标元素的新位置。
-  export default class BpmnAutoPlace extends ModuleConstructor {
+  export default class BpmnAutoPlace {
     constructor(eventBus: EventBus)
   }
 }
@@ -541,7 +537,7 @@ declare module 'bpmn-js/lib/features/auto-resize/BpmnAutoResizeProvider' {
 }
 // 元素上下文菜单
 declare module 'bpmn-js/lib/features/context-pad/ContextPadProvider' {
-  import { Injector, ModuleConstructor } from 'didi'
+  import { Injector } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import ContextPad from 'diagram-js/lib/features/context-pad/ContextPad'
   import Modeling from 'bpmn-js/lib/features/modeling/Modeling.js'
@@ -567,7 +563,7 @@ declare module 'bpmn-js/lib/features/context-pad/ContextPadProvider' {
    * 实例化时添加对 autoPlace 实例的依赖
    * 注册 create.end 事件监听函数，手动触发 replace 下面的点击事件
    */
-  export default class ContextPadProvider extends ModuleConstructor {
+  export default class ContextPadProvider {
     constructor(
       config: any,
       injector: Injector,
@@ -610,7 +606,6 @@ declare module 'bpmn-js/lib/features/copy-paste/BpmnCopyPaste' {
   import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import ModdleCopy from 'bpmn-js/lib/features/copy-paste/ModdleCopy'
-  import { ModuleConstructor } from 'didi'
 
   /**
    * bpmn 元素实例的复制粘贴, 优先级指数 750
@@ -618,7 +613,7 @@ declare module 'bpmn-js/lib/features/copy-paste/BpmnCopyPaste' {
    * copyPaste.pasteElements, copyPaste.pasteElement 事件的监听函数
    *
    */
-  export default class BpmnCopyPaste extends ModuleConstructor {
+  export default class BpmnCopyPaste {
     constructor(bpmnFactory: BpmnFactory, eventBus: EventBus, moddleCopy: ModdleCopy)
   }
 }
@@ -628,14 +623,13 @@ declare module 'bpmn-js/lib/features/copy-paste/ModdleCopy' {
   import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
   import BpmnModdle, { ModdleElement } from 'bpmn-moddle'
   import { Base } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
 
   /**
    * 用于将模型属性从源元素复制到目标元素。
    * 初始化时注册 moddleCopy.canCopyProperties, moddleCopy.canCopyProperty,
    * moddleCopy.canSetCopiedProperty 事件的监听函数， 对元素实例与元素属性的可复制性进行校验
    */
-  export default class ModdleCopy extends ModuleConstructor {
+  export default class ModdleCopy {
     constructor(eventBus: EventBus, bpmnFactory: BpmnFactory, moddle: BpmnModdle)
     protected _bpmnFactory: BpmnFactory
     protected _eventBus: EventBus
@@ -671,13 +665,11 @@ declare module 'bpmn-js/lib/features/copy-paste/ModdleCopy' {
 }
 //
 declare module 'bpmn-js/lib/features/di-ordering/BpmnDiOrdering' {
-  import { ModuleConstructor } from 'didi'
-  export default class BpmnDiOrdering extends ModuleConstructor {}
+  export default class BpmnDiOrdering {}
 }
 // 排除bpmn定义的不可均分元素
 declare module 'bpmn-js/lib/features/distribute-elements/BpmnDistributeElements' {
   import DistributeElements from 'diagram-js/lib/features/distribute-elements/DistributeElements'
-  import { ModuleConstructor } from 'didi'
   /**
    * 初始化时注册一个过滤器，默认排除以下元素：
    * 'bpmn:Association',
@@ -690,7 +682,7 @@ declare module 'bpmn-js/lib/features/distribute-elements/BpmnDistributeElements'
    * 'bpmn:SequenceFlow',
    * 'bpmn:TextAnnotation'
    */
-  export default class BpmnDistributeElements extends ModuleConstructor {
+  export default class BpmnDistributeElements {
     constructor(distributeElements: DistributeElements)
   }
 }
@@ -701,13 +693,12 @@ declare module 'bpmn-js/lib/features/drilldown/DrilldownBreadcrumbs' {
   import Overlays from 'diagram-js/lib/features/overlays/Overlays'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import { Base } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
   /**
    * 添加允许在折叠的子进程上切换平面的叠加层。
    * 初始化时会在画布中添加一个 `<ul class="bjs-breadcrumbs"></ul>` 标签
    * 在 element.changed, root.set 事件触发时会更新 Breadcrumbs
    */
-  export default class DrilldownBreadcrumbs extends ModuleConstructor {
+  export default class DrilldownBreadcrumbs {
     constructor(
       eventBus: EventBus,
       elementRegistry: ElementRegistry,
@@ -726,7 +717,6 @@ declare module 'bpmn-js/lib/features/drilldown/DrilldownBreadcrumbs' {
 declare module 'bpmn-js/lib/features/drilldown/DrilldownCentering' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
-  import { ModuleConstructor } from 'didi'
 
   type PositionEntry = {
     x: number
@@ -745,7 +735,7 @@ declare module 'bpmn-js/lib/features/drilldown/DrilldownCentering' {
 
   // 向下钻取时，将折叠的子流程移动到视图中。
   // 缩放和滚动保存在会话中。
-  export default class DrilldownCentering extends ModuleConstructor {
+  export default class DrilldownCentering {
     constructor(eventBus: EventBus, canvas: Canvas)
   }
 }
@@ -840,30 +830,26 @@ declare module 'bpmn-js/lib/features/editor-actions/BpmnEditorActions' {
 }
 //
 declare module 'bpmn-js/lib/features/grid-snapping/BpmnGridSnapping' {
-  import { ModuleConstructor } from 'didi'
-  export default class BpmnGridSnapping extends ModuleConstructor {
+  export default class BpmnGridSnapping {
     constructor(eventBus)
   }
 }
 //
 declare module 'bpmn-js/lib/features/grid-snapping/behavior/AutoPlaceBehavior' {
-  import { ModuleConstructor } from 'didi'
-  export default class AutoPlaceBehavior extends ModuleConstructor {
+  export default class AutoPlaceBehavior {
     constructor(eventBus, gridSnapping)
   }
 }
 //
 declare module 'bpmn-js/lib/features/grid-snapping/behavior/CreateParticipantBehavior' {
-  import { ModuleConstructor } from 'didi'
-  export default class CreateParticipantBehavior extends ModuleConstructor {
+  export default class CreateParticipantBehavior {
     constructor(canvas, eventBus, gridSnapping)
   }
 }
 //
 declare module 'bpmn-js/lib/features/grid-snapping/behavior/LayoutConnectionBehavior' {
-  import { ModuleConstructor } from 'didi'
   import { Point } from 'diagram-js/lib/model'
-  export default class LayoutConnectionBehavior extends ModuleConstructor {
+  export default class LayoutConnectionBehavior {
     constructor(eventBus, gridSnapping, modeling)
 
     snapMiddleSegments(waypoints: Point[]): Point[]
@@ -871,11 +857,10 @@ declare module 'bpmn-js/lib/features/grid-snapping/behavior/LayoutConnectionBeha
 }
 // PMN特定的命中区域和交互修复。
 declare module 'bpmn-js/lib/features/interaction-events/BpmnInteractionEvents' {
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import InteractionEvents from 'diagram-js/lib/features/interaction-events/InteractionEvents'
   import { Base } from 'diagram-js/lib/model'
-  export default class BpmnInteractionEvents extends ModuleConstructor {
+  export default class BpmnInteractionEvents {
     constructor(eventBus: EventBus, interactionEvents: InteractionEvents)
     _interactionEvents: InteractionEvents
 
@@ -907,12 +892,11 @@ declare module 'bpmn-js/lib/features/keyboard/BpmnKeyboardBindings' {
 }
 //
 declare module 'bpmn-js/lib/features/label-editing/LabelEditingPreview' {
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
   import PathMap from 'bpmn-js/lib/draw/PathMap'
-  export default class LabelEditingPreview extends ModuleConstructor {
+  export default class LabelEditingPreview {
     constructor(
       eventBus: EventBus,
       canvas: Canvas,
@@ -923,9 +907,8 @@ declare module 'bpmn-js/lib/features/label-editing/LabelEditingPreview' {
 }
 //
 declare module 'bpmn-js/lib/features/label-editing/LabelEditingProvider' {
-  import { ModuleConstructor } from 'didi'
   import { Base } from 'diagram-js/lib/model'
-  export default class LabelEditingProvider extends ModuleConstructor {
+  export default class LabelEditingProvider {
     constructor(eventBus, bpmnFactory, canvas, directEditing, modeling, resizeHandles, textRenderer)
 
     // 为活动和文本注释激活直接编辑
@@ -938,9 +921,8 @@ declare module 'bpmn-js/lib/features/label-editing/LabelEditingProvider' {
 }
 // 更新BPMN元素文本的处理程序。
 declare module 'bpmn-js/lib/features/label-editing/cmd/UpdateLabelHandler' {
-  import { ModuleConstructor } from 'didi'
   // 结构类似继承的 CommandInterceptor
-  export default class UpdateLabelHandler extends ModuleConstructor {
+  export default class UpdateLabelHandler {
     constructor(modeling, textRenderer, bpmnFactory)
   }
 }
@@ -1033,7 +1015,6 @@ declare module 'bpmn-js/lib/features/palette/PaletteProvider' {
 }
 // 此模块是弹出菜单的元素不可知替换菜单提供程序
 declare module 'bpmn-js/lib/features/popup-menu/ReplaceMenuProvider' {
-  import { ModuleConstructor } from 'didi'
   import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
   import PopupMenu, { PopupMenuEntry } from 'diagram-js/lib/features/popup-menu/PopupMenu'
   import Modeling from 'bpmn-js/lib/features/modeling/Modeling'
@@ -1044,7 +1025,7 @@ declare module 'bpmn-js/lib/features/popup-menu/ReplaceMenuProvider' {
   import { ReplaceOption } from 'bpmn-js/lib/features/replace/ReplaceOptions'
   import BpmnModdle from 'bpmn-moddle'
 
-  export default class ReplaceMenuProvider extends ModuleConstructor {
+  export default class ReplaceMenuProvider {
     constructor(
       bpmnFactory: BpmnFactory,
       popupMenu: PopupMenu,
@@ -1088,7 +1069,6 @@ declare module 'bpmn-js/lib/features/popup-menu/ReplaceMenuProvider' {
 }
 // 该模块负责更换BPMN元素
 declare module 'bpmn-js/lib/features/replace/BpmnReplace' {
-  import { ModuleConstructor } from 'didi'
   import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
   import ElementFactory from 'bpmn-js/lib/features/modeling/ElementFactory'
   import ModdleCopy from 'bpmn-js/lib/features/copy-paste/ModdleCopy'
@@ -1106,7 +1086,7 @@ declare module 'bpmn-js/lib/features/replace/BpmnReplace' {
     'isInterrupting'
   ]
 
-  export default class BpmnReplace extends ModuleConstructor {
+  export default class BpmnReplace {
     constructor(
       bpmnFactory: BpmnFactory,
       elementFactory: ElementFactory,
@@ -1272,13 +1252,12 @@ declare module 'bpmn-js/lib/features/rules/BpmnRules' {
 }
 // 提供搜索BPMN元素的能力
 declare module 'bpmn-js/lib/features/search/BpmnSearchProvider' {
-  import { ModuleConstructor } from 'didi'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
   import SearchPad from 'diagram-js/lib/features/search-pad/SearchPad'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import { Base } from 'diagram-js/lib/model'
 
-  export default class BpmnSearchProvider extends ModuleConstructor {
+  export default class BpmnSearchProvider {
     constructor(elementRegistry: ElementRegistry, searchPad: SearchPad, canvas: Canvas)
     _elementRegistry: ElementRegistry
     _canvas: Canvas

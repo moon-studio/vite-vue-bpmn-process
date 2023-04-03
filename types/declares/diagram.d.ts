@@ -674,7 +674,7 @@ declare module 'diagram-js/lib/core/GraphicsFactory' {
 // 提供可撤销/重做的命令执行栈, 通过 CommandHandler 执行具体命令
 declare module 'diagram-js/lib/command/CommandStack' {
   import { Base } from 'diagram-js/lib/model'
-  import { Injector, ModuleConstructor } from 'didi'
+  import { Injector } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import CommandHandler from 'diagram-js/lib/command/CommandHandler'
 
@@ -699,7 +699,7 @@ declare module 'diagram-js/lib/command/CommandStack' {
   }
   export type StackItem = any
 
-  export default class CommandStack extends ModuleConstructor {
+  export default class CommandStack {
     constructor(eventBus: EventBus, injector: Injector)
     // 所有已注册的命令处理程序 Map
     _handlerMap: Record<string, CommandHandler>
@@ -764,9 +764,8 @@ declare module 'diagram-js/lib/command/CommandHandler' {
 // CommandHandler 实现类 的一个验证和扩展程序
 declare module 'diagram-js/lib/command/CommandInterceptor' {
   import EventBus from 'diagram-js/lib/core/EventBus'
-  import { ModuleConstructor } from 'didi'
 
-  export default abstract class CommandInterceptor extends ModuleConstructor {
+  export default abstract class CommandInterceptor {
     protected constructor(eventBus: EventBus)
     on(
       events: Function | number | string | string[],
@@ -853,10 +852,9 @@ declare module 'diagram-js/lib/command/CommandInterceptor' {
 // 抽象类 基础渲染器
 declare module 'diagram-js/lib/draw/BaseRenderer' {
   import { Base, Connection, Shape } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
 
-  export default class BaseRenderer extends ModuleConstructor {
+  export default class BaseRenderer {
     constructor(eventBus: EventBus, renderPriority?: number)
     canRender<E extends Base>(element: E): boolean
     drawShape<E extends Shape>(visuals: SVGElement, element: E): SVGRectElement
@@ -871,7 +869,6 @@ declare module 'diagram-js/lib/draw/DefaultRenderer' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Styles, { Traits } from 'diagram-js/lib/draw/Styles'
   import { Connection, Shape } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
 
   export default class DefaultRenderer extends BaseRenderer {
     constructor(eventBus: EventBus, styles: Styles, DEFAULT_RENDER_PRIORITY?: number)
@@ -1041,9 +1038,8 @@ declare module 'diagram-js/lib/layout/CroppingConnectionDocking' {
   import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
   import { Base, Connection, Shape, Point, Hints } from 'diagram-js/lib/model'
   import { DockingPointDescriptor } from 'diagram-js/lib/layout/ConnectionDocking'
-  import { ModuleConstructor } from 'didi'
 
-  export default class CroppingConnectionDocking extends ModuleConstructor {
+  export default class CroppingConnectionDocking {
     constructor(elementRegistry: ElementRegistry, graphicsFactory: GraphicsFactory)
     private _getIntersection(shape: Shape, connection: Connection, takeFirst: boolean): Point
     private _getConnectionPath(connection: Connection): string
@@ -1072,9 +1068,8 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
   import CommandHandler from 'diagram-js/lib/command/CommandHandler'
   import { Base, Connection, Label, Shape, Hints } from 'diagram-js/lib/model'
   import { Dimensions, Position } from 'diagram-js/lib/core/Canvas'
-  import { ModuleConstructor } from 'didi'
 
-  export class ModelingHandler extends ModuleConstructor implements CommandHandler {
+  export class ModelingHandler implements CommandHandler {
     constructor(modeling: Modeling)
     canExecute(context: Object): boolean
     execute<E extends Base>(context: Object): E[]
@@ -1083,7 +1078,7 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
     revert<E extends Base>(context: Object): E[]
   }
 
-  export default class Modeling extends ModuleConstructor {
+  export default class Modeling {
     constructor(eventBus: EventBus, elementFactory: ElementFactory, commandStack: CommandStack)
 
     protected _create(type: string, attrs: Object): Base
@@ -1179,9 +1174,8 @@ declare module 'diagram-js/lib/features/modeling/Modeling' {
 declare module 'diagram-js/lib/features/align-elements/AlignElements' {
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import { Base } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
 
-  export default class AlignElements extends ModuleConstructor {
+  export default class AlignElements {
     constructor(modeling: Modeling)
 
     /**
@@ -1218,9 +1212,8 @@ declare module 'diagram-js/lib/features/auto-place/AutoPlace' {
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import { Hints, Shape } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
 
-  export default class AutoPlace extends ModuleConstructor {
+  export default class AutoPlace {
     constructor(eventBus: EventBus, modeling: Modeling, canvas: Canvas)
     /**
      * 将元素添加到 source 元素中的合适位置
@@ -1236,9 +1229,8 @@ declare module 'diagram-js/lib/features/auto-place/AutoPlace' {
 declare module 'diagram-js/lib/features/auto-place/AutoPlaceSelectionBehavior' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Selection from 'diagram-js/lib/features/selection/Selection'
-  import { ModuleConstructor } from 'didi'
 
-  export default class AutoPlaceSelectionBehavior extends ModuleConstructor {
+  export default class AutoPlaceSelectionBehavior {
     constructor(eventBus: EventBus, selection: Selection)
   }
 }
@@ -1336,9 +1328,8 @@ declare module 'diagram-js/lib/features/auto-scroll/AutoScroll' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import { Point } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
 
-  export default class AutoScroll extends ModuleConstructor {
+  export default class AutoScroll {
     constructor(config: any, eventBus: EventBus, canvas: Canvas)
     /**
      * 启动画布滚动, 创建一个定时器，每隔一定时间执行一次滚动
@@ -1365,9 +1356,8 @@ declare module 'diagram-js/lib/features/bendpoints/Bendpoints' {
   import BendpointMove from 'diagram-js/lib/features/bendpoints/BendpointMove'
   import ConnectionSegmentMove from 'diagram-js/lib/features/bendpoints/ConnectionSegmentMove'
   import { Connection } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
 
-  export default class Bendpoints extends ModuleConstructor {
+  export default class Bendpoints {
     constructor(
       eventBus: EventBus,
       canvas: Canvas,
@@ -1384,7 +1374,7 @@ declare module 'diagram-js/lib/features/bendpoints/Bendpoints' {
 }
 // 通过拖放移动弯曲点以添加/删除弯曲点或重新连接连接
 declare module 'diagram-js/lib/features/bendpoints/BendpointMove' {
-  import { Injector, ModuleConstructor } from 'didi'
+  import { Injector } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import Dragging from 'diagram-js/lib/features/dragging/Dragging'
@@ -1392,7 +1382,7 @@ declare module 'diagram-js/lib/features/bendpoints/BendpointMove' {
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import { Connection, Point } from 'diagram-js/lib/model'
 
-  export default class BendpointMove extends ModuleConstructor {
+  export default class BendpointMove {
     constructor(
       injector: Injector,
       eventBus: EventBus,
@@ -1409,11 +1399,11 @@ declare module 'diagram-js/lib/features/bendpoints/BendpointMove' {
 // 拖动连线拐点时的预览实现
 declare module 'diagram-js/lib/features/bendpoints/BendpointMovePreview' {
   import BendpointMove from 'diagram-js/lib/features/bendpoints/BendpointMove'
-  import { Injector, ModuleConstructor } from 'didi'
+  import { Injector } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
 
-  export default class BendpointMovePreview extends ModuleConstructor {
+  export default class BendpointMovePreview {
     constructor(
       bendpointMove: BendpointMove,
       injector: Injector,
@@ -1425,20 +1415,19 @@ declare module 'diagram-js/lib/features/bendpoints/BendpointMovePreview' {
 // 注册拐点移动监听事件
 declare module 'diagram-js/lib/features/bendpoints/BendpointSnapping' {
   import EventBus from 'diagram-js/lib/core/EventBus'
-  import { ModuleConstructor } from 'didi'
-  export default class BendpointSnapping extends ModuleConstructor {
+  export default class BendpointSnapping {
     constructor(eventBus: EventBus)
   }
 }
 // 拐点移动时的预览实现
 declare module 'diagram-js/lib/features/bendpoints/ConnectionSegmentMove' {
-  import { Injector, ModuleConstructor } from 'didi'
+  import { Injector } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import Dragging from 'diagram-js/lib/features/dragging/Dragging'
   import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
-  export default class ConnectionSegmentMove extends ModuleConstructor {
+  export default class ConnectionSegmentMove {
     constructor(
       injector: Injector,
       eventBus: EventBus,
@@ -1455,7 +1444,6 @@ declare module 'diagram-js/lib/features/change-support/ChangeSupport' {
   import Canvas from 'diagram-js/lib/core/Canvas'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
   import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
-  import { ModuleConstructor } from 'didi'
   /**
    * 向图表添加更改支持，包括
    * 更改时重新绘制形状和连接线
@@ -1464,7 +1452,7 @@ declare module 'diagram-js/lib/features/change-support/ChangeSupport' {
    * @param {ElementRegistry} elementRegistry
    * @param {GraphicsFactory} graphicsFactory
    */
-  export default class ChangeSupport extends ModuleConstructor {
+  export default class ChangeSupport {
     constructor(
       eventBus: EventBus,
       canvas: Canvas,
@@ -1490,8 +1478,7 @@ declare module 'diagram-js/lib/features/connect/Connect' {
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import Rules from 'diagram-js/lib/features/rules/Rules'
   import { Base, Point } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
-  export default class Connect extends ModuleConstructor {
+  export default class Connect {
     constructor(eventBus: EventBus, dragging: Dragging, modeling: Modeling, rules: Rules)
     /**
      * 开始连接操作
@@ -1505,17 +1492,17 @@ declare module 'diagram-js/lib/features/connect/Connect' {
 }
 // 在连接期间显示连接预览
 declare module 'diagram-js/lib/features/connect/ConnectPreview' {
-  import { Injector, ModuleConstructor } from 'didi'
+  import { Injector } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   // 内部依赖 connectionPreview 模块
-  export default class ConnectPreview extends ModuleConstructor {
+  export default class ConnectPreview {
     constructor(injector: Injector, eventBus: EventBus, canvas: Canvas)
   }
 }
 // 绘制连接预览。
 declare module 'diagram-js/lib/features/connection-preview/ConnectionPreview' {
-  import { Injector, ModuleConstructor } from 'didi'
+  import { Injector } from 'didi'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
   import ElementFactory from 'diagram-js/lib/core/ElementFactory'
@@ -1523,7 +1510,7 @@ declare module 'diagram-js/lib/features/connection-preview/ConnectionPreview' {
   /**
    * 绘制连接预览。这可以使用布局和连接对接来绘制外观更好的预览(可选)
    */
-  export default class ConnectionPreview extends ModuleConstructor {
+  export default class ConnectionPreview {
     constructor(
       injector: Injector,
       canvas: Canvas,
@@ -1592,7 +1579,6 @@ declare module 'diagram-js/lib/features/context-pad/ContextPad' {
   import Overlays from 'diagram-js/lib/features/overlays/Overlays'
   import { Base } from 'diagram-js/lib/model'
   import { Overlay } from 'diagram-js/lib/features/overlays/Overlays'
-  import { ModuleConstructor } from 'didi'
   import { Position } from 'diagram-js/lib/core/Canvas'
 
   export type ContextPadEntry = {}
@@ -1600,7 +1586,7 @@ declare module 'diagram-js/lib/features/context-pad/ContextPad' {
     getContextPadEntries(element: Base): ContextPadEntry
   }
 
-  export default class ContextPad extends ModuleConstructor {
+  export default class ContextPad {
     constructor(config: any, eventBus: EventBus, overlays: Overlays)
     //注册与其他组件交互所需的事件, 包括 selection.changed, element.changed, element.delete
     protected _init(): void
@@ -1636,7 +1622,6 @@ declare module 'diagram-js/lib/features/copy-paste/CopyPaste' {
   import Mouse from 'diagram-js/lib/features/mouse/Mouse'
   import Rules from 'diagram-js/lib/features/rules/Rules'
   import { Base, Connection, Shape, Label, Point, Hints } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
 
   export type CopyPasteTree = {
     [key: number]: {
@@ -1646,7 +1631,7 @@ declare module 'diagram-js/lib/features/copy-paste/CopyPaste' {
     }[]
   }
 
-  export default class CopyPaste extends ModuleConstructor {
+  export default class CopyPaste {
     constructor(
       canvas: Canvas,
       create: Create,
@@ -1719,9 +1704,8 @@ declare module 'diagram-js/lib/features/create/Create' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import Rules from 'diagram-js/lib/features/rules/Rules'
-  import { ModuleConstructor } from 'didi'
 
-  export default class Create extends ModuleConstructor {
+  export default class Create {
     constructor(
       canvas: Canvas,
       dragging: Dragging,
@@ -1734,11 +1718,11 @@ declare module 'diagram-js/lib/features/create/Create' {
 }
 // 元素创建过程中的连线预览
 declare module 'diagram-js/lib/features/create/CreateConnectPreview' {
-  import { Injector, ModuleConstructor } from 'didi'
+  import { Injector } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
 
   // 内部依赖 connectionPreview 实例，监听 create.move 事件 通过 connectionPreview.drawPreview 创建连线预览
-  export default class CreateConnectPreview extends ModuleConstructor {
+  export default class CreateConnectPreview {
     constructor(injector: Injector, eventBus: EventBus)
   }
 }
@@ -1749,9 +1733,8 @@ declare module 'diagram-js/lib/features/create/CreatePreview' {
   import GraphicsFactory from 'diagram-js/lib/core/GraphicsFactory'
   import PreviewSupport from 'diagram-js/lib/features/preview-support/PreviewSupport'
   import Styles from 'diagram-js/lib/draw/Styles'
-  import { ModuleConstructor } from 'didi'
   // 监听 create.move 事件
-  export default class CreatePreview extends ModuleConstructor {
+  export default class CreatePreview {
     constructor(
       canvas: Canvas,
       eventBus: EventBus,
@@ -1765,7 +1748,6 @@ declare module 'diagram-js/lib/features/create/CreatePreview' {
 declare module 'diagram-js/lib/features/distribute-elements/DistributeElements' {
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import { Base } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
 
   export type ElementRange = {
     min: number
@@ -1778,7 +1760,7 @@ declare module 'diagram-js/lib/features/distribute-elements/DistributeElements' 
   export type RangeGroups = RangeGroup[]
   export type Orientation = 'horizontal' | 'vertical'
 
-  export default class DistributeElements extends ModuleConstructor {
+  export default class DistributeElements {
     constructor(modeling: Modeling)
     private _filters: Function[]
     /**
@@ -1830,10 +1812,9 @@ declare module 'diagram-js/lib/features/dragging/Dragging' {
   import Canvas from 'diagram-js/lib/core/Canvas'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
-  import { ModuleConstructor } from 'didi'
   import { Point } from 'diagram-js/lib/model'
 
-  export default class Dragging extends ModuleConstructor {
+  export default class Dragging {
     constructor(
       eventBus: EventBus,
       canvas: Canvas,
@@ -1858,9 +1839,9 @@ declare module 'diagram-js/lib/features/dragging/Dragging' {
 // 一种接口，通过将请求触发操作的人和触发器本身解耦，提供对建模操作的访问。
 // 可以通过将新操作注册到 'registerAction' 来添加新操作，并同样使用 'unregisterAction' 取消注册现有操作。
 declare module 'diagram-js/lib/features/editor-actions/EditorActions' {
-  import { Injector, ModuleConstructor } from 'didi'
+  import { Injector } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
-  export default class EditorActions extends ModuleConstructor {
+  export default class EditorActions {
     constructor(eventBus: EventBus | Injector, injector?: Injector)
     // 初始化可用操作对象Map
     protected _actions: Record<string, Function>
@@ -1917,9 +1898,8 @@ declare module 'diagram-js/lib/features/global-connect/GlobalConnect' {
   import ToolManager from 'diagram-js/lib/features/tool-manager/ToolManager'
   import Rules from 'diagram-js/lib/features/rules/Rules'
   import Mouse from 'diagram-js/lib/features/mouse/Mouse'
-  import { ModuleConstructor } from 'didi'
   import { Shape } from 'diagram-js/lib/model'
-  export default class GlobalConnect extends ModuleConstructor {
+  export default class GlobalConnect {
     constructor(
       eventBus: EventBus,
       dragging: Dragging,
@@ -1942,7 +1922,6 @@ declare module 'diagram-js/lib/features/global-connect/GlobalConnect' {
 declare module 'diagram-js/lib/features/grid-snapping/GridSnapping' {
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
   import EventBus from 'diagram-js/lib/core/EventBus'
-  import { ModuleConstructor } from 'didi'
   /**
    * 基本的格式调整事件监听注册，包括连接，创建，移动，调整形状，移动弯曲点和连接等
    * 可以通过设置 config 参数 {gridSnapping: { active: false }} 来禁用格式调整
@@ -1960,7 +1939,7 @@ declare module 'diagram-js/lib/features/grid-snapping/GridSnapping' {
    * 'shape.move.move',
    * 'shape.move.end'
    */
-  export default class GridSnapping extends ModuleConstructor {
+  export default class GridSnapping {
     constructor(elementRegistry: ElementRegistry, eventBus: EventBus, config: any)
     /**
      * 捕捉事件x或y。可选设置 最小值、最大值和偏移量
@@ -1999,13 +1978,12 @@ declare module 'diagram-js/lib/features/grid-snapping/GridSnapping' {
 declare module 'diagram-js/lib/features/grid-snapping/visuals/Grid' {
   import Canvas, { Viewbox } from 'diagram-js/lib/core/Canvas'
   import EventBus from 'diagram-js/lib/core/EventBus'
-  import { ModuleConstructor } from 'didi'
   /**
    * 背景网格工具(没有默认引入)
    * 在 diagram 初始化时初始化一个背景网格（画布容器大小）
    * 默认网格尺寸 100000 * 100000
    */
-  export default class Grid extends ModuleConstructor {
+  export default class Grid {
     _canvas: Canvas
     constructor(canvas: Canvas, eventBus: EventBus)
     protected _init(): void
@@ -2040,23 +2018,22 @@ declare module 'diagram-js/lib/features/grid-snapping/behavior/ResizeBehavior' {
 }
 //
 declare module 'diagram-js/lib/features/grid-snapping/behavior/SpaceToolBehavior' {
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import GridSnapping from 'diagram-js/lib/features/grid-snapping/GridSnapping'
-  export default class SpaceToolBehavior extends ModuleConstructor {
+  export default class SpaceToolBehavior {
     constructor(eventBus: EventBus, gridSnapping: GridSnapping)
   }
 }
 // 手型工具
 declare module 'diagram-js/lib/features/hand-tool/HandTool' {
-  import { Injector, ModuleConstructor } from 'didi'
+  import { Injector } from 'didi'
   import Dragging from 'diagram-js/lib/features/dragging/Dragging'
   import Mouse from 'diagram-js/lib/features/mouse/Mouse'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import ToolManager from 'diagram-js/lib/features/tool-manager/ToolManager'
   // 内部依赖 keyboard 响应键盘 空格 按键事件
-  export default class HandTool extends ModuleConstructor {
+  export default class HandTool {
     _dragging: Dragging
     _mouse: Mouse
     constructor(
@@ -2075,7 +2052,6 @@ declare module 'diagram-js/lib/features/hand-tool/HandTool' {
 }
 //
 declare module 'diagram-js/lib/features/hover-fix/HoverFix' {
-  import { ModuleConstructor } from 'didi'
   /**
    * 如果用户要使用鼠标快速移动，浏览器可能会吞下某些事件 (悬停，退出…)。
    * 此组件中实现的修复程序确保我们
@@ -2083,14 +2059,13 @@ declare module 'diagram-js/lib/features/hover-fix/HoverFix' {
    * 2) 拖动离开元素时具有out事件
    * 内部依赖 Dragging
    */
-  export default class HoverFix extends ModuleConstructor {
+  export default class HoverFix {
     constructor(elementRegistry, eventBus, injector)
     protected _findTargetGfx(event: Event): Element
   }
 }
 //
 declare module 'diagram-js/lib/features/interaction-events/InteractionEvents' {
-  import { ModuleConstructor } from 'didi'
   import { Base, Point } from 'diagram-js/lib/model'
   /**
    * 为图表元素提供交互事件的插件
@@ -2108,7 +2083,7 @@ declare module 'diagram-js/lib/features/interaction-events/InteractionEvents' {
    * Each event is a tuple { element, gfx, originalEvent }.
    * 可以通过 调用 preventDefault() 阻止浏览器默认事件
    */
-  export default class InteractionEvents extends ModuleConstructor {
+  export default class InteractionEvents {
     handlers: Record<string, Function>
     constructor(eventBus, elementRegistry, styles)
     // 移除高亮样式
@@ -2133,14 +2108,13 @@ declare module 'diagram-js/lib/features/interaction-events/InteractionEvents' {
 }
 // 键盘事件绑定和映射
 declare module 'diagram-js/lib/features/keyboard/Keyboard' {
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
 
   export interface KeyboardConfig<T extends Element> {
     bindTo: T
   }
 
-  export default class Keyboard<T extends Element> extends ModuleConstructor {
+  export default class Keyboard<T extends Element> {
     _config: Object
     _eventBus: EventBus
     constructor(config: KeyboardConfig<T>, eventBus: EventBus)
@@ -2168,21 +2142,19 @@ declare module 'diagram-js/lib/features/keyboard/KeyboardBindings' {
   import Keyboard from 'diagram-js/lib/features/keyboard/Keyboard'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import EditorActions from 'diagram-js/lib/features/editor-actions/EditorActions'
-  import { ModuleConstructor } from 'didi'
 
-  export default class KeyboardBindings<T extends Element> extends ModuleConstructor {
+  export default class KeyboardBindings<T extends Element> {
     constructor(eventBus: EventBus, keyboard: Keyboard<T>)
     registerBindings(keyboard: Keyboard<T>, editorActions: EditorActions): void
   }
 }
 // 启用使用键盘箭头移动选择。与换档一起使用以获得修改后的速度 (默认 = 1，with Shift = 10)。按下Cmd/Ctrl关闭功能。
 declare module 'diagram-js/lib/features/keyboard-move-selection/KeyboardMoveSelection' {
-  import { ModuleConstructor } from 'didi'
   import Keyboard from 'diagram-js/lib/features/keyboard/Keyboard'
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import Rules from 'diagram-js/lib/features/rules/Rules'
   import Selection from 'diagram-js/lib/features/selection/Selection'
-  export default class KeyboardMoveSelection extends ModuleConstructor {
+  export default class KeyboardMoveSelection {
     _config: Object
     constructor(
       config: Object,
@@ -2208,7 +2180,6 @@ declare module 'diagram-js/lib/features/label-support/LabelSupport' {
 }
 // 套索工具
 declare module 'diagram-js/lib/features/lasso-tool/LassoTool' {
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas, { Bounds } from 'diagram-js/lib/core/Canvas'
   import Dragging from 'diagram-js/lib/features/dragging/Dragging'
@@ -2217,7 +2188,7 @@ declare module 'diagram-js/lib/features/lasso-tool/LassoTool' {
   import ToolManager from 'diagram-js/lib/features/tool-manager/ToolManager'
   import Mouse from 'diagram-js/lib/features/mouse/Mouse'
   import { Base } from 'diagram-js/lib/model'
-  export default class LassoTool extends ModuleConstructor {
+  export default class LassoTool {
     _selection: Selection
     _dragging: Dragging
     _mouse: Mouse
@@ -2240,9 +2211,8 @@ declare module 'diagram-js/lib/features/lasso-tool/LassoTool' {
 }
 //
 declare module 'diagram-js/lib/features/mouse/Mouse' {
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
-  export default class Mouse extends ModuleConstructor {
+  export default class Mouse {
     _lastMoveEvent: null | MouseEvent
     constructor(eventBus: EventBus)
 
@@ -2251,14 +2221,13 @@ declare module 'diagram-js/lib/features/mouse/Mouse' {
 }
 // 移动
 declare module 'diagram-js/lib/features/move/Move' {
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Dragging from 'diagram-js/lib/features/dragging/Dragging'
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import Selection from 'diagram-js/lib/features/selection/Selection'
   import Rules from 'diagram-js/lib/features/rules/Rules'
   import { Shape } from 'diagram-js/lib/model'
-  export default class Move extends ModuleConstructor {
+  export default class Move {
     constructor(
       eventBus: EventBus,
       dragging: Dragging,
@@ -2272,9 +2241,8 @@ declare module 'diagram-js/lib/features/move/Move' {
 }
 // 移动预览
 declare module 'diagram-js/lib/features/move/MovePreview' {
-  import { ModuleConstructor } from 'didi'
   import { Base } from 'diagram-js/lib/model'
-  export default class MovePreview extends ModuleConstructor {
+  export default class MovePreview {
     constructor(eventBus, canvas, styles, previewSupport)
 
     makeDraggable(context: Object, element: Base, addMarker: boolean): void
@@ -2292,9 +2260,8 @@ declare module 'diagram-js/lib/features/ordering/OrderingProvider' {
 }
 // 一个插件，可以通过CSS类激活和样式的形状和连接添加轮廓
 declare module 'diagram-js/lib/features/outline/Outline' {
-  import { ModuleConstructor } from 'didi'
   import { Base } from 'diagram-js/lib/model'
-  export default class Outline extends ModuleConstructor {
+  export default class Outline {
     constructor(eventBus, styles, elementRegistry)
     offset: number
 
@@ -2308,7 +2275,6 @@ declare module 'diagram-js/lib/features/overlays/Overlays' {
   import Canvas, { Viewbox } from 'diagram-js/lib/core/Canvas'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
   import { Base } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
   import IdGenerator from 'diagram-js/lib/util/IdGenerator'
 
   export type Search = {
@@ -2339,7 +2305,7 @@ declare module 'diagram-js/lib/features/overlays/Overlays' {
     overlays: Overlay[]
   }
 
-  export default class Overlays extends ModuleConstructor {
+  export default class Overlays {
     constructor(config: any, eventBus: EventBus, canvas: Canvas, elementRegistry: ElementRegistry)
     _eventBus: EventBus
     _canvas: Canvas
@@ -2373,7 +2339,6 @@ declare module 'diagram-js/lib/features/palette/Palette' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import { Base } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
 
   export type PaletteEntry = {
     group: string
@@ -2391,7 +2356,7 @@ declare module 'diagram-js/lib/features/palette/Palette' {
     twoColumn: boolean
   }
 
-  export default class Palette extends ModuleConstructor {
+  export default class Palette {
     static HTML_MARKUP: string
     constructor(eventBus: EventBus, canvas: Canvas)
     _eventBus: EventBus
@@ -2424,7 +2389,6 @@ declare module 'diagram-js/lib/features/popup-menu/PopupMenu' {
   import PopupMenuProvider from 'diagram-js/lib/features/popup-menu/PopupMenuProvider'
   import { Base } from 'diagram-js/lib/model'
   import { Position } from 'diagram-js/lib/core/Canvas'
-  import { ModuleConstructor } from 'didi'
 
   export type PopupMenuEntry = {
     id: string
@@ -2434,7 +2398,7 @@ declare module 'diagram-js/lib/features/popup-menu/PopupMenu' {
     action: Function
   }
 
-  export default class PopupMenu extends ModuleConstructor {
+  export default class PopupMenu {
     constructor(config: Object, eventBus: EventBus, overlays: Overlays)
     _config: Object
     _eventBus: EventBus
@@ -2488,9 +2452,8 @@ declare module 'diagram-js/lib/features/preview-support/PreviewSupport' {
   import Canvas from 'diagram-js/lib/core/Canvas'
   import Styles from 'diagram-js/lib/draw/Styles'
   import { Base } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
 
-  export default class PreviewSupport extends ModuleConstructor {
+  export default class PreviewSupport {
     constructor(
       elementRegistry: ElementRegistry,
       eventBus: EventBus,
@@ -2513,9 +2476,8 @@ declare module 'diagram-js/lib/features/preview-support/PreviewSupport' {
 declare module 'diagram-js/lib/features/replace/Replace' {
   import Modeling from 'diagram-js/lib/features/modeling/Modeling'
   import { Base, Shape } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
 
-  export default class Replace extends ModuleConstructor {
+  export default class Replace {
     constructor(modeling: Modeling)
     replaceElement<E extends Base, S extends Shape>(
       oldElement: E,
@@ -2532,9 +2494,8 @@ declare module 'diagram-js/lib/features/resize/Resize' {
   import Dragging from 'diagram-js/lib/features/dragging/Dragging'
   import { Shape } from 'diagram-js/lib/model'
   import { Bounds } from 'diagram-js/lib/core/Canvas'
-  import { ModuleConstructor } from 'didi'
 
-  export default class Resize extends ModuleConstructor {
+  export default class Resize {
     constructor(eventBus: EventBus, rules: Rules, modeling: Modeling, dragging: Dragging)
     canResize(context: Object): boolean
     activate<E extends Shape>(
@@ -2552,9 +2513,8 @@ declare module 'diagram-js/lib/features/resize/ResizeHandles' {
   import Selection from 'diagram-js/lib/features/selection/Selection'
   import Resize from 'diagram-js/lib/features/resize/Resize'
   import { Shape } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
 
-  export default class ResizeHandles extends ModuleConstructor {
+  export default class ResizeHandles {
     constructor(eventBus: EventBus, canvas: Canvas, selection: Selection, resize: Resize)
     protected _resize: Resize
     protected _canvas: Canvas
@@ -2570,8 +2530,7 @@ declare module 'diagram-js/lib/features/resize/ResizePreview' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import PreviewSupport from 'diagram-js/lib/features/preview-support/PreviewSupport'
-  import { ModuleConstructor } from 'didi'
-  export default class ResizePreview extends ModuleConstructor {
+  export default class ResizePreview {
     constructor(eventBus: EventBus, canvas: Canvas, previewSupport: PreviewSupport)
   }
 }
@@ -2588,10 +2547,10 @@ declare module 'diagram-js/lib/features/root-elements/RootElementsBehavior' {
 // 默认实现将挂入命令堆栈执行实际的规则评估。确保提供命令堆栈如果您打算使用此模块，请使用它。
 // 连同此实现，您可以使用 RulesProvider 来实现你自己的规则检查器。
 declare module 'diagram-js/lib/features/rules/Rules' {
-  import { Injector, ModuleConstructor } from 'didi'
+  import { Injector } from 'didi'
   import CommandStack from 'diagram-js/lib/command/CommandStack'
 
-  export default class Rules extends ModuleConstructor {
+  export default class Rules {
     constructor(injector: Injector)
     protected _commandStack: CommandStack
     allowed(action: string, context?: Object): boolean
@@ -2611,7 +2570,6 @@ declare module 'diagram-js/lib/features/rules/RuleProvider' {
 }
 // 查询组件
 declare module 'diagram-js/lib/features/search-pad/SearchPad' {
-  import { ModuleConstructor } from 'didi'
   import Selection from 'diagram-js/lib/features/selection/Selection'
   import Overlays from 'diagram-js/lib/features/overlays/Overlays'
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -2631,7 +2589,7 @@ declare module 'diagram-js/lib/features/search-pad/SearchPad' {
     find: Function
   }
 
-  export default class SearchPad extends ModuleConstructor {
+  export default class SearchPad {
     static CONTAINER_SELECTOR: string
     static INPUT_SELECTOR: string
     static RESULTS_CONTAINER_SELECTOR: string
@@ -2694,11 +2652,10 @@ declare module 'diagram-js/lib/features/selection/Selection' {
   import Canvas from 'diagram-js/lib/core/Canvas'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import { Base } from 'diagram-js/lib/model'
-  import { ModuleConstructor } from 'didi'
 
   interface SelectedElement extends Base {}
 
-  export default class Selection extends ModuleConstructor {
+  export default class Selection {
     constructor(eventBus: EventBus, canvas: Canvas)
     protected _eventBus: EventBus
     protected _canvas: Canvas
@@ -2715,9 +2672,8 @@ declare module 'diagram-js/lib/features/selection/SelectionBehavior' {
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Selection from 'diagram-js/lib/features/selection/Selection'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
-  import { ModuleConstructor } from 'didi'
 
-  export default class SelectionBehavior extends ModuleConstructor {
+  export default class SelectionBehavior {
     constructor(
       eventBus: EventBus,
       selection: Selection,
@@ -2732,10 +2688,9 @@ declare module 'diagram-js/lib/features/selection/SelectionVisuals' {
   import Selection from 'diagram-js/lib/features/selection/Selection'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import Styles from 'diagram-js/lib/draw/Styles'
-  import { ModuleConstructor } from 'didi'
   import { Shape } from 'diagram-js/lib/model'
 
-  export default class SelectionVisuals extends ModuleConstructor {
+  export default class SelectionVisuals {
     constructor(eventBus: EventBus, canvas: Canvas, selection: Selection, styles: Styles)
     protected _canvas: Canvas
     protected _multiSelectionBox: any
@@ -2745,7 +2700,6 @@ declare module 'diagram-js/lib/features/selection/SelectionVisuals' {
 }
 // 对齐标识线
 declare module 'diagram-js/lib/features/snapping/Snapping' {
-  import { ModuleConstructor } from 'didi'
   import { debounce } from 'min-dash'
   import Canvas from 'diagram-js/lib/core/Canvas'
   import { SnapPoints } from 'diagram-js/lib/features/snapping/SnapContext'
@@ -2759,7 +2713,7 @@ declare module 'diagram-js/lib/features/snapping/Snapping' {
   }
   type Orientation = 'horizontal' | 'vertical'
 
-  export default class Snapping extends ModuleConstructor {
+  export default class Snapping {
     constructor(canvas: Canvas)
     protected _canvas: Canvas
     protected _asyncHide: typeof debounce
@@ -2807,13 +2761,12 @@ declare module 'diagram-js/lib/features/snapping/SnapContext' {
 }
 //
 declare module 'diagram-js/lib/features/snapping/ResizeSnapping' {
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Snapping from 'diagram-js/lib/features/snapping/Snapping'
   import SnapContext, { SnapPoints } from 'diagram-js/lib/features/snapping/SnapContext'
   import { Connection, Shape } from 'diagram-js/lib/model'
 
-  export default class ResizeSnapping extends ModuleConstructor {
+  export default class ResizeSnapping {
     constructor(eventBus: EventBus, snapping: Snapping)
 
     initSnap(event: Event): SnapContext
@@ -2828,14 +2781,13 @@ declare module 'diagram-js/lib/features/snapping/ResizeSnapping' {
 }
 //
 declare module 'diagram-js/lib/features/snapping/CreateMoveSnapping' {
-  import { ModuleConstructor } from 'didi'
   import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Snapping from 'diagram-js/lib/features/snapping/Snapping'
   import SnapContext, { SnapPoints } from 'diagram-js/lib/features/snapping/SnapContext'
   import { Connection, Shape } from 'diagram-js/lib/model'
 
-  export default class CreateMoveSnapping extends ModuleConstructor {
+  export default class CreateMoveSnapping {
     constructor(elementRegistry: ElementRegistry, eventBus: EventBus, snapping: Snapping)
     protected _elementRegistry: ElementRegistry
 
@@ -2851,7 +2803,6 @@ declare module 'diagram-js/lib/features/snapping/CreateMoveSnapping' {
 }
 // 对齐工具
 declare module 'diagram-js/lib/features/space-tool/SpaceTool' {
-  import { ModuleConstructor } from 'didi'
   import Canvas, { Position } from 'diagram-js/lib/core/Canvas'
   import Dragging from 'diagram-js/lib/features/dragging/Dragging'
   import EventBus from 'diagram-js/lib/core/EventBus'
@@ -2866,7 +2817,7 @@ declare module 'diagram-js/lib/features/space-tool/SpaceTool' {
     resizingShapes: Shape[]
   }
 
-  export default class SpaceTool extends ModuleConstructor {
+  export default class SpaceTool {
     constructor(
       canvas: Canvas,
       dragging: Dragging,
@@ -2901,18 +2852,16 @@ declare module 'diagram-js/lib/features/space-tool/SpaceTool' {
 }
 // 供创建/移除空间时选择/移动/调整形状的预览。
 declare module 'diagram-js/lib/features/space-tool/SpaceToolPreview' {
-  import { ModuleConstructor } from 'didi'
-  export default class SpaceToolPreview extends ModuleConstructor {
+  export default class SpaceToolPreview {
     constructor(eventBus, elementRegistry, canvas, styles, previewSupport)
   }
 }
 // 工具管理器充当可用工具和 palette 之间的中间人，它需要确保设置了正确的活动状态。
 declare module 'diagram-js/lib/features/tool-manager/ToolManager' {
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Dragging from 'diagram-js/lib/features/dragging/Dragging'
 
-  export default class ToolManager extends ModuleConstructor {
+  export default class ToolManager {
     constructor(eventBus: EventBus, dragging: Dragging)
     protected _eventBus: EventBus
     protected _dragging: Dragging
@@ -2928,7 +2877,6 @@ declare module 'diagram-js/lib/features/tool-manager/ToolManager' {
 }
 //允许用户在图上呈现工具提示的服务。工具提示服务将负责在导航缩放期间更新工具提示定位。
 declare module 'diagram-js/lib/features/tooltips/Tooltips' {
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas, { Viewbox } from 'diagram-js/lib/core/Canvas'
   import IdGenerator from 'diagram-js/lib/util/IdGenerator'
@@ -2949,7 +2897,7 @@ declare module 'diagram-js/lib/features/tooltips/Tooltips' {
     removeTimer?: typeof setTimeout
   }
 
-  export default class Tooltips extends ModuleConstructor {
+  export default class Tooltips {
     constructor(eventBus: EventBus, canvas: Canvas)
     protected _eventBus: EventBus
     protected _canvas: Canvas
@@ -2976,10 +2924,9 @@ declare module 'diagram-js/lib/features/tooltips/Tooltips' {
 }
 // 移动端事件修正
 declare module 'diagram-js/lib/features/touch/TouchFix' {
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
-  export default class TouchFix extends ModuleConstructor {
+  export default class TouchFix {
     constructor(canvas: Canvas, eventBus: EventBus)
 
     /**
@@ -2992,9 +2939,8 @@ declare module 'diagram-js/lib/features/touch/TouchFix' {
 }
 // 为元素提供触摸事件的插件。
 declare module 'diagram-js/lib/features/touch/TouchInteractionEvents' {
-  import { ModuleConstructor } from 'didi'
   // 内部依赖 dragging， move， contextPad， palette
-  export default class TouchInteractionEvents extends ModuleConstructor {
+  export default class TouchInteractionEvents {
     constructor(injector, canvas, eventBus, elementRegistry, interactionEvents)
   }
 }
@@ -3002,7 +2948,6 @@ declare module 'diagram-js/lib/features/touch/TouchInteractionEvents' {
 /*************************************** 其他 ****************************************/
 //
 declare module 'diagram-js/lib/navigation/keyboard-move/KeyboardMove' {
-  import { ModuleConstructor } from 'didi'
   import Keyboard from 'diagram-js/lib/features/keyboard/Keyboard'
   import Canvas from 'diagram-js/lib/core/Canvas'
 
@@ -3011,7 +2956,7 @@ declare module 'diagram-js/lib/navigation/keyboard-move/KeyboardMove' {
     moveSpeedAccelerated: number
   }
   //允许用户使用键盘移动画布的功能。
-  export default class KeyboardMove extends ModuleConstructor {
+  export default class KeyboardMove {
     constructor(config: Object, keyboard: Keyboard<Element>, canvas: Canvas)
     protected _config: KeyboardMoveConfig
 
@@ -3020,10 +2965,9 @@ declare module 'diagram-js/lib/navigation/keyboard-move/KeyboardMove' {
 }
 // 通过鼠标移动画布。
 declare module 'diagram-js/lib/navigation/movecanvas/MoveCanvas' {
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas from 'diagram-js/lib/core/Canvas'
-  export default class MoveCanvas extends ModuleConstructor {
+  export default class MoveCanvas {
     constructor(eventBus: EventBus, canvas: Canvas)
 
     protected isActive(): boolean
@@ -3031,7 +2975,6 @@ declare module 'diagram-js/lib/navigation/movecanvas/MoveCanvas' {
 }
 // 过鼠标滚轮缩放画布
 declare module 'diagram-js/lib/navigation/zoomscroll/ZoomScroll' {
-  import { ModuleConstructor } from 'didi'
   import EventBus from 'diagram-js/lib/core/EventBus'
   import Canvas, { Position } from 'diagram-js/lib/core/Canvas'
   /**
@@ -3047,7 +2990,7 @@ declare module 'diagram-js/lib/navigation/zoomscroll/ZoomScroll' {
    * @param {EventBus} eventBus
    * @param {Canvas} canvas
    */
-  export default class ZoomScroll extends ModuleConstructor {
+  export default class ZoomScroll {
     constructor(config: Object, eventBus: EventBus, canvas: Canvas)
     protected _enabled: boolean
     protected _canvas: Canvas
