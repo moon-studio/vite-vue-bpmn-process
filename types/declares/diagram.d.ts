@@ -753,19 +753,19 @@ declare module 'diagram-js/lib/command/CommandStack' {
 declare module 'diagram-js/lib/command/CommandHandler' {
   import { Base } from 'diagram-js/lib/model'
 
-  export default abstract class CommandHandler {
-    abstract execute<E extends Base>(context: Object): E[]
-    abstract revert<E extends Base>(context: Object): E[]
-    abstract canExecute(context: Object): boolean
-    abstract preExecute(context: Object): void
-    abstract postExecute(context: Object): void
+  export default class CommandHandler {
+    execute<E extends Base>(context: Object): E[]
+    revert<E extends Base>(context: Object): E[]
+    canExecute(context: Object): boolean
+    preExecute(context: Object): void
+    postExecute(context: Object): void
   }
 }
 // CommandHandler 实现类 的一个验证和扩展程序
 declare module 'diagram-js/lib/command/CommandInterceptor' {
   import EventBus from 'diagram-js/lib/core/EventBus'
 
-  export default abstract class CommandInterceptor {
+  export default class CommandInterceptor {
     protected constructor(eventBus: EventBus)
     on(
       events: Function | number | string | string[],
