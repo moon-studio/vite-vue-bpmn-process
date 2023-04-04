@@ -27,7 +27,7 @@ const defaultState: ModelerStore = {
 }
 
 export default defineStore('modeler', {
-  state: () => defaultState,
+  state: (): ModelerStore => defaultState,
   getters: {
     getActive: (state) => state.activeElement,
     getActiveId: (state) => state.activeElementId,

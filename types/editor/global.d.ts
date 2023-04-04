@@ -6,9 +6,6 @@ declare global {
     bpmnInstances: any
     __messageBox: MessageApiInjection
   }
-  interface Object {
-    [key: string | number]: string | number | boolean | undefined | null | Object | Function
-  }
 
   type BpmnElement = Base | Shape | Connection | Label
 }

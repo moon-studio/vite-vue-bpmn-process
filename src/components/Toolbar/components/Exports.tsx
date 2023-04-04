@@ -19,18 +19,18 @@ const Exports = defineComponent({
         const modeler = moderlerStore.getModeler
         // 按需要类型创建文件并下载
         if (type === 'xml' || type === 'bpmn') {
-          const { err, xml } = await modeler!.saveXML()
+          const { error, xml } = await modeler!.saveXML()
           // 读取异常时抛出异常
-          if (err) {
-            console.error(`[Process Designer Warn ]: ${err.message || err}`)
+          if (error) {
+            console.error(`[Process Designer Warn ]: ${error.message || error}`)
           }
           const { href, filename } = setEncoded(type.toUpperCase(), name, xml!)
           downloadFile(href, filename)
         } else {
-          const { err, svg } = await modeler!.saveSVG()
+          const { error, svg } = await modeler!.saveSVG()
           // 读取异常时抛出异常
-          if (err) {
-            return console.error(err)
+          if (error) {
+            return console.error(error)
           }
           const { href, filename } = setEncoded('SVG', name, svg!)
           downloadFile(href, filename)
