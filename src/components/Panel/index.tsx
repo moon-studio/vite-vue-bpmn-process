@@ -29,7 +29,7 @@ import { isCanbeConditional } from '@/bo-utils/conditionUtil'
 import { customTranslate } from '@/additional-modules/Translate'
 
 const Panel = defineComponent({
-  name: 'Panel',
+  name: 'PropertiesPanel',
   setup() {
     const modeler = modelerStore()
     const panel = ref<HTMLDivElement | null>(null)
@@ -42,7 +42,7 @@ const Panel = defineComponent({
 
     const renderComponents = markRaw<Component[]>([])
 
-    const setCurrentComponents = (element: Base) => {
+    const setCurrentComponents = (element: BpmnElement) => {
       // 清空
       renderComponents.splice(0, renderComponents.length)
       renderComponents.push(ElementGenerations)
@@ -57,7 +57,7 @@ const Panel = defineComponent({
 
     // 设置选中元素，更新 store
     const setCurrentElement = debounce((element: Shape | Base | Connection | Label | null) => {
-      let activatedElement: BpmnElement | null | undefined = element
+      let activatedElement: BpmnElement | undefined = element
       let activatedElementTypeName = ''
 
       if (!activatedElement) {
@@ -71,7 +71,7 @@ const Panel = defineComponent({
       }
       activatedElementTypeName = getBpmnIconType(activatedElement)
 
-      modeler.setElement(markRaw(activatedElement), activatedElement.id)
+      modeler.setElement(markRaw(activatedElement))
       currentElementId.value = activatedElement.id
       currentElementType.value = activatedElement.type.split(':')[1]
 
@@ -86,7 +86,6 @@ const Panel = defineComponent({
         'Selected element changed',
         `ID: ${activatedElement.id} , type: ${activatedElement.type}`
       )
-      Logger.prettyInfo('Selected element businessObject', activatedElement.businessObject)
     }, 100)
 
     EventEmitter.on('modeler-init', (modeler) => {

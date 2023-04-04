@@ -28,7 +28,7 @@ const Designer = defineComponent({
         try {
           const modelerModules = modulesAndModdle(editorSettings)
           await nextTick()
-          initModeler(designer, modelerModules, emit)
+          await initModeler(designer, modelerModules, emit)
           if (!oldValue || value.processEngine !== oldValue!.processEngine) {
             await createNewDiagram()
           } else {

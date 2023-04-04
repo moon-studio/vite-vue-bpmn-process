@@ -1,9 +1,8 @@
-import { Base } from 'diagram-js/lib/model'
 import { getBusinessObject, is } from 'bpmn-js/lib/util/ModelUtil'
 import { isEventSubProcess, isExpanded, isInterrupting } from 'bpmn-js/lib/util/DiUtil'
 import { isPlane } from 'bpmn-js/lib/util/DrilldownUtil'
 
-export default function getBpmnIconType(element: Base): string {
+export default function getBpmnIconType(element: BpmnElement): string {
   const { type: elementType } = element
 
   let type = getRawType(elementType)

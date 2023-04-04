@@ -5,10 +5,10 @@ import modeler from '@/store/modeler'
 import { useI18n } from 'vue-i18n'
 
 const Exports = defineComponent({
-  name: 'Exports',
+  name: 'ExportTools',
   setup() {
     const { t } = useI18n()
-    const moderlerStore = modeler()
+    const modelerStore = modeler()
     // 下载流程图到本地
     /**
      * @param {string} type
@@ -16,10 +16,10 @@ const Exports = defineComponent({
      */
     const downloadProcess = async (type: string, name = 'diagram') => {
       try {
-        const modeler = moderlerStore.getModeler
+        const modeler = modelerStore.getModeler
         // 按需要类型创建文件并下载
         if (type === 'xml' || type === 'bpmn') {
-          const { error, xml } = await modeler!.saveXML()
+          const { error, xml } = await modeler!.saveXML({})
           // 读取异常时抛出异常
           if (error) {
             console.error(`[Process Designer Warn ]: ${error.message || error}`)
@@ -27,11 +27,8 @@ const Exports = defineComponent({
           const { href, filename } = setEncoded(type.toUpperCase(), name, xml!)
           downloadFile(href, filename)
         } else {
-          const { error, svg } = await modeler!.saveSVG()
+          const { svg } = await modeler!.saveSVG()
           // 读取异常时抛出异常
-          if (error) {
-            return console.error(error)
-          }
           const { href, filename } = setEncoded('SVG', name, svg!)
           downloadFile(href, filename)
         }

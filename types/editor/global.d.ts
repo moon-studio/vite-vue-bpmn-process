@@ -1,5 +1,5 @@
-import { Base, Shape, Connection, Label } from 'diagram-js/lib/model'
 import { MessageApiInjection } from 'naive-ui/lib/message/src/MessageProvider'
+import { ElementLike } from 'diagram-js/lib/core'
 
 declare global {
   interface Window {
@@ -7,7 +7,7 @@ declare global {
     __messageBox: MessageApiInjection
   }
 
-  type BpmnElement = Base | Shape | Connection | Label
+  type BpmnElement = ElementLike & { type: string }
 }
 
 declare interface Window {

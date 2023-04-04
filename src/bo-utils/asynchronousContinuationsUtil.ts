@@ -45,7 +45,7 @@ export function setACExclusive(element: Base, value: boolean) {
 
 //////////////////// helper
 // 是否支持异步属性
-export function isAsynchronous(element: Base): boolean {
+export function isAsynchronous(element: BpmnElement): boolean {
   const prefix = editor().getProcessEngine
   return is(element, `${prefix}:AsyncCapable`)
 }

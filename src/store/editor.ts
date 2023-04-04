@@ -9,13 +9,16 @@ const state = {
 export default defineStore('editor', {
   state: () => state,
   getters: {
-    getLocales: (state) => state.editorSettings.language,
-    getProcessDef: (state) => ({
+    getLocales: (state): EditorSettings['language'] => state.editorSettings.language,
+    getProcessDef: (state): Pick<EditorSettings, 'processName' | 'processId'> => ({
       processName: state.editorSettings.processName,
       processId: state.editorSettings.processId
     }),
-    getProcessEngine: (state) => state.editorSettings.processEngine,
-    getEditorConfig: (state) => ({
+    getProcessEngine: (state): EditorSettings['processEngine'] =>
+      state.editorSettings.processEngine,
+    getEditorConfig: (
+      state
+    ): Omit<EditorSettings, 'language' | 'processName' | 'processId' | 'processEngine'> => ({
       bg: state.editorSettings.bg,
       paletteMode: state.editorSettings.paletteMode,
       penalMode: state.editorSettings.penalMode,

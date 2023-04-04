@@ -33,7 +33,7 @@ export function isExtendStartEvent(element: Base): boolean {
   return is(element, 'bpmn:StartEvent')
 }
 // 元素 是否符合 可以设置条件 的情况
-export function isCanbeConditional(element: Base): boolean {
+export function isCanbeConditional(element: BpmnElement): boolean {
   return (
     (is(element, 'bpmn:SequenceFlow') && isConditionalSource((element as Connection)?.source)) ||
     isConditionEventDefinition(element)

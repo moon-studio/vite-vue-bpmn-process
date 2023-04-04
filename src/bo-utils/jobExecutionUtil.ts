@@ -26,7 +26,7 @@ export function taskPriorityVisible(element: Base): boolean {
     !!isTimerEvent(element)
   )
 }
-export function isJobExecutable(element: Base): boolean {
+export function isJobExecutable(element: BpmnElement): boolean {
   return retryTimeCycleVisible(element) || taskPriorityVisible(element)
 }
 

@@ -19,7 +19,7 @@ export function setInitiatorValue(element: Base, value: string | undefined) {
   })
 }
 
-export function isStartInitializable(element: Base): boolean {
+export function isStartInitializable(element: BpmnElement): boolean {
   const prefix = editor().getProcessEngine
   return is(element, `${prefix}:Initiator`) && !is(element.parent, 'bpmn:SubProcess')
 }

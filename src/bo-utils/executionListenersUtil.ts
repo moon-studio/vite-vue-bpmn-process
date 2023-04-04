@@ -63,7 +63,7 @@ export function removeExecutionListener(element: Base, listener: ModdleElement) 
 }
 
 ////////////// helpers
-export function isExecutable(element: Base): boolean {
+export function isExecutable(element: BpmnElement): boolean {
   if (isAny(element, LISTENER_ALLOWED_TYPES)) return true
   if (is(element, 'bpmn:Participant')) {
     return !!element.businessObject.processRef

@@ -1,16 +1,24 @@
 // 右键扩展
-import Modeler from 'bpmn-js/lib/Modeler'
-import PopupMenu from 'diagram-js/lib/features/popup-menu/PopupMenu'
-import { Base } from 'diagram-js/lib/model'
-import Canvas, { Position } from 'diagram-js/lib/core/Canvas'
 import editor from '@/store/editor'
 import EventEmitter from '@/utils/EventEmitter'
 import { isAppendAction } from '@/utils/BpmnDesignerUtils'
 
+import type Modeler from 'bpmn-js/lib/Modeler'
+import type PopupMenu from 'diagram-js/lib/features/popup-menu/PopupMenu'
+import type { Base } from 'diagram-js/lib/model'
+import type Canvas from 'diagram-js/lib/core/Canvas'
+import type { Point } from 'diagram-js/lib/util/Types'
+import type { Event } from 'diagram-js/lib/core/EventBus'
+
+type ContextMenuEvent = {
+  element: Base
+  originalEvent: MouseEvent
+} & Event
+
 export default function (modeler: Modeler) {
   const config = editor().getEditorConfig
   if (!config.contextmenu) return
-  modeler.on('element.contextmenu', 2000, (event) => {
+  modeler.on('element.contextmenu', 2000, (event: ContextMenuEvent) => {
     const { element, originalEvent } = event
 
     // 自定义右键菜单
@@ -62,7 +70,7 @@ function openEnhancementPopupMenu(modeler: Modeler, element: Base, event: MouseE
 }
 
 ///// utils
-function getContextMenuPosition(event: MouseEvent, offset?: boolean): Position {
+function getContextMenuPosition(event: MouseEvent, offset?: boolean): Point {
   return {
     x: event.clientX + (offset ? 10 : 0),
     y: event.clientY + (offset ? 25 : 0)
