@@ -61,17 +61,26 @@
     transition: all cubic-bezier(0.8, 0.4, 0.8, 0.4) 0.24s;
   }
 }
+.settings-model {
+  width: 40vw;
+  min-width: 480px;
+  height: 80vh;
+  overflow: hidden;
+}
 
 .tips-message {
   width: 100%;
   text-align: left;
   color: #303133;
+  display: flex;
   .grip-tips {
     display: grid;
-    grid-template-columns: auto 1fr;
     p:first-child {
       grid-row-start: 1;
       grid-row-end: 5;
+    }
+    +.grip-tips {
+      margin-left: 20px;
     }
   }
   p {

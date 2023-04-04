@@ -1,18 +1,17 @@
 import { defineComponent } from 'vue'
-import { assign } from 'min-dash'
 import modelerStore from '@/store/modeler'
 import ElementFactory from 'bpmn-js/lib/features/modeling/ElementFactory'
 import Create from 'diagram-js/lib/features/create/Create'
 import { NCollapse, NCollapseItem } from 'naive-ui'
 
 const Palette = defineComponent({
-  name: 'Palette',
+  name: 'BpmnPalette',
   setup() {
     const store = modelerStore()
     const createElement = (ev: Event, type: string, options?: any) => {
       const ElementFactory: ElementFactory = store.getModeler!.get('elementFactory')
       const create: Create = store.getModeler!.get('create')
-      const shape = ElementFactory.createShape(assign({ type: `bpmn:${type}` }, options))
+      const shape = ElementFactory.createShape({ type: `bpmn:${type}`, ...(options || {}) })
       if (options) {
         shape.businessObject.di.isExpanded = options.isExpanded
       }

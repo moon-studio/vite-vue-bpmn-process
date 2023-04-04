@@ -1,6 +1,6 @@
-import { Ref, toRaw } from 'vue'
-import { ModuleDeclaration } from 'didi'
-import { EditorSettings } from 'types/editor/settings'
+import { type Ref, toRaw } from 'vue'
+import type { ModuleDeclaration } from 'didi'
+import type { EditorSettings } from 'types/editor/settings'
 
 // ** 官方流程模拟 module
 import TokenSimulationModule from 'bpmn-js-token-simulation'
@@ -47,10 +47,16 @@ import minimapModule from 'diagram-js-minimap'
 
 import BpmnColorPickerModule from 'bpmn-js-color-picker'
 
-export default function (settings: Ref<EditorSettings>) {
+export type ModulesAndModdles = [
+  ModuleDeclaration[],
+  { [key: string]: any },
+  { [key: string]: unknown }
+]
+
+export default function (settings: Ref<EditorSettings>): ModulesAndModdles {
   const modules: ModuleDeclaration[] = [] // modules 扩展模块数组
   let moddle: { [key: string]: any } = {} // moddle 声明文件对象
-  const options: { [key: string]: any } = {} // modeler 其他配置
+  const options: { [key: string]: unknown } = {} // modeler 其他配置
 
   // 配置 palette (可覆盖 paletteProvider 取消原生侧边栏)
   settings.value.paletteMode === 'enhancement' && modules.push(EnhancementPalette)

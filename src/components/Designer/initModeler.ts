@@ -1,22 +1,24 @@
 import { markRaw, Ref } from 'vue'
-import { ViewerOptions } from 'diagram-js/lib/model'
 import Modeler from 'bpmn-js/lib/Modeler'
 import EventEmitter from '@/utils/EventEmitter'
 import modelerStore from '@/store/modeler'
-import { Moddle } from 'moddle'
-import Modeling from 'bpmn-js/lib/features/modeling/Modeling'
-import Canvas from 'diagram-js/lib/core/Canvas'
-import ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
 import EnhancementContextmenu from '@/additional-functions/EnhancementContextmenu'
+
+import type Canvas from 'diagram-js/lib/core/Canvas'
+import type ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+import type { Moddle } from 'moddle'
+import type Modeling from 'bpmn-js/lib/features/modeling/Modeling'
+import type { BaseViewerOptions } from 'bpmn-js/lib/BaseViewer'
+import type { ModulesAndModdles } from '@/components/Designer/modulesAndModdle'
 
 export default function (
   designer: Ref<HTMLElement | null>,
-  modelerModules: ViewerOptions<Element>,
+  modelerModules: ModulesAndModdles,
   emit
 ) {
   const store = modelerStore()
 
-  const options: ViewerOptions<Element> = {
+  const options: BaseViewerOptions = {
     container: designer!.value as HTMLElement,
     additionalModules: modelerModules[0] || [],
     moddleExtensions: modelerModules[1] || {},

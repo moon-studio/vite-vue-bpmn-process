@@ -8,7 +8,7 @@ import initModeler from '@/components/Designer/initModeler'
 import { createNewDiagram } from '@/utils'
 
 const Designer = defineComponent({
-  name: 'Designer',
+  name: 'BpmnDesigner',
   props: {
     xml: {
       type: String as PropType<string>,
