@@ -1,0 +1,36 @@
+name: VITE-BPMN-DEV-CI
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 步骤名
+      - name: Checkout
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      # 执行npm脚本打包项目
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+
+      # 发布到个人仓库
+      - name: Deploy Step One
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          ACCESS_TOKEN: ${{ secrets.VITE_BPMN_TOKEN }}
+          BRANCH: master
+          FOLDER: dist
+          REPOSITORY_NAME: miyuesc/miyuesc.github.io
+          TARGET_FOLDER: vite-vue-bpmn-process-dev
