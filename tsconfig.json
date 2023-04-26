@@ -20,7 +20,7 @@
     // 生成相应的 .map文件。
     "sourceMap": false,
     // 忽略所有的声明文件（ *.d.ts）的类型检查。
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     // 指定ECMAScript目标版本
     "target": "esnext",
     // 要包含的类型声明文件名列表
