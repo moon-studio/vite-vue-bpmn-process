@@ -35,6 +35,14 @@ class EventEmitter {
     return EventEmitter._addListener(type, fn, context)
   }
 
+  static hasListener(type: string, fn: any) {
+    return (
+      EventEmitter._events[type] &&
+      EventEmitter._events[type].indexOf &&
+      EventEmitter._events[type].indexOf(fn) > -1
+    )
+  }
+
   static on(type: string, fn: any, context?: any) {
     return EventEmitter.addListener(type, fn, context)
   }
@@ -80,6 +88,9 @@ class EventEmitter {
     }
 
     const events = EventEmitter._events[type]
+    if (!events) {
+      return EventEmitter
+    }
 
     if (typeof events === 'function') {
       events === fn && delete EventEmitter._events[type]

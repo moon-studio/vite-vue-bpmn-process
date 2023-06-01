@@ -23,3 +23,7 @@ export function isStartInitializable(element: BpmnElement): boolean {
   const prefix = editor().getProcessEngine
   return is(element, `${prefix}:Initiator`) && !is(element.parent, 'bpmn:SubProcess')
 }
+
+export function isUserAssignmentSupported(element: BpmnElement) {
+  return is(element, `${editor().getProcessEngine}:Assignable`)
+}

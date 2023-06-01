@@ -15,7 +15,7 @@ import BpmnIcon from '@/components/common/BpmnIcon.vue'
 import { isAsynchronous } from '@/bo-utils/asynchronousContinuationsUtil'
 import { isExecutable } from '@/bo-utils/executionListenersUtil'
 import { isJobExecutable } from '@/bo-utils/jobExecutionUtil'
-import { isStartInitializable } from '@/bo-utils/initiatorUtil'
+import { isStartInitializable, isUserAssignmentSupported } from '@/bo-utils/initiatorUtil'
 
 import ElementGenerations from './components/ElementGenerations.vue'
 import ElementConditional from './components/ElementConditional.vue'
@@ -25,6 +25,9 @@ import ElementExtensionProperties from './components/ElementExtensionProperties.
 import ElementAsyncContinuations from './components/ElementAsyncContinuations.vue'
 import ElementJobExecution from './components/ElementJobExecution.vue'
 import ElementStartInitiator from './components/ElementStartInitiator.vue'
+
+import UserAssignment from './components/UserAssignment.vue'
+
 import { isCanbeConditional } from '@/bo-utils/conditionUtil'
 import { customTranslate } from '@/additional-modules/Translate'
 
@@ -53,6 +56,7 @@ const Panel = defineComponent({
       isExecutable(element) && renderComponents.push(ElementExecutionListeners)
       isAsynchronous(element) && renderComponents.push(ElementAsyncContinuations)
       isStartInitializable(element) && renderComponents.push(ElementStartInitiator)
+      isUserAssignmentSupported(element) && renderComponents.push(UserAssignment)
     }
 
     // 设置选中元素，更新 store
@@ -109,7 +113,7 @@ const Panel = defineComponent({
       })
     })
 
-    onMounted(() => !currentElementId.value && setCurrentElement())
+    onMounted(() => !currentElementId.value && setCurrentElement(null))
 
     return () => (
       <div ref={panel} class="panel">
