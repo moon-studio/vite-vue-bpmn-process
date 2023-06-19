@@ -194,6 +194,12 @@ React 项目也可以参考自定义插件和属性更新方式。
 
 ![img_6.png](docs/img_6.png)
 
+
+## 其他项目
+
+1. [diagram-js-grid-bg](https://github.com/miyuesc/diagram-js-grid-bg)：基于 diagram-js-grid 的 SVG 网格背景，可用于diagram-js的相关项目，例如 bpmn-js、dmn-js 等
+2. [bpmn-js-external-label-modeling](https://github.com/miyuesc/bpmn-js-external-label-modeling)：一个用来将 Label 标签渲染在节点外部的bpmn-js插件。
+
 ## Licence
 
 This project is licensed under the Apache License 2.0 .
