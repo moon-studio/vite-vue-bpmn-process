@@ -128,6 +128,12 @@ Life is not easy, pig sighs sighs. If it helps you, you can buy me a cup of coff
 > Activiti moddle json: https://github.com/Activiti/activiti-modeling-app/blob/master/projects/process-editor/src/services/activiti.json
 
 
+## Other Projects
+
+1. [diagram-js-grid-bg](https://github.com/miyuesc/diagram-js-grid-bg)：A visual grid backgroud for diagram-js, base on diagram-js-grid.
+2. [bpmn-js-external-label-modeling](https://github.com/miyuesc/bpmn-js-external-label-modeling)：A bpmn-js plugin used to render Label tags outside of nodes.
+
+   
 ## Licence
 
 This project is licensed under the Apache License 2.0 .
