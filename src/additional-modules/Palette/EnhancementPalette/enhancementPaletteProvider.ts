@@ -137,7 +137,7 @@ class EnhancementPaletteProvider extends PaletteProvider {
   }
 }
 
-EnhancementPaletteProvider.$inject = [
+EnhancementPaletteProvider['$inject'] = [
   'palette',
   'create',
   'elementFactory',

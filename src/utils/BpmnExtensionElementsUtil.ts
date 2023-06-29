@@ -1,5 +1,5 @@
 import { is } from 'bpmn-js/lib/util/ModelUtil'
-import { Base } from 'diagram-js/lib/model'
+import { Element } from 'diagram-js/lib/model/Types'
 import { ModdleElement } from 'bpmn-moddle'
 import { isArray } from 'min-dash'
 import modeler from '@/store/modeler'
@@ -26,7 +26,7 @@ export function getExtensionElementsList(
  * Add one or more extension elements. Create bpmn:ExtensionElements if it doesn't exist.
  */
 export function addExtensionElements(
-  element: Base,
+  element: Element,
   businessObject: ModdleElement,
   extensionElementToAdd: ModdleElement
 ) {
@@ -54,7 +54,7 @@ export function addExtensionElements(
  * Remove one or more extension elements. Remove bpmn:ExtensionElements afterwards if it's empty.
  */
 export function removeExtensionElements(
-  element: Base,
+  element: Element,
   businessObject: ModdleElement,
   extensionElementsToRemove: ModdleElement | ModdleElement[]
 ) {
@@ -75,7 +75,7 @@ export function removeExtensionElements(
 export function createModdleElement(
   elementType: string,
   properties: Record<string, any>,
-  parent?: Base | ModdleElement
+  parent?: Element | ModdleElement
 ): ModdleElement {
   const moddle = modeler().getModdle!
   const element = moddle.create(elementType, properties)

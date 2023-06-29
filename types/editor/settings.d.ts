@@ -1,4 +1,4 @@
-import { ViewerOptions } from 'diagram-js/lib/model'
+import { ViewerOptions } from 'diagram-js/lib/model/Types'
 import { ModuleDeclaration } from 'didi'
 
 export interface EditorSettings {

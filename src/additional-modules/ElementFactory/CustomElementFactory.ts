@@ -1,8 +1,7 @@
 import ElementFactory from 'bpmn-js/lib/features/modeling/ElementFactory'
 import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
 import BpmnModdle from 'bpmn-moddle'
-import { Translate } from 'diagram-js/lib/i18n/translate'
-import { Dimensions } from 'diagram-js/lib/core/Canvas'
+import { Dimensions } from 'diagram-js/lib/util/Types'
 import { getBusinessObject, getDi, is } from 'bpmn-js/lib/util/ModelUtil'
 
 type ElementConfig = Record<string, Dimensions>
@@ -13,7 +12,7 @@ class CustomElementFactory extends ElementFactory {
     config: Record<string, Dimensions>,
     bpmnFactory: BpmnFactory,
     moddle: BpmnModdle,
-    translate: Translate
+    translate
   ) {
     super(bpmnFactory, moddle, translate)
     this._config = config

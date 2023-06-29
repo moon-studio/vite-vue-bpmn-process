@@ -73,7 +73,7 @@
 <script lang="ts">
   import { computed, defineComponent, onMounted, ref } from 'vue'
   import modeler from '@/store/modeler'
-  import { Base } from 'diagram-js/lib/model'
+  import { Element } from 'diagram-js/lib/model/Types'
   import { scriptTypeOptions } from '@/config/selectOptions'
   import * as CU from '@/bo-utils/conditionUtil'
   import EventEmitter from '@/utils/EventEmitter'
@@ -82,7 +82,7 @@
     name: 'ElementConditional',
     setup() {
       const modelerStore = modeler()
-      const getActive = computed<Base | null>(() => modelerStore.getActive!)
+      const getActive = computed<Element | null>(() => modelerStore.getActive!)
 
       // 变量配置部分
       const varVisible = ref<boolean>(false)

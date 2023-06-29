@@ -1,7 +1,7 @@
 import editor from '@/store/editor'
 import { find } from 'min-dash'
 import { getBusinessObject, is, isAny } from 'bpmn-js/lib/util/ModelUtil'
-import { Base } from 'diagram-js/lib/model'
+import { Element } from 'diagram-js/lib/model/Types'
 import { ModdleElement } from 'bpmn-moddle'
 import { getExtensionElementsList } from '@/utils/BpmnExtensionElementsUtil'
 
@@ -22,7 +22,7 @@ type ImplementationType =
 
 // 获取节点事件定义
 export function getEventDefinition(
-  element: Base | ModdleElement,
+  element: Element | ModdleElement,
   eventType: string
 ): ModdleElement | undefined {
   const businessObject = getBusinessObject(element)
@@ -32,7 +32,7 @@ export function getEventDefinition(
   })
 }
 // 获取节点消息事件
-export function getMessageEventDefinition(element: Base): ModdleElement | undefined {
+export function getMessageEventDefinition(element: Element): ModdleElement | undefined {
   if (is(element, 'bpmn:ReceiveTask')) {
     return getBusinessObject(element)
   }
@@ -42,17 +42,17 @@ export function getMessageEventDefinition(element: Base): ModdleElement | undefi
 /////////////////////////////////////////// bpmn 根据流程引擎的扩展方法
 
 // Check whether an element is ServiceTaskLike 检查元素是否为 'ServiceTaskLike'
-export function isServiceTaskLike(element: Base | ModdleElement): boolean {
+export function isServiceTaskLike(element: Element | ModdleElement): boolean {
   return is(element, `${getProcessPrefix}:ServiceTaskLike`)
 }
 
 // Returns 'true' if the given element is 'DmnCapable'
-export function isDmnCapable(element: Base | ModdleElement): boolean {
+export function isDmnCapable(element: Element | ModdleElement): boolean {
   return is(element, `${getProcessPrefix}:DmnCapable`)
 }
 
 // Returns 'true' if the given element is 'ExternalCapable'
-export function isExternalCapable(element: Base | ModdleElement): boolean {
+export function isExternalCapable(element: Element | ModdleElement): boolean {
   return is(element, `${getProcessPrefix}:ExternalCapable`)
 }
 
@@ -83,7 +83,7 @@ export function getServiceTaskLikeBusinessObject(element): ModdleElement | false
  * - script
  * - or undefined, when no matching implementation type is found
  */
-export function getImplementationType(element: Base): ImplementationType {
+export function getImplementationType(element: Element): ImplementationType {
   const prefix = getProcessPrefix()
   const businessObject =
     getListenerBusinessObject(element) || getServiceTaskLikeBusinessObject(element)
@@ -135,7 +135,7 @@ export function getImplementationType(element: Base): ImplementationType {
 }
 
 function getListenerBusinessObject(
-  businessObject: Base | ModdleElement
+  businessObject: Element | ModdleElement
 ): ModdleElement | undefined {
   const prefix = getProcessPrefix()
   if (isAny(businessObject, [`${prefix}:ExecutionListener`, `${prefix}:TaskListener`])) {

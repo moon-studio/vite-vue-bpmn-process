@@ -47,6 +47,11 @@ import minimapModule from 'diagram-js-minimap'
 
 import BpmnColorPickerModule from 'bpmn-js-color-picker'
 
+import GridLineModule from 'diagram-js-grid-bg'
+
+// 外置 label
+import ExternalLabelModule from 'bpmn-js-external-label-modeling'
+
 export type ModulesAndModdles = [
   ModuleDeclaration[],
   { [key: string]: any },
@@ -136,6 +141,10 @@ export default function (settings: Ref<EditorSettings>): ModulesAndModdles {
     modules.push(TokenSimulationModule)
 
     modules.push(BpmnColorPickerModule)
+
+    modules.push(GridLineModule)
+
+    modules.push(ExternalLabelModule)
 
     // 设置键盘事件绑定
     options['keyboard'] = {

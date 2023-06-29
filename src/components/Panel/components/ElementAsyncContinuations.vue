@@ -20,7 +20,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { mapState } from 'pinia'
-  import { Base } from 'diagram-js/lib/model'
+  import { Element } from 'diagram-js/lib/model/Types'
   import modelerStore from '@/store/modeler'
   import {
     getACAfter,
@@ -53,20 +53,20 @@
     },
     methods: {
       reloadACStatus() {
-        this.acBefore = getACBefore(this.getActive as Base)
-        this.acAfter = getACAfter(this.getActive as Base)
-        this.acExclusive = getACExclusive(this.getActive as Base)
+        this.acBefore = getACBefore(this.getActive as Element)
+        this.acAfter = getACAfter(this.getActive as Element)
+        this.acExclusive = getACExclusive(this.getActive as Element)
       },
       updateElementACBefore(value: boolean) {
-        setACBefore(this.getActive as Base, value)
+        setACBefore(this.getActive as Element, value)
         this.reloadACStatus()
       },
       updateElementACAfter(value: boolean) {
-        setACAfter(this.getActive as Base, value)
+        setACAfter(this.getActive as Element, value)
         this.reloadACStatus()
       },
       updateElementACExclusive(value: boolean) {
-        setACExclusive(this.getActive as Base, value)
+        setACExclusive(this.getActive as Element, value)
         this.reloadACStatus()
       }
     }

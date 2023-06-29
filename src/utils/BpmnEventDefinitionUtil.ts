@@ -1,21 +1,21 @@
 import { isAny } from 'bpmn-js/lib/features/modeling/util/ModelingUtil'
 import { getBusinessObject, is } from 'bpmn-js/lib/util/ModelUtil'
-import { Base } from 'diagram-js/lib/model'
+import { Element } from 'diagram-js/lib/model/Types'
 import { ModdleElement } from 'bpmn-moddle'
 import { find } from 'min-dash'
 
-export function isErrorSupported(element: Base): boolean {
+export function isErrorSupported(element: Element): boolean {
   return (
     isAny(element, ['bpmn:StartEvent', 'bpmn:BoundaryEvent', 'bpmn:EndEvent']) &&
     !!getErrorEventDefinition(element)
   )
 }
 
-export function getErrorEventDefinition(element: Base): ModdleElement | undefined {
+export function getErrorEventDefinition(element: Element): ModdleElement | undefined {
   return getEventDefinition(element, 'bpmn:ErrorEventDefinition')
 }
 
-export function isTimerSupported(element: Base): boolean {
+export function isTimerSupported(element: Element): boolean {
   return (
     isAny(element, ['bpmn:StartEvent', 'bpmn:IntermediateCatchEvent', 'bpmn:BoundaryEvent']) &&
     !!getTimerEventDefinition(element)
@@ -50,17 +50,17 @@ export function getTimerDefinitionType(timer: ModdleElement): string | undefined
   }
 }
 
-export function getTimerEventDefinition(element: Base): ModdleElement | undefined {
+export function getTimerEventDefinition(element: Element): ModdleElement | undefined {
   return getEventDefinition(element, 'bpmn:TimerEventDefinition')
 }
 
-export function getError(element: Base) {
+export function getError(element: Element) {
   const errorEventDefinition = getErrorEventDefinition(element)
 
   return errorEventDefinition && errorEventDefinition.get('errorRef')
 }
 
-export function getEventDefinition(element: Base, eventType: string): ModdleElement | undefined {
+export function getEventDefinition(element: Element, eventType: string): ModdleElement | undefined {
   const businessObject = getBusinessObject(element)
 
   const eventDefinitions = businessObject.get('eventDefinitions') || []
@@ -70,7 +70,7 @@ export function getEventDefinition(element: Base, eventType: string): ModdleElem
   })
 }
 
-export function isMessageSupported(element: Base): boolean {
+export function isMessageSupported(element: Element): boolean {
   return (
     is(element, 'bpmn:ReceiveTask') ||
     (isAny(element, [
@@ -84,7 +84,7 @@ export function isMessageSupported(element: Base): boolean {
   )
 }
 
-export function getMessageEventDefinition(element: Base): ModdleElement | undefined {
+export function getMessageEventDefinition(element: Element): ModdleElement | undefined {
   if (is(element, 'bpmn:ReceiveTask')) {
     return getBusinessObject(element)
   }
@@ -92,63 +92,63 @@ export function getMessageEventDefinition(element: Base): ModdleElement | undefi
   return getEventDefinition(element, 'bpmn:MessageEventDefinition')
 }
 
-export function getMessage(element: Base): ModdleElement | undefined {
+export function getMessage(element: Element): ModdleElement | undefined {
   const messageEventDefinition = getMessageEventDefinition(element)
 
   return messageEventDefinition && messageEventDefinition.get('messageRef')
 }
 
-export function getLinkEventDefinition(element: Base): ModdleElement | undefined {
+export function getLinkEventDefinition(element: Element): ModdleElement | undefined {
   return getEventDefinition(element, 'bpmn:LinkEventDefinition')
 }
 
-export function getSignalEventDefinition(element: Base): ModdleElement | undefined {
+export function getSignalEventDefinition(element: Element): ModdleElement | undefined {
   return getEventDefinition(element, 'bpmn:SignalEventDefinition')
 }
 
-export function isLinkSupported(element: Base): boolean {
+export function isLinkSupported(element: Element): boolean {
   return (
     isAny(element, ['bpmn:IntermediateThrowEvent', 'bpmn:IntermediateCatchEvent']) &&
     !!getLinkEventDefinition(element)
   )
 }
 
-export function isSignalSupported(element: Base): boolean {
+export function isSignalSupported(element: Element): boolean {
   return is(element, 'bpmn:Event') && !!getSignalEventDefinition(element)
 }
 
-export function getSignal(element: Base): ModdleElement | undefined {
+export function getSignal(element: Element): ModdleElement | undefined {
   const signalEventDefinition = getSignalEventDefinition(element)
 
   return signalEventDefinition && signalEventDefinition.get('signalRef')
 }
 
-export function getEscalationEventDefinition(element: Base): ModdleElement | undefined {
+export function getEscalationEventDefinition(element: Element): ModdleElement | undefined {
   return getEventDefinition(element, 'bpmn:EscalationEventDefinition')
 }
 
-export function isEscalationSupported(element: Base): boolean {
+export function isEscalationSupported(element: Element): boolean {
   return is(element, 'bpmn:Event') && !!getEscalationEventDefinition(element)
 }
 
-export function getEscalation(element: Base): ModdleElement | undefined {
+export function getEscalation(element: Element): ModdleElement | undefined {
   const escalationEventDefinition = getEscalationEventDefinition(element)
 
   return escalationEventDefinition && escalationEventDefinition.get('escalationRef')
 }
 
-export function isCompensationSupported(element: Base): boolean {
+export function isCompensationSupported(element: Element): boolean {
   return (
     isAny(element, ['bpmn:EndEvent', 'bpmn:IntermediateThrowEvent']) &&
     !!getCompensateEventDefinition(element)
   )
 }
 
-export function getCompensateEventDefinition(element: Base): ModdleElement | undefined {
+export function getCompensateEventDefinition(element: Element): ModdleElement | undefined {
   return getEventDefinition(element, 'bpmn:CompensateEventDefinition')
 }
 
-export function getCompensateActivity(element: Base): ModdleElement | undefined {
+export function getCompensateActivity(element: Element): ModdleElement | undefined {
   const compensateEventDefinition = getCompensateEventDefinition(element)
 
   return compensateEventDefinition && compensateEventDefinition.get('activityRef')

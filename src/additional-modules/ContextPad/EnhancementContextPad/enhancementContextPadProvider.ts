@@ -9,10 +9,18 @@ import Create from 'diagram-js/lib/features/create/Create'
 import PopupMenu from 'diagram-js/lib/features/popup-menu/PopupMenu'
 import Canvas from 'diagram-js/lib/core/Canvas'
 import Rules from 'diagram-js/lib/features/rules/Rules'
-import { Translate } from 'diagram-js/lib/i18n/translate'
-import { Base, Shape } from 'diagram-js/lib/model'
+import { Element, Shape } from 'diagram-js/lib/model/Types'
 
 class EnhancementContextPadProvider extends ContextPadProvider {
+  private _contextPad: ContextPad
+  private _modeling: Modeling
+  private _elementFactory: ElementFactory
+  private _autoPlace: any
+  private _connect: Connect
+  private _create: Create
+  private _popupMenu: PopupMenu
+  private _canvas: Canvas
+  private _rules: Rules
   constructor(
     config: any,
     injector: Injector,
@@ -25,7 +33,7 @@ class EnhancementContextPadProvider extends ContextPadProvider {
     popupMenu: PopupMenu,
     canvas: Canvas,
     rules: Rules,
-    translate: Translate
+    translate
   ) {
     super(
       config,
@@ -51,12 +59,11 @@ class EnhancementContextPadProvider extends ContextPadProvider {
     this._popupMenu = popupMenu
     this._canvas = canvas
     this._rules = rules
-    this._translate = translate
 
     this._autoPlace = injector.get('autoPlace', false)
   }
 
-  getContextPadEntries(element: Base) {
+  getContextPadEntries(element: Element) {
     const actions: Record<string, any> = {}
 
     const appendUserTask = (event: Event, element: Shape) => {

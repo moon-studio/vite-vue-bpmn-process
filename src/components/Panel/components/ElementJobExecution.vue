@@ -27,14 +27,14 @@
     setRetryTimeCycleValue,
     taskPriorityVisible
   } from '@/bo-utils/jobExecutionUtil'
-  import { Base } from 'diagram-js/lib/model'
+  import { Element } from 'diagram-js/lib/model/Types'
   import EventEmitter from '@/utils/EventEmitter'
 
   export default defineComponent({
     name: 'ElementJobExecution',
     setup() {
       const modelerStore = modeler()
-      const getActive = computed<Base | null>(() => modelerStore.getActive!)
+      const getActive = computed<Element | null>(() => modelerStore.getActive!)
       const getActiveId = computed<string>(() => modelerStore.getActiveId!)
 
       const retryTimeCycle = ref<string | undefined>(undefined)

@@ -1,4 +1,4 @@
-import { Base } from 'diagram-js/lib/model'
+import { Element } from 'diagram-js/lib/model/Types'
 import { ModdleElement } from 'bpmn-moddle'
 import { getBusinessObject, is } from 'bpmn-js/lib/util/ModelUtil'
 import editor from '@/store/editor'
@@ -9,14 +9,14 @@ import { isAsync } from '@/utils/BpmnAsyncElement'
 import { createModdleElement, getExtensionElementsList } from '@/utils/BpmnExtensionElementsUtil'
 
 //
-export function retryTimeCycleVisible(element: Base): boolean {
+export function retryTimeCycleVisible(element: Element): boolean {
   const prefix = editor().getProcessEngine
   const businessObject = getBusinessObject(element)
   return (
     (is(element, `${prefix}:AsyncCapable`) && isAsync(businessObject)) || !!isTimerEvent(element)
   )
 }
-export function taskPriorityVisible(element: Base): boolean {
+export function taskPriorityVisible(element: Element): boolean {
   const prefix = editor().getProcessEngine
   const businessObject = getBusinessObject(element)
   return (
@@ -31,12 +31,12 @@ export function isJobExecutable(element: BpmnElement): boolean {
 }
 
 // 任务优先级
-export function getExternalTaskValue(element: Base): string | undefined {
+export function getExternalTaskValue(element: Element): string | undefined {
   const prefix = editor().getProcessEngine
   const businessObject = getRelativeBusinessObject(element)
   return businessObject.get(`${prefix}:taskPriority`)
 }
-export function setExternalTaskValue(element: Base, value: string | undefined) {
+export function setExternalTaskValue(element: Element, value: string | undefined) {
   const prefix = editor().getProcessEngine
   const modeling = modeler().getModeling
   const businessObject = getRelativeBusinessObject(element)
@@ -46,7 +46,7 @@ export function setExternalTaskValue(element: Base, value: string | undefined) {
 }
 
 // 重试周期
-export function getRetryTimeCycleValue(element: Base): string | undefined {
+export function getRetryTimeCycleValue(element: Element): string | undefined {
   const prefix = editor().getProcessEngine
   const businessObject = getBusinessObject(element)
   const failedJobRetryTimeCycle = getExtensionElementsList(
@@ -55,7 +55,7 @@ export function getRetryTimeCycleValue(element: Base): string | undefined {
   )[0]
   return failedJobRetryTimeCycle && failedJobRetryTimeCycle.body
 }
-export function setRetryTimeCycleValue(element: Base, value: string | undefined) {
+export function setRetryTimeCycleValue(element: Element, value: string | undefined) {
   const prefix = editor().getProcessEngine
   const modeling = modeler().getModeling
   const moddle = modeler().getModdle!
@@ -90,14 +90,14 @@ export function setRetryTimeCycleValue(element: Base, value: string | undefined)
 }
 
 /////////// helpers
-function isExternalTaskLike(element: Base): boolean {
+function isExternalTaskLike(element: Element): boolean {
   const prefix = editor().getProcessEngine
   const bo = getServiceTaskLikeBusinessObject(element),
     type = bo && bo.get(`${prefix}:type`)
   return bo && is(bo, `${prefix}:ServiceTaskLike`) && type && type === 'external'
 }
 
-function getRelativeBusinessObject(element: Base): ModdleElement {
+function getRelativeBusinessObject(element: Element): ModdleElement {
   let businessObject
   if (is(element, 'bpmn:Participant')) {
     businessObject = getBusinessObject(element).get('processRef')

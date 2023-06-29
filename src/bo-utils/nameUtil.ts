@@ -1,5 +1,5 @@
 import modelerStore from '@/store/modeler'
-import { Base } from 'diagram-js/lib/model'
+import { Element } from 'diagram-js/lib/model/Types'
 import { ModdleElement } from 'bpmn-moddle'
 import { getBusinessObject, is } from 'bpmn-js/lib/util/ModelUtil'
 import { isAny } from 'bpmn-js/lib/features/modeling/util/ModelingUtil'
@@ -7,7 +7,7 @@ import { add as collectionAdd } from 'diagram-js/lib/util/Collections'
 import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
 
 // 根据元素获取 name 属性
-export function getNameValue(element: Base): string | undefined {
+export function getNameValue(element: Element): string | undefined {
   if (isAny(element, ['bpmn:Collaboration', 'bpmn:DataAssociation', 'bpmn:Association'])) {
     return undefined
   }
@@ -23,7 +23,7 @@ export function getNameValue(element: Base): string | undefined {
 }
 
 // 根据输入内容设置 name 属性
-export function setNameValue(element: Base, value: string): void {
+export function setNameValue(element: Element, value: string): void {
   const store = modelerStore()
 
   const modeling = store.getModeling

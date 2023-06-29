@@ -32,8 +32,8 @@ export default defineStore('modeler', {
     getActiveId: (state) => state.activeElementId,
     getModeler: (state) => state.modeler,
     getModdle: (state) => state.moddle,
-    getModeling: (state) => state.modeling,
-    getCanvas: (state) => state.canvas,
+    getModeling: (state): Modeling | undefined => state.modeling,
+    getCanvas: (state): Canvas | undefined => state.canvas,
     getElRegistry: (state) => state.elementRegistry
   },
   actions: {

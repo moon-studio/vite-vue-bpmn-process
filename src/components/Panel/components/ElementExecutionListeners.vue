@@ -114,7 +114,7 @@
   import { FormInst, FormRules, DataTableColumns, NButton } from 'naive-ui'
   import modeler from '@/store/modeler'
   import { ModdleElement } from 'bpmn-moddle'
-  import { Base } from 'diagram-js/lib/model'
+  import { Element } from 'diagram-js/lib/model/Types'
   import {
     addExecutionListener,
     getDefaultEvent,
@@ -223,7 +223,7 @@
         updateListenerType('class')
         newListener.value = { event: getDefaultEvent(getActive.value), type: 'class' }
         listenerEventTypeOptions.value = getExecutionListenerTypes(getActive.value)
-        ;(listenersRaw as ModdleElement[]) = markRaw(getExecutionListeners(getActive.value as Base))
+        ;(listenersRaw as ModdleElement[]) = markRaw(getExecutionListeners(getActive.value as Element))
         const list = listenersRaw.map(
           (item: ModdleElement & BpmnExecutionListener): ExecutionListenerForm => ({
             ...item,

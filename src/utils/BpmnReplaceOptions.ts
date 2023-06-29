@@ -1,13 +1,13 @@
-import { Base } from 'diagram-js/lib/model'
+import { Element } from 'diagram-js/lib/model/Types'
 import { isDifferentType } from 'bpmn-js/lib/features/popup-menu/util/TypeUtil'
 import { getBusinessObject, is } from 'bpmn-js/lib/util/ModelUtil'
 import * as replaceOptions from 'bpmn-js/lib/features/replace/ReplaceOptions'
 import { isEventSubProcess, isExpanded } from 'bpmn-js/lib/util/DiUtil'
 import { isAppendAction } from '@/utils/BpmnDesignerUtils'
 
-export default function (element?: Base) {
-  const differentType = (element: Base) => isDifferentType(element)
-  const getCurrentReplaceOptions = (element: Base) => {
+export default function (element?: Element) {
+  const differentType = (element: Element) => isDifferentType(element)
+  const getCurrentReplaceOptions = (element: Element) => {
     const businessObject = element.businessObject
     if (is(businessObject, 'bpmn:DataObjectReference')) {
       return replaceOptions.DATA_OBJECT_REFERENCE

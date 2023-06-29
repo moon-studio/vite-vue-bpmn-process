@@ -17,14 +17,14 @@
   import { computed, defineComponent, onMounted, ref } from 'vue'
   import { getInitiatorValue, setInitiatorValue } from '@/bo-utils/initiatorUtil'
   import modeler from '@/store/modeler'
-  import { Base } from 'diagram-js/lib/model'
+  import { Element } from 'diagram-js/lib/model/Types'
   import EventEmitter from '@/utils/EventEmitter'
 
   export default defineComponent({
     name: 'ElementStartInitiator',
     setup() {
       const modelerStore = modeler()
-      const getActive = computed<Base | null>(() => modelerStore.getActive!)
+      const getActive = computed<Element | null>(() => modelerStore.getActive!)
       const initiator = ref<string | undefined>('')
 
       const getElementInitiator = () => {

@@ -1,7 +1,7 @@
 // 复制粘贴的行为校验
 declare module 'camunda-bpmn-moddle/lib/CopyPasteBehavior' {
   import EventBus from 'diagram-js/lib/core/EventBus'
-  import { Base } from 'diagram-js/lib/model'
+  import { Element } from 'diagram-js/lib/model/Types'
 
   // 注册一个  moddleCopy.canCopyProperty  监听事件
   export default class CopyPasteBehavior {
@@ -12,13 +12,13 @@ declare module 'camunda-bpmn-moddle/lib/CopyPasteBehavior' {
      * @param property
      * @param parent
      */
-    canCopyProperty(property: Object | string, parent: Base): boolean
+    canCopyProperty(property: Object | string, parent: Element): boolean
 
-    canHostInputOutput(parent: Base): boolean
+    canHostInputOutput(parent: Element): boolean
 
-    canHostConnector(parent: Base): boolean
+    canHostConnector(parent: Element): boolean
 
-    canHostIn(parent: Base): boolean
+    canHostIn(parent: Element): boolean
   }
 }
 //

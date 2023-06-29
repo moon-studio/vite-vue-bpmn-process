@@ -1,4 +1,4 @@
-import { Base } from 'diagram-js/lib/model'
+import { Element } from 'diagram-js/lib/model/Types'
 import { ModdleElement } from 'bpmn-moddle'
 import { getBusinessObject, is } from 'bpmn-js/lib/util/ModelUtil'
 import { createModdleElement, getExtensionElementsList } from '@/utils/BpmnExtensionElementsUtil'
@@ -7,14 +7,14 @@ import editorStore from '@/store/editor'
 import { without } from 'min-dash'
 
 /////// 功能函数
-export function getExtensionProperties(element: Base): ModdleElement[] {
+export function getExtensionProperties(element: Element): ModdleElement[] {
   const businessObject = getRelevantBusinessObject(element)
 
   if (!businessObject) return []
   return getPropertiesList(businessObject) || []
 }
 
-export function addExtensionProperty(element: Base, property) {
+export function addExtensionProperty(element: Element, property) {
   try {
     const store = modelerStore()
     const editor = editorStore()
@@ -53,7 +53,7 @@ export function addExtensionProperty(element: Base, property) {
   }
 }
 
-export function removeExtensionProperty(element: Base, property: ModdleElement) {
+export function removeExtensionProperty(element: Element, property: ModdleElement) {
   const businessObject = getRelevantBusinessObject(element)
   const extensionElements = businessObject.get('extensionElements')
   const properties = getProperties(businessObject)
@@ -73,7 +73,7 @@ export function removeExtensionProperty(element: Base, property: ModdleElement) 
 }
 
 ///// helpers
-function getRelevantBusinessObject(element: Base) {
+function getRelevantBusinessObject(element: Element) {
   const businessObject = getBusinessObject(element)
   if (is(element, 'bpmn:Participant')) {
     return businessObject.get('processRef')

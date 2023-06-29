@@ -15,7 +15,7 @@
   import { defineComponent } from 'vue'
   import { mapState } from 'pinia'
   import modelerStore from '@/store/modeler'
-  import { Base } from 'diagram-js/lib/model'
+  import { Element } from 'diagram-js/lib/model/Types'
   import { getDocumentValue, setDocumentValue } from '@/bo-utils/documentationUtil'
   import EventEmitter from '@/utils/EventEmitter'
 
@@ -33,19 +33,19 @@
       getActiveId: {
         immediate: true,
         handler() {
-          this.elementDoc = getDocumentValue(this.getActive as Base) || ''
+          this.elementDoc = getDocumentValue(this.getActive as Element) || ''
         }
       }
     },
     mounted() {
-      this.elementDoc = getDocumentValue(this.getActive as Base) || ''
+      this.elementDoc = getDocumentValue(this.getActive as Element) || ''
       EventEmitter.on('element-update', () => {
-        this.elementDoc = getDocumentValue(this.getActive as Base) || ''
+        this.elementDoc = getDocumentValue(this.getActive as Element) || ''
       })
     },
     methods: {
       updateElementDoc(value) {
-        setDocumentValue(this.getActive as Base, value)
+        setDocumentValue(this.getActive as Element, value)
       }
     }
   })

@@ -5,13 +5,13 @@ declare module 'moddle' {
     prefix?: string
   }
 
-  export class Base {
+  export class Element {
     get(name: string): ReturnType<typeof Properties.prototype.get>
     set(name: string, value: any): ReturnType<typeof Properties.prototype.set>
     $instanceOf: typeof Moddle.prototype.hasType
   }
 
-  export class ModdleElement extends Base {
+  export class ModdleElement extends Element {
     constructor(attrs: Object)
     readonly $type: string
     $attrs: Object | {}

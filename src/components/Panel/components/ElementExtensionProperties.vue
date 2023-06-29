@@ -44,7 +44,7 @@
   import { h, defineComponent, toRaw, markRaw } from 'vue'
   import { mapState } from 'pinia'
   import modelerStore from '@/store/modeler'
-  import { Base } from 'diagram-js/lib/model'
+  import { Element } from 'diagram-js/lib/model/Types'
   import {
     addExtensionProperty,
     getExtensionProperties,
@@ -131,17 +131,17 @@
         this.modelVisible = false
         await this.$nextTick()
         this.newProperty = { name: '', value: '' }
-        ;(this.extensionsRaw as any[]) = markRaw(getExtensionProperties(this.getActive as Base))
+        ;(this.extensionsRaw as any[]) = markRaw(getExtensionProperties(this.getActive as Element))
         this.extensions = JSON.parse(JSON.stringify(this.extensionsRaw))
       },
       removeProperty(propIndex: number) {
-        removeExtensionProperty(this.getActive as Base, this.extensionsRaw[propIndex])
+        removeExtensionProperty(this.getActive as Element, this.extensionsRaw[propIndex])
         this.reloadExtensionProperties()
       },
       async addProperty() {
         ;(this.$refs.formRef as FormInst).validate((errors) => {
           if (!errors) {
-            addExtensionProperty(this.getActive as Base, toRaw(this.newProperty))
+            addExtensionProperty(this.getActive as Element, toRaw(this.newProperty))
             this.reloadExtensionProperties()
           }
         })

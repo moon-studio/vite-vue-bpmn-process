@@ -1,6 +1,6 @@
 import BaseRenderer from 'diagram-js/lib/draw/BaseRenderer'
 import { RendererHandler } from 'bpmn-js/lib/draw/BpmnRenderer'
-import { Base, Connection, Shape } from 'diagram-js/lib/model'
+import { Element, Connection, Shape } from 'diagram-js/lib/model/Types'
 import { is } from 'bpmn-js/lib/util/ModelUtil'
 import EventBus from 'diagram-js/lib/core/EventBus'
 import Styles from 'diagram-js/lib/draw/Styles'
@@ -1541,8 +1541,8 @@ class RewriteRenderer extends BaseRenderer {
         const path = drawPath(parentGfx, pathData, attrs)
         const sequenceflow = getSemantic(element)
         let source
-        if ((element as Base as Connection).source) {
-          source = (element as Base as Connection).source.businessObject
+        if ((element as Element as Connection).source) {
+          source = (element as Element as Connection).source.businessObject
           if (sequenceflow.conditionExpression && source.$instanceOf('bpmn:Activity')) {
             svgAttr(path, {
               markerStart: marker('conditional-flow-marker', fill, stroke)
@@ -1585,7 +1585,7 @@ class RewriteRenderer extends BaseRenderer {
           attrs.markerStart = marker('association-start', fill, stroke)
         }
 
-        return drawLine(parentGfx, (element as Base as Connection).waypoints, attrs)
+        return drawLine(parentGfx, (element as Element as Connection).waypoints, attrs)
       },
       'bpmn:DataInputAssociation': function (parentGfx, element) {
         const fill = getFillColor(element, defaultFillColor),
@@ -1990,7 +1990,7 @@ class RewriteRenderer extends BaseRenderer {
     })
   }
 
-  public canRender<E extends Base>(element: E): boolean {
+  public canRender<E extends Element>(element: E): boolean {
     return is(element, 'bpmn:BaseElement')
   }
   public drawConnection(parentGfx: SVGElement, connection: Connection): SVGPolylineElement {

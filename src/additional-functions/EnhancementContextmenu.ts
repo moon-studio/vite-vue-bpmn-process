@@ -5,13 +5,13 @@ import { isAppendAction } from '@/utils/BpmnDesignerUtils'
 
 import type Modeler from 'bpmn-js/lib/Modeler'
 import type PopupMenu from 'diagram-js/lib/features/popup-menu/PopupMenu'
-import type { Base } from 'diagram-js/lib/model'
+import type { Element } from 'diagram-js/lib/model/Types'
 import type Canvas from 'diagram-js/lib/core/Canvas'
 import type { Point } from 'diagram-js/lib/util/Types'
 import type { Event } from 'diagram-js/lib/core/EventBus'
 
 type ContextMenuEvent = {
-  element: Base
+  element: Element
   originalEvent: MouseEvent
 } & Event
 
@@ -28,6 +28,7 @@ export default function (modeler: Modeler) {
 
     // 原生面板扩展
     // 1. 更改元素类型
+    // ts-ignore
     if (!isAppendAction(element)) {
       return config.templateChooser
         ? openEnhancementPopupMenu(modeler, element, originalEvent)
@@ -42,12 +43,10 @@ export default function (modeler: Modeler) {
 }
 
 // default replace popupMenu
-function openPopupMenu(modeler: Modeler, element: Base, event: MouseEvent) {
+function openPopupMenu(modeler: Modeler, element: Element, event: MouseEvent) {
   const popupMenu = modeler.get<PopupMenu>('popupMenu')
   if (popupMenu && !popupMenu.isEmpty(element, 'bpmn-replace')) {
-    popupMenu.open(element, 'bpmn-replace', {
-      cursor: { x: event.clientX + 10, y: event.clientY + 10 }
-    })
+    popupMenu.open(element, 'bpmn-replace', { x: event.clientX + 10, y: event.clientY + 10 })
     // 设置画布点击清除事件
     const canvas = modeler.get<Canvas>('canvas')
     const container = canvas.getContainer()
@@ -62,7 +61,7 @@ function openPopupMenu(modeler: Modeler, element: Base, event: MouseEvent) {
 }
 
 // templateChooser enhancement replace popupMenu
-function openEnhancementPopupMenu(modeler: Modeler, element: Base, event: MouseEvent) {
+function openEnhancementPopupMenu(modeler: Modeler, element: Element, event: MouseEvent) {
   const replaceMenu: any = modeler.get('replaceMenu')
   if (replaceMenu) {
     replaceMenu.open(element, getContextMenuPosition(event, true))

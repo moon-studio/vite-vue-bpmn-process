@@ -1,6 +1,6 @@
 import { every, some, isObject } from 'min-dash'
 import { append as svgAppend, attr as svgAttr, create as svgCreate } from 'tiny-svg'
-import { Base } from 'diagram-js/lib/model'
+import { Element } from 'diagram-js/lib/model/Types'
 import { ModdleElement } from 'bpmn-moddle'
 
 //////////////////// 校验部分
@@ -15,7 +15,7 @@ export function isTypedEvent(event: ModdleElement, eventDefinitionType: string, 
   })
 }
 
-export function getSemantic<T extends Base>(element: T): ModdleElement {
+export function getSemantic<T extends Element>(element: T): ModdleElement {
   return element.businessObject
 }
 

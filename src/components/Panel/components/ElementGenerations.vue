@@ -30,7 +30,7 @@
   import { defineComponent } from 'vue'
   import { mapState } from 'pinia'
   import modelerStore from '@/store/modeler'
-  import { Base } from 'diagram-js/lib/model'
+  import { Element } from 'diagram-js/lib/model/Types'
   import { getNameValue, setNameValue } from '@/bo-utils/nameUtil'
   import { setIdValue } from '@/bo-utils/idUtil'
   import {
@@ -63,28 +63,28 @@
       reloadGenerationData() {
         this.isProcess = !!this.getActive && this.getActive.type === 'bpmn:Process'
         this.elementId = this.getActiveId as string
-        this.elementName = getNameValue(this.getActive as Base) || ''
+        this.elementName = getNameValue(this.getActive as Element) || ''
         if (this.isProcess) {
-          this.elementExecutable = getProcessExecutable(this.getActive as Base)
-          this.elementVersion = getProcessVersionTag(this.getActive as Base) || ''
+          this.elementExecutable = getProcessExecutable(this.getActive as Element)
+          this.elementVersion = getProcessVersionTag(this.getActive as Element) || ''
         }
       },
       updateElementName(value: string) {
-        setNameValue(this.getActive as Base, value)
+        setNameValue(this.getActive as Element, value)
       },
       updateElementId(value: string) {
-        setIdValue(this.getActive as Base, value)
+        setIdValue(this.getActive as Element, value)
       },
       updateElementVersion(value: string) {
         const reg = /((\d|([1-9](\d*))).){2}(\d|([1-9](\d*)))/
         if (reg.test(value)) {
-          setProcessVersionTag(this.getActive as Base, value)
+          setProcessVersionTag(this.getActive as Element, value)
         } else {
           window.__messageBox.error('版本号必须符合语义化版本2.0.0 要点')
         }
       },
       updateElementExecutable(value: boolean) {
-        setProcessExecutable(this.getActive as Base, value)
+        setProcessExecutable(this.getActive as Element, value)
       }
     }
   })

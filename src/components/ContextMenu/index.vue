@@ -27,7 +27,7 @@
    */
   import { onBeforeUnmount, onMounted, ref } from 'vue'
   import EventEmitter from '@/utils/EventEmitter'
-  import { Base } from 'diagram-js/lib/model'
+  import { Element } from 'diagram-js/lib/model/Types'
   import { customTranslate } from '@/additional-modules/Translate'
   import BpmnReplaceOptions from '@/utils/BpmnReplaceOptions'
   import { isAppendAction } from '@/utils/BpmnDesignerUtils'
@@ -42,7 +42,7 @@
   const currentReplaceOptions = ref<any[]>([])
 
   let mouseEvent: MouseEvent | null = null
-  let currentElement: Base | null = null
+  let currentElement: Element | null = null
   const isAppend = ref<boolean>(false)
   const contextMenuTitle = ref<string>('创建元素')
 
@@ -59,7 +59,7 @@
     }
   }
 
-  const initEventCallback = (event: MouseEvent, element?: Base) => {
+  const initEventCallback = (event: MouseEvent, element?: Element) => {
     x.value = event.clientX
     y.value = event.clientY
     mouseEvent = event

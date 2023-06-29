@@ -20,7 +20,7 @@
     ) {
       const modeling = modeler().getModeling
       const exPropKey = `${editor().getProcessEngine}:${propKey}`
-      modeling?.updateModdleProperties(element, moddleElement, {
+      modeling!.updateModdleProperties(element, moddleElement, {
         [exPropKey]: propValue === '' ? undefined : propValue
       })
     },

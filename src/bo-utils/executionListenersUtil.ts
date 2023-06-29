@@ -1,5 +1,5 @@
 import { getBusinessObject, is, isAny } from 'bpmn-js/lib/util/ModelUtil'
-import { Base } from 'diagram-js/lib/model'
+import { Element } from 'diagram-js/lib/model/Types'
 import { ModdleElement } from 'bpmn-moddle'
 import {
   getExtensionElementsList,
@@ -19,14 +19,14 @@ export const EXECUTION_LISTENER_TYPE = {
 }
 
 // execution listener list
-export function getExecutionListeners(element: Base): ModdleElement[] {
+export function getExecutionListeners(element: Element): ModdleElement[] {
   const prefix = editor().getProcessEngine
   const businessObject = getListenersContainer(element)
   return getExtensionElementsList(businessObject, `${prefix}:ExecutionListener`)
 }
 
 // create an empty execution listener and update element's businessObject
-export function addEmptyExtensionListener(element: Base) {
+export function addEmptyExtensionListener(element: Element) {
   const prefix = editor().getProcessEngine
   const moddle = modeler().getModdle
   const listener = moddle!.create(`${prefix}:ExecutionListener`, {
@@ -38,7 +38,7 @@ export function addEmptyExtensionListener(element: Base) {
 }
 
 // create an execution listener with props
-export function addExecutionListener(element: Base, props: ExecutionListenerForm) {
+export function addExecutionListener(element: Element, props: ExecutionListenerForm) {
   const prefix = editor().getProcessEngine
   const moddle = modeler().getModdle
   const businessObject = getListenersContainer(element)
@@ -49,7 +49,7 @@ export function addExecutionListener(element: Base, props: ExecutionListenerForm
 
 // update execution listener's property
 export function updateExecutionListener(
-  element: Base,
+  element: Element,
   props: ExecutionListenerForm,
   listener: ModdleElement
 ) {
@@ -58,7 +58,7 @@ export function updateExecutionListener(
 }
 
 // remove an execution listener
-export function removeExecutionListener(element: Base, listener: ModdleElement) {
+export function removeExecutionListener(element: Element, listener: ModdleElement) {
   removeExtensionElements(element, getListenersContainer(element), listener)
 }
 
@@ -82,16 +82,16 @@ export function getExecutionListenerType(listener: ModdleElement): string {
   return ''
 }
 
-export function getListenersContainer(element: Base): ModdleElement {
+export function getListenersContainer(element: Element): ModdleElement {
   const businessObject = getBusinessObject(element)
   return businessObject?.get('processRef') || businessObject
 }
 
-export function getDefaultEvent(element: Base) {
+export function getDefaultEvent(element: Element) {
   return is(element, 'bpmn:SequenceFlow') ? 'take' : 'start'
 }
 
-export function getExecutionListenerTypes(element: Base) {
+export function getExecutionListenerTypes(element: Element) {
   if (is(element, 'bpmn:SequenceFlow')) {
     return [{ label: 'Take', value: 'take' }]
   }
@@ -102,7 +102,7 @@ export function getExecutionListenerTypes(element: Base) {
 }
 
 function updateListenerProperty(
-  element: Base,
+  element: Element,
   listener: ModdleElement,
   props: ExecutionListenerForm
 ) {

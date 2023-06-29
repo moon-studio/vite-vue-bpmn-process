@@ -1,16 +1,16 @@
-import { Base } from 'diagram-js/lib/model'
+import { Element } from 'diagram-js/lib/model/Types'
 import editor from '@/store/editor'
 import modeler from '@/store/modeler'
 import { getBusinessObject, is } from 'bpmn-js/lib/util/ModelUtil'
 
 ////////// only in bpmn:StartEvent
-export function getInitiatorValue(element: Base): string | undefined {
+export function getInitiatorValue(element: Element): string | undefined {
   const prefix = editor().getProcessEngine
   const businessObject = getBusinessObject(element)
 
   return businessObject.get(`${prefix}:initiator`)
 }
-export function setInitiatorValue(element: Base, value: string | undefined) {
+export function setInitiatorValue(element: Element, value: string | undefined) {
   const prefix = editor().getProcessEngine
   const modeling = modeler().getModeling
   const businessObject = getBusinessObject(element)

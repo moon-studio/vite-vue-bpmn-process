@@ -1,15 +1,15 @@
-import { Base } from 'diagram-js/lib/model'
+import { Element } from 'diagram-js/lib/model/Types'
 import modelerStore from '@/store/modeler'
 import BpmnFactory from 'bpmn-js/lib/features/modeling/BpmnFactory'
 import { without } from 'min-dash'
 
-export function getDocumentValue(element: Base): string {
+export function getDocumentValue(element: Element): string {
   const businessObject = element?.businessObject
   const documentation = businessObject && findDocumentation(businessObject.get('documentation'))
   return documentation && documentation.text
 }
 
-export function setDocumentValue(element: Base, value: string | undefined) {
+export function setDocumentValue(element: Element, value: string | undefined) {
   const store = modelerStore()
 
   const modeling = store.getModeling

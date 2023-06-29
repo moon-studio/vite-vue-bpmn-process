@@ -1,7 +1,3 @@
-declare module 'bpmn-js/lib/features/modeling/Modeling' {
-  export default class Modeling {}
-}
-
 declare module 'bpmn-js/lib/util/ModelUtil' {
   /**
    * Is an element of the given BPMN type?

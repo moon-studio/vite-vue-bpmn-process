@@ -1,6 +1,6 @@
 import { defineComponent, Component, markRaw, onMounted, ref } from 'vue'
 import { NCollapse } from 'naive-ui'
-import { Base, Connection, Label, Shape } from 'diagram-js/lib/model'
+import { Element, Connection, Label, Shape } from 'diagram-js/lib/model/Types'
 import { Translate } from 'diagram-js/lib/i18n/translate'
 import debounce from 'lodash.debounce'
 
@@ -60,7 +60,7 @@ const Panel = defineComponent({
     }
 
     // 设置选中元素，更新 store
-    const setCurrentElement = debounce((element: Shape | Base | Connection | Label | null) => {
+    const setCurrentElement = debounce((element: Shape | Element | Connection | Label | null) => {
       let activatedElement: BpmnElement | undefined = element
       let activatedElementTypeName = ''
 
