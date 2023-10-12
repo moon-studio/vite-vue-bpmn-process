@@ -4,6 +4,7 @@ import type Modeler from 'bpmn-js/lib/Modeler'
 import type Modeling from 'bpmn-js/lib/features/modeling/Modeling'
 import type Canvas from 'diagram-js/lib/core/Canvas'
 import type ElementRegistry from 'diagram-js/lib/core/ElementRegistry'
+import { toRaw } from 'vue'
 
 type ModelerStore = {
   activeElement: BpmnElement | undefined
@@ -28,13 +29,13 @@ const defaultState: ModelerStore = {
 export default defineStore('modeler', {
   state: (): ModelerStore => defaultState,
   getters: {
-    getActive: (state) => state.activeElement,
+    getActive: (state) => toRaw(state.activeElement),
     getActiveId: (state) => state.activeElementId,
-    getModeler: (state) => state.modeler,
-    getModdle: (state) => state.moddle,
-    getModeling: (state): Modeling | undefined => state.modeling,
-    getCanvas: (state): Canvas | undefined => state.canvas,
-    getElRegistry: (state) => state.elementRegistry
+    getModeler: (state) => toRaw(state.modeler),
+    getModdle: (state) => toRaw(state.moddle),
+    getModeling: (state): Modeling | undefined => toRaw(state.modeling),
+    getCanvas: (state): Canvas | undefined => toRaw(state.canvas),
+    getElRegistry: (state) => toRaw(state.elementRegistry)
   },
   actions: {
     setModeler(modeler: Modeler | undefined) {

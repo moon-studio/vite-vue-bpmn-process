@@ -34,7 +34,7 @@ export function setNameValue(element: Element, value: string): void {
     return undefined
   }
   if (is(element, 'bpmn:TextAnnotation')) {
-    return modeling?.updateProperties(element, { text: value })
+    return modeling?.updateModdleProperties(element, element.businessObject, { text: value })
   }
   if (is(element, 'bpmn:Group')) {
     const businessObject = getBusinessObject(element),
@@ -44,7 +44,7 @@ export function setNameValue(element: Element, value: string): void {
     }
     return modeling?.updateLabel(element, value)
   }
-  modeling?.updateProperties(element, { name: value })
+  modeling?.updateModdleProperties(element, element.businessObject, { name: value })
 }
 
 ////////////////  helpers
