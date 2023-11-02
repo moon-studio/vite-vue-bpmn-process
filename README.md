@@ -36,12 +36,11 @@ React 项目也可以参考自定义插件和属性更新方式。
 
 > 码云：https://gitee.com/MiyueSC/vite-vue-bpmn-process
 
-> 🚀Tips:
+> 🚀Tips: diagram-js 与 bpmn-js 目前均已支持 Typescript。
 > 
-> Diagram.js 最近已经实现了 Type Declares 声明，具体请查看 [Diagram.js](https://github.com/bpmn-io/diagram-js) 的 **type-declarations** 分支~
-> 
-> Bpmn.js 的 Type Declares 声明 目前已经加入到 bpmn-io 团队的任务面板中，但目前处于 **积压状态**。
 
+
+-----
 
 > 2023年10月1日 更新
 >
@@ -65,6 +64,8 @@ React 项目也可以参考自定义插件和属性更新方式。
 > 12. 扩展的自定义元素与属性
 >
 > 有需要的同学可以联系通过微信公众号联系我。
+>
+> 预览地址：[Vercel](https://vue-bpmn-process-designer.vercel.app/)、[GitHub Page](https://miyuesc.github.io/bpmn-designer/)
 
 ## 友情赞助
 
@@ -159,7 +160,7 @@ React 项目也可以参考自定义插件和属性更新方式。
 |-- package.json
 |-- vite.config.js
 ```
- 
+
 > Activiti moddle json: https://github.com/Activiti/activiti-modeling-app/blob/master/projects/process-editor/src/services/activiti.json
 
 ## 当前功能
