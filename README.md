@@ -26,6 +26,8 @@
 <img src="https://img.shields.io/badge/Bpmn.js-9.2.2-orange" alt="" />
 </p>
 
+> 掘金2023年度人气创作者打榜中，快来帮我打榜吧～ https://activity.juejin.cn/rank/2023/writer/747323639208391?utm_campaign=annual_2023&utm_medium=self_web_share&utm_source=MiyueFE
+
 ## 项目简介
 
 Vite Vue Bpmn流程编辑器，基于[Bpmn.js](https://github.com/bpmn-io/bpmn-js)， [Vite](https://vitejs.dev)， [Vue.js 3.x](https://vuejs.org/)。
