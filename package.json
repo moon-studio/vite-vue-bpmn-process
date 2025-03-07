@@ -35,7 +35,7 @@
     "pinia": "2.1.4",
     "tiny-svg": "^3.0.1",
     "vue": "^3.3.4",
-    "vue-i18n": "^9.2.2"
+    "vue-i18n": "^9.14.3"
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.7",
